@@ -74,6 +74,7 @@
         this.yAxis.height(height);
         this.bars.height(height);
         this.labels.height(height);
+        this.texts.height(height);
         return this;
       },
       width : function(width){
@@ -82,6 +83,7 @@
         this.yAxis.width(width);
         this.bars.width(width);
         this.labels.width(width);
+        this.texts.width(width);
         return this;
       },
       initialize : function(){
@@ -90,6 +92,7 @@
         this.yAxis = this.mixin('NumericalAxis',this.base.append('g')).orient('left');
         this.bars = this.mixin('Bars', this.base.append('g'));
         this.labels = this.mixin('RoundedRectangles',this.base.append('g'));
+        this.texts = this.mixin('TextLabels', this.base.append('g'));
       }
     });
 

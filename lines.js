@@ -33,6 +33,10 @@ d3.chart('GenericChart').extend('Lines', {
 
                 var chart = this.chart();
 
+                //It's computed using datum instead of data
+                //Similar case to axis
+                //Added to a svg:g
+
                 return this.append('path')
                            .datum(chart.data)
                            .attr('class','line')

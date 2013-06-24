@@ -15,6 +15,7 @@
     <script src="circleschart.js"></script>
     <script src="ordinalaxis.js"></script>
     <script src="lines.js"></script>
+    <script src="textlabels.js"></script>
     <script src="chart.js"></script>
     <link rel="stylesheet" type="text/css" href="styles.css"/>
   </head>
@@ -70,11 +71,11 @@
         /*var axis = svg.chart('Scatterplot').height(height-100).width(width-100);
         axis.draw(scaterplotdata);*/
 
-        /*var ordinal = svg.chart('BarChart').height(height-100).width(width-100);
-        ordinal.draw(domainData);*/
+        var ordinal = svg.chart('BarChart').height(height-100).width(width-100);
+        ordinal.draw(domainData);
 
-        var linechart = svg.chart('LineChart').height(height-100).width(width-100);
-        linechart.draw(scaterplotdata);
+        /*var linechart = svg.chart('LineChart').height(height-100).width(width-100);
+        linechart.draw(scaterplotdata);*/
 
       });
     </script>
