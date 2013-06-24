@@ -7,7 +7,7 @@ TO DO :
 
 --- Text labels chats for the bar chart are still not created
 
-NOTES :
+NOTES on d3.chart :
 
 The main idea in this approach is to separate a chart in its constituting parts. So, a x-y axis system can be seen as a linear scale for x, and another linear scale for y, wich are conceived as two separated objects. Having that, it will be possible to use a custom xy axis system, to build more charts, like for example, a bar chart.
 
@@ -27,6 +27,8 @@ We have linear axis that can serve as x,y axis (also, the xyaxis chart contains 
 
 As composed charts, a scatterplot was defined. It uses two linear scales as axis, wich are already defined as only ONE chart (it's a composition of the linear scales). The bar chart is a composition of 4 charts.
 
+A donut chart is also defined, without labels.
+
 CONSIDERATIONS DEFINING A CHART :
 
 - transform : used to process data before reaching the dataBind propierty.
@@ -42,13 +44,21 @@ CONSIDERATIONS DEFINING A CHART :
 
 HOW TO COMPOSE :
 
-Based on the parts defined, a mixin must be defined when the composed chart is initialized. The "father" chart will not contain the events, since each part will handle that itself.
+Based on the parts defined, a mixin must be defined when the composed chart is initialized. The parent chart will not contain the events, since each part will handle that itself.
 
 For example, the bar chart is a mix of 4 other charts : the ordinal, linear scale, the bars and the rounded rectangles. Having the data processed, its only necessary to define scales for element location.
 
 FILES:
 
 chart.js -> contains definitions of composed charts.
+
+ADVANTAGES :
+
+- Having understood the d3.chart flow, a chart is not difficult to draw. However, knowledge on d3 is necessary, since d3.chart doesn't provide charts itself. Just a way to order the handling of data states.
+
+- Possibility of reusing charts, just by drawing the new data.
+
+- Composing new charts based on already defined ones.
 
 PROBLEMS FOUND :
 
@@ -57,3 +67,6 @@ PROBLEMS FOUND :
 For example, examining the d3.chart flow, if I want to draw an ordinal scale of 5 values, I would have to define an 'insert' for each element to add. However, this is not necessary, since we can define a d3.scale.ordinal() and set the domain.
 
 This doesn't work, since we only need one svg:g element that will contain the whole scale. The idea to solve this situation is to force the data 'enter' (or merge) state to contain only one element. This way, an svg:g will be added to contain the scale. Same idea was addressed for the linear scales.
+
+- A similar problem is found when trying to draw a line chart, since d3 provides a line primitive. Also, its computed using the 'datum' instead of 'data' : this way, we don't compute enter / exit states, it doesn't compute data join.
+

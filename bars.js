@@ -1,16 +1,5 @@
   //Bars for a bar chart
   d3.chart('GenericChart').extend('Bars',{
-    transform : function(data){
-      var ordinalscale = data.map(function(d){return d.value});
-      var linearscale = this.maxFromFunction(data,function(d){return d.y});
-
-      var newdata = {};
-      newdata.ordinalscale = ordinalscale;
-      newdata.linearscale = linearscale;
-      newdata.data = data;
-
-      return newdata;
-    },
     initialize : function(){
 
       var x = d3.scale.ordinal();
@@ -22,8 +11,9 @@
         dataBind : function(d){
 
           var chart = this.chart();
+
           x.domain(d.ordinalscale).rangeBands([0,chart.w],0.1);
-          y.domain([0,d.linearscale]).range([chart.h,0]);
+          y.domain([0,d.linearscaley]).range([chart.h,0]);
 
           return this.selectAll('rect').data(d.data);
 

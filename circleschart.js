@@ -1,9 +1,6 @@
 //CIRCLES CHART
     d3.chart('GenericChart').extend('CirclesChart',{
 
-      transform : function(data){
-        return this.dataMaxCoords(data);
-      },
       initialize : function(){
 
         this.pathBase = this.base.append('g');
@@ -16,13 +13,10 @@
         this.layer('circles', this.pathBase,{
           dataBind: function(d){
 
-            var maxX = d.maxcoords[0];
-            var maxY = d.maxcoords[1];
-
             var chart = this.chart();
 
-            x.domain([0,maxX]).range([0, chart.w]);
-            y.domain([0,maxY]).range([chart.h, 0]);
+            x.domain([0,d.linearscalex]).range([0, chart.w]);
+            y.domain([0,d.linearscaley]).range([chart.h, 0]);
 
             return this.selectAll('circle').data(d.data);
           },

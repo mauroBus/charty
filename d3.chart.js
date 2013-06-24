@@ -265,7 +265,6 @@
 		args.unshift(selection);
 		var ctor = Chart[chartName];
 		var chart = variadicNew(ctor, args);
-
 		this._mixins.push(chart);
 		return chart;
 	};

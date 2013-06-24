@@ -1,12 +1,12 @@
     //Ordinal axis -> uses discrete values, instead of a linear scale
     d3.chart('GenericChart').extend('OrdinalAxis',{
 
-      transform : function(data){
+      /*transform : function(data){
         var result = data.map(function(d){return d.value});
         var newdata = [];
         newdata[0] = result;
         return newdata;
-      },
+      },*/
       initialize : function(){
 
         var pathBase = this.base.append('g');
@@ -17,8 +17,11 @@
         this.layer('ordinal', pathBase, {
           dataBind : function(d){
             var chart = this.chart();
-            x.domain(d[0]).rangeRoundBands([0, chart.w], .1);
-            return this.selectAll('g').data(d);
+            //x.domain(d[0]).rangeRoundBands([0, chart.w], .1);
+            console.log(d);
+            x.domain(d.ordinalscale).rangeRoundBands([0, chart.w], .1);
+            //Only one element needs to be as argument
+            return this.selectAll('g').data([0]);
           },
           insert : function(){
               var app = this.append('g');

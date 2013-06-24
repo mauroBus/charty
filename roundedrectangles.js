@@ -1,7 +1,7 @@
   //ROUNDED RECTANGLES
   //For chart labeling
     d3.chart('GenericChart').extend('RoundedRectangles',{
-    transform : function(data){
+    /*transform : function(data){
       var newdata = {};
 
       var ordinalx = data.map(function(d){return d.value});
@@ -12,7 +12,7 @@
       newdata.x = ordinalx;
 
       return newdata;
-    },
+    },*/
     initialize : function(){
 
       var pathBase = this.base.append('g');
@@ -25,8 +25,8 @@
 
           var chart = this.chart();
 
-          x.domain(d.x).rangeRoundBands([0, chart.w], .1);
-          y.domain([0,d.y]).range([chart.h,0]);
+          x.domain(d.ordinalscale).rangeRoundBands([0, chart.w], .1);
+          y.domain([0,d.linearscaley]).range([chart.h,0]);
 
           return this.selectAll('rect').data(d.data);
         },
@@ -34,7 +34,7 @@
           return this.append('rect');
         },
         events : {
-          'merge' : function(){
+          'enter' : function(){
             //Width / height set here belong to the rectangle itself
 
             var rectheight = 15;
@@ -50,6 +50,13 @@
                        .attr('rx', 5)
                        .attr('ry', 5)
                        .attr('fill','gray');
+          },
+          update : function(){
+            return this.attr('x', function(d){
+                          var val = x(d.value)+(x.rangeBand()/2)-(rectwidht/2);
+                          return val;
+                        })
+                       .attr('y',function(d){return y(d.y)-rectheight});
           },
           'exit' : function(){
             return this.remove();
