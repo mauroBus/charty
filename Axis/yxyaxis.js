@@ -6,6 +6,9 @@
       return this;
     },
     height : function(height){
+
+      if (!height) { console.log(height) }
+
       this.xaxis.height(height).ytranslate(height);
       this.yaxisright.height(height);
       this.yaxisleft.height(height);
