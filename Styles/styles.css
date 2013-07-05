@@ -1,0 +1,81 @@
+  .axis path{
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+  }
+
+  .dot {
+    stroke: #000;
+  }
+
+  .redcircle{
+    fill: red;
+  }
+
+  .bluecircle{
+    fill : steelblue;
+  }
+
+  .bluebar {
+    fill: steelblue;
+  }
+
+  .blue {
+    fill : steelblue;
+  }
+
+  .red {
+    fill : red;
+  }
+
+  .gray {
+    fill : gray;
+  }
+
+  .graycircle {
+    fill : gray;
+  }
+
+  .redbar {
+    fill : red;
+  }
+
+  .graybar {
+    fill : gray;
+  }
+
+  .yellowbar {
+    fill : yellow;
+  }
+
+  .line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+  }
+
+  .blueline{
+     fill: none;
+     stroke: steelblue;
+     stroke-width: 1.5px;
+  }
+
+  .redline {
+    fill: none;
+    stroke: red;
+    stroke-width: 1.5px;
+  }
+
+  .grayline{
+    fill: none;
+    stroke: gray;
+    stroke-width: 1.5px;
+  }
+
+  .axis .tick line{
+      fill: none;
+      stroke: lightgrey;
+      opacity: 0.7;
+      shape-rendering: crispEdges;
+    }
+  }
