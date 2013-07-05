@@ -13,6 +13,7 @@
           chart.y = d.scaley;
           chart.rh = d.rh;
           chart.rw = d.rw;
+          chart.rc = d.rc;
 
           return this.selectAll('rect').data(d.data);
         },
@@ -25,9 +26,6 @@
 
             var chart = this.chart();
 
-            var rectheight = 15;
-            var rectwidht = 15;
-
             return this.attr('height',chart.rh)
                        .attr('width',chart.rw)
                        .attr('x', function(d){
@@ -39,14 +37,23 @@
                         })
                        .attr('rx', 5)
                        .attr('ry', 5)
-                       .attr('fill','yellow');
+                       .attr('fill',chart.rc);
           },
           update : function(){
-            /*return this.attr('x', function(d){
-                          var val = x(d.value)+(x.rangeBand()/2)-(rectwidht/2);
+
+            var chart = this.chart();
+
+            return this
+                       .attr('x', function(d){
+                          var val = chart.x(d.x)+(chart.x.rangeBand()/2)-(chart.rw/2);
                           return val;
                         })
-                       .attr('y',function(d){return y(d.y)-rectheight});*/
+                       .attr('y',function(d){
+                          return chart.y(d.y);
+                        })
+                       .attr('rx', 5)
+                       .attr('ry', 5)
+                       .attr('fill',chart.rc);
           },
           'exit' : function(){
             return this.remove();
