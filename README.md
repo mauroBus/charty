@@ -1,13 +1,14 @@
-TO DO :
 
-//Calculations need to be done once in barchart and scatterplot
-//Chart that contains them will do the data transformation so that they are //not done in every chart
+# TOC
 
---- Regarding this point, every chart used to compose a bigger one, will use the same scaling in the svg drawing. If the bigger chart transforms the data one time, every part will be able to use it, without the need to calculate everything againg. So, the scales should be defined once, since all of them will use the same scaling.
+## Chart library
 
---- Text labels chats for the bar chart are still not created
+[Demo](index.html)
 
-NOTES on d3.chart :
+- [D3](http://d3js.org/)
+- [D3.Chart](https://github.com/misoproject/d3.chart/)
+
+## WTF
 
 The main idea in this approach is to separate a chart in its constituting parts. So, a x-y axis system can be seen as a linear scale for x, and another linear scale for y, wich are conceived as two separated objects. Having that, it will be possible to use a custom xy axis system, to build more charts, like for example, a bar chart.
 
@@ -17,7 +18,7 @@ For that purpose , each drawable chart will have events that represent data's li
 
 If I use the same chart with 6 elements, the 'enter' event will handle the two new events, since no svg elements belong to them yet. Update will handle the already defined 4 elements. If the next time I get 3 elements, 'exit' will handle the missing 3 elements.
 
--------------------------------------------------------------------------
+## Slides
 
 At this point, there are some parts defined that can be used to create a custom and reusable chart.
 
@@ -29,30 +30,25 @@ As composed charts, a scatterplot was defined. It uses two linear scales as axis
 
 A donut chart is also defined, without labels.
 
-CONSIDERATIONS DEFINING A CHART :
+### CONSIDERATIONS DEFINING A CHART
 
-- transform : used to process data before reaching the dataBind propierty.
+- **transform** : used to process data before reaching the dataBind propierty.
+- **dataBind** : the link between the data itself and the selection of svg elements.
+- **insert** : based on the early selection, for every new data element, something will be 
+  done, for instance, appending the svg element.
+- **events** : we define here every state of data handling
+    + 'enter'
+    + 'merge'
+    + 'update'
+    + 'exit'
 
-- dataBind : the link between the data itself and the selection of svg elements.
-- insert : based on the early selection, for every new data element, something will be done, for instance, appending the svg element.
-
-- events : we define here every state of data handling
---- 'enter'
---- 'merge'
---- 'update'
---- 'exit'
-
-HOW TO COMPOSE :
+### HOW TO COMPOSE
 
 Based on the parts defined, a mixin must be defined when the composed chart is initialized. The parent chart will not contain the events, since each part will handle that itself.
 
 For example, the bar chart is a mix of 4 other charts : the ordinal, linear scale, the bars and the rounded rectangles. Having the data processed, its only necessary to define scales for element location.
 
-FILES:
-
-chart.js -> contains definitions of composed charts.
-
-ADVANTAGES :
+### ADVANTAGES
 
 - Having understood the d3.chart flow, a chart is not difficult to draw. However, knowledge on d3 is necessary, since d3.chart doesn't provide charts itself. Just a way to order the handling of data states.
 
@@ -60,13 +56,21 @@ ADVANTAGES :
 
 - Composing new charts based on already defined ones.
 
-PROBLEMS FOUND :
+### PROBLEMS FOUND
 
-- Since d3 already provides a native way to draw linear and ordinal scales, and handles the data update states, its not quite easy to map to the lifecycle that d3.chart proposes. Also, there is not direct correspondence between each data point and the linear scale : usind d3, it is easy to draw the scale getting the minimun and maximun values, and defining the domain.
+- Since d3 already provides a native way to draw linear and ordinal scales, and handles the data 
+  update states, its not quite easy to map to the lifecycle that d3.chart proposes. Also, there is 
+  not direct correspondence between each data point and the linear scale : usind d3, it is easy to 
+  draw the scale getting the minimun and maximun values, and defining the domain.
+  For example, examining the d3.chart flow, if I want to draw an ordinal scale of 5  values, I would
+  have to define an 'insert' for each element to add. However, this is not necessary, since we can 
+  define a d3.scale.ordinal() and set the domain.
+  This doesn't work, since we only need one svg:g element that will contain the whole scale. The idea
+  to solve this situation is to force the data 'enter' (or merge) state to contain only one element. 
+  This way, an svg:g will be added to contain the scale. Same idea was addressed for the linear scales.
 
-For example, examining the d3.chart flow, if I want to draw an ordinal scale of 5 values, I would have to define an 'insert' for each element to add. However, this is not necessary, since we can define a d3.scale.ordinal() and set the domain.
-
-This doesn't work, since we only need one svg:g element that will contain the whole scale. The idea to solve this situation is to force the data 'enter' (or merge) state to contain only one element. This way, an svg:g will be added to contain the scale. Same idea was addressed for the linear scales.
-
-- A similar problem is found when trying to draw a line chart, since d3 provides a line primitive. Also, its computed using the 'datum' instead of 'data' : this way, we don't compute enter / exit states, it doesn't compute data join.
-
+- A similar problem is found when trying to draw a line chart, since d3 provides a line primitive. Also,
+  it's computed using the 'datum' instead of 'data' : this way, we don't compute enter / exit states, it 
+  doesn't compute data join.
+  
+  
