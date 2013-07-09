@@ -7,6 +7,32 @@
 
 - [D3](http://d3js.org/)
 - [D3.Chart](https://github.com/misoproject/d3.chart/)
+- [YUI Coding standard] (http://yui.github.io/yuidoc/syntax/index.html)
+
+## What's new
+
+- Charts Api defined : a chart can be append to a html root element
+- LinearScale, OrdinalScale : separate objects for data mapping
+- Directory relocation 
+  + Components : each individual component goes here
+  + Composition : each composed chart is defined here
+  + Utils : utilities for data managing
+- Chart instantiation using different preset options
+- Simple way for chart creation and instantiaton
+- Most charts were renamed
+  + SimpleDataInput : takes only one data series to process
+  + MultipleDataInput : takes N series to draw. 
+- Documentation was added to the code, following the YUI standard
+
+## Coming soon
+
+ - Support for negative values
+ - Support for switching linear / ordinal scales
+ - Completion of donut chart 
+ - Define chart names as constants
+ - Relocate labels with text and rounded rectangles
+ - Slides to explain composition
+ - Redefinition of scatterplot chart
 
 ## WTF
 

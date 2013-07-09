@@ -1,3 +1,8 @@
+  .test{
+      width: 400px;
+      height: 400px;
+    }
+  
   .axis path{
     fill: none;
     stroke: black;
@@ -6,18 +11,6 @@
 
   .dot {
     stroke: #000;
-  }
-
-  .redcircle{
-    fill: red;
-  }
-
-  .bluecircle{
-    fill : steelblue;
-  }
-
-  .bluebar {
-    fill: steelblue;
   }
 
   .blue {
@@ -32,19 +25,7 @@
     fill : gray;
   }
 
-  .graycircle {
-    fill : gray;
-  }
-
-  .redbar {
-    fill : red;
-  }
-
-  .graybar {
-    fill : gray;
-  }
-
-  .yellowbar {
+  .yellow {
     fill : yellow;
   }
 
