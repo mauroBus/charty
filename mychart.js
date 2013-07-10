@@ -8,7 +8,7 @@ var data1 = {
   rc:'red',
   data: [
     { x: 'A', y: 100 },
-    { x: 'B', y: 30 },
+    { x: 'B', y: -50 },
     { x: 'C', y: 60 }
   ]
 };
@@ -33,11 +33,11 @@ var datagroup2 = [];
 var accessor1 = new Accessor(datagroup1);
 var accessor2 = new Accessor(datagroup2);
 
-var MyApi = new ChartsApi(); 
+var MyApi = new ChartsApi();
 
 var options1 = {
   chartName : 'BarChart',
-  instances : 2, 
+  instances : 2,
   root : '#chart1',
   xAxis : 'ordinal',
   yAxis : 'linear',
@@ -64,7 +64,7 @@ var options2 = {
 
 var options3 = {
   chartName : 'LineChart',
-  instances : 2, 
+  instances : 2,
   root : '#chart3',
   xAxis : 'ordinal',
   yAxis : 'linear',
@@ -78,7 +78,7 @@ var options3 = {
 
 var options4 = {
   chartName : 'Scatterplot',
-  instances : 2, 
+  instances : 2,
   root : '#chart4',
   xAxis : 'ordinal',
   yAxis : 'linear',
@@ -91,16 +91,16 @@ var options4 = {
 };
 
 var chart1 = MyApi.chart(options1);
-    chart1.draw(accessor1); 
+    chart1.draw(accessor1);
 
-var chart2 = MyApi.chart(options2); 
+var chart2 = MyApi.chart(options2);
     chart2.draw(accessor2);
 
     data1.color = 'redline';
     data2.color = 'blueline';
 
 var chart3 = MyApi.chart(options3);
-    chart3.draw(accessor1); 
+    chart3.draw(accessor1);
 
     data1.color = 'red';
     data1.r = 5;
@@ -108,4 +108,4 @@ var chart3 = MyApi.chart(options3);
     data2.r = 8;
 
 var chart4 = MyApi.chart(options4);
-    chart4.draw(accessor1); 
+    chart4.draw(accessor1);

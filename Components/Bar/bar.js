@@ -19,7 +19,7 @@ d3.chart('SimpleDataInput').extend('Bar', {
 
     var options = {
       /**
-      Data bind for a bar serie. 
+      Data bind for a bar serie.
       Can have a color set for the whole serie.
 
       @method
@@ -44,22 +44,40 @@ d3.chart('SimpleDataInput').extend('Bar', {
 
               var chart = this.chart();
 
-              this.attr("class", chart.c)
-                  .attr("x", function(d) { return chart.xscale.map(d.x, chart.factor) })
+              this.attr("class", function(d){
+                    if(d.c){
+                      return d.c;
+                    }
+                    return chart.c;
+                  })
+                  .attr("x", function(d) { return chart.xscale.map(d.x, chart.factor)} )
                   .attr("width", chart.xscale.band(chart.factor))
-                  .attr("y", function(d) { return chart.yscale.map(d.y, chart.factor)})
-                  .attr("height", function(d) { return chart.yscale.band(chart.h,d.y) });
+                  .attr("y", function(d) {
+                    return Math.min(chart.yscale.map(0),chart.yscale.map(d.y, chart.factor))
+                  })
+                  .attr("height", function(d) {
+                    return Math.abs(chart.yscale.band(chart.h,d.y)-(chart.h-chart.yscale.map(0)))}
+                    );
               return this;
         },
         'update' : function(){
 
               var chart = this.chart();
 
-              this.attr("class", chart.c)
-                  .attr("x", function(d) { return chart.xscale.map(d.x, chart.factor) })
+              this.attr("class", function(d){
+                    if(d.c){
+                      return d.c;
+                    }
+                    return chart.c;
+                  })
+                  .attr("x", function(d) { return chart.xscale.map(d.x, chart.factor)} )
                   .attr("width", chart.xscale.band(chart.factor))
-                  .attr("y", function(d) { return chart.yscale.map(d.y, chart.factor)})
-                  .attr("height", function(d) { return chart.yscale.band(chart.h,d.y) });
+                  .attr("y", function(d) {
+                    return Math.min(chart.yscale.map(0),chart.yscale.map(d.y, chart.factor))
+                  })
+                  .attr("height", function(d) {
+                    return Math.abs(chart.yscale.band(chart.h,d.y)-(chart.h-chart.yscale.map(0)))}
+                    );
               return this;
         },
         'exit' : function(){

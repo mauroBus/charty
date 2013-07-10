@@ -20,7 +20,7 @@ d3.chart('SimpleDataInput').extend('Triangle',{
     this.layer('triangles', pathBase , {
       /**
       Data bind for a triangle serie.
-      Will set a color for the whole serie. 
+      Will set a color for the whole serie.
 
       @method
       @param {Object} d example = {
@@ -31,7 +31,7 @@ d3.chart('SimpleDataInput').extend('Triangle',{
       dataBind : function(d){
 
         var chart = this.chart();
-        chart.c = d.color; 
+        chart.c = d.color;
 
         return this.selectAll('path').data(d.data);
 
@@ -45,8 +45,8 @@ d3.chart('SimpleDataInput').extend('Triangle',{
           var chart = this.chart();
 
           return this.attr('class', function(d){
-                        if(d.c){ 
-                          return d.c; 
+                        if(d.c){
+                          return d.c;
                         }
                         return chart.c;
                       })
@@ -58,8 +58,8 @@ d3.chart('SimpleDataInput').extend('Triangle',{
           var chart = this.chart();
 
           return this.attr('class', function(d){
-                        if(d.c){ 
-                          return d.c; 
+                        if(d.c){
+                          return d.c;
                         }
                         return chart.c;
                       })
@@ -85,7 +85,7 @@ d3.chart('SimpleDataInput').extend('Triangle',{
         var p = "M ";
 
         var x1 = this.xscale.map(d.x,1);
-        var y1 = this.h;
+        var y1 = this.yscale.map(0);
 
         p = p + x1 + " " + y1+" ";
 
@@ -95,7 +95,7 @@ d3.chart('SimpleDataInput').extend('Triangle',{
         p = p + "L " + x2 + " " + y2 +" ";
 
         var x3 = x1 + this.xscale.band(1);
-        var y3 = this.h;
+        var y3 = this.yscale.map(0);
 
         p = p + "L " + x3 + " " + y3;
 

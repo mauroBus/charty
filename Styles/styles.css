@@ -2,11 +2,14 @@
       width: 400px;
       height: 400px;
     }
-  
+
   .axis path{
     fill: none;
-    stroke: black;
     shape-rendering: crispEdges;
+  }
+
+  .show path{
+    display : none;
   }
 
   .dot {
@@ -27,12 +30,6 @@
 
   .yellow {
     fill : yellow;
-  }
-
-  .line {
-    fill: none;
-    stroke: steelblue;
-    stroke-width: 1.5px;
   }
 
   .blueline{

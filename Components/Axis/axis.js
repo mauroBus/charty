@@ -2,7 +2,7 @@
 Basic Axis representation.
 
 Only one X/Y is sufficient for chart drawing, but can
-contain more. 
+contain more.
 
 @class Axis
 @constructor
@@ -116,7 +116,7 @@ d3.chart('BaseChart').extend('Axis',{
   Sets x translation for axis.
 
   @method
-  @param {Number} t tranlation value 
+  @param {Number} t tranlation value
   @chainable
   */
   xtranslate : function(t){
@@ -127,7 +127,7 @@ d3.chart('BaseChart').extend('Axis',{
   Sets y translation for axis.
 
   @method
-  @param {Number} t tranlation value 
+  @param {Number} t tranlation value
   @chainable
   */
   ytranslate : function(t){
@@ -141,7 +141,7 @@ d3.chart('BaseChart').extend('Axis',{
   @param {String} type axis type
   @chainable
   */
-  axistype : function(type){  
+  axistype : function(type){
     this.type = type;
     return this;
   }

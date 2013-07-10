@@ -22,7 +22,7 @@ var LinearScale = function(axisType){
 */
 LinearScale.prototype.setDomain = function(minValue, maxValue){
 	this.scale = this.scale.domain([minValue, maxValue]);
-	return this; 
+	return this;
 }
 
 /**
@@ -33,18 +33,18 @@ LinearScale.prototype.setDomain = function(minValue, maxValue){
 	@chainable
 */
 LinearScale.prototype.setRange = function(range){
-	var r; 
+	var r;
 
 	if(this.axisType === 'x'){
 		r = [0,range];
 	}
 	else{
 		if(this.axisType === 'y'){
-			r = [range, 0]; 
+			r = [range, 0];
 		}
 	}
 
-	this.scale = this.scale.range(r); 
+	this.scale = this.scale.range(r);
 	return this;
 }
 
@@ -55,7 +55,7 @@ LinearScale.prototype.setRange = function(range){
 	@return {Object} d3.scale (linear scale)
 */
 LinearScale.prototype.getScale = function(){
-	return this.scale; 
+	return this.scale;
 }
 
 /**
@@ -66,7 +66,7 @@ LinearScale.prototype.getScale = function(){
 	@return {Number} mapped value
 */
 LinearScale.prototype.map = function(value){
-	return this.scale(value); 
+	return this.scale(value);
 }
 
 /**
@@ -75,7 +75,7 @@ LinearScale.prototype.map = function(value){
 	@method
 	@param {Number} max max value for a scale
 	@param {Number} value to map
-	@return {Number} similar to ordinal band but for 
+	@return {Number} similar to ordinal band but for
 	linear scale
 */
 LinearScale.prototype.band = function(max, value){
@@ -89,27 +89,32 @@ Data probably won't be uniform, so for each data element,
 a maximum value is obtained. The maximum element will be kept.
 Same situation is for the minimum element
 
+Keeps a reference for the minimum value
+
 @method
 @param {Object} data Accessor for the data collection
 @param {Object} f callback function
+@chainable
 */
 LinearScale.prototype.calculateDomain = function(data, f){
 	var max = -100000,
-		min = 1000000;
+			min = 1000000;
 
-	var d = data.getData(); 
+	var d = data.getData();
 
-    d.forEach(function(element){
-      var d = element.data;
-      var maxg = d3.max(d, f);
-      var ming = d3.min(d, f);
-      if(maxg > max){
-        max = maxg;
-      }
-      if(ming < min){
-		min = ming; 
-	  }
-    });
+  d.forEach(function(element){
+    var d = element.data;
+    var maxg = d3.max(d, f);
+    var ming = d3.min(d, f);
+    if(maxg > max){
+      max = maxg;
+    }
+    if(ming < min){
+			min = ming;
+  	}
+  });
 
-    return this.setDomain(Math.min(0, min), Math.max(0,max));
+  this.min = min;
+
+  return this.setDomain(Math.min(0, min), Math.max(0,max));
 }

@@ -8,14 +8,14 @@ Api for chart creation management
 */
 
 var ChartsApi = function(){
-	this.scaleFactory = new ScaleFactory(); 
+	this.scaleFactory = new ScaleFactory();
 };
 
 /**
 	Appends a chart to a root d3.selection element. Chart is determined
-	by a defined chart name. 
+	by a defined chart name.
 	Margin is used to translate the chart a small distance. A chart can have many
-	instances. 
+	instances.
 
 	@method
 	@param {Object} options options = {
@@ -29,7 +29,7 @@ var ChartsApi = function(){
 											top : 20,
 											lfactor : 4.2,
 											tfactor : 4.2										}
-									  }	
+									  }
 	@return {Object} d3.chart for data drawing
 */
 ChartsApi.prototype.chart = function(options){
@@ -37,7 +37,7 @@ ChartsApi.prototype.chart = function(options){
 	var selection = d3.select(options.root);
 
 	var height = parseInt(selection.style('height')),
-		width  = parseInt(selection.style('width'));
+		  width  = parseInt(selection.style('width'));
 
 	var svg = selection.append("svg")
                  	   .attr("width", width)
@@ -50,5 +50,5 @@ ChartsApi.prototype.chart = function(options){
     			   .setYScale(this.scaleFactory.scale(options.yAxis,'y'))
     			   .height(height-options.margin.left*options.margin.lfactor)
     			   .width(width-options.margin.top*options.margin.tfactor);
-    return chart; 
+    return chart;
 }

@@ -1,5 +1,5 @@
 /**
-Defines a YXY axis system. 
+Defines a YXY axis system.
 Two Y Axis (one left, one right)
 One X Axis (bottom)
 
@@ -22,8 +22,8 @@ d3.chart('BaseChart').extend('YXYAxis',{
 
     this.componentsMixins = [];
     this.componentsMixins.push(this.xaxis);
-    this.componentsMixins.push(this.yaxisleft); 
-    this.componentsMixins.push(this.yaxisright);  
+    this.componentsMixins.push(this.yaxisleft);
+    this.componentsMixins.push(this.yaxisright);
   },
   /**
   Show whole chart as a grid.

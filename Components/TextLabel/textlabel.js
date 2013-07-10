@@ -28,13 +28,13 @@ d3.chart('SimpleDataInput').extend('TextLabel', {
                                     rh : 15,
                                     rw : 15,
                                     data : [...]
-                                  }  
+                                  }
       */
       dataBind : function(d){
 
         var chart = this.chart();
         chart.rh = d.rh;
-        chart.rw = d.rw; 
+        chart.rw = d.rw;
 
         return this.selectAll('text').data(d.data);
       },
@@ -51,7 +51,7 @@ d3.chart('SimpleDataInput').extend('TextLabel', {
                           return val;
                         })
                        .attr('y', function(d){
-                          return chart.yscale.map(d.y)+chart.rh;
+                          return chart.yscale.map(d.y);
                         })
                        .attr("text-anchor", "middle")
                        .text(function(d) { return d.y; });

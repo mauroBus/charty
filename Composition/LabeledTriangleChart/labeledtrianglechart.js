@@ -16,7 +16,7 @@ d3.chart('CompositeChart').extend('LabeledTriangleChart', {
   initialize: function() {
 
     var yxyaxis = this.mixin('YXYAxis', this.base.append('g')).showAsGrid();
-    
+
     var options1 = {
       instances : 1,
       chartName : 'Triangle'
@@ -27,18 +27,18 @@ d3.chart('CompositeChart').extend('LabeledTriangleChart', {
       instances : 1,
       chartName : 'RoundedRectangle'
     };
-    var recs = this.mixin('MultipleDataInput', this.base.append('g'), options2); 
+    var recs = this.mixin('MultipleDataInput', this.base.append('g'), options2);
 
     var options3 = {
       instances : 1,
       chartName : 'TextLabel'
     };
-    var texts = this.mixin('MultipleDataInput', this.base.append('g'), options3); 
+    var texts = this.mixin('MultipleDataInput', this.base.append('g'), options3);
 
     this.componentsMixins = [];
     this.componentsMixins.push(triangles);
-    this.componentsMixins.push(recs); 
-    this.componentsMixins.push(texts); 
+    this.componentsMixins.push(recs);
+    this.componentsMixins.push(texts);
     this.componentsMixins.push(yxyaxis);
 
   }

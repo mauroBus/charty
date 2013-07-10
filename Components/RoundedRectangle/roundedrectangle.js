@@ -16,7 +16,7 @@ d3.chart('SimpleDataInput').extend('RoundedRectangle',{
       /**
       Data bind for Rounded Rectangle.
       Data defines a rectangle height (rh), width (rw),
-      color (rc). 
+      color (rc).
 
       @method
       @param {Object} d example = {
@@ -51,15 +51,15 @@ d3.chart('SimpleDataInput').extend('RoundedRectangle',{
                         return val;
                       })
                      .attr('y',function(d){
-                        return chart.yscale.map(d.y);
+                        return chart.yscale.map(d.y)-(chart.rh/2);
                       })
                      .attr('rx', 5)
                      .attr('ry', 5)
                      .attr('fill',function(d){
                         if(d.c){
-                          return d.c
+                          return d.c;
                         }
-                        return chart.rc; 
+                        return chart.rc;
                      });
         },
         update : function(){
@@ -81,7 +81,7 @@ d3.chart('SimpleDataInput').extend('RoundedRectangle',{
                         if(d.c){
                           return d.c
                         }
-                        return chart.rc; 
+                        return chart.rc;
                      });
         },
         'exit' : function(){
