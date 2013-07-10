@@ -1,18 +1,16 @@
 /**
-Line chart drawers.
-Takes N input data series
+Scatterplot chart
 
-@class LineChart
-@extends BaseChart
+@class Scatterplot
 @constructor
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
-d3.chart('CompositeChart').extend('LineChart',{
+d3.chart('CompositeChart').extend('Scatterplot',{
 	initialize : function(args){
 		var options = {
-			chartName : 'Line',
+			chartName : 'Circle',
 			instances : args.instances
 		}
 

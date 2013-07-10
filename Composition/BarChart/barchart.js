@@ -9,7 +9,7 @@ N data series
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
-d3.chart('BaseChart').extend('BarChart',{
+d3.chart('CompositeChart').extend('BarChart',{
 	/**
 	BarChart initialization.
 
@@ -25,8 +25,8 @@ d3.chart('BaseChart').extend('BarChart',{
 			instances : args.instances, 
 		};
 
-		var barChart = this.mixin('MultipleDataInput', this.base.append('g'),options);
 		var yxyaxis = this.mixin('YXYAxis', this.base.append('g')).showAsGrid();
+		var barChart = this.mixin('MultipleDataInput', this.base.append('g'),options);
 
 		this.componentsMixins = [];
 		this.componentsMixins.push(barChart);

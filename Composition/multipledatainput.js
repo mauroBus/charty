@@ -20,39 +20,15 @@ d3.chart('BaseChart').extend('MultipleDataInput', {
                                     }
   */
   initialize : function(options){
-    this.mixinsInstances = [];
+    this.componentsMixins = [];
 
     var f = options.instances; 
 
     for(var i = options.instances - 1; i >=0; i--){
       var instance = this.mixin(options.chartName, this.base.append('g'));
       instance.factor = (f--/options.instances);
-      this.mixinsInstances.push(instance);
+      this.componentsMixins.push(instance);
     }
-  },
-  /**
-  Data transformation for multiple data series
-  Once scales are obtained, they have to be set to the mixins contained
-
-  @method
-  @param {Object} data Data accessor
-  @return {Object} Data accesor
-  */
-  transform : function(data){
-
-    if(this.xscale.defaultDomain()){
-      this.xscale.calculateDomain(data, function(d){return d.x}).setRange(this.w);
-      this.yscale.calculateDomain(data, function(d){return d.y}).setRange(this.h);
-    }
-
-    var self = this; 
-
-    this.mixinsInstances.forEach(function(element){
-      element.setXScale(self.xscale);
-      element.setYScale(self.yscale);
-    });
-
-    return data;
   },
   /**
   Propagates height value to all defined mixins
@@ -63,7 +39,7 @@ d3.chart('BaseChart').extend('MultipleDataInput', {
   */
   height : function(newHeight){
     this.h = newHeight; 
-    this.mixinsInstances.forEach(function(element){
+    this.componentsMixins.forEach(function(element){
       element.height(newHeight);
     });
     return this;
@@ -77,7 +53,7 @@ d3.chart('BaseChart').extend('MultipleDataInput', {
   */
   width : function(newWidth){
     this.w = newWidth; 
-    this.mixinsInstances.forEach(function(element){
+    this.componentsMixins.forEach(function(element){
       element.width(newWidth);
     });
     return this;

@@ -102,18 +102,14 @@ LinearScale.prototype.calculateDomain = function(data, f){
     d.forEach(function(element){
       var d = element.data;
       var maxg = d3.max(d, f);
+      var ming = d3.min(d, f);
       if(maxg > max){
         max = maxg;
       }
+      if(ming < min){
+		min = ming; 
+	  }
     });
 
-    /*data.forEach(function(element){
-    	var d = element.data;
-    	var ming = d3.min(d,f);
-    	if(ming < min){
-    		ming = min; 
-    	}
-    });*/
-
-    return this.setDomain(0, max);
+    return this.setDomain(Math.min(0, min), Math.max(0,max));
 }

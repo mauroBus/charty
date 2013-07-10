@@ -76,6 +76,20 @@ var options3 = {
   }
 };
 
+var options4 = {
+  chartName : 'Scatterplot',
+  instances : 2, 
+  root : '#chart4',
+  xAxis : 'ordinal',
+  yAxis : 'linear',
+  margin : {
+    left : 50,
+    top : 20,
+    lfactor : 2,
+    tfactor : 4.2
+  }
+};
+
 var chart1 = MyApi.chart(options1);
     chart1.draw(accessor1); 
 
@@ -87,3 +101,11 @@ var chart2 = MyApi.chart(options2);
 
 var chart3 = MyApi.chart(options3);
     chart3.draw(accessor1); 
+
+    data1.color = 'red';
+    data1.r = 5;
+    data2.color = 'blue';
+    data2.r = 8;
+
+var chart4 = MyApi.chart(options4);
+    chart4.draw(accessor1); 

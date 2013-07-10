@@ -33,6 +33,7 @@
  - Relocate labels with text and rounded rectangles
  - Slides to explain composition
  - Redefinition of scatterplot chart
+ - Better drawing for grid charts
 
 ## WTF
 
