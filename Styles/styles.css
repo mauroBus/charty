@@ -1,23 +1,27 @@
+  .test{
+      width: 400px;
+      height: 400px;
+    }
+
   .axis path{
     fill: none;
-    stroke: black;
     shape-rendering: crispEdges;
+  }
+
+  .show path{
+    display : none;
   }
 
   .dot {
     stroke: #000;
   }
 
-  .redcircle{
-    fill: red;
+  .yellow {
+    fill : yellow;
   }
 
-  .bluecircle{
-    fill : steelblue;
-  }
-
-  .bluebar {
-    fill: steelblue;
+  .green {
+    fill : green;
   }
 
   .blue {
@@ -32,26 +36,8 @@
     fill : gray;
   }
 
-  .graycircle {
-    fill : gray;
-  }
-
-  .redbar {
-    fill : red;
-  }
-
-  .graybar {
-    fill : gray;
-  }
-
-  .yellowbar {
+  .yellow {
     fill : yellow;
-  }
-
-  .line {
-    fill: none;
-    stroke: steelblue;
-    stroke-width: 1.5px;
   }
 
   .blueline{

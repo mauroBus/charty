@@ -1,169 +1,62 @@
 <!doctype html>
 <html>
   <head>
-    <title>
-        D3JS test
-    </title>
-    <script src="Libs\jquery-1.8.2.js"></script>
-    <script src="Libs\d3.v3.js" charset="utf-8"></script>
-    <script src="Libs\d3.chart.js"></script>
-    <script src="Iterator\iterator.js"></script>
-    <script src="Generic\genericchart.js"></script>
-    <script src="MultipleDataSeries\multipleDataInput.js"></script>
-    <script src="MultipleDataSeries\stackedInput.js"></script>
-    <script src="Axis\axis.js"></script>
-    <script src="Axis\yxyaxis.js"></script>
-    <script src="Axis\xyaxis.js"></script>
-    <script src="Donut\donutchart.js"></script>
-    <script src="Circles\circleschart.js" defer></script>
-    <script src="Labeling\roundedrectangles.js" defer></script>
-    <script src="Labeling\textlabels.js" defer></script>
-    <script src="MultipleDataSeries\bars.js" defer></script>
-    <script src="MultipleDataSeries\lines.js" defer></script>
-    <script src="MultipleDataSeries\multipleBars.js"></script>
-    <script src="MultipleDataSeries\multipleLines.js"></script>
-    <script src="MultipleDataSeries\groupedbars.js"></script>
-    <script src="MultipleDataSeries\triangles.js" defer></script>
-    <script src="MultipleDataSeries\multipleTriangles.js"></script>
-    <script src="MultipleDataSeries\scatterplot.js"></script>
+    <title>D3JS test</title>
     <link rel="stylesheet" type="text/css" href="Styles\styles.css"/>
   </head>
   <body>
-    <script>
-      $(document).ready(function(){
 
-        var domainData = {
-            id : 'group1',
-            color : 'redline',
-            rh : 20,
-            rw : 30,
-            rc:'lightgray',
-            r:6,
-            data: [
-                {x : 'Jan', y : 100, c : 'red', r:3},
-                {x : 'Feb', y : 200, c : 'red', r:9},
-                {x : 'Mar', y : 150, c : 'blue', r:3},
-                {x : 'Apr', y : 300, c : 'blue'},
-                {x : 'May', y : 193, c : 'blue'},
-                {x : 'Jun', y :  77, c : 'blue'},
-                {x : 'Jul', y :  33, c : 'gray'},
-                {x : 'Ago', y : 250, c : 'gray'}
-            ]
-        };
+    <main>Here will the charts be rendered in different div elements</main>
 
-        var domainData2 = {
-            id : 'group2',
-            color : 'blueline',
-            r : 5,
-            data: [
-                {x : 'Jan', y : 180},
-                {x : 'Feb', y : 350},
-                {x : 'Mar', y : 100},
-                {x : 'Apr', y : 150},
-                {x : 'May', y : 122},
-                {x : 'Jun', y :  12},
-                {x : 'Jul', y :  33},
-                {x : 'Ago', y : 187}
-            ]
-        };
+    <div id='chart1' class='test'>
+    </div>
 
-        var domainData3 = {
-            r:9,
-            id : 'group3',
-            color : 'grayline',
-            data: [
-                {x : 'Jan', y : 190},
-                {x : 'Feb', y : 300},
-                {x : 'Mar', y : 110},
-                {x : 'Apr', y : 50},
-                {x : 'May', y : 22},
-                {x : 'Jun', y :  312},
-                {x : 'Jul', y :  133},
-                {x : 'Ago', y : 287}
-            ]
-        };
+    <div id='chart2' class='test'>
+    </div>
 
-        var datagroups = [];
-        datagroups.push(domainData);
-        datagroups.push(domainData2);
-        datagroups.push(domainData3);
+    <div id='chart3' class='test'>
+    </div>
 
-        var it = new Iterator(datagroups);
+    <div id='chart4' class='test'>
+    </div>
 
-        var margin = {top: 20, right: 20, bottom: 30, left: 40},
-            width = 1200 - margin.left - margin.right,
-            height = 800 - margin.top - margin.bottom;
+    <div id='chart5' class='test'>
+    </div>
 
-        var width = 500,
-            height = 500;
+    <script src="Libs/d3.v3.js" charset="utf-8"></script>
+    <script src="Libs/d3.chart.js"></script>
 
-        var svg2 = d3.select("body").append("svg")
-                    .attr("width", width)
-                    .attr("height", height)
-                    .append("g")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    <script src="Utils/Accessor/accessor.js"></script>
 
-        var linechart = svg2.chart('MultipleLines').instances(3).height(height-100).width(width-100);
-        linechart.draw(it);
+    <script src="Components/Scales/linearscale.js"></script>
+    <script src="Components/Scales/ordinalscale.js"></script>
+    <script src="Components/Scales/scalesfactory.js"></script>
 
-        it.restart();
+    <script src="Components/Base/basechart.js"></script>
+    <script src="Composition/multipledatagroup.js"></script>
+    <script src="Composition/simpledatagroup.js"></script>
+    <script src="Composition/multipleinstancesmixin.js"></script>
+    <script src="Components/Bar/bar.js"></script>
+    <script src="Components/Line/line.js"></script>
+    <script src="Components/Circle/circle.js"></script>
+    <script src="Components/Triangle/triangle.js"></script>
+    <script src="Components/RoundedRectangle/roundedrectangle.js"></script>
+    <script src="Components/TextLabel/textlabel.js"></script>
 
-        var svg3 = d3.select("body").append("svg")
-                    .attr("width", width)
-                    .attr("height", height)
-                    .append("g")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    <script src="Components/Axis/axis.js"></script>
+    <script src="Composition/Axis/xyaxis.js"></script>
+    <script src="Composition/Axis/yxyaxis.js"></script>
 
-        domainData.color = 'redbar';
-        domainData2.color = 'bluebar';
-        domainData3.color = 'graybar';
+    <script src="Composition/LabeledTriangleChart/labeledtrianglechart.js"></script>
+    <script src="Composition/BarChart/barchart.js"></script>
+    <script src="Composition/LineChart/linechart.js"></script>
+    <script src="Composition/Scatterplot/scatterplot.js"></script>
 
-        var doublebars = svg3.chart('MultipleBars').instances(3).height(height-100).width(width-100);
-        doublebars.draw(it);
+    <script src="Components/Donut/donut.js"></script>
 
-        var svg = d3.select("body").append("svg")
-                    .attr("width", width)
-                    .attr("height", height)
-                    .append("g")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    <script src="Api/chartsapi.js"></script>
 
-        it.restart();
+    <script src="mychart.js"></script>
 
-        domainData.color = 'redcircle';
-        domainData2.color = 'bluecircle';
-
-        var scatterplot = svg.chart('Scatterplot').instances(3).height(height-150).width(width-150);
-        scatterplot.draw(it);
-
-        var svg4 = d3.select("body").append("svg")
-                    .attr("width", width)
-                    .attr("height", height)
-                    .append("g")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-        it.restart();
-
-        var triangles = svg4.chart('MultipleTriangles').height(height-150).width(width-150);
-
-        var data2 = [];
-        data2.push(domainData);
-
-        var it2 = new Iterator(data2);
-        triangles.draw(it);
-
-        var svg5 = d3.select("body").append("svg")
-                    .attr("width", width)
-                    .attr("height", height)
-                    .append("g")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-        var apples = [100,200,300,400];
-
-        var donutChart = svg5.chart('DonutChart').radius(150).height(height-150).width(width-150).translate();
-
-        donutChart.draw(apples);
-
-      });
-    </script>
   </body>
 </html>
