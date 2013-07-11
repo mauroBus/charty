@@ -3,13 +3,13 @@ Create a bar chart that will render
 N data series
 
 @class BarChart
-@extends BaseChart
+@extends MultipleDataGroup
 @constructor
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
-d3.chart('CompositeChart').extend('BarChart',{
+d3.chart('MultipleDataGroup').extend('BarChart',{
 	/**
 	BarChart initialization.
 
@@ -26,7 +26,7 @@ d3.chart('CompositeChart').extend('BarChart',{
 		};
 
 		var yxyaxis = this.mixin('YXYAxis', this.base.append('g')).showAsGrid();
-		var barChart = this.mixin('MultipleDataInput', this.base.append('g'),options);
+		var barChart = this.mixin('MultipleInstancesMixin', this.base.append('g'),options);
 
 		this.componentsMixins = [];
 		this.componentsMixins.push(barChart);

@@ -16,6 +16,14 @@
     stroke: #000;
   }
 
+  .yellow {
+    fill : yellow;
+  }
+
+  .green {
+    fill : green;
+  }
+
   .blue {
     fill : steelblue;
   }

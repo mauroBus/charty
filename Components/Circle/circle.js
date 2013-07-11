@@ -2,12 +2,12 @@
 Circle drawer.
 
 @class Circle
-@extends SimpleDataInput
+@extends SimpleDataGroup
 @constructor
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
-d3.chart('SimpleDataInput').extend('Circle',{
+d3.chart('SimpleDataGroup').extend('Circle',{
 
   /**
   Circle initializator
@@ -47,7 +47,12 @@ d3.chart('SimpleDataInput').extend('Circle',{
 
           var chart = this.chart();
 
-          return this.attr('class',chart.c)
+          return this.attr('class',function(d){
+                      if(d.c){
+                        return d.c;
+                      }
+                      return chart.c; 
+                    })
                     .attr("r", function(d){
                       if(d.r){
                         return d.r;
@@ -61,7 +66,12 @@ d3.chart('SimpleDataInput').extend('Circle',{
 
           var chart = this.chart();
 
-          return this.attr('class',chart.c)
+          return this.attr('class',function(d){
+                      if(d.c){
+                        return d.c;
+                      }
+                      return chart.c; 
+                    })
                     .attr("r", function(d){
                       if(d.r){
                         return d.r;

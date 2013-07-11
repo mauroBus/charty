@@ -2,12 +2,13 @@
 Scatterplot chart
 
 @class Scatterplot
+@extends MultipleDataGroup
 @constructor
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
-d3.chart('CompositeChart').extend('Scatterplot',{
+d3.chart('MultipleDataGroup').extend('Scatterplot',{
 	initialize : function(args){
 		var options = {
 			chartName : 'Circle',
@@ -15,7 +16,7 @@ d3.chart('CompositeChart').extend('Scatterplot',{
 		}
 
 		var yxyaxis = this.mixin('YXYAxis', this.base.append('g')).showAsGrid();
-		var lineChart = this.mixin('MultipleDataInput', this.base.append('g'), options);
+		var lineChart = this.mixin('MultipleInstancesMixin', this.base.append('g'), options);
 
 		this.componentsMixins = [];
 		this.componentsMixins.push(lineChart);

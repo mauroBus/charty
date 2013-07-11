@@ -2,12 +2,12 @@
 Text labeling.
 
 @class TextLabel
-@extends SimpleDataInput
+@extends SimpleDataGroup
 @constructor
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
-d3.chart('SimpleDataInput').extend('TextLabel', {
+d3.chart('SimpleDataGroup').extend('TextLabel', {
   /**
   Text label initializator
 
@@ -38,6 +38,12 @@ d3.chart('SimpleDataInput').extend('TextLabel', {
 
         return this.selectAll('text').data(d.data);
       },
+      /**
+      Insert a text element for each data input. 
+
+      @mehtod
+      @chainable
+      */
       insert : function(){
         return this.append('text');
       },

@@ -12,6 +12,9 @@
 ## What's new
 
 - Charts Api defined : a chart can be append to a html root element
+- Support for negative values
+- Redefinition of scatterplot chart
+- Donut added, with no labels
 - LinearScale, OrdinalScale : separate objects for data mapping
 - Directory relocation 
   + Components : each individual component goes here
@@ -24,16 +27,14 @@
   + MultipleDataInput : takes N series to draw. 
 - Documentation was added to the code, following the YUI standard
 
+
 ## Coming soon
 
- - Support for negative values
  - Support for switching linear / ordinal scales
  - Completion of donut chart 
  - Define chart names as constants
  - Relocate labels with text and rounded rectangles
  - Slides to explain composition
- - Redefinition of scatterplot chart
- - Better drawing for grid charts
 
 ## WTF
 

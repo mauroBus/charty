@@ -1,13 +1,13 @@
 /**
 Defines a data transformation for composite charts
 
-@class CompositeChart
+@class MultipleDataGroup
 @extend BaseChart
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>" 
 */
 
-d3.chart('BaseChart').extend('CompositeChart',{
+d3.chart('BaseChart').extend('MultipleDataGroup',{
   /**
   Data transformation for multiple data series
   Once scales are obtained, they have to be set to the mixins contained

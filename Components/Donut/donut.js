@@ -2,12 +2,12 @@
 Donut drawer
 
 @class Donut
-@extends BaseChart
+@extends SimpleDataGroup
 @constructor
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
-d3.chart('SimpleDataInput').extend("Donut", {
+d3.chart('SimpleDataGroup').extend("Donut", {
   /**
   Donut initialization
 
@@ -17,8 +17,13 @@ d3.chart('SimpleDataInput').extend("Donut", {
 
     var pathBase = this.base.append('g');
 
-    var pieLayout = d3.layout.pie().sort(null);
-    var colorGen = d3.scale.category20();
+    var pieLayout = d3.layout
+                      .pie()
+                      .sort(null)
+                      .value(function(d){
+                        return d.x; 
+                      });
+                      
     var arcGen = d3.svg.arc();
 
     this.layer('paths', pathBase ,{
@@ -32,7 +37,10 @@ d3.chart('SimpleDataInput').extend("Donut", {
       @param {Object} data example = {
                                         ir : -150,
                                         or : -100,
-                                        data : [...]
+                                        data : [
+                                          {x : 200, c: 'red'}
+                                          {x : 500, c:'blue'}
+                                        ]
                                       }
       */
       dataBind : function(data){
@@ -44,9 +52,7 @@ d3.chart('SimpleDataInput').extend("Donut", {
         arcGen = arcGen.innerRadius(chart.ir)
                        .outerRadius(chart.or);
 
-        var d1 = data.data.map(function(d){return d.y});
-
-        return this.selectAll('path').data(pieLayout(d1));
+        return this.selectAll('path').data(pieLayout(data.data));
       },
       /**
       Adds a path element for the donut
@@ -57,35 +63,20 @@ d3.chart('SimpleDataInput').extend("Donut", {
         return this.append('path');
       },
       events : {
-        'exit' : function(){
-          return this.remove();
-        },
-        'merge' : function(){
+        'enter' : function(){
 
           var chart = this.chart();
 
-          console.log(chart.w);
-
           return this.attr('transform', "translate(" + chart.w / 2 + "," + chart.h / 2 + ")")
-                     .attr("fill", function(d, i) {
-                          return colorGen(i);})
+                     .attr("fill", function(d) {
+                          return d.data.c;
+                      })
                      .attr("d", arcGen);
+        },
+        'exit' : function(){
+          return this.remove();
         }
       }
     });
-  },
-  /**
-  Sets the radius for donut paths.
-
-  @method
-  @param {Number} newRadius
-  @chainable
-  */
-  radius : function(newRadius){
-    if(arguments.length === 0){
-      return this.r;
-    }
-    this.r = newRadius;
-    return this;
   }
 });

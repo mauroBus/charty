@@ -2,12 +2,12 @@
 Line drawing.
 
 @class Line
-@extends SimpleDataInput
+@extends SimpleDataGroup
 @constructor
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
-d3.chart('SimpleDataInput').extend('Line', {
+d3.chart('SimpleDataGroup').extend('Line', {
   /**
   Line initialization
 

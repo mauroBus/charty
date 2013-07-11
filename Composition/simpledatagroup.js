@@ -1,13 +1,13 @@
 /**
 Defines a basic chart to process individual data series
 
-@class SimpleDataInput
+@class SimpleDataGroup
 @extends BaseChart
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
-d3.chart('BaseChart').extend('SimpleDataInput', {
+d3.chart('BaseChart').extend('SimpleDataGroup', {
   /**
   Returns the next element of the data collection
 

@@ -3,11 +3,11 @@ Bar drawer. Takes only one data series as input.
 
 @class Bar
 @constructor
-@extends SimpleDataInput
+@extends SimpleDataGroup
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
-d3.chart('SimpleDataInput').extend('Bar', {
+d3.chart('SimpleDataGroup').extend('Bar', {
   /**
   Bar initialization
 

@@ -3,11 +3,11 @@ Rounded rectangle drawer.
 
 @class RoundedRectangle
 @constructor
-@extends SimpleDataInput
+@extends SimpleDataGroup
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
-d3.chart('SimpleDataInput').extend('RoundedRectangle',{
+d3.chart('SimpleDataGroup').extend('RoundedRectangle',{
   initialize : function(){
 
     var pathBase = this.base.append('g');
