@@ -139,3 +139,40 @@ var chart4 = myApi.chart(options4);
 
 var chart5 = myApi.chart(options5);
     chart5.draw(accessor3);
+
+setTimeout(function(){
+
+  var data1 = {
+    color: 'blue',
+    rh: 30,
+    rw: 30,
+    rc:'gray',
+    data: [
+      { x: 'A', y: 100, c1 : 'green', c2:'yellow'},
+      { x: 'B', y: -40, c1 : 'blue', c2:'yellow' },
+      { x: 'C', y: 60, c1 : 'red', c2:'green' }
+    ]
+  };
+
+  var data2 = {
+    color: 'red',
+    r : 8,
+    data: [
+      { x: 'A', y: 150 },
+      { x: 'B', y: 50 },
+      { x: 'C', y: 30 }
+    ]
+  };
+
+  var data3 = {
+    ir :  -100,
+    or : -50,
+    data : [
+      {x : 200, c : 'blue'},
+      {x : 300, c : 'red'},
+      {x : 150, c : 'yellow'},
+      {x :  50, c : 'green'}
+    ]
+  };
+
+},3000);

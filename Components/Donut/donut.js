@@ -21,25 +21,26 @@ d3.chart('SimpleDataGroup').extend("Donut", {
                       .pie()
                       .sort(null)
                       .value(function(d){
-                        return d.x; 
+                        return d.x;
                       });
-                      
+
     var arcGen = d3.svg.arc();
 
     this.layer('paths', pathBase ,{
       /**
       Data bind for donut.
-      Will take y elements as data for drawing
+      Will take x elements as data for drawing
       or : outter radius
       ir : inner radius
+      Each part of the donut must have a color set
 
       @method
       @param {Object} data example = {
                                         ir : -150,
                                         or : -100,
                                         data : [
-                                          {x : 200, c: 'red'}
-                                          {x : 500, c:'blue'}
+                                          {x : 200, c: 'red' }
+                                          {x : 500, c: 'blue'}
                                         ]
                                       }
       */
@@ -47,7 +48,7 @@ d3.chart('SimpleDataGroup').extend("Donut", {
 
         var chart = this.chart();
         chart.ir = data.ir;
-        chart.or = data.or; 
+        chart.or = data.or;
 
         arcGen = arcGen.innerRadius(chart.ir)
                        .outerRadius(chart.or);
@@ -56,7 +57,7 @@ d3.chart('SimpleDataGroup').extend("Donut", {
       },
       /**
       Adds a path element for the donut
-      
+
       @method
       */
       insert : function(){

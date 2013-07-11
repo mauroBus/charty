@@ -52,3 +52,11 @@ ChartsApi.prototype.chart = function(options){
     			   .width(width-options.margin.top*options.margin.tfactor);
     return chart;
 }
+
+/**
+Chart names are defined as constants
+*/
+
+ChartsApi.prototype.CHART_NAMES = {
+
+}

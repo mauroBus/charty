@@ -20,12 +20,15 @@ d3.chart('SimpleDataGroup').extend('Bar', {
     var options = {
       /**
       Data bind for a bar serie.
-      Can have a color set for the whole serie.
+      Can have a color set for the whole serie, or
+      each bar can have an own color defined.
 
       @method
       @param {Object} d example = {
                                      color : 'red',
-                                     daata = [...]
+                                     data = [
+                                      {x : 'Jan', y : 200, c : 'red'}
+                                     ]
                                   }
       */
       dataBind : function(d){

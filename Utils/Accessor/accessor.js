@@ -1,6 +1,8 @@
 /**
 Accessor for data collection
 
+Accessor will iterate over the data collection.
+
 @class Accessor
 @constructor
 
@@ -66,3 +68,13 @@ Returns the data contained in the accessor
 Accessor.prototype.getData = function() {
   return this.data;
 };
+
+/**
+Sets a specific data set to this accessor
+
+@method
+@param {Object} data Data series
+*/
+Accessor.prototype.setData = function(data){
+  this.data = data;
+}

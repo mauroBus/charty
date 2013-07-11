@@ -29,7 +29,10 @@ d3.chart('SimpleDataGroup').extend('Line', {
       @method
       @param {Object} d example = {
                                     color : 'redline'
-                                    data : [...]
+                                    data : [
+                                      {x : 'Jan', y: 200},
+                                      ...
+                                    ]
                                   }
       */
       dataBind : function(d){
@@ -54,7 +57,7 @@ d3.chart('SimpleDataGroup').extend('Line', {
       events : {
         'enter' : function(){
 
-            var chart = this.chart(); 
+            var chart = this.chart();
 
             return this.datum(chart.datum)
                        .attr('class',chart.c)

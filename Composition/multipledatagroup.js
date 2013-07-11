@@ -4,7 +4,7 @@ Defines a data transformation for composite charts
 @class MultipleDataGroup
 @extend BaseChart
 
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>" 
+@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 d3.chart('BaseChart').extend('MultipleDataGroup',{
@@ -23,7 +23,7 @@ d3.chart('BaseChart').extend('MultipleDataGroup',{
       this.yscale.calculateDomain(data, function(d){return d.y}).setRange(this.h);
     }
 
-    var self = this; 
+    var self = this;
 
     this.componentsMixins.forEach(function(element){
       element.setXScale(self.xscale);

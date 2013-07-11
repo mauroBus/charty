@@ -20,14 +20,17 @@ d3.chart('SimpleDataGroup').extend('Circle',{
 
     this.layer('circles', this.pathBase,{
       /**
-      Data bind for a circle serie. 
-      Can have color and circle radius set for the whole serie.
+      Data bind for a circle serie.
+      Can have color and circle radius set for the whole serie,
+      or own values for each data point.
 
       @method
       @param {Object} d example = {
                                     color : 'red',
                                     r : 5
-                                    data : [...]
+                                    data : [
+                                      {x : 'Jan', y: 300, c : 'blue', r : 20}
+                                    ]
                                   }
       */
       dataBind: function(d){
@@ -35,7 +38,7 @@ d3.chart('SimpleDataGroup').extend('Circle',{
         var chart = this.chart();
 
         chart.c = d.color;
-        chart.r = d.r; 
+        chart.r = d.r;
 
         return this.selectAll('circle').data(d.data);
       },
@@ -51,7 +54,7 @@ d3.chart('SimpleDataGroup').extend('Circle',{
                       if(d.c){
                         return d.c;
                       }
-                      return chart.c; 
+                      return chart.c;
                     })
                     .attr("r", function(d){
                       if(d.r){
@@ -70,7 +73,7 @@ d3.chart('SimpleDataGroup').extend('Circle',{
                       if(d.c){
                         return d.c;
                       }
-                      return chart.c; 
+                      return chart.c;
                     })
                     .attr("r", function(d){
                       if(d.r){
