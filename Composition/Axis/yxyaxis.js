@@ -44,9 +44,10 @@ d3.chart('BaseChart').extend('YXYAxis',{
   @chainable
   */
   height : function(newHeight){
+    this.h = newHeight; 
     this.xaxis.height(newHeight).ytranslate(newHeight);
     this.yaxisright.height(newHeight);
-    this.yaxisleft.height(newHeight);
+    this.yaxisleft.height(newHeight).tickSize(newHeight);
     return this;
   },
   /**
@@ -57,9 +58,33 @@ d3.chart('BaseChart').extend('YXYAxis',{
   @chainable
   */
   width : function(newWidth){
-    this.xaxis.width(newWidth);
+    this.w = newWidth;
+    this.xaxis.width(newWidth).tickSize(newWidth);
     this.yaxisright.width(newWidth).xtranslate(newWidth);
     this.yaxisleft.width(newWidth);
+    return this;
+  },
+  /**
+  Redefinition of x scale setter
+
+  @method
+  @param {Object} scale d3.scale
+  @chainable
+  */
+  setXScale : function(scale){
+    this.xaxis.setScale(scale);
+    return this;
+  },
+  /**
+  Redefinition of y scale setter
+
+  @method
+  @param {Object} scale d3.scale
+  @chainable
+  */
+  setYScale : function(scale){
+    this.yaxisleft.setScale(scale);
+    this.yaxisright.setScale(scale);
     return this;
   }
 });

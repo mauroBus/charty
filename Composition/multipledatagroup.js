@@ -18,10 +18,8 @@ d3.chart('BaseChart').extend('MultipleDataGroup',{
   */
   transform : function(data){
 
-    if(this.xscale.defaultDomain()){
-      this.xscale.calculateDomain(data, function(d){return d.x}).setRange(this.w);
-      this.yscale.calculateDomain(data, function(d){return d.y}).setRange(this.h);
-    }
+    this.xscale.calculateDomain(data, function(d){return d.x}).setRange(this.w);
+    this.yscale.calculateDomain(data, function(d){return d.y}).setRange(this.h);
 
     var self = this;
 

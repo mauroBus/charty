@@ -56,10 +56,7 @@ d3.chart('SimpleDataGroup').extend('RoundedRectangle',{
                      .attr('rx', 5)
                      .attr('ry', 5)
                      .attr('fill',function(d){
-                        if(d.c){
-                          return d.c;
-                        }
-                        return chart.rc;
+                        return (d.c || chart.rc);
                      });
         },
         update : function(){
@@ -73,15 +70,12 @@ d3.chart('SimpleDataGroup').extend('RoundedRectangle',{
                         return val;
                       })
                      .attr('y',function(d){
-                        return chart.yscale.map(d.y);
+                        return chart.yscale.map(d.y)-(chart.rh/2);
                       })
                      .attr('rx', 5)
                      .attr('ry', 5)
                      .attr('fill',function(d){
-                        if(d.c){
-                          return d.c
-                        }
-                        return chart.rc;
+                        return (d.c || chart.rc);
                      });
         },
         'exit' : function(){

@@ -98,7 +98,7 @@ Keeps a reference for the minimum value
 */
 LinearScale.prototype.calculateDomain = function(data, f){
 	var max = -100000,
-			min = 1000000;
+		min = 1000000;
 
 	var d = data.getData();
 
@@ -110,7 +110,7 @@ LinearScale.prototype.calculateDomain = function(data, f){
       max = maxg;
     }
     if(ming < min){
-			min = ming;
+		min = ming;
   	}
   });
 

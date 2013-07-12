@@ -39,7 +39,7 @@ d3.chart('SimpleDataGroup').extend('TextLabel', {
         return this.selectAll('text').data(d.data);
       },
       /**
-      Insert a text element for each data input. 
+      Insert a text element for each data input.
 
       @mehtod
       @chainable

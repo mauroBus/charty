@@ -74,6 +74,13 @@ d3.chart('SimpleDataGroup').extend("Donut", {
                       })
                      .attr("d", arcGen);
         },
+        'update' : function(){
+          var chart = this.chart();
+          return this.attr("fill", function(d) {
+                          return d.data.c;
+                      })
+                     .attr("d", arcGen);
+        },
         'exit' : function(){
           return this.remove();
         }

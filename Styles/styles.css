@@ -61,7 +61,5 @@
   .axis .tick line{
       fill: none;
       stroke: lightgrey;
-      opacity: 0.7;
-      shape-rendering: crispEdges;
     }
   }
