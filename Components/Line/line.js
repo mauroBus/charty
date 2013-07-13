@@ -67,6 +67,10 @@ d3.chart('SimpleDataGroup').extend('Line', {
 
           var chart = this.chart();
 
+          console.log('update '+chart.c);
+
+          console.log(chart.datum);
+
           return this.datum(chart.datum)
                      .attr('class',chart.c)
                      .attr('d',line);

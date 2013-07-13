@@ -48,10 +48,7 @@ d3.chart('SimpleDataGroup').extend('Bar', {
               var chart = this.chart();
 
               this.attr("class", function(d){
-                    if(d.c){
-                      return d.c;
-                    }
-                    return chart.c;
+                    return (d.c || chart.c);
                   })
                   .attr("x", function(d) { return chart.xscale.map(d.x, chart.factor)} )
                   .attr("width", chart.xscale.band(chart.factor))
@@ -68,10 +65,7 @@ d3.chart('SimpleDataGroup').extend('Bar', {
               var chart = this.chart();
 
               this.attr("class", function(d){
-                    if(d.c){
-                      return d.c;
-                    }
-                    return chart.c;
+                   return (d.c || chart.c);
                   })
                   .attr("x", function(d) { return chart.xscale.map(d.x, chart.factor)} )
                   .attr("width", chart.xscale.band(chart.factor))

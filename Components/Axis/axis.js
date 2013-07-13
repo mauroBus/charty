@@ -38,16 +38,8 @@ d3.chart('BaseChart').extend('Axis',{
 
         var chart = this.chart();
 
-        if(chart.type === 'x'){  //x axis
-          axis = axis.scale(chart.xscale.getScale());
-        }
-        else{ //y axis
-          if(chart.type === 'y'){
-            axis = axis.scale(chart.yscale.getScale());
-          }
-        }
-
-        axis = axis.orient(chart.o);
+        axis = axis.scale(chart.scale.getScale())
+                   .orient(chart.o);
 
         return this.selectAll('g').data([0]);
       },
@@ -64,15 +56,9 @@ d3.chart('BaseChart').extend('Axis',{
         'merge' : function(){
 
             var chart = this.chart();
+
             if(chart.grid){
-              if(chart.type === 'x'){
-                axis = axis.tickSize(-chart.h,0,0);
-              }
-              else{
-                if(chart.type === 'y'){
-                  axis = axis.tickSize(-chart.w,0,0);
-                }
-              }
+                axis = axis.tickSize(-chart.tsize,0,0);
             }
 
             this.attr('class','axis')
@@ -89,6 +75,28 @@ d3.chart('BaseChart').extend('Axis',{
         }
       }
     });
+  },
+  /**
+  Sets tick size for the axis
+
+  @method
+  @param {Number} size ticksize
+  @chainable
+  */
+  tickSize : function(size){
+    this.tsize = size;
+    return this; 
+  },
+  /**
+  Sets the scale that will be used for the axis
+
+  @method
+  @param {Object} d3.scale
+  @chainable
+  */
+  setScale : function(scale){
+    this.scale = scale;
+    return this; 
   },
   /**
   Shows the axis as a grid

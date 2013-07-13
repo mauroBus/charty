@@ -5,9 +5,9 @@ var data1 = {
   rw: 30,
   rc:'gray',
   data: [
-    { x: 'A', y: 100, c1 : 'green', c2:'yellow'},
-    { x: 'B', y: -40, c1 : 'blue', c2:'yellow' },
-    { x: 'C', y: 60, c1 : 'red', c2:'green' }
+    { x: 'A', y: 100, c : 'green'},
+    { x: 'B', y: -40, c : 'blue'},
+    { x: 'C', y: 60, c : 'red' }
   ]
 };
 
@@ -73,7 +73,7 @@ var options2 = {
     lfactor : 2,
     tfactor : 4.2
   }
-}
+};
 
 var options3 = {
   chartName : 'LineChart',
@@ -142,37 +142,72 @@ var chart5 = myApi.chart(options5);
 
 setTimeout(function(){
 
-  var data1 = {
+  data1 = {
     color: 'blue',
     rh: 30,
     rw: 30,
     rc:'gray',
     data: [
       { x: 'A', y: 100, c1 : 'green', c2:'yellow'},
-      { x: 'B', y: -40, c1 : 'blue', c2:'yellow' },
-      { x: 'C', y: 60, c1 : 'red', c2:'green' }
+      { x: 'B', y: 40, c1 : 'blue', c2:'yellow' },
+      { x: 'C', y: 60, c1 : 'red', c2:'green' },
+      { x: 'D', y: 80, c1: 'green' , c2:'blue' }
     ]
   };
 
-  var data2 = {
+  data2 = {
     color: 'red',
     r : 8,
     data: [
       { x: 'A', y: 150 },
       { x: 'B', y: 50 },
-      { x: 'C', y: 30 }
+      { x: 'C', y: 30 },
+      { x: 'D', y: 230 }
     ]
   };
 
-  var data3 = {
+  data3 = {
     ir :  -100,
     or : -50,
     data : [
       {x : 200, c : 'blue'},
       {x : 300, c : 'red'},
       {x : 150, c : 'yellow'},
-      {x :  50, c : 'green'}
+      {x :  50, c : 'green'},
+      {x : 400, c: 'gray'}
     ]
   };
+
+  var datagroup4 = [];
+      datagroup4.push(data1);
+      datagroup4.push(data2);
+
+  accessor1.setData(datagroup4);
+
+  var datagroup5 = [];
+      datagroup5.push(data1);
+
+  var datagroup6 = [];
+      datagroup6.push(data3);
+
+  accessor2.setData(datagroup5);
+  accessor3.setData(datagroup6);
+
+  chart1.draw(accessor1);
+  chart2.draw(accessor2);
+
+  data1.color = 'redline';
+  data2.color = 'blueline';
+
+  chart3.draw(accessor1);
+
+  chart5.draw(accessor3);
+
+  data1.color = 'gray';
+  data1.r = 12;
+  data2.color = 'red';
+  data2.r = 8;
+
+  chart4.draw(accessor1);
 
 },3000);
