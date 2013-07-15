@@ -7,78 +7,94 @@ Line drawing.
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
-d3.chart('SimpleDataGroup').extend('Line', {
-  /**
-  Line initialization
 
-  @method
-  */
-  initialize : function(){
+(function(root, factory) {
+  // Set up Backbone appropriately for the environment.
+  if (typeof define === 'function' && define.amd) {
+    // AMD
+    define(['d3',
+      'd3.chart',
+      'simpledatagroup'], 
+      function(d3) {
+        // Export global even in AMD case in case this script is loaded with others
+        return factory(d3);
+    });
+  }
+  else {
+    // Browser globals
+    return factory(d3);
+  }
+}(this, function(d3) {
+  d3.chart('SimpleDataGroup').extend('Line', {
+    /**
+    Line initialization
 
-    var line = d3.svg.line();
+    @method
+    */
+    initialize : function(){
 
-    var pathBase = this.base;
+      var line = d3.svg.line();
 
-    this.layer('lineslayer', pathBase, {
-      /**
-      Data bind for a line serie.
-      Since a line is drawed using d3.line
-      a datum must be defined. Can also have a color
-      for the whole serie.
+      var pathBase = this.base;
 
-      @method
-      @param {Object} d example = {
-                                    color : 'redline'
-                                    data : [
-                                      {x : 'Jan', y: 200},
-                                      ...
-                                    ]
-                                  }
-      */
-      dataBind : function(d){
+      this.layer('lineslayer', pathBase, {
+        /**
+        Data bind for a line serie.
+        Since a line is drawed using d3.line
+        a datum must be defined. Can also have a color
+        for the whole serie.
 
-        var chart = this.chart();
+        @method
+        @param {Object} d example = {
+                                      color : 'redline'
+                                      data : [
+                                        {x : 'Jan', y: 200},
+                                        ...
+                                      ]
+                                    }
+        */
+        dataBind : function(d){
 
-        line.x(function(d) {
-          return chart.xscale.map(d.x, 0);
-        }).y(function(d) {
-          return chart.yscale.map(d.y, 0);
-        });
+          var chart = this.chart();
 
-        chart.datum = d.data;
-        chart.c = d.color;
+          line.x(function(d) {
+            return chart.xscale.map(d.x, 0);
+          }).y(function(d) {
+            return chart.yscale.map(d.y, 0);
+          });
 
-        return this.selectAll('path').data([0]);
+          chart.datum = d.data;
+          chart.c = d.color;
 
-      },
-      insert : function(){
-        return this.append('path');
-      },
-      events : {
-        'enter' : function(){
+          return this.selectAll('path').data([0]);
+
+        },
+        insert : function(){
+          return this.append('path');
+        },
+        events : {
+          'enter' : function(){
+
+              var chart = this.chart();
+
+              return this.datum(chart.datum)
+                         .attr('class',chart.c)
+                         .attr('d',line);
+          },
+          'update':function(){
 
             var chart = this.chart();
 
             return this.datum(chart.datum)
                        .attr('class',chart.c)
                        .attr('d',line);
-        },
-        'update':function(){
-
-          var chart = this.chart();
-
-          console.log('update '+chart.c);
-
-          console.log(chart.datum);
-
-          return this.datum(chart.datum)
-                     .attr('class',chart.c)
-                     .attr('d',line);
-        },
-        'exit' : function(){
-          return this.remove();
+          },
+          'exit' : function(){
+            return this.remove();
+          }
         }
-      }
-    });
-  }
-});
+      });
+    }
+  });
+ })
+)
