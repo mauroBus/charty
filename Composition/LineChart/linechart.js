@@ -5,6 +5,10 @@ Takes N input data series
 @class LineChart
 @extends MultipleDataGroup
 @constructor
+@requires d3,
+          d3.chart,
+          line,
+          multipledatagroup
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -16,7 +20,7 @@ Takes N input data series
     define(['d3',
     	'd3.chart',
     	'line',
-    	'multipledatagroup'], 
+    	'multipledatagroup'],
     	function(d3) {
 	      // Export global even in AMD case in case this script is loaded with others
 	      return factory(d3);
@@ -39,7 +43,7 @@ Takes N input data series
 		initialize : function(args){
 			var options = {
 				chartName : 'Line',
-				instances : args.instances
+				instances : (args.instances || 1)
 			}
 
 			var yxyaxis = this.mixin('YXYAxis', this.base.append('g')).showAsGrid();

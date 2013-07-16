@@ -4,6 +4,9 @@ Text labeling.
 @class TextLabel
 @extends SimpleDataGroup
 @constructor
+@requires d3,
+          d3.chart,
+          simpledatagroup
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -14,7 +17,7 @@ Text labeling.
     // AMD
     define(['d3',
       'd3.chart',
-      'simpledatagroup'], 
+      'simpledatagroup'],
       function(d3) {
         // Export global even in AMD case in case this script is loaded with others
         return factory(d3);
@@ -33,9 +36,9 @@ Text labeling.
     */
     initialize : function(){
 
-      var pathBase = this.base.append('g');
+      this.pathBase = this.base;
 
-      this.layer('texts', pathBase ,{
+      this.layer('texts', this.pathBase ,{
         /**
         Data bind for text labeling.
         Can depend on other elements, for instance,
@@ -43,16 +46,13 @@ Text labeling.
 
         @method
         @param {Object} d example = {
-                                      rh : 15,
-                                      rw : 15,
                                       data : [...]
                                     }
         */
         dataBind : function(d){
 
           var chart = this.chart();
-          chart.rh = d.rh;
-          chart.rw = d.rw;
+          chart.checkScales('Text Label');
 
           return this.selectAll('text').data(d.data);
         },
@@ -101,6 +101,6 @@ Text labeling.
       });
 
     }
-  })
+  });
  })
-)
+);

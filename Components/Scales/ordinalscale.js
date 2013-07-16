@@ -12,7 +12,7 @@ Ordinal Scale
   if (typeof define === 'function' && define.amd) {
     // AMD
     define(['d3',
-    	'd3.chart'], 
+    	'd3.chart'],
     	function(d3) {
 	      // Export global even in AMD case in case this script is loaded with others
 	      return factory(d3);
@@ -25,7 +25,7 @@ Ordinal Scale
 }(this, function(d3) {
 	var OrdinalScale = function(axisType){
 		this.scale = d3.scale.ordinal();
-		this.axisType = axisType;  
+		this.axisType = axisType;
 	}
 
 	/**
@@ -48,7 +48,7 @@ Ordinal Scale
 	@chainable
 	*/
 	OrdinalScale.prototype.setRange = function(range){
-		var r ; 
+		var r ;
 
 		if(this.axisType === 'x'){
 			r = [0,range];
@@ -57,22 +57,25 @@ Ordinal Scale
 			if(this.axisType === 'y'){
 				r = [range,0]
 			}
+			else{
+				throw new Error('No scale was defined for this ordinal scale.');
+			}
 		}
-		this.scale = this.scale.rangeRoundBands(r , .1); 
-		return this; 
+		this.scale = this.scale.rangeRoundBands(r , .1);
+		return this;
 	}
 
 	/**
 	Returns the created ordinal scale
 
 	@method
-	@return {Object} d3.scale (ordinal scale) 
+	@return {Object} d3.scale (ordinal scale)
 	*/
 	OrdinalScale.prototype.getScale = function(){
-		return this.scale; 
+		return this.scale;
 	}
 
-	/**	
+	/**
 	Maps a value to the current scaling
 	Since ordinal scales computes a band width
 	A value needs to be mapped and moved according
@@ -84,7 +87,7 @@ Ordinal Scale
 	@return {Number} mapped String value
 	*/
 	OrdinalScale.prototype.map = function(value, factor){
-		return (this.scale(value) + ((this.scale.rangeBand() - (this.scale.rangeBand() * factor))/2)); 
+		return (this.scale(value) + ((this.scale.rangeBand() - (this.scale.rangeBand() * factor))/2));
 	}
 
 	/**
@@ -100,7 +103,7 @@ Ordinal Scale
 	}
 
 	/**
-	Calculates the scale domain, based on a data collection and a 
+	Calculates the scale domain, based on a data collection and a
 	callback function
 	Regarding the data series, ordinal scales should be uniform, whether
 	they have values for that specific ordinal element or not.
@@ -111,10 +114,10 @@ Ordinal Scale
 	@chainable
 	*/
 	OrdinalScale.prototype.calculateDomain = function(data, f){
-		var dataSample = data.first().data; 
+		var dataSample = data.first().data;
 
 		var dom = dataSample.map(f);
-		return this.setDomain(dom); 
+		return this.setDomain(dom);
 	}
 
 	/**
@@ -124,9 +127,9 @@ Ordinal Scale
 	@return {Boolean} True if domain isn't set
 	*/
 	OrdinalScale.prototype.defaultDomain = function(){
-		return (this.scale.domain().length === 0); 
+		return (this.scale.domain().length === 0);
 	}
 
-	return OrdinalScale; 
+	return OrdinalScale;
 })
 )

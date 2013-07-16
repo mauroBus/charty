@@ -4,6 +4,9 @@ Line drawing.
 @class Line
 @extends SimpleDataGroup
 @constructor
+@requires d3,
+          d3.chart,
+          simpledatagroup
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -14,7 +17,7 @@ Line drawing.
     // AMD
     define(['d3',
       'd3.chart',
-      'simpledatagroup'], 
+      'simpledatagroup'],
       function(d3) {
         // Export global even in AMD case in case this script is loaded with others
         return factory(d3);
@@ -32,6 +35,10 @@ Line drawing.
     @method
     */
     initialize : function(){
+
+      var defaults = {
+        c : 'line-default'
+      };
 
       var line = d3.svg.line();
 
@@ -56,6 +63,7 @@ Line drawing.
         dataBind : function(d){
 
           var chart = this.chart();
+          chart.checkScales('Line');
 
           line.x(function(d) {
             return chart.xscale.map(d.x, 0);
@@ -78,7 +86,7 @@ Line drawing.
               var chart = this.chart();
 
               return this.datum(chart.datum)
-                         .attr('class',chart.c)
+                         .attr('class',(chart.c || defaults.c))
                          .attr('d',line);
           },
           'update':function(){
@@ -86,7 +94,7 @@ Line drawing.
             var chart = this.chart();
 
             return this.datum(chart.datum)
-                       .attr('class',chart.c)
+                       .attr('class',(chart.c || defaults.c))
                        .attr('d',line);
           },
           'exit' : function(){
@@ -97,4 +105,4 @@ Line drawing.
     }
   });
  })
-)
+);

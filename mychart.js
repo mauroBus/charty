@@ -31,9 +31,15 @@ require.config({
     'line' : 'Components/Line/line',
     'circle' : 'Components/Circle/circle',
     'scatterplot' : 'Composition/Scatterplot/scatterplot',
-    'donut' : 'Components/Donut/donut'
+    'donut' : 'Components/Donut/donut',
+    'underscore' : 'Libs/underscore',
+    'groupedbarchart' : 'Composition/GroupedBarChart/groupedbarchart',
+    'jquery' : 'Libs/jquery-1.10.2'
   },
   shim:{
+    'underscore' : {
+      exports : '_'
+    },
     'd3' : {
       exports :'d3'
     },
@@ -44,41 +50,71 @@ require.config({
   }
 });
 
-requirejs(['chartsapi','accessor'],
-function(ChartsApi, Accessor){
+requirejs(['chartsapi','accessor','underscore','jquery'],
+function(ChartsApi, Accessor,_,$){
+
+  "use strict";
+
   /**
-  Data rendering examples. 
+  Data rendering examples.
   */
   var data1 = {
+    z : '2011',
     color: 'blue',
     rh: 30,
     rw: 30,
     rc:'gray',
     data: [
-      { x: 'A', y: 100, c : 'green'},
-      { x: 'B', y: -40, c : 'blue'},
-      { x: 'C', y: 60, c : 'red' }
+      { x: 'A', y: 100, c : 'green', z: '2011'},
+      { x: 'B', y: -40, c : 'blue', z: '2011'},
+      { x: 'C', y: 60, c : 'red', z: '2011' }
     ]
   };
 
   var data2 = {
+    z : '2012',
     color: 'red',
-    r : 8,
     data: [
-      { x: 'A', y: 150 },
-      { x: 'B', y: 50 },
-      { x: 'C', y: 30, c:'yellow' }
+      { x: 'A', y: 150 , z: '2012'},
+      { x: 'B', y: 50 , z: '2012'},
+      { x: 'C', y: 30, c:'yellow' , z: '2012' }
     ]
   };
 
   var data3 = {
     ir :  -100,
-    or : -50,
+    or : -70,
     data : [
       {x : 200, c : 'blue'},
       {x : 300, c : 'red'},
       {x : 150, c : 'yellow'},
       {x :  50, c : 'green'}
+    ]
+  };
+
+  /**
+  Data for grouped bar chart
+
+  Each x value will have an array of y-z pairs
+  */
+  var data4 = {
+    data : [
+      {x:'A', y : [
+                      {y : '2011', z : 100},
+                      {y : '2012', z : 150},
+                      {y : '2013', z : 300}
+                  ]
+      },
+      {x:'B', y : [
+                      {y : '2011', z : 80},
+                      {y : '2012', z : 60},
+                      {y : '2013', z : 200}
+                  ]},
+      {x:'C', y : [
+                      {y : '2011', z : 250},
+                      {y : '2012', z : 20},
+                      {y : '2013', z : 100}
+                  ]}
     ]
   };
 
@@ -145,6 +181,7 @@ function(ChartsApi, Accessor){
     root : '#chart4',
     xAxis : 'ordinal',
     yAxis : 'linear',
+    imgUrl : 'http://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/280px-PNG_transparency_demonstration_1.png',
     margin : {
       left : 50,
       top : 20,
@@ -157,8 +194,9 @@ function(ChartsApi, Accessor){
     chartName : 'Donut',
     instances : 1,
     root : '#chart5',
-    ir : 100,
-    or : 50,
+    imgUrl : 'http://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/280px-PNG_transparency_demonstration_1.png',
+    ir : 150,
+    or : 100,
     margin : {
       left : 50,
       top : 20,
@@ -167,12 +205,29 @@ function(ChartsApi, Accessor){
     }
   };
 
+  var options6 = {
+    chartName : 'GroupedBarChart',
+    instances : 2,
+    root : '#chart6',
+    xAxis : 'ordinal',
+    yAxis : 'linear',
+    margin : {
+      left : 50,
+      top : 20,
+      lfactor : 2,
+      tfactor : 4.2
+    }
+  };
+
+  /**
+  Charts draw here.
+  */
   var chart1 = myApi.chart(options1);
       chart1.draw(accessor1);
 
   var chart2 = myApi.chart(options2);
       chart2.draw(accessor2);
-  
+
       data1.color = 'redline';
       data2.color = 'blueline';
 
@@ -180,17 +235,20 @@ function(ChartsApi, Accessor){
       chart3.draw(accessor1);
 
       data1.color = 'red';
-      data1.r = 5;
       data2.color = 'blue';
-      data2.r = 8;
 
   var chart4 = myApi.chart(options4);
       chart4.draw(accessor1);
 
-
   var chart5 = myApi.chart(options5);
       chart5.draw(accessor3);
 
+  /*var chart6 = myApi.chart(options6);
+      chart6.draw(accessor1);*/
+
+  /**
+  Charts update here.
+  */
   setTimeout(function(){
 
     data1 = {
@@ -199,10 +257,10 @@ function(ChartsApi, Accessor){
       rw: 30,
       rc:'gray',
       data: [
-        { x: 'A', y: 100, c1 : 'green', c2:'yellow'},
-        { x: 'B', y: 40, c1 : 'blue', c2:'yellow' },
-        { x: 'C', y: 60, c1 : 'red', c2:'green' },
-        { x: 'D', y: 80, c1: 'green' , c2:'blue' }
+        { x: 'A', y: 100},
+        { x: 'B', y: 40},
+        { x: 'C', y: 60},
+        { x: 'D', y: 80}
       ]
     };
 
@@ -219,7 +277,7 @@ function(ChartsApi, Accessor){
 
     data3 = {
       ir :  -100,
-      or : -50,
+      or : -70,
       data : [
         {x : 200, c : 'blue'},
         {x : 300, c : 'red'},
@@ -246,10 +304,9 @@ function(ChartsApi, Accessor){
 
     chart1.draw(accessor1);
     chart2.draw(accessor2);
-    
+
     data1.color = 'redline';
     data2.color = 'blueline';
-
 
     chart3.draw(accessor1);
 
@@ -259,8 +316,7 @@ function(ChartsApi, Accessor){
     data2.r = 8;
 
     chart4.draw(accessor1);
-
     chart5.draw(accessor3);
 
   },3000);
-}); 
+});

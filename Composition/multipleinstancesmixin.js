@@ -1,11 +1,14 @@
 /**
-Chart that can represent many data series 
+Chart that can represent many data series
 
 @class MultipleInstancesMixin
 @extends BaseChart
 @constructor
+@requires d3,
+          d3.chart,
+          basechart
 
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"  
+@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -14,7 +17,7 @@ Chart that can represent many data series
     // AMD
     define(['d3',
       'd3.chart',
-      'basechart'], 
+      'basechart'],
       function(d3) {
         // Export global even in AMD case in case this script is loaded with others
         return factory(d3);
@@ -29,7 +32,7 @@ Chart that can represent many data series
     /**
     Creates multiple mixin instances of a specific chart.
     It is necessary to set the instances count
-    and the chart name. 
+    and the chart name.
 
     @method
     @param {Object} options example = {
@@ -40,7 +43,7 @@ Chart that can represent many data series
     initialize : function(options){
       this.componentsMixins = [];
 
-      var f = options.instances; 
+      var f = options.instances;
 
       for(var i = options.instances - 1; i >= 0; i--){
         var instance = this.mixin(options.chartName, this.base.append('g'));

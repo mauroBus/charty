@@ -3,6 +3,9 @@ Defines a basic chart to process individual data series
 
 @class SimpleDataGroup
 @extends BaseChart
+@requires d3,
+          d3.chart,
+          basechart
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -13,7 +16,7 @@ Defines a basic chart to process individual data series
     // AMD
     define(['d3',
       'd3.chart',
-      'basechart'], 
+      'basechart'],
       function(d3) {
         // Export global even in AMD case in case this script is loaded with others
         return factory(d3);
@@ -38,4 +41,4 @@ Defines a basic chart to process individual data series
     }
   });
  })
-)
+);

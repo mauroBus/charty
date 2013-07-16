@@ -4,6 +4,9 @@ Triangle drawer.
 @class Triangle
 @constructor
 @extends SimpleDataGroup
+@requires  d3,
+           d3.chart,
+           simpledatagroup
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -14,7 +17,7 @@ Triangle drawer.
     // AMD
     define(['d3',
       'd3.chart',
-      'simpledatagroup'], 
+      'simpledatagroup'],
       function(d3) {
         // Export global even in AMD case in case this script is loaded with others
         return factory(d3);
@@ -33,7 +36,11 @@ Triangle drawer.
     */
     initialize : function(){
 
-      var pathBase = this.base.append('g');
+      var defaults = {
+        c : 'triangle-default'
+      };
+
+      var pathBase = this.base;
 
       this.layer('triangles', pathBase , {
         /**
@@ -52,6 +59,7 @@ Triangle drawer.
         dataBind : function(d){
 
           var chart = this.chart();
+          chart.checkScales('Triangle');
           chart.c = d.color;
 
           return this.selectAll('path').data(d.data);
@@ -66,7 +74,7 @@ Triangle drawer.
             var chart = this.chart();
 
             return this.attr('class', function(d){
-                          return (d.c || chart.c);
+                          return (d.c || chart.c || defaults.c);
                         })
                        .attr('d', function(d){
                           return chart.getPath(d);
@@ -76,7 +84,7 @@ Triangle drawer.
             var chart = this.chart();
 
             return this.attr('class', function(d){
-                          return (d.c || chart.c);
+                          return (d.c || chart.c || defaults.c);
                         })
                        .attr('d', function(d){
                           return chart.getPath(d);
@@ -118,33 +126,33 @@ Triangle drawer.
     }
     /**
     Triangle drawer IS SimpleDataInput
-    However, transform must be redefined in order to 
+    However, transform must be redefined in order to
     separate a triangle in two constituting parts
 
     @method
     @param {Object} data Data Acccessor
     @return {Object} already mapped values for each datapoint
-    
+
     transform : function(data){
       var result = [];
 
       var dataArray = data.next().data;
 
       for(var i = 0; i < dataArray.length; i++){
-        var element = dataArray[i]; 
+        var element = dataArray[i];
 
         var x1 = this.xscale.map(element.x,1);
-        var x2 = x1 + this.xscale.band(1)/2; 
-        var x3 = x1 + this.xscale.band(1); 
+        var x2 = x1 + this.xscale.band(1)/2;
+        var x3 = x1 + this.xscale.band(1);
 
         var y1 = this.yscale.map(0);
         var y2 = this.yscale.map(element.y);
 
         result.unshift({x1 : x1, y1: y1, x2 : x2, y2 : y2, x3 : x2, y3 : y1, c: element.c1});
-        result.unshift({x1 : x2, y1: y1, x2 : x2, y2 : y2, x3 : x3, y3 : y1, c: element.c2}); 
+        result.unshift({x1 : x2, y1: y1, x2 : x2, y2 : y2, x3 : x3, y3 : y1, c: element.c2});
 
       }
-      return result; 
+      return result;
     },
     /**
     Path is defined as a string connecting different
@@ -153,7 +161,7 @@ Triangle drawer.
     @method
     @param {Object} d
     @return {String} path
-    
+
     getPath : function(d){
       var p = 'M '+d.x1+' '+d.y1+' L '+d.x2+' '+d.y2+' L '+d.x3+' '+d.y3;
       return p;
