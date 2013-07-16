@@ -4,6 +4,10 @@ Donut drawer
 @class Donut
 @extends SimpleDataGroup
 @constructor
+@requires d3,
+          underscore,
+          d3.chart,
+          simpledatagroup
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -13,18 +17,19 @@ Donut drawer
   if (typeof define === 'function' && define.amd) {
     // AMD
     define(['d3',
+      'underscore',
       'd3.chart',
-      'simpledatagroup'], 
-      function(d3) {
+      'simpledatagroup'],
+      function(d3, _) {
         // Export global even in AMD case in case this script is loaded with others
-        return factory(d3);
+        return factory(d3, _);
     });
   }
   else {
     // Browser globals
-    return factory(d3);
+    return factory(d3, _);
   }
-}(this, function(d3) {
+}(this, function(d3, _) {
   d3.chart('SimpleDataGroup').extend("Donut", {
     /**
     Donut initialization
@@ -33,7 +38,15 @@ Donut drawer
     */
     initialize : function(){
 
-      var pathBase = this.base.append('g');
+      /**
+      Default vaule for inner / outter radius
+      */
+      var defaults = {
+        ir : -150,
+        or : -100
+      };
+
+      var pathBase = this.base;
 
       var pieLayout = d3.layout
                         .pie()
@@ -68,8 +81,12 @@ Donut drawer
           chart.ir = data.ir;
           chart.or = data.or;
 
-          arcGen = arcGen.innerRadius(chart.ir)
-                         .outerRadius(chart.or);
+          if(!_.isNumber(chart.ir) || !_.isNumber(chart.or)){
+            throw new Error('Radius for donut chart must be numerical values');
+          }
+
+          arcGen = arcGen.innerRadius(chart.ir || defaults.ir)
+                         .outerRadius(chart.or || defaults.or);
 
           return this.selectAll('path').data(pieLayout(data.data));
         },
@@ -91,6 +108,7 @@ Donut drawer
                             return d.data.c;
                         })
                        .attr("d", arcGen);
+
           },
           'update' : function(){
             var chart = this.chart();
@@ -107,4 +125,4 @@ Donut drawer
     }
   });
  })
-)
+);

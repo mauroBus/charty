@@ -3,6 +3,8 @@
 
 	@class LinearScale
 	@constructor
+	@requires d3,
+						d3.chart
 
 	@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -12,7 +14,7 @@
   if (typeof define === 'function' && define.amd) {
     // AMD
     define(['d3',
-    	'd3.chart'], 
+    	'd3.chart'],
     	function(d3) {
 	      // Export global even in AMD case in case this script is loaded with others
 	      return factory(d3);
@@ -57,6 +59,9 @@ LinearScale.prototype.setDomain = function(minValue, maxValue){
 		else{
 			if(this.axisType === 'y'){
 				r = [range, 0];
+			}
+			else{
+				throw new Error('No axis type was defined for this linear scale');
 			}
 		}
 
@@ -133,8 +138,8 @@ LinearScale.prototype.setDomain = function(minValue, maxValue){
 	  this.min = min;
 
 	  return this.setDomain(Math.min(0, min), Math.max(0,max));
-	}
+	};
 
-	return LinearScale; 
+	return LinearScale;
 })
-)
+);

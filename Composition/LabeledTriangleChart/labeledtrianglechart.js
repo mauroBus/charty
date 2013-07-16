@@ -4,6 +4,14 @@ Labeled triangle chart drawer.
 @class LabeledTriangleChart
 @extends MultipleDataGroup
 @constructor
+@requires d3,
+          d3.chart,
+          triangle,
+          roundedrectangle,
+          textlabel,
+          multipleinstancesmixin,
+          yxyaxis,
+          multipledatagroup
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -19,7 +27,7 @@ Labeled triangle chart drawer.
       'textlabel',
       'multipleinstancesmixin',
       'yxyaxis',
-      'multipledatagroup'], 
+      'multipledatagroup'],
       function(d3) {
         // Export global even in AMD case in case this script is loaded with others
         return factory(d3);
@@ -67,4 +75,4 @@ Labeled triangle chart drawer.
     }
   });
  })
-)
+);

@@ -1,6 +1,6 @@
-/*! d3.chart - v0.1.0
+/*! d3.chart - v0.1.1
  *  License: MIT Expat
- *  Date: 2013-05-27
+ *  Date: 2013-06-10
  */
 (function(window, undefined) {
 
@@ -77,12 +77,9 @@
 
 		bound = this.dataBind.call(this._base, data);
 
-		/**
-		@Fixme https://github.com/misoproject/d3.chart/commit/974b153a0ab85459dee2ba259434832df4a80e4c
-		*/
-		/*if (!(bound instanceof d3.selection)) {
+		if (!(bound instanceof d3.selection)) {
 			throw new Error('Invalid selection defined by `dataBind` method.');
-		}*/
+		}
 
 		entering = bound.enter();
 		entering._chart = this._base._chart;
@@ -120,13 +117,10 @@
 				selection = selection();
 			}
 
-			/**
-			@Fixme https://github.com/misoproject/d3.chart/commit/974b153a0ab85459dee2ba259434832df4a80e4c
-			*/
-			/*if (!(selection instanceof d3.selection)) {
+			if (!(selection instanceof d3.selection)) {
 				throw new Error('Invalid selection defined for "' + eventName +
 					"' lifecycle event.");
-			}*/
+			}
 
 			handlers = this._handlers[eventName];
 
@@ -271,6 +265,7 @@
 		args.unshift(selection);
 		var ctor = Chart[chartName];
 		var chart = variadicNew(ctor, args);
+
 		this._mixins.push(chart);
 		return chart;
 	};
@@ -353,10 +348,13 @@
 		var events = this._events[name];
 		var i, ev;
 
-		for (i = 0; i < events.length; i++) {
-			ev = events[i];
-			ev.callback.apply(ev.context, args);
+		if (events !== undefined) {
+			for (i = 0; i < events.length; i++) {
+				ev = events[i];
+				ev.callback.apply(ev.context, args);
+			}
 		}
+
 		return this;
 	};
 

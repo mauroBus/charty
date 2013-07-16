@@ -4,6 +4,9 @@ Bar drawer. Takes only one data series as input.
 @class Bar
 @constructor
 @extends SimpleDataGroup
+@requires d3,
+          d3.chart
+          simpledatagroup
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -14,7 +17,7 @@ Bar drawer. Takes only one data series as input.
     // AMD
     define(['d3',
       'd3.chart',
-      'simpledatagroup'], 
+      'simpledatagroup'],
       function(d3) {
         // Export global even in AMD case in case this script is loaded with others
         return factory(d3);
@@ -35,6 +38,10 @@ Bar drawer. Takes only one data series as input.
 
       var pathBase = this.base;
 
+      var defaults = {
+        c : 'bar-default'
+      };
+
       var options = {
         /**
         Data bind for a bar serie.
@@ -52,7 +59,11 @@ Bar drawer. Takes only one data series as input.
         dataBind : function(d){
 
           var chart = this.chart();
+          chart.checkScales('Bar');
 
+          /**
+          Sets color for the whole data serie.
+          */
           chart.c = d.color;
 
           return this.selectAll('rect').data(d.data);
@@ -66,16 +77,16 @@ Bar drawer. Takes only one data series as input.
                 var chart = this.chart();
 
                 this.attr("class", function(d){
-                      return (d.c || chart.c);
+                      return (d.c || chart.c || defaults.c);
                     })
                     .attr("x", function(d) { return chart.xscale.map(d.x, chart.factor)} )
                     .attr("width", chart.xscale.band(chart.factor))
                     .attr("y", function(d) {
-                      return Math.min(chart.yscale.map(0),chart.yscale.map(d.y, chart.factor))
+                      return Math.min(chart.yscale.map(0),chart.yscale.map(d.y, chart.factor));
                     })
                     .attr("height", function(d) {
                       return Math.abs(chart.yscale.band(chart.h,d.y)-(chart.h-chart.yscale.map(0)))}
-                      );
+                    );
                 return this;
           },
           'update' : function(){
@@ -83,7 +94,7 @@ Bar drawer. Takes only one data series as input.
                 var chart = this.chart();
 
                 this.attr("class", function(d){
-                     return (d.c || chart.c);
+                     return (d.c || chart.c || defaults.c);
                     })
                     .attr("x", function(d) { return chart.xscale.map(d.x, chart.factor)} )
                     .attr("width", chart.xscale.band(chart.factor))
@@ -101,8 +112,10 @@ Bar drawer. Takes only one data series as input.
         }
       };
 
-      //Layer creation
-      this.layer('barlayer', pathBase.append('g') ,options);
+      /**
+      Default layer.
+      */
+      this.layer('barlayer', pathBase ,options);
 
     }
   });

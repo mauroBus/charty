@@ -4,6 +4,8 @@ Base XY system for all the 2D charts.
 @class XYAxis
 @constructor
 @extends BaseChart
+@requires d3,
+          d3.chart
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -13,7 +15,9 @@ Base XY system for all the 2D charts.
   if (typeof define === 'function' && define.amd) {
     // AMD
     define(['d3',
-      'd3.chart'], 
+      'd3.chart',
+      'basechart',
+      'axis'],
       function(d3) {
         // Export global even in AMD case in case this script is loaded with others
         return factory(d3);
@@ -31,10 +35,10 @@ Base XY system for all the 2D charts.
     @method
     */
     initialize : function(){
-        this.xaxis = this.mixin(
-            'Axis',
-            this.base.append('g')
-        ).orient('bottom').axistype('x');
+
+        this.xaxis = this.mixin('Axis',this.base.append('g'))
+                         .orient('bottom')
+                         .axistype('x');
 
         this.yaxis = this.mixin('Axis',this.base.append('g'))
                          .orient('left')
@@ -63,7 +67,7 @@ Base XY system for all the 2D charts.
     @chainable
     */
     height : function(newHeight){
-      this.h = newHeight; 
+      this.h = newHeight;
       this.xaxis.height(newHeight).ytranslate(newHeight);
       this.yaxis.height(newHeight).tickSize(newHeight);
       return this;
@@ -76,7 +80,7 @@ Base XY system for all the 2D charts.
     @chainable
     */
     width : function(newWidth){
-      this.w = newWidth; 
+      this.w = newWidth;
       this.xaxis.width(newWidth).tickSize(newWidth);
       this.yaxis.width(newWidth);
       return this;
@@ -105,5 +109,5 @@ Base XY system for all the 2D charts.
     }
   });
  })
-)
+);
 

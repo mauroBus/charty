@@ -4,6 +4,10 @@ Rounded rectangle drawer.
 @class RoundedRectangle
 @constructor
 @extends SimpleDataGroup
+@requires d3,
+          underscore,
+          d3.chart,
+          simpledatagroup
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -13,18 +17,19 @@ Rounded rectangle drawer.
   if (typeof define === 'function' && define.amd) {
     // AMD
     define(['d3',
+      'underscore',
       'd3.chart',
-      'simpledatagroup'], 
-      function(d3) {
+      'simpledatagroup'],
+      function(d3, _) {
         // Export global even in AMD case in case this script is loaded with others
-        return factory(d3);
+        return factory(d3, _);
     });
   }
   else {
     // Browser globals
-    return factory(d3);
+    return factory(d3, _);
   }
-}(this, function(d3) {
+}(this, function(d3, _) {
   d3.chart('SimpleDataGroup').extend('RoundedRectangle',{
     /**
     Rounded rectangle initialization.
@@ -33,7 +38,19 @@ Rounded rectangle drawer.
     */
     initialize : function(){
 
-      var pathBase = this.base.append('g');
+      /**
+      Defaults for rectangle
+      */
+
+      var defaults = {
+        rh : 20,
+        rw : 20,
+        rc : 'rounded-rectangle-default',
+        rx : 5,
+        ry : 5
+      };
+
+      var pathBase = this.base;
 
       this.layer('roundedrects', pathBase,{
         /**
@@ -52,6 +69,7 @@ Rounded rectangle drawer.
         dataBind : function(d){
 
           var chart = this.chart();
+          chart.checkScales('Rounded Rectangle');
 
           chart.rh = d.rh;
           chart.rw = d.rw;
@@ -67,8 +85,20 @@ Rounded rectangle drawer.
 
             var chart = this.chart();
 
-            return this.attr('height',chart.rh)
-                       .attr('width',chart.rw)
+            if(chart.rh){
+              if(!_.isNumber(chart.rh) || chart.rh < 0){
+                throw new Error('Invalid value for rectangle height. Must be positive number.');
+              }
+            }
+
+            if(chart.rw){
+              if(!_.isNumber(chart.rw) || chart.rw < 0){
+                throw new Error('Invalid value for rectangle width. Must be positive number.');
+              }
+            }
+
+            return this.attr('height', (chart.rh || defaults.rh))
+                       .attr('width', (chart.rw || defaults.rw))
                        .attr('x', function(d){
                           var val = chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2)-(chart.rw/2);
                           return val;
@@ -76,18 +106,30 @@ Rounded rectangle drawer.
                        .attr('y',function(d){
                           return chart.yscale.map(d.y)-(chart.rh/2);
                         })
-                       .attr('rx', 5)
-                       .attr('ry', 5)
+                       .attr('rx', defaults.rx)
+                       .attr('ry', defaults.ry)
                        .attr('fill',function(d){
-                          return (chart.rc);
+                          return (d.rc ||chart.rc || defaults.rc);
                        });
           },
           update : function(){
 
             var chart = this.chart();
 
-            return this.attr('height',chart.rh)
-                       .attr('width',chart.rw)
+            if(chart.rh){
+              if(!_.isNumber(chart.rh) || chart.rh < 0){
+                throw new Error('Invalid value for rectangle height. Must be positive number.');
+              }
+            }
+
+            if(chart.rw){
+              if(!_.isNumber(chart.rw) || chart.rw < 0){
+                throw new Error('Invalid value for rectangle width. Must be positive number.');
+              }
+            }
+
+            return this.attr('height', (chart.rh || defaults.rh))
+                       .attr('width', (chart.rw || defaults.rw))
                        .attr('x', function(d){
                           var val = chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2)-(chart.rw/2);
                           return val;
@@ -95,18 +137,18 @@ Rounded rectangle drawer.
                        .attr('y',function(d){
                           return chart.yscale.map(d.y)-(chart.rh/2);
                         })
-                       .attr('rx', 5)
-                       .attr('ry', 5)
+                       .attr('rx', defaults.rx)
+                       .attr('ry', defaults.ry)
                        .attr('fill',function(d){
-                          return (d.c || chart.rc);
+                          return (d.rc || chart.rc || defaults.rc);
                        });
           },
           'exit' : function(){
             return this.remove();
           }
         }
-      })
+      });
     }
   });
  })
-)
+);

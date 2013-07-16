@@ -6,6 +6,10 @@ One X Axis (bottom)
 @class YXYAxis
 @extends BaseChart
 @constructor
+@requires d3,
+          basechart,
+          axis,
+          d3.chart
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -17,7 +21,7 @@ One X Axis (bottom)
     define(['d3',
       'basechart',
       'axis',
-      'd3.chart'], 
+      'd3.chart'],
       function(d3) {
         // Export global even in AMD case in case this script is loaded with others
         return factory(d3);
@@ -63,7 +67,7 @@ One X Axis (bottom)
     @chainable
     */
     height : function(newHeight){
-      this.h = newHeight; 
+      this.h = newHeight;
       this.xaxis.height(newHeight).ytranslate(newHeight);
       this.yaxisright.height(newHeight);
       this.yaxisleft.height(newHeight).tickSize(newHeight);
@@ -108,4 +112,4 @@ One X Axis (bottom)
     }
   });
  })
-)
+);

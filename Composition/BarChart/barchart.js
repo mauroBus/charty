@@ -5,6 +5,12 @@ N data series
 @class BarChart
 @extends MultipleDataGroup
 @constructor
+@requires d3,
+          bar,
+          multipledatagroup,
+          yxyaxis,
+          multipleinstancesmixin,
+          d3.chart
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -18,7 +24,7 @@ N data series
     	'multipledatagroup',
     	'yxyaxis',
     	'multipleinstancesmixin',
-    	'd3.chart'], 
+    	'd3.chart'],
     	function(d3) {
 	      // Export global even in AMD case in case this script is loaded with others
 	      return factory(d3);
@@ -36,13 +42,13 @@ N data series
 		@method
 		@param {Object} args example = {
 										   instances : 2,
-									   }		
+									   }
 		*/
 		initialize : function(args){
 
 			var options = {
 				chartName : 'Bar',
-				instances : args.instances, 
+				instances : (args.instances || 1),
 			};
 
 			var yxyaxis = this.mixin('YXYAxis', this.base.append('g')).showAsGrid();
@@ -54,4 +60,4 @@ N data series
 		}
 	});
  })
-)
+);

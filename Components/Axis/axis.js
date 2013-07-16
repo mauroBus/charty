@@ -2,11 +2,15 @@
 Basic Axis representation.
 
 Only one X/Y is sufficient for chart drawing, but can
-contain more.
+contain more. The idea is to draw an axis and locate it
+wherever is necessary.
 
 @class Axis
 @constructor
 @extends BaseChart
+@requires  d3,
+           d3.chart,
+           basechart
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -17,7 +21,7 @@ contain more.
     // AMD
     define(['d3',
       'd3.chart',
-      'basechart'], 
+      'basechart'],
       function(d3) {
         // Export global even in AMD case in case this script is loaded with others
         return factory(d3);
@@ -36,7 +40,21 @@ contain more.
     */
     initialize : function(){
 
+      /**
+      Tranlation value in the x direction
+
+      @property
+      @type Number
+      @default 0
+      */
       this.xt = 0;
+      /**
+      Tranlation value in the y direction
+
+      @property
+      @type Number
+      @default 0
+      */
       this.yt = 0;
 
       var pathBase = this.base;
@@ -56,6 +74,12 @@ contain more.
 
           var chart = this.chart();
 
+          if(!chart.scale){
+            throw new Error('Undefined scale for axis.');
+          };
+
+          var scale = chart.scale.getScale();
+
           axis = axis.scale(chart.scale.getScale())
                      .orient(chart.o);
 
@@ -74,7 +98,9 @@ contain more.
           'merge' : function(){
 
               var chart = this.chart();
-
+              /**
+              Renders as a grid.
+              */
               if(chart.grid){
                   axis = axis.tickSize(-chart.tsize,0,0);
               }
@@ -102,8 +128,15 @@ contain more.
     @chainable
     */
     tickSize : function(size){
-      this.tsize = size;
-      return this; 
+      /**
+      Size for the ticks.
+
+      @property
+      @type Number
+      @default 0
+      */
+      this.tsize = (size || 0);
+      return this;
     },
     /**
     Sets the scale that will be used for the axis
@@ -114,7 +147,7 @@ contain more.
     */
     setScale : function(scale){
       this.scale = scale;
-      return this; 
+      return this;
     },
     /**
     Shows the axis as a grid
@@ -122,6 +155,7 @@ contain more.
     @method
     @param {Boolean} val true/false value
     @chainable
+    @default false
     */
     showAsGrid : function(val){
       this.grid = val;
@@ -133,9 +167,10 @@ contain more.
     @method
     @param {String} orient
     @chainable
+    @default bottom
     */
     orient : function(orient){
-      this.o = orient;
+      this.o = (orient || 'bottom');
       return this;
     },
     /**
@@ -173,4 +208,4 @@ contain more.
     }
   });
  })
-)
+);
