@@ -7,7 +7,12 @@ another one for the data mapping.
 @class GroupedBarChart
 @extends MultipleDataGroup
 @requires d3,
-          d3.chart
+          scalesfactory,
+          d3.chart,
+          bar,
+          xyaxis,
+          multipledatagroup,
+          multipleinstancesmixin
 */
 
 (function(root, factory) {

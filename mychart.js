@@ -34,7 +34,8 @@ require.config({
     'donut' : 'Components/Donut/donut',
     'underscore' : 'Libs/underscore',
     'groupedbarchart' : 'Composition/GroupedBarChart/groupedbarchart',
-    'jquery' : 'Libs/jquery-1.10.2'
+    'jquery' : 'Libs/jquery-1.10.2',
+    'donutwithinnertext' : 'Composition/DonutWithInnerText/donutwithinnertext'
   },
   shim:{
     'underscore' : {
@@ -81,6 +82,9 @@ function(ChartsApi, Accessor,_,$){
     ]
   };
 
+  /**
+  Data test for donut chart.
+  */
   var data3 = {
     ir :  -100,
     or : -70,
@@ -93,28 +97,14 @@ function(ChartsApi, Accessor,_,$){
   };
 
   /**
-  Data for grouped bar chart
-
-  Each x value will have an array of y-z pairs
+  Data test for donut chart with inner text
   */
   var data4 = {
+    ir :  -100,
+    or : -70,
     data : [
-      {x:'A', y : [
-                      {y : '2011', z : 100},
-                      {y : '2012', z : 150},
-                      {y : '2013', z : 300}
-                  ]
-      },
-      {x:'B', y : [
-                      {y : '2011', z : 80},
-                      {y : '2012', z : 60},
-                      {y : '2013', z : 200}
-                  ]},
-      {x:'C', y : [
-                      {y : '2011', z : 250},
-                      {y : '2012', z : 20},
-                      {y : '2013', z : 100}
-                  ]}
+      {x : 25 , c: 'red'},
+      {x : 175, c: 'gray'}
     ]
   };
 
@@ -128,9 +118,13 @@ function(ChartsApi, Accessor,_,$){
   var datagroup3 = [];
       datagroup3.push(data3);
 
+  var datagroup4 = [];
+      datagroup4.push(data4);
+
   var accessor1 = new Accessor(datagroup1);
   var accessor2 = new Accessor(datagroup2);
   var accessor3 = new Accessor(datagroup3);
+  var accessor4 = new Accessor(datagroup4);
 
   var myApi = new ChartsApi();
 
@@ -140,12 +134,10 @@ function(ChartsApi, Accessor,_,$){
     root : '#chart1',
     xAxis : 'ordinal',
     yAxis : 'linear',
-    margin : {
-      left : 50,
-      top : 20,
-      lfactor : 2,
-      tfactor : 4.2
-    }
+    marginleft : 50,
+    margintop : 20,
+    marginlfactor : 2,
+    margintfactor : 4.2
   };
 
   var options2 = {
@@ -153,12 +145,10 @@ function(ChartsApi, Accessor,_,$){
     root : '#chart2',
     xAxis : 'ordinal',
     yAxis : 'linear',
-    margin : {
-      left : 50,
-      top : 20,
-      lfactor : 2,
-      tfactor : 4.2
-    }
+    marginleft : 50,
+    margintop : 20,
+    marginlfactor : 2,
+    margintfactor : 4.2
   };
 
   var options3 = {
@@ -167,12 +157,10 @@ function(ChartsApi, Accessor,_,$){
     root : '#chart3',
     xAxis : 'ordinal',
     yAxis : 'linear',
-    margin : {
-      left : 50,
-      top : 20,
-      lfactor : 2,
-      tfactor : 4.2
-    }
+    marginleft : 50,
+    margintop : 20,
+    marginlfactor : 2,
+    margintfactor : 4.2
   };
 
   var options4 = {
@@ -182,41 +170,37 @@ function(ChartsApi, Accessor,_,$){
     xAxis : 'ordinal',
     yAxis : 'linear',
     imgUrl : 'http://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/280px-PNG_transparency_demonstration_1.png',
-    margin : {
-      left : 50,
-      top : 20,
-      lfactor : 2,
-      tfactor : 4.2
-    }
+    marginleft : 50,
+    margintop : 20,
+    marginlfactor : 2,
+    margintfactor : 4.2
   };
 
   var options5 = {
     chartName : 'Donut',
     instances : 1,
     root : '#chart5',
-    imgUrl : 'http://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/280px-PNG_transparency_demonstration_1.png',
+    /*imgUrl : 'http://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/280px-PNG_transparency_demonstration_1.png',*/
     ir : 150,
-    or : 100,
-    margin : {
-      left : 50,
-      top : 20,
-      lfactor : 2,
-      tfactor : 4.2
-    }
+    or : 100
   };
 
   var options6 = {
+    chartName : 'DonutWithInnerText',
+    instances : 1,
+    root : '#chart6'
+  };
+
+  var options7 = {
     chartName : 'GroupedBarChart',
     instances : 2,
-    root : '#chart6',
+    root : '#chart7',
     xAxis : 'ordinal',
     yAxis : 'linear',
-    margin : {
-      left : 50,
-      top : 20,
-      lfactor : 2,
-      tfactor : 4.2
-    }
+    marginleft : 50,
+    margintop : 20,
+    marginlfactor : 2,
+    margintfactor : 4.2
   };
 
   /**
@@ -242,6 +226,9 @@ function(ChartsApi, Accessor,_,$){
 
   var chart5 = myApi.chart(options5);
       chart5.draw(accessor3);
+
+  var chart6 = myApi.chart(options6);
+      chart6.draw(accessor4);
 
   /*var chart6 = myApi.chart(options6);
       chart6.draw(accessor1);*/

@@ -77,9 +77,13 @@
 
 		bound = this.dataBind.call(this._base, data);
 
+		/**
+
+		@FixMe https://github.com/misoproject/d3.chart/issues/33
 		if (!(bound instanceof d3.selection)) {
 			throw new Error('Invalid selection defined by `dataBind` method.');
 		}
+		*/
 
 		entering = bound.enter();
 		entering._chart = this._base._chart;
@@ -117,10 +121,13 @@
 				selection = selection();
 			}
 
+			/**
+			@FixMe https://github.com/misoproject/d3.chart/issues/33
 			if (!(selection instanceof d3.selection)) {
 				throw new Error('Invalid selection defined for "' + eventName +
 					"' lifecycle event.");
 			}
+			*/
 
 			handlers = this._handlers[eventName];
 

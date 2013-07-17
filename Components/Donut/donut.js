@@ -17,15 +17,15 @@ Donut drawer
   if (typeof define === 'function' && define.amd) {
     // AMD
     define(['d3',
-      'underscore',
-      'd3.chart',
-      'simpledatagroup'],
+        'underscore',
+        'd3.chart',
+        'simpledatagroup'
+      ],
       function(d3, _) {
         // Export global even in AMD case in case this script is loaded with others
         return factory(d3, _);
-    });
-  }
-  else {
+      });
+  } else {
     // Browser globals
     return factory(d3, _);
   }
@@ -36,28 +36,28 @@ Donut drawer
 
     @method
     */
-    initialize : function(){
+    initialize: function() {
 
       /**
       Default vaule for inner / outter radius
       */
       var defaults = {
-        ir : -150,
-        or : -100
+        ir: -150,
+        or: -100
       };
 
       var pathBase = this.base;
 
       var pieLayout = d3.layout
-                        .pie()
-                        .sort(null)
-                        .value(function(d){
-                          return d.x;
-                        });
+        .pie()
+        .sort(null)
+        .value(function(d) {
+          return d.x;
+        });
 
       var arcGen = d3.svg.arc();
 
-      this.layer('paths', pathBase ,{
+      this.layer('paths', pathBase, {
         /**
         Data bind for donut.
         Will take x elements as data for drawing
@@ -75,18 +75,18 @@ Donut drawer
                                           ]
                                         }
         */
-        dataBind : function(data){
+        dataBind: function(data) {
 
           var chart = this.chart();
           chart.ir = data.ir;
           chart.or = data.or;
 
-          if(!_.isNumber(chart.ir) || !_.isNumber(chart.or)){
+          if (!_.isNumber(chart.ir) || !_.isNumber(chart.or)) {
             throw new Error('Radius for donut chart must be numerical values');
           }
 
           arcGen = arcGen.innerRadius(chart.ir || defaults.ir)
-                         .outerRadius(chart.or || defaults.or);
+            .outerRadius(chart.or || defaults.or);
 
           return this.selectAll('path').data(pieLayout(data.data));
         },
@@ -95,34 +95,44 @@ Donut drawer
 
         @method
         */
-        insert : function(){
+        insert: function() {
           return this.append('path');
         },
-        events : {
-          'enter' : function(){
+        events: {
+          'enter': function() {
 
             var chart = this.chart();
 
             return this.attr('transform', "translate(" + chart.w / 2 + "," + chart.h / 2 + ")")
-                       .attr("fill", function(d) {
-                            return d.data.c;
-                        })
-                       .attr("d", arcGen);
+              .attr("fill", function(d) {
+                return d.data.c;
+              })
+              .attr("d", arcGen);
 
           },
-          'update' : function(){
+          'update': function() {
             var chart = this.chart();
             return this.attr("fill", function(d) {
-                            return d.data.c;
-                        })
-                       .attr("d", arcGen);
+              return d.data.c;
+            })
+              .attr("d", arcGen);
           },
-          'exit' : function(){
+          'exit': function() {
             return this.remove();
           }
         }
       });
+    },
+    /**
+    Sets a text that goes right in the middle of the donut.
+
+    @method
+    @param {Object} String Text to show
+    @chainable
+    */
+    setInnerText: function(text) {
+      this.innerText = text;
+      return this;
     }
   });
- })
-);
+}));
