@@ -7,7 +7,7 @@ Testing chart drawing and data update
 require.config({
   baseUrl : '.',
   paths : {
-    'chartsapi' : 'Api/chartsapi', 
+    'chartsapi' : 'Api/chartsapi',
     'axis' : 'Components/Axis/axis',
     'bar' : 'Components/Bar/bar',
     'basechart' : 'Components/Base/basechart',
@@ -36,7 +36,7 @@ require.config({
     'groupedbarchart' : 'Composition/GroupedBarChart/groupedbarchart',
     'jquery' : 'Libs/jquery-1.10.2',
     'donutwithinnertext' : 'Composition/DonutWithInnerText/donutwithinnertext',
-    'labeleddonutchart' : 'Composition/LabeledDonutChart/labeleddonutchart'
+    'labeleddonutchart' : 'Composition/LabeledDonutChart/labeleddonutchart',
   },
   shim:{
     'underscore' : {
@@ -87,14 +87,21 @@ function(ChartsApi, Accessor,_,$){
   Data test for donut chart.
   */
   var data3 = {
+    circleCorrection : 0.1,
+    innerRectangleCorrection : 0.3,
+    innerRectangleColor : 'white',
+    outterTextYCorrection : 0.65,
+    innerTextXCorrection : 0.28,
+    innerTextYCorrection : 0.65,
+    r : 5,
     ir :  -100,
     or : -70,
     rh: 30,
-    rw: 100,
+    rw: 160,
     rc : 'lightgray',
     data : [
-      {x : 200, c : 'blue', xlabel : 100, ylabel : 100},
-      {x : 300, c : 'red', xlabel : 100, ylabel : 200}/*,
+      {x : 200, c : 'blue', textlabel : 'Complete', xlabel : 25, ylabel : 100},
+      {x : 300, c : 'red', textlabel : 'Not started' ,xlabel : 25, ylabel : 200}/*,
       {x : 150, c : 'yellow', xlabel : 100, ylabel : 250},
       {x :  50, c : 'green', xlabel : 100, ylabel : 50}*/
     ]
@@ -173,7 +180,7 @@ function(ChartsApi, Accessor,_,$){
     root : '#chart4',
     xAxis : 'ordinal',
     yAxis : 'linear',
-    imgUrl : 'http://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/280px-PNG_transparency_demonstration_1.png',
+    /*imgUrl : 'http://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/280px-PNG_transparency_demonstration_1.png',*/
     marginleft : 50,
     margintop : 20,
     marginlfactor : 2,
@@ -317,7 +324,7 @@ function(ChartsApi, Accessor,_,$){
     };
 
     var datagroup7 = [];
-        datagroup7.push(data9); 
+        datagroup7.push(data9);
 
     var accessor7 = new Accessor(datagroup7);
     chart6.draw(accessor7);

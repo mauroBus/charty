@@ -123,17 +123,6 @@ Donut drawer
           }
         }
       });
-    },
-    /**
-    Sets a text that goes right in the middle of the donut.
-
-    @method
-    @param {Object} String Text to show
-    @chainable
-    */
-    setInnerText: function(text) {
-      this.innerText = text;
-      return this;
     }
   });
 }));

@@ -44,7 +44,7 @@ doesn't depend on the data value.
         /**
         First element will be shown as label.
 
-        Data here wil take two elements, since is necessary
+        Data here will take two elements, since is necessary
         to render two paths for the donut chart.
 
         The first one is the one that will be shown in label.
@@ -80,10 +80,10 @@ doesn't depend on the data value.
                        });
           },
           'update' : function(){
-            var chart = this.chart(); 
+            var chart = this.chart();
 
             return this.text(function(d){
-              return d; 
+              return d;
             });
           },
           'exit' : function(){
