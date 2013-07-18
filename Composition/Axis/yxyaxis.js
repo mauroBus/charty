@@ -68,9 +68,9 @@ One X Axis (bottom)
     */
     height : function(newHeight){
       this.h = newHeight;
-      this.xaxis.height(newHeight).ytranslate(newHeight);
+      this.xaxis.height(newHeight).ytranslate(newHeight).tickSize(newHeight);
       this.yaxisright.height(newHeight);
-      this.yaxisleft.height(newHeight).tickSize(newHeight);
+      this.yaxisleft.height(newHeight);
       return this;
     },
     /**
@@ -82,9 +82,9 @@ One X Axis (bottom)
     */
     width : function(newWidth){
       this.w = newWidth;
-      this.xaxis.width(newWidth).tickSize(newWidth);
+      this.xaxis.width(newWidth);
       this.yaxisright.width(newWidth).xtranslate(newWidth);
-      this.yaxisleft.width(newWidth);
+      this.yaxisleft.width(newWidth).tickSize(newWidth);
       return this;
     },
     /**

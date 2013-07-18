@@ -68,8 +68,8 @@ Base XY system for all the 2D charts.
     */
     height : function(newHeight){
       this.h = newHeight;
-      this.xaxis.height(newHeight).ytranslate(newHeight);
-      this.yaxis.height(newHeight).tickSize(newHeight);
+      this.xaxis.height(newHeight).ytranslate(newHeight).tickSize(newHeight);
+      this.yaxis.height(newHeight);
       return this;
     },
     /**
@@ -81,8 +81,8 @@ Base XY system for all the 2D charts.
     */
     width : function(newWidth){
       this.w = newWidth;
-      this.xaxis.width(newWidth).tickSize(newWidth);
-      this.yaxis.width(newWidth);
+      this.xaxis.width(newWidth);
+      this.yaxis.width(newWidth).tickSize(newWidth);
       return this;
     },
     /**

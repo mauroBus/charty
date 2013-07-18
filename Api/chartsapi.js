@@ -1,6 +1,9 @@
 /**
 Api for chart creation management.
 
+Having the api, it is possible to set a root html element,
+and will append a specific chart to it.
+
 @class ChartsApi
 @constructor
 @requires d3,
@@ -10,7 +13,10 @@ Api for chart creation management.
           labeledtrianglechart,
           linechart,
           scatterplot,
-          donut
+          donut,
+          groupedbarchart,
+          donutwithinnertext,
+          labeleddonutchart
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -29,7 +35,8 @@ Api for chart creation management.
         'scatterplot',
         'donut',
         'groupedbarchart',
-        'donutwithinnertext'
+        'donutwithinnertext',
+        'labeleddonutchart'
       ],
       function(d3, ScaleFactory) {
         // Export global even in AMD case in case this script is loaded with others
@@ -74,7 +81,7 @@ Api for chart creation management.
     var selection = d3.select(options.root);
 
     var height = (parseInt(selection.style('height'), 10) || 200),
-      width = (parseInt(selection.style('width'), 10) || 200);
+        width = (parseInt(selection.style('width'), 10) || 200);
 
     /**
     Set default values for margin, for the svg element.
@@ -91,6 +98,7 @@ Api for chart creation management.
       .attr("height", height)
       .append('g')
       .attr("transform", "translate(" + marginValues.left + "," + marginValues.top + ")");
+    
     /**
     Chart dimension values are porcentaje from svg adapted value.
     */

@@ -57,11 +57,9 @@ wherever is necessary.
       */
       this.yt = 0;
 
-      var pathBase = this.base;
-
       var axis = d3.svg.axis();
 
-      this.layer('axis',pathBase, {
+      var axisLayerOptions = {
         /**
         Data bind for axis
         Since axis requires just a scale, only one element
@@ -81,7 +79,7 @@ wherever is necessary.
           var scale = chart.scale.getScale();
 
           axis = axis.scale(chart.scale.getScale())
-                     .orient(chart.o);
+                          .orient(chart.o);
 
           return this.selectAll('g').data([0]);
         },
@@ -98,6 +96,7 @@ wherever is necessary.
           'merge' : function(){
 
               var chart = this.chart();
+              
               /**
               Renders as a grid.
               */
@@ -108,6 +107,9 @@ wherever is necessary.
               this.attr('class','axis')
                   .call(axis);
 
+              /**
+              Axis translation in x or y direction. 
+              */
               if(chart.xt !== 0 || chart.yt !== 0){
                 this.attr("transform", "translate("+chart.xt+"," + chart.yt + ")");
               };
@@ -118,7 +120,12 @@ wherever is necessary.
             return this.remove();
           }
         }
-      });
+      }; 
+
+      /**
+      Axis layer creation
+      */
+      this.layer('axis',this.base.append('g'), axisLayerOptions);
     },
     /**
     Sets tick size for the axis
@@ -129,7 +136,8 @@ wherever is necessary.
     */
     tickSize : function(size){
       /**
-      Size for the ticks.
+      Size for the ticks. Necessary
+      to define a grid chart. 
 
       @property
       @type Number

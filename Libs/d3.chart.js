@@ -153,6 +153,7 @@
 	};
 
 	d3.selection.prototype.layer = function(options) {
+
 		var layer = new Layer(this);
 		var eventName;
 

@@ -11,8 +11,10 @@ doesn't depend on the data value.
 
 @class DonutWithInnerText
 @constructor
-@extends
-@requires
+@extends Donut
+@requires d3,
+          d3.chart,
+          donut
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -34,11 +36,9 @@ doesn't depend on the data value.
   }
 }(this, function(d3) {
   d3.chart('Donut').extend('DonutWithInnerText',{
-    initialize : function(){
+    initialize : function(args){
 
       var pathBase = this.base.append('g');
-
-      console.log(this.layer('paths'));
 
       this.layer('donutText', pathBase, {
         /**
@@ -56,11 +56,15 @@ doesn't depend on the data value.
         */
         dataBind : function(d){
           var data = d.data;
-
           var stringValue = (data[0].x).toString() +'%';
-          console.log(stringValue);
           return this.selectAll('text').data([stringValue]);
         },
+        /**
+        Inserts one text for the value to display
+
+        @method
+        @chainable
+        */
         insert : function(){
           return this.append('text');
         },
@@ -72,12 +76,15 @@ doesn't depend on the data value.
             return this.attr('x', chart.w/2)
                        .attr('y',chart.h/2)
                        .text(function(d){
-                        console.log(d);
-                        return d;
+                          return d;
                        });
           },
           'update' : function(){
+            var chart = this.chart(); 
 
+            return this.text(function(d){
+              return d; 
+            });
           },
           'exit' : function(){
             return this.remove();

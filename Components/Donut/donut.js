@@ -78,6 +78,7 @@ Donut drawer
         dataBind: function(data) {
 
           var chart = this.chart();
+
           chart.ir = data.ir;
           chart.or = data.or;
 

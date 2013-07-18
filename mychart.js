@@ -7,7 +7,7 @@ Testing chart drawing and data update
 require.config({
   baseUrl : '.',
   paths : {
-    'chartsapi' : 'Api/chartsapi',
+    'chartsapi' : 'Api/chartsapi', 
     'axis' : 'Components/Axis/axis',
     'bar' : 'Components/Bar/bar',
     'basechart' : 'Components/Base/basechart',
@@ -35,7 +35,8 @@ require.config({
     'underscore' : 'Libs/underscore',
     'groupedbarchart' : 'Composition/GroupedBarChart/groupedbarchart',
     'jquery' : 'Libs/jquery-1.10.2',
-    'donutwithinnertext' : 'Composition/DonutWithInnerText/donutwithinnertext'
+    'donutwithinnertext' : 'Composition/DonutWithInnerText/donutwithinnertext',
+    'labeleddonutchart' : 'Composition/LabeledDonutChart/labeleddonutchart'
   },
   shim:{
     'underscore' : {
@@ -61,9 +62,9 @@ function(ChartsApi, Accessor,_,$){
   */
   var data1 = {
     z : '2011',
-    color: 'blue',
     rh: 30,
     rw: 30,
+    color: 'blue',
     rc:'gray',
     data: [
       { x: 'A', y: 100, c : 'green', z: '2011'},
@@ -88,11 +89,14 @@ function(ChartsApi, Accessor,_,$){
   var data3 = {
     ir :  -100,
     or : -70,
+    rh: 30,
+    rw: 100,
+    rc : 'lightgray',
     data : [
-      {x : 200, c : 'blue'},
-      {x : 300, c : 'red'},
-      {x : 150, c : 'yellow'},
-      {x :  50, c : 'green'}
+      {x : 200, c : 'blue', xlabel : 100, ylabel : 100},
+      {x : 300, c : 'red', xlabel : 100, ylabel : 200}/*,
+      {x : 150, c : 'yellow', xlabel : 100, ylabel : 250},
+      {x :  50, c : 'green', xlabel : 100, ylabel : 50}*/
     ]
   };
 
@@ -177,18 +181,20 @@ function(ChartsApi, Accessor,_,$){
   };
 
   var options5 = {
-    chartName : 'Donut',
+    chartName : 'LabeledDonutChart',
     instances : 1,
     root : '#chart5',
-    /*imgUrl : 'http://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/280px-PNG_transparency_demonstration_1.png',*/
-    ir : 150,
-    or : 100
+    imgUrl : 'http://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/280px-PNG_transparency_demonstration_1.png',
+    marginlfactor : 2,
+    margintfactor : 4.2
   };
 
   var options6 = {
     chartName : 'DonutWithInnerText',
     instances : 1,
-    root : '#chart6'
+    root : '#chart6',
+    marginlfactor : 2,
+    margintfactor : 4.2
   };
 
   var options7 = {
@@ -204,7 +210,7 @@ function(ChartsApi, Accessor,_,$){
   };
 
   /**
-  Charts draw here.
+  Initial charts drawing here.
   */
   var chart1 = myApi.chart(options1);
       chart1.draw(accessor1);
@@ -229,9 +235,6 @@ function(ChartsApi, Accessor,_,$){
 
   var chart6 = myApi.chart(options6);
       chart6.draw(accessor4);
-
-  /*var chart6 = myApi.chart(options6);
-      chart6.draw(accessor1);*/
 
   /**
   Charts update here.
@@ -303,7 +306,21 @@ function(ChartsApi, Accessor,_,$){
     data2.r = 8;
 
     chart4.draw(accessor1);
-    chart5.draw(accessor3);
+
+    var data9 = {
+      ir :  -100,
+      or : -70,
+      data : [
+        {x : 50 , c: 'blue'},
+        {x : 155, c: 'gray'}
+      ]
+    };
+
+    var datagroup7 = [];
+        datagroup7.push(data9); 
+
+    var accessor7 = new Accessor(datagroup7);
+    chart6.draw(accessor7);
 
   },3000);
 });
