@@ -13,20 +13,21 @@ Circle drawer.
 */
 
 (function(root, factory) {
-  // Set up Backbone appropriately for the environment.
+  /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
-    // AMD
+    /** AMD */
     define(['d3',
       'underscore',
       'd3.chart',
       'simpledatagroup'],
       function(d3, _) {
-        // Export global even in AMD case in case this script is loaded with others
+        /** Export global even in AMD case in case this script 
+        is loaded with others */
         return factory(d3, _);
     });
   }
   else {
-    // Browser globals
+    /** Browser globals */
     return factory(d3, _);
   }
 }(this, function(d3, _) {
@@ -38,14 +39,16 @@ Circle drawer.
     */
     initialize : function(){
 
+      /**
+      r : circle radius
+      c : circle color
+      */
       var defaults = {
         r : 5,
         c : 'circle-default'
       };
 
-      var pathBase = this.base.append('g');
-
-      this.layer('circles', pathBase,{
+      var options = {
         /**
         Data bind for a circle serie.
         Can have color and circle radius set for the whole serie,
@@ -59,6 +62,7 @@ Circle drawer.
                                         {x : 'Jan', y: 300, c : 'blue', r : 20}
                                       ]
                                     }
+        @chainable
         */
         dataBind: function(d){
 
@@ -70,6 +74,12 @@ Circle drawer.
 
           return this.selectAll('circle').data(d.data);
         },
+        /**
+        Appends a svg:circle
+
+        @method
+        @chainable
+        */
         insert : function(){
           return this.append('circle');
         },
@@ -111,10 +121,16 @@ Circle drawer.
                       .attr("cy", function(d) { return chart.yscale.map(d.y,0); });
           },
           'exit' : function(){
+            
             return this.remove();
           }
         }
-      });
+      }; 
+
+      /**
+      Layer creation
+      */
+      this.layer('circles', this.base.append('g'), options);
     }
   });
  })

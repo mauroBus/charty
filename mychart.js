@@ -7,36 +7,52 @@ Testing chart drawing and data update
 require.config({
   baseUrl : '.',
   paths : {
-    'chartsapi' : 'Api/chartsapi',
-    'axis' : 'Components/Axis/axis',
-    'bar' : 'Components/Bar/bar',
-    'basechart' : 'Components/Base/basechart',
-    'linearscale' : 'Components/Scales/linearscale',
-    'ordinalscale' : 'Components/Scales/ordinalscale',
-    'scalesfactory' : 'Components/Scales/scalesfactory',
-    'xyaxis' : 'Composition/Axis/xyaxis',
-    'yxyaxis' : 'Composition/Axis/yxyaxis',
-    'barchart' : 'Composition/BarChart/barchart',
-    'd3' : 'Libs/d3.v3',
-    'd3.chart' : 'Libs/d3.chart',
-    'accessor' : 'Utils/Accessor/accessor',
-    'multipleinstancesmixin' : 'Composition/multipleinstancesmixin',
-    'multipledatagroup' : 'Composition/multipledatagroup',
-    'simpledatagroup' : 'Composition/simpledatagroup',
-    'labeledtrianglechart' : 'Composition/LabeledTriangleChart/labeledtrianglechart',
-    'triangle' : 'Components/Triangle/triangle',
-    'textlabel' : 'Components/TextLabel/textlabel',
-    'roundedrectangle' : 'Components/RoundedRectangle/roundedrectangle',
-    'linechart' : 'Composition/LineChart/linechart',
-    'line' : 'Components/Line/line',
-    'circle' : 'Components/Circle/circle',
-    'scatterplot' : 'Composition/Scatterplot/scatterplot',
-    'donut' : 'Components/Donut/donut',
-    'underscore' : 'Libs/underscore',
-    'groupedbarchart' : 'Composition/GroupedBarChart/groupedbarchart',
-    'jquery' : 'Libs/jquery-1.10.2',
-    'donutwithinnertext' : 'Composition/DonutWithInnerText/donutwithinnertext',
-    'labeleddonutchart' : 'Composition/LabeledDonutChart/labeleddonutchart',
+    
+    /** Libraries */
+
+    'd3'                      : 'Libs/d3.v3',
+    'd3.chart'                : 'Libs/d3.chart',
+    'jquery'                  : 'Libs/jquery-1.10.2',
+    'underscore'              : 'Libs/underscore',
+
+    /** Api */
+
+    'chartsapi'               : 'Api/chartsapi',
+
+    /** Components */
+
+    'axis'                    : 'Components/Axis/axis',
+    'bar'                     : 'Components/Bar/bar',
+    'basechart'               : 'Components/Base/basechart',
+    'linearscale'             : 'Components/Scales/linearscale',
+    'ordinalscale'            : 'Components/Scales/ordinalscale',
+    'scalesfactory'           : 'Components/Scales/scalesfactory',
+    'triangle'                : 'Components/Triangle/triangle',
+    'textlabel'               : 'Components/TextLabel/textlabel',
+    'roundedrectangle'        : 'Components/RoundedRectangle/roundedrectangle',
+    'line'                    : 'Components/Line/line',
+    'circle'                  : 'Components/Circle/circle',
+    'donut'                   : 'Components/Donut/donut',
+
+    /** Composition */
+
+    'xyaxis'                  : 'Composition/Axis/xyaxis',
+    'yxyaxis'                 : 'Composition/Axis/yxyaxis',
+    'barchart'                : 'Composition/BarChart/barchart',
+    'multipleinstancesmixin'  : 'Composition/multipleinstancesmixin',
+    'multipledatagroup'       : 'Composition/multipledatagroup',
+    'simpledatagroup'         : 'Composition/simpledatagroup',
+    'labeledtrianglechart'    : 'Composition/LabeledTriangleChart/labeledtrianglechart',
+    'linechart'               : 'Composition/LineChart/linechart',
+    'scatterplot'             : 'Composition/Scatterplot/scatterplot',
+    'groupedbarchart'         : 'Composition/GroupedBarChart/groupedbarchart',
+    'donutwithinnertext'      : 'Composition/DonutWithInnerText/donutwithinnertext',
+    'labeleddonutchart'       : 'Composition/LabeledDonutChart/labeleddonutchart',
+    'linechartcircles'        : 'Composition/LineChart/linechartcircles',
+    
+    /** Utils */
+    'accessor'                : 'Utils/Accessor/accessor'
+
   },
   shim:{
     'underscore' : {
@@ -64,27 +80,27 @@ function(ChartsApi, Accessor,_,$){
     z : '2011',
     rh: 30,
     rw: 30,
-    color: 'blue',
+    color: 'blueline',
     rc:'gray',
     data: [
-      { x: 'A', y: 100, c : 'green', z: '2011'},
-      { x: 'B', y: -40, c : 'blue', z: '2011'},
+      { x: 'A', y: 100, c : 'red', z: '2011'},
+      { x: 'B', y: -40, c : 'red', z: '2011'},
       { x: 'C', y: 60, c : 'red', z: '2011' }
     ]
   };
 
   var data2 = {
     z : '2012',
-    color: 'red',
+    color: 'redline',
     data: [
-      { x: 'A', y: 150 , z: '2012'},
-      { x: 'B', y: 50 , z: '2012'},
-      { x: 'C', y: 30, c:'yellow' , z: '2012' }
+      { x: 'A', y: 150 , c:'blue', z: '2012'},
+      { x: 'B', y: 50 , c: 'blue', z: '2012'},
+      { x: 'C', y: 30, c:'blue' , z: '2012' }
     ]
   };
 
   /**
-  Data test for donut chart.
+  Data test for labeled donut chart.
   */
   var data3 = {
     circleCorrection : 0.1,
@@ -205,7 +221,7 @@ function(ChartsApi, Accessor,_,$){
   };
 
   var options7 = {
-    chartName : 'GroupedBarChart',
+    chartName : 'LineChartCircles',
     instances : 2,
     root : '#chart7',
     xAxis : 'ordinal',
@@ -242,6 +258,12 @@ function(ChartsApi, Accessor,_,$){
 
   var chart6 = myApi.chart(options6);
       chart6.draw(accessor4);
+
+      data1.color = 'redline';
+      data2.color = 'blueline'; 
+
+  var chart7 = myApi.chart(options7);
+      chart7.draw(accessor1);
 
   /**
   Charts update here.

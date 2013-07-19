@@ -20,27 +20,26 @@ doesn't depend on the data value.
 */
 
 (function(root, factory) {
-  // Set up Backbone appropriately for the environment.
+  /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
-    // AMD
+    /** AMD */
     define(['d3',
             'd3.chart',
             'donut'], function(d3) {
-      // Export global even in AMD case in case this script is loaded with others
+      /** Export global even in AMD case in case this script 
+      is loaded with others */
       return factory(d3);
     });
   }
   else {
-    // Browser globals
+    /** Browser globals */
     return factory(d3);
   }
 }(this, function(d3) {
   d3.chart('Donut').extend('DonutWithInnerText',{
     initialize : function(args){
 
-      var pathBase = this.base.append('g');
-
-      this.layer('donutText', pathBase, {
+      var options = {
         /**
         First element will be shown as label.
 
@@ -55,7 +54,14 @@ doesn't depend on the data value.
         @chainable
         */
         dataBind : function(d){
+
+          var chart = this.chart(); 
+
+          chart.or = d.or;
+          chart.ir = d.ir; 
+
           var data = d.data;
+
           var stringValue = (data[0].x).toString() +'%';
           return this.selectAll('text').data([stringValue]);
         },
@@ -71,26 +77,35 @@ doesn't depend on the data value.
         events : {
           'enter' : function(){
 
-            var chart = this.chart();
+            var chart = this.chart(); 
 
-            return this.attr('x', chart.w/2)
-                       .attr('y',chart.h/2)
-                       .text(function(d){
-                          return d;
-                       });
+            this.attr('x', chart.w/2 )
+                .attr('y', chart.h/2 )
+                .text(function(d){
+                  return d;
+                });
+
+            return this; 
           },
           'update' : function(){
-            var chart = this.chart();
 
-            return this.text(function(d){
+            this.text(function(d){
               return d;
             });
+
+            return this; 
           },
           'exit' : function(){
+
             return this.remove();
           }
         }
-      });
+      };
+
+      /**
+      Layer creation
+      */
+      this.layer('donutText', this.base.append('g'), options);
     }
   });
  })

@@ -5,26 +5,29 @@ Base XY system for all the 2D charts.
 @constructor
 @extends BaseChart
 @requires d3,
-          d3.chart
+          d3.chart,
+          basechart,
+          axis
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
-  // Set up Backbone appropriately for the environment.
+  /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
-    // AMD
+    /** AMD */
     define(['d3',
       'd3.chart',
       'basechart',
       'axis'],
       function(d3) {
-        // Export global even in AMD case in case this script is loaded with others
+        /** Export global even in AMD case in case this script 
+        is loaded with others */
         return factory(d3);
     });
   }
   else {
-    // Browser globals
+    /** Browser globals */
     return factory(d3);
   }
 }(this, function(d3) {
@@ -37,12 +40,10 @@ Base XY system for all the 2D charts.
     initialize : function(){
 
         this.xaxis = this.mixin('Axis',this.base.append('g'))
-                         .orient('bottom')
-                         .axistype('x');
+                         .orient('bottom'); 
 
         this.yaxis = this.mixin('Axis',this.base.append('g'))
-                         .orient('left')
-                         .axistype('y');
+                         .orient('left'); 
 
         this.componentsMixins = [];
         this.componentsMixins.push(this.xaxis);

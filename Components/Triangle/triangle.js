@@ -12,19 +12,20 @@ Triangle drawer.
 */
 
 (function(root, factory) {
-  // Set up Backbone appropriately for the environment.
+  /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
-    // AMD
+    /** AMD */
     define(['d3',
       'd3.chart',
       'simpledatagroup'],
       function(d3) {
-        // Export global even in AMD case in case this script is loaded with others
+        /** Export global even in AMD case in case this script 
+        is loaded with others */
         return factory(d3);
     });
   }
   else {
-    // Browser globals
+    /** Browser globals */
     return factory(d3);
   }
 }(this, function(d3) {
@@ -36,13 +37,14 @@ Triangle drawer.
     */
     initialize : function(){
 
+      /**
+      c : triangle color
+      */
       var defaults = {
         c : 'triangle-default'
       };
 
-      var pathBase = this.base;
-
-      this.layer('triangles', pathBase , {
+      var options = {
         /**
         Data bind for a triangle serie.
         Will set a color for the whole serie.
@@ -55,16 +57,24 @@ Triangle drawer.
                                         ...
                                       ]
                                     }
+        @chainable
         */
         dataBind : function(d){
 
           var chart = this.chart();
+
           chart.checkScales('Triangle');
           chart.c = d.color;
 
           return this.selectAll('path').data(d.data);
 
         },
+        /**
+        Appends a svg:path
+
+        @method
+        @chainable
+        */
         insert : function(){
           return this.insert('path');
         },
@@ -91,10 +101,16 @@ Triangle drawer.
                         });
           },
           'exit' : function(){
+
             return this.remove();
           }
         }
-      });
+      }; 
+
+      /**
+      Layer creation
+      */
+      this.layer('triangles', this.base.append('g') , options);
     },
     /**
     Path is defined as a string connecting different

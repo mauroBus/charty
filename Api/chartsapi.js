@@ -2,7 +2,7 @@
 Api for chart creation management.
 
 Having the api, it is possible to set a root html element,
-and will append a specific chart to it.
+and it will append a specific chart to it.
 
 @class ChartsApi
 @constructor
@@ -16,16 +16,17 @@ and will append a specific chart to it.
           donut,
           groupedbarchart,
           donutwithinnertext,
-          labeleddonutchart
+          labeleddonutchart,
+          linechartcircles
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
 
-  // Set up Backbone appropriately for the environment.
+  /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
-    // AMD
+    /** AMD */
     define(['d3',
         'scalesfactory',
         'd3.chart',
@@ -36,14 +37,16 @@ and will append a specific chart to it.
         'donut',
         'groupedbarchart',
         'donutwithinnertext',
-        'labeleddonutchart'
+        'labeleddonutchart',
+        'linechartcircles'
       ],
       function(d3, ScaleFactory) {
-        // Export global even in AMD case in case this script is loaded with others
+        /** Export global even in AMD case in case this script 
+        is loaded with others */
         return factory(d3, ScaleFactory);
       });
   } else {
-    // Browser globals
+    /** Browser globals */
     return factory(d3, ScaleFactory);
   }
 }(this, function(d3, ScaleFactory) {
@@ -81,7 +84,7 @@ and will append a specific chart to it.
     var selection = d3.select(options.root);
 
     var height = (parseInt(selection.style('height'), 10) || 200),
-        width = (parseInt(selection.style('width'), 10) || 200);
+        width  = (parseInt(selection.style('width'), 10) || 200);
 
     /**
     Set default values for margin, for the svg element.
@@ -116,19 +119,21 @@ and will append a specific chart to it.
     Appends the chart to the specified html element.
     */
     var chart = svg.chart(options.chartName, {
-      instances: options.instances
-    })
-      .setXScale(this.scaleFactory.scale(options.xAxis || 'ordinal', 'x'))
-      .setYScale(this.scaleFactory.scale(options.yAxis || 'linear', 'y'))
-      .height(height)
-      .width(width);
+                    instances: options.instances
+                  })
+                  .height(height)
+                  .width(width);
 
     /**
-    Some charts can have a special label in the middle of them.
+    Scale definition.
+    Some charts can use direct mapping instead of scaling.
     */
-    if (options.innerText) {
-      chart.setInnerText(options.innerText);
-    }
+    if (options.xAxis){
+      chart = chart.setXScale(this.scaleFactory.scale(options.xAxis,'x')); 
+    }; 
+    if (options.yAxis){
+      chart = chart.setYScale(this.scaleFactory.scale(options.yAxis,'y'));
+    }; 
 
     return chart;
   };
@@ -165,4 +170,5 @@ and will append a specific chart to it.
   }
 
   return ChartsApi;
+  
 }));

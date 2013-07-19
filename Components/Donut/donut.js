@@ -1,5 +1,5 @@
 /**
-Donut drawer
+Donut drawer. 
 
 @class Donut
 @extends SimpleDataGroup
@@ -13,20 +13,21 @@ Donut drawer
 */
 
 (function(root, factory) {
-  // Set up Backbone appropriately for the environment.
+  /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
-    // AMD
+    /** AMD */
     define(['d3',
         'underscore',
         'd3.chart',
         'simpledatagroup'
       ],
       function(d3, _) {
-        // Export global even in AMD case in case this script is loaded with others
+        /** Export global even in AMD case in case this script 
+        is loaded with others */
         return factory(d3, _);
       });
   } else {
-    // Browser globals
+    /** Browser globals */
     return factory(d3, _);
   }
 }(this, function(d3, _) {
@@ -39,15 +40,17 @@ Donut drawer
     initialize: function() {
 
       /**
-      Default vaule for inner / outter radius
+      ir : inner radius
+      or : outter radius
       */
       var defaults = {
         ir: -150,
         or: -100
       };
 
-      var pathBase = this.base;
-
+      /**
+      d3 layout for pie data mapping. 
+      */
       var pieLayout = d3.layout
         .pie()
         .sort(null)
@@ -57,7 +60,7 @@ Donut drawer
 
       var arcGen = d3.svg.arc();
 
-      this.layer('paths', pathBase, {
+      var options = {
         /**
         Data bind for donut.
         Will take x elements as data for drawing
@@ -87,12 +90,12 @@ Donut drawer
           }
 
           arcGen = arcGen.innerRadius(chart.ir || defaults.ir)
-            .outerRadius(chart.or || defaults.or);
+                         .outerRadius(chart.or || defaults.or);
 
           return this.selectAll('path').data(pieLayout(data.data));
         },
         /**
-        Adds a path element for the donut
+        Adds a svg:path element for the donut
 
         @method
         */
@@ -104,7 +107,7 @@ Donut drawer
 
             var chart = this.chart();
 
-            return this.attr('transform', "translate(" + chart.w / 2 + "," + chart.h / 2 + ")")
+            return this.attr('transform', "translate(" + (chart.w / 2) + "," + (chart.h / 2) + ")")
               .attr("fill", function(d) {
                 return d.data.c;
               })
@@ -112,17 +115,25 @@ Donut drawer
 
           },
           'update': function() {
+
             var chart = this.chart();
+
             return this.attr("fill", function(d) {
               return d.data.c;
             })
               .attr("d", arcGen);
           },
           'exit': function() {
+
             return this.remove();
           }
         }
-      });
+      };
+
+      /**
+      Layer creation
+      */
+      this.layer('paths', this.base.append('g'), options);
     }
   });
 }));

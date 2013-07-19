@@ -3,23 +3,26 @@ Ordinal Scale
 
 @class OrdinalScale
 @constructor
-
+@requires d3,
+		  d3.chart
+		  
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
-  // Set up Backbone appropriately for the environment.
+  /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
-    // AMD
+    /** AMD */
     define(['d3',
     	'd3.chart'],
     	function(d3) {
-	      // Export global even in AMD case in case this script is loaded with others
+	      /** Export global even in AMD case in case this script 
+	      is loaded with others */
 	      return factory(d3);
     });
   }
   else {
-    // Browser globals
+    /** Browser globals */
     return factory(d3);
   }
 }(this, function(d3) {

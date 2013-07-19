@@ -22,40 +22,40 @@ display of the elements inside the label.
 */
 
 (function(root, factory) {
-  // Set up Backbone appropriately for the environment.
+  /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
-    // AMD
+    /** AMD */
     define(['d3',
       'd3.chart',
       'donut'
     ], function(d3) {
-      // Export global even in AMD case in case this script is loaded with others
+      /** Export global even in AMD case in case this script 
+      is loaded with others */
       return factory(d3);
     });
   } else {
-    // Browser globals
+    /** Browser globals */
     return factory(d3);
   }
 }(this, function(d3) {
   d3.chart('Donut').extend('LabeledDonutChart', {
     /**
-  		Initialize for LabeledDonutChart.
+		Initialize for LabeledDonutChart.
 
-  		Each part will be in a different layer, but all of them
-  		in the same chart.
+		Each part will be in a different layer, but all of them
+		in the same chart.
 
-  		@method
-      @param {Object} args arguments
-    	*/
+		@method
+    @param {Object} args arguments
+  	*/
     initialize: function(args) {
 
       /**
-        Layer Options.
+      Layer Options.
 
-  			Layer for the container rounded rectange.
-  			The label itself, contains the rest of the elements.
-  			*/
-
+			Layer for the container rounded rectange.
+			The label itself, contains the rest of the elements.
+			*/
       var outterRectangleOptions = {
         dataBind: function(d) {
 
@@ -66,6 +66,9 @@ display of the elements inside the label.
 
           return this.selectAll('rect').data(d.data);
         },
+        /**
+        Appends a svg:rect element.
+        */
         insert: function() {
           return this.append('rect');
         },

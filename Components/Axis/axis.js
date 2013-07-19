@@ -16,19 +16,20 @@ wherever is necessary.
 */
 
 (function(root, factory) {
-  // Set up Backbone appropriately for the environment.
+  /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
-    // AMD
+    /** AMD */
     define(['d3',
       'd3.chart',
       'basechart'],
       function(d3) {
-        // Export global even in AMD case in case this script is loaded with others
+        /** Export global even in AMD case in case this script 
+        is loaded with others */
         return factory(d3);
     });
   }
   else {
-    // Browser globals
+    /** Browser globals */
     return factory(d3);
   }
 }(this, function(d3) {
@@ -59,6 +60,9 @@ wherever is necessary.
 
       var axis = d3.svg.axis();
 
+      /**
+      Layer options
+      */
       var axisLayerOptions = {
         /**
         Data bind for axis
@@ -79,7 +83,7 @@ wherever is necessary.
           var scale = chart.scale.getScale();
 
           axis = axis.scale(chart.scale.getScale())
-                          .orient(chart.o);
+                     .orient(chart.o);
 
           return this.selectAll('g').data([0]);
         },
@@ -117,6 +121,7 @@ wherever is necessary.
               return this;
           },
           'remove' : function(){
+            
             return this.remove();
           }
         }
@@ -201,17 +206,6 @@ wherever is necessary.
     */
     ytranslate : function(t){
       this.yt = t;
-      return this;
-    },
-    /**
-    Sets axis type. Must be 'x' or 'y'
-
-    @method
-    @param {String} type axis type
-    @chainable
-    */
-    axistype : function(type){
-      this.type = type;
       return this;
     }
   });
