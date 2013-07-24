@@ -5,7 +5,7 @@ Testing chart drawing and data update
 */
 
 require.config({
-  baseUrl : '.',
+  baseUrl : '..',
   paths : {
     
     /** Libraries */
@@ -23,6 +23,7 @@ require.config({
 
     'axis'                    : 'Components/Axis/axis',
     'bar'                     : 'Components/Bar/bar',
+    'basescale'               : 'Components/Scales/basescale',
     'basechart'               : 'Components/Base/basechart',
     'linearscale'             : 'Components/Scales/linearscale',
     'ordinalscale'            : 'Components/Scales/ordinalscale',
@@ -71,7 +72,7 @@ require.config({
 requirejs(['chartsapi','accessor','underscore','jquery'],
 function(ChartsApi, Accessor,_,$){
 
-  "use strict";
+  'use strict';
 
   /**
   Data rendering examples.

@@ -96,11 +96,11 @@ and it will append a specific chart to it.
       tfactor: (options.margintfactor || 0)
     };
 
-    var svg = selection.append("svg")
-      .attr("width", width)
-      .attr("height", height)
+    var svg = selection.append('svg')
+      .attr('width', width)
+      .attr('height', height)
       .append('g')
-      .attr("transform", "translate(" + marginValues.left + "," + marginValues.top + ")");
+      .attr('transform', 'translate(' + marginValues.left + ',' + marginValues.top + ')');
     
     /**
     Chart dimension values are porcentaje from svg adapted value.
@@ -109,10 +109,10 @@ and it will append a specific chart to it.
     height = height - marginValues.left * marginValues.lfactor;
 
     if (options.imgUrl) {
-      svg.append("svg:image")
-        .attr("xlink:href", options.imgUrl)
-        .attr("width", width)
-        .attr("height", height);
+      svg.append('svg:image')
+        .attr('xlink:href', options.imgUrl)
+        .attr('width', width)
+        .attr('height', height);
     }
 
     /**

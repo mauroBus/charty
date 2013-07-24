@@ -24,7 +24,7 @@ Contains common functionality
     });
   }
   else {
-    // Browser globals
+    /** Browser globals */
     return factory(d3, _);
   }
 }(this, function(d3, _) {

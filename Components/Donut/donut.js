@@ -31,7 +31,7 @@ Donut drawer.
     return factory(d3, _);
   }
 }(this, function(d3, _) {
-  d3.chart('SimpleDataGroup').extend("Donut", {
+  d3.chart('SimpleDataGroup').extend('Donut', {
     /**
     Donut initialization
 
@@ -107,21 +107,21 @@ Donut drawer.
 
             var chart = this.chart();
 
-            return this.attr('transform', "translate(" + (chart.w / 2) + "," + (chart.h / 2) + ")")
-              .attr("fill", function(d) {
+            return this.attr('transform', 'translate(' + (chart.w / 2) + ',' + (chart.h / 2) + ')')
+              .attr('fill', function(d) {
                 return d.data.c;
               })
-              .attr("d", arcGen);
+              .attr('d', arcGen);
 
           },
           'update': function() {
 
             var chart = this.chart();
 
-            return this.attr("fill", function(d) {
+            return this.attr('fill', function(d) {
               return d.data.c;
             })
-              .attr("d", arcGen);
+              .attr('d', arcGen);
           },
           'exit': function() {
 

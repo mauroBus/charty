@@ -121,22 +121,22 @@ Triangle drawer.
     @return {String} path
     */
     getPath : function(d){
-      var p = "M ";
+      var p = 'M ';
 
       var x1 = this.xscale.map(d.x,1);
       var y1 = this.yscale.map(0);
 
-      p = p + x1 + " " + y1+" ";
+      p = p + x1 + ' ' + y1 + ' ';
 
       var x2 = x1 + this.xscale.band(1)/2;
       var y2 = this.yscale.map(d.y);
 
-      p = p + "L " + x2 + " " + y2 +" ";
+      p = p + 'L ' + x2 + ' ' + y2 + ' ';
 
       var x3 = x1 + this.xscale.band(1);
       var y3 = this.yscale.map(0);
 
-      p = p + "L " + x3 + " " + y3;
+      p = p + 'L ' + x3 + ' ' + y3;
 
       return p;
     }

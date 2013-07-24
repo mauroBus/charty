@@ -91,15 +91,15 @@ Bar drawer. Takes only one data series as input.
             are draw using bars. 
             */
 
-            this.attr("class", function(d){
+            this.attr('class', function(d){
                   return (d.c || chart.c || defaults.c);
                 })
-                .attr("x", function(d) { return chart.xscale.map(d.x, chart.factor)} )
-                .attr("width", chart.xscale.band(chart.factor))
-                .attr("y", function(d) {
+                .attr('x', function(d) { return chart.xscale.map(d.x, chart.factor)} )
+                .attr('width', chart.xscale.band(chart.factor))
+                .attr('y', function(d) {
                   return Math.min(chart.yscale.map(0),chart.yscale.map(d.y, chart.factor));
                 })
-                .attr("height", function(d) {
+                .attr('height', function(d) {
                   return Math.abs(chart.yscale.band(chart.h,d.y)-(chart.h-chart.yscale.map(0)))}
                 );
 
@@ -109,17 +109,18 @@ Bar drawer. Takes only one data series as input.
 
             var chart = this.chart();
 
-            this.attr("class", function(d){
-                 return (d.c || chart.c || defaults.c);
+            this.attr('class', function(d){
+                  return (d.c || chart.c || defaults.c);
                 })
-                .attr("x", function(d) { return chart.xscale.map(d.x, chart.factor)} )
-                .attr("width", chart.xscale.band(chart.factor))
-                .attr("y", function(d) {
-                  return Math.min(chart.yscale.map(0),chart.yscale.map(d.y, chart.factor))
+                .attr('x', function(d) { return chart.xscale.map(d.x, chart.factor)} )
+                .attr('width', chart.xscale.band(chart.factor))
+                .attr('y', function(d) {
+                  return Math.min(chart.yscale.map(0),chart.yscale.map(d.y, chart.factor));
                 })
-                .attr("height", function(d) {
-                  return Math.abs(chart.yscale.band(chart.h,d.y)-(chart.h-chart.yscale.map(0)))
-                });
+                .attr('height', function(d) {
+                  return Math.abs(chart.yscale.band(chart.h,d.y)-(chart.h-chart.yscale.map(0)))}
+                );
+                
             return this;
           },
           'exit' : function(){

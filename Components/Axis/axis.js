@@ -115,7 +115,7 @@ wherever is necessary.
               Axis translation in x or y direction. 
               */
               if(chart.xt !== 0 || chart.yt !== 0){
-                this.attr("transform", "translate("+chart.xt+"," + chart.yt + ")");
+                this.attr('transform', 'translate(' + chart.xt + ',' + chart.yt + ')');
               };
 
               return this;

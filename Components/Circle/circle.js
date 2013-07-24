@@ -99,8 +99,8 @@ Circle drawer.
                         };
                         return (d.r || chart.r || defaults.r);
                       })
-                      .attr("cx", function(d) { return chart.xscale.map(d.x,0); })
-                      .attr("cy", function(d) { return chart.yscale.map(d.y,0); });
+                      .attr('cx', function(d) { return chart.xscale.map(d.x,0); })
+                      .attr('cy', function(d) { return chart.yscale.map(d.y,0); });
           },
           'update' : function(){
 
@@ -109,7 +109,7 @@ Circle drawer.
             return this.attr('class',function(d){
                         return (d.c || chart.c || defaults.c);
                       })
-                      .attr("r", function(d){
+                      .attr('r', function(d){
                         if((!_.isNumber(d.r) && !_.isNumber(chart.r))){
                           if(d.r < 0 || chart.r < 0){
                             throw new Error('Circle radius must be a positive number.' );
@@ -117,8 +117,8 @@ Circle drawer.
                         };
                         return (d.r || chart.r || defaults.r);
                       })
-                      .attr("cx", function(d) { return chart.xscale.map(d.x,0); })
-                      .attr("cy", function(d) { return chart.yscale.map(d.y,0); });
+                      .attr('cx', function(d) { return chart.xscale.map(d.x,0); })
+                      .attr('cy', function(d) { return chart.yscale.map(d.y,0); });
           },
           'exit' : function(){
             

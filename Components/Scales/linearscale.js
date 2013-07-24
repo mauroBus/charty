@@ -3,7 +3,9 @@ Linear scale for linear axis
 
 @class LinearScale
 @constructor
+@extends BaseScale
 @requires d3,
+			basescale,
 		  d3.chart
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
@@ -14,22 +16,29 @@ Linear scale for linear axis
   if (typeof define === 'function' && define.amd) {
     /** AMD */
     define(['d3',
+    	'basescale',
     	'd3.chart'],
-    	function(d3) {
+    	function(d3, BaseScale) {
 	      /** Export global even in AMD case in case this script 
 	      is loaded with others */
-	      return factory(d3);
+	      return factory(d3, BaseScale);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3);
+    return factory(d3, BaseScale);
   }
-}(this, function(d3) {
+}(this, function(d3, BaseScale) {
+
 	var LinearScale = function(axisType){
 		this.scale = d3.scale.linear();
 		this.axisType = axisType;
 	}
+
+	/**
+	Inheritance from BaseScale
+	*/
+	LinearScale.prototype = new BaseScale(); 
 
 	/**
 	Sets domain for linear scale
@@ -52,32 +61,9 @@ Linear scale for linear axis
 	@chainable
 	*/
 	LinearScale.prototype.setRange = function(range){
-		var r;
 
-		if(this.axisType === 'x'){
-			r = [0,range];
-		}
-		else{
-			if(this.axisType === 'y'){
-				r = [range, 0];
-			}
-			else{
-				throw new Error('No axis type was defined for this linear scale');
-			}
-		}
-
-		this.scale = this.scale.range(r);
+		this.scale = this.scale.range(this.generateRange(range));
 		return this;
-	}
-
-	/**
-	Returns the created linear scale
-
-	@method
-	@return {Object} d3.scale (linear scale)
-	*/
-	LinearScale.prototype.getScale = function(){
-		return this.scale;
 	}
 
 	/**
