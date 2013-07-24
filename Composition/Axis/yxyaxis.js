@@ -15,20 +15,21 @@ One X Axis (bottom)
 */
 
 (function(root, factory) {
-  // Set up Backbone appropriately for the environment.
+  /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
-    // AMD
+    /** AMD */
     define(['d3',
       'basechart',
       'axis',
       'd3.chart'],
       function(d3) {
-        // Export global even in AMD case in case this script is loaded with others
+        /** Export global even in AMD case in case this script 
+        is loaded with others */
         return factory(d3);
     });
   }
   else {
-    // Browser globals
+    /** Browser globals */
     return factory(d3);
   }
 }(this, function(d3) {
@@ -39,9 +40,9 @@ One X Axis (bottom)
     @method
     */
     initialize : function(){
-      this.xaxis = this.mixin('Axis', this.base.append('g')).orient('bottom').axistype('x');
-      this.yaxisleft = this.mixin('Axis',this.base.append('g')).orient('left').axistype('y');
-      this.yaxisright = this.mixin('Axis', this.base.append('g')).axistype('y').orient('right');
+      this.xaxis = this.mixin('Axis', this.base.append('g')).orient('bottom');
+      this.yaxisleft = this.mixin('Axis',this.base.append('g')).orient('left');
+      this.yaxisright = this.mixin('Axis', this.base.append('g')).orient('right');
 
       this.componentsMixins = [];
       this.componentsMixins.push(this.xaxis);
@@ -68,9 +69,9 @@ One X Axis (bottom)
     */
     height : function(newHeight){
       this.h = newHeight;
-      this.xaxis.height(newHeight).ytranslate(newHeight);
+      this.xaxis.height(newHeight).ytranslate(newHeight).tickSize(newHeight);
       this.yaxisright.height(newHeight);
-      this.yaxisleft.height(newHeight).tickSize(newHeight);
+      this.yaxisleft.height(newHeight);
       return this;
     },
     /**
@@ -82,9 +83,9 @@ One X Axis (bottom)
     */
     width : function(newWidth){
       this.w = newWidth;
-      this.xaxis.width(newWidth).tickSize(newWidth);
+      this.xaxis.width(newWidth);
       this.yaxisright.width(newWidth).xtranslate(newWidth);
-      this.yaxisleft.width(newWidth);
+      this.yaxisleft.width(newWidth).tickSize(newWidth);
       return this;
     },
     /**

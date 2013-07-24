@@ -1,5 +1,5 @@
 /**
-Donut drawer
+Donut drawer. 
 
 @class Donut
 @extends SimpleDataGroup
@@ -13,51 +13,54 @@ Donut drawer
 */
 
 (function(root, factory) {
-  // Set up Backbone appropriately for the environment.
+  /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
-    // AMD
+    /** AMD */
     define(['d3',
-      'underscore',
-      'd3.chart',
-      'simpledatagroup'],
+        'underscore',
+        'd3.chart',
+        'simpledatagroup'
+      ],
       function(d3, _) {
-        // Export global even in AMD case in case this script is loaded with others
+        /** Export global even in AMD case in case this script 
+        is loaded with others */
         return factory(d3, _);
-    });
-  }
-  else {
-    // Browser globals
+      });
+  } else {
+    /** Browser globals */
     return factory(d3, _);
   }
 }(this, function(d3, _) {
-  d3.chart('SimpleDataGroup').extend("Donut", {
+  d3.chart('SimpleDataGroup').extend('Donut', {
     /**
     Donut initialization
 
     @method
     */
-    initialize : function(){
+    initialize: function() {
 
       /**
-      Default vaule for inner / outter radius
+      ir : inner radius
+      or : outter radius
       */
       var defaults = {
-        ir : -150,
-        or : -100
+        ir: -150,
+        or: -100
       };
 
-      var pathBase = this.base;
-
+      /**
+      d3 layout for pie data mapping. 
+      */
       var pieLayout = d3.layout
-                        .pie()
-                        .sort(null)
-                        .value(function(d){
-                          return d.x;
-                        });
+        .pie()
+        .sort(null)
+        .value(function(d) {
+          return d.x;
+        });
 
       var arcGen = d3.svg.arc();
 
-      this.layer('paths', pathBase ,{
+      var options = {
         /**
         Data bind for donut.
         Will take x elements as data for drawing
@@ -75,13 +78,14 @@ Donut drawer
                                           ]
                                         }
         */
-        dataBind : function(data){
+        dataBind: function(data) {
 
           var chart = this.chart();
+
           chart.ir = data.ir;
           chart.or = data.or;
 
-          if(!_.isNumber(chart.ir) || !_.isNumber(chart.or)){
+          if (!_.isNumber(chart.ir) || !_.isNumber(chart.or)) {
             throw new Error('Radius for donut chart must be numerical values');
           }
 
@@ -91,38 +95,45 @@ Donut drawer
           return this.selectAll('path').data(pieLayout(data.data));
         },
         /**
-        Adds a path element for the donut
+        Adds a svg:path element for the donut
 
         @method
         */
-        insert : function(){
+        insert: function() {
           return this.append('path');
         },
-        events : {
-          'enter' : function(){
+        events: {
+          'enter': function() {
 
             var chart = this.chart();
 
-            return this.attr('transform', "translate(" + chart.w / 2 + "," + chart.h / 2 + ")")
-                       .attr("fill", function(d) {
-                            return d.data.c;
-                        })
-                       .attr("d", arcGen);
+            return this.attr('transform', 'translate(' + (chart.w / 2) + ',' + (chart.h / 2) + ')')
+              .attr('fill', function(d) {
+                return d.data.c;
+              })
+              .attr('d', arcGen);
 
           },
-          'update' : function(){
+          'update': function() {
+
             var chart = this.chart();
-            return this.attr("fill", function(d) {
-                            return d.data.c;
-                        })
-                       .attr("d", arcGen);
+
+            return this.attr('fill', function(d) {
+              return d.data.c;
+            })
+              .attr('d', arcGen);
           },
-          'exit' : function(){
+          'exit': function() {
+
             return this.remove();
           }
         }
-      });
+      };
+
+      /**
+      Layer creation
+      */
+      this.layer('paths', this.base.append('g'), options);
     }
   });
- })
-);
+}));

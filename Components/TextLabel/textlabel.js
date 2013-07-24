@@ -12,19 +12,20 @@ Text labeling.
 */
 
 (function(root, factory) {
-  // Set up Backbone appropriately for the environment.
+  /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
-    // AMD
+    /** AMD */
     define(['d3',
       'd3.chart',
       'simpledatagroup'],
       function(d3) {
-        // Export global even in AMD case in case this script is loaded with others
+        /** Export global even in AMD case in case this script 
+        is loaded with others */
         return factory(d3);
     });
   }
   else {
-    // Browser globals
+    /** Browser globals */
     return factory(d3);
   }
 }(this, function(d3) {
@@ -36,9 +37,7 @@ Text labeling.
     */
     initialize : function(){
 
-      this.pathBase = this.base;
-
-      this.layer('texts', this.pathBase ,{
+      var options = {
         /**
         Data bind for text labeling.
         Can depend on other elements, for instance,
@@ -57,7 +56,7 @@ Text labeling.
           return this.selectAll('text').data(d.data);
         },
         /**
-        Insert a text element for each data input.
+        Insert a svg:text element for each data input.
 
         @mehtod
         @chainable
@@ -71,34 +70,37 @@ Text labeling.
               var chart = this.chart();
 
               return this.attr('x', function(d){
-                            var val = chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2) ;
-                            return val;
+                            return chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2);
                           })
                          .attr('y', function(d){
                             return chart.yscale.map(d.y);
                           })
-                         .attr("text-anchor", "middle")
+                         .attr('text-anchor', 'middle')
                          .text(function(d) { return d.y; });
           },
           'update' : function(){
 
               var chart = this.chart();
 
-               return this.attr('x', function(d){
-                            var val = chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2) ;
-                            return val;
+              return this.attr('x', function(d){
+                            return chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2);
                           })
                          .attr('y', function(d){
                             return chart.yscale.map(d.y);
                           })
-                         .attr("text-anchor", "middle")
                          .text(function(d) { return d.y; });
           },
           'exit' : function(){
+
             return this.remove();
           }
         }
-      });
+      }
+
+      /**
+      Layer creation
+      */
+      this.layer('texts', this.base.append('g') , options);
 
     }
   });

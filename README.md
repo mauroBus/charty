@@ -20,7 +20,7 @@
   + Utils : utilities for data managing
 - Chart instantiation using different preset options
 - Simple way for chart creation and instantiaton
-- Most charts were renamed. 
+- Most charts were renamed.
   + SimpleDataGroup : takes only one data series to process
   + MultipleDataGroup : takes N series to draw.
   + MultipleInstancesMixin : creates N instances of a specific mixin.
@@ -28,15 +28,12 @@
 - Documentation was added to the code, following the YUI standard
 
 ## Coming soon
-
+ - Support for IE8
  - Support for switching linear / ordinal scales
  - Completion of a labeled donut chart
- - Triangle chart should draw one chart instead of two
  - Define chart names as constants
- - Text positioning must be related to label size. 
- - AMD support
- - Parameters checking must be enforced
- - More charts : histogram , grouper bar chart 
+ - Text positioning must be related to label size.
+ - More charts : histogram , grouper bar chart
  - Slides to explain composition
 
 ## WTF
@@ -51,15 +48,15 @@ If I use the same chart with 6 elements, the 'enter' event will handle the two n
 
 ## D3
 
-d3.chart is a framework designed for chart drawing using d3. d3 also provides a way of working over svg elements, so a bit of knowledge in both concepts are recommended. 
+d3.chart is a framework designed for chart drawing using d3. d3 also provides a way of working over svg elements, so a bit of knowledge in both concepts are recommended.
 
 ## D3 for drawing
 
-d3 works defining selections of svg elements (or classes), and will compute a join between svg elements and data to be rendered. Svg elements work defining attributes , so they must be explicitly set (for example, width must be set using something like this.attr('width', value)). 
+d3 works defining selections of svg elements (or classes), and will compute a join between svg elements and data to be rendered. Svg elements work defining attributes , so they must be explicitly set (for example, width must be set using something like this.attr('width', value)).
 
-With the selection, it is possible to define common attributes or styles for every svg:element attached to every data element. 
+With the selection, it is possible to define common attributes or styles for every svg:element attached to every data element.
 
-Also, d3 provides some layouts for drawing specific charts. For example, a pie chart needs paths and arcs (an arc has staring / ending angles, etc), so the pie layout processes the data in a way that information necessary for the arcs or paths is automatically calculated. Without using the layout, calculations should be done manually. 
+Also, d3 provides some layouts for drawing specific charts. For example, a pie chart needs paths and arcs (an arc has staring / ending angles, etc), so the pie layout processes the data in a way that information necessary for the arcs or paths is automatically calculated. Without using the layout, calculations should be done manually.
 
 ## Some main concepts
 
@@ -67,67 +64,67 @@ Also, d3 provides some layouts for drawing specific charts. For example, a pie c
 
 + Chart : can be composed of other layers or charts. Should process the data before each layer is called for drawing. A chart itselft won't draw anything, that situation will be covered by the layer.
 
-+ draw : each chart will have a draw method, that will draw layers and charts defined in it. 
++ draw : each chart will have a draw method, that will draw layers and charts defined in it.
 
-+ redraw : when data changes, chart's draw method must be called again, in order to update the data and svg elements rendered.  
++ redraw : when data changes, chart's draw method must be called again, in order to update the data and svg elements rendered.
 
 ## Components
 
-At this point, there are some parts defined that can be used to create a custom and reusable chart. Each component is seen as a separate constituting part of the chart that will be created. 
+At this point, there are some parts defined that can be used to create a custom and reusable chart. Each component is seen as a separate constituting part of the chart that will be created.
 
 ### Individual components
 
-+ Axis : will render an axis. Configuration options will determine whether it will render and x or y axis. 
-+ Bar : will render bars (like in a bar chart) for one data serie. 
-+ Circles : renders circles for one data serie. 
++ Axis : will render an axis. Configuration options will determine whether it will render and x or y axis.
++ Bar : will render bars (like in a bar chart) for one data serie.
++ Circles : renders circles for one data serie.
 + Donut : pie chart, renders as a donut
 + Line : draws a line for a data serie.
-+ Rounded rectangles : used for labeling. Should be related to a text. 
++ Rounded rectangles : used for labeling. Should be related to a text.
 + TextLabel : defines text for labeling. Can be used combined with rounded rectangles to create a label.
-+ Triangle : similar to Bar, but it draws a triangle instead of a bar. 
++ Triangle : similar to Bar, but it draws a triangle instead of a bar.
 
 ### Composite Charts
 
-+ XYAxis : system with and X and Y axis. 
-+ YXYAxis : two Y Axis for the same system (one will render on the left and the other on the right of the drawing area). 
-+ LabeledDonutChart : (still in progress) will draw a donut with labels for each data element. 
-+ LabeledTriangleChart : defines a chart, similar to a bar chart, but using triangles instead of bars. Also, labels are added where the triangle points, showing the data value. 
-+ LineChart : lines drawing for many data series. 
-+ Scatterplot : chart that renders data as circles in an axis system. This chart doesn't use an axis system. 
++ XYAxis : system with and X and Y axis.
++ YXYAxis : two Y Axis for the same system (one will render on the left and the other on the right of the drawing area).
++ LabeledDonutChart : (still in progress) will draw a donut with labels for each data element.
++ LabeledTriangleChart : defines a chart, similar to a bar chart, but using triangles instead of bars. Also, labels are added where the triangle points, showing the data value.
++ LineChart : lines drawing for many data series.
++ Scatterplot : chart that renders data as circles in an axis system. This chart doesn't use an axis system.
 
 ### Basic elements for extending and mixin
 
-+ BaseChart : base for every defined chart. Contains some common functions. 
++ BaseChart : base for every defined chart. Contains some common functions.
 + SimpleDataGroup : transforms many data series so that the charts that receive the data, get only one data serie (works as a stack, taking the first element)
 + MultipleDataGroup : data manipulation for rendering multiple data series in the same chart. Will process data so that each component chart works as a SimpleDataGroup.
 + MultipleInstancesMixin : easy way to create many components of the same type for a specific chart. So, if a line chart for 5 lines wants to be defined, 5 mixins for 'Bar' will be defined, each of them working as a SimpleDataInput. If we have 5 data series, 5 'Bar' must be defined
 
 ### Utilities
 
-+ Accessor : provides a way for data series iteration. This accessor will provide the chance of drawing multiple data series in a same chart.  
++ Accessor : provides a way for data series iteration. This accessor will provide the chance of drawing multiple data series in a same chart.
 
 ### Drawing components
 
 + LinearScale : defines a linear scale, for numeric values (continuos domain).
-+ OrdinalScale : defines an ordinal scale, for discrete domain values. 
-+ ScaleFactory : used for creating available scales. 
++ OrdinalScale : defines an ordinal scale, for discrete domain values.
++ ScaleFactory : used for creating available scales.
 
 ### API
 
-+ ChartsApi : defines a way to get charts and append them to an html element. Using configuration options, a root must be defined, and a chart will be returned in order to set the data and draw. 
++ ChartsApi : defines a way to get charts and append them to an html element. Using configuration options, a root must be defined, and a chart will be returned in order to set the data and draw.
 
 ### Considerations defining a chart
 
-Each chart can define the following methods. They can be optional, however. For example, a data transform can be defined in a chart with no initialization and no layer for data binding, but other charts will extend from this one. 
+Each chart can define the following methods. They can be optional, however. For example, a data transform can be defined in a chart with no initialization and no layer for data binding, but other charts will extend from this one.
 
 #### Chart Options
 
-- **initialize** : chart initialization. Layers / Mixins used should be defined here. 
-- **transform** : used to process data before reaching the dataBind propierty of each layer in the chart. 
+- **initialize** : chart initialization. Layers / Mixins used should be defined here.
+- **transform** : used to process data before reaching the dataBind propierty of each layer in the chart.
 
 #### Layer Options
 
-- **dataBind** : the link between the data itself and the selection of svg elements. Using d3, a selection of svg elements is recovered (for example svg:rect) , and using the selection.data method, a data join is computed. This means that each data element will be associated with one element for the selection. 
+- **dataBind** : the link between the data itself and the selection of svg elements. Using d3, a selection of svg elements is recovered (for example svg:rect) , and using the selection.data method, a data join is computed. This means that each data element will be associated with one element for the selection.
 - **insert** : based on the early selection, for every new data element, something will be
   done, for instance, appending the svg element.
 - **events** : we define here every state of data handling
@@ -136,7 +133,7 @@ Each chart can define the following methods. They can be optional, however. For 
     + 'update' : old elements will be updated
     + 'exit' : elements that no longer exist should be removed
 
-Here, a the difference between chart and layer can be visualized. A chart will define layers (or use other charts with layers) that will have ways of manipulating data input, update and removal. 
+Here, a the difference between chart and layer can be visualized. A chart will define layers (or use other charts with layers) that will have ways of manipulating data input, update and removal.
 
 ### How to compose
 
@@ -144,33 +141,33 @@ Based on the parts defined, a mixin must be defined when the composed chart is i
 
 For example, the bar chart is a mix of 4 other charts : the ordinal, linear scale, the bars and the rounded rectangles. Having the data processed, its only necessary to define scales for element location.
 
-Once having individual elements defined (like Bar, Circle), it can be easily combined with an axis system to render a scatterplot. So, a new chart is defined (scatterplot) , and the initialization will get many mixins elements as needed : for example, only one mixin for circles, and another one for the whole axis system. 
+Once having individual elements defined (like Bar, Circle), it can be easily combined with an axis system to render a scatterplot. So, a new chart is defined (scatterplot) , and the initialization will get many mixins elements as needed : for example, only one mixin for circles, and another one for the whole axis system.
 
 ### Data manipulation
 
-Using the transform method, data can be accessed before reaching the drawing instance. 
+Using the transform method, data can be accessed before reaching the drawing instance.
 
 ### Advantages
 
-- Having understood the d3.chart flow, a chart is not difficult to draw. 
+- Having understood the d3.chart flow, a chart is not difficult to draw.
 
 - Possibility of reusing charts, just by drawing the new data.
 
-- Composing new charts based on already defined ones. Having the parts defined, the possibily of building new charts is real. 
+- Composing new charts based on already defined ones. Having the parts defined, the possibily of building new charts is real.
 
-- Working in separated components gives a better idea of the chart that we want to draw , and wich part must have wich responsibilities. 
+- Working in separated components gives a better idea of the chart that we want to draw , and wich part must have wich responsibilities.
 
-- Full separation of components, so that each one will have an own draw method, for the composing charts and layers. 
+- Full separation of components, so that each one will have an own draw method, for the composing charts and layers.
 
-- To achieve full separation and independece between components, each one should be in a chart with a unique layer. This way, each unique component can define an own way of transforming data, or use the one defined in the 'parent' chart. 
+- To achieve full separation and independece between components, each one should be in a chart with a unique layer. This way, each unique component can define an own way of transforming data, or use the one defined in the 'parent' chart.
 
 ### Problems
 
-- The flow, when drawing a complex chart, can be difficult to follow, since the flow template is already defined. Everything begins at a base chart, and the flow must be followed to the last component parts. The problem arises when each component part is defined in a separated chart. 
+- The flow, when drawing a complex chart, can be difficult to follow, since the flow template is already defined. Everything begins at a base chart, and the flow must be followed to the last component parts. The problem arises when each component part is defined in a separated chart.
 
 - Knowledge on d3 and svg is necessary, since d3.chart doesn't provide charts itself. Just a way to manage the handling of data states.
 
 - Some elements have already defined data changes manipulation (like the d3.axis). This means that a draw method for the axis is never called, we just define some configuration parameters that will render the axis and changing those parameters involves the redrawing. So, if the axis will be in a separated component, it must somehow be adapted to the d3.chart flow. This happens with other components too.
 
-- Something similar happens with the d3.svg.line. Each path for the line isn't computed using a data join. 
+- Something similar happens with the d3.svg.line. Each path for the line isn't computed using a data join.
 

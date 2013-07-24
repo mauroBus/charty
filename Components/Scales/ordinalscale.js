@@ -3,30 +3,42 @@ Ordinal Scale
 
 @class OrdinalScale
 @constructor
-
+@extends BaseScale
+@requires d3,
+			basescale,
+		  d3.chart
+		  
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
-  // Set up Backbone appropriately for the environment.
+  /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
-    // AMD
+    /** AMD */
     define(['d3',
+    	'basescale',
     	'd3.chart'],
-    	function(d3) {
-	      // Export global even in AMD case in case this script is loaded with others
-	      return factory(d3);
+    	function(d3, BaseScale) {
+	      /** Export global even in AMD case in case this script 
+	      is loaded with others */
+	      return factory(d3, BaseScale);
     });
   }
   else {
-    // Browser globals
-    return factory(d3);
+    /** Browser globals */
+    return factory(d3, BaseScale);
   }
-}(this, function(d3) {
+}(this, function(d3, BaseScale) {
+
 	var OrdinalScale = function(axisType){
 		this.scale = d3.scale.ordinal();
 		this.axisType = axisType;
 	}
+
+	/**
+	Inheritance from BaseScale
+	*/
+	OrdinalScale.prototype = new BaseScale(); 
 
 	/**
 	Sets the domain data for the scale
@@ -48,31 +60,9 @@ Ordinal Scale
 	@chainable
 	*/
 	OrdinalScale.prototype.setRange = function(range){
-		var r ;
 
-		if(this.axisType === 'x'){
-			r = [0,range];
-		}
-		else{
-			if(this.axisType === 'y'){
-				r = [range,0]
-			}
-			else{
-				throw new Error('No scale was defined for this ordinal scale.');
-			}
-		}
-		this.scale = this.scale.rangeRoundBands(r , .1);
+		this.scale = this.scale.rangeRoundBands(this.generateRange(range) , .1);
 		return this;
-	}
-
-	/**
-	Returns the created ordinal scale
-
-	@method
-	@return {Object} d3.scale (ordinal scale)
-	*/
-	OrdinalScale.prototype.getScale = function(){
-		return this.scale;
 	}
 
 	/**

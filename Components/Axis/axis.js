@@ -16,19 +16,20 @@ wherever is necessary.
 */
 
 (function(root, factory) {
-  // Set up Backbone appropriately for the environment.
+  /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
-    // AMD
+    /** AMD */
     define(['d3',
       'd3.chart',
       'basechart'],
       function(d3) {
-        // Export global even in AMD case in case this script is loaded with others
+        /** Export global even in AMD case in case this script 
+        is loaded with others */
         return factory(d3);
     });
   }
   else {
-    // Browser globals
+    /** Browser globals */
     return factory(d3);
   }
 }(this, function(d3) {
@@ -57,11 +58,12 @@ wherever is necessary.
       */
       this.yt = 0;
 
-      var pathBase = this.base;
-
       var axis = d3.svg.axis();
 
-      this.layer('axis',pathBase, {
+      /**
+      Layer options
+      */
+      var axisLayerOptions = {
         /**
         Data bind for axis
         Since axis requires just a scale, only one element
@@ -98,6 +100,7 @@ wherever is necessary.
           'merge' : function(){
 
               var chart = this.chart();
+              
               /**
               Renders as a grid.
               */
@@ -108,17 +111,26 @@ wherever is necessary.
               this.attr('class','axis')
                   .call(axis);
 
+              /**
+              Axis translation in x or y direction. 
+              */
               if(chart.xt !== 0 || chart.yt !== 0){
-                this.attr("transform", "translate("+chart.xt+"," + chart.yt + ")");
+                this.attr('transform', 'translate(' + chart.xt + ',' + chart.yt + ')');
               };
 
               return this;
           },
           'remove' : function(){
+            
             return this.remove();
           }
         }
-      });
+      }; 
+
+      /**
+      Axis layer creation
+      */
+      this.layer('axis',this.base.append('g'), axisLayerOptions);
     },
     /**
     Sets tick size for the axis
@@ -129,7 +141,8 @@ wherever is necessary.
     */
     tickSize : function(size){
       /**
-      Size for the ticks.
+      Size for the ticks. Necessary
+      to define a grid chart. 
 
       @property
       @type Number
@@ -193,17 +206,6 @@ wherever is necessary.
     */
     ytranslate : function(t){
       this.yt = t;
-      return this;
-    },
-    /**
-    Sets axis type. Must be 'x' or 'y'
-
-    @method
-    @param {String} type axis type
-    @chainable
-    */
-    axistype : function(type){
-      this.type = type;
       return this;
     }
   });

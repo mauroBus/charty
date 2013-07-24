@@ -11,19 +11,20 @@ Defines a basic chart to process individual data series
 */
 
 (function(root, factory) {
-  // Set up Backbone appropriately for the environment.
+  /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
-    // AMD
+    /** AMD */
     define(['d3',
       'd3.chart',
       'basechart'],
       function(d3) {
-        // Export global even in AMD case in case this script is loaded with others
+        /** Export global even in AMD case in case this script
+        is loaded with others */
         return factory(d3);
     });
   }
   else {
-    // Browser globals
+    /** Browser globals */
     return factory(d3);
   }
 }(this, function(d3) {
@@ -32,10 +33,11 @@ Defines a basic chart to process individual data series
     Returns the next element of the data collection
 
     @method
-    @param {Object} data Data accessor
+    @param {Object} data Data Accessor
     @return {Object} next element in the collection
     */
     transform : function (data) {
+
       var top = data.next();
       return top;
     }

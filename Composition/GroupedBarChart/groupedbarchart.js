@@ -7,13 +7,18 @@ another one for the data mapping.
 @class GroupedBarChart
 @extends MultipleDataGroup
 @requires d3,
-          d3.chart
+          scalesfactory,
+          d3.chart,
+          bar,
+          xyaxis,
+          multipledatagroup,
+          multipleinstancesmixin
 */
 
 (function(root, factory) {
-  // Set up Backbone appropriately for the environment.
+  /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
-    // AMD
+    /** AMD */
     define(['d3',
             'scalesfactory',
             'd3.chart',
@@ -23,12 +28,13 @@ another one for the data mapping.
             'multipleinstancesmixin',
            ],
            function(d3, ScaleFactory) {
-      // Export global even in AMD case in case this script is loaded with others
+      /** Export global even in AMD case in case this script 
+      is loaded with others */
       return factory(d3, ScaleFactory);
     });
   }
   else {
-    // Browser globals
+    /** Browser globals */
     return factory(d3, ScaleFactory);
   }
 }(this, function(d3, ScaleFactory) {

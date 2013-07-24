@@ -12,19 +12,20 @@ Line drawing.
 */
 
 (function(root, factory) {
-  // Set up Backbone appropriately for the environment.
+  /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
-    // AMD
+    /** AMD */
     define(['d3',
       'd3.chart',
       'simpledatagroup'],
       function(d3) {
-        // Export global even in AMD case in case this script is loaded with others
+        /** Export global even in AMD case in case this script 
+        is loaded with others */
         return factory(d3);
     });
   }
   else {
-    // Browser globals
+    /** Browser globals */
     return factory(d3);
   }
 }(this, function(d3) {
@@ -36,15 +37,16 @@ Line drawing.
     */
     initialize : function(){
 
+      /**
+      c : default color line
+      */
       var defaults = {
         c : 'line-default'
       };
 
       var line = d3.svg.line();
 
-      var pathBase = this.base;
-
-      this.layer('lineslayer', pathBase, {
+      var options = {
         /**
         Data bind for a line serie.
         Since a line is drawed using d3.line
@@ -77,7 +79,14 @@ Line drawing.
           return this.selectAll('path').data([0]);
 
         },
+        /**
+        Appends a svg:path
+
+        @method
+        @chainable
+        */
         insert : function(){
+
           return this.append('path');
         },
         events : {
@@ -98,10 +107,16 @@ Line drawing.
                        .attr('d',line);
           },
           'exit' : function(){
+
             return this.remove();
           }
         }
-      });
+      }
+
+      /**
+      Layer creation
+      */
+      this.layer('lineslayer', this.base.append('g'), options);
     }
   });
  })

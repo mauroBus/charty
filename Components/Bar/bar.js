@@ -12,19 +12,20 @@ Bar drawer. Takes only one data series as input.
 */
 
 (function(root, factory) {
-  // Set up Backbone appropriately for the environment.
+  /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
-    // AMD
+    /** AMD */
     define(['d3',
       'd3.chart',
       'simpledatagroup'],
       function(d3) {
-        // Export global even in AMD case in case this script is loaded with others
+        /** Export global even in AMD case in case this script 
+        is loaded with others*/
         return factory(d3);
     });
   }
   else {
-    // Browser globals
+    /** Browser globals */
     return factory(d3);
   }
 }(this, function(d3) {
@@ -36,8 +37,9 @@ Bar drawer. Takes only one data series as input.
     */
     initialize : function(){
 
-      var pathBase = this.base;
-
+      /**
+      Sets only bar color as default.  
+      */
       var defaults = {
         c : 'bar-default'
       };
@@ -52,9 +54,10 @@ Bar drawer. Takes only one data series as input.
         @param {Object} d example = {
                                        color : 'red',
                                        data = [
-                                        {x : 'Jan', y : 200, c : 'red'}
+                                        {x : 'Jan', y : 200, c : 'blue'}
                                        ]
                                     }
+        @chainable
         */
         dataBind : function(d){
 
@@ -68,54 +71,69 @@ Bar drawer. Takes only one data series as input.
 
           return this.selectAll('rect').data(d.data);
         },
+        /**
+        Inserts a svg:rect element.
+
+        @method
+        @chainable
+        */
         insert : function(){
           return this.append('rect');
         },
         events : {
           'enter' : function(){
 
-                var chart = this.chart();
+            var chart = this.chart();
 
-                this.attr("class", function(d){
-                      return (d.c || chart.c || defaults.c);
-                    })
-                    .attr("x", function(d) { return chart.xscale.map(d.x, chart.factor)} )
-                    .attr("width", chart.xscale.band(chart.factor))
-                    .attr("y", function(d) {
-                      return Math.min(chart.yscale.map(0),chart.yscale.map(d.y, chart.factor));
-                    })
-                    .attr("height", function(d) {
-                      return Math.abs(chart.yscale.band(chart.h,d.y)-(chart.h-chart.yscale.map(0)))}
-                    );
-                return this;
+            /**
+            chart.factor : value used to define bar's width. It can
+            be useful to reduce the width, in case many data series
+            are draw using bars. 
+            */
+
+            this.attr('class', function(d){
+                  return (d.c || chart.c || defaults.c);
+                })
+                .attr('x', function(d) { return chart.xscale.map(d.x, chart.factor)} )
+                .attr('width', chart.xscale.band(chart.factor))
+                .attr('y', function(d) {
+                  return Math.min(chart.yscale.map(0),chart.yscale.map(d.y, chart.factor));
+                })
+                .attr('height', function(d) {
+                  return Math.abs(chart.yscale.band(chart.h,d.y)-(chart.h-chart.yscale.map(0)))}
+                );
+
+            return this;
           },
           'update' : function(){
 
-                var chart = this.chart();
+            var chart = this.chart();
 
-                this.attr("class", function(d){
-                     return (d.c || chart.c || defaults.c);
-                    })
-                    .attr("x", function(d) { return chart.xscale.map(d.x, chart.factor)} )
-                    .attr("width", chart.xscale.band(chart.factor))
-                    .attr("y", function(d) {
-                      return Math.min(chart.yscale.map(0),chart.yscale.map(d.y, chart.factor))
-                    })
-                    .attr("height", function(d) {
-                      return Math.abs(chart.yscale.band(chart.h,d.y)-(chart.h-chart.yscale.map(0)))}
-                      );
-                return this;
+            this.attr('class', function(d){
+                  return (d.c || chart.c || defaults.c);
+                })
+                .attr('x', function(d) { return chart.xscale.map(d.x, chart.factor)} )
+                .attr('width', chart.xscale.band(chart.factor))
+                .attr('y', function(d) {
+                  return Math.min(chart.yscale.map(0),chart.yscale.map(d.y, chart.factor));
+                })
+                .attr('height', function(d) {
+                  return Math.abs(chart.yscale.band(chart.h,d.y)-(chart.h-chart.yscale.map(0)))}
+                );
+                
+            return this;
           },
           'exit' : function(){
+            
             return this.remove();
           }
         }
       };
 
       /**
-      Default layer.
+      Layer creation
       */
-      this.layer('barlayer', pathBase ,options);
+      this.layer('barlayer', this.base ,options);
 
     }
   });

@@ -13,15 +13,16 @@ Rounded rectangle drawer.
 */
 
 (function(root, factory) {
-  // Set up Backbone appropriately for the environment.
+  /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
-    // AMD
+    /** AMD */
     define(['d3',
       'underscore',
       'd3.chart',
       'simpledatagroup'],
       function(d3, _) {
-        // Export global even in AMD case in case this script is loaded with others
+        /** Export global even in AMD case in case this script 
+        is loaded with others */
         return factory(d3, _);
     });
   }
@@ -40,8 +41,12 @@ Rounded rectangle drawer.
 
       /**
       Defaults for rectangle
-      */
 
+      rh : rectangle height
+      rw : rectangle width
+      rc : rectangle color
+      rx, ry : value for rounded corners
+      */
       var defaults = {
         rh : 20,
         rw : 20,
@@ -52,11 +57,12 @@ Rounded rectangle drawer.
 
       var pathBase = this.base;
 
-      this.layer('roundedrects', pathBase,{
+      var options = {
         /**
         Data bind for Rounded Rectangle.
         Data defines a rectangle height (rh), width (rw),
-        color (rc).
+        color (rc), rx, ry. If not defined, defauls are
+        used. 
 
         @method
         @param {Object} d example = {
@@ -65,6 +71,7 @@ Rounded rectangle drawer.
                                       rc : 'red'
                                       data : [...]
                                     }
+        @chainable
         */
         dataBind : function(d){
 
@@ -74,9 +81,17 @@ Rounded rectangle drawer.
           chart.rh = d.rh;
           chart.rw = d.rw;
           chart.rc = d.rc;
+          chart.rx = d.rx;
+          chart.ry = d.ry; 
 
           return this.selectAll('rect').data(d.data);
         },
+        /**
+        Appends a svg:rect element.
+
+        @method
+        @chainable
+        */
         insert : function(){
           return this.append('rect');
         },
@@ -147,7 +162,12 @@ Rounded rectangle drawer.
             return this.remove();
           }
         }
-      });
+      };
+
+      /**
+      Layer creation
+      */
+      this.layer('roundedrects', pathBase, options);
     }
   });
  })
