@@ -1,78 +1,8 @@
 /**
-Main Application
-
-Testing chart drawing and data update
+Execution start
 */
-
-require.config({
-  baseUrl : '..',
-  paths : {
-
-    /** Libraries */
-
-    /*'d3'                      : 'Libs/d3.v3',*/
-    'd3.chart'                : 'Libs/d3.chart',
-    'jquery'                  : 'Libs/jquery-1.10.2',
-    'underscore'              : 'Libs/underscore',
-
-    /** Api */
-
-    'chartsapi'               : 'Api/chartsapi',
-
-    /** Components */
-
-    'axis'                    : 'Components/Axis/axis',
-    'bar'                     : 'Components/Bar/bar',
-    'basescale'               : 'Components/Scales/basescale',
-    'basechart'               : 'Components/Base/basechart',
-    'linearscale'             : 'Components/Scales/linearscale',
-    'ordinalscale'            : 'Components/Scales/ordinalscale',
-    'scalesfactory'           : 'Components/Scales/scalesfactory',
-    'triangle'                : 'Components/Triangle/triangle',
-    'textlabel'               : 'Components/TextLabel/textlabel',
-    'roundedrectangle'        : 'Components/RoundedRectangle/roundedrectangle',
-    'line'                    : 'Components/Line/line',
-    'circle'                  : 'Components/Circle/circle',
-    'donut'                   : 'Components/Donut/donut',
-
-    /** Composition */
-
-    'xyaxis'                  : 'Composition/Axis/xyaxis',
-    'yxyaxis'                 : 'Composition/Axis/yxyaxis',
-    'barchart'                : 'Composition/BarChart/barchart',
-    'multipleinstancesmixin'  : 'Composition/multipleinstancesmixin',
-    'multipledatagroup'       : 'Composition/multipledatagroup',
-    'simpledatagroup'         : 'Composition/simpledatagroup',
-    'labeledtrianglechart'    : 'Composition/LabeledTriangleChart/labeledtrianglechart',
-    'linechart'               : 'Composition/LineChart/linechart',
-    'scatterplot'             : 'Composition/Scatterplot/scatterplot',
-    'groupedbarchart'         : 'Composition/GroupedBarChart/groupedbarchart',
-    'donutwithinnertext'      : 'Composition/DonutWithInnerText/donutwithinnertext',
-    'labeleddonutchart'       : 'Composition/LabeledDonutChart/labeleddonutchart',
-    'linechartcircles'        : 'Composition/LineChart/linechartcircles',
-
-    /** Utils */
-    'accessor'                : 'Utils/Accessor/accessor'
-
-  },
-  shim:{
-    'underscore' : {
-      exports : '_'
-    },
-    /*'d3' : {
-      exports :'d3'
-    },*/
-    'd3.chart' : {
-     /* deps : ['d3'],*/
-      exports : 'd3'
-    }
-  }
-});
-
 requirejs(['chartsapi','accessor','underscore','jquery'],
-function(ChartsApi, Accessor,_,$){
-
-  'use strict';
+function (ChartsApi, Accessor, _ , $){
 
   /**
   Data rendering examples.
@@ -322,20 +252,20 @@ function(ChartsApi, Accessor,_,$){
     accessor2.setData(datagroup5);
     accessor3.setData(datagroup6);
 
-    //chart1.draw(accessor1);
-    //chart2.draw(accessor2);
+    chart1.draw(accessor1);
+    chart2.draw(accessor2);
 
     data1.color = 'redline';
     data2.color = 'blueline';
 
-    //chart3.draw(accessor1);
+    chart3.draw(accessor1);
 
     data1.color = 'gray';
     data1.r = 12;
     data2.color = 'red';
     data2.r = 8;
 
-    //chart4.draw(accessor1);
+    chart4.draw(accessor1);
 
     var data9 = {
       ir :  -100,
@@ -350,7 +280,7 @@ function(ChartsApi, Accessor,_,$){
         datagroup7.push(data9);
 
     var accessor7 = new Accessor(datagroup7);
-    //chart6.draw(accessor7);
+    chart6.draw(accessor7);
 
   },3000);
 });

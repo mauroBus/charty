@@ -27,21 +27,21 @@ and it will append a specific chart to it.
   /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define(['d3',
-        'scalesfactory',
+    define([/*'d3',*/
         'd3.chart',
+        'scalesfactory',
         'barchart',
         'labeledtrianglechart',
         'linechart',
         'scatterplot',
         'donut',
-        'groupedbarchart',
+        /*'groupedbarchart',*/
         'donutwithinnertext',
         'labeleddonutchart',
         'linechartcircles'
       ],
       function(d3, ScaleFactory) {
-        /** Export global even in AMD case in case this script 
+        /** Export global even in AMD case in case this script
         is loaded with others */
         return factory(d3, ScaleFactory);
       });
@@ -101,7 +101,7 @@ and it will append a specific chart to it.
       .attr('height', height)
       .append('g')
       .attr('transform', 'translate(' + marginValues.left + ',' + marginValues.top + ')');
-    
+
     /**
     Chart dimension values are porcentaje from svg adapted value.
     */
@@ -129,11 +129,11 @@ and it will append a specific chart to it.
     Some charts can use direct mapping instead of scaling.
     */
     if (options.xAxis){
-      chart = chart.setXScale(this.scaleFactory.scale(options.xAxis,'x')); 
-    }; 
+      chart = chart.setXScale(this.scaleFactory.scale(options.xAxis,'x'));
+    };
     if (options.yAxis){
       chart = chart.setYScale(this.scaleFactory.scale(options.yAxis,'y'));
-    }; 
+    };
 
     return chart;
   };
@@ -170,5 +170,5 @@ and it will append a specific chart to it.
   }
 
   return ChartsApi;
-  
+
 }));

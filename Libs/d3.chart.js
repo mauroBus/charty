@@ -187,7 +187,7 @@
 	var Surrogate = function(ctor) { this.constructor = ctor; };
 	var variadicNew = function(Ctor, args) {
 		var inst;
-		Surrogate.prototype = Ctor.prototype;
+		Surrogate.prototype = Ctor.prototype || {};
 		inst = new Surrogate(Ctor);
 		Ctor.apply(inst, args);
 		return inst;
@@ -269,8 +269,10 @@
 	};
 
 	Chart.prototype.mixin = function(chartName, selection) {
+
 		var args = Array.prototype.slice.call(arguments, 2);
 		args.unshift(selection);
+
 		var ctor = Chart[chartName];
 		var chart = variadicNew(ctor, args);
 
@@ -285,11 +287,14 @@
 		data = this.transform(data);
 
 		for (layerName in this._layers) {
+			// console.log(layerName);
 			this._layers[layerName].draw(data);
 		}
 
 		for (mixinName in this._mixins) {
-			this._mixins[mixinName].draw(data);
+			if (this._mixins.hasOwnProperty(mixinName)) {
+				this._mixins[mixinName].draw(data);
+			}
 		}
 	};
 

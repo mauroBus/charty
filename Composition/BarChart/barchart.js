@@ -19,14 +19,15 @@ N data series
   /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define(['d3',
+    define([/*'d3',*/
+      'd3.chart',
     	'bar',
     	'multipledatagroup',
     	'yxyaxis',
     	'multipleinstancesmixin',
-    	'd3.chart'],
+    	/*'d3.chart'*/],
     	function(d3) {
-	      /** Export global even in AMD case in case this script 
+	      /** Export global even in AMD case in case this script
 	      is loaded with others */
 	      return factory(d3);
     });
@@ -36,6 +37,7 @@ N data series
     return factory(d3);
   }
 }(this, function(d3) {
+
 	d3.chart('MultipleDataGroup').extend('BarChart',{
 		/**
 		BarChart initialization.

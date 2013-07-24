@@ -1,5 +1,5 @@
 /**
-Line chart combined with circles. 
+Line chart combined with circles.
 
 @class LineChartCircles
 @constructor
@@ -17,7 +17,7 @@ Line chart combined with circles.
   /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define(['d3',
+    define([/*'d3',*/
     	'd3.chart',
     	'multipledatagroup',
     	'linechart',
@@ -52,7 +52,7 @@ Line chart combined with circles.
 			var lineChart = this.mixin('LineChart', this.base.append('g'), options);
 			var circles = this.mixin('MultipleInstancesMixin', this.base.append('g'), options);
 
-			this.componentsMixins = []; 
+			this.componentsMixins = [];
 			this.componentsMixins.push(lineChart);
 			this.componentsMixins.push(circles);
 		}

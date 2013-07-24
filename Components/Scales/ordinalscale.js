@@ -7,7 +7,7 @@ Ordinal Scale
 @requires d3,
 			basescale,
 		  d3.chart
-		  
+
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
@@ -15,11 +15,13 @@ Ordinal Scale
   /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define(['d3',
+    define([/*'d3',*/
+    	'd3.chart',
     	'basescale',
-    	'd3.chart'],
+    	/*'d3.chart'*/
+    	],
     	function(d3, BaseScale) {
-	      /** Export global even in AMD case in case this script 
+	      /** Export global even in AMD case in case this script
 	      is loaded with others */
 	      return factory(d3, BaseScale);
     });
@@ -38,7 +40,7 @@ Ordinal Scale
 	/**
 	Inheritance from BaseScale
 	*/
-	OrdinalScale.prototype = new BaseScale(); 
+	OrdinalScale.prototype = new BaseScale();
 
 	/**
 	Sets the domain data for the scale

@@ -15,11 +15,11 @@ Line drawing.
   /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define(['d3',
+    define([/*'d3',*/
       'd3.chart',
       'simpledatagroup'],
       function(d3) {
-        /** Export global even in AMD case in case this script 
+        /** Export global even in AMD case in case this script
         is loaded with others */
         return factory(d3);
     });
@@ -65,7 +65,6 @@ Line drawing.
         dataBind : function(d){
 
           var chart = this.chart();
-          chart.checkScales('Line');
 
           line.x(function(d) {
             return chart.xscale.map(d.x, 0);

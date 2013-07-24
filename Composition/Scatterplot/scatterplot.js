@@ -18,14 +18,14 @@ Scatterplot chart
   /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define(['d3',
+    define([/*'d3',*/
     	'd3.chart',
     	'circle',
     	'multipledatagroup',
     	'yxyaxis',
     	'multipleinstancesmixin'],
     	function(d3) {
-	      /** Export global even in AMD case in case this script 
+	      /** Export global even in AMD case in case this script
         is loaded with others */
 	      return factory(d3);
     });

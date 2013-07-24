@@ -1,5 +1,5 @@
 /**
-Donut drawer. 
+Donut drawer.
 
 @class Donut
 @extends SimpleDataGroup
@@ -16,13 +16,14 @@ Donut drawer.
   /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define(['d3',
-        'underscore',
+    define([/*'d3',*/
         'd3.chart',
+        'underscore',
+        /*'d3.chart',*/
         'simpledatagroup'
       ],
       function(d3, _) {
-        /** Export global even in AMD case in case this script 
+        /** Export global even in AMD case in case this script
         is loaded with others */
         return factory(d3, _);
       });
@@ -49,7 +50,7 @@ Donut drawer.
       };
 
       /**
-      d3 layout for pie data mapping. 
+      d3 layout for pie data mapping.
       */
       var pieLayout = d3.layout
         .pie()
