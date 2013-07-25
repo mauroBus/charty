@@ -111,8 +111,8 @@ function(ChartsApi, Accessor,_,$){
     innerTextXCorrection : 0.28,
     innerTextYCorrection : 0.65,
     r : 5,
-    ir :  -100,
-    or : -70,
+    ir :  50,
+    or :  90,
     rh: 30,
     rw: 160,
     rc : 'lightgray',
@@ -128,8 +128,8 @@ function(ChartsApi, Accessor,_,$){
   Data test for donut chart with inner text
   */
   var data4 = {
-    ir :  -100,
-    or : -70,
+    ir :  90,
+    or :  50,
     data : [
       {x : 25 , c: 'red'},
       {x : 175, c: 'gray'}
@@ -239,7 +239,7 @@ function(ChartsApi, Accessor,_,$){
   var chart1 = myApi.chart(options1);
       chart1.draw(accessor1);
 
-  var chart2 = myApi.chart(options2);
+ /* var chart2 = myApi.chart(options2);
       chart2.draw(accessor2);
 
       data1.color = 'redline';
@@ -264,7 +264,7 @@ function(ChartsApi, Accessor,_,$){
       data2.color = 'blueline';
 
   var chart7 = myApi.chart(options7);
-      chart7.draw(accessor1);
+      chart7.draw(accessor1);*/
 
   /**
   Charts update here.
@@ -296,8 +296,8 @@ function(ChartsApi, Accessor,_,$){
     };
 
     data3 = {
-      ir :  -100,
-      or : -70,
+      ir :  50,
+      or :  90,
       data : [
         {x : 200, c : 'blue'},
         {x : 300, c : 'red'},
@@ -322,7 +322,7 @@ function(ChartsApi, Accessor,_,$){
     accessor2.setData(datagroup5);
     accessor3.setData(datagroup6);
 
-    //chart1.draw(accessor1);
+    chart1.draw(accessor1);
     //chart2.draw(accessor2);
 
     data1.color = 'redline';
@@ -338,8 +338,8 @@ function(ChartsApi, Accessor,_,$){
     //chart4.draw(accessor1);
 
     var data9 = {
-      ir :  -100,
-      or : -70,
+      ir :  50,
+      or :  90,
       data : [
         {x : 50 , c: 'blue'},
         {x : 155, c: 'gray'}

@@ -287,7 +287,6 @@
 		data = this.transform(data);
 
 		for (layerName in this._layers) {
-			// console.log(layerName);
 			this._layers[layerName].draw(data);
 		}
 

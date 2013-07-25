@@ -45,8 +45,8 @@ Donut drawer.
       or : outter radius
       */
       var defaults = {
-        ir: -150,
-        or: -100
+        ir: 90,
+        or: 50
       };
 
       /**
@@ -90,8 +90,12 @@ Donut drawer.
             throw new Error('Radius for donut chart must be numerical values');
           }
 
-          arcGen = arcGen.innerRadius(chart.ir || defaults.ir)
-                         .outerRadius(chart.or || defaults.or);
+          var radius = Math.min(chart.w, chart.h) / 2,
+              ir = data.ir || defaults.ir,
+              or = data.or || defaults.or;
+
+          arcGen = arcGen.innerRadius(radius - ir)
+                         .outerRadius(radius - or);
 
           return this.selectAll('path').data(pieLayout(data.data));
         },

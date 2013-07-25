@@ -86,7 +86,7 @@ wherever is necessary.
           axis = axis.scale(chart.scale.getScale())
                      .orient(chart.o);
 
-          return this.selectAll('g').data([0]);
+          return this.selectAll('g').data([true]);
         },
         /**
         Insert for axis. Just inserts one svg:g
