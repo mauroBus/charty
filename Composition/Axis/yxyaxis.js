@@ -18,7 +18,7 @@ One X Axis (bottom)
   /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define([/*'d3',*/
+    define(['d3',
       'd3.chart',
       'basechart',
       'axis',

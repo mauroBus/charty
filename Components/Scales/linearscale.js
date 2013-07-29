@@ -16,9 +16,9 @@ Linear scale for linear axis
   if (typeof define === 'function' && define.amd) {
     /** AMD */
     define([/*'d3',*/
-    	'd3.chart',
+    	'd3',
     	'basescale',
-    	/*'d3.chart'*/
+    	'd3.chart'
     	],
     	function(d3, BaseScale) {
 	      /** Export global even in AMD case in case this script

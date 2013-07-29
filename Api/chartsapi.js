@@ -27,8 +27,7 @@ and it will append a specific chart to it.
   /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define([/*'d3',*/
-        'd3.chart',
+    define(['d3',
         'scalesfactory',
         'barchart',
         'labeledtrianglechart',
@@ -38,7 +37,8 @@ and it will append a specific chart to it.
         /*'groupedbarchart',*/
         'donutwithinnertext',
         'labeleddonutchart',
-        'linechartcircles'
+        'linechartcircles',
+        'd3.chart'
       ],
       function(d3, ScaleFactory) {
         /** Export global even in AMD case in case this script

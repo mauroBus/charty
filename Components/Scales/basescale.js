@@ -10,7 +10,7 @@ for inheritance.
   /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define([/*'d3',*/
+    define(['d3',
       'd3.chart'],
       function(d3) {
         /** Export global even in AMD case in case this script

@@ -30,19 +30,17 @@
     <div id='chart7' class='test'>
     </div>
 
-    <div id="objectives">
+    <!--div id="objectives">
         <a href="#agg">Agg</a>
         <a href="#bal">Bal</a>
         <a href="#mod">Mod</a>
         <a href="#inc">Inc</a>
     </div>
-    <div id="d3portfolio"></div>
+    <div id="d3portfolio"></div-->
 
-    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="../Libs/getComputedStyle.js"></script>
-    <script src="../Libs/r2d3/r2d3.js" charset="utf-8"></script>
 
-    <style>
+    <!--style>
 
         body {
           font: 10px sans-serif;
@@ -72,27 +70,23 @@
           fill: #fff;
         }
 
-    </style>
+    </style-->
 
     <script>
 
-    /**
-    d3.chart needs bind function and it may not be defined
-    in ie8
-    */
     if(!function(){}.bind){
-      Function.prototype.bind = function(){
-        var me = this
-        , shift = [].shift
-        , he = shift.apply(arguments)
-        , ar = arguments
-        return function(){
-          return me.apply(he, ar);
-        }
-      }
-    }
+        Function.prototype.bind = function(){
+          var me = this
+          , shift = [].shift
+          , he = shift.apply(arguments)
+          , ar = arguments
+          return function(){
+            return me.apply(he, ar);
+          };
+        };
+      };
 
-    var agg = { label: 'Aggressive', pct: [30, 10, 6, 30, 14, 10] },
+    /*var agg = { label: 'Aggressive', pct: [30, 10, 6, 30, 14, 10] },
         bal = { label: 'Balanced',   pct: [24,  7, 2, 18, 13, 36] },
         mod = { label: 'Moderate',   pct: [12,  4, 2, 10, 11, 61] },
         inc = { label: 'Income',     pct: [ 0,  0, 0,  0,  0,100] },
@@ -176,12 +170,12 @@
             .style("fill-opacity", function(d) {return d.value==0 ? 1e-6 : 1;});
 
         pieLabel.text(data.label);
-    }
+    }*/
 
     // click handler
-    $("#objectives a").click(function() {
+    /*$("#objectives a").click(function() {
         updateChart(this.href.slice(this.href.indexOf('#') + 1));
-    });
+    });*/
 
     </script>
 

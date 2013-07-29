@@ -17,10 +17,10 @@ to provide an easy way to switching scales in a defined chart
   if (typeof define === 'function' && define.amd) {
     /** AMD */
     define([/*'d3',*/
-      'd3.chart',
+      'd3',
     	'ordinalscale',
     	'linearscale',
-    	/*'d3.chart'*/
+    	'd3.chart'
       ],
     	function(d3, OrdinalScale, LinearScale) {
 	      /** Export global even in AMD case in case this script

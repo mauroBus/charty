@@ -15,7 +15,7 @@ Bar drawer. Takes only one data series as input.
   /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define([/*'d3',*/
+    define(['d3',
       'd3.chart',
       'simpledatagroup'],
       function(d3) {

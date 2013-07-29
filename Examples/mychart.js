@@ -52,16 +52,26 @@ require.config({
     'linechartcircles'        : 'Composition/LineChart/linechartcircles',
 
     /** Utils */
-    'accessor'                : 'Utils/Accessor/accessor'
+    'accessor'                : 'Utils/Accessor/accessor',
+
+    /** Test */
+
+    'computedStyle'           : 'Libs/getComputedStyle',
+    'd3'                      : 'Libs/r2d3/r2d3',
+    'bind'                    : 'Libs/bindFunction'
+
 
   },
   shim:{
     'underscore' : {
       exports : '_'
     },
-    /*'d3' : {
-      exports :'d3'
+    /*'computedStyle' : {
+      exports : 'getComputedStyle'
     },*/
+    'd3' : {
+      exports :'d3'
+    },
     'd3.chart' : {
      /* deps : ['d3'],*/
       exports : 'd3'
@@ -208,7 +218,7 @@ function(ChartsApi, Accessor,_,$){
     chartName : 'LabeledDonutChart',
     instances : 1,
     root : '#chart5',
-    imgUrl : 'http://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/280px-PNG_transparency_demonstration_1.png',
+    /*imgUrl : 'http://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/280px-PNG_transparency_demonstration_1.png',*/
     marginlfactor : 2,
     margintfactor : 4.2
   };
@@ -239,7 +249,7 @@ function(ChartsApi, Accessor,_,$){
   var chart1 = myApi.chart(options1);
       chart1.draw(accessor1);
 
- /* var chart2 = myApi.chart(options2);
+  var chart2 = myApi.chart(options2);
       chart2.draw(accessor2);
 
       data1.color = 'redline';
@@ -264,7 +274,7 @@ function(ChartsApi, Accessor,_,$){
       data2.color = 'blueline';
 
   var chart7 = myApi.chart(options7);
-      chart7.draw(accessor1);*/
+      chart7.draw(accessor1);
 
   /**
   Charts update here.
@@ -323,19 +333,19 @@ function(ChartsApi, Accessor,_,$){
     accessor3.setData(datagroup6);
 
     chart1.draw(accessor1);
-    //chart2.draw(accessor2);
+    chart2.draw(accessor2);
 
     data1.color = 'redline';
     data2.color = 'blueline';
 
-    //chart3.draw(accessor1);
+    chart3.draw(accessor1);
 
     data1.color = 'gray';
     data1.r = 12;
     data2.color = 'red';
     data2.r = 8;
 
-    //chart4.draw(accessor1);
+    chart4.draw(accessor1);
 
     var data9 = {
       ir :  50,
@@ -350,7 +360,7 @@ function(ChartsApi, Accessor,_,$){
         datagroup7.push(data9);
 
     var accessor7 = new Accessor(datagroup7);
-    //chart6.draw(accessor7);
+    chart6.draw(accessor7);
 
   },3000);
 });

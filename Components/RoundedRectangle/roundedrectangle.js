@@ -16,10 +16,9 @@ Rounded rectangle drawer.
   /** Set up Backbone appropriately for the environment. */
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define([/*'d3',*/
-      'd3.chart',
+    define(['d3',
       'underscore',
-      /*'d3.chart',*/
+      'd3.chart',
       'simpledatagroup'],
       function(d3, _) {
         /** Export global even in AMD case in case this script
