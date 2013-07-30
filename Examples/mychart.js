@@ -2,6 +2,8 @@
 Main Application
 
 Testing chart drawing and data update
+
+@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 require.config({
@@ -10,10 +12,12 @@ require.config({
 
     /** Libraries */
 
-    /*'d3'                      : 'Libs/d3.v3',*/
-    'd3.chart'                : 'Libs/d3.chart',
-    'jquery'                  : 'Libs/jquery-1.10.2',
-    'underscore'              : 'Libs/underscore',
+    'd3'                      : 'Vendor/d3/d3',
+    'r2d3'                    : 'Vendor/r2d3/r2d3',
+    'd3.chart'                : 'Vendor/d3.chart/d3.chart',
+    'underscore'              : 'Vendor/underscore/underscore',
+    'feature'                 : 'Vendor/feature/feature',
+    'implementations'         : 'Examples/dynamic',
 
     /** Api */
 
@@ -54,33 +58,27 @@ require.config({
     /** Utils */
     'accessor'                : 'Utils/Accessor/accessor',
 
-    /** Test */
-
-    'computedStyle'           : 'Libs/getComputedStyle',
-    'd3'                      : 'Libs/r2d3/r2d3',
-    'bind'                    : 'Libs/bindFunction'
-
 
   },
   shim:{
     'underscore' : {
       exports : '_'
     },
-    /*'computedStyle' : {
-      exports : 'getComputedStyle'
-    },*/
+    'r2d3' : {
+      exports : 'd3'
+    },
     'd3' : {
       exports :'d3'
     },
     'd3.chart' : {
-     /* deps : ['d3'],*/
+      deps : ['feature!d3impl'],
       exports : 'd3'
     }
   }
 });
 
-requirejs(['chartsapi','accessor','underscore','jquery'],
-function(ChartsApi, Accessor,_,$){
+requirejs(['chartsapi','accessor'],
+function(ChartsApi, Accessor){
 
   'use strict';
 

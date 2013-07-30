@@ -13,14 +13,13 @@ to provide an easy way to switching scales in a defined chart
 */
 
 (function(root, factory) {
-  /** Set up Backbone appropriately for the environment. */
+  /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define([/*'d3',*/
-      'd3',
+    define([
+      'd3.chart',
     	'ordinalscale',
     	'linearscale',
-    	'd3.chart'
       ],
     	function(d3, OrdinalScale, LinearScale) {
 	      /** Export global even in AMD case in case this script

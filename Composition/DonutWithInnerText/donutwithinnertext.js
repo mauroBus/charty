@@ -20,10 +20,10 @@ doesn't depend on the data value.
 */
 
 (function(root, factory) {
-  /** Set up Backbone appropriately for the environment. */
+  /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define(['d3',
+    define([
             'd3.chart',
             'donut'
             ], function(d3) {

@@ -12,13 +12,12 @@ Linear scale for linear axis
 */
 
 (function(root, factory) {
-  /** Set up Backbone appropriately for the environment. */
+  /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define([/*'d3',*/
-    	'd3',
-    	'basescale',
-    	'd3.chart'
+    define([
+    	'd3.chart',
+    	'basescale'
     	],
     	function(d3, BaseScale) {
 	      /** Export global even in AMD case in case this script

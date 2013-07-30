@@ -13,12 +13,12 @@ Donut drawer.
 */
 
 (function(root, factory) {
-  /** Set up Backbone appropriately for the environment. */
+  /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define(['d3',
-        'underscore',
+    define([
         'd3.chart',
+        'underscore',
         'simpledatagroup'
       ],
       function(d3, _) {
