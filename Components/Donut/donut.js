@@ -72,6 +72,8 @@ Donut drawer.
         @param {Object} data example = {
                                           ir : -150,
                                           or : -100,
+                                          xPosition : 100,
+                                          yPosition : 100,
                                           data : [
                                             {x : 200, c: 'red' }
                                             {x : 500, c: 'blue'}
@@ -85,10 +87,15 @@ Donut drawer.
           chart.ir = data.ir;
           chart.or = data.or;
 
+          /** By default, donut will be centered in svg */
+          chart.xPosition = (data.xPosition || (chart.w/2));
+          chart.yPosition = (data.yPosition || (chart.h/2));
+
           if (!_.isNumber(chart.ir) || !_.isNumber(chart.or)) {
             throw new Error('Radius for donut chart must be numerical values');
           }
 
+          /** Radius calculation */
           var radius = Math.min(chart.w, chart.h) / 2,
               ir = data.ir || defaults.ir,
               or = data.or || defaults.or;
@@ -111,7 +118,7 @@ Donut drawer.
 
             var chart = this.chart();
 
-            return this.attr('transform', 'translate(' + (chart.w / 2) + ',' + (chart.h / 2) + ')')
+            return this.attr('transform', 'translate(' + (chart.xPosition) + ',' + (chart.yPosition) + ')')
               .attr('fill', function(d) {
                 return d.data.c;
               })

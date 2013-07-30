@@ -120,6 +120,8 @@ function(ChartsApi, Accessor,_,$){
     outterTextYCorrection : 0.65,
     innerTextXCorrection : 0.28,
     innerTextYCorrection : 0.65,
+    /*xPosition : 100,
+    yPosition : 100,*/
     r : 5,
     ir :  50,
     or :  90,
@@ -332,7 +334,7 @@ function(ChartsApi, Accessor,_,$){
     accessor2.setData(datagroup5);
     accessor3.setData(datagroup6);
 
-    chart1.draw(accessor1);
+    /*chart1.draw(accessor1);
     chart2.draw(accessor2);
 
     data1.color = 'redline';
@@ -360,7 +362,7 @@ function(ChartsApi, Accessor,_,$){
         datagroup7.push(data9);
 
     var accessor7 = new Accessor(datagroup7);
-    chart6.draw(accessor7);
+    chart6.draw(accessor7);*/
 
   },3000);
 });
