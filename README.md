@@ -1,4 +1,3 @@
-
 # Chart library
 
 [Demo](index.html)
@@ -6,13 +5,36 @@
 - [D3](http://d3js.org/)
 - [D3.Chart](https://github.com/misoproject/d3.chart/)
 - [YUI Comments Standard](http://yui.github.io/yuidoc/syntax/index.html)
+- [R2D3](https://github.com/mhemesath/r2d3)
+- [Raphäel](https://github.com/DmitryBaranovskiy/raphael)
+- [IE8 polyfills](https://github.com/jonathantneal/Polyfills-for-IE8)
+- [AMD feature](https://github.com/jensarps/AMD-feature)
+- [bower](https://github.com/bower/bower)
+- [bind function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind#Browser_compatibility)
+- requirejs, jquery, underscore
+
+## Browser Support
+
+- IE8
+  + Via r2d3 : Raphäel for SVG support. Includes polyfills for ECMA5 support. Also, might require "getComputedStyle", wich is also not included. 
+	+ d3.chart : requires "bind" function, wich is not added by r2d3.
+- Chrome, Firefox, Safari, above IE8
+	+ Via d3
+- Below IE8
+	+ No support added. 
+
+Important : r2d3 is used as a library, not polyfills to add d3 support, so conditional loading was added, via AMD feature. In case of IE8, r2d3 is used (and some polyfills wich r2d3 doesn't provide). Other case, d3 is used. 
+
+## Installing
+
++ Clone the repository
++ Install bower (via nodejs, if necessary) : npm install bower -g
++ bower install
 
 ## What's new
 
-- Charts Api defined : a chart can be append to a html root element
+- Charts Api defined : a chart can be append directly to a html root element
 - Support for negative values
-- Redefinition of scatterplot chart
-- Donut added, with no labels
 - LinearScale, OrdinalScale : separate objects for data mapping
 - Directory components relocation
   + Components : each individual component goes here
@@ -26,15 +48,13 @@
   + MultipleInstancesMixin : creates N instances of a specific mixin.
   Since it is the same mixin, creation is the same.
 - Documentation was added to the code, following the YUI standard
+- bower added for dependencies install
+- IE8 support via r2d3 and some polyfills
 
-## Coming soon
- - Support for IE8
- - Support for switching linear / ordinal scales
- - Completion of a labeled donut chart
- - Define chart names as constants
- - Text positioning must be related to label size.
- - More charts : histogram , grouper bar chart
- - Slides to explain composition
+## Known issues
+
++ Updating some charts that have an axis system displayed as a grid, can have unusual drawing behaviour (for example, the LabeledTriangleChart, some grid lines are displayed before the triangles, but some others not)
++ Adding a background image to the chart : can't be done via SVG:image, since it doesn't have full support for IE8 yet. 
 
 ## WTF
 
@@ -108,6 +128,7 @@ At this point, there are some parts defined that can be used to create a custom 
 + LinearScale : defines a linear scale, for numeric values (continuos domain).
 + OrdinalScale : defines an ordinal scale, for discrete domain values.
 + ScaleFactory : used for creating available scales.
++ BaseScale : contains some common functionality for scales. 
 
 ### API
 
@@ -170,4 +191,3 @@ Using the transform method, data can be accessed before reaching the drawing ins
 - Some elements have already defined data changes manipulation (like the d3.axis). This means that a draw method for the axis is never called, we just define some configuration parameters that will render the axis and changing those parameters involves the redrawing. So, if the axis will be in a separated component, it must somehow be adapted to the d3.chart flow. This happens with other components too.
 
 - Something similar happens with the d3.svg.line. Each path for the line isn't computed using a data join.
-
