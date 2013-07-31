@@ -10,11 +10,11 @@ Accessor will iterate over the data collection.
 */
 
 (function(root, factory) {
-  /** Set up Backbone appropriately for the environment. */
+  /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
     define(function() {
-      /** Export global even in AMD case in case this script 
+      /** Export global even in AMD case in case this script
       is loaded with others */
       return factory();
     });
@@ -95,6 +95,6 @@ Accessor will iterate over the data collection.
     this.data = data;
   }
 
-  return Accessor; 
+  return Accessor;
  })
 )

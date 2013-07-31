@@ -11,14 +11,15 @@ Contains common functionality
 */
 
 (function(root, factory) {
-  /** Set up Backbone appropriately for the environment. */
+  /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define(['d3',
+    define([
+      'd3.chart',
       'underscore',
-      'd3.chart'],
+      ],
       function(d3, _) {
-        /** Export global even in AMD case in case this script 
+        /** Export global even in AMD case in case this script
         is loaded with others */
         return factory(d3, _);
     });
@@ -28,6 +29,7 @@ Contains common functionality
     return factory(d3, _);
   }
 }(this, function(d3, _) {
+
   d3.chart('BaseChart',{
     /**
     Sets the width for the chart
@@ -50,10 +52,10 @@ Contains common functionality
 
       this.w = newWidth;
       if(this.componentsMixins){
-        this.componentsMixins.forEach(function(element){
+        _.each(this.componentsMixins, function (element){
           element.width(newWidth);
-        });
-      }
+        }); 
+      }; 
 
       return this;
     },
@@ -76,7 +78,7 @@ Contains common functionality
 
       this.h = newHeight;
       if(this.componentsMixins){
-        this.componentsMixins.forEach(function(element){
+        _.each(this.componentsMixins, function (element){
           element.height(newHeight);
         });
       }
@@ -88,17 +90,21 @@ Contains common functionality
     Propagates to components
 
     Not all charts use scales. Some can use direct
-    mapping. 
+    mapping.
 
     @method
     @param {Oject} LinearScale, OrdinalScale
     @chainable
     */
-    setXScale : function(scale){
+    setXScale : function (scale){
+
+      if ( !scale ){
+        throw new Error('Undefined x scale');
+      }
 
       this.xscale = scale;
       if(this.componentsMixins){
-        this.componentsMixins.forEach(function(element){
+        _.each(this.componentsMixins, function (element){
           element.setXScale(scale);
         });
       }
@@ -110,37 +116,26 @@ Contains common functionality
     Propagates to components.
 
     Not all charts use scales. Some can use direct
-    mapping. 
+    mapping.
 
     @method
     @param {Oject} LinearScale, OrdinalScale
     @chainable
     */
-    setYScale : function(scale){
+    setYScale : function (scale){
+
+      if ( !scale ){
+        throw new Error('Undefined y scale');
+      }
 
       this.yscale = scale;
-      if(this.componentsMixins){
-        this.componentsMixins.forEach(function(element){
+      if ( this.componentsMixins ){
+        _.each(this.componentsMixins, function (element){
           element.setYScale(scale);
         });
-      }
+      };
 
       return this;
-    },
-    /**
-    Checks if scales were set
-
-    @method
-    */
-    checkScales : function(chart){
-      if(!this.xscale){
-        throw new Error('Undefined x scale for '+ chart +' chart');
-      }
-      else{
-        if(!this.yscale){
-          throw new Error('Undefined x scale for '+ chart +' chart');
-        }
-      }
     }
   });
  })

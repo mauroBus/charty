@@ -13,15 +13,16 @@ Circle drawer.
 */
 
 (function(root, factory) {
-  /** Set up Backbone appropriately for the environment. */
+  /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define(['d3',
+    define([
+      'd3.chart',
       'underscore',
       'd3.chart',
       'simpledatagroup'],
       function(d3, _) {
-        /** Export global even in AMD case in case this script 
+        /** Export global even in AMD case in case this script
         is loaded with others */
         return factory(d3, _);
     });
@@ -67,7 +68,6 @@ Circle drawer.
         dataBind: function(d){
 
           var chart = this.chart();
-          chart.checkScales('Circle');
 
           chart.c = d.color;
           chart.r = d.r;
@@ -121,11 +121,11 @@ Circle drawer.
                       .attr('cy', function(d) { return chart.yscale.map(d.y,0); });
           },
           'exit' : function(){
-            
+
             return this.remove();
           }
         }
-      }; 
+      };
 
       /**
       Layer creation

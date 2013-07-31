@@ -12,14 +12,14 @@ Triangle drawer.
 */
 
 (function(root, factory) {
-  /** Set up Backbone appropriately for the environment. */
+  /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define(['d3',
+    define([
       'd3.chart',
       'simpledatagroup'],
       function(d3) {
-        /** Export global even in AMD case in case this script 
+        /** Export global even in AMD case in case this script
         is loaded with others */
         return factory(d3);
     });
@@ -63,7 +63,6 @@ Triangle drawer.
 
           var chart = this.chart();
 
-          chart.checkScales('Triangle');
           chart.c = d.color;
 
           return this.selectAll('path').data(d.data);
@@ -105,7 +104,7 @@ Triangle drawer.
             return this.remove();
           }
         }
-      }; 
+      };
 
       /**
       Layer creation

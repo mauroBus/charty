@@ -13,15 +13,15 @@ Base XY system for all the 2D charts.
 */
 
 (function(root, factory) {
-  /** Set up Backbone appropriately for the environment. */
+  /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define(['d3',
+    define([
       'd3.chart',
       'basechart',
       'axis'],
       function(d3) {
-        /** Export global even in AMD case in case this script 
+        /** Export global even in AMD case in case this script
         is loaded with others */
         return factory(d3);
     });
@@ -40,10 +40,10 @@ Base XY system for all the 2D charts.
     initialize : function(){
 
         this.xaxis = this.mixin('Axis',this.base.append('g'))
-                         .orient('bottom'); 
+                         .orient('bottom');
 
         this.yaxis = this.mixin('Axis',this.base.append('g'))
-                         .orient('left'); 
+                         .orient('left');
 
         this.componentsMixins = [];
         this.componentsMixins.push(this.xaxis);

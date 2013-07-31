@@ -17,10 +17,10 @@ Labeled triangle chart drawer.
 */
 
 (function(root, factory) {
-  /** Set up Backbone appropriately for the environment. */
+  /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define(['d3',
+    define([
       'd3.chart',
       'triangle',
       'roundedrectangle',
@@ -29,7 +29,7 @@ Labeled triangle chart drawer.
       'yxyaxis',
       'multipledatagroup'],
       function(d3) {
-        /** Export global even in AMD case in case this script 
+        /** Export global even in AMD case in case this script
         is loaded with others */
         return factory(d3);
     });
@@ -44,7 +44,7 @@ Labeled triangle chart drawer.
     Labeled triangle constructor.
 
     Will contain only one instance of each component chart, since no
-    resize can be assumed. 
+    resize can be assumed.
 
     @method
     */

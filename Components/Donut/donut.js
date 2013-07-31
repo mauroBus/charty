@@ -1,5 +1,5 @@
 /**
-Donut drawer. 
+Donut drawer.
 
 @class Donut
 @extends SimpleDataGroup
@@ -13,16 +13,16 @@ Donut drawer.
 */
 
 (function(root, factory) {
-  /** Set up Backbone appropriately for the environment. */
+  /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define(['d3',
-        'underscore',
+    define([
         'd3.chart',
+        'underscore',
         'simpledatagroup'
       ],
       function(d3, _) {
-        /** Export global even in AMD case in case this script 
+        /** Export global even in AMD case in case this script
         is loaded with others */
         return factory(d3, _);
       });
@@ -44,12 +44,12 @@ Donut drawer.
       or : outter radius
       */
       var defaults = {
-        ir: -150,
-        or: -100
+        ir: 90,
+        or: 50
       };
 
       /**
-      d3 layout for pie data mapping. 
+      d3 layout for pie data mapping.
       */
       var pieLayout = d3.layout
         .pie()
@@ -72,6 +72,8 @@ Donut drawer.
         @param {Object} data example = {
                                           ir : -150,
                                           or : -100,
+                                          xPosition : 100,
+                                          yPosition : 100,
                                           data : [
                                             {x : 200, c: 'red' }
                                             {x : 500, c: 'blue'}
@@ -85,12 +87,21 @@ Donut drawer.
           chart.ir = data.ir;
           chart.or = data.or;
 
+          /** By default, donut will be centered in svg */
+          chart.xPosition = (data.xPosition || (chart.w/2));
+          chart.yPosition = (data.yPosition || (chart.h/2));
+
           if (!_.isNumber(chart.ir) || !_.isNumber(chart.or)) {
             throw new Error('Radius for donut chart must be numerical values');
           }
 
-          arcGen = arcGen.innerRadius(chart.ir || defaults.ir)
-                         .outerRadius(chart.or || defaults.or);
+          /** Radius calculation */
+          var radius = Math.min(chart.w, chart.h) / 2,
+              ir = data.ir || defaults.ir,
+              or = data.or || defaults.or;
+
+          arcGen = arcGen.innerRadius(radius - ir)
+                         .outerRadius(radius - or);
 
           return this.selectAll('path').data(pieLayout(data.data));
         },
@@ -107,7 +118,7 @@ Donut drawer.
 
             var chart = this.chart();
 
-            return this.attr('transform', 'translate(' + (chart.w / 2) + ',' + (chart.h / 2) + ')')
+            return this.attr('transform', 'translate(' + (chart.xPosition) + ',' + (chart.yPosition) + ')')
               .attr('fill', function(d) {
                 return d.data.c;
               })

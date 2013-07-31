@@ -13,15 +13,15 @@ Rounded rectangle drawer.
 */
 
 (function(root, factory) {
-  /** Set up Backbone appropriately for the environment. */
+  /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define(['d3',
-      'underscore',
+    define([
       'd3.chart',
+      'underscore',
       'simpledatagroup'],
       function(d3, _) {
-        /** Export global even in AMD case in case this script 
+        /** Export global even in AMD case in case this script
         is loaded with others */
         return factory(d3, _);
     });
@@ -62,7 +62,7 @@ Rounded rectangle drawer.
         Data bind for Rounded Rectangle.
         Data defines a rectangle height (rh), width (rw),
         color (rc), rx, ry. If not defined, defauls are
-        used. 
+        used.
 
         @method
         @param {Object} d example = {
@@ -76,13 +76,12 @@ Rounded rectangle drawer.
         dataBind : function(d){
 
           var chart = this.chart();
-          chart.checkScales('Rounded Rectangle');
 
           chart.rh = d.rh;
           chart.rw = d.rw;
           chart.rc = d.rc;
           chart.rx = d.rx;
-          chart.ry = d.ry; 
+          chart.ry = d.ry;
 
           return this.selectAll('rect').data(d.data);
         },

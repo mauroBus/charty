@@ -1,6 +1,10 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>D3JS test</title>
     <link rel="stylesheet" type="text/css" href="../Styles/styles.css"/>
   </head>
@@ -29,7 +33,24 @@
     <div id='chart7' class='test'>
     </div>
 
-    <script data-main="mychart" src="//requirejs.org/docs/release/2.1.8/comments/require.js"></script>
+    <!--[if lte IE 8]>
+      <script src="../Vendor/Polyfills-for-IE8/getComputedStyle.js"></script>
+      <script>
+        if(!function(){}.bind){
+            Function.prototype.bind = function(){
+              var me = this
+              , shift = [].shift
+              , he = shift.apply(arguments)
+              , ar = arguments
+              return function(){
+                return me.apply(he, ar);
+              };
+            };
+        };
+      </script>
+    <![endif]-->
+
+    <script data-main="mychart" src="../Vendor/requirejs/require.js"></script>
 
   </body>
 </html>

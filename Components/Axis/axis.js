@@ -16,14 +16,15 @@ wherever is necessary.
 */
 
 (function(root, factory) {
-  /** Set up Backbone appropriately for the environment. */
+  /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define(['d3',
+    define([
       'd3.chart',
-      'basechart'],
+      'basechart'
+      ],
       function(d3) {
-        /** Export global even in AMD case in case this script 
+        /** Export global even in AMD case in case this script
         is loaded with others */
         return factory(d3);
     });
@@ -85,7 +86,7 @@ wherever is necessary.
           axis = axis.scale(chart.scale.getScale())
                      .orient(chart.o);
 
-          return this.selectAll('g').data([0]);
+          return this.selectAll('g').data([true]);
         },
         /**
         Insert for axis. Just inserts one svg:g
@@ -100,7 +101,7 @@ wherever is necessary.
           'merge' : function(){
 
               var chart = this.chart();
-              
+
               /**
               Renders as a grid.
               */
@@ -112,7 +113,7 @@ wherever is necessary.
                   .call(axis);
 
               /**
-              Axis translation in x or y direction. 
+              Axis translation in x or y direction.
               */
               if(chart.xt !== 0 || chart.yt !== 0){
                 this.attr('transform', 'translate(' + chart.xt + ',' + chart.yt + ')');
@@ -121,11 +122,11 @@ wherever is necessary.
               return this;
           },
           'remove' : function(){
-            
+
             return this.remove();
           }
         }
-      }; 
+      };
 
       /**
       Axis layer creation
@@ -142,7 +143,7 @@ wherever is necessary.
     tickSize : function(size){
       /**
       Size for the ticks. Necessary
-      to define a grid chart. 
+      to define a grid chart.
 
       @property
       @type Number

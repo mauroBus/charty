@@ -20,13 +20,14 @@ doesn't depend on the data value.
 */
 
 (function(root, factory) {
-  /** Set up Backbone appropriately for the environment. */
+  /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define(['d3',
+    define([
             'd3.chart',
-            'donut'], function(d3) {
-      /** Export global even in AMD case in case this script 
+            'donut'
+            ], function(d3) {
+      /** Export global even in AMD case in case this script
       is loaded with others */
       return factory(d3);
     });
@@ -55,10 +56,10 @@ doesn't depend on the data value.
         */
         dataBind : function(d){
 
-          var chart = this.chart(); 
+          var chart = this.chart();
 
           chart.or = d.or;
-          chart.ir = d.ir; 
+          chart.ir = d.ir;
 
           var data = d.data;
 
@@ -77,7 +78,7 @@ doesn't depend on the data value.
         events : {
           'enter' : function(){
 
-            var chart = this.chart(); 
+            var chart = this.chart();
 
             this.attr('x', chart.w/2 )
                 .attr('y', chart.h/2 )
@@ -85,7 +86,7 @@ doesn't depend on the data value.
                   return d;
                 });
 
-            return this; 
+            return this;
           },
           'update' : function(){
 
@@ -93,7 +94,7 @@ doesn't depend on the data value.
               return d;
             });
 
-            return this; 
+            return this;
           },
           'exit' : function(){
 

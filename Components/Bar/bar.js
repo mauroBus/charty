@@ -12,14 +12,14 @@ Bar drawer. Takes only one data series as input.
 */
 
 (function(root, factory) {
-  /** Set up Backbone appropriately for the environment. */
+  /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define(['d3',
+    define([
       'd3.chart',
       'simpledatagroup'],
       function(d3) {
-        /** Export global even in AMD case in case this script 
+        /** Export global even in AMD case in case this script
         is loaded with others*/
         return factory(d3);
     });
@@ -38,7 +38,7 @@ Bar drawer. Takes only one data series as input.
     initialize : function(){
 
       /**
-      Sets only bar color as default.  
+      Sets only bar color as default.
       */
       var defaults = {
         c : 'bar-default'
@@ -62,7 +62,6 @@ Bar drawer. Takes only one data series as input.
         dataBind : function(d){
 
           var chart = this.chart();
-          chart.checkScales('Bar');
 
           /**
           Sets color for the whole data serie.
@@ -88,7 +87,7 @@ Bar drawer. Takes only one data series as input.
             /**
             chart.factor : value used to define bar's width. It can
             be useful to reduce the width, in case many data series
-            are draw using bars. 
+            are draw using bars.
             */
 
             this.attr('class', function(d){
@@ -120,11 +119,11 @@ Bar drawer. Takes only one data series as input.
                 .attr('height', function(d) {
                   return Math.abs(chart.yscale.band(chart.h,d.y)-(chart.h-chart.yscale.map(0)))}
                 );
-                
+
             return this;
           },
           'exit' : function(){
-            
+
             return this.remove();
           }
         }
