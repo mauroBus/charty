@@ -17,7 +17,10 @@ require.config({
     'd3.chart'                : 'Vendor/d3.chart/d3.chart',
     'underscore'              : 'Vendor/underscore/underscore',
     'feature'                 : 'Vendor/feature/feature',
-    'implementations'         : 'Examples/dynamic',
+    'jquery'                  : 'Vendor/jquery/jquery',
+
+    /** Conditional loading */
+    'implementations'         : 'Examples/dynamic',                
 
     /** Api */
 
@@ -61,6 +64,9 @@ require.config({
 
   },
   shim:{
+    'jquery' : {
+      exports : '$'
+    },
     'underscore' : {
       exports : '_'
     },
@@ -207,7 +213,6 @@ function(ChartsApi, Accessor){
     root : '#chart4',
     xAxis : 'ordinal',
     yAxis : 'linear',
-    /*imgUrl : 'http://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/280px-PNG_transparency_demonstration_1.png',*/
     marginleft : 50,
     margintop : 20,
     marginlfactor : 2,
@@ -218,7 +223,7 @@ function(ChartsApi, Accessor){
     chartName : 'LabeledDonutChart',
     instances : 1,
     root : '#chart5',
-    /*imgUrl : 'http://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/280px-PNG_transparency_demonstration_1.png',*/
+    imgUrl : 'image.png',
     marginlfactor : 2,
     margintfactor : 4.2
   };

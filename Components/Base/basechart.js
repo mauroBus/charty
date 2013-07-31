@@ -52,10 +52,10 @@ Contains common functionality
 
       this.w = newWidth;
       if(this.componentsMixins){
-        this.componentsMixins.forEach(function(element){
+        _.each(this.componentsMixins, function (element){
           element.width(newWidth);
-        });
-      }
+        }); 
+      }; 
 
       return this;
     },
@@ -78,7 +78,7 @@ Contains common functionality
 
       this.h = newHeight;
       if(this.componentsMixins){
-        this.componentsMixins.forEach(function(element){
+        _.each(this.componentsMixins, function (element){
           element.height(newHeight);
         });
       }
@@ -103,8 +103,8 @@ Contains common functionality
       }
 
       this.xscale = scale;
-      if( this.componentsMixins){
-        this.componentsMixins.forEach(function (element){
+      if(this.componentsMixins){
+        _.each(this.componentsMixins, function (element){
           element.setXScale(scale);
         });
       }
@@ -130,10 +130,10 @@ Contains common functionality
 
       this.yscale = scale;
       if ( this.componentsMixins ){
-        this.componentsMixins.forEach(function (element){
+        _.each(this.componentsMixins, function (element){
           element.setYScale(scale);
         });
-      }
+      };
 
       return this;
     }
