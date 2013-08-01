@@ -1,0 +1,73 @@
+/**
+  Base examples styles.
+*/
+.viewport {
+  float: left;
+
+  width: 600px;
+  height: 300px;
+}
+
+.axis path {
+  fill: none;
+  shape-rendering: crispEdges;
+}
+
+.show path {
+  display : none;
+}
+
+.dot {
+  stroke: #000;
+}
+
+.yellow {
+  fill : yellow;
+}
+
+.green {
+  fill : green;
+}
+
+.blue {
+  fill : steelblue;
+}
+
+.red {
+  fill : red;
+}
+
+.gray {
+  fill : gray;
+}
+
+.yellow {
+  fill : yellow;
+}
+
+.white {
+  fill : white;
+}
+
+.blueline {
+   fill: none;
+   stroke: steelblue;
+   stroke-width: 1.5px;
+}
+
+.redline {
+  fill: none;
+  stroke: red;
+  stroke-width: 1.5px;
+}
+
+.grayline {
+  fill: none;
+  stroke: gray;
+  stroke-width: 1.5px;
+}
+
+.axis .tick line {
+  fill: none;
+  stroke: lightgrey;
+}

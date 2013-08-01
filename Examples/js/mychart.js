@@ -1,8 +1,83 @@
 /**
-Execution start
+Main Application
+
+Testing chart drawing and data update
+
+@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
-requirejs(['chartsapi','accessor','underscore','jquery'],
-function (ChartsApi, Accessor, _ , $){
+require.config({
+  paths : {
+    /** Libraries */
+    'd3'                      : '../../Vendor/d3/d3',
+    'r2d3'                    : '../../Vendor/r2d3/r2d3',
+    'd3.chart'                : '../../Vendor/d3.chart/d3.chart',
+    'underscore'              : '../../Vendor/underscore/underscore',
+    'feature'                 : '../../Vendor/feature/feature',
+    'jquery'                  : '../../Vendor/jquery/jquery',
+
+    /** Conditional loading */
+    'implementations'         : 'dynamic',
+
+    /** Api */
+    'chartsapi'               : '../../Api/chartsapi',
+
+    /** Components */
+    'axis'                    : '../../Components/Axis/axis',
+    'bar'                     : '../../Components/Bar/bar',
+    'basescale'               : '../../Components/Scales/basescale',
+    'basechart'               : '../../Components/Base/basechart',
+    'linearscale'             : '../../Components/Scales/linearscale',
+    'ordinalscale'            : '../../Components/Scales/ordinalscale',
+    'scalesfactory'           : '../../Components/Scales/scalesfactory',
+    'triangle'                : '../../Components/Triangle/triangle',
+    'textlabel'               : '../../Components/TextLabel/textlabel',
+    'roundedrectangle'        : '../../Components/RoundedRectangle/roundedrectangle',
+    'line'                    : '../../Components/Line/line',
+    'circle'                  : '../../Components/Circle/circle',
+    'donut'                   : '../../Components/Donut/donut',
+
+    /** Composition */
+    'xyaxis'                  : '../../Composition/Axis/xyaxis',
+    'yxyaxis'                 : '../../Composition/Axis/yxyaxis',
+    'barchart'                : '../../Composition/BarChart/barchart',
+    'multipleinstancesmixin'  : '../../Composition/multipleinstancesmixin',
+    'multipledatagroup'       : '../../Composition/multipledatagroup',
+    'simpledatagroup'         : '../../Composition/simpledatagroup',
+    'labeledtrianglechart'    : '../../Composition/LabeledTriangleChart/labeledtrianglechart',
+    'linechart'               : '../../Composition/LineChart/linechart',
+    'scatterplot'             : '../../Composition/Scatterplot/scatterplot',
+    'groupedbarchart'         : '../../Composition/GroupedBarChart/groupedbarchart',
+    'donutwithinnertext'      : '../../Composition/DonutWithInnerText/donutwithinnertext',
+    'labeleddonutchart'       : '../../Composition/LabeledDonutChart/labeleddonutchart',
+    'linechartcircles'        : '../../Composition/LineChart/linechartcircles',
+
+    /** Utils */
+    'accessor'                : '../../Utils/Accessor/accessor',
+  },
+  shim:{
+    'jquery' : {
+      exports : '$'
+    },
+    'underscore' : {
+      exports : '_'
+    },
+    'r2d3' : {
+      exports : 'd3'
+    },
+    'd3' : {
+      exports :'d3'
+    },
+    'd3.chart' : {
+      deps : ['feature!d3impl'],
+      exports : 'd3'
+    }
+  }
+});
+
+requirejs(['chartsapi','accessor'],
+function(ChartsApi, Accessor){
+
+  'use strict';
 
   /**
   Data rendering examples.
@@ -40,9 +115,11 @@ function (ChartsApi, Accessor, _ , $){
     outterTextYCorrection : 0.65,
     innerTextXCorrection : 0.28,
     innerTextYCorrection : 0.65,
+    /*xPosition : 100,
+    yPosition : 100,*/
     r : 5,
-    ir :  -100,
-    or : -70,
+    ir :  50,
+    or :  90,
     rh: 30,
     rw: 160,
     rc : 'lightgray',
@@ -58,8 +135,8 @@ function (ChartsApi, Accessor, _ , $){
   Data test for donut chart with inner text
   */
   var data4 = {
-    ir :  -100,
-    or : -70,
+    ir :  90,
+    or :  50,
     data : [
       {x : 25 , c: 'red'},
       {x : 175, c: 'gray'}
@@ -127,7 +204,6 @@ function (ChartsApi, Accessor, _ , $){
     root : '#chart4',
     xAxis : 'ordinal',
     yAxis : 'linear',
-    /*imgUrl : 'http://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/280px-PNG_transparency_demonstration_1.png',*/
     marginleft : 50,
     margintop : 20,
     marginlfactor : 2,
@@ -138,7 +214,7 @@ function (ChartsApi, Accessor, _ , $){
     chartName : 'LabeledDonutChart',
     instances : 1,
     root : '#chart5',
-    imgUrl : 'http://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/280px-PNG_transparency_demonstration_1.png',
+    imgUrl : 'img/image.png',
     marginlfactor : 2,
     margintfactor : 4.2
   };
@@ -226,8 +302,8 @@ function (ChartsApi, Accessor, _ , $){
     };
 
     data3 = {
-      ir :  -100,
-      or : -70,
+      ir :  50,
+      or :  90,
       data : [
         {x : 200, c : 'blue'},
         {x : 300, c : 'red'},
@@ -252,7 +328,7 @@ function (ChartsApi, Accessor, _ , $){
     accessor2.setData(datagroup5);
     accessor3.setData(datagroup6);
 
-    chart1.draw(accessor1);
+    /*chart1.draw(accessor1);
     chart2.draw(accessor2);
 
     data1.color = 'redline';
@@ -268,8 +344,8 @@ function (ChartsApi, Accessor, _ , $){
     chart4.draw(accessor1);
 
     var data9 = {
-      ir :  -100,
-      or : -70,
+      ir :  50,
+      or :  90,
       data : [
         {x : 50 , c: 'blue'},
         {x : 155, c: 'gray'}
@@ -280,7 +356,7 @@ function (ChartsApi, Accessor, _ , $){
         datagroup7.push(data9);
 
     var accessor7 = new Accessor(datagroup7);
-    chart6.draw(accessor7);
+    chart6.draw(accessor7);*/
 
   },3000);
 });
