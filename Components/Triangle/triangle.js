@@ -75,7 +75,7 @@ Triangle drawer.
         @chainable
         */
         insert : function(){
-          return this.insert('path');
+          return this.append('path');
         },
         events : {
           'enter' : function(){
