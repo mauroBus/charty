@@ -48,7 +48,6 @@ require.config({
     'scatterplot'             : '../../Composition/Scatterplot/scatterplot',
     'groupedbarchart'         : '../../Composition/GroupedBarChart/groupedbarchart',
     'donutwithinnertext'      : '../../Composition/DonutWithInnerText/donutwithinnertext',
-    'labeleddonutchart'       : '../../Composition/LabeledDonutChart/labeleddonutchart',
     'linechartcircles'        : '../../Composition/LineChart/linechartcircles',
 
     /** Utils */
@@ -83,51 +82,23 @@ function(ChartsApi, Accessor){
   Data rendering examples.
   */
   var data1 = {
-    z : '2011',
     rh: 30,
     rw: 30,
     color: 'blueline',
     rc:'gray',
     data: [
-      { x: 'A', y: 100, c : 'red', z: '2011'},
-      { x: 'B', y: -40, c : 'red', z: '2011'},
-      { x: 'C', y: 60, c : 'red', z: '2011' }
+      { x: 'A', y: 100, c : 'red'},
+      { x: 'B', y: -40, c : 'red'},
+      { x: 'C', y: 60, c : 'red'}
     ]
   };
 
   var data2 = {
-    z : '2012',
     color: 'redline',
     data: [
-      { x: 'A', y: 150 , c:'blue', z: '2012'},
-      { x: 'B', y: 50 , c: 'blue', z: '2012'},
-      { x: 'C', y: 30, c:'blue' , z: '2012' }
-    ]
-  };
-
-  /**
-  Data test for labeled donut chart.
-  */
-  var data3 = {
-    circleCorrection : 0.1,
-    innerRectangleCorrection : 0.3,
-    innerRectangleColor : 'white',
-    outterTextYCorrection : 0.65,
-    innerTextXCorrection : 0.28,
-    innerTextYCorrection : 0.65,
-    /*xPosition : 100,
-    yPosition : 100,*/
-    r : 5,
-    ir :  50,
-    or :  90,
-    rh: 30,
-    rw: 160,
-    rc : 'lightgray',
-    data : [
-      {x : 200, c : 'blue', textlabel : 'Complete', xlabel : 25, ylabel : 100},
-      {x : 300, c : 'red', textlabel : 'Not started' ,xlabel : 25, ylabel : 200}/*,
-      {x : 150, c : 'yellow', xlabel : 100, ylabel : 250},
-      {x :  50, c : 'green', xlabel : 100, ylabel : 50}*/
+      { x: 'A', y: 150 , c:'blue'},
+      { x: 'B', y: 50 , c: 'blue'},
+      { x: 'C', y: 30, c:'blue'}
     ]
   };
 
@@ -150,15 +121,11 @@ function(ChartsApi, Accessor){
   var datagroup2 = [];
       datagroup2.push(data1);
 
-  var datagroup3 = [];
-      datagroup3.push(data3);
-
   var datagroup4 = [];
       datagroup4.push(data4);
 
   var accessor1 = new Accessor(datagroup1);
   var accessor2 = new Accessor(datagroup2);
-  var accessor3 = new Accessor(datagroup3);
   var accessor4 = new Accessor(datagroup4);
 
   var myApi = new ChartsApi();
@@ -210,15 +177,6 @@ function(ChartsApi, Accessor){
     margintfactor : 4.2
   };
 
-  var options5 = {
-    chartName : 'LabeledDonutChart',
-    instances : 1,
-    root : '#chart5',
-    imgUrl : 'img/image.png',
-    marginlfactor : 2,
-    margintfactor : 4.2
-  };
-
   var options6 = {
     chartName : 'DonutWithInnerText',
     instances : 1,
@@ -260,9 +218,6 @@ function(ChartsApi, Accessor){
   var chart4 = myApi.chart(options4);
       chart4.draw(accessor1);
 
-  var chart5 = myApi.chart(options5);
-      chart5.draw(accessor3);
-
   var chart6 = myApi.chart(options6);
       chart6.draw(accessor4);
 
@@ -301,18 +256,6 @@ function(ChartsApi, Accessor){
       ]
     };
 
-    data3 = {
-      ir :  50,
-      or :  90,
-      data : [
-        {x : 200, c : 'blue'},
-        {x : 300, c : 'red'},
-        {x : 150, c : 'yellow'},
-        {x :  50, c : 'green'},
-        {x : 400, c: 'gray'}
-      ]
-    };
-
     var datagroup4 = [];
         datagroup4.push(data1);
         datagroup4.push(data2);
@@ -322,13 +265,9 @@ function(ChartsApi, Accessor){
     var datagroup5 = [];
         datagroup5.push(data1);
 
-    var datagroup6 = [];
-        datagroup6.push(data3);
-
     accessor2.setData(datagroup5);
-    accessor3.setData(datagroup6);
 
-    /*chart1.draw(accessor1);
+    chart1.draw(accessor1);
     chart2.draw(accessor2);
 
     data1.color = 'redline';
@@ -356,7 +295,7 @@ function(ChartsApi, Accessor){
         datagroup7.push(data9);
 
     var accessor7 = new Accessor(datagroup7);
-    chart6.draw(accessor7);*/
+    chart6.draw(accessor7);
 
   },3000);
 });

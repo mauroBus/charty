@@ -37,7 +37,6 @@ and it will append a specific chart to it.
         'donut',
         /*'groupedbarchart',*/
         'donutwithinnertext',
-        'labeleddonutchart',
         'linechartcircles',
         'd3.chart'
       ],
@@ -82,9 +81,8 @@ and it will append a specific chart to it.
       throw new Error('Root element or chart name not defined');
     };
 
-    var selection = d3.select(options.root);
-
-    var height = (parseInt(selection.style('height'), 10) || 200),
+    var selection = d3.select(options.root),
+        height = (parseInt(selection.style('height'), 10) || 200),
         width  = (parseInt(selection.style('width'), 10) || 200);
 
     /**

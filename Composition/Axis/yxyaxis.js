@@ -34,7 +34,7 @@ One X Axis (bottom)
     return factory(d3);
   }
 }(this, function(d3) {
-  d3.chart('BaseChart').extend('YXYAxis',{
+  d3.chart('YXYAxis',{
     /**
     Defines as a mixin a right Y axis, a left Y axis, a X bottom axis
 
@@ -45,10 +45,6 @@ One X Axis (bottom)
       this.yaxisleft = this.mixin('Axis',this.base.append('g')).orient('left');
       this.yaxisright = this.mixin('Axis', this.base.append('g')).orient('right');
 
-      this.componentsMixins = [];
-      this.componentsMixins.push(this.xaxis);
-      this.componentsMixins.push(this.yaxisleft);
-      this.componentsMixins.push(this.yaxisright);
     },
     /**
     Show whole chart as a grid.
@@ -113,5 +109,4 @@ One X Axis (bottom)
       return this;
     }
   });
- })
-);
+}));

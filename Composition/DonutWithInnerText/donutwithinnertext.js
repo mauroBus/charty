@@ -109,5 +109,4 @@ doesn't depend on the data value.
       this.layer('donutText', this.base.append('g'), options);
     }
   });
- })
-);
+}));

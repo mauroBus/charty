@@ -62,5 +62,4 @@ N data series
 			this.componentsMixins.push(yxyaxis);
 		}
 	});
- })
-);
+}));

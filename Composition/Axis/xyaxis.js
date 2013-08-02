@@ -19,7 +19,8 @@ Base XY system for all the 2D charts.
     define([
       'd3.chart',
       'basechart',
-      'axis'],
+      'axis'
+      ],
       function(d3) {
         /** Export global even in AMD case in case this script
         is loaded with others */
@@ -31,7 +32,7 @@ Base XY system for all the 2D charts.
     return factory(d3);
   }
 }(this, function(d3) {
-  d3.chart('BaseChart').extend('XYAxis',{
+  d3.chart('XYAxis',{
     /**
     XY axis system initializer
 
@@ -45,9 +46,6 @@ Base XY system for all the 2D charts.
         this.yaxis = this.mixin('Axis',this.base.append('g'))
                          .orient('left');
 
-        this.componentsMixins = [];
-        this.componentsMixins.push(this.xaxis);
-        this.componentsMixins.push(this.yaxis);
     },
     /**
     Show whole chart as a grid.
@@ -109,6 +107,4 @@ Base XY system for all the 2D charts.
       return this;
     }
   });
- })
-);
-
+}));
