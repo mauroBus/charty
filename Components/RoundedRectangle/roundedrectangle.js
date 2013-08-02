@@ -19,7 +19,8 @@ Rounded rectangle drawer.
     define([
       'd3.chart',
       'underscore',
-      'simpledatagroup'],
+      'simpledatagroup'
+      ],
       function(d3, _) {
         /** Export global even in AMD case in case this script
         is loaded with others */
@@ -77,11 +78,11 @@ Rounded rectangle drawer.
 
           var chart = this.chart();
 
-          chart.rh = d.rh;
-          chart.rw = d.rw;
-          chart.rc = d.rc;
-          chart.rx = d.rx;
-          chart.ry = d.ry;
+          chart.rh = (d.rh || defaults.rh);
+          chart.rw = (d.rw || defaults.rw); 
+          chart.rc = (d.rc || defaults.rc);
+          chart.rx = (d.rx || defaults.rx);
+          chart.ry = (d.ry || defaults.ry);
 
           return this.selectAll('rect').data(d.data);
         },
@@ -95,7 +96,7 @@ Rounded rectangle drawer.
           return this.append('rect');
         },
         events : {
-          'enter' : function(){
+          'merge' : function(){
 
             var chart = this.chart();
 
@@ -111,8 +112,8 @@ Rounded rectangle drawer.
               }
             }
 
-            return this.attr('height', (chart.rh || defaults.rh))
-                       .attr('width', (chart.rw || defaults.rw))
+            return this.attr('height', chart.rh)
+                       .attr('width', chart.rw)
                        .attr('x', function(d){
                           var val = chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2)-(chart.rw/2);
                           return val;
@@ -120,41 +121,10 @@ Rounded rectangle drawer.
                        .attr('y',function(d){
                           return chart.yscale.map(d.y)-(chart.rh/2);
                         })
-                       .attr('rx', defaults.rx)
-                       .attr('ry', defaults.ry)
+                       .attr('rx', chart.rx)
+                       .attr('ry', chart.ry)
                        .attr('fill',function(d){
-                          return (d.rc ||chart.rc || defaults.rc);
-                       });
-          },
-          update : function(){
-
-            var chart = this.chart();
-
-            if(chart.rh){
-              if(!_.isNumber(chart.rh) || chart.rh < 0){
-                throw new Error('Invalid value for rectangle height. Must be positive number.');
-              }
-            }
-
-            if(chart.rw){
-              if(!_.isNumber(chart.rw) || chart.rw < 0){
-                throw new Error('Invalid value for rectangle width. Must be positive number.');
-              }
-            }
-
-            return this.attr('height', (chart.rh || defaults.rh))
-                       .attr('width', (chart.rw || defaults.rw))
-                       .attr('x', function(d){
-                          var val = chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2)-(chart.rw/2);
-                          return val;
-                        })
-                       .attr('y',function(d){
-                          return chart.yscale.map(d.y)-(chart.rh/2);
-                        })
-                       .attr('rx', defaults.rx)
-                       .attr('ry', defaults.ry)
-                       .attr('fill',function(d){
-                          return (d.rc || chart.rc || defaults.rc);
+                          return (d.rc || chart.rc);
                        });
           },
           'exit' : function(){
@@ -169,5 +139,4 @@ Rounded rectangle drawer.
       this.layer('roundedrects', pathBase, options);
     }
   });
- })
-);
+}));

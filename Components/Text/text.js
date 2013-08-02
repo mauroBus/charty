@@ -4,8 +4,7 @@ Text labeling.
 @class TextLabel
 @extends SimpleDataGroup
 @constructor
-@requires d3,
-          d3.chart,
+@requires d3.chart,
           simpledatagroup
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
@@ -17,7 +16,8 @@ Text labeling.
     /** AMD */
     define([
       'd3.chart',
-      'simpledatagroup'],
+      'simpledatagroup'
+      ],
       function(d3) {
         /** Export global even in AMD case in case this script
         is loaded with others */

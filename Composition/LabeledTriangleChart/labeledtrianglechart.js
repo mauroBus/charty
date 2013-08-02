@@ -50,25 +50,10 @@ Labeled triangle chart drawer.
     */
     initialize: function() {
 
-      var yxyaxis = this.mixin('YXYAxis', this.base.append('g')).showAsGrid();
-
-      var options1 = {
-        instances : 1,
-        chartName : 'Triangle'
-      };
-      var triangles = this.mixin('MultipleInstancesMixin', this.base.append('g'), options1);
-
-      var options2 = {
-        instances : 1,
-        chartName : 'RoundedRectangle'
-      };
-      var recs = this.mixin('MultipleInstancesMixin', this.base.append('g'), options2);
-
-      var options3 = {
-        instances : 1,
-        chartName : 'Text'
-      };
-      var texts = this.mixin('MultipleInstancesMixin', this.base.append('g'), options3);
+      var yxyaxis = this.mixin('YXYAxis', this.base.append('g')).showAsGrid(),
+          triangles = this.mixin('Triangle', this.base.append('g')),
+          recs = this.mixin('RoundedRectangle', this.base.append('g')),
+          texts = this.mixin('Text', this.base.append('g'));
 
       this.componentsMixins = [];
       this.componentsMixins.push(triangles);
@@ -78,5 +63,4 @@ Labeled triangle chart drawer.
 
     }
   });
- })
-);
+}));

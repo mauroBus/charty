@@ -4,9 +4,8 @@ Triangle drawer.
 @class Triangle
 @constructor
 @extends SimpleDataGroup
-@requires  d3,
-           d3.chart,
-           simpledatagroup
+@requires d3.chart,
+          simpledatagroup
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -17,7 +16,8 @@ Triangle drawer.
     /** AMD */
     define([
       'd3.chart',
-      'simpledatagroup'],
+      'simpledatagroup'
+      ],
       function(d3) {
         /** Export global even in AMD case in case this script
         is loaded with others */
@@ -120,24 +120,14 @@ Triangle drawer.
     @return {String} path
     */
     getPath : function(d){
-      var p = 'M ';
 
-      var x1 = this.xscale.map(d.x,1);
-      var y1 = this.yscale.map(0);
+      var x1 = this.xscale.map(d.x,1),
+          y1 = this.yscale.map(0),
+          band = this.xscale.band(1);
 
-      p = p + x1 + ' ' + y1 + ' ';
-
-      var x2 = x1 + this.xscale.band(1)/2;
-      var y2 = this.yscale.map(d.y);
-
-      p = p + 'L ' + x2 + ' ' + y2 + ' ';
-
-      var x3 = x1 + this.xscale.band(1);
-      var y3 = this.yscale.map(0);
-
-      p = p + 'L ' + x3 + ' ' + y3;
-
-      return p;
+      return  ('M ' + x1 + ' ' + y1
+              + ' L ' + (x1 + band/2) + ' ' + this.yscale.map(d.y) 
+              + ' L ' + (x1 + band) + ' ' + y1);
     }
     /**
     Triangle drawer IS SimpleDataInput
