@@ -40,6 +40,13 @@ doesn't depend on the data value.
   d3.chart('Donut').extend('DonutWithInnerText',{
     initialize : function(args){
 
+      /**
+      Defaults for Inner text
+      */
+      var defaults = {
+        fontSize : 55
+      }
+
       var options = {
         /**
         First element will be shown as label.
@@ -58,12 +65,14 @@ doesn't depend on the data value.
 
           var chart = this.chart();
 
-          chart.or = d.or;
-          chart.ir = d.ir;
+          chart.fontSize = (d.fontSize || defaults.fontSize);
+          /** By default, text will be centered inside donut */
+          chart.xPosition = (d.xPosition || (chart.w/2));
+          chart.yPosition = (d.yPosition || (chart.h/2));
 
           var data = d.data;
-
           var stringValue = (data[0].x).toString() +'%';
+
           return this.selectAll('text').data([stringValue]);
         },
         /**
@@ -80,8 +89,11 @@ doesn't depend on the data value.
 
             var chart = this.chart();
 
-            this.attr('x', chart.w/2 )
-                .attr('y', chart.h/2 )
+            this.attr('x', chart.xPosition)
+                .attr('y', chart.yPosition)
+                .attr('dy', '0.35em')
+                .attr('text-anchor', 'middle')
+                .attr('font-size', chart.fontSize)
                 .text(function(d){
                   return d;
                 });

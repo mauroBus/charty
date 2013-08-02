@@ -108,6 +108,8 @@ function(ChartsApi, Accessor){
   var data4 = {
     ir :  90,
     or :  50,
+    xPosition : 200,
+    yPosition : 200,
     data : [
       {x : 25 , c: 'red'},
       {x : 175, c: 'gray'}

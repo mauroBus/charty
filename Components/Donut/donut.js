@@ -70,8 +70,8 @@ Donut drawer.
 
         @method
         @param {Object} data example = {
-                                          ir : -150,
-                                          or : -100,
+                                          ir : 150,
+                                          or : 100,
                                           xPosition : 100,
                                           yPosition : 100,
                                           data : [
@@ -84,21 +84,18 @@ Donut drawer.
 
           var chart = this.chart();
 
-          chart.ir = data.ir;
-          chart.or = data.or;
-
           /** By default, donut will be centered in svg */
           chart.xPosition = (data.xPosition || (chart.w/2));
           chart.yPosition = (data.yPosition || (chart.h/2));
-
-          if (!_.isNumber(chart.ir) || !_.isNumber(chart.or)) {
-            throw new Error('Radius for donut chart must be numerical values');
-          }
 
           /** Radius calculation */
           var radius = Math.min(chart.w, chart.h) / 2,
               ir = data.ir || defaults.ir,
               or = data.or || defaults.or;
+
+          if (!_.isNumber(ir) || !_.isNumber(or)) {
+            throw new Error('Radius for donut chart must be numerical values');
+          }
 
           arcGen = arcGen.innerRadius(radius - ir)
                          .outerRadius(radius - or);
@@ -119,10 +116,10 @@ Donut drawer.
             var chart = this.chart();
 
             return this.attr('transform', 'translate(' + (chart.xPosition) + ',' + (chart.yPosition) + ')')
-              .attr('fill', function(d) {
-                return d.data.c;
-              })
-              .attr('d', arcGen);
+                       .attr('fill', function(d) {
+                          return d.data.c;
+                       })
+                       .attr('d', arcGen);
 
           },
           'update': function() {
@@ -130,9 +127,9 @@ Donut drawer.
             var chart = this.chart();
 
             return this.attr('fill', function(d) {
-              return d.data.c;
-            })
-              .attr('d', arcGen);
+                        return d.data.c;
+                       })
+                       .attr('d', arcGen);
           },
           'exit': function() {
 
