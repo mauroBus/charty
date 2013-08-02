@@ -5,12 +5,12 @@ Only one X/Y is sufficient for chart drawing, but can
 contain more. The idea is to draw an axis and locate it
 wherever is necessary.
 
+Wether Axis is a BaseChart, no need to extend it, since
+it will implement all the functions needed. 
+
 @class Axis
 @constructor
-@extends BaseChart
-@requires  d3,
-           d3.chart,
-           basechart
+@requires d3.chart
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -21,7 +21,6 @@ wherever is necessary.
     /** AMD */
     define([
       'd3.chart',
-      'basechart'
       ],
       function(d3) {
         /** Export global even in AMD case in case this script
@@ -34,7 +33,7 @@ wherever is necessary.
     return factory(d3);
   }
 }(this, function(d3) {
-  d3.chart('BaseChart').extend('Axis',{
+  d3.chart('Axis',{
     /**
     Basic Axis initialization
 
@@ -80,8 +79,6 @@ wherever is necessary.
           if(!chart.scale){
             throw new Error('Undefined scale for axis.');
           };
-
-          var scale = chart.scale.getScale();
 
           axis = axis.scale(chart.scale.getScale())
                      .orient(chart.o);
@@ -210,5 +207,4 @@ wherever is necessary.
       return this;
     }
   });
- })
-);
+}));

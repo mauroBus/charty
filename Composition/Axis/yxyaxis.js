@@ -4,11 +4,8 @@ Two Y Axis (one left, one right)
 One X Axis (bottom)
 
 @class YXYAxis
-@extends BaseChart
 @constructor
-@requires d3,
-          basechart,
-          axis,
+@requires axis,
           d3.chart
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
@@ -20,9 +17,8 @@ One X Axis (bottom)
     /** AMD */
     define([
       'd3.chart',
-      'basechart',
       'axis',
-      'd3.chart'],
+      ],
       function(d3) {
         /** Export global even in AMD case in case this script
         is loaded with others */
@@ -58,31 +54,27 @@ One X Axis (bottom)
       return this;
     },
     /**
-    Propagate height to components
+    Sets x axis position and tick size
 
     @method
-    @param {Number} newHeight height set for all components
+    @param {Number} newHeight chart's height
     @chainable
     */
     height : function(newHeight){
-      this.h = newHeight;
-      this.xaxis.height(newHeight).ytranslate(newHeight).tickSize(newHeight);
-      this.yaxisright.height(newHeight);
-      this.yaxisleft.height(newHeight);
+      this.xaxis.ytranslate(newHeight).tickSize(newHeight);
       return this;
     },
     /**
-    Propagate width to components
+    Sets y axis disposition, based on a given
+    width value, and tick size for only one y axis.
 
     @method
-    @param {Number} newHeight height set for all components
+    @param {Number} newWidth chart's width
     @chainable
     */
     width : function(newWidth){
-      this.w = newWidth;
-      this.xaxis.width(newWidth);
-      this.yaxisright.width(newWidth).xtranslate(newWidth);
-      this.yaxisleft.width(newWidth).tickSize(newWidth);
+      this.yaxisright.xtranslate(newWidth);
+      this.yaxisleft.tickSize(newWidth);
       return this;
     },
     /**

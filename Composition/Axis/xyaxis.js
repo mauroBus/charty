@@ -3,10 +3,7 @@ Base XY system for all the 2D charts.
 
 @class XYAxis
 @constructor
-@extends BaseChart
-@requires d3,
-          d3.chart,
-          basechart,
+@requires d3.chart,
           axis
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
@@ -18,7 +15,6 @@ Base XY system for all the 2D charts.
     /** AMD */
     define([
       'd3.chart',
-      'basechart',
       'axis'
       ],
       function(d3) {
@@ -59,33 +55,30 @@ Base XY system for all the 2D charts.
       return this;
     },
     /**
-    Propagate height to components
+    Moves x axis according to given height value, and sets
+    tick size value. 
 
     @method
-    @param {Number} newHeight height set for all components
+    @param {Number} newHeight chart's height
     @chainable
     */
     height : function(newHeight){
-      this.h = newHeight;
-      this.xaxis.height(newHeight).ytranslate(newHeight).tickSize(newHeight);
-      this.yaxis.height(newHeight);
+      this.xaxis.ytranslate(newHeight).tickSize(newHeight);
       return this;
     },
     /**
-    Propagate width to components
+    Sets tick size, based on given width value
 
     @method
-    @param {Number} newHeight height set for all components
+    @param {Number} newWidth chart's width
     @chainable
     */
     width : function(newWidth){
-      this.w = newWidth;
-      this.xaxis.width(newWidth);
-      this.yaxis.width(newWidth).tickSize(newWidth);
+      this.yaxis.tickSize(newWidth);
       return this;
     },
     /**
-    Redefinition of x scale setter
+    Sets x scale.
 
     @method
     @param {Object} scale d3.scale
@@ -96,7 +89,7 @@ Base XY system for all the 2D charts.
       return this;
     },
     /**
-    Redefinition of y scale setter
+    Sets y scale.
 
     @method
     @param {Object} scale d3.scale
