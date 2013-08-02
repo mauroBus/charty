@@ -30,7 +30,7 @@ require.config({
     'ordinalscale'            : '../../Components/Scales/ordinalscale',
     'scalesfactory'           : '../../Components/Scales/scalesfactory',
     'triangle'                : '../../Components/Triangle/triangle',
-    'textlabel'               : '../../Components/TextLabel/textlabel',
+    'textlabel'               : '../../Components/Text/text',
     'roundedrectangle'        : '../../Components/RoundedRectangle/roundedrectangle',
     'line'                    : '../../Components/Line/line',
     'circle'                  : '../../Components/Circle/circle',

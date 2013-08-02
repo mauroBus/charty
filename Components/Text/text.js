@@ -29,7 +29,7 @@ Text labeling.
     return factory(d3);
   }
 }(this, function(d3) {
-  d3.chart('SimpleDataGroup').extend('TextLabel', {
+  d3.chart('SimpleDataGroup').extend('Text', {
     /**
     Text label initializator
 

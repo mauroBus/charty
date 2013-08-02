@@ -66,7 +66,7 @@ Labeled triangle chart drawer.
 
       var options3 = {
         instances : 1,
-        chartName : 'TextLabel'
+        chartName : 'Text'
       };
       var texts = this.mixin('MultipleInstancesMixin', this.base.append('g'), options3);
 
