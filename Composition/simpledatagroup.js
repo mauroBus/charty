@@ -3,8 +3,7 @@ Defines a basic chart to process individual data series
 
 @class SimpleDataGroup
 @extends BaseChart
-@requires d3,
-          d3.chart,
+@requires d3.chart,
           basechart
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
@@ -38,9 +37,7 @@ Defines a basic chart to process individual data series
     */
     transform : function (data) {
 
-      var top = data.next();
-      return top;
+      return data.next();
     }
   });
- })
-);
+}));

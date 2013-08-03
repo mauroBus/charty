@@ -4,8 +4,7 @@ Line chart combined with circles.
 @class LineChartCircles
 @constructor
 @extends MultipleDataGroup
-@requires	d3,
-					d3.chart,
+@requires	d3.chart,
 					multipledatagroup,
 					linechart,
 					multipleinstancesmixin
@@ -21,7 +20,8 @@ Line chart combined with circles.
     	'd3.chart',
     	'multipledatagroup',
     	'linechart',
-    	'multipleinstancesmixin'],
+    	'multipleinstancesmixin'
+    	],
     	function(d3) {
 	      /** Export global even in AMD case in case this script
 	      is loaded with others */
@@ -49,12 +49,12 @@ Line chart combined with circles.
 				instances : (args.instances || 1)
 			};
 
-			var lineChart = this.mixin('LineChart', this.base.append('g'), options);
-			var circles = this.mixin('MultipleInstancesMixin', this.base.append('g'), options);
+			var lineChart = this.mixin('LineChart', this.base.append('g'), options),
+					circles = this.mixin('MultipleInstancesMixin', this.base.append('g'), options);
 
 			this.componentsMixins = [];
 			this.componentsMixins.push(lineChart);
 			this.componentsMixins.push(circles);
 		}
 	});
-}))
+})); 

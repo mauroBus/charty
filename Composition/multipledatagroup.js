@@ -3,8 +3,7 @@ Defines a data transformation for composite charts
 
 @class MultipleDataGroup
 @extend BaseChart
-@requires d3,
-          d3.chart,
+@requires d3.chart,
           basechart
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
@@ -16,7 +15,8 @@ Defines a data transformation for composite charts
     /** AMD */
     define([
       'd3.chart',
-      'basechart'],
+      'basechart'
+      ],
       function(d3) {
         /** Export global even in AMD case in case this script
         is loaded with others */

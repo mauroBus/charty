@@ -138,5 +138,4 @@ Contains common functionality
       return this;
     }
   });
- })
-);
+}));

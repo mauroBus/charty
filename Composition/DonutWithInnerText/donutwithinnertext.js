@@ -12,8 +12,7 @@ doesn't depend on the data value.
 @class DonutWithInnerText
 @constructor
 @extends Donut
-@requires d3,
-          d3.chart,
+@requires d3.chart,
           donut
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
@@ -26,7 +25,8 @@ doesn't depend on the data value.
     define([
             'd3.chart',
             'donut'
-            ], function(d3) {
+            ], 
+            function(d3) {
       /** Export global even in AMD case in case this script
       is loaded with others */
       return factory(d3);
@@ -70,8 +70,8 @@ doesn't depend on the data value.
           chart.xPosition = (d.xPosition || (chart.w/2));
           chart.yPosition = (d.yPosition || (chart.h/2));
 
-          var data = d.data;
-          var stringValue = (data[0].x).toString() +'%';
+          var data = d.data,
+              stringValue = (data[0].x).toString() +'%';
 
           return this.selectAll('text').data([stringValue]);
         },

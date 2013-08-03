@@ -6,9 +6,8 @@ and it will append a specific chart to it.
 
 @class ChartsApi
 @constructor
-@requires d3,
+@requires d3.chart,
           scalesfactory,
-          d3.chart,
           barchart,
           labeledtrianglechart,
           linechart,
@@ -37,8 +36,7 @@ and it will append a specific chart to it.
         'donut',
         /*'groupedbarchart',*/
         'donutwithinnertext',
-        'linechartcircles',
-        'd3.chart'
+        'linechartcircles'
       ],
       function(d3, ScaleFactory) {
         /** Export global even in AMD case in case this script
@@ -70,8 +68,8 @@ and it will append a specific chart to it.
 										margin : {
 											left : 20,
 											top : 20,
-											lfactor : 4.2,
-											tfactor : 4.2
+											lfactor : 0.8
+											tfactor : 0.8
 									  }
 	@return {Object} d3.chart for data drawing
 	*/
@@ -91,8 +89,8 @@ and it will append a specific chart to it.
     var marginValues = {
       left: (options.marginleft || 0),
       top: (options.margintop || 0),
-      lfactor: (options.marginlfactor || 0),
-      tfactor: (options.margintfactor || 0)
+      lfactor: (options.marginlfactor || 1),
+      tfactor: (options.margintfactor || 1)
     };
 
     var svg = selection.append('svg')
@@ -104,8 +102,8 @@ and it will append a specific chart to it.
     /**
     Chart dimension values are porcentaje from svg adapted value.
     */
-    width = width - marginValues.top * marginValues.tfactor;
-    height = height - marginValues.left * marginValues.lfactor;
+    width = (width - marginValues.top) * marginValues.tfactor;
+    height = (height - marginValues.left) * marginValues.lfactor;
 
     if (options.imgUrl) {
       svg.append('svg:image')

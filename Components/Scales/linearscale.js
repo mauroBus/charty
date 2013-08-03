@@ -4,9 +4,8 @@ Linear scale for linear axis
 @class LinearScale
 @constructor
 @extends BaseScale
-@requires d3,
-			basescale,
-		  d3.chart
+@requires d3.chart,
+			basescale
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -51,7 +50,7 @@ Linear scale for linear axis
 	*/
 	LinearScale.prototype.setDomain = function(minValue, maxValue){
 		this.scale = this.scale.domain([minValue, maxValue]);
-			return this;
+		return this;
 	}
 
 	/**
@@ -107,27 +106,26 @@ Linear scale for linear axis
 	*/
 	LinearScale.prototype.calculateDomain = function(data, f){
 		var max = -100000,
-			min = 1000000;
-
-		var d = data.getData();
+				min = 1000000;
+			  d = data.getData();
 
 	  	d.forEach(function(element){
-		    var d = element.data;
-		    var maxg = d3.max(d, f);
-		    var ming = d3.min(d, f);
-		    if(maxg > max){
-		      max = maxg;
-		    }
-		    if(ming < min){
-				min = ming;
-		  	}
-		});
+			    var d = element.data,
+			        maxg = d3.max(d, f),
+			        ming = d3.min(d, f);
+
+			    if(maxg > max){
+			      max = maxg;
+			    }
+			    if(ming < min){
+					min = ming;
+			  	}
+			});
 
 	  	this.min = min;
 
-	  	return this.setDomain(Math.min(0, min), Math.max(0,max));
+	  	return this.setDomain(Math.min(0, min), Math.max(0, max));
 	};
 
 	return LinearScale;
-})
-);
+}));

@@ -3,6 +3,7 @@ Defines common scale functionality. Used as base element
 for inheritance.
 
 @class BaseScale
+@requires d3.chart
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */

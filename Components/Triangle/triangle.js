@@ -63,7 +63,7 @@ Triangle drawer.
 
           var chart = this.chart();
 
-          chart.c = d.color;
+          chart.c = (d.color || defaults.c);
 
           return this.selectAll('path').data(d.data);
 
@@ -78,25 +78,17 @@ Triangle drawer.
           return this.append('path');
         },
         events : {
-          'enter' : function(){
+          'merge' : function(){
 
-            var chart = this.chart();
-
-            return this.attr('class', function(d){
-                          return (d.c || chart.c || defaults.c);
-                        })
-                       .attr('d', function(d){
-                          return chart.getPath(d);
-                        });
-          },
-          'update' : function(){
-            var chart = this.chart();
+            var chart = this.chart(),
+                y1 = chart.yscale.map(0),
+                band = chart.xscale.band(1);
 
             return this.attr('class', function(d){
-                          return (d.c || chart.c || defaults.c);
+                          return (d.c || chart.c);
                         })
                        .attr('d', function(d){
-                          return chart.getPath(d);
+                          return chart.getPath(d, y1, band);
                         });
           },
           'exit' : function(){
@@ -119,11 +111,9 @@ Triangle drawer.
     @param {Object} d
     @return {String} path
     */
-    getPath : function(d){
+    getPath : function(d, y1, band){
 
-      var x1 = this.xscale.map(d.x,1),
-          y1 = this.yscale.map(0),
-          band = this.xscale.band(1);
+      var x1 = this.xscale.map(d.x,1); 
 
       return  ('M ' + x1 + ' ' + y1
               + ' L ' + (x1 + band/2) + ' ' + this.yscale.map(d.y) 
@@ -172,5 +162,4 @@ Triangle drawer.
       return p;
     }*/
   });
- })
-)
+})); 

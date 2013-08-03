@@ -4,10 +4,9 @@ to provide an easy way to switching scales in a defined chart
 
 @class ScaleFactory
 @constructor
-@requires d3,
+@requires d3.chart,
           ordinalscale,
-          linearscale,
-          d3.chart
+          linearscale
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -60,5 +59,4 @@ to provide an easy way to switching scales in a defined chart
 	}
 
 	return ScaleFactory;
-})
-);
+}));

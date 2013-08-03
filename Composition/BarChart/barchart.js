@@ -5,12 +5,11 @@ N data series
 @class BarChart
 @extends MultipleDataGroup
 @constructor
-@requires d3,
+@requires d3.chart,
           bar,
           multipledatagroup,
           yxyaxis,
-          multipleinstancesmixin,
-          d3.chart
+          multipleinstancesmixin
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -52,10 +51,10 @@ N data series
 			var options = {
 				chartName : 'Bar',
 				instances : (args.instances || 1),
-			};
+			}
 
-			var yxyaxis = this.mixin('YXYAxis', this.base.append('g')).showAsGrid();
-			var barChart = this.mixin('MultipleInstancesMixin', this.base.append('g'),options);
+			var yxyaxis = this.mixin('YXYAxis', this.base.append('g')).showAsGrid(),
+					barChart = this.mixin('MultipleInstancesMixin', this.base.append('g'),options);
 
 			this.componentsMixins = [];
 			this.componentsMixins.push(barChart);

@@ -5,8 +5,8 @@ One X Axis (bottom)
 
 @class YXYAxis
 @constructor
-@requires axis,
-          d3.chart
+@requires d3.chart,
+          axis
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */

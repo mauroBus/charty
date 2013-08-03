@@ -4,9 +4,8 @@ Ordinal Scale
 @class OrdinalScale
 @constructor
 @extends BaseScale
-@requires d3,
-			basescale,
-		  d3.chart
+@requires d3.chart,
+					basescale
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -105,9 +104,9 @@ Ordinal Scale
 	@chainable
 	*/
 	OrdinalScale.prototype.calculateDomain = function(data, f){
-		var dataSample = data.first().data;
+		var dataSample = data.first().data,
+				dom = dataSample.map(f);
 
-		var dom = dataSample.map(f);
 		return this.setDomain(dom);
 	}
 
@@ -122,5 +121,4 @@ Ordinal Scale
 	}
 
 	return OrdinalScale;
-})
-)
+}));

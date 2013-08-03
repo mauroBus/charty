@@ -4,9 +4,8 @@ Circle drawer.
 @class Circle
 @extends SimpleDataGroup
 @constructor
-@requires d3,
+@requires d3.chart,
           underscore,
-          d3.chart,
           simpledatagroup
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
@@ -19,8 +18,8 @@ Circle drawer.
     define([
       'd3.chart',
       'underscore',
-      'd3.chart',
-      'simpledatagroup'],
+      'simpledatagroup'
+      ],
       function(d3, _) {
         /** Export global even in AMD case in case this script
         is loaded with others */
@@ -41,6 +40,8 @@ Circle drawer.
     initialize : function(){
 
       /**
+      Defaults for circles.  
+
       r : circle radius
       c : circle color
       */
@@ -69,8 +70,24 @@ Circle drawer.
 
           var chart = this.chart();
 
-          chart.c = d.color;
-          chart.r = d.r;
+          chart.c = (d.color || defaults.c);
+
+          /** 
+          If custom radio is set, check for a valid value.
+
+          Otherwise, takes default value.  
+          */
+          if(d.r){
+            if( !_.isNumber(d.r) || d.r < 0 ){
+              throw new Error('Circle radius must be a positive number.' );
+            }
+            else{
+              chart.r = d.r;
+            }
+          }
+          else{
+            chart.r = defaults.r; 
+          }
 
           return this.selectAll('circle').data(d.data);
         },
@@ -84,38 +101,15 @@ Circle drawer.
           return this.append('circle');
         },
         events : {
-          'enter' : function(){
+          'merge' : function(){
 
             var chart = this.chart();
 
             return this.attr('class',function(d){
-                        return (d.c || chart.c || defaults.c);
+                        return (d.c || chart.c);
                       })
                       .attr("r", function(d){
-                        if((!_.isNumber(d.r) && !_.isNumber(chart.r))){
-                          if(d.r < 0 || chart.r < 0){
-                            throw new Error('Circle radius must be a positive number.' );
-                          }
-                        };
-                        return (d.r || chart.r || defaults.r);
-                      })
-                      .attr('cx', function(d) { return chart.xscale.map(d.x,0); })
-                      .attr('cy', function(d) { return chart.yscale.map(d.y,0); });
-          },
-          'update' : function(){
-
-            var chart = this.chart();
-
-            return this.attr('class',function(d){
-                        return (d.c || chart.c || defaults.c);
-                      })
-                      .attr('r', function(d){
-                        if((!_.isNumber(d.r) && !_.isNumber(chart.r))){
-                          if(d.r < 0 || chart.r < 0){
-                            throw new Error('Circle radius must be a positive number.' );
-                          }
-                        };
-                        return (d.r || chart.r || defaults.r);
+                        return (d.r || chart.r);
                       })
                       .attr('cx', function(d) { return chart.xscale.map(d.x,0); })
                       .attr('cy', function(d) { return chart.yscale.map(d.y,0); });
@@ -133,5 +127,4 @@ Circle drawer.
       this.layer('circles', this.base.append('g'), options);
     }
   });
- })
-);
+}));

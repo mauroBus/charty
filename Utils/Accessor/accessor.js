@@ -96,5 +96,4 @@ Accessor will iterate over the data collection.
   }
 
   return Accessor;
- })
-)
+}));

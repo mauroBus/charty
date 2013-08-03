@@ -90,8 +90,8 @@ Donut drawer.
 
           /** Radius calculation */
           var radius = Math.min(chart.w, chart.h) / 2,
-              ir = data.ir || defaults.ir,
-              or = data.or || defaults.or;
+              ir = (data.ir || defaults.ir),
+              or = (data.or || defaults.or);
 
           if (!_.isNumber(ir) || !_.isNumber(or)) {
             throw new Error('Radius for donut chart must be numerical values');

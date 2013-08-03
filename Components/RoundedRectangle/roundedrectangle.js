@@ -4,9 +4,8 @@ Rounded rectangle drawer.
 @class RoundedRectangle
 @constructor
 @extends SimpleDataGroup
-@requires d3,
+@requires d3.chart,
           underscore,
-          d3.chart,
           simpledatagroup
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
