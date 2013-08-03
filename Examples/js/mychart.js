@@ -108,8 +108,8 @@ function(ChartsApi, Accessor){
   var data4 = {
     ir :  90,
     or :  50,
-    xPosition : 200,
-    yPosition : 200,
+    /*xPosition : 200,
+    yPosition : 200,*/
     data : [
       {x : 25 , c: 'red'},
       {x : 175, c: 'gray'}
@@ -140,8 +140,8 @@ function(ChartsApi, Accessor){
     yAxis : 'linear',
     marginleft : 50,
     margintop : 20,
-    marginlfactor : 2,
-    margintfactor : 4.2
+    marginlfactor : 0.85,
+    margintfactor : 0.85
   };
 
   var options2 = {
@@ -151,8 +151,8 @@ function(ChartsApi, Accessor){
     yAxis : 'linear',
     marginleft : 50,
     margintop : 20,
-    marginlfactor : 2,
-    margintfactor : 4.2
+    marginlfactor : 0.85,
+    margintfactor : 0.85
   };
 
   var options3 = {
@@ -163,8 +163,8 @@ function(ChartsApi, Accessor){
     yAxis : 'linear',
     marginleft : 50,
     margintop : 20,
-    marginlfactor : 2,
-    margintfactor : 4.2
+    marginlfactor : 0.85,
+    margintfactor : 0.85
   };
 
   var options4 = {
@@ -175,16 +175,16 @@ function(ChartsApi, Accessor){
     yAxis : 'linear',
     marginleft : 50,
     margintop : 20,
-    marginlfactor : 2,
-    margintfactor : 4.2
+    marginlfactor : 0.85,
+    margintfactor : 0.85
   };
 
   var options6 = {
     chartName : 'DonutWithInnerText',
     instances : 1,
     root : '#chart6',
-    marginlfactor : 2,
-    margintfactor : 4.2
+    /*marginlfactor : 0.8,
+    margintfactor : 0.8*/
   };
 
   var options7 = {
@@ -195,8 +195,8 @@ function(ChartsApi, Accessor){
     yAxis : 'linear',
     marginleft : 50,
     margintop : 20,
-    marginlfactor : 2,
-    margintfactor : 4.2
+    marginlfactor : 0.85,
+    margintfactor : 0.85
   };
 
   /**
