@@ -111,20 +111,16 @@ Linear scale for linear axis
 
 	  	d.forEach(function(element){
 			    var d = element.data,
-			        maxg = d3.max(d, f),
+							maxg = d3.max(d, f),
 			        ming = d3.min(d, f);
 
-			    if(maxg > max){
-			      max = maxg;
-			    }
-			    if(ming < min){
-					min = ming;
-			  	}
+					max = Math.max(maxg, max);
+					min = Math.min(ming, min);
 			});
 
-	  	this.min = min;
+			this.min = min;
 
-	  	return this.setDomain(Math.min(0, min), Math.max(0, max));
+			return this.setDomain(Math.min(0, min), Math.max(0, max));
 	};
 
 	return LinearScale;
