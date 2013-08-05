@@ -75,6 +75,7 @@ Text labeling.
                             return chart.yscale.map(d.y);
                           })
                          .attr('text-anchor', 'middle')
+                         .attr('dy', '0.35em')
                          .text(function(d) { return d.y; });
           },
           'update' : function(){
