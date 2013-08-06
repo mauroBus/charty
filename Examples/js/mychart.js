@@ -183,6 +183,7 @@ function(ChartsApi, Accessor){
     chartName : 'DonutWithInnerText',
     instances : 1,
     root : '#chart6',
+    imgLocation : 'imgCenter',
     /*marginlfactor : 0.8,
     margintfactor : 0.8*/
   };

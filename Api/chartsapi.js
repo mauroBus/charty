@@ -95,22 +95,23 @@ and it will append a specific chart to it.
 
     var svg = selection.append('svg')
       .attr('width', width)
-      .attr('height', height)
-      .append('g')
-      .attr('transform', 'translate(' + marginValues.left + ',' + marginValues.top + ')');
+      .attr('height', height);
+
+    /**
+    Sets an background image via CSS
+    */
+    if (options.imgLocation) {
+      svg.attr('class', options.imgLocation);
+    }
+
+    svg = svg.append('g')
+            .attr('transform', 'translate(' + marginValues.left + ',' + marginValues.top + ')');
 
     /**
     Chart dimension values are porcentaje from svg adapted value.
     */
     width = (width - marginValues.top) * marginValues.tfactor;
     height = (height - marginValues.left) * marginValues.lfactor;
-
-    if (options.imgUrl) {
-      svg.append('svg:image')
-        .attr('xlink:href', options.imgUrl)
-        .attr('width', width)
-        .attr('height', height);
-    }
 
     /**
     Appends the chart to the specified html element.

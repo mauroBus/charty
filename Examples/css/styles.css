@@ -3,7 +3,6 @@
 */
 .viewport {
   float: left;
-
   width: 600px;
   height: 300px;
 }
@@ -70,4 +69,16 @@
 .axis .tick line {
   fill: none;
   stroke: lightgrey;
+}
+
+.imgCenter {
+  background : url('../img/image.png') 50% 50% no-repeat;
+}
+
+.imgLeft {
+  background : url('../img/image.png') center 50% no-repeat;
+}
+
+.imgRight {
+  background : url('../img/image.png') 100% 50% no-repeat;
 }
