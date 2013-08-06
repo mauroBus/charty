@@ -25,7 +25,7 @@ doesn't depend on the data value.
     define([
             'd3.chart',
             'donut'
-            ], 
+            ],
             function(d3) {
       /** Export global even in AMD case in case this script
       is loaded with others */
@@ -45,7 +45,7 @@ doesn't depend on the data value.
       */
       var defaults = {
         fontSize : 55
-      }
+      };
 
       var options = {
         /**

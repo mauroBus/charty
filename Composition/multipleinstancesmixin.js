@@ -49,9 +49,9 @@ Chart that can represent many data series
 
       for(var i = options.instances - 1; i >= 0; i--){
         var instance = this.mixin(options.chartName, this.base.append('g'));
-        instance.factor = (f--/options.instances);
+        instance.factor = ((f--)/options.instances);
         this.componentsMixins.push(instance);
       }
     }
   });
-})); 
+}));

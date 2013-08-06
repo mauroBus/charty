@@ -40,7 +40,7 @@ Circle drawer.
     initialize : function(){
 
       /**
-      Defaults for circles.  
+      Defaults for circles.
 
       r : circle radius
       c : circle color
@@ -72,10 +72,10 @@ Circle drawer.
 
           chart.c = (d.color || defaults.c);
 
-          /** 
+          /**
           If custom radio is set, check for a valid value.
 
-          Otherwise, takes default value.  
+          Otherwise, takes default value.
           */
           if(d.r){
             if( !_.isNumber(d.r) || d.r < 0 ){
@@ -86,7 +86,7 @@ Circle drawer.
             }
           }
           else{
-            chart.r = defaults.r; 
+            chart.r = defaults.r;
           }
 
           return this.selectAll('circle').data(d.data);

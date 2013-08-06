@@ -6,7 +6,7 @@ contain more. The idea is to draw an axis and locate it
 wherever is necessary.
 
 Wether Axis is a BaseChart, no need to extend it, since
-it will implement all the functions needed. 
+it will implement all the functions needed.
 
 @class Axis
 @constructor
@@ -78,7 +78,7 @@ it will implement all the functions needed.
 
           if(!chart.scale){
             throw new Error('Undefined scale for axis.');
-          };
+          }
 
           axis = axis.scale(chart.scale.getScale())
                      .orient(chart.o);
@@ -114,7 +114,7 @@ it will implement all the functions needed.
               */
               if(chart.xt !== 0 || chart.yt !== 0){
                 this.attr('transform', 'translate(' + chart.xt + ',' + chart.yt + ')');
-              };
+              }
 
               return this;
           },

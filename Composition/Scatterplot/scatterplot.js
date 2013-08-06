@@ -18,16 +18,16 @@ Scatterplot chart
   if (typeof define === 'function' && define.amd) {
     /** AMD */
     define([
-    	'd3.chart',
-    	'circle',
-    	'multipledatagroup',
-    	'yxyaxis',
-    	'multipleinstancesmixin'
+      'd3.chart',
+      'circle',
+      'multipledatagroup',
+      'yxyaxis',
+      'multipleinstancesmixin'
       ],
-    	function(d3) {
-	      /** Export global even in AMD case in case this script
+      function(d3) {
+        /** Export global even in AMD case in case this script
         is loaded with others */
-	      return factory(d3);
+        return factory(d3);
     });
   }
   else {
@@ -40,10 +40,10 @@ Scatterplot chart
 			var options = {
 				chartName : 'Circle',
 				instances : (args.instances || 1)
-			}
+			};
 
 			var yxyaxis = this.mixin('YXYAxis', this.base.append('g')).showAsGrid(),
-			    lineChart = this.mixin('MultipleInstancesMixin', this.base, options);
+          lineChart = this.mixin('MultipleInstancesMixin', this.base, options);
 
 			this.componentsMixins = [];
 			this.componentsMixins.push(lineChart);

@@ -39,8 +39,8 @@ Defines a data transformation for composite charts
     */
     transform : function(data){
 
-      this.xscale.calculateDomain(data, function(d){return d.x}).setRange(this.w);
-      this.yscale.calculateDomain(data, function(d){return d.y}).setRange(this.h);
+      this.xscale.calculateDomain(data, function(d){return d.x;}).setRange(this.w);
+      this.yscale.calculateDomain(data, function(d){return d.y;}).setRange(this.h);
 
       return data;
     }

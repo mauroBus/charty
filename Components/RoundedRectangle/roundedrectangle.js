@@ -78,7 +78,7 @@ Rounded rectangle drawer.
           var chart = this.chart();
 
           chart.rh = (d.rh || defaults.rh);
-          chart.rw = (d.rw || defaults.rw); 
+          chart.rw = (d.rw || defaults.rw);
           chart.rc = (d.rc || defaults.rc);
           chart.rx = (d.rx || defaults.rx);
           chart.ry = (d.ry || defaults.ry);

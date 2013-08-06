@@ -95,7 +95,7 @@ Text labeling.
             return this.remove();
           }
         }
-      }
+      };
 
       /**
       Layer creation

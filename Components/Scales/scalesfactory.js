@@ -17,13 +17,13 @@ to provide an easy way to switching scales in a defined chart
     /** AMD */
     define([
       'd3.chart',
-    	'ordinalscale',
-    	'linearscale',
+      'ordinalscale',
+      'linearscale',
       ],
-    	function(d3, OrdinalScale, LinearScale) {
-	      /** Export global even in AMD case in case this script
-	      is loaded with others */
-	      return factory(d3, OrdinalScale, LinearScale);
+      function(d3, OrdinalScale, LinearScale) {
+        /** Export global even in AMD case in case this script
+        is loaded with others */
+        return factory(d3, OrdinalScale, LinearScale);
     });
   }
   else {
@@ -56,7 +56,7 @@ to provide an easy way to switching scales in a defined chart
 		}
 
 		return scale;
-	}
+	};
 
 	return ScaleFactory;
 }));

@@ -27,7 +27,8 @@ Labeled triangle chart drawer.
       'textlabel',
       'multipleinstancesmixin',
       'yxyaxis',
-      'multipledatagroup'],
+      'multipledatagroup'
+      ],
       function(d3) {
         /** Export global even in AMD case in case this script
         is loaded with others */

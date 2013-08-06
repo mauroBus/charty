@@ -56,7 +56,7 @@ Base XY system for all the 2D charts.
     },
     /**
     Moves x axis according to given height value, and sets
-    tick size value. 
+    tick size value.
 
     @method
     @param {Number} newHeight chart's height

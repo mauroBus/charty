@@ -15,13 +15,13 @@ Ordinal Scale
   if (typeof define === 'function' && define.amd) {
     /** AMD */
     define([
-    	'd3.chart',
-    	'basescale',
-    	],
-    	function(d3, BaseScale) {
-	      /** Export global even in AMD case in case this script
-	      is loaded with others */
-	      return factory(d3, BaseScale);
+			'd3.chart',
+			'basescale',
+			],
+			function(d3, BaseScale) {
+				/** Export global even in AMD case in case this script
+				is loaded with others */
+				return factory(d3, BaseScale);
     });
   }
   else {
@@ -33,7 +33,7 @@ Ordinal Scale
 	var OrdinalScale = function(axisType){
 		this.scale = d3.scale.ordinal();
 		this.axisType = axisType;
-	}
+	};
 
 	/**
 	Inheritance from BaseScale
@@ -50,7 +50,7 @@ Ordinal Scale
 	OrdinalScale.prototype.setDomain = function(domain){
 		this.scale = this.scale.domain(domain);
 		return this;
-	}
+	};
 
 	/**
 	Sets the range for the scale
@@ -61,9 +61,9 @@ Ordinal Scale
 	*/
 	OrdinalScale.prototype.setRange = function(range){
 
-		this.scale = this.scale.rangeRoundBands(this.generateRange(range) , .1);
+		this.scale = this.scale.rangeRoundBands(this.generateRange(range) , 0.1);
 		return this;
-	}
+	};
 
 	/**
 	Maps a value to the current scaling
@@ -78,7 +78,7 @@ Ordinal Scale
 	*/
 	OrdinalScale.prototype.map = function(value, factor){
 		return (this.scale(value) + ((this.scale.rangeBand() - (this.scale.rangeBand() * factor))/2));
-	}
+	};
 
 	/**
 	Returns the range band for the scale
@@ -90,7 +90,7 @@ Ordinal Scale
 	*/
 	OrdinalScale.prototype.band = function(factor){
 		return (this.scale.rangeBand() * factor);
-	}
+	};
 
 	/**
 	Calculates the scale domain, based on a data collection and a
@@ -108,7 +108,7 @@ Ordinal Scale
 				dom = dataSample.map(f);
 
 		return this.setDomain(dom);
-	}
+	};
 
 	/**
 	Checks if domain wasn't previously calculated
@@ -118,7 +118,7 @@ Ordinal Scale
 	*/
 	OrdinalScale.prototype.defaultDomain = function(){
 		return (this.scale.domain().length === 0);
-	}
+	};
 
 	return OrdinalScale;
 }));

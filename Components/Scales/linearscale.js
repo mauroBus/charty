@@ -15,13 +15,13 @@ Linear scale for linear axis
   if (typeof define === 'function' && define.amd) {
     /** AMD */
     define([
-    	'd3.chart',
-    	'basescale'
-    	],
-    	function(d3, BaseScale) {
-	      /** Export global even in AMD case in case this script
-	      is loaded with others */
-	      return factory(d3, BaseScale);
+			'd3.chart',
+			'basescale'
+			],
+			function(d3, BaseScale) {
+				/** Export global even in AMD case in case this script
+				is loaded with others */
+				return factory(d3, BaseScale);
     });
   }
   else {
@@ -33,7 +33,7 @@ Linear scale for linear axis
 	var LinearScale = function(axisType){
 		this.scale = d3.scale.linear();
 		this.axisType = axisType;
-	}
+	};
 
 	/**
 	Inheritance from BaseScale
@@ -51,7 +51,7 @@ Linear scale for linear axis
 	LinearScale.prototype.setDomain = function(minValue, maxValue){
 		this.scale = this.scale.domain([minValue, maxValue]);
 		return this;
-	}
+	};
 
 	/**
 	Sets the range for the linear scale
@@ -64,7 +64,7 @@ Linear scale for linear axis
 
 		this.scale = this.scale.range(this.generateRange(range));
 		return this;
-	}
+	};
 
 	/**
 	Returns scaled value
@@ -75,7 +75,7 @@ Linear scale for linear axis
 	*/
 	LinearScale.prototype.map = function(value){
 		return this.scale(value);
-	}
+	};
 
 	/**
 	Returns band for a specified value
@@ -88,7 +88,7 @@ Linear scale for linear axis
 	*/
 	LinearScale.prototype.band = function(max, value){
 		return (max - this.scale(value));
-	}
+	};
 
 	/**
 	Calculates the domain for the linear scale
@@ -107,12 +107,12 @@ Linear scale for linear axis
 	LinearScale.prototype.calculateDomain = function(data, f){
 		var max = -100000,
 				min = 1000000;
-			  d = data.getData();
+				d = data.getData();
 
-	  	d.forEach(function(element){
-			    var d = element.data,
+				d.forEach(function(element){
+					var d = element.data,
 							maxg = d3.max(d, f),
-			        ming = d3.min(d, f);
+							ming = d3.min(d, f);
 
 					max = Math.max(maxg, max);
 					min = Math.min(ming, min);

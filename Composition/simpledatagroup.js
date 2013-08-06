@@ -15,7 +15,8 @@ Defines a basic chart to process individual data series
     /** AMD */
     define([
       'd3.chart',
-      'basechart'],
+      'basechart'
+      ],
       function(d3) {
         /** Export global even in AMD case in case this script
         is loaded with others */

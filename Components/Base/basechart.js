@@ -44,18 +44,18 @@ Contains common functionality
 
       if(arguments.length === 0){
         return this.w;
-      };
+      }
 
       if(!newWidth || !_.isNumber(newWidth) || newWidth < 0){
         throw new Error('Invalid width value for chart.');
-      };
+      }
 
       this.w = newWidth;
       if(this.componentsMixins){
         _.each(this.componentsMixins, function (element){
           element.width(newWidth);
-        }); 
-      }; 
+        });
+      }
 
       return this;
     },
@@ -70,11 +70,11 @@ Contains common functionality
 
       if(arguments.length === 0){
         return this.h;
-      };
+      }
 
       if(!newHeight || !_.isNumber(newHeight) || newHeight < 0){
         throw new Error('Invalid height value for chart.');
-      };
+      }
 
       this.h = newHeight;
       if(this.componentsMixins){
@@ -133,7 +133,7 @@ Contains common functionality
         _.each(this.componentsMixins, function (element){
           element.setYScale(scale);
         });
-      };
+      }
 
       return this;
     }

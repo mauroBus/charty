@@ -78,7 +78,7 @@ another one for the data mapping.
       @property
       @type {Object} LinearScale / OrdinalScale
       */
-      this.xscale.calculateDomain(data, function(d){return d.x}).setRange(this.w);
+      this.xscale.calculateDomain(data, function(d){return d.x;}).setRange(this.w);
 
       /**
       Since it is a regular bar chart, an ordinal scale
@@ -92,9 +92,8 @@ another one for the data mapping.
         console.log(element);
       });
 
-      this.yscale.calculateDomain(data, function(d){return d.y}).setRange(this.h);
+      this.yscale.calculateDomain(data, function(d){return d.y;}).setRange(this.h);
 
     }
   });
- })
-);
+}));

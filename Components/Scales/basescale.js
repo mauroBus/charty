@@ -28,7 +28,7 @@ for inheritance.
 
 	var BaseScale = function(){
 
-	}
+	};
 
 	/**
 	Returns the created scale
@@ -38,7 +38,7 @@ for inheritance.
 	*/
 	BaseScale.prototype.getScale = function(){
 		return this.scale;
-	}
+	};
 
 	/**
 	Generates range value for a scale.
@@ -55,7 +55,7 @@ for inheritance.
 		}
 		else{
 			if(this.axisType === 'y'){
-				r = [range,0]
+				r = [range,0];
 			}
 			else{
 				throw new Error('No scale was defined for this scale.');
@@ -63,7 +63,7 @@ for inheritance.
 		}
 
 		return r;
-	}
+	};
 
 	return BaseScale;
 

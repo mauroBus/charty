@@ -17,15 +17,15 @@ Line chart combined with circles.
   if (typeof define === 'function' && define.amd) {
     /** AMD */
     define([
-    	'd3.chart',
-    	'multipledatagroup',
-    	'linechart',
-    	'multipleinstancesmixin'
-    	],
-    	function(d3) {
-	      /** Export global even in AMD case in case this script
-	      is loaded with others */
-	      return factory(d3);
+      'd3.chart',
+      'multipledatagroup',
+      'linechart',
+      'multipleinstancesmixin'
+      ],
+      function(d3) {
+        /** Export global even in AMD case in case this script
+        is loaded with others */
+        return factory(d3);
     });
   }
   else {
@@ -39,8 +39,8 @@ Line chart combined with circles.
 
 		@method
 		@param {Object} args example = {
-												 		instances : 2
-												 }
+                              instances : 2
+                          }
 		*/
 		initialize : function(args){
 
@@ -57,4 +57,4 @@ Line chart combined with circles.
 			this.componentsMixins.push(circles);
 		}
 	});
-})); 
+}));

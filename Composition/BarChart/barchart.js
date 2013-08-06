@@ -20,15 +20,15 @@ N data series
     /** AMD */
     define([
       'd3.chart',
-    	'bar',
-    	'multipledatagroup',
-    	'yxyaxis',
-    	'multipleinstancesmixin',
-    	],
-    	function(d3) {
-	      /** Export global even in AMD case in case this script
-	      is loaded with others */
-	      return factory(d3);
+      'bar',
+      'multipledatagroup',
+      'yxyaxis',
+      'multipleinstancesmixin',
+      ],
+      function(d3) {
+        /** Export global even in AMD case in case this script
+        is loaded with others */
+        return factory(d3);
     });
   }
   else {
@@ -43,15 +43,15 @@ N data series
 
 		@method
 		@param {Object} args example = {
-										   instances : 2,
-									   }
+                          instances : 2,
+                        }
 		*/
 		initialize : function(args){
 
 			var options = {
 				chartName : 'Bar',
-				instances : (args.instances || 1),
-			}
+				instances : (args.instances || 1)
+			};
 
 			var yxyaxis = this.mixin('YXYAxis', this.base.append('g')).showAsGrid(),
 					barChart = this.mixin('MultipleInstancesMixin', this.base.append('g'),options);

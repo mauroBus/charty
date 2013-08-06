@@ -70,14 +70,14 @@ and it will append a specific chart to it.
 											top : 20,
 											lfactor : 0.8
 											tfactor : 0.8
-									  }
+                    }
 	@return {Object} d3.chart for data drawing
 	*/
   ChartsApi.prototype.chart = function(options) {
 
     if (!options.root || !options.chartName) {
       throw new Error('Root element or chart name not defined');
-    };
+    }
 
     var selection = d3.select(options.root),
         height = (parseInt(selection.style('height'), 10) || 200),
@@ -127,10 +127,10 @@ and it will append a specific chart to it.
     */
     if (options.xAxis){
       chart = chart.setXScale(this.scaleFactory.scale(options.xAxis,'x'));
-    };
+    }
     if (options.yAxis){
       chart = chart.setYScale(this.scaleFactory.scale(options.yAxis,'y'));
-    };
+    }
 
     return chart;
   };
@@ -156,7 +156,7 @@ and it will append a specific chart to it.
     MULTIPLE_DATA_GROUP: 'MultipleDataGroup',
     MULTIPLE_INSTANCES_MIXIN: 'MultipleInstancesMixin',
     SIMPLE_DATA_GROUP: 'SimpleDataGroup'
-  }
+  };
 
   /**
 	Axis types are defined as constants
@@ -164,7 +164,7 @@ and it will append a specific chart to it.
   ChartsApi.prototype.AXIS_TYPES = {
     ORDINAL: 'ordinal',
     LINEAR: 'linear'
-  }
+  };
 
   return ChartsApi;
 

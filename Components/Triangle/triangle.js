@@ -113,11 +113,11 @@ Triangle drawer.
     */
     getPath : function(d, y1, band){
 
-      var x1 = this.xscale.map(d.x,1); 
+      var x1 = this.xscale.map(d.x,1);
 
-      return  ('M ' + x1 + ' ' + y1
-              + ' L ' + (x1 + band/2) + ' ' + this.yscale.map(d.y) 
-              + ' L ' + (x1 + band) + ' ' + y1);
+      return  ('M ' + x1 + ' ' + y1 +
+              ' L ' + (x1 + band/2) + ' ' + this.yscale.map(d.y) +
+              ' L ' + (x1 + band) + ' ' + y1);
     }
     /**
     Triangle drawer IS SimpleDataInput
@@ -162,4 +162,4 @@ Triangle drawer.
       return p;
     }*/
   });
-})); 
+}));

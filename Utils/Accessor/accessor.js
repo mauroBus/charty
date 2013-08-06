@@ -93,7 +93,7 @@ Accessor will iterate over the data collection.
   */
   Accessor.prototype.setData = function(data){
     this.data = data;
-  }
+  };
 
   return Accessor;
 }));

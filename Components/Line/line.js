@@ -102,7 +102,7 @@ Line drawing.
             return this.remove();
           }
         }
-      }
+      };
 
       /**
       Layer creation
