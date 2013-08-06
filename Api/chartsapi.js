@@ -84,6 +84,13 @@ and it will append a specific chart to it.
         width  = (parseInt(selection.style('width'), 10) || 200);
 
     /**
+    Sets background image via CSS
+    */
+    if (options.imgLocation){
+      selection.classed(options.imgLocation, true);
+    }
+
+    /**
     Set default values for margin, for the svg element.
     */
     var marginValues = {
@@ -96,13 +103,6 @@ and it will append a specific chart to it.
     var svg = selection.append('svg')
       .attr('width', width)
       .attr('height', height);
-
-    /**
-    Sets an background image via CSS
-    */
-    if (options.imgLocation) {
-      svg.attr('class', options.imgLocation);
-    }
 
     svg = svg.append('g')
             .attr('transform', 'translate(' + marginValues.left + ',' + marginValues.top + ')');
