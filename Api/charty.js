@@ -45,7 +45,6 @@ Define constants that will be used as names for different parts
     MULTIPLE_DATA_GROUP: 'MultipleDataGroup',
     MULTIPLE_INSTANCES_MIXIN: 'MultipleInstancesMixin',
     SIMPLE_DATA_GROUP: 'SimpleDataGroup',
-    BAR_CHART : 'BarChart',
     DONUT_INNER_TEXT : 'DonutWithInnerText',
     GROUPED_BAR_CHART : 'GroupedBarChart',
     LINE_CHART : 'LineChart',
