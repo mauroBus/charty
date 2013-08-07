@@ -5,6 +5,7 @@ Chart that can represent many data series
 @extends BaseChart
 @constructor
 @requires d3.chart,
+          charty,
           basechart
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
@@ -16,20 +17,23 @@ Chart that can represent many data series
     /** AMD */
     define([
       'd3.chart',
+      'charty',
       'basechart'
       ],
-      function(d3) {
+      function(d3, charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3);
+        return factory(d3, charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3);
+    return factory(d3, charty);
   }
-}(this, function(d3) {
-  d3.chart('BaseChart').extend('MultipleInstancesMixin', {
+}(this, function(d3, charty) {
+
+  d3.chart(charty.CHART_NAMES.BASE_CHART)
+    .extend(charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, {
     /**
     Creates multiple mixin instances of a specific chart.
     It is necessary to set the instances count

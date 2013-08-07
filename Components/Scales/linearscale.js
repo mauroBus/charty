@@ -5,7 +5,7 @@ Linear scale for linear axis
 @constructor
 @extends BaseScale
 @requires d3.chart,
-			basescale
+					basescale
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */

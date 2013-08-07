@@ -5,6 +5,7 @@ to provide an easy way to switching scales in a defined chart
 @class ScaleFactory
 @constructor
 @requires d3.chart,
+          charty,
           ordinalscale,
           linearscale
 
@@ -17,20 +18,21 @@ to provide an easy way to switching scales in a defined chart
     /** AMD */
     define([
       'd3.chart',
+      'charty',
       'ordinalscale',
       'linearscale',
       ],
-      function(d3, OrdinalScale, LinearScale) {
+      function(d3, charty, OrdinalScale, LinearScale) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, OrdinalScale, LinearScale);
+        return factory(d3, charty, OrdinalScale, LinearScale);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3, OrdinalScale, LinearScale);
+    return factory(d3, charty, OrdinalScale, LinearScale);
   }
-}(this, function(d3, OrdinalScale, LinearScale) {
+}(this, function(d3, charty, OrdinalScale, LinearScale) {
 	var ScaleFactory = function(){
 
 	};
@@ -47,10 +49,10 @@ to provide an easy way to switching scales in a defined chart
 		var scale;
 
 		switch(scaleType){
-			case 'ordinal' :
+			case charty.AXIS_TYPE.ORDINAL :
 				scale = new OrdinalScale(axisType);
 				break;
-			case 'linear' :
+			case charty.AXIS_TYPE.LINEAR :
 				scale = new LinearScale(axisType);
 				break;
 		}

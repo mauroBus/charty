@@ -5,6 +5,7 @@ Scatterplot chart
 @extends MultipleDataGroup
 @constructor
 @requires d3.chart,
+          charty,
           circle,
           multipledatagroup,
           yxyaxis,
@@ -19,31 +20,34 @@ Scatterplot chart
     /** AMD */
     define([
       'd3.chart',
+      'charty',
       'circle',
       'multipledatagroup',
       'yxyaxis',
       'multipleinstancesmixin'
       ],
-      function(d3) {
+      function(d3, charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3);
+        return factory(d3, charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3);
+    return factory(d3, charty);
   }
-}(this, function(d3) {
-	d3.chart('MultipleDataGroup').extend('Scatterplot',{
+}(this, function(d3, charty) {
+	d3.chart(charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
+    .extend(charty.CHART_NAMES.SCATTERPLOT, {
+
 		initialize : function(args){
 			var options = {
-				chartName : 'Circle',
+				chartName : charty.CHART_NAMES.CIRCLE,
 				instances : (args.instances || 1)
 			};
 
-			var yxyaxis = this.mixin('YXYAxis', this.base.append('g')).showAsGrid(),
-          lineChart = this.mixin('MultipleInstancesMixin', this.base, options);
+			var yxyaxis = this.mixin(charty.CHART_NAMES.YXY_AXIS, this.base.append('g')).showAsGrid(),
+          lineChart = this.mixin(charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base, options);
 
 			this.componentsMixins = [];
 			this.componentsMixins.push(lineChart);

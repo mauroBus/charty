@@ -6,6 +6,7 @@ One X Axis (bottom)
 @class YXYAxis
 @constructor
 @requires d3.chart,
+          charty,
           axis
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
@@ -17,29 +18,30 @@ One X Axis (bottom)
     /** AMD */
     define([
       'd3.chart',
+      'charty',
       'axis',
       ],
-      function(d3) {
+      function(d3, charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3);
+        return factory(d3, charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3);
+    return factory(d3, charty);
   }
-}(this, function(d3) {
-  d3.chart('YXYAxis',{
+}(this, function(d3, charty) {
+  d3.chart(charty.CHART_NAMES.YXY_AXIS, {
     /**
     Defines as a mixin a right Y axis, a left Y axis, a X bottom axis
 
     @method
     */
     initialize : function(){
-      this.xaxis = this.mixin('Axis', this.base.append('g')).orient('bottom');
-      this.yaxisleft = this.mixin('Axis',this.base.append('g')).orient('left');
-      this.yaxisright = this.mixin('Axis', this.base.append('g')).orient('right');
+      this.xaxis = this.mixin(charty.CHART_NAMES.AXIS, this.base.append('g')).orient('bottom');
+      this.yaxisleft = this.mixin(charty.CHART_NAMES.AXIS,this.base.append('g')).orient('left');
+      this.yaxisright = this.mixin(charty.CHART_NAMES.AXIS, this.base.append('g')).orient('right');
 
     },
     /**

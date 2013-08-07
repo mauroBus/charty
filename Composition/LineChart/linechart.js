@@ -6,6 +6,7 @@ Takes N input data series
 @extends MultipleDataGroup
 @constructor
 @requires d3.chart,
+          charty,
           line,
           multipledatagroup
 
@@ -18,21 +19,23 @@ Takes N input data series
     /** AMD */
     define([
       'd3.chart',
+      'charty',
       'line',
       'multipledatagroup'
       ],
-      function(d3) {
+      function(d3, charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3);
+        return factory(d3, charty);
       });
   }
   else {
     /** Browser globals */
-    return factory(d3);
+    return factory(d3, charty);
   }
-}(this, function(d3) {
-	d3.chart('MultipleDataGroup').extend('LineChart',{
+}(this, function(d3, charty) {
+	d3.chart(charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
+    .extend(charty.CHART_NAMES.LINE_CHART,{
 		/**
 		Multiple data group initializator.
 
@@ -43,12 +46,12 @@ Takes N input data series
 		*/
 		initialize : function(args){
 			var options = {
-				chartName : 'Line',
+				chartName : charty.CHART_NAMES.LINE,
 				instances : (args.instances || 1)
 			};
 
-			var yxyaxis = this.mixin('YXYAxis', this.base.append('g')).showAsGrid(),
-					lineChart = this.mixin('MultipleInstancesMixin', this.base.append('g'), options);
+			var yxyaxis = this.mixin(charty.CHART_NAMES.YXY_AXIS, this.base.append('g')).showAsGrid(),
+					lineChart = this.mixin(charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base.append('g'), options);
 
 			this.componentsMixins = [];
 			this.componentsMixins.push(lineChart);

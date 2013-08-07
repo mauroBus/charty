@@ -23,19 +23,19 @@ Define constants that will be used as names for different parts
   }
 }(this, function() {
 
-  var ChartNames = function(){
+  var Charty = {
 
   };
 
-  ChartNames.prototype.CHART_NAMES = {
+  Charty.CHART_NAMES = {
     AXIS: 'Axis',
     BAR: 'Bar',
     BASE_CHART: 'BaseChart',
     CIRCLE: 'Circle',
     DONUT: 'Donut',
     LINE: 'Line',
-    ROUNDED_RECTANGLES: 'RoundedRectangle',
-    TEXT_LABEL: 'TextLabel',
+    ROUNDED_RECTANGLE: 'RoundedRectangle',
+    TEXT: 'Text',
     TRIANGLE: 'Triangle',
     XY_AXIS: 'XYAxis',
     YXY_AXIS: 'YXYAxis',
@@ -44,16 +44,29 @@ Define constants that will be used as names for different parts
     SCATTERPLOT: 'Scatterplot',
     MULTIPLE_DATA_GROUP: 'MultipleDataGroup',
     MULTIPLE_INSTANCES_MIXIN: 'MultipleInstancesMixin',
-    SIMPLE_DATA_GROUP: 'SimpleDataGroup'
+    SIMPLE_DATA_GROUP: 'SimpleDataGroup',
+    BAR_CHART : 'BarChart',
+    DONUT_INNER_TEXT : 'DonutWithInnerText',
+    GROUPED_BAR_CHART : 'GroupedBarChart',
+    LINE_CHART : 'LineChart',
+    LINE_CHART_CIRCLES : 'LineChartCircles'
   };
 
   /**
   Axis types are defined as constants
   */
-  ChartNames.prototype.AXIS_TYPES = {
+  Charty.AXIS_TYPE = {
     ORDINAL: 'ordinal',
     LINEAR: 'linear'
   };
 
-  return ChartNames;
+  /**
+  Axis defined as constants
+  */
+  Charty.AXIS = {
+    X : 'x',
+    Y : 'y'
+  };
+
+  return Charty;
 }));

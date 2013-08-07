@@ -5,6 +5,7 @@ Text labeling.
 @extends SimpleDataGroup
 @constructor
 @requires d3.chart,
+          charty,
           simpledatagroup
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
@@ -16,20 +17,22 @@ Text labeling.
     /** AMD */
     define([
       'd3.chart',
+      'charty',
       'simpledatagroup'
       ],
-      function(d3) {
+      function(d3, charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3);
+        return factory(d3, charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3);
+    return factory(d3, charty);
   }
-}(this, function(d3) {
-  d3.chart('SimpleDataGroup').extend('Text', {
+}(this, function(d3, charty) {
+  d3.chart(charty.CHART_NAMES.SIMPLE_DATA_GROUP)
+    .extend(charty.CHART_NAMES.TEXT, {
     /**
     Text label initializator
 

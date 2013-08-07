@@ -5,6 +5,7 @@ Triangle drawer.
 @constructor
 @extends SimpleDataGroup
 @requires d3.chart,
+          charty,
           simpledatagroup
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
@@ -16,20 +17,22 @@ Triangle drawer.
     /** AMD */
     define([
       'd3.chart',
+      'charty',
       'simpledatagroup'
       ],
-      function(d3) {
+      function(d3, charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3);
+        return factory(d3, charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3);
+    return factory(d3, charty);
   }
-}(this, function(d3) {
-  d3.chart('SimpleDataGroup').extend('Triangle',{
+}(this, function(d3, charty) {
+  d3.chart(charty.CHART_NAMES.SIMPLE_DATA_GROUP)
+    .extend(charty.CHART_NAMES.TRIANGLE, {
     /**
     Triangle initialization
 

@@ -4,8 +4,8 @@ Labeled triangle chart drawer.
 @class LabeledTriangleChart
 @extends MultipleDataGroup
 @constructor
-@requires d3,
-          d3.chart,
+@requires d3.chart,
+          charty,
           triangle,
           roundedrectangle,
           textlabel,
@@ -22,6 +22,7 @@ Labeled triangle chart drawer.
     /** AMD */
     define([
       'd3.chart',
+      'charty',
       'triangle',
       'roundedrectangle',
       'textlabel',
@@ -29,18 +30,19 @@ Labeled triangle chart drawer.
       'yxyaxis',
       'multipledatagroup'
       ],
-      function(d3) {
+      function(d3, charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3);
+        return factory(d3, charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3);
+    return factory(d3, charty);
   }
-}(this, function(d3) {
-  d3.chart('MultipleDataGroup').extend('LabeledTriangleChart', {
+}(this, function(d3, charty) {
+  d3.chart(charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
+    .extend(charty.CHART_NAMES.LABELED_TRIANGLE_CHART, {
     /**
     Labeled triangle constructor.
 
@@ -51,10 +53,10 @@ Labeled triangle chart drawer.
     */
     initialize: function() {
 
-      var yxyaxis = this.mixin('YXYAxis', this.base.append('g')).showAsGrid(),
-          triangles = this.mixin('Triangle', this.base.append('g')),
-          recs = this.mixin('RoundedRectangle', this.base.append('g')),
-          texts = this.mixin('Text', this.base.append('g'));
+      var yxyaxis = this.mixin(charty.CHART_NAMES.YXY_AXIS, this.base.append('g')).showAsGrid(),
+          triangles = this.mixin(charty.CHART_NAMES.TRIANGLE, this.base.append('g')),
+          recs = this.mixin(charty.CHART_NAMES.ROUNDED_RECTANGLE, this.base.append('g')),
+          texts = this.mixin(charty.CHART_NAMES.TEXT, this.base.append('g'));
 
       this.componentsMixins = [];
       this.componentsMixins.push(triangles);

@@ -8,6 +8,7 @@ another one for the data mapping.
 @extends MultipleDataGroup
 @requires d3,
           scalesfactory,
+          charty,
           d3.chart,
           bar,
           xyaxis,
@@ -21,24 +22,26 @@ another one for the data mapping.
     /** AMD */
     define([
             'd3.chart',
+            'charty',
             'scalesfactory',
             'bar',
             'xyaxis',
             'multipledatagroup',
             'multipleinstancesmixin',
            ],
-           function(d3, ScaleFactory) {
+           function(d3, ScaleFactory, charty) {
       /** Export global even in AMD case in case this script
       is loaded with others */
-      return factory(d3, ScaleFactory);
+      return factory(d3, ScaleFactory, charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3, ScaleFactory);
+    return factory(d3, ScaleFactory, charty);
   }
-}(this, function(d3, ScaleFactory) {
-  d3.chart('MultipleDataGroup').extend('GroupedBarChart',{
+}(this, function(d3, ScaleFactory, charty) {
+  d3.chart(charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
+    .extend(charty.CHART_NAMES.GROUPED_BAR_CHART, {
     /**
     Grouper Bar Chart initializer.
 
@@ -47,12 +50,12 @@ another one for the data mapping.
     initialize : function(args){
 
       var options = {
-        chartName : 'Bar',
+        chartName : charty.CHART_NAMES.BAR,
         instances : (args.instances || 1)
       };
 
-      var barChart = this.mixin('MultipleInstancesMixin', this.base.append('g'), options);
-      var xyaxis = this.mixin('XYAxis', this.base.append('g')).showAsGrid();
+      var barChart = this.mixin(charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base.append('g'), options);
+      var xyaxis = this.mixin(charty.CHART_NAMES.XY_AXIS, this.base.append('g')).showAsGrid();
 
       this.componentsMixin = [];
       this.componentsMixin.push(barChart);

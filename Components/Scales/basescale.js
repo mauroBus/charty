@@ -3,7 +3,8 @@ Defines common scale functionality. Used as base element
 for inheritance.
 
 @class BaseScale
-@requires d3.chart
+@requires d3.chart,
+          charty
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -12,19 +13,20 @@ for inheritance.
   if (typeof define === 'function' && define.amd) {
     /** AMD */
     define([
-      'd3.chart'
+      'd3.chart',
+      'charty'
       ],
-      function(d3) {
+      function(d3, charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3);
+        return factory(d3, charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3);
+    return factory(d3, charty);
   }
-}(this, function(d3) {
+}(this, function(d3, charty) {
 
 	var BaseScale = function(){
 
@@ -50,11 +52,11 @@ for inheritance.
 	BaseScale.prototype.generateRange = function(range){
 		var r ;
 
-		if(this.axisType === 'x'){
+		if(this.axisType === charty.AXIS.X){
 			r = [0,range];
 		}
 		else{
-			if(this.axisType === 'y'){
+			if(this.axisType === charty.AXIS.Y){
 				r = [range,0];
 			}
 			else{
@@ -66,5 +68,4 @@ for inheritance.
 	};
 
 	return BaseScale;
-
 }));

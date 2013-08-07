@@ -6,6 +6,7 @@ N data series
 @extends MultipleDataGroup
 @constructor
 @requires d3.chart,
+          charty,
           bar,
           multipledatagroup,
           yxyaxis,
@@ -20,24 +21,26 @@ N data series
     /** AMD */
     define([
       'd3.chart',
+      'charty',
       'bar',
       'multipledatagroup',
       'yxyaxis',
       'multipleinstancesmixin',
       ],
-      function(d3) {
+      function(d3, charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3);
+        return factory(d3, charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3);
+    return factory(d3, charty);
   }
-}(this, function(d3) {
+}(this, function(d3, charty) {
 
-	d3.chart('MultipleDataGroup').extend('BarChart',{
+	d3.chart(charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
+    .extend(charty.CHART_NAMES.BAR_CHART,{
 		/**
 		BarChart initialization.
 
@@ -49,12 +52,12 @@ N data series
 		initialize : function(args){
 
 			var options = {
-				chartName : 'Bar',
+				chartName : charty.CHART_NAMES.BAR,
 				instances : (args.instances || 1)
 			};
 
-			var yxyaxis = this.mixin('YXYAxis', this.base.append('g')).showAsGrid(),
-					barChart = this.mixin('MultipleInstancesMixin', this.base.append('g'),options);
+			var yxyaxis = this.mixin(charty.CHART_NAMES.YXY_AXIS, this.base.append('g')).showAsGrid(),
+					barChart = this.mixin(charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base.append('g'),options);
 
 			this.componentsMixins = [];
 			this.componentsMixins.push(barChart);

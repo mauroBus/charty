@@ -4,6 +4,7 @@ Base XY system for all the 2D charts.
 @class XYAxis
 @constructor
 @requires d3.chart,
+          charty,
           axis
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
@@ -15,20 +16,22 @@ Base XY system for all the 2D charts.
     /** AMD */
     define([
       'd3.chart',
+      'charty',
       'axis'
       ],
-      function(d3) {
+      function(d3, charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3);
+        return factory(d3, charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3);
+    return factory(d3, charty);
   }
-}(this, function(d3) {
-  d3.chart('XYAxis',{
+}(this, function(d3, charty) {
+
+  d3.chart(charty.CHART_NAMES.XY_AXIS, {
     /**
     XY axis system initializer
 
@@ -36,10 +39,10 @@ Base XY system for all the 2D charts.
     */
     initialize : function(){
 
-        this.xaxis = this.mixin('Axis',this.base.append('g'))
+        this.xaxis = this.mixin(charty.CHART_NAMES.AXIS,this.base.append('g'))
                          .orient('bottom');
 
-        this.yaxis = this.mixin('Axis',this.base.append('g'))
+        this.yaxis = this.mixin(charty.CHART_NAMES.AXIS,this.base.append('g'))
                          .orient('left');
 
     },

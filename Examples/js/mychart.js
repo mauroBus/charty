@@ -21,6 +21,9 @@ require.config({
     /** Api */
     'chartsapi'               : '../../Api/chartsapi',
 
+    /** Name constants */
+    'charty'                  : '../../Api/charty',
+
     /** Components */
     'axis'                    : '../../Components/Axis/axis',
     'bar'                     : '../../Components/Bar/bar',

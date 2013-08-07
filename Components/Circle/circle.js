@@ -18,20 +18,22 @@ Circle drawer.
     define([
       'd3.chart',
       'underscore',
+      'charty',
       'simpledatagroup'
       ],
-      function(d3, _) {
+      function(d3, _, charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, _);
+        return factory(d3, _, charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3, _);
+    return factory(d3, _, charty);
   }
-}(this, function(d3, _) {
-  d3.chart('SimpleDataGroup').extend('Circle',{
+}(this, function(d3, _, charty) {
+  d3.chart(charty.CHART_NAMES.SIMPLE_DATA_GROUP)
+    .extend(charty.CHART_NAMES.CIRCLE,{
     /**
     Circle initializator
 
