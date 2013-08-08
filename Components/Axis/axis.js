@@ -61,6 +61,15 @@ it will implement all the functions needed.
       */
       this.yt = 0;
 
+      /**
+      Defaults for axis
+
+      c : axis style class
+      */
+      var defaults = {
+        c : 'axis'
+      };
+
       var axis = d3.svg.axis();
 
       /**
@@ -82,6 +91,8 @@ it will implement all the functions needed.
           if(!chart.scale){
             throw new Error('Undefined scale for axis.');
           }
+
+          chart.c = (d.c || defaults.c);
 
           axis = axis.scale(chart.scale.getScale())
                      .orient(chart.o);
@@ -109,7 +120,7 @@ it will implement all the functions needed.
                   axis = axis.tickSize(-chart.tsize,0,0);
               }
 
-              this.attr('class','axis')
+              this.attr('class', chart.c)
                   .call(axis);
 
               /**
