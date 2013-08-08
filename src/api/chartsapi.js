@@ -136,37 +136,5 @@ and it will append a specific chart to it.
     return chart;
   };
 
-  /**
-	Chart names are defined as constants
-	*/
-  ChartsApi.prototype.CHART_NAMES = {
-    AXIS: 'Axis',
-    BAR: 'Bar',
-    BASE_CHART: 'BaseChart',
-    CIRCLE: 'Circle',
-    DONUT: 'Donut',
-    LINE: 'Line',
-    ROUNDED_RECTANGLES: 'RoundedRectangle',
-    TEXT_LABEL: 'TextLabel',
-    TRIANGLE: 'Triangle',
-    XY_AXIS: 'XYAxis',
-    YXY_AXIS: 'YXYAxis',
-    BAR_CHART: 'BarChart',
-    LABELED_TRIANGLE_CHART: 'LabeledTriangleChart',
-    SCATTERPLOT: 'Scatterplot',
-    MULTIPLE_DATA_GROUP: 'MultipleDataGroup',
-    MULTIPLE_INSTANCES_MIXIN: 'MultipleInstancesMixin',
-    SIMPLE_DATA_GROUP: 'SimpleDataGroup'
-  };
-
-  /**
-	Axis types are defined as constants
-	*/
-  ChartsApi.prototype.AXIS_TYPES = {
-    ORDINAL: 'ordinal',
-    LINEAR: 'linear'
-  };
-
   return ChartsApi;
-
 }));
