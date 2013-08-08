@@ -8,53 +8,53 @@ Testing chart drawing and data update
 require.config({
   paths : {
     /** Libraries */
-    'd3'                      : '../../Vendor/d3/d3',
-    'r2d3'                    : '../../Vendor/r2d3/r2d3',
-    'd3.chart'                : '../../Vendor/d3.chart/d3.chart',
-    'underscore'              : '../../Vendor/underscore/underscore',
-    'feature'                 : '../../Vendor/feature/feature',
-    'jquery'                  : '../../Vendor/jquery/jquery',
+    'd3'                      : '../../vendor/d3/d3',
+    'r2d3'                    : '../../vendor/r2d3/r2d3',
+    'd3.chart'                : '../../vendor/d3.chart/d3.chart',
+    'underscore'              : '../../vendor/underscore/underscore',
+    'feature'                 : '../../vendor/feature/feature',
+    'jquery'                  : '../../vendor/jquery/jquery',
 
     /** Conditional loading */
     'implementations'         : 'dynamic',
 
     /** Api */
-    'chartsapi'               : '../../Api/chartsapi',
+    'chartsapi'               : '../../src/api/chartsapi',
 
     /** Name constants */
-    'charty'                  : '../../Api/charty',
+    'charty'                  : '../../src/api/charty',
 
     /** Components */
-    'axis'                    : '../../Components/Axis/axis',
-    'bar'                     : '../../Components/Bar/bar',
-    'basescale'               : '../../Components/Scales/basescale',
-    'basechart'               : '../../Components/Base/basechart',
-    'linearscale'             : '../../Components/Scales/linearscale',
-    'ordinalscale'            : '../../Components/Scales/ordinalscale',
-    'scalesfactory'           : '../../Components/Scales/scalesfactory',
-    'triangle'                : '../../Components/Triangle/triangle',
-    'textlabel'               : '../../Components/Text/text',
-    'roundedrectangle'        : '../../Components/RoundedRectangle/roundedrectangle',
-    'line'                    : '../../Components/Line/line',
-    'circle'                  : '../../Components/Circle/circle',
-    'donut'                   : '../../Components/Donut/donut',
+    'axis'                    : '../../src/components/axis/axis',
+    'bar'                     : '../../src/components/bar/bar',
+    'basescale'               : '../../src/components/scales/basescale',
+    'basechart'               : '../../src/components/base/basechart',
+    'linearscale'             : '../../src/components/scales/linearscale',
+    'ordinalscale'            : '../../src/components/scales/ordinalscale',
+    'scalesfactory'           : '../../src/components/scales/scalesfactory',
+    'triangle'                : '../../src/components/triangle/triangle',
+    'textlabel'               : '../../src/components/text/text',
+    'roundedrectangle'        : '../../src/components/roundedrectangle/roundedrectangle',
+    'line'                    : '../../src/components/line/line',
+    'circle'                  : '../../src/components/circle/circle',
+    'donut'                   : '../../src/components/donut/donut',
 
     /** Composition */
-    'xyaxis'                  : '../../Composition/Axis/xyaxis',
-    'yxyaxis'                 : '../../Composition/Axis/yxyaxis',
-    'barchart'                : '../../Composition/BarChart/barchart',
-    'multipleinstancesmixin'  : '../../Composition/multipleinstancesmixin',
-    'multipledatagroup'       : '../../Composition/multipledatagroup',
-    'simpledatagroup'         : '../../Composition/simpledatagroup',
-    'labeledtrianglechart'    : '../../Composition/LabeledTriangleChart/labeledtrianglechart',
-    'linechart'               : '../../Composition/LineChart/linechart',
-    'scatterplot'             : '../../Composition/Scatterplot/scatterplot',
-    'groupedbarchart'         : '../../Composition/GroupedBarChart/groupedbarchart',
-    'donutwithinnertext'      : '../../Composition/DonutWithInnerText/donutwithinnertext',
-    'linechartcircles'        : '../../Composition/LineChart/linechartcircles',
+    'xyaxis'                  : '../../src/composition/axis/xyaxis',
+    'yxyaxis'                 : '../../src/composition/axis/yxyaxis',
+    'barchart'                : '../../src/composition/barchart/barchart',
+    'multipleinstancesmixin'  : '../../src/composition/multipleinstancesmixin',
+    'multipledatagroup'       : '../../src/composition/multipledatagroup',
+    'simpledatagroup'         : '../../src/composition/simpledatagroup',
+    'labeledtrianglechart'    : '../../src/composition/labeledtrianglechart/labeledtrianglechart',
+    'linechart'               : '../../src/composition/lineChart/linechart',
+    'scatterplot'             : '../../src/composition/scatterplot/scatterplot',
+    'groupedbarchart'         : '../../src/composition/groupedbarchart/groupedbarchart',
+    'donutwithinnertext'      : '../../src/composition/donutwithinnertext/donutwithinnertext',
+    'linechartcircles'        : '../../src/composition/linechart/linechartcircles',
 
     /** Utils */
-    'accessor'                : '../../Utils/Accessor/accessor',
+    'accessor'                : '../../src/utils/accessor/accessor',
   },
   shim:{
     'jquery' : {
