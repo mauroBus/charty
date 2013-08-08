@@ -2609,8 +2609,7 @@ and it will append a specific chart to it.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('chartsapi',
-      [
+    define('chartsapi',[
         'd3.chart',
         'scalesfactory',
         'barchart',

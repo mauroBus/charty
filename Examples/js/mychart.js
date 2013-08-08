@@ -22,7 +22,7 @@ require.config({
     'chartsapi'               : '../../dist/charty.min',
 
     /** Utils */
-    'accessor'                : '../../src/utils/accessor/accessor'
+    'accessor'                : '../../utils/accessor/accessor'
   },
   shim:{
     'jquery' : {
