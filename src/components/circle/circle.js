@@ -15,7 +15,7 @@ Circle drawer.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define([
+    define('circle',[
       'd3.chart',
       'underscore',
       'charty',

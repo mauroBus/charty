@@ -15,7 +15,7 @@ Line drawing.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define([
+    define('line',[
       'd3.chart',
       'charty',
       'simpledatagroup'

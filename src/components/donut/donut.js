@@ -17,7 +17,7 @@ Donut drawer.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define([
+    define('donut',[
         'd3.chart',
         'underscore',
         'charty',

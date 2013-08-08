@@ -14,7 +14,7 @@ Defines a data transformation for composite charts
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define([
+    define('multipledatagroup',[
       'd3.chart',
       'charty',
       'basechart'

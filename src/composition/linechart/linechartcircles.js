@@ -17,7 +17,7 @@ Line chart combined with circles.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define([
+    define('linechartcircles',[
       'd3.chart',
       'charty',
       'multipledatagroup',

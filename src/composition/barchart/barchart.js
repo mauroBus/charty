@@ -19,7 +19,7 @@ N data series
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define([
+    define('barchart',[
       'd3.chart',
       'charty',
       'bar',

@@ -1,7 +1,7 @@
 /**
 Text labeling.
 
-@class TextLabel
+@class Text
 @extends SimpleDataGroup
 @constructor
 @requires d3.chart,
@@ -15,7 +15,7 @@ Text labeling.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define([
+    define('text',[
       'd3.chart',
       'charty',
       'simpledatagroup'
@@ -52,8 +52,6 @@ Text labeling.
                                     }
         */
         dataBind : function(d){
-
-          var chart = this.chart();
 
           return this.selectAll('text').data(d.data);
         },

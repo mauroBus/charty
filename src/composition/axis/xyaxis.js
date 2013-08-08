@@ -14,7 +14,7 @@ Base XY system for all the 2D charts.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define([
+    define('xyaxis',[
       'd3.chart',
       'charty',
       'axis'

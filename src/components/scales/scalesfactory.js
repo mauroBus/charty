@@ -16,7 +16,7 @@ to provide an easy way to switching scales in a defined chart
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define([
+    define('scalesfactory',[
       'd3.chart',
       'charty',
       'ordinalscale',

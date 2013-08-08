@@ -23,7 +23,7 @@ doesn't depend on the data value.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define([
+    define('donutwithinnertext',[
             'd3.chart',
             'charty',
             'donut'

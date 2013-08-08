@@ -12,7 +12,7 @@ for inheritance.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define([
+    define('basescale',[
       'd3.chart',
       'charty'
       ],

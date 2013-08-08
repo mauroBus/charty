@@ -20,12 +20,12 @@ Labeled triangle chart drawer.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define([
+    define('labeledtrianglechart',[
       'd3.chart',
       'charty',
       'triangle',
       'roundedrectangle',
-      'textlabel',
+      'text',
       'multipleinstancesmixin',
       'yxyaxis',
       'multipledatagroup'

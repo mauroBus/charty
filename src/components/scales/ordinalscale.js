@@ -14,7 +14,7 @@ Ordinal Scale
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define([
+    define('ordinalscale',[
 			'd3.chart',
 			'basescale',
 			],

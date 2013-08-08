@@ -18,43 +18,11 @@ require.config({
     /** Conditional loading */
     'implementations'         : 'dynamic',
 
-    /** Api */
-    'chartsapi'               : '../../src/api/chartsapi',
-
-    /** Name constants */
-    'charty'                  : '../../src/api/charty',
-
-    /** Components */
-    'axis'                    : '../../src/components/axis/axis',
-    'bar'                     : '../../src/components/bar/bar',
-    'basescale'               : '../../src/components/scales/basescale',
-    'basechart'               : '../../src/components/base/basechart',
-    'linearscale'             : '../../src/components/scales/linearscale',
-    'ordinalscale'            : '../../src/components/scales/ordinalscale',
-    'scalesfactory'           : '../../src/components/scales/scalesfactory',
-    'triangle'                : '../../src/components/triangle/triangle',
-    'textlabel'               : '../../src/components/text/text',
-    'roundedrectangle'        : '../../src/components/roundedrectangle/roundedrectangle',
-    'line'                    : '../../src/components/line/line',
-    'circle'                  : '../../src/components/circle/circle',
-    'donut'                   : '../../src/components/donut/donut',
-
-    /** Composition */
-    'xyaxis'                  : '../../src/composition/axis/xyaxis',
-    'yxyaxis'                 : '../../src/composition/axis/yxyaxis',
-    'barchart'                : '../../src/composition/barchart/barchart',
-    'multipleinstancesmixin'  : '../../src/composition/multipleinstancesmixin',
-    'multipledatagroup'       : '../../src/composition/multipledatagroup',
-    'simpledatagroup'         : '../../src/composition/simpledatagroup',
-    'labeledtrianglechart'    : '../../src/composition/labeledtrianglechart/labeledtrianglechart',
-    'linechart'               : '../../src/composition/lineChart/linechart',
-    'scatterplot'             : '../../src/composition/scatterplot/scatterplot',
-    'groupedbarchart'         : '../../src/composition/groupedbarchart/groupedbarchart',
-    'donutwithinnertext'      : '../../src/composition/donutwithinnertext/donutwithinnertext',
-    'linechartcircles'        : '../../src/composition/linechart/linechartcircles',
+    /** Test */
+    'chartsapi'               : '../../dist/charty.min',
 
     /** Utils */
-    'accessor'                : '../../src/utils/accessor/accessor',
+    'accessor'                : '../../src/utils/accessor/accessor'
   },
   shim:{
     'jquery' : {

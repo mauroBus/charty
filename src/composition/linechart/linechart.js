@@ -17,7 +17,7 @@ Takes N input data series
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define([
+    define('linechart',[
       'd3.chart',
       'charty',
       'line',

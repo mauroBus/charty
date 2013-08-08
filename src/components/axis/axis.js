@@ -20,7 +20,7 @@ it will implement all the functions needed.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define([
+    define('axis',[
       'd3.chart',
       'charty'
       ],

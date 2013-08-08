@@ -14,7 +14,7 @@ Linear scale for linear axis
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define([
+    define('linearscale',[
 			'd3.chart',
 			'basescale'
 			],

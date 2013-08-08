@@ -10,7 +10,7 @@ Define constants that will be used as names for different parts
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define(
+    define('charty',
       function() {
         /** Export global even in AMD case in case this script
         is loaded with others */

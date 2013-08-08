@@ -18,7 +18,7 @@ Scatterplot chart
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define([
+    define('scatterplot',[
       'd3.chart',
       'charty',
       'circle',
