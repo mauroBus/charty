@@ -51,12 +51,23 @@ Labeled triangle chart drawer.
 
     @method
     */
-    initialize: function() {
+    initialize: function(args) {
 
-      var yxyaxis = this.mixin(charty.CHART_NAMES.YXY_AXIS, this.base.append('g')).showAsGrid(),
-          triangles = this.mixin(charty.CHART_NAMES.TRIANGLE, this.base.append('g')),
-          recs = this.mixin(charty.CHART_NAMES.ROUNDED_RECTANGLE, this.base.append('g')),
-          texts = this.mixin(charty.CHART_NAMES.TEXT, this.base.append('g'));
+      var yxyaxis = this.mixin(charty.CHART_NAMES.YXY_AXIS,
+                              this.base.append('g'),
+                              { dataValidator : args.dataValidator }).showAsGrid(),
+
+          triangles = this.mixin(charty.CHART_NAMES.TRIANGLE,
+                                this.base.append('g'),
+                                args),
+
+          recs = this.mixin(charty.CHART_NAMES.ROUNDED_RECTANGLE,
+                            this.base.append('g'),
+                            args),
+
+          texts = this.mixin(charty.CHART_NAMES.TEXT,
+                            this.base.append('g'),
+                            args);
 
       this.componentsMixins = [];
       this.componentsMixins.push(triangles);

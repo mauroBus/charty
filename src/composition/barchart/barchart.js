@@ -53,11 +53,17 @@ N data series
 
 			var options = {
 				chartName : charty.CHART_NAMES.BAR,
+        dataValidator : args.dataValidator,
 				instances : (args.instances || 1)
 			};
 
-			var yxyaxis = this.mixin(charty.CHART_NAMES.YXY_AXIS, this.base.append('g')).showAsGrid(),
-					barChart = this.mixin(charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base.append('g'),options);
+			var yxyaxis = this.mixin(charty.CHART_NAMES.YXY_AXIS, 
+                               this.base.append('g'),
+                               { dataValidator : args.dataValidator }).showAsGrid(),
+
+					barChart = this.mixin(charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, 
+                                this.base.append('g'),
+                                options);
 
 			this.componentsMixins = [];
 			this.componentsMixins.push(barChart);

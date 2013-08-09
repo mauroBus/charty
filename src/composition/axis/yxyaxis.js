@@ -38,10 +38,18 @@ One X Axis (bottom)
 
     @method
     */
-    initialize : function(){
-      this.xaxis = this.mixin(charty.CHART_NAMES.AXIS, this.base.append('g')).orient('bottom');
-      this.yaxisleft = this.mixin(charty.CHART_NAMES.AXIS,this.base.append('g')).orient('left');
-      this.yaxisright = this.mixin(charty.CHART_NAMES.AXIS, this.base.append('g')).orient('right');
+    initialize : function(args){
+      this.xaxis = this.mixin(charty.CHART_NAMES.AXIS,
+                              this.base.append('g'),
+                              args).orient('bottom');
+
+      this.yaxisleft = this.mixin(charty.CHART_NAMES.AXIS,
+                            this.base.append('g'),
+                            args).orient('left');
+      
+      this.yaxisright = this.mixin(charty.CHART_NAMES.AXIS,
+                                   this.base.append('g'),
+                                   args).orient('right');
 
     },
     /**

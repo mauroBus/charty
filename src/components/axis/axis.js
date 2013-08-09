@@ -24,7 +24,7 @@ it will implement all the functions needed.
       'd3.chart',
       'charty'
       ],
-      function(d3, charty) {
+      function (d3, charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
         return factory(d3, charty);
@@ -34,7 +34,7 @@ it will implement all the functions needed.
     /** Browser globals */
     return factory(d3, charty);
   }
-}(this, function(d3, charty) {
+}(this, function (d3, charty) {
 
   d3.chart(charty.CHART_NAMES.AXIS, {
     /**
@@ -42,7 +42,7 @@ it will implement all the functions needed.
 
     @method
     */
-    initialize : function(){
+    initialize : function(args){
 
       /**
       Tranlation value in the x direction

@@ -105,8 +105,8 @@ Linear scale for linear axis
 	@chainable
 	*/
 	LinearScale.prototype.calculateDomain = function(data, f){
-		var max = -100000,
-				min = 1000000;
+		var max = -Infinity,
+				min = Infinity;
 				d = data.getData();
 
 				d.forEach(function(element){
@@ -117,8 +117,6 @@ Linear scale for linear axis
 					max = Math.max(maxg, max);
 					min = Math.min(ming, min);
 			});
-
-			this.min = min;
 
 			return this.setDomain(Math.min(0, min), Math.max(0, max));
 	};

@@ -47,11 +47,17 @@ Takes N input data series
 		initialize : function(args){
 			var options = {
 				chartName : charty.CHART_NAMES.LINE,
+        dataValidator : args.dataValidator,
 				instances : (args.instances || 1)
 			};
 
-			var yxyaxis = this.mixin(charty.CHART_NAMES.YXY_AXIS, this.base.append('g')).showAsGrid(),
-					lineChart = this.mixin(charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base.append('g'), options);
+			var yxyaxis = this.mixin(charty.CHART_NAMES.YXY_AXIS,
+                              this.base.append('g'),
+                              { dataValidator : args.dataValidator }).showAsGrid(),
+
+					lineChart = this.mixin(charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
+                                this.base.append('g'),
+                                options);
 
 			this.componentsMixins = [];
 			this.componentsMixins.push(lineChart);

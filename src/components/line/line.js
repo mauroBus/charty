@@ -20,7 +20,7 @@ Line drawing.
       'charty',
       'simpledatagroup'
       ],
-      function(d3, charty) {
+      function (d3, charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
         return factory(d3, charty);
@@ -30,7 +30,7 @@ Line drawing.
     /** Browser globals */
     return factory(d3, charty);
   }
-}(this, function(d3, charty) {
+}(this, function (d3, charty) {
   d3.chart(charty.CHART_NAMES.SIMPLE_DATA_GROUP)
     .extend(charty.CHART_NAMES.LINE, {
     /**
@@ -69,14 +69,11 @@ Line drawing.
 
           var chart = this.chart();
 
-          line.x(function(d) {
-            return chart.xscale.map(d.x, 0);
-          }).y(function(d) {
-            return chart.yscale.map(d.y, 0);
-          });
+          line.x(function(d) { return chart.xscale.map(d.x, 0); })
+              .y(function(d) { return chart.yscale.map(d.y, 0); });
 
           chart.datum = d.data;
-          chart.c = (d.color || defaults.c);
+          chart.c = (d.c || defaults.c);
 
           return this.selectAll('path').data([0]);
 

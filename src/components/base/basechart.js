@@ -18,7 +18,7 @@ Contains common functionality
       'd3.chart',
       'underscore',
       ],
-      function(d3, _) {
+      function (d3, _) {
         /** Export global even in AMD case in case this script
         is loaded with others */
         return factory(d3, _);
@@ -28,7 +28,7 @@ Contains common functionality
     /** Browser globals */
     return factory(d3, _);
   }
-}(this, function(d3, _) {
+}(this, function (d3, _) {
 
   d3.chart('BaseChart',{
     /**

@@ -66,7 +66,7 @@ Triangle drawer.
 
           var chart = this.chart();
 
-          chart.c = (d.color || defaults.c);
+          chart.c = (d.c || defaults.c);
 
           return this.selectAll('path').data(d.data);
 

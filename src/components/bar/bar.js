@@ -20,7 +20,7 @@ Bar drawer. Takes only one data series as input.
       'charty',
       'simpledatagroup'
       ],
-      function(d3, charty) {
+      function (d3, charty) {
         /** Export global even in AMD case in case this script
         is loaded with others*/
         return factory(d3, charty);
@@ -28,9 +28,9 @@ Bar drawer. Takes only one data series as input.
   }
   else {
     /** Browser globals */
-    return factory(d3, charty);
+    return factory (d3, charty);
   }
-}(this, function(d3, charty) {
+}(this, function (d3, charty) {
   d3.chart(charty.CHART_NAMES.SIMPLE_DATA_GROUP)
     .extend(charty.CHART_NAMES.BAR, {
     /**
@@ -38,7 +38,7 @@ Bar drawer. Takes only one data series as input.
 
     @method
     */
-    initialize : function(){
+    initialize : function(args){
 
       /**
       Sets only bar color as default.
@@ -69,7 +69,7 @@ Bar drawer. Takes only one data series as input.
           /**
           Sets color for the whole data serie.
           */
-          chart.c = (d.color || defaults.c);
+          chart.c = (d.c || defaults.c);
 
           return this.selectAll('rect').data(d.data);
         },
@@ -94,7 +94,6 @@ Bar drawer. Takes only one data series as input.
             be useful to reduce the width, in case many data series
             are draw using bars.
             */
-
             this.attr('class', function(d){
                   return (d.c || chart.c);
                 })

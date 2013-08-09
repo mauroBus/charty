@@ -44,6 +44,11 @@ doesn't depend on the data value.
     .extend(charty.CHART_NAMES.DONUT_INNER_TEXT,{
     initialize : function(args){
 
+      var dataValidator = args.dataValidator,
+          errors = {
+            invalidFontSize : 'Invalid value : font size must be positive'
+          };
+
       /**
       Defaults for Inner text
       */
@@ -67,15 +72,14 @@ doesn't depend on the data value.
         */
         dataBind : function(d){
 
-          var chart = this.chart();
+          var chart = this.chart(),
+              data = d.data,
+              stringValue = (data[0].x).toString() +'%';
 
-          chart.fontSize = (d.fontSize || defaults.fontSize);
+          chart.fontSize = (dataValidator.isPositiveNumber(d.fontSize, errors.invalidFontSize) || defaults.fontSize);
           /** By default, text will be centered inside donut */
           chart.xPosition = (d.xPosition || (chart.w/2));
           chart.yPosition = (d.yPosition || (chart.h/2));
-
-          var data = d.data,
-              stringValue = (data[0].x).toString() +'%';
 
           return this.selectAll('text').data([stringValue]);
         },

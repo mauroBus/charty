@@ -11,7 +11,7 @@ Define constants that will be used as names for different parts
   if (typeof define === 'function' && define.amd) {
     /** AMD */
     define('charty',
-      function() {
+      function () {
         /** Export global even in AMD case in case this script
         is loaded with others */
         return factory();
@@ -21,7 +21,7 @@ Define constants that will be used as names for different parts
     /** Browser globals */
     return factory();
   }
-}(this, function() {
+}(this, function () {
 
   var Charty = {
 
@@ -247,8 +247,8 @@ Linear scale for linear axis
 	@chainable
 	*/
 	LinearScale.prototype.calculateDomain = function(data, f){
-		var max = -100000,
-				min = 1000000;
+		var max = -Infinity,
+				min = Infinity;
 				d = data.getData();
 
 				d.forEach(function(element){
@@ -259,8 +259,6 @@ Linear scale for linear axis
 					max = Math.max(maxg, max);
 					min = Math.min(ming, min);
 			});
-
-			this.min = min;
 
 			return this.setDomain(Math.min(0, min), Math.max(0, max));
 	};
@@ -475,7 +473,7 @@ Contains common functionality
       'd3.chart',
       'underscore',
       ],
-      function(d3, _) {
+      function (d3, _) {
         /** Export global even in AMD case in case this script
         is loaded with others */
         return factory(d3, _);
@@ -485,7 +483,7 @@ Contains common functionality
     /** Browser globals */
     return factory(d3, _);
   }
-}(this, function(d3, _) {
+}(this, function (d3, _) {
 
   d3.chart('BaseChart',{
     /**
@@ -596,7 +594,7 @@ Contains common functionality
     }
   });
 }));
-/**
+ /**
 Defines a basic chart to process individual data series
 
 @class SimpleDataGroup
@@ -617,7 +615,7 @@ Defines a basic chart to process individual data series
       'charty',
       'basechart'
       ],
-      function(d3, charty) {
+      function (d3, charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
         return factory(d3, charty);
@@ -627,7 +625,7 @@ Defines a basic chart to process individual data series
     /** Browser globals */
     return factory(d3, charty);
   }
-}(this, function(d3, charty) {
+}(this, function (d3, charty) {
 
   d3.chart(charty.CHART_NAMES.BASE_CHART)
     .extend(charty.CHART_NAMES.SIMPLE_DATA_GROUP, {
@@ -670,7 +668,7 @@ it will implement all the functions needed.
       'd3.chart',
       'charty'
       ],
-      function(d3, charty) {
+      function (d3, charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
         return factory(d3, charty);
@@ -680,7 +678,7 @@ it will implement all the functions needed.
     /** Browser globals */
     return factory(d3, charty);
   }
-}(this, function(d3, charty) {
+}(this, function (d3, charty) {
 
   d3.chart(charty.CHART_NAMES.AXIS, {
     /**
@@ -688,7 +686,7 @@ it will implement all the functions needed.
 
     @method
     */
-    initialize : function(){
+    initialize : function(args){
 
       /**
       Tranlation value in the x direction
@@ -890,7 +888,7 @@ Bar drawer. Takes only one data series as input.
       'charty',
       'simpledatagroup'
       ],
-      function(d3, charty) {
+      function (d3, charty) {
         /** Export global even in AMD case in case this script
         is loaded with others*/
         return factory(d3, charty);
@@ -898,9 +896,9 @@ Bar drawer. Takes only one data series as input.
   }
   else {
     /** Browser globals */
-    return factory(d3, charty);
+    return factory (d3, charty);
   }
-}(this, function(d3, charty) {
+}(this, function (d3, charty) {
   d3.chart(charty.CHART_NAMES.SIMPLE_DATA_GROUP)
     .extend(charty.CHART_NAMES.BAR, {
     /**
@@ -908,7 +906,7 @@ Bar drawer. Takes only one data series as input.
 
     @method
     */
-    initialize : function(){
+    initialize : function(args){
 
       /**
       Sets only bar color as default.
@@ -939,7 +937,7 @@ Bar drawer. Takes only one data series as input.
           /**
           Sets color for the whole data serie.
           */
-          chart.c = (d.color || defaults.c);
+          chart.c = (d.c || defaults.c);
 
           return this.selectAll('rect').data(d.data);
         },
@@ -964,7 +962,6 @@ Bar drawer. Takes only one data series as input.
             be useful to reduce the width, in case many data series
             are draw using bars.
             */
-
             this.attr('class', function(d){
                   return (d.c || chart.c);
                 })
@@ -1013,21 +1010,20 @@ Circle drawer.
     /** AMD */
     define('circle',[
       'd3.chart',
-      'underscore',
       'charty',
       'simpledatagroup'
       ],
-      function(d3, _, charty) {
+      function (d3, charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, _, charty);
+        return factory(d3, charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3, _, charty);
+    return factory(d3, charty);
   }
-}(this, function(d3, _, charty) {
+}(this, function (d3, charty) {
   d3.chart(charty.CHART_NAMES.SIMPLE_DATA_GROUP)
     .extend(charty.CHART_NAMES.CIRCLE,{
     /**
@@ -1035,7 +1031,12 @@ Circle drawer.
 
     @method
     */
-    initialize : function(){
+    initialize : function(args){
+
+      var dataValidator = args.dataValidator,
+          errors = {
+            invalidRadio : 'Invalid value : radius for circles must be positive.'
+          };
 
       /**
       Defaults for circles.
@@ -1068,24 +1069,8 @@ Circle drawer.
 
           var chart = this.chart();
 
-          chart.c = (d.color || defaults.c);
-
-          /**
-          If custom radio is set, check for a valid value.
-
-          Otherwise, takes default value.
-          */
-          if(d.r){
-            if( !_.isNumber(d.r) || d.r < 0 ){
-              throw new Error('Circle radius must be a positive number.' );
-            }
-            else{
-              chart.r = d.r;
-            }
-          }
-          else{
-            chart.r = defaults.r;
-          }
+          chart.c = (d.c || defaults.c);
+          chart.r = (dataValidator.isPositiveNumber(d.r, errors.invalidRadio) || defaults.r);
 
           return this.selectAll('circle').data(d.data);
         },
@@ -1147,20 +1132,19 @@ Donut drawer.
     /** AMD */
     define('donut',[
         'd3.chart',
-        'underscore',
         'charty',
         'simpledatagroup'
       ],
-      function(d3, _, charty) {
+      function (d3, charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, _, charty);
+        return factory(d3, charty);
       });
   } else {
     /** Browser globals */
-    return factory(d3, _, charty);
+    return factory(d3, charty);
   }
-}(this, function(d3, _, charty) {
+}(this, function (d3, charty) {
   d3.chart(charty.CHART_NAMES.SIMPLE_DATA_GROUP)
     .extend(charty.CHART_NAMES.DONUT, {
     /**
@@ -1168,7 +1152,12 @@ Donut drawer.
 
     @method
     */
-    initialize: function() {
+    initialize: function(args) {
+
+      var dataValidator = args.dataValidator,
+          errors = {
+            invalidRadius : 'Radius for donut chart must be numerical values'
+          };
 
       /**
       ir : inner radius
@@ -1221,12 +1210,8 @@ Donut drawer.
 
           /** Radius calculation */
           var radius = Math.min(chart.w, chart.h) / 2,
-              ir = (data.ir || defaults.ir),
-              or = (data.or || defaults.or);
-
-          if (!_.isNumber(ir) || !_.isNumber(or)) {
-            throw new Error('Radius for donut chart must be numerical values');
-          }
+              ir = (dataValidator.isNumber(data.ir, errors.invalidRadius) || defaults.ir),
+              or = (dataValidator.isNumber(data.or, errors.invalidRadius) || defaults.or);
 
           arcGen = arcGen.innerRadius(radius - ir)
                          .outerRadius(radius - or);
@@ -1298,7 +1283,7 @@ Line drawing.
       'charty',
       'simpledatagroup'
       ],
-      function(d3, charty) {
+      function (d3, charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
         return factory(d3, charty);
@@ -1308,7 +1293,7 @@ Line drawing.
     /** Browser globals */
     return factory(d3, charty);
   }
-}(this, function(d3, charty) {
+}(this, function (d3, charty) {
   d3.chart(charty.CHART_NAMES.SIMPLE_DATA_GROUP)
     .extend(charty.CHART_NAMES.LINE, {
     /**
@@ -1347,14 +1332,11 @@ Line drawing.
 
           var chart = this.chart();
 
-          line.x(function(d) {
-            return chart.xscale.map(d.x, 0);
-          }).y(function(d) {
-            return chart.yscale.map(d.y, 0);
-          });
+          line.x(function(d) { return chart.xscale.map(d.x, 0); })
+              .y(function(d) { return chart.yscale.map(d.y, 0); });
 
           chart.datum = d.data;
-          chart.c = (d.color || defaults.c);
+          chart.c = (d.c || defaults.c);
 
           return this.selectAll('path').data([0]);
 
@@ -1399,7 +1381,6 @@ Rounded rectangle drawer.
 @constructor
 @extends SimpleDataGroup
 @requires d3.chart,
-          underscore,
           charty,
           simpledatagroup
 
@@ -1412,21 +1393,20 @@ Rounded rectangle drawer.
     /** AMD */
     define('roundedrectangle',[
       'd3.chart',
-      'underscore',
       'charty',
       'simpledatagroup'
       ],
-      function(d3, _, charty) {
+      function (d3, charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, _, charty);
+        return factory(d3, charty);
     });
   }
   else {
     // Browser globals
-    return factory(d3, _, charty);
+    return factory(d3, charty);
   }
-}(this, function(d3, _, charty) {
+}(this, function (d3, charty) {
   d3.chart(charty.CHART_NAMES.SIMPLE_DATA_GROUP)
     .extend(charty.CHART_NAMES.ROUNDED_RECTANGLE,{
     /**
@@ -1434,7 +1414,15 @@ Rounded rectangle drawer.
 
     @method
     */
-    initialize : function(){
+    initialize : function(args){
+
+      var dataValidator = args.dataValidator,
+          errors = {
+            invalidRH : 'Invalid value for rectangle height. Must be positive number.',
+            invalidRW : 'Invalid value for rectangle width. Must be positive number.',
+            invalidRX : 'Invalid value for rectangle rx. Must be positive number.',
+            invalidRY : 'Invalid value for rectangle ry. Must be positive number.'
+          };
 
       /**
       Defaults for rectangle
@@ -1451,8 +1439,6 @@ Rounded rectangle drawer.
         rx : 5,
         ry : 5
       };
-
-      var pathBase = this.base;
 
       var options = {
         /**
@@ -1474,11 +1460,11 @@ Rounded rectangle drawer.
 
           var chart = this.chart();
 
-          chart.rh = (d.rh || defaults.rh);
-          chart.rw = (d.rw || defaults.rw);
+          chart.rh = (dataValidator.isPositiveNumber(d.rh, errors.invalidRH) || defaults.rh);
+          chart.rw = (dataValidator.isPositiveNumber(d.rw, errors.invalidRH) || defaults.rw);
+          chart.rx = (dataValidator.isPositiveNumber(d.rx, errors.invalidRX) || defaults.rx);
+          chart.ry = (dataValidator.isPositiveNumber(d.ry, errors.invalidRY) || defaults.ry);
           chart.rc = (d.rc || defaults.rc);
-          chart.rx = (d.rx || defaults.rx);
-          chart.ry = (d.ry || defaults.ry);
 
           return this.selectAll('rect').data(d.data);
         },
@@ -1496,23 +1482,10 @@ Rounded rectangle drawer.
 
             var chart = this.chart();
 
-            if(chart.rh){
-              if(!_.isNumber(chart.rh) || chart.rh < 0){
-                throw new Error('Invalid value for rectangle height. Must be positive number.');
-              }
-            }
-
-            if(chart.rw){
-              if(!_.isNumber(chart.rw) || chart.rw < 0){
-                throw new Error('Invalid value for rectangle width. Must be positive number.');
-              }
-            }
-
             return this.attr('height', chart.rh)
                        .attr('width', chart.rw)
                        .attr('x', function(d){
-                          var val = chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2)-(chart.rw/2);
-                          return val;
+                          return chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2)-(chart.rw/2);
                         })
                        .attr('y',function(d){
                           return chart.yscale.map(d.y)-(chart.rh/2);
@@ -1532,7 +1505,7 @@ Rounded rectangle drawer.
       /**
       Layer creation
       */
-      this.layer('roundedrects', pathBase, options);
+      this.layer('roundedrects', this.base, options);
     }
   });
 }));
@@ -1712,7 +1685,7 @@ Triangle drawer.
 
           var chart = this.chart();
 
-          chart.c = (d.color || defaults.c);
+          chart.c = (d.c || defaults.c);
 
           return this.selectAll('path').data(d.data);
 
@@ -1833,7 +1806,7 @@ Defines a data transformation for composite charts
       'charty',
       'basechart'
       ],
-      function(d3, charty) {
+      function (d3, charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
         return factory(d3, charty);
@@ -1843,7 +1816,7 @@ Defines a data transformation for composite charts
     /** Browser globals */
     return factory(d3, charty);
   }
-}(this, function(d3, charty) {
+}(this, function (d3, charty) {
   d3.chart(charty.CHART_NAMES.BASE_CHART)
     .extend(charty.CHART_NAMES.MULTIPLE_DATA_GROUP, {
     /**
@@ -1885,7 +1858,7 @@ Chart that can represent many data series
       'charty',
       'basechart'
       ],
-      function(d3, charty) {
+      function (d3, charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
         return factory(d3, charty);
@@ -1895,7 +1868,7 @@ Chart that can represent many data series
     /** Browser globals */
     return factory(d3, charty);
   }
-}(this, function(d3, charty) {
+}(this, function (d3, charty) {
 
   d3.chart(charty.CHART_NAMES.BASE_CHART)
     .extend(charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, {
@@ -1905,20 +1878,24 @@ Chart that can represent many data series
     and the chart name.
 
     @method
-    @param {Object} options example = {
+    @param {Object} args example = {
                                         instances : 2,
                                         chartName : 'Bar'
                                       }
     */
-    initialize : function(options){
+    initialize : function(args){
 
-      var f = options.instances;
+      var f = args.instances;
 
       this.componentsMixins = [];
 
-      for(var i = options.instances - 1; i >= 0; i--){
-        var instance = this.mixin(options.chartName, this.base.append('g'));
-        instance.factor = ((f--)/options.instances);
+      for(var i = args.instances - 1; i >= 0; i--){
+
+        var instance = this.mixin(args.chartName,
+                                  this.base.append('g'),
+                                  args);
+
+        instance.factor = ((f--)/args.instances);
         this.componentsMixins.push(instance);
       }
     }
@@ -1963,13 +1940,15 @@ Base XY system for all the 2D charts.
 
     @method
     */
-    initialize : function(){
+    initialize : function(args){
 
-        this.xaxis = this.mixin(charty.CHART_NAMES.AXIS,this.base.append('g'))
-                         .orient('bottom');
+        this.xaxis = this.mixin(charty.CHART_NAMES.AXIS,
+                                this.base.append('g'),
+                                args).orient('bottom');
 
-        this.yaxis = this.mixin(charty.CHART_NAMES.AXIS,this.base.append('g'))
-                         .orient('left');
+        this.yaxis = this.mixin(charty.CHART_NAMES.AXIS,
+                                this.base.append('g'),
+                                args).orient('left');
 
     },
     /**
@@ -2070,10 +2049,18 @@ One X Axis (bottom)
 
     @method
     */
-    initialize : function(){
-      this.xaxis = this.mixin(charty.CHART_NAMES.AXIS, this.base.append('g')).orient('bottom');
-      this.yaxisleft = this.mixin(charty.CHART_NAMES.AXIS,this.base.append('g')).orient('left');
-      this.yaxisright = this.mixin(charty.CHART_NAMES.AXIS, this.base.append('g')).orient('right');
+    initialize : function(args){
+      this.xaxis = this.mixin(charty.CHART_NAMES.AXIS,
+                              this.base.append('g'),
+                              args).orient('bottom');
+
+      this.yaxisleft = this.mixin(charty.CHART_NAMES.AXIS,
+                            this.base.append('g'),
+                            args).orient('left');
+      
+      this.yaxisright = this.mixin(charty.CHART_NAMES.AXIS,
+                                   this.base.append('g'),
+                                   args).orient('right');
 
     },
     /**
@@ -2191,11 +2178,17 @@ N data series
 
 			var options = {
 				chartName : charty.CHART_NAMES.BAR,
+        dataValidator : args.dataValidator,
 				instances : (args.instances || 1)
 			};
 
-			var yxyaxis = this.mixin(charty.CHART_NAMES.YXY_AXIS, this.base.append('g')).showAsGrid(),
-					barChart = this.mixin(charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base.append('g'),options);
+			var yxyaxis = this.mixin(charty.CHART_NAMES.YXY_AXIS, 
+                               this.base.append('g'),
+                               { dataValidator : args.dataValidator }).showAsGrid(),
+
+					barChart = this.mixin(charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, 
+                                this.base.append('g'),
+                                options);
 
 			this.componentsMixins = [];
 			this.componentsMixins.push(barChart);
@@ -2249,6 +2242,11 @@ doesn't depend on the data value.
     .extend(charty.CHART_NAMES.DONUT_INNER_TEXT,{
     initialize : function(args){
 
+      var dataValidator = args.dataValidator,
+          errors = {
+            invalidFontSize : 'Invalid value : font size must be positive'
+          };
+
       /**
       Defaults for Inner text
       */
@@ -2272,15 +2270,14 @@ doesn't depend on the data value.
         */
         dataBind : function(d){
 
-          var chart = this.chart();
+          var chart = this.chart(),
+              data = d.data,
+              stringValue = (data[0].x).toString() +'%';
 
-          chart.fontSize = (d.fontSize || defaults.fontSize);
+          chart.fontSize = (dataValidator.isPositiveNumber(d.fontSize, errors.invalidFontSize) || defaults.fontSize);
           /** By default, text will be centered inside donut */
           chart.xPosition = (d.xPosition || (chart.w/2));
           chart.yPosition = (d.yPosition || (chart.h/2));
-
-          var data = d.data,
-              stringValue = (data[0].x).toString() +'%';
 
           return this.selectAll('text').data([stringValue]);
         },
@@ -2384,12 +2381,23 @@ Labeled triangle chart drawer.
 
     @method
     */
-    initialize: function() {
+    initialize: function(args) {
 
-      var yxyaxis = this.mixin(charty.CHART_NAMES.YXY_AXIS, this.base.append('g')).showAsGrid(),
-          triangles = this.mixin(charty.CHART_NAMES.TRIANGLE, this.base.append('g')),
-          recs = this.mixin(charty.CHART_NAMES.ROUNDED_RECTANGLE, this.base.append('g')),
-          texts = this.mixin(charty.CHART_NAMES.TEXT, this.base.append('g'));
+      var yxyaxis = this.mixin(charty.CHART_NAMES.YXY_AXIS,
+                              this.base.append('g'),
+                              { dataValidator : args.dataValidator }).showAsGrid(),
+
+          triangles = this.mixin(charty.CHART_NAMES.TRIANGLE,
+                                this.base.append('g'),
+                                args),
+
+          recs = this.mixin(charty.CHART_NAMES.ROUNDED_RECTANGLE,
+                            this.base.append('g'),
+                            args),
+
+          texts = this.mixin(charty.CHART_NAMES.TEXT,
+                            this.base.append('g'),
+                            args);
 
       this.componentsMixins = [];
       this.componentsMixins.push(triangles);
@@ -2449,11 +2457,17 @@ Takes N input data series
 		initialize : function(args){
 			var options = {
 				chartName : charty.CHART_NAMES.LINE,
+        dataValidator : args.dataValidator,
 				instances : (args.instances || 1)
 			};
 
-			var yxyaxis = this.mixin(charty.CHART_NAMES.YXY_AXIS, this.base.append('g')).showAsGrid(),
-					lineChart = this.mixin(charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base.append('g'), options);
+			var yxyaxis = this.mixin(charty.CHART_NAMES.YXY_AXIS,
+                              this.base.append('g'),
+                              { dataValidator : args.dataValidator }).showAsGrid(),
+
+					lineChart = this.mixin(charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
+                                this.base.append('g'),
+                                options);
 
 			this.componentsMixins = [];
 			this.componentsMixins.push(lineChart);
@@ -2512,11 +2526,17 @@ Line chart combined with circles.
 
 			var options = {
 				chartName : charty.CHART_NAMES.CIRCLE,
+        dataValidator : args.dataValidator,
 				instances : (args.instances || 1)
 			};
 
-			var lineChart = this.mixin(charty.CHART_NAMES.LINE_CHART, this.base.append('g'), options),
-					circles = this.mixin(charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base.append('g'), options);
+			var lineChart = this.mixin(charty.CHART_NAMES.LINE_CHART, 
+                                this.base.append('g'),
+                                options),
+
+					circles = this.mixin(charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, 
+                              this.base.append('g'),
+                              options);
 
 			this.componentsMixins = [];
 			this.componentsMixins.push(lineChart);
@@ -2569,11 +2589,17 @@ Scatterplot chart
 		initialize : function(args){
 			var options = {
 				chartName : charty.CHART_NAMES.CIRCLE,
+        dataValidator : args.dataValidator,
 				instances : (args.instances || 1)
 			};
 
-			var yxyaxis = this.mixin(charty.CHART_NAMES.YXY_AXIS, this.base.append('g')).showAsGrid(),
-          lineChart = this.mixin(charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base, options);
+			var yxyaxis = this.mixin(charty.CHART_NAMES.YXY_AXIS, 
+                    this.base.append('g'),
+                    { dataValidator : args.dataValidator }).showAsGrid(),
+
+          lineChart = this.mixin(charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
+                                 this.base,
+                                 options);
 
 			this.componentsMixins = [];
 			this.componentsMixins.push(lineChart);
@@ -2612,6 +2638,7 @@ and it will append a specific chart to it.
     define('chartsapi',[
         'd3.chart',
         'scalesfactory',
+        'datavalidator',
         'barchart',
         'labeledtrianglechart',
         'linechart',
@@ -2621,18 +2648,19 @@ and it will append a specific chart to it.
         'donutwithinnertext',
         'linechartcircles'
       ],
-      function(d3, ScaleFactory) {
+      function (d3, ScaleFactory, DataValidator) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, ScaleFactory);
+        return factory(d3, ScaleFactory, DataValidator);
       });
   } else {
     /** Browser globals */
-    return factory(d3, ScaleFactory);
+    return factory(d3, ScaleFactory, DataValidator);
   }
-}(this, function(d3, ScaleFactory) {
+}(this, function (d3, ScaleFactory, DataValidator) {
   var ChartsApi = function() {
     this.scaleFactory = new ScaleFactory();
+    this.dataValidator = new DataValidator();
   };
 
   /**
@@ -2667,13 +2695,6 @@ and it will append a specific chart to it.
         width  = (parseInt(selection.style('width'), 10) || 200);
 
     /**
-    Sets background image via CSS
-    */
-    if (options.imgLocation){
-      selection.classed(options.imgLocation, true);
-    }
-
-    /**
     Set default values for margin, for the svg element.
     */
     var marginValues = {
@@ -2683,12 +2704,21 @@ and it will append a specific chart to it.
       tfactor: (options.margintfactor || 1)
     };
 
+    /**
+    Sets background image via CSS
+    */
+    if (options.imgLocation){
+      selection.classed(options.imgLocation, true);
+    }
+
+    /**
+    Svg element creation
+    */
     var svg = selection.append('svg')
       .attr('width', width)
-      .attr('height', height);
-
-    svg = svg.append('g')
-            .attr('transform', 'translate(' + marginValues.left + ',' + marginValues.top + ')');
+      .attr('height', height)
+      .append('g')
+      .attr('transform', 'translate(' + marginValues.left + ',' + marginValues.top + ')');
 
     /**
     Chart dimension values are porcentaje from svg adapted value.
@@ -2700,7 +2730,8 @@ and it will append a specific chart to it.
     Appends the chart to the specified html element.
     */
     var chart = svg.chart(options.chartName, {
-                    instances: options.instances
+                    instances: options.instances,
+                    dataValidator : this.dataValidator
                   })
                   .height(height)
                   .width(width);

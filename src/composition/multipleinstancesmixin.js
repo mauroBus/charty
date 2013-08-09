@@ -20,7 +20,7 @@ Chart that can represent many data series
       'charty',
       'basechart'
       ],
-      function(d3, charty) {
+      function (d3, charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
         return factory(d3, charty);
@@ -30,7 +30,7 @@ Chart that can represent many data series
     /** Browser globals */
     return factory(d3, charty);
   }
-}(this, function(d3, charty) {
+}(this, function (d3, charty) {
 
   d3.chart(charty.CHART_NAMES.BASE_CHART)
     .extend(charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, {
@@ -40,20 +40,24 @@ Chart that can represent many data series
     and the chart name.
 
     @method
-    @param {Object} options example = {
+    @param {Object} args example = {
                                         instances : 2,
                                         chartName : 'Bar'
                                       }
     */
-    initialize : function(options){
+    initialize : function(args){
 
-      var f = options.instances;
+      var f = args.instances;
 
       this.componentsMixins = [];
 
-      for(var i = options.instances - 1; i >= 0; i--){
-        var instance = this.mixin(options.chartName, this.base.append('g'));
-        instance.factor = ((f--)/options.instances);
+      for(var i = args.instances - 1; i >= 0; i--){
+
+        var instance = this.mixin(args.chartName,
+                                  this.base.append('g'),
+                                  args);
+
+        instance.factor = ((f--)/args.instances);
         this.componentsMixins.push(instance);
       }
     }

@@ -17,21 +17,20 @@ Circle drawer.
     /** AMD */
     define('circle',[
       'd3.chart',
-      'underscore',
       'charty',
       'simpledatagroup'
       ],
-      function(d3, _, charty) {
+      function (d3, charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, _, charty);
+        return factory(d3, charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3, _, charty);
+    return factory(d3, charty);
   }
-}(this, function(d3, _, charty) {
+}(this, function (d3, charty) {
   d3.chart(charty.CHART_NAMES.SIMPLE_DATA_GROUP)
     .extend(charty.CHART_NAMES.CIRCLE,{
     /**
@@ -39,7 +38,12 @@ Circle drawer.
 
     @method
     */
-    initialize : function(){
+    initialize : function(args){
+
+      var dataValidator = args.dataValidator,
+          errors = {
+            invalidRadio : 'Invalid value : radius for circles must be positive.'
+          };
 
       /**
       Defaults for circles.
@@ -72,24 +76,8 @@ Circle drawer.
 
           var chart = this.chart();
 
-          chart.c = (d.color || defaults.c);
-
-          /**
-          If custom radio is set, check for a valid value.
-
-          Otherwise, takes default value.
-          */
-          if(d.r){
-            if( !_.isNumber(d.r) || d.r < 0 ){
-              throw new Error('Circle radius must be a positive number.' );
-            }
-            else{
-              chart.r = d.r;
-            }
-          }
-          else{
-            chart.r = defaults.r;
-          }
+          chart.c = (d.c || defaults.c);
+          chart.r = (dataValidator.isPositiveNumber(d.r, errors.invalidRadio) || defaults.r);
 
           return this.selectAll('circle').data(d.data);
         },

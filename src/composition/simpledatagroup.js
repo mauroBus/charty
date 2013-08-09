@@ -1,4 +1,4 @@
-/**
+ /**
 Defines a basic chart to process individual data series
 
 @class SimpleDataGroup
@@ -19,7 +19,7 @@ Defines a basic chart to process individual data series
       'charty',
       'basechart'
       ],
-      function(d3, charty) {
+      function (d3, charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
         return factory(d3, charty);
@@ -29,7 +29,7 @@ Defines a basic chart to process individual data series
     /** Browser globals */
     return factory(d3, charty);
   }
-}(this, function(d3, charty) {
+}(this, function (d3, charty) {
 
   d3.chart(charty.CHART_NAMES.BASE_CHART)
     .extend(charty.CHART_NAMES.SIMPLE_DATA_GROUP, {

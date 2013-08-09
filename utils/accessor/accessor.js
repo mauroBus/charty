@@ -13,7 +13,7 @@ Accessor will iterate over the data collection.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define(function() {
+    define(function () {
       /** Export global even in AMD case in case this script
       is loaded with others */
       return factory();
@@ -50,7 +50,7 @@ Accessor will iterate over the data collection.
   */
   Accessor.prototype.next = function() {
     if(!this.hasNext()){
-      this.reset();
+      this.restart();
     }
     return this.data[++this.index];
   };
@@ -71,7 +71,7 @@ Accessor will iterate over the data collection.
 
   @method
   */
-  Accessor.prototype.reset = function() {
+  Accessor.prototype.restart = function() {
     this.index = -1;
   };
 

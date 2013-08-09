@@ -29,6 +29,7 @@ and it will append a specific chart to it.
     define('chartsapi',[
         'd3.chart',
         'scalesfactory',
+        'datavalidator',
         'barchart',
         'labeledtrianglechart',
         'linechart',
@@ -38,18 +39,19 @@ and it will append a specific chart to it.
         'donutwithinnertext',
         'linechartcircles'
       ],
-      function(d3, ScaleFactory) {
+      function (d3, ScaleFactory, DataValidator) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, ScaleFactory);
+        return factory(d3, ScaleFactory, DataValidator);
       });
   } else {
     /** Browser globals */
-    return factory(d3, ScaleFactory);
+    return factory(d3, ScaleFactory, DataValidator);
   }
-}(this, function(d3, ScaleFactory) {
+}(this, function (d3, ScaleFactory, DataValidator) {
   var ChartsApi = function() {
     this.scaleFactory = new ScaleFactory();
+    this.dataValidator = new DataValidator();
   };
 
   /**
@@ -84,13 +86,6 @@ and it will append a specific chart to it.
         width  = (parseInt(selection.style('width'), 10) || 200);
 
     /**
-    Sets background image via CSS
-    */
-    if (options.imgLocation){
-      selection.classed(options.imgLocation, true);
-    }
-
-    /**
     Set default values for margin, for the svg element.
     */
     var marginValues = {
@@ -100,12 +95,21 @@ and it will append a specific chart to it.
       tfactor: (options.margintfactor || 1)
     };
 
+    /**
+    Sets background image via CSS
+    */
+    if (options.imgLocation){
+      selection.classed(options.imgLocation, true);
+    }
+
+    /**
+    Svg element creation
+    */
     var svg = selection.append('svg')
       .attr('width', width)
-      .attr('height', height);
-
-    svg = svg.append('g')
-            .attr('transform', 'translate(' + marginValues.left + ',' + marginValues.top + ')');
+      .attr('height', height)
+      .append('g')
+      .attr('transform', 'translate(' + marginValues.left + ',' + marginValues.top + ')');
 
     /**
     Chart dimension values are porcentaje from svg adapted value.
@@ -117,7 +121,8 @@ and it will append a specific chart to it.
     Appends the chart to the specified html element.
     */
     var chart = svg.chart(options.chartName, {
-                    instances: options.instances
+                    instances: options.instances,
+                    dataValidator : this.dataValidator
                   })
                   .height(height)
                   .width(width);

@@ -49,11 +49,17 @@ Line chart combined with circles.
 
 			var options = {
 				chartName : charty.CHART_NAMES.CIRCLE,
+        dataValidator : args.dataValidator,
 				instances : (args.instances || 1)
 			};
 
-			var lineChart = this.mixin(charty.CHART_NAMES.LINE_CHART, this.base.append('g'), options),
-					circles = this.mixin(charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base.append('g'), options);
+			var lineChart = this.mixin(charty.CHART_NAMES.LINE_CHART, 
+                                this.base.append('g'),
+                                options),
+
+					circles = this.mixin(charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, 
+                              this.base.append('g'),
+                              options);
 
 			this.componentsMixins = [];
 			this.componentsMixins.push(lineChart);

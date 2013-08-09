@@ -15,7 +15,7 @@ Data checker for different data input
     define([
       'underscore'
       ],
-      function(_) {
+      function (_) {
       /** Export global even in AMD case in case this script
       is loaded with others */
       return factory(_);
@@ -36,9 +36,40 @@ Data checker for different data input
   @method
   @param {Number} value number to check
   @param {String} message error message to show
+  @return {Number} value
   */
-  DataValidator.prototype.checkPositiveValue = function (value, message){
+  DataValidator.prototype.isPositiveNumber = function (value, message){
     if(!_.isUndefined(value) && (!_.isNumber(value) || value < 0)){
+      throw new Error(message);
+    }
+    return value;
+  };
+
+  /**
+  Checks if value is number, or is defined
+
+  @method
+  @param {Number} value to check
+  @param {String} error message 
+  @return {Number} value
+  */
+  DataValidator.prototype.isNumber = function(value, message){
+    if(!_.isUndefined(value) && !_.isNumber(value)){
+      throw new Error(message);
+    }
+    return value;
+  };
+
+  /**
+  Checks if a value is defined
+
+  @method
+  @param {Number} value to check
+  @param {String} message error message
+  @return {Number} value
+  */
+  DataValidator.prototype.isUndefined = function(value, message){
+    if(_.isUndefined(value)){
       throw new Error(message);
     }
     return value;

@@ -11,7 +11,7 @@ Define constants that will be used as names for different parts
   if (typeof define === 'function' && define.amd) {
     /** AMD */
     define('charty',
-      function() {
+      function () {
         /** Export global even in AMD case in case this script
         is loaded with others */
         return factory();
@@ -21,7 +21,7 @@ Define constants that will be used as names for different parts
     /** Browser globals */
     return factory();
   }
-}(this, function() {
+}(this, function () {
 
   var Charty = {
 

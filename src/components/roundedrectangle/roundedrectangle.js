@@ -5,7 +5,6 @@ Rounded rectangle drawer.
 @constructor
 @extends SimpleDataGroup
 @requires d3.chart,
-          underscore,
           charty,
           simpledatagroup
 
@@ -18,21 +17,20 @@ Rounded rectangle drawer.
     /** AMD */
     define('roundedrectangle',[
       'd3.chart',
-      'underscore',
       'charty',
       'simpledatagroup'
       ],
-      function(d3, _, charty) {
+      function (d3, charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, _, charty);
+        return factory(d3, charty);
     });
   }
   else {
     // Browser globals
-    return factory(d3, _, charty);
+    return factory(d3, charty);
   }
-}(this, function(d3, _, charty) {
+}(this, function (d3, charty) {
   d3.chart(charty.CHART_NAMES.SIMPLE_DATA_GROUP)
     .extend(charty.CHART_NAMES.ROUNDED_RECTANGLE,{
     /**
@@ -40,7 +38,15 @@ Rounded rectangle drawer.
 
     @method
     */
-    initialize : function(){
+    initialize : function(args){
+
+      var dataValidator = args.dataValidator,
+          errors = {
+            invalidRH : 'Invalid value for rectangle height. Must be positive number.',
+            invalidRW : 'Invalid value for rectangle width. Must be positive number.',
+            invalidRX : 'Invalid value for rectangle rx. Must be positive number.',
+            invalidRY : 'Invalid value for rectangle ry. Must be positive number.'
+          };
 
       /**
       Defaults for rectangle
@@ -57,8 +63,6 @@ Rounded rectangle drawer.
         rx : 5,
         ry : 5
       };
-
-      var pathBase = this.base;
 
       var options = {
         /**
@@ -80,11 +84,11 @@ Rounded rectangle drawer.
 
           var chart = this.chart();
 
-          chart.rh = (d.rh || defaults.rh);
-          chart.rw = (d.rw || defaults.rw);
+          chart.rh = (dataValidator.isPositiveNumber(d.rh, errors.invalidRH) || defaults.rh);
+          chart.rw = (dataValidator.isPositiveNumber(d.rw, errors.invalidRH) || defaults.rw);
+          chart.rx = (dataValidator.isPositiveNumber(d.rx, errors.invalidRX) || defaults.rx);
+          chart.ry = (dataValidator.isPositiveNumber(d.ry, errors.invalidRY) || defaults.ry);
           chart.rc = (d.rc || defaults.rc);
-          chart.rx = (d.rx || defaults.rx);
-          chart.ry = (d.ry || defaults.ry);
 
           return this.selectAll('rect').data(d.data);
         },
@@ -102,23 +106,10 @@ Rounded rectangle drawer.
 
             var chart = this.chart();
 
-            if(chart.rh){
-              if(!_.isNumber(chart.rh) || chart.rh < 0){
-                throw new Error('Invalid value for rectangle height. Must be positive number.');
-              }
-            }
-
-            if(chart.rw){
-              if(!_.isNumber(chart.rw) || chart.rw < 0){
-                throw new Error('Invalid value for rectangle width. Must be positive number.');
-              }
-            }
-
             return this.attr('height', chart.rh)
                        .attr('width', chart.rw)
                        .attr('x', function(d){
-                          var val = chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2)-(chart.rw/2);
-                          return val;
+                          return chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2)-(chart.rw/2);
                         })
                        .attr('y',function(d){
                           return chart.yscale.map(d.y)-(chart.rh/2);
@@ -138,7 +129,7 @@ Rounded rectangle drawer.
       /**
       Layer creation
       */
-      this.layer('roundedrects', pathBase, options);
+      this.layer('roundedrects', this.base, options);
     }
   });
 }));

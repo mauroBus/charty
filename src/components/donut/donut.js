@@ -19,20 +19,19 @@ Donut drawer.
     /** AMD */
     define('donut',[
         'd3.chart',
-        'underscore',
         'charty',
         'simpledatagroup'
       ],
-      function(d3, _, charty) {
+      function (d3, charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, _, charty);
+        return factory(d3, charty);
       });
   } else {
     /** Browser globals */
-    return factory(d3, _, charty);
+    return factory(d3, charty);
   }
-}(this, function(d3, _, charty) {
+}(this, function (d3, charty) {
   d3.chart(charty.CHART_NAMES.SIMPLE_DATA_GROUP)
     .extend(charty.CHART_NAMES.DONUT, {
     /**
@@ -40,7 +39,12 @@ Donut drawer.
 
     @method
     */
-    initialize: function() {
+    initialize: function(args) {
+
+      var dataValidator = args.dataValidator,
+          errors = {
+            invalidRadius : 'Radius for donut chart must be numerical values'
+          };
 
       /**
       ir : inner radius
@@ -93,12 +97,8 @@ Donut drawer.
 
           /** Radius calculation */
           var radius = Math.min(chart.w, chart.h) / 2,
-              ir = (data.ir || defaults.ir),
-              or = (data.or || defaults.or);
-
-          if (!_.isNumber(ir) || !_.isNumber(or)) {
-            throw new Error('Radius for donut chart must be numerical values');
-          }
+              ir = (dataValidator.isNumber(data.ir, errors.invalidRadius) || defaults.ir),
+              or = (dataValidator.isNumber(data.or, errors.invalidRadius) || defaults.or);
 
           arcGen = arcGen.innerRadius(radius - ir)
                          .outerRadius(radius - or);

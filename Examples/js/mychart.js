@@ -19,10 +19,11 @@ require.config({
     'implementations'         : 'dynamic',
 
     /** Test */
-    'chartsapi'               : '../../dist/charty.min',
+    'chartsapi'               : '../../dist/charty',
 
     /** Utils */
-    'accessor'                : '../../utils/accessor/accessor'
+    'accessor'                : '../../utils/accessor/accessor',
+    'datavalidator'           : '../../utils/datavalidator/datavalidator'
   },
   shim:{
     'jquery' : {
@@ -55,7 +56,7 @@ function(ChartsApi, Accessor){
   var data1 = {
     rh: 30,
     rw: 30,
-    color: 'blueline',
+    c: 'blueline',
     rc:'gray',
     data: [
       { x: 'A', y: 100, c : 'red'},
@@ -65,7 +66,7 @@ function(ChartsApi, Accessor){
   };
 
   var data2 = {
-    color: 'redline',
+    c: 'redline',
     data: [
       { x: 'A', y: 150 , c:'blue'},
       { x: 'B', y: 50 , c: 'blue'},
@@ -180,14 +181,14 @@ function(ChartsApi, Accessor){
   var chart2 = myApi.chart(options2);
       chart2.draw(accessor2);
 
-      data1.color = 'redline';
-      data2.color = 'blueline';
+      data1.c = 'redline';
+      data2.c = 'blueline';
 
   var chart3 = myApi.chart(options3);
       chart3.draw(accessor1);
 
-      data1.color = 'red';
-      data2.color = 'blue';
+      data1.c = 'red';
+      data2.c = 'blue';
 
   var chart4 = myApi.chart(options4);
       chart4.draw(accessor1);
@@ -195,8 +196,8 @@ function(ChartsApi, Accessor){
   var chart6 = myApi.chart(options6);
       chart6.draw(accessor4);
 
-      data1.color = 'redline';
-      data2.color = 'blueline';
+      data1.c = 'redline';
+      data2.c = 'blueline';
 
   var chart7 = myApi.chart(options7);
       chart7.draw(accessor1);
@@ -207,7 +208,7 @@ function(ChartsApi, Accessor){
   setTimeout(function(){
 
     data1 = {
-      color: 'blue',
+      c: 'blue',
       rh: 30,
       rw: 30,
       rc:'gray',
@@ -220,7 +221,7 @@ function(ChartsApi, Accessor){
     };
 
     data2 = {
-      color: 'red',
+      c: 'red',
       r : 8,
       data: [
         { x: 'A', y: 150 },
@@ -244,14 +245,14 @@ function(ChartsApi, Accessor){
     chart1.draw(accessor1);
     chart2.draw(accessor2);
 
-    data1.color = 'redline';
-    data2.color = 'blueline';
+    data1.c = 'redline';
+    data2.c = 'blueline';
 
     chart3.draw(accessor1);
 
-    data1.color = 'gray';
+    data1.c = 'gray';
     data1.r = 12;
-    data2.color = 'red';
+    data2.c = 'red';
     data2.r = 8;
 
     chart4.draw(accessor1);

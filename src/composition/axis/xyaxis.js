@@ -37,13 +37,15 @@ Base XY system for all the 2D charts.
 
     @method
     */
-    initialize : function(){
+    initialize : function(args){
 
-        this.xaxis = this.mixin(charty.CHART_NAMES.AXIS,this.base.append('g'))
-                         .orient('bottom');
+        this.xaxis = this.mixin(charty.CHART_NAMES.AXIS,
+                                this.base.append('g'),
+                                args).orient('bottom');
 
-        this.yaxis = this.mixin(charty.CHART_NAMES.AXIS,this.base.append('g'))
-                         .orient('left');
+        this.yaxis = this.mixin(charty.CHART_NAMES.AXIS,
+                                this.base.append('g'),
+                                args).orient('left');
 
     },
     /**
