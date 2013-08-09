@@ -5,10 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>D3JS test</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+    <title>Charty 0.4.5 - AMD</title>
+    <link rel="stylesheet" type="text/css" href="../css/styles.css"/>
   </head>
   <body>
+    <h1>AMD Examples</h1>
     <div id='chart1' class='viewport'>
     </div>
 
@@ -21,14 +22,14 @@
     <div id='chart4' class='viewport'>
     </div>
 
-    <div id='chart6' class='viewport imgCenter'>
+    <div id='chart6' class='viewport'>
     </div>
 
     <div id='chart7' class='viewport'>
     </div>
 
     <!--[if lte IE 8]>
-      <script src="../Vendor/Polyfills-for-IE8/getComputedStyle.js"></script>
+      <script src="../../Vendor/Polyfills-for-IE8/getComputedStyle.js"></script>
       <script>
         if(!function(){}.bind){
             Function.prototype.bind = function(){
@@ -44,7 +45,7 @@
       </script>
     <![endif]-->
 
-    <script data-main="js/mychart" src="../Vendor/requirejs/require.js"></script>
+    <script data-main="js/mychart" src="../../Vendor/requirejs/require.js"></script>
 
   </body>
 </html>

@@ -19,19 +19,19 @@ Base XY system for all the 2D charts.
       'charty',
       'axis'
       ],
-      function(d3, charty) {
+      function (d3, Charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, charty);
+        return factory(d3, Charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3, charty);
+    factory(d3, Charty);
   }
-}(this, function(d3, charty) {
+}(this, function (d3, Charty) {
 
-  d3.chart(charty.CHART_NAMES.XY_AXIS, {
+  d3.chart(Charty.CHART_NAMES.XY_AXIS, {
     /**
     XY axis system initializer
 

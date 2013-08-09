@@ -23,7 +23,7 @@ and the data accessor.
   }
   else {
     /** Browser globals */
-    return factory(Accessor);
+    window.ChartInterface = factory(Accessor);
   }
 }(this, function (Accessor) {
 

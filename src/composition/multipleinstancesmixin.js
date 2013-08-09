@@ -20,20 +20,20 @@ Chart that can represent many data series
       'charty',
       'basechart'
       ],
-      function (d3, charty) {
+      function (d3, Charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, charty);
+        return factory(d3, Charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3, charty);
+    factory(d3, Charty);
   }
-}(this, function (d3, charty) {
+}(this, function (d3, Charty) {
 
-  d3.chart(charty.CHART_NAMES.BASE_CHART)
-    .extend(charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, {
+  d3.chart(Charty.CHART_NAMES.BASE_CHART)
+    .extend(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, {
     /**
     Creates multiple mixin instances of a specific chart.
     It is necessary to set the instances count

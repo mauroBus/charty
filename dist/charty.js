@@ -19,7 +19,7 @@ Define constants that will be used as names for different parts
   }
   else {
     /** Browser globals */
-    return factory();
+    window.Charty = factory();
   }
 }(this, function () {
 
@@ -87,17 +87,17 @@ for inheritance.
       'd3.chart',
       'charty'
       ],
-      function(d3, charty) {
+      function (d3, Charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, charty);
+        return factory(d3, Charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3, charty);
+    window.BaseScale = factory(d3, Charty);
   }
-}(this, function(d3, charty) {
+}(this, function (d3, Charty) {
 
 	var BaseScale = function(){
 
@@ -123,11 +123,11 @@ for inheritance.
 	BaseScale.prototype.generateRange = function(range){
 		var r ;
 
-		if(this.axisType === charty.AXIS.X){
+		if(this.axisType === Charty.AXIS.X){
 			r = [0,range];
 		}
 		else{
-			if(this.axisType === charty.AXIS.Y){
+			if(this.axisType === Charty.AXIS.Y){
 				r = [range,0];
 			}
 			else{
@@ -160,7 +160,7 @@ Linear scale for linear axis
 			'd3.chart',
 			'basescale'
 			],
-			function(d3, BaseScale) {
+			function (d3, BaseScale) {
 				/** Export global even in AMD case in case this script
 				is loaded with others */
 				return factory(d3, BaseScale);
@@ -168,9 +168,9 @@ Linear scale for linear axis
   }
   else {
     /** Browser globals */
-    return factory(d3, BaseScale);
+    window.LinearScale = factory(d3, BaseScale);
   }
-}(this, function(d3, BaseScale) {
+}(this, function (d3, BaseScale) {
 
 	var LinearScale = function(axisType){
 		this.scale = d3.scale.linear();
@@ -285,7 +285,7 @@ Ordinal Scale
 			'd3.chart',
 			'basescale',
 			],
-			function(d3, BaseScale) {
+			function (d3, BaseScale) {
 				/** Export global even in AMD case in case this script
 				is loaded with others */
 				return factory(d3, BaseScale);
@@ -293,9 +293,9 @@ Ordinal Scale
   }
   else {
     /** Browser globals */
-    return factory(d3, BaseScale);
+    window.OrdinalScale = factory(d3, BaseScale);
   }
-}(this, function(d3, BaseScale) {
+}(this, function (d3, BaseScale) {
 
 	var OrdinalScale = function(axisType){
 		this.scale = d3.scale.ordinal();
@@ -413,17 +413,17 @@ to provide an easy way to switching scales in a defined chart
       'ordinalscale',
       'linearscale',
       ],
-      function(d3, charty, OrdinalScale, LinearScale) {
+      function(d3, Charty, OrdinalScale, LinearScale) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, charty, OrdinalScale, LinearScale);
+        return factory(d3, Charty, OrdinalScale, LinearScale);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3, charty, OrdinalScale, LinearScale);
+    window.ScaleFactory = factory(d3, Charty, OrdinalScale, LinearScale);
   }
-}(this, function(d3, charty, OrdinalScale, LinearScale) {
+}(this, function(d3, Charty, OrdinalScale, LinearScale) {
 	var ScaleFactory = function(){
 
 	};
@@ -440,10 +440,10 @@ to provide an easy way to switching scales in a defined chart
 		var scale;
 
 		switch(scaleType){
-			case charty.AXIS_TYPE.ORDINAL :
+			case Charty.AXIS_TYPE.ORDINAL :
 				scale = new OrdinalScale(axisType);
 				break;
-			case charty.AXIS_TYPE.LINEAR :
+			case Charty.AXIS_TYPE.LINEAR :
 				scale = new LinearScale(axisType);
 				break;
 		}
@@ -615,20 +615,20 @@ Defines a basic chart to process individual data series
       'charty',
       'basechart'
       ],
-      function (d3, charty) {
+      function (d3, Charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, charty);
+        return factory(d3, Charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3, charty);
+    factory(d3, Charty);
   }
-}(this, function (d3, charty) {
+}(this, function (d3, Charty) {
 
-  d3.chart(charty.CHART_NAMES.BASE_CHART)
-    .extend(charty.CHART_NAMES.SIMPLE_DATA_GROUP, {
+  d3.chart(Charty.CHART_NAMES.BASE_CHART)
+    .extend(Charty.CHART_NAMES.SIMPLE_DATA_GROUP, {
     /**
     Returns the next element of the data collection
 
@@ -668,19 +668,19 @@ it will implement all the functions needed.
       'd3.chart',
       'charty'
       ],
-      function (d3, charty) {
+      function (d3, Charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, charty);
+        return factory(d3, Charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3, charty);
+    factory(d3, Charty);
   }
-}(this, function (d3, charty) {
+}(this, function (d3, Charty) {
 
-  d3.chart(charty.CHART_NAMES.AXIS, {
+  d3.chart(Charty.CHART_NAMES.AXIS, {
     /**
     Basic Axis initialization
 
@@ -888,19 +888,19 @@ Bar drawer. Takes only one data series as input.
       'charty',
       'simpledatagroup'
       ],
-      function (d3, charty) {
+      function (d3, Charty) {
         /** Export global even in AMD case in case this script
         is loaded with others*/
-        return factory(d3, charty);
+        return factory(d3, Charty);
     });
   }
   else {
     /** Browser globals */
-    return factory (d3, charty);
+    factory (d3, Charty);
   }
-}(this, function (d3, charty) {
-  d3.chart(charty.CHART_NAMES.SIMPLE_DATA_GROUP)
-    .extend(charty.CHART_NAMES.BAR, {
+}(this, function (d3, Charty) {
+  d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
+    .extend(Charty.CHART_NAMES.BAR, {
     /**
     Bar initialization
 
@@ -1013,19 +1013,19 @@ Circle drawer.
       'charty',
       'simpledatagroup'
       ],
-      function (d3, charty) {
+      function (d3, Charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, charty);
+        return factory(d3, Charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3, charty);
+    factory(d3, Charty);
   }
-}(this, function (d3, charty) {
-  d3.chart(charty.CHART_NAMES.SIMPLE_DATA_GROUP)
-    .extend(charty.CHART_NAMES.CIRCLE,{
+}(this, function (d3, Charty) {
+  d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
+    .extend(Charty.CHART_NAMES.CIRCLE,{
     /**
     Circle initializator
 
@@ -1135,18 +1135,18 @@ Donut drawer.
         'charty',
         'simpledatagroup'
       ],
-      function (d3, charty) {
+      function (d3, Charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, charty);
+        return factory(d3, Charty);
       });
   } else {
     /** Browser globals */
-    return factory(d3, charty);
+    factory(d3, Charty);
   }
-}(this, function (d3, charty) {
-  d3.chart(charty.CHART_NAMES.SIMPLE_DATA_GROUP)
-    .extend(charty.CHART_NAMES.DONUT, {
+}(this, function (d3, Charty) {
+  d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
+    .extend(Charty.CHART_NAMES.DONUT, {
     /**
     Donut initialization
 
@@ -1283,19 +1283,19 @@ Line drawing.
       'charty',
       'simpledatagroup'
       ],
-      function (d3, charty) {
+      function (d3, Charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, charty);
+        return factory(d3, Charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3, charty);
+    factory(d3, Charty);
   }
-}(this, function (d3, charty) {
-  d3.chart(charty.CHART_NAMES.SIMPLE_DATA_GROUP)
-    .extend(charty.CHART_NAMES.LINE, {
+}(this, function (d3, Charty) {
+  d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
+    .extend(Charty.CHART_NAMES.LINE, {
     /**
     Line initialization
 
@@ -1396,19 +1396,19 @@ Rounded rectangle drawer.
       'charty',
       'simpledatagroup'
       ],
-      function (d3, charty) {
+      function (d3, Charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, charty);
+        return factory(d3, Charty);
     });
   }
   else {
     // Browser globals
-    return factory(d3, charty);
+    factory(d3, Charty);
   }
-}(this, function (d3, charty) {
-  d3.chart(charty.CHART_NAMES.SIMPLE_DATA_GROUP)
-    .extend(charty.CHART_NAMES.ROUNDED_RECTANGLE,{
+}(this, function (d3, Charty) {
+  d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
+    .extend(Charty.CHART_NAMES.ROUNDED_RECTANGLE,{
     /**
     Rounded rectangle initialization.
 
@@ -1531,19 +1531,19 @@ Text labeling.
       'charty',
       'simpledatagroup'
       ],
-      function(d3, charty) {
+      function (d3, Charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, charty);
+        return factory(d3, Charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3, charty);
+    factory(d3, Charty);
   }
-}(this, function(d3, charty) {
-  d3.chart(charty.CHART_NAMES.SIMPLE_DATA_GROUP)
-    .extend(charty.CHART_NAMES.TEXT, {
+}(this, function (d3, Charty) {
+  d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
+    .extend(Charty.CHART_NAMES.TEXT, {
     /**
     Text label initializator
 
@@ -1639,19 +1639,19 @@ Triangle drawer.
       'charty',
       'simpledatagroup'
       ],
-      function(d3, charty) {
+      function (d3, Charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, charty);
+        return factory(d3, Charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3, charty);
+    factory(d3, Charty);
   }
-}(this, function(d3, charty) {
-  d3.chart(charty.CHART_NAMES.SIMPLE_DATA_GROUP)
-    .extend(charty.CHART_NAMES.TRIANGLE, {
+}(this, function (d3, Charty) {
+  d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
+    .extend(Charty.CHART_NAMES.TRIANGLE, {
     /**
     Triangle initialization
 
@@ -1806,19 +1806,19 @@ Defines a data transformation for composite charts
       'charty',
       'basechart'
       ],
-      function (d3, charty) {
+      function (d3, Charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, charty);
+        return factory(d3, Charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3, charty);
+    factory(d3, Charty);
   }
-}(this, function (d3, charty) {
-  d3.chart(charty.CHART_NAMES.BASE_CHART)
-    .extend(charty.CHART_NAMES.MULTIPLE_DATA_GROUP, {
+}(this, function (d3, Charty) {
+  d3.chart(Charty.CHART_NAMES.BASE_CHART)
+    .extend(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP, {
     /**
     Data transformation for multiple data series
     Once scales are obtained, they have to be set to the mixins contained
@@ -1858,20 +1858,20 @@ Chart that can represent many data series
       'charty',
       'basechart'
       ],
-      function (d3, charty) {
+      function (d3, Charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, charty);
+        return factory(d3, Charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3, charty);
+    factory(d3, Charty);
   }
-}(this, function (d3, charty) {
+}(this, function (d3, Charty) {
 
-  d3.chart(charty.CHART_NAMES.BASE_CHART)
-    .extend(charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, {
+  d3.chart(Charty.CHART_NAMES.BASE_CHART)
+    .extend(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, {
     /**
     Creates multiple mixin instances of a specific chart.
     It is necessary to set the instances count
@@ -1922,19 +1922,19 @@ Base XY system for all the 2D charts.
       'charty',
       'axis'
       ],
-      function(d3, charty) {
+      function (d3, Charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, charty);
+        return factory(d3, Charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3, charty);
+    factory(d3, Charty);
   }
-}(this, function(d3, charty) {
+}(this, function (d3, Charty) {
 
-  d3.chart(charty.CHART_NAMES.XY_AXIS, {
+  d3.chart(Charty.CHART_NAMES.XY_AXIS, {
     /**
     XY axis system initializer
 
@@ -2032,33 +2032,33 @@ One X Axis (bottom)
       'charty',
       'axis',
       ],
-      function(d3, charty) {
+      function (d3, Charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, charty);
+        return factory(d3, Charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3, charty);
+    return factory(d3, Charty);
   }
-}(this, function(d3, charty) {
-  d3.chart(charty.CHART_NAMES.YXY_AXIS, {
+}(this, function (d3, Charty) {
+  d3.chart(Charty.CHART_NAMES.YXY_AXIS, {
     /**
     Defines as a mixin a right Y axis, a left Y axis, a X bottom axis
 
     @method
     */
     initialize : function(args){
-      this.xaxis = this.mixin(charty.CHART_NAMES.AXIS,
+      this.xaxis = this.mixin(Charty.CHART_NAMES.AXIS,
                               this.base.append('g'),
                               args).orient('bottom');
 
-      this.yaxisleft = this.mixin(charty.CHART_NAMES.AXIS,
+      this.yaxisleft = this.mixin(Charty.CHART_NAMES.AXIS,
                             this.base.append('g'),
                             args).orient('left');
-      
-      this.yaxisright = this.mixin(charty.CHART_NAMES.AXIS,
+
+      this.yaxisright = this.mixin(Charty.CHART_NAMES.AXIS,
                                    this.base.append('g'),
                                    args).orient('right');
 
@@ -2152,20 +2152,20 @@ N data series
       'yxyaxis',
       'multipleinstancesmixin',
       ],
-      function(d3, charty) {
+      function (d3, Charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, charty);
+        return factory(d3, Charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3, charty);
+    factory(d3, Charty);
   }
-}(this, function(d3, charty) {
+}(this, function (d3, Charty) {
 
-	d3.chart(charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
-    .extend(charty.CHART_NAMES.BAR_CHART,{
+	d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
+    .extend(Charty.CHART_NAMES.BAR_CHART,{
 		/**
 		BarChart initialization.
 
@@ -2177,16 +2177,16 @@ N data series
 		initialize : function(args){
 
 			var options = {
-				chartName : charty.CHART_NAMES.BAR,
+				chartName : Charty.CHART_NAMES.BAR,
         dataValidator : args.dataValidator,
 				instances : (args.instances || 1)
 			};
 
-			var yxyaxis = this.mixin(charty.CHART_NAMES.YXY_AXIS, 
+			var yxyaxis = this.mixin(Charty.CHART_NAMES.YXY_AXIS,
                                this.base.append('g'),
                                { dataValidator : args.dataValidator }).showAsGrid(),
 
-					barChart = this.mixin(charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, 
+					barChart = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                                 this.base.append('g'),
                                 options);
 
@@ -2226,20 +2226,20 @@ doesn't depend on the data value.
             'charty',
             'donut'
             ],
-            function(d3, charty) {
+            function (d3, Charty) {
       /** Export global even in AMD case in case this script
       is loaded with others */
-      return factory(d3, charty);
+      return factory(d3, Charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3, charty);
+    factory(d3, Charty);
   }
-}(this, function(d3, charty) {
+}(this, function (d3, Charty) {
 
-  d3.chart(charty.CHART_NAMES.DONUT)
-    .extend(charty.CHART_NAMES.DONUT_INNER_TEXT,{
+  d3.chart(Charty.CHART_NAMES.DONUT)
+    .extend(Charty.CHART_NAMES.DONUT_INNER_TEXT,{
     initialize : function(args){
 
       var dataValidator = args.dataValidator,
@@ -2360,19 +2360,19 @@ Labeled triangle chart drawer.
       'yxyaxis',
       'multipledatagroup'
       ],
-      function(d3, charty) {
+      function (d3, Charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, charty);
+        return factory(d3, Charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3, charty);
+    factory(d3, Charty);
   }
-}(this, function(d3, charty) {
-  d3.chart(charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
-    .extend(charty.CHART_NAMES.LABELED_TRIANGLE_CHART, {
+}(this, function (d3, Charty) {
+  d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
+    .extend(Charty.CHART_NAMES.LABELED_TRIANGLE_CHART, {
     /**
     Labeled triangle constructor.
 
@@ -2383,19 +2383,19 @@ Labeled triangle chart drawer.
     */
     initialize: function(args) {
 
-      var yxyaxis = this.mixin(charty.CHART_NAMES.YXY_AXIS,
+      var yxyaxis = this.mixin(Charty.CHART_NAMES.YXY_AXIS,
                               this.base.append('g'),
                               { dataValidator : args.dataValidator }).showAsGrid(),
 
-          triangles = this.mixin(charty.CHART_NAMES.TRIANGLE,
+          triangles = this.mixin(Charty.CHART_NAMES.TRIANGLE,
                                 this.base.append('g'),
                                 args),
 
-          recs = this.mixin(charty.CHART_NAMES.ROUNDED_RECTANGLE,
+          recs = this.mixin(Charty.CHART_NAMES.ROUNDED_RECTANGLE,
                             this.base.append('g'),
                             args),
 
-          texts = this.mixin(charty.CHART_NAMES.TEXT,
+          texts = this.mixin(Charty.CHART_NAMES.TEXT,
                             this.base.append('g'),
                             args);
 
@@ -2433,19 +2433,19 @@ Takes N input data series
       'line',
       'multipledatagroup'
       ],
-      function(d3, charty) {
+      function (d3, Charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, charty);
+        return factory(d3, Charty);
       });
   }
   else {
     /** Browser globals */
-    return factory(d3, charty);
+    factory(d3, Charty);
   }
-}(this, function(d3, charty) {
-	d3.chart(charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
-    .extend(charty.CHART_NAMES.LINE_CHART,{
+}(this, function (d3, Charty) {
+	d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
+    .extend(Charty.CHART_NAMES.LINE_CHART,{
 		/**
 		Multiple data group initializator.
 
@@ -2456,16 +2456,16 @@ Takes N input data series
 		*/
 		initialize : function(args){
 			var options = {
-				chartName : charty.CHART_NAMES.LINE,
+				chartName : Charty.CHART_NAMES.LINE,
         dataValidator : args.dataValidator,
 				instances : (args.instances || 1)
 			};
 
-			var yxyaxis = this.mixin(charty.CHART_NAMES.YXY_AXIS,
+			var yxyaxis = this.mixin(Charty.CHART_NAMES.YXY_AXIS,
                               this.base.append('g'),
                               { dataValidator : args.dataValidator }).showAsGrid(),
 
-					lineChart = this.mixin(charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
+					lineChart = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                                 this.base.append('g'),
                                 options);
 
@@ -2501,19 +2501,19 @@ Line chart combined with circles.
       'linechart',
       'multipleinstancesmixin'
       ],
-      function(d3, charty) {
+      function (d3, Charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, charty);
+        return factory(d3, Charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3, charty);
+    factory(d3, Charty);
   }
-}(this, function(d3, charty) {
-	d3.chart(charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
-    .extend(charty.CHART_NAMES.LINE_CHART_CIRCLES,{
+}(this, function (d3, Charty) {
+	d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
+    .extend(Charty.CHART_NAMES.LINE_CHART_CIRCLES,{
 		/**
 		Line and circles chart initializator.
 
@@ -2525,16 +2525,16 @@ Line chart combined with circles.
 		initialize : function(args){
 
 			var options = {
-				chartName : charty.CHART_NAMES.CIRCLE,
+				chartName : Charty.CHART_NAMES.CIRCLE,
         dataValidator : args.dataValidator,
 				instances : (args.instances || 1)
 			};
 
-			var lineChart = this.mixin(charty.CHART_NAMES.LINE_CHART, 
+			var lineChart = this.mixin(Charty.CHART_NAMES.LINE_CHART,
                                 this.base.append('g'),
                                 options),
 
-					circles = this.mixin(charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, 
+					circles = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                               this.base.append('g'),
                               options);
 
@@ -2572,32 +2572,32 @@ Scatterplot chart
       'yxyaxis',
       'multipleinstancesmixin'
       ],
-      function(d3, charty) {
+      function (d3, Charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, charty);
+        return factory(d3, Charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3, charty);
+    factory(d3, Charty);
   }
-}(this, function(d3, charty) {
-	d3.chart(charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
-    .extend(charty.CHART_NAMES.SCATTERPLOT, {
+}(this, function (d3, Charty) {
+	d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
+    .extend(Charty.CHART_NAMES.SCATTERPLOT, {
 
 		initialize : function(args){
 			var options = {
-				chartName : charty.CHART_NAMES.CIRCLE,
+				chartName : Charty.CHART_NAMES.CIRCLE,
         dataValidator : args.dataValidator,
 				instances : (args.instances || 1)
 			};
 
-			var yxyaxis = this.mixin(charty.CHART_NAMES.YXY_AXIS, 
+			var yxyaxis = this.mixin(Charty.CHART_NAMES.YXY_AXIS,
                     this.base.append('g'),
                     { dataValidator : args.dataValidator }).showAsGrid(),
 
-          lineChart = this.mixin(charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
+          lineChart = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                                  this.base,
                                  options);
 
@@ -2632,7 +2632,7 @@ Data checker for different data input
   }
   else {
     /** Browser globals */
-    return factory(_);
+    window.DataValidator = factory(_);
   }
 }(this, function() {
   function DataValidator (_){
@@ -2659,7 +2659,7 @@ Data checker for different data input
 
   @method
   @param {Number} value to check
-  @param {String} error message 
+  @param {String} error message
   @return {Number} value
   */
   DataValidator.prototype.isNumber = function(value, message){
@@ -2709,7 +2709,7 @@ Accessor will iterate over the data collection.
   }
   else {
     /** Browser globals */
-    return factory();
+    window.Accessor = factory();
   }
 }(this, function() {
   function Accessor(d) {
@@ -2809,7 +2809,7 @@ and the data accessor.
   }
   else {
     /** Browser globals */
-    return factory(Accessor);
+    window.ChartInterface = factory(Accessor);
   }
 }(this, function (Accessor) {
 
@@ -2881,7 +2881,7 @@ and it will append a specific chart to it.
       });
   } else {
     /** Browser globals */
-    return factory(d3, ScaleFactory, DataValidator, ChartInterface);
+    window.ChartsApi = factory(d3, ScaleFactory, DataValidator, ChartInterface);
   }
 }(this, function (d3, ScaleFactory, DataValidator, ChartInterface) {
   var ChartsApi = function() {

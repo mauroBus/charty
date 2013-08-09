@@ -18,7 +18,7 @@ Ordinal Scale
 			'd3.chart',
 			'basescale',
 			],
-			function(d3, BaseScale) {
+			function (d3, BaseScale) {
 				/** Export global even in AMD case in case this script
 				is loaded with others */
 				return factory(d3, BaseScale);
@@ -26,9 +26,9 @@ Ordinal Scale
   }
   else {
     /** Browser globals */
-    return factory(d3, BaseScale);
+    window.OrdinalScale = factory(d3, BaseScale);
   }
-}(this, function(d3, BaseScale) {
+}(this, function (d3, BaseScale) {
 
 	var OrdinalScale = function(axisType){
 		this.scale = d3.scale.ordinal();

@@ -22,17 +22,17 @@ to provide an easy way to switching scales in a defined chart
       'ordinalscale',
       'linearscale',
       ],
-      function(d3, charty, OrdinalScale, LinearScale) {
+      function(d3, Charty, OrdinalScale, LinearScale) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, charty, OrdinalScale, LinearScale);
+        return factory(d3, Charty, OrdinalScale, LinearScale);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3, charty, OrdinalScale, LinearScale);
+    window.ScaleFactory = factory(d3, Charty, OrdinalScale, LinearScale);
   }
-}(this, function(d3, charty, OrdinalScale, LinearScale) {
+}(this, function(d3, Charty, OrdinalScale, LinearScale) {
 	var ScaleFactory = function(){
 
 	};
@@ -49,10 +49,10 @@ to provide an easy way to switching scales in a defined chart
 		var scale;
 
 		switch(scaleType){
-			case charty.AXIS_TYPE.ORDINAL :
+			case Charty.AXIS_TYPE.ORDINAL :
 				scale = new OrdinalScale(axisType);
 				break;
-			case charty.AXIS_TYPE.LINEAR :
+			case Charty.AXIS_TYPE.LINEAR :
 				scale = new LinearScale(axisType);
 				break;
 		}

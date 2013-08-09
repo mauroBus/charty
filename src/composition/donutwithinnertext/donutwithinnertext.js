@@ -28,20 +28,20 @@ doesn't depend on the data value.
             'charty',
             'donut'
             ],
-            function(d3, charty) {
+            function (d3, Charty) {
       /** Export global even in AMD case in case this script
       is loaded with others */
-      return factory(d3, charty);
+      return factory(d3, Charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3, charty);
+    factory(d3, Charty);
   }
-}(this, function(d3, charty) {
+}(this, function (d3, Charty) {
 
-  d3.chart(charty.CHART_NAMES.DONUT)
-    .extend(charty.CHART_NAMES.DONUT_INNER_TEXT,{
+  d3.chart(Charty.CHART_NAMES.DONUT)
+    .extend(Charty.CHART_NAMES.DONUT_INNER_TEXT,{
     initialize : function(args){
 
       var dataValidator = args.dataValidator,

@@ -16,17 +16,17 @@ for inheritance.
       'd3.chart',
       'charty'
       ],
-      function(d3, charty) {
+      function (d3, Charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, charty);
+        return factory(d3, Charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3, charty);
+    window.BaseScale = factory(d3, Charty);
   }
-}(this, function(d3, charty) {
+}(this, function (d3, Charty) {
 
 	var BaseScale = function(){
 
@@ -52,11 +52,11 @@ for inheritance.
 	BaseScale.prototype.generateRange = function(range){
 		var r ;
 
-		if(this.axisType === charty.AXIS.X){
+		if(this.axisType === Charty.AXIS.X){
 			r = [0,range];
 		}
 		else{
-			if(this.axisType === charty.AXIS.Y){
+			if(this.axisType === Charty.AXIS.Y){
 				r = [range,0];
 			}
 			else{

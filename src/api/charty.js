@@ -19,7 +19,7 @@ Define constants that will be used as names for different parts
   }
   else {
     /** Browser globals */
-    return factory();
+    window.Charty = factory();
   }
 }(this, function () {
 

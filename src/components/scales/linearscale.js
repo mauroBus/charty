@@ -18,7 +18,7 @@ Linear scale for linear axis
 			'd3.chart',
 			'basescale'
 			],
-			function(d3, BaseScale) {
+			function (d3, BaseScale) {
 				/** Export global even in AMD case in case this script
 				is loaded with others */
 				return factory(d3, BaseScale);
@@ -26,9 +26,9 @@ Linear scale for linear axis
   }
   else {
     /** Browser globals */
-    return factory(d3, BaseScale);
+    window.LinearScale = factory(d3, BaseScale);
   }
-}(this, function(d3, BaseScale) {
+}(this, function (d3, BaseScale) {
 
 	var LinearScale = function(axisType){
 		this.scale = d3.scale.linear();

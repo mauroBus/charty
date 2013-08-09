@@ -21,7 +21,7 @@ Accessor will iterate over the data collection.
   }
   else {
     /** Browser globals */
-    return factory();
+    window.Accessor = factory();
   }
 }(this, function() {
   function Accessor(d) {

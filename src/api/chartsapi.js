@@ -45,7 +45,7 @@ and it will append a specific chart to it.
       });
   } else {
     /** Browser globals */
-    return factory(d3, ScaleFactory, DataValidator, ChartInterface);
+    window.ChartsApi = factory(d3, ScaleFactory, DataValidator, ChartInterface);
   }
 }(this, function (d3, ScaleFactory, DataValidator, ChartInterface) {
   var ChartsApi = function() {

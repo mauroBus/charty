@@ -23,7 +23,7 @@ Data checker for different data input
   }
   else {
     /** Browser globals */
-    return factory(_);
+    window.DataValidator = factory(_);
   }
 }(this, function() {
   function DataValidator (_){
@@ -50,7 +50,7 @@ Data checker for different data input
 
   @method
   @param {Number} value to check
-  @param {String} error message 
+  @param {String} error message
   @return {Number} value
   */
   DataValidator.prototype.isNumber = function(value, message){

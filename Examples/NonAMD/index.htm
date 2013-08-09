@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Charty 0.4.5 - Non AMD Examples</title>
+    <!--[if lte IE 8]>
+      <script src="../../vendor/r2d3/r2d3.js" charset="utf-8"></script>
+      <script src="../../Vendor/Polyfills-for-IE8/getComputedStyle.js"></script>
+      <script>
+        if(!function(){}.bind){
+            Function.prototype.bind = function(){
+              var me = this
+              , shift = [].shift
+              , he = shift.apply(arguments)
+              , ar = arguments
+              return function(){
+                return me.apply(he, ar);
+              };
+            };
+        };
+      </script>
+    <![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script src="../../vendor/d3/d3.min.js"></script>
+    <!--<![endif]-->
+    <link rel="stylesheet" type="text/css" href="../css/styles.css"/>
+  </head>
+  <body>
+    <h1>Non AMD Test</h1>
+
+    <div id='chart1' class='viewport'>
+    </div>
+
+    <div id='chart2' class='viewport'>
+    </div>
+
+    <div id='chart3' class='viewport'>
+    </div>
+
+    <div id='chart4' class='viewport'>
+    </div>
+
+    <div id='chart6' class='viewport'>
+    </div>
+
+    <div id='chart7' class='viewport'>
+    </div>
+
+    <script src="../../vendor/d3.chart/d3.chart.min.js"></script>
+    <script src="../../vendor/underscore/underscore-min.js"></script>
+    <script src="../../vendor/jquery/jquery.min.js"></script>
+
+    <script src="../../dist/charty.js"></script>
+
+    <script>
+      'use strict';
+
+      /**
+      Data rendering examples.
+      */
+      var data1 = {
+        rh: 30,
+        rw: 30,
+        c: 'blueline',
+        rc:'gray',
+        data: [
+          { x: 'A', y: 100, c : 'red'},
+          { x: 'B', y: -40, c : 'red'},
+          { x: 'C', y: 60, c : 'red'}
+        ]
+      };
+
+      var data2 = {
+        c: 'redline',
+        data: [
+          { x: 'A', y: 150 , c:'blue'},
+          { x: 'B', y: 50 , c: 'blue'},
+          { x: 'C', y: 30, c:'blue'}
+        ]
+      };
+
+      /**
+      Data test for donut chart with inner text
+      */
+      var data4 = {
+        ir :  90,
+        or :  50,
+        /*xPosition : 200,
+        yPosition : 200,*/
+        data : [
+          {x : 25 , c: 'red'},
+          {x : 175, c: 'gray'}
+        ]
+      };
+
+      var datagroup1 = [];
+          datagroup1.push(data1);
+          datagroup1.push(data2);
+
+      var datagroup2 = [];
+          datagroup2.push(data1);
+
+      var datagroup4 = [];
+          datagroup4.push(data4);
+
+      var myApi = new ChartsApi();
+
+      var options1 = {
+        chartName : 'BarChart',
+        instances : 2,
+        root : '#chart1',
+        xAxis : 'ordinal',
+        yAxis : 'linear',
+        marginleft : 50,
+        margintop : 20,
+        marginlfactor : 0.85,
+        margintfactor : 0.85
+      };
+
+      var options2 = {
+        chartName : 'LabeledTriangleChart',
+        root : '#chart2',
+        xAxis : 'ordinal',
+        yAxis : 'linear',
+        marginleft : 50,
+        margintop : 20,
+        marginlfactor : 0.85,
+        margintfactor : 0.85
+      };
+
+      var options3 = {
+        chartName : 'LineChart',
+        instances : 2,
+        root : '#chart3',
+        xAxis : 'ordinal',
+        yAxis : 'linear',
+        marginleft : 50,
+        margintop : 20,
+        marginlfactor : 0.85,
+        margintfactor : 0.85
+      };
+
+      var options4 = {
+        chartName : 'Scatterplot',
+        instances : 2,
+        root : '#chart4',
+        xAxis : 'ordinal',
+        yAxis : 'linear',
+        marginleft : 50,
+        margintop : 20,
+        marginlfactor : 0.85,
+        margintfactor : 0.85
+      };
+
+      var options6 = {
+        chartName : 'DonutWithInnerText',
+        instances : 1,
+        root : '#chart6',
+        imgLocation : 'imgCenter',
+        /*marginlfactor : 0.8,
+        margintfactor : 0.8*/
+      };
+
+      var options7 = {
+        chartName : 'LineChartCircles',
+        instances : 2,
+        root : '#chart7',
+        xAxis : 'ordinal',
+        yAxis : 'linear',
+        marginleft : 50,
+        margintop : 20,
+        marginlfactor : 0.85,
+        margintfactor : 0.85
+      };
+
+      /**
+      Initial charts drawing here.
+      */
+      var chart1 = myApi.chart(options1);
+          chart1.draw(datagroup1);
+
+      var chart2 = myApi.chart(options2);
+          chart2.draw(datagroup2);
+
+          data1.c = 'redline';
+          data2.c = 'blueline';
+
+      var chart3 = myApi.chart(options3);
+          chart3.draw(datagroup1);
+
+          data1.c = 'red';
+          data2.c = 'blue';
+
+      var chart4 = myApi.chart(options4);
+          chart4.draw(datagroup1);
+
+      var chart6 = myApi.chart(options6);
+          chart6.draw(datagroup4);
+
+          data1.c = 'redline';
+          data2.c = 'blueline';
+
+      var chart7 = myApi.chart(options7);
+          chart7.draw(datagroup1);
+
+      /**
+      Charts update here.
+      */
+      setTimeout(function(){
+
+        data1 = {
+          c: 'blue',
+          rh: 30,
+          rw: 30,
+          rc:'gray',
+          data: [
+            { x: 'A', y: 100},
+            { x: 'B', y: 40},
+            { x: 'C', y: 60},
+            { x: 'D', y: 80}
+          ]
+        };
+
+        data2 = {
+          c: 'red',
+          r : 8,
+          data: [
+            { x: 'A', y: 150 },
+            { x: 'B', y: 50 },
+            { x: 'C', y: 30 },
+            { x: 'D', y: 230 }
+          ]
+        };
+
+        var datagroup4 = [];
+            datagroup4.push(data1);
+            datagroup4.push(data2);
+
+        var datagroup5 = [];
+            datagroup5.push(data1);
+
+        chart1.draw(datagroup4);
+        chart2.draw(datagroup5);
+
+        data1.c = 'redline';
+        data2.c = 'blueline';
+
+        chart3.draw(datagroup4);
+
+        data1.c = 'gray';
+        data1.r = 12;
+        data2.c = 'red';
+        data2.r = 8;
+
+        chart4.draw(datagroup4);
+
+        var data9 = {
+          ir :  50,
+          or :  90,
+          data : [
+            {x : 50 , c: 'blue'},
+            {x : 155, c: 'gray'}
+          ]
+        };
+
+        var datagroup7 = [];
+            datagroup7.push(data9);
+
+        chart6.draw(datagroup7);
+
+      },3000);
+    </script>
+  </body>
+</html>

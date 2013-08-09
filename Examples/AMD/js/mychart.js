@@ -8,17 +8,17 @@ Testing chart drawing and data update
 require.config({
   paths : {
     /** Libraries */
-    'd3'                      : '../../vendor/d3/d3.min',
-    'r2d3'                    : '../../vendor/r2d3/r2d3',
-    'd3.chart'                : '../../vendor/d3.chart/d3.chart.min',
-    'underscore'              : '../../vendor/underscore/underscore-min',
-    'feature'                 : '../../vendor/feature/feature',
-    'jquery'                  : '../../vendor/jquery/jquery.min',
-    'chartsapi'               : '../../dist/charty',
+    'd3'                      : '../../../vendor/d3/d3.min',
+    'r2d3'                    : '../../../vendor/r2d3/r2d3',
+    'd3.chart'                : '../../../vendor/d3.chart/d3.chart.min',
+    'underscore'              : '../../../vendor/underscore/underscore-min',
+    'feature'                 : '../../../vendor/feature/feature',
+    'jquery'                  : '../../../vendor/jquery/jquery.min',
+    'chartsapi'               : '../../../dist/charty',
 
     /** Conditional loading */
     'implementations'         : 'dynamic'
-    
+
   },
   shim:{
     'jquery' : {
