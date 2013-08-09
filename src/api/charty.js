@@ -1,7 +1,7 @@
 /**
-Define constants that will be used as names for different parts
+Full chart api
 
-@class ChartNames
+@class Charty
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -10,61 +10,122 @@ Define constants that will be used as names for different parts
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('charty',
-      function () {
+    define('charty',[
+      'chartynames',
+      'scalesfactory',
+      'chartinterface',
+      'barchart',
+      'labeledtrianglechart',
+      'linechart',
+      'scatterplot',
+      'donut',
+      'donutwithinnertext',
+      'linechartcircles'
+      ],
+      function (Charty, ScaleFactory, ChartInterface) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory();
+        return factory(Charty, ScaleFactory, ChartInterface);
     });
   }
   else {
     /** Browser globals */
-    window.Charty = factory();
+    root.Charty = factory(Charty, ScaleFactory, ChartInterface);
   }
-}(this, function () {
-
-  var Charty = {
-
-  };
-
-  Charty.CHART_NAMES = {
-    AXIS: 'Axis',
-    BAR: 'Bar',
-    BASE_CHART: 'BaseChart',
-    CIRCLE: 'Circle',
-    DONUT: 'Donut',
-    LINE: 'Line',
-    ROUNDED_RECTANGLE: 'RoundedRectangle',
-    TEXT: 'Text',
-    TRIANGLE: 'Triangle',
-    XY_AXIS: 'XYAxis',
-    YXY_AXIS: 'YXYAxis',
-    BAR_CHART: 'BarChart',
-    LABELED_TRIANGLE_CHART: 'LabeledTriangleChart',
-    SCATTERPLOT: 'Scatterplot',
-    MULTIPLE_DATA_GROUP: 'MultipleDataGroup',
-    MULTIPLE_INSTANCES_MIXIN: 'MultipleInstancesMixin',
-    SIMPLE_DATA_GROUP: 'SimpleDataGroup',
-    DONUT_INNER_TEXT : 'DonutWithInnerText',
-    GROUPED_BAR_CHART : 'GroupedBarChart',
-    LINE_CHART : 'LineChart',
-    LINE_CHART_CIRCLES : 'LineChartCircles'
-  };
+}(this, function (Charty, ScaleFactory, ChartInterface) {
 
   /**
-  Axis types are defined as constants
-  */
-  Charty.AXIS_TYPE = {
-    ORDINAL: 'ordinal',
-    LINEAR: 'linear'
-  };
+  Appends a chart to a root d3.selection element. Chart is determined
+  by a defined chart name.
+  Margin is used to translate the chart a small distance. A chart can have many
+  instances.
 
-  /**
-  Axis defined as constants
+  @method
+  @param {Object} options options = {
+                    chartName : 'BarChart',
+                    instances : 2,
+                    root : 'body',
+                    xAxis : 'ordinal',
+                    yAxis : 'linear',
+                    margin : {
+                      left : 20,
+                      top : 20,
+                      lfactor : 0.8
+                      tfactor : 0.8
+                    }
+  @return {Object} d3.chart for data drawing
   */
-  Charty.AXIS = {
-    X : 'x',
-    Y : 'y'
+  Charty.prototype.chart = function(options) {
+
+    if( !this.scaleFactory ){
+      this.scaleFactory = new ScaleFactory();
+    }
+
+    if (!options.root || !options.chartName) {
+      throw new Error('Root element or chart name not defined');
+    }
+
+    var selection = d3.select(options.root),
+        height = (parseInt(selection.style('height'), 10) || 200),
+        width  = (parseInt(selection.style('width'), 10) || 200);
+
+    /**
+    Set default values for margin, for the svg element.
+    */
+    var marginValues = {
+      left: (options.marginleft || 0),
+      top: (options.margintop || 0),
+      lfactor: (options.marginlfactor || 1),
+      tfactor: (options.margintfactor || 1)
+    };
+
+    /**
+    Sets background image via CSS
+    */
+    if (options.imgLocation){
+      selection.classed(options.imgLocation, true);
+    }
+
+    /**
+    Svg element creation
+    */
+    var svg = selection.append('svg')
+      .attr('width', width)
+      .attr('height', height)
+      .append('g')
+      .attr('transform', 'translate(' + marginValues.left + ',' + marginValues.top + ')');
+
+    /**
+    Chart dimension values are porcentaje from svg adapted value.
+    */
+    width = (width - marginValues.top) * marginValues.tfactor;
+    height = (height - marginValues.left) * marginValues.lfactor;
+
+    /**
+    Appends the chart to the specified html element.
+    */
+    var chart = svg.chart(options.chartName, {
+                    instances: options.instances,
+                    dataValidator : this.dataValidator
+                  })
+                  .height(height)
+                  .width(width);
+
+    /**
+    Scale definition.
+    Some charts can use direct mapping instead of scaling.
+    */
+    if (options.xAxis){
+      chart = chart.setXScale(this.scaleFactory.scale(options.xAxis,'x'));
+    }
+    if (options.yAxis){
+      chart = chart.setYScale(this.scaleFactory.scale(options.yAxis,'y'));
+    }
+
+    /**
+    Returns the interface for the chart drawing
+    */
+    return new ChartInterface(chart);
   };
 
   return Charty;

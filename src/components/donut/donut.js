@@ -19,7 +19,7 @@ Donut drawer.
     /** AMD */
     define('donut',[
         'd3.chart',
-        'charty',
+        'chartynames',
         'simpledatagroup'
       ],
       function (d3, Charty) {

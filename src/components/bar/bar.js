@@ -17,7 +17,7 @@ Bar drawer. Takes only one data series as input.
     /** AMD */
     define('bar',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'simpledatagroup'
       ],
       function (d3, Charty) {

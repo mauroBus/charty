@@ -17,7 +17,7 @@ Rounded rectangle drawer.
     /** AMD */
     define('roundedrectangle',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'simpledatagroup'
       ],
       function (d3, Charty) {

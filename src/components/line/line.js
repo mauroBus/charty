@@ -17,7 +17,7 @@ Line drawing.
     /** AMD */
     define('line',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'simpledatagroup'
       ],
       function (d3, Charty) {

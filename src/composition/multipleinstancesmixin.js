@@ -17,7 +17,7 @@ Chart that can represent many data series
     /** AMD */
     define('multipleinstancesmixin',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'basechart'
       ],
       function (d3, Charty) {

@@ -42,10 +42,6 @@ Contains common functionality
     */
     width : function(newWidth){
 
-      if(arguments.length === 0){
-        return this.w;
-      }
-
       if(!newWidth || !_.isNumber(newWidth) || newWidth < 0){
         throw new Error('Invalid width value for chart.');
       }
@@ -67,10 +63,6 @@ Contains common functionality
     @param {Number} newHeight height for the chart
     */
     height : function(newHeight){
-
-      if(arguments.length === 0){
-        return this.h;
-      }
 
       if(!newHeight || !_.isNumber(newHeight) || newHeight < 0){
         throw new Error('Invalid height value for chart.');

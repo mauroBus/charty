@@ -21,7 +21,7 @@ N data series
     /** AMD */
     define('barchart',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'bar',
       'multipledatagroup',
       'yxyaxis',

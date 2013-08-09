@@ -24,7 +24,9 @@ module.exports = function(grunt) {
     concat: {
       dist: {
         src: [
-          '<%= yeoman.app %>/api/charty.js',
+          '<%= yeoman.app %>/utils/datavalidator/datavalidator.js',
+          '<%= yeoman.app %>/api/chartyinit.js',
+          '<%= yeoman.app %>/api/chartynames.js',
           '<%= yeoman.app %>/components/scales/*.js',
           '<%= yeoman.app %>/components/base/basechart.js',
           '<%= yeoman.app %>/composition/simpledatagroup.js',
@@ -45,10 +47,10 @@ module.exports = function(grunt) {
           '<%= yeoman.app %>/composition/labeledtrianglechart/labeledtrianglechart.js',
           '<%= yeoman.app %>/composition/linechart/*.js',
           '<%= yeoman.app %>/composition/scatterplot/scatterplot.js',
-          '<%= yeoman.app %>/utils/datavalidator/datavalidator.js',
           '<%= yeoman.app %>/utils/accessor/accessor.js',
           '<%= yeoman.app %>/api/chartinterface.js',
-          '<%= yeoman.app %>/api/chartsapi.js'
+          '<%= yeoman.app %>/api/chartyapi.js',
+          '<%= yeoman.app %>/api/charty.js',
         ],
         dest: '<%= yeoman.dist %>/charty.js'
       }

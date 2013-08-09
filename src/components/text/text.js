@@ -17,7 +17,7 @@ Text labeling.
     /** AMD */
     define('text',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'simpledatagroup'
       ],
       function (d3, Charty) {

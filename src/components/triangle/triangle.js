@@ -17,7 +17,7 @@ Triangle drawer.
     /** AMD */
     define('triangle',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'simpledatagroup'
       ],
       function (d3, Charty) {

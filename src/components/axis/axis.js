@@ -22,7 +22,7 @@ it will implement all the functions needed.
     /** AMD */
     define('axis',[
       'd3.chart',
-      'charty'
+      'chartynames'
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script

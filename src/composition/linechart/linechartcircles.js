@@ -19,7 +19,7 @@ Line chart combined with circles.
     /** AMD */
     define('linechartcircles',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'multipledatagroup',
       'linechart',
       'multipleinstancesmixin'

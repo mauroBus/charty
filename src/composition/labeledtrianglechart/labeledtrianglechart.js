@@ -22,7 +22,7 @@ Labeled triangle chart drawer.
     /** AMD */
     define('labeledtrianglechart',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'triangle',
       'roundedrectangle',
       'text',

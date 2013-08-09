@@ -18,7 +18,7 @@ One X Axis (bottom)
     /** AMD */
     define('yxyaxis',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'axis',
       ],
       function (d3, Charty) {

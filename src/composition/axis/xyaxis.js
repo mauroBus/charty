@@ -16,7 +16,7 @@ Base XY system for all the 2D charts.
     /** AMD */
     define('xyaxis',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'axis'
       ],
       function (d3, Charty) {

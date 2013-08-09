@@ -19,7 +19,7 @@ Takes N input data series
     /** AMD */
     define('linechart',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'line',
       'multipledatagroup'
       ],

@@ -14,7 +14,7 @@ require.config({
     'underscore'              : '../../../vendor/underscore/underscore-min',
     'feature'                 : '../../../vendor/feature/feature',
     'jquery'                  : '../../../vendor/jquery/jquery.min',
-    'chartsapi'               : '../../../dist/charty',
+    'charty'                  : '../../../dist/charty',
 
     /** Conditional loading */
     'implementations'         : 'dynamic'
@@ -40,10 +40,14 @@ require.config({
   }
 });
 
-requirejs(['chartsapi'],
-function(ChartsApi){
+requirejs(['charty'],
+function(Charty){
 
   'use strict';
+
+  var myApi = new Charty();
+
+  console.log(myApi.CHART_NAMES);
 
   /**
   Data rendering examples.
@@ -92,8 +96,6 @@ function(ChartsApi){
 
   var datagroup4 = [];
       datagroup4.push(data4);
-
-  var myApi = new ChartsApi();
 
   var options1 = {
     chartName : 'BarChart',

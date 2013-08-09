@@ -20,7 +20,7 @@ Scatterplot chart
     /** AMD */
     define('scatterplot',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'circle',
       'multipledatagroup',
       'yxyaxis',

@@ -17,7 +17,7 @@ Circle drawer.
     /** AMD */
     define('circle',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'simpledatagroup'
       ],
       function (d3, Charty) {

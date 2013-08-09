@@ -25,7 +25,7 @@ doesn't depend on the data value.
     /** AMD */
     define('donutwithinnertext',[
             'd3.chart',
-            'charty',
+            'chartynames',
             'donut'
             ],
             function (d3, Charty) {

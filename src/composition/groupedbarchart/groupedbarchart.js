@@ -22,7 +22,7 @@ another one for the data mapping.
     /** AMD */
     define([
             'd3.chart',
-            'charty',
+            'chartynames',
             'scalesfactory',
             'bar',
             'xyaxis',

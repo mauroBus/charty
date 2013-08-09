@@ -1,4 +1,130 @@
 /**
+Data checker for different data input
+
+@class DataValidator
+@constructor
+@requires underscore
+
+@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+*/
+
+(function(root, factory) {
+  /** Setting up AMD support*/
+  if (typeof define === 'function' && define.amd) {
+    /** AMD */
+    define('datavalidator',[
+      'underscore'
+      ],
+      function (_) {
+      /** Export global even in AMD case in case this script
+      is loaded with others */
+      return factory(_);
+    });
+  }
+  else {
+    /** Browser globals */
+    window.DataValidator = factory(_);
+  }
+}(this, function() {
+  function DataValidator (_){
+
+  }
+
+  /**
+  Checks if a given value is defined and > 0
+
+  @method
+  @param {Number} value number to check
+  @param {String} message error message to show
+  @return {Number} value
+  */
+  DataValidator.prototype.isPositiveNumber = function (value, message){
+    if(!_.isUndefined(value) && (!_.isNumber(value) || value < 0)){
+      throw new Error(message);
+    }
+    return value;
+  };
+
+  /**
+  Checks if value is number, or is defined
+
+  @method
+  @param {Number} value to check
+  @param {String} error message
+  @return {Number} value
+  */
+  DataValidator.prototype.isNumber = function(value, message){
+    if(!_.isUndefined(value) && !_.isNumber(value)){
+      throw new Error(message);
+    }
+    return value;
+  };
+
+  /**
+  Checks if a value is defined
+
+  @method
+  @param {Number} value to check
+  @param {String} message error message
+  @return {Number} value
+  */
+  DataValidator.prototype.isUndefined = function(value, message){
+    if(_.isUndefined(value)){
+      throw new Error(message);
+    }
+    return value;
+  };
+
+  return DataValidator;
+}));
+/**
+Api for chart creation management.
+
+Having the api, it is possible to set a root html element,
+and it will append a specific chart to it.
+
+@class ChartsApi
+@constructor
+@requires d3.chart,
+          scalesfactory,
+          barchart,
+          labeledtrianglechart,
+          linechart,
+          scatterplot,
+          donut,
+          donutwithinnertext,
+          labeleddonutchart,
+          linechartcircles
+
+@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+*/
+
+(function(root, factory) {
+
+  /** Setting up AMD support*/
+  if (typeof define === 'function' && define.amd) {
+    /** AMD */
+    define('chartyinit',[
+        'datavalidator'
+      ],
+      function (DataValidator) {
+        /** Export global even in AMD case in case this script
+        is loaded with others */
+        return factory(DataValidator);
+      });
+  } else {
+    /** Browser globals */
+    root.Charty = factory(DataValidator);
+  }
+}(this, function (DataValidator) {
+
+  var Charty = function() {
+    this.dataValidator = new DataValidator();
+  };
+
+  return Charty;
+}));
+/**
 Define constants that will be used as names for different parts
 
 @class ChartNames
@@ -10,24 +136,22 @@ Define constants that will be used as names for different parts
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('charty',
-      function () {
+    define('chartynames',[
+      'chartyinit'
+      ],
+      function (Charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory();
+        return factory(Charty);
     });
   }
   else {
     /** Browser globals */
-    window.Charty = factory();
+    root.Charty = factory(Charty);
   }
-}(this, function () {
+}(this, function (Charty) {
 
-  var Charty = {
-
-  };
-
-  Charty.CHART_NAMES = {
+  Charty.prototype.CHART_NAMES = {
     AXIS: 'Axis',
     BAR: 'Bar',
     BASE_CHART: 'BaseChart',
@@ -54,7 +178,7 @@ Define constants that will be used as names for different parts
   /**
   Axis types are defined as constants
   */
-  Charty.AXIS_TYPE = {
+  Charty.prototype.AXIS_TYPE = {
     ORDINAL: 'ordinal',
     LINEAR: 'linear'
   };
@@ -62,7 +186,7 @@ Define constants that will be used as names for different parts
   /**
   Axis defined as constants
   */
-  Charty.AXIS = {
+  Charty.prototype.AXIS = {
     X : 'x',
     Y : 'y'
   };
@@ -85,7 +209,7 @@ for inheritance.
     /** AMD */
     define('basescale',[
       'd3.chart',
-      'charty'
+      'chartynames'
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
@@ -408,22 +532,21 @@ to provide an easy way to switching scales in a defined chart
   if (typeof define === 'function' && define.amd) {
     /** AMD */
     define('scalesfactory',[
-      'd3.chart',
-      'charty',
+      'chartynames',
       'ordinalscale',
       'linearscale',
       ],
-      function(d3, Charty, OrdinalScale, LinearScale) {
+      function(Charty, OrdinalScale, LinearScale) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, Charty, OrdinalScale, LinearScale);
+        return factory(Charty, OrdinalScale, LinearScale);
     });
   }
   else {
     /** Browser globals */
-    window.ScaleFactory = factory(d3, Charty, OrdinalScale, LinearScale);
+    window.ScaleFactory = factory(Charty, OrdinalScale, LinearScale);
   }
-}(this, function(d3, Charty, OrdinalScale, LinearScale) {
+}(this, function(Charty, OrdinalScale, LinearScale) {
 	var ScaleFactory = function(){
 
 	};
@@ -434,7 +557,7 @@ to provide an easy way to switching scales in a defined chart
 	@method
 	@param {String} scaleType Available scale type
 	@param {String} axisType Related axis type ('x'-'y')
-	@return {Object} d3.scale
+	@return {Object} LinearScale / OrdinalScale
 	*/
 	ScaleFactory.prototype.scale = function(scaleType, axisType){
 		var scale;
@@ -497,10 +620,6 @@ Contains common functionality
     */
     width : function(newWidth){
 
-      if(arguments.length === 0){
-        return this.w;
-      }
-
       if(!newWidth || !_.isNumber(newWidth) || newWidth < 0){
         throw new Error('Invalid width value for chart.');
       }
@@ -522,10 +641,6 @@ Contains common functionality
     @param {Number} newHeight height for the chart
     */
     height : function(newHeight){
-
-      if(arguments.length === 0){
-        return this.h;
-      }
 
       if(!newHeight || !_.isNumber(newHeight) || newHeight < 0){
         throw new Error('Invalid height value for chart.');
@@ -612,7 +727,7 @@ Defines a basic chart to process individual data series
     /** AMD */
     define('simpledatagroup',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'basechart'
       ],
       function (d3, Charty) {
@@ -666,7 +781,7 @@ it will implement all the functions needed.
     /** AMD */
     define('axis',[
       'd3.chart',
-      'charty'
+      'chartynames'
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
@@ -885,7 +1000,7 @@ Bar drawer. Takes only one data series as input.
     /** AMD */
     define('bar',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'simpledatagroup'
       ],
       function (d3, Charty) {
@@ -1010,7 +1125,7 @@ Circle drawer.
     /** AMD */
     define('circle',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'simpledatagroup'
       ],
       function (d3, Charty) {
@@ -1132,7 +1247,7 @@ Donut drawer.
     /** AMD */
     define('donut',[
         'd3.chart',
-        'charty',
+        'chartynames',
         'simpledatagroup'
       ],
       function (d3, Charty) {
@@ -1280,7 +1395,7 @@ Line drawing.
     /** AMD */
     define('line',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'simpledatagroup'
       ],
       function (d3, Charty) {
@@ -1393,7 +1508,7 @@ Rounded rectangle drawer.
     /** AMD */
     define('roundedrectangle',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'simpledatagroup'
       ],
       function (d3, Charty) {
@@ -1528,7 +1643,7 @@ Text labeling.
     /** AMD */
     define('text',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'simpledatagroup'
       ],
       function (d3, Charty) {
@@ -1636,7 +1751,7 @@ Triangle drawer.
     /** AMD */
     define('triangle',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'simpledatagroup'
       ],
       function (d3, Charty) {
@@ -1803,7 +1918,7 @@ Defines a data transformation for composite charts
     /** AMD */
     define('multipledatagroup',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'basechart'
       ],
       function (d3, Charty) {
@@ -1855,7 +1970,7 @@ Chart that can represent many data series
     /** AMD */
     define('multipleinstancesmixin',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'basechart'
       ],
       function (d3, Charty) {
@@ -1919,7 +2034,7 @@ Base XY system for all the 2D charts.
     /** AMD */
     define('xyaxis',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'axis'
       ],
       function (d3, Charty) {
@@ -2029,7 +2144,7 @@ One X Axis (bottom)
     /** AMD */
     define('yxyaxis',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'axis',
       ],
       function (d3, Charty) {
@@ -2146,7 +2261,7 @@ N data series
     /** AMD */
     define('barchart',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'bar',
       'multipledatagroup',
       'yxyaxis',
@@ -2223,7 +2338,7 @@ doesn't depend on the data value.
     /** AMD */
     define('donutwithinnertext',[
             'd3.chart',
-            'charty',
+            'chartynames',
             'donut'
             ],
             function (d3, Charty) {
@@ -2352,7 +2467,7 @@ Labeled triangle chart drawer.
     /** AMD */
     define('labeledtrianglechart',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'triangle',
       'roundedrectangle',
       'text',
@@ -2429,7 +2544,7 @@ Takes N input data series
     /** AMD */
     define('linechart',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'line',
       'multipledatagroup'
       ],
@@ -2496,7 +2611,7 @@ Line chart combined with circles.
     /** AMD */
     define('linechartcircles',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'multipledatagroup',
       'linechart',
       'multipleinstancesmixin'
@@ -2566,7 +2681,7 @@ Scatterplot chart
     /** AMD */
     define('scatterplot',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'circle',
       'multipledatagroup',
       'yxyaxis',
@@ -2606,85 +2721,6 @@ Scatterplot chart
 			this.componentsMixins.push(yxyaxis);
 		}
 	});
-}));
-/**
-Data checker for different data input
-
-@class DataValidator
-@constructor
-@requires underscore
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
-*/
-
-(function(root, factory) {
-  /** Setting up AMD support*/
-  if (typeof define === 'function' && define.amd) {
-    /** AMD */
-    define('datavalidator',[
-      'underscore'
-      ],
-      function (_) {
-      /** Export global even in AMD case in case this script
-      is loaded with others */
-      return factory(_);
-    });
-  }
-  else {
-    /** Browser globals */
-    window.DataValidator = factory(_);
-  }
-}(this, function() {
-  function DataValidator (_){
-
-  }
-
-  /**
-  Checks if a given value is defined and > 0
-
-  @method
-  @param {Number} value number to check
-  @param {String} message error message to show
-  @return {Number} value
-  */
-  DataValidator.prototype.isPositiveNumber = function (value, message){
-    if(!_.isUndefined(value) && (!_.isNumber(value) || value < 0)){
-      throw new Error(message);
-    }
-    return value;
-  };
-
-  /**
-  Checks if value is number, or is defined
-
-  @method
-  @param {Number} value to check
-  @param {String} error message
-  @return {Number} value
-  */
-  DataValidator.prototype.isNumber = function(value, message){
-    if(!_.isUndefined(value) && !_.isNumber(value)){
-      throw new Error(message);
-    }
-    return value;
-  };
-
-  /**
-  Checks if a value is defined
-
-  @method
-  @param {Number} value to check
-  @param {String} message error message
-  @return {Number} value
-  */
-  DataValidator.prototype.isUndefined = function(value, message){
-    if(_.isUndefined(value)){
-      throw new Error(message);
-    }
-    return value;
-  };
-
-  return DataValidator;
 }));
 /**
 Accessor for data collection
@@ -2835,82 +2871,67 @@ and the data accessor.
   return ChartInterface;
 }));
 /**
-Api for chart creation management.
+Full chart api
 
-Having the api, it is possible to set a root html element,
-and it will append a specific chart to it.
-
-@class ChartsApi
-@constructor
-@requires d3.chart,
-          scalesfactory,
-          barchart,
-          labeledtrianglechart,
-          linechart,
-          scatterplot,
-          donut,
-          donutwithinnertext,
-          labeleddonutchart,
-          linechartcircles
+@class Charty
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
-
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('chartsapi',[
-        'd3.chart',
-        'scalesfactory',
-        'datavalidator',
-        'chartinterface',
-        'barchart',
-        'labeledtrianglechart',
-        'linechart',
-        'scatterplot',
-        'donut',
-        'donutwithinnertext',
-        'linechartcircles'
+    define('charty',[
+      'chartynames',
+      'scalesfactory',
+      'chartinterface',
+      'barchart',
+      'labeledtrianglechart',
+      'linechart',
+      'scatterplot',
+      'donut',
+      'donutwithinnertext',
+      'linechartcircles'
       ],
-      function (d3, ScaleFactory, DataValidator, ChartInterface) {
+      function (Charty, ScaleFactory, ChartInterface) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, ScaleFactory, DataValidator, ChartInterface);
-      });
-  } else {
-    /** Browser globals */
-    window.ChartsApi = factory(d3, ScaleFactory, DataValidator, ChartInterface);
+        return factory(Charty, ScaleFactory, ChartInterface);
+    });
   }
-}(this, function (d3, ScaleFactory, DataValidator, ChartInterface) {
-  var ChartsApi = function() {
-    this.scaleFactory = new ScaleFactory();
-    this.dataValidator = new DataValidator();
-  };
+  else {
+    /** Browser globals */
+    root.Charty = factory(Charty, ScaleFactory, ChartInterface);
+  }
+}(this, function (Charty, ScaleFactory, ChartInterface) {
 
   /**
-	Appends a chart to a root d3.selection element. Chart is determined
-	by a defined chart name.
-	Margin is used to translate the chart a small distance. A chart can have many
-	instances.
+  Appends a chart to a root d3.selection element. Chart is determined
+  by a defined chart name.
+  Margin is used to translate the chart a small distance. A chart can have many
+  instances.
 
-	@method
-	@param {Object} options options = {
-										chartName : 'BarChart',
-										instances : 2,
-										root : 'body',
-										xAxis : 'ordinal',
-										yAxis : 'linear',
-										margin : {
-											left : 20,
-											top : 20,
-											lfactor : 0.8
-											tfactor : 0.8
+  @method
+  @param {Object} options options = {
+                    chartName : 'BarChart',
+                    instances : 2,
+                    root : 'body',
+                    xAxis : 'ordinal',
+                    yAxis : 'linear',
+                    margin : {
+                      left : 20,
+                      top : 20,
+                      lfactor : 0.8
+                      tfactor : 0.8
                     }
-	@return {Object} d3.chart for data drawing
-	*/
-  ChartsApi.prototype.chart = function(options) {
+  @return {Object} d3.chart for data drawing
+  */
+  Charty.prototype.chart = function(options) {
+
+    if( !this.scaleFactory ){
+      this.scaleFactory = new ScaleFactory();
+    }
 
     if (!options.root || !options.chartName) {
       throw new Error('Root element or chart name not defined');
@@ -2974,12 +2995,10 @@ and it will append a specific chart to it.
     }
 
     /**
-    Creates the interface for the chart drawing
+    Returns the interface for the chart drawing
     */
-    var chartInt = new ChartInterface(chart);
-
-    return chartInt;
+    return new ChartInterface(chart);
   };
 
-  return ChartsApi;
+  return Charty;
 }));

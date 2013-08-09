@@ -16,7 +16,7 @@ Defines a basic chart to process individual data series
     /** AMD */
     define('simpledatagroup',[
       'd3.chart',
-      'charty',
+      'chartynames',
       'basechart'
       ],
       function (d3, Charty) {
