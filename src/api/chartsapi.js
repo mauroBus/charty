@@ -13,7 +13,6 @@ and it will append a specific chart to it.
           linechart,
           scatterplot,
           donut,
-          groupedbarchart,
           donutwithinnertext,
           labeleddonutchart,
           linechartcircles
@@ -30,25 +29,25 @@ and it will append a specific chart to it.
         'd3.chart',
         'scalesfactory',
         'datavalidator',
+        'chartinterface',
         'barchart',
         'labeledtrianglechart',
         'linechart',
         'scatterplot',
         'donut',
-        /*'groupedbarchart',*/
         'donutwithinnertext',
         'linechartcircles'
       ],
-      function (d3, ScaleFactory, DataValidator) {
+      function (d3, ScaleFactory, DataValidator, ChartInterface) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, ScaleFactory, DataValidator);
+        return factory(d3, ScaleFactory, DataValidator, ChartInterface);
       });
   } else {
     /** Browser globals */
-    return factory(d3, ScaleFactory, DataValidator);
+    return factory(d3, ScaleFactory, DataValidator, ChartInterface);
   }
-}(this, function (d3, ScaleFactory, DataValidator) {
+}(this, function (d3, ScaleFactory, DataValidator, ChartInterface) {
   var ChartsApi = function() {
     this.scaleFactory = new ScaleFactory();
     this.dataValidator = new DataValidator();
@@ -138,7 +137,12 @@ and it will append a specific chart to it.
       chart = chart.setYScale(this.scaleFactory.scale(options.yAxis,'y'));
     }
 
-    return chart;
+    /**
+    Creates the interface for the chart drawing
+    */
+    var chartInt = new ChartInterface(chart);
+
+    return chartInt;
   };
 
   return ChartsApi;

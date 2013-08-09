@@ -8,10 +8,10 @@ var mountFolder = function(connect, dir) {
 module.exports = function(grunt) {
   'use strict';
 
-  // load all grunt tasks
+  /** Load all grunt tasks */
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
-  // configurable paths
+  /** Configurable paths */
   var yeomanConfig = {
     app: 'src',
     dist: 'dist'
@@ -20,9 +20,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     yeoman: yeomanConfig,
 
-    ////
-    // Concat
-    ////
+    /** Concat */
     concat: {
       dist: {
         src: [
@@ -48,15 +46,15 @@ module.exports = function(grunt) {
           '<%= yeoman.app %>/composition/linechart/*.js',
           '<%= yeoman.app %>/composition/scatterplot/scatterplot.js',
           '<%= yeoman.app %>/utils/datavalidator/datavalidator.js',
+          '<%= yeoman.app %>/utils/accessor/accessor.js',
+          '<%= yeoman.app %>/api/chartinterface.js',
           '<%= yeoman.app %>/api/chartsapi.js'
         ],
         dest: '<%= yeoman.dist %>/charty.js'
       }
     },
 
-    /**
-    Minimify code
-    */
+    /** Minimify code */
     uglify: {
       dist: {
         files: {
@@ -67,7 +65,7 @@ module.exports = function(grunt) {
 
   });
 
-  // build js
+  /** Build js */
   grunt.registerTask('build-js', [
     'concat',
     'uglify'

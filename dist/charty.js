@@ -2687,6 +2687,154 @@ Data checker for different data input
   return DataValidator;
 }));
 /**
+Accessor for data collection
+
+Accessor will iterate over the data collection.
+
+@class Accessor
+@constructor
+
+@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+*/
+
+(function(root, factory) {
+  /** Setting up AMD support*/
+  if (typeof define === 'function' && define.amd) {
+    /** AMD */
+    define('accessor', function () {
+      /** Export global even in AMD case in case this script
+      is loaded with others */
+      return factory();
+    });
+  }
+  else {
+    /** Browser globals */
+    return factory();
+  }
+}(this, function() {
+  function Accessor(d) {
+    this.index = -1;
+  }
+
+  /**
+  Returns first element of the collection
+
+  @method
+  @return {Object} data element from the collection
+  */
+  Accessor.prototype.first = function() {
+    return this.data[0];
+  };
+
+  /**
+  Returns the next element of the collection
+  If no more elements are available,
+  collection index will reset itself
+
+  @method
+  @return {Object} next element in the collection,
+  first element in case of reset
+  */
+  Accessor.prototype.next = function() {
+    if(!this.hasNext()){
+      this.restart();
+    }
+    return this.data[++this.index];
+  };
+
+  /**
+  Determines if the collection has more elements
+
+  @method
+  @return {Boolean} true if collection has more elements,
+  false if not
+  */
+  Accessor.prototype.hasNext = function() {
+    return this.index + 1 < this.data.length;
+  };
+
+  /**
+  Resets the colletion to restart iteration automatically
+
+  @method
+  */
+  Accessor.prototype.restart = function() {
+    this.index = -1;
+  };
+
+  /**
+  Returns the data contained in the accessor
+
+  @method
+  @return {Object} data collection
+  */
+  Accessor.prototype.getData = function() {
+    return this.data;
+  };
+
+  /**
+  Sets a specific data set to this accessor
+
+  @method
+  @param {Object} data Data series
+  */
+  Accessor.prototype.setData = function(data){
+    this.data = data;
+  };
+
+  return Accessor;
+}));
+/**
+Sets an interface for adding a link between the chart
+and the data accessor.
+
+@class ChartInterface
+@constructor
+@requires accessor
+
+@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+*/
+(function(root, factory) {
+  /** Setting up AMD support*/
+  if (typeof define === 'function' && define.amd) {
+    /** AMD */
+    define('chartinterface',[
+      'accessor'
+      ],
+      function (Accessor) {
+      /** Export global even in AMD case in case this script
+      is loaded with others */
+      return factory(Accessor);
+    });
+  }
+  else {
+    /** Browser globals */
+    return factory(Accessor);
+  }
+}(this, function (Accessor) {
+
+  /**
+  @param {Object} chart d3.chart object
+  */
+  var ChartInterface = function(chart){
+    this.accessor = new Accessor();
+    this.chart = chart;
+  };
+
+  /**
+  Interface to the chart drawing stage
+
+  @method
+  @param {Object} dataArray Data series contained in one array
+  */
+  ChartInterface.prototype.draw = function(dataArray){
+    this.accessor.setData(dataArray);
+    this.chart.draw(this.accessor);
+  };
+
+  return ChartInterface;
+}));
+/**
 Api for chart creation management.
 
 Having the api, it is possible to set a root html element,
@@ -2701,7 +2849,6 @@ and it will append a specific chart to it.
           linechart,
           scatterplot,
           donut,
-          groupedbarchart,
           donutwithinnertext,
           labeleddonutchart,
           linechartcircles
@@ -2718,25 +2865,25 @@ and it will append a specific chart to it.
         'd3.chart',
         'scalesfactory',
         'datavalidator',
+        'chartinterface',
         'barchart',
         'labeledtrianglechart',
         'linechart',
         'scatterplot',
         'donut',
-        /*'groupedbarchart',*/
         'donutwithinnertext',
         'linechartcircles'
       ],
-      function (d3, ScaleFactory, DataValidator) {
+      function (d3, ScaleFactory, DataValidator, ChartInterface) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(d3, ScaleFactory, DataValidator);
+        return factory(d3, ScaleFactory, DataValidator, ChartInterface);
       });
   } else {
     /** Browser globals */
-    return factory(d3, ScaleFactory, DataValidator);
+    return factory(d3, ScaleFactory, DataValidator, ChartInterface);
   }
-}(this, function (d3, ScaleFactory, DataValidator) {
+}(this, function (d3, ScaleFactory, DataValidator, ChartInterface) {
   var ChartsApi = function() {
     this.scaleFactory = new ScaleFactory();
     this.dataValidator = new DataValidator();
@@ -2826,7 +2973,12 @@ and it will append a specific chart to it.
       chart = chart.setYScale(this.scaleFactory.scale(options.yAxis,'y'));
     }
 
-    return chart;
+    /**
+    Creates the interface for the chart drawing
+    */
+    var chartInt = new ChartInterface(chart);
+
+    return chartInt;
   };
 
   return ChartsApi;

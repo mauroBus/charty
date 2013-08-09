@@ -14,15 +14,10 @@ require.config({
     'underscore'              : '../../vendor/underscore/underscore-min',
     'feature'                 : '../../vendor/feature/feature',
     'jquery'                  : '../../vendor/jquery/jquery.min',
-
-    /** Conditional loading */
-    'implementations'         : 'dynamic',
-
-    /** Test */
     'chartsapi'               : '../../dist/charty',
 
-    /** Utils */
-    'accessor'                : '../../utils/accessor/accessor'
+    /** Conditional loading */
+    'implementations'         : 'dynamic'
     
   },
   shim:{
@@ -45,8 +40,8 @@ require.config({
   }
 });
 
-requirejs(['chartsapi','accessor'],
-function(ChartsApi, Accessor){
+requirejs(['chartsapi'],
+function(ChartsApi){
 
   'use strict';
 
@@ -97,10 +92,6 @@ function(ChartsApi, Accessor){
 
   var datagroup4 = [];
       datagroup4.push(data4);
-
-  var accessor1 = new Accessor(datagroup1);
-  var accessor2 = new Accessor(datagroup2);
-  var accessor4 = new Accessor(datagroup4);
 
   var myApi = new ChartsApi();
 
@@ -176,31 +167,31 @@ function(ChartsApi, Accessor){
   Initial charts drawing here.
   */
   var chart1 = myApi.chart(options1);
-      chart1.draw(accessor1);
+      chart1.draw(datagroup1);
 
   var chart2 = myApi.chart(options2);
-      chart2.draw(accessor2);
+      chart2.draw(datagroup2);
 
       data1.c = 'redline';
       data2.c = 'blueline';
 
   var chart3 = myApi.chart(options3);
-      chart3.draw(accessor1);
+      chart3.draw(datagroup1);
 
       data1.c = 'red';
       data2.c = 'blue';
 
   var chart4 = myApi.chart(options4);
-      chart4.draw(accessor1);
+      chart4.draw(datagroup1);
 
   var chart6 = myApi.chart(options6);
-      chart6.draw(accessor4);
+      chart6.draw(datagroup4);
 
       data1.c = 'redline';
       data2.c = 'blueline';
 
   var chart7 = myApi.chart(options7);
-      chart7.draw(accessor1);
+      chart7.draw(datagroup1);
 
   /**
   Charts update here.
@@ -235,27 +226,23 @@ function(ChartsApi, Accessor){
         datagroup4.push(data1);
         datagroup4.push(data2);
 
-    accessor1.setData(datagroup4);
-
     var datagroup5 = [];
         datagroup5.push(data1);
 
-    accessor2.setData(datagroup5);
-
-    chart1.draw(accessor1);
-    chart2.draw(accessor2);
+    chart1.draw(datagroup4);
+    chart2.draw(datagroup5);
 
     data1.c = 'redline';
     data2.c = 'blueline';
 
-    chart3.draw(accessor1);
+    chart3.draw(datagroup4);
 
     data1.c = 'gray';
     data1.r = 12;
     data2.c = 'red';
     data2.r = 8;
 
-    chart4.draw(accessor1);
+    chart4.draw(datagroup4);
 
     var data9 = {
       ir :  50,
@@ -269,8 +256,7 @@ function(ChartsApi, Accessor){
     var datagroup7 = [];
         datagroup7.push(data9);
 
-    var accessor7 = new Accessor(datagroup7);
-    chart6.draw(accessor7);
+    chart6.draw(datagroup7);
 
   },3000);
 });
