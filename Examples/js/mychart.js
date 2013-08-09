@@ -22,8 +22,8 @@ require.config({
     'chartsapi'               : '../../dist/charty',
 
     /** Utils */
-    'accessor'                : '../../utils/accessor/accessor',
-    'datavalidator'           : '../../utils/datavalidator/datavalidator'
+    'accessor'                : '../../utils/accessor/accessor'
+    
   },
   shim:{
     'jquery' : {

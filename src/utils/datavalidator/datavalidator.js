@@ -12,7 +12,7 @@ Data checker for different data input
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define([
+    define('datavalidator',[
       'underscore'
       ],
       function (_) {

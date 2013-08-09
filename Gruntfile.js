@@ -47,6 +47,7 @@ module.exports = function(grunt) {
           '<%= yeoman.app %>/composition/labeledtrianglechart/labeledtrianglechart.js',
           '<%= yeoman.app %>/composition/linechart/*.js',
           '<%= yeoman.app %>/composition/scatterplot/scatterplot.js',
+          '<%= yeoman.app %>/utils/datavalidator/datavalidator.js',
           '<%= yeoman.app %>/api/chartsapi.js'
         ],
         dest: '<%= yeoman.dist %>/charty.js'
