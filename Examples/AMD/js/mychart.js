@@ -94,11 +94,11 @@ function(Charty){
       datagroup4.push(data4);
 
   var options1 = {
-    chartName : 'BarChart',
+    chartName : Charty.CHART_NAMES.BAR_CHART,
     instances : 2,
     root : '#chart1',
-    xAxis : 'ordinal',
-    yAxis : 'linear',
+    xAxis : Charty.AXIS_TYPE.ORDINAL,
+    yAxis : Charty.AXIS_TYPE.LINEAR,
     marginleft : 50,
     margintop : 20,
     marginlfactor : 0.85,
@@ -106,10 +106,10 @@ function(Charty){
   };
 
   var options2 = {
-    chartName : 'LabeledTriangleChart',
+    chartName : Charty.CHART_NAMES.LABELED_TRIANGLE_CHART,
     root : '#chart2',
-    xAxis : 'ordinal',
-    yAxis : 'linear',
+    xAxis : Charty.AXIS_TYPE.ORDINAL,
+    yAxis : Charty.AXIS_TYPE.LINEAR,
     marginleft : 50,
     margintop : 20,
     marginlfactor : 0.85,
@@ -117,11 +117,11 @@ function(Charty){
   };
 
   var options3 = {
-    chartName : 'LineChart',
+    chartName : Charty.CHART_NAMES.LINE_CHART,
     instances : 2,
     root : '#chart3',
-    xAxis : 'ordinal',
-    yAxis : 'linear',
+    xAxis : Charty.AXIS_TYPE.ORDINAL,
+    yAxis : Charty.AXIS_TYPE.LINEAR,
     marginleft : 50,
     margintop : 20,
     marginlfactor : 0.85,
@@ -129,11 +129,11 @@ function(Charty){
   };
 
   var options4 = {
-    chartName : 'Scatterplot',
+    chartName : Charty.CHART_NAMES.SCATTERPLOT,
     instances : 2,
     root : '#chart4',
-    xAxis : 'ordinal',
-    yAxis : 'linear',
+    xAxis : Charty.AXIS_TYPE.ORDINAL,
+    yAxis : Charty.AXIS_TYPE.LINEAR,
     marginleft : 50,
     margintop : 20,
     marginlfactor : 0.85,
@@ -141,7 +141,7 @@ function(Charty){
   };
 
   var options6 = {
-    chartName : 'DonutWithInnerText',
+    chartName : Charty.CHART_NAMES.DONUT_INNER_TEXT,
     instances : 1,
     root : '#chart6',
     imgLocation : 'imgCenter',
@@ -150,11 +150,11 @@ function(Charty){
   };
 
   var options7 = {
-    chartName : 'LineChartCircles',
+    chartName : Charty.CHART_NAMES.LINE_CHART_CIRCLES,
     instances : 2,
     root : '#chart7',
-    xAxis : 'ordinal',
-    yAxis : 'linear',
+    xAxis : Charty.AXIS_TYPE.ORDINAL,
+    yAxis : Charty.AXIS_TYPE.LINEAR,
     marginleft : 50,
     margintop : 20,
     marginlfactor : 0.85,
