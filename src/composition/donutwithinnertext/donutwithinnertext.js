@@ -23,10 +23,10 @@ doesn't depend on the data value.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('donutwithinnertext',[
+    define( 'charty/donutwithinnertext',[
             'd3.chart',
-            'chartynames',
-            'donut'
+            'charty/chartynames',
+            'charty/donut'
             ],
             function (d3, Charty) {
       /** Export global even in AMD case in case this script

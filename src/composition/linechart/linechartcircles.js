@@ -17,12 +17,12 @@ Line chart combined with circles.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('linechartcircles',[
+    define('charty/linechartcircles',[
       'd3.chart',
-      'chartynames',
-      'multipledatagroup',
-      'linechart',
-      'multipleinstancesmixin'
+      'charty/chartynames',
+      'charty/multipledatagroup',
+      'charty/linechart',
+      'charty/multipleinstancesmixin'
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script

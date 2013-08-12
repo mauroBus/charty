@@ -17,10 +17,10 @@ Donut drawer.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('donut',[
+    define('charty/donut',[
         'd3.chart',
-        'chartynames',
-        'simpledatagroup'
+        'charty/chartynames',
+        'charty/simpledatagroup'
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script

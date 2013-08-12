@@ -16,10 +16,10 @@ to provide an easy way to switching scales in a defined chart
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('scalesfactory',[
-      'chartynames',
-      'ordinalscale',
-      'linearscale',
+    define('charty/scalesfactory',[
+      'charty/chartynames',
+      'charty/ordinalscale',
+      'charty/linearscale',
       ],
       function(Charty, OrdinalScale, LinearScale) {
         /** Export global even in AMD case in case this script

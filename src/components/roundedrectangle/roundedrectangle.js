@@ -15,10 +15,10 @@ Rounded rectangle drawer.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('roundedrectangle',[
+    define('charty/roundedrectangle',[
       'd3.chart',
-      'chartynames',
-      'simpledatagroup'
+      'charty/chartynames',
+      'charty/simpledatagroup'
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script

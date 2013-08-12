@@ -16,10 +16,10 @@ One X Axis (bottom)
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('yxyaxis',[
+    define('charty/yxyaxis',[
       'd3.chart',
-      'chartynames',
-      'axis',
+      'charty/chartynames',
+      'charty/axis',
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script

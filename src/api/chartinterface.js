@@ -12,8 +12,8 @@ and the data accessor.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('chartinterface',[
-      'accessor'
+    define('charty/chartinterface',[
+      'charty/accessor'
       ],
       function (Accessor) {
       /** Export global even in AMD case in case this script

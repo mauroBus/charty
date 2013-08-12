@@ -12,7 +12,7 @@ Data checker for different data input
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('datavalidator',[
+    define('charty/datavalidator',[
       'underscore'
       ],
       function (_) {
@@ -23,7 +23,7 @@ Data checker for different data input
   }
   else {
     /** Browser globals */
-    window.DataValidator = factory(_);
+    root.DataValidator = factory(_);
   }
 }(this, function() {
   function DataValidator (_){

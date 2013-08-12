@@ -14,7 +14,7 @@ require.config({
     'underscore'              : '../../../vendor/underscore/underscore-min',
     'feature'                 : '../../../vendor/feature/feature',
     'jquery'                  : '../../../vendor/jquery/jquery.min',
-    'charty'                  : '../../../dist/charty',
+    'charty/charty'           : '../../../dist/charty',
 
     /** Conditional loading */
     'implementations'         : 'dynamic'
@@ -40,7 +40,7 @@ require.config({
   }
 });
 
-requirejs(['charty'],
+requirejs(['charty/charty'],
 function(Charty){
 
   'use strict';

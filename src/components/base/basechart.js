@@ -14,7 +14,7 @@ Contains common functionality
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('basechart',[
+    define('charty/basechart',[
       'd3.chart',
       'underscore',
       ],

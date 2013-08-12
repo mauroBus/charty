@@ -20,15 +20,15 @@ Labeled triangle chart drawer.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('labeledtrianglechart',[
+    define('charty/labeledtrianglechart',[
       'd3.chart',
-      'chartynames',
-      'triangle',
-      'roundedrectangle',
-      'text',
-      'multipleinstancesmixin',
-      'yxyaxis',
-      'multipledatagroup'
+      'charty/chartynames',
+      'charty/triangle',
+      'charty/roundedrectangle',
+      'charty/text',
+      'charty/multipleinstancesmixin',
+      'charty/yxyaxis',
+      'charty/multipledatagroup'
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script

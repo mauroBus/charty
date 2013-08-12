@@ -12,7 +12,7 @@ Data checker for different data input
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('datavalidator',[
+    define('charty/datavalidator',[
       'underscore'
       ],
       function (_) {
@@ -23,7 +23,7 @@ Data checker for different data input
   }
   else {
     /** Browser globals */
-    window.DataValidator = factory(_);
+    root.DataValidator = factory(_);
   }
 }(this, function() {
   function DataValidator (_){
@@ -104,19 +104,17 @@ and it will append a specific chart to it.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('chartyinit',[
-        'datavalidator'
-      ],
-      function (DataValidator) {
+    define('charty/chartyinit',
+      function () {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(DataValidator);
+        return factory();
       });
   } else {
     /** Browser globals */
-    root.Charty = factory(DataValidator);
+    root.Charty = factory();
   }
-}(this, function (DataValidator) {
+}(this, function () {
 
   var Charty = {
 
@@ -136,8 +134,8 @@ Define constants that will be used as names for different parts
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('chartynames',[
-      'chartyinit'
+    define('charty/chartynames',[
+      'charty/chartyinit'
       ],
       function (Charty) {
         /** Export global even in AMD case in case this script
@@ -207,9 +205,9 @@ for inheritance.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('basescale',[
+    define('charty/basescale',[
       'd3.chart',
-      'chartynames'
+      'charty/chartynames'
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
@@ -280,9 +278,9 @@ Linear scale for linear axis
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('linearscale',[
+    define('charty/linearscale',[
 			'd3.chart',
-			'basescale'
+			'charty/basescale'
 			],
 			function (d3, BaseScale) {
 				/** Export global even in AMD case in case this script
@@ -405,9 +403,9 @@ Ordinal Scale
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('ordinalscale',[
+    define('charty/ordinalscale',[
 			'd3.chart',
-			'basescale',
+			'charty/basescale',
 			],
 			function (d3, BaseScale) {
 				/** Export global even in AMD case in case this script
@@ -531,10 +529,10 @@ to provide an easy way to switching scales in a defined chart
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('scalesfactory',[
-      'chartynames',
-      'ordinalscale',
-      'linearscale',
+    define('charty/scalesfactory',[
+      'charty/chartynames',
+      'charty/ordinalscale',
+      'charty/linearscale',
       ],
       function(Charty, OrdinalScale, LinearScale) {
         /** Export global even in AMD case in case this script
@@ -592,7 +590,7 @@ Contains common functionality
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('basechart',[
+    define('charty/basechart',[
       'd3.chart',
       'underscore',
       ],
@@ -725,10 +723,10 @@ Defines a basic chart to process individual data series
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('simpledatagroup',[
+    define('charty/simpledatagroup',[
       'd3.chart',
-      'chartynames',
-      'basechart'
+      'charty/chartynames',
+      'charty/basechart'
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
@@ -779,9 +777,9 @@ it will implement all the functions needed.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('axis',[
+    define('charty/axis',[
       'd3.chart',
-      'chartynames'
+      'charty/chartynames'
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
@@ -998,10 +996,10 @@ Bar drawer. Takes only one data series as input.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('bar',[
+    define('charty/bar',[
       'd3.chart',
-      'chartynames',
-      'simpledatagroup'
+      'charty/chartynames',
+      'charty/simpledatagroup'
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
@@ -1123,10 +1121,10 @@ Circle drawer.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('circle',[
+    define('charty/circle',[
       'd3.chart',
-      'chartynames',
-      'simpledatagroup'
+      'charty/chartynames',
+      'charty/simpledatagroup'
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
@@ -1245,10 +1243,10 @@ Donut drawer.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('donut',[
+    define('charty/donut',[
         'd3.chart',
-        'chartynames',
-        'simpledatagroup'
+        'charty/chartynames',
+        'charty/simpledatagroup'
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
@@ -1393,10 +1391,10 @@ Line drawing.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('line',[
+    define('charty/line',[
       'd3.chart',
-      'chartynames',
-      'simpledatagroup'
+      'charty/chartynames',
+      'charty/simpledatagroup'
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
@@ -1506,10 +1504,10 @@ Rounded rectangle drawer.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('roundedrectangle',[
+    define('charty/roundedrectangle',[
       'd3.chart',
-      'chartynames',
-      'simpledatagroup'
+      'charty/chartynames',
+      'charty/simpledatagroup'
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
@@ -1641,10 +1639,10 @@ Text labeling.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('text',[
+    define('charty/text',[
       'd3.chart',
-      'chartynames',
-      'simpledatagroup'
+      'charty/chartynames',
+      'charty/simpledatagroup'
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
@@ -1749,10 +1747,10 @@ Triangle drawer.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('triangle',[
+    define('charty/triangle',[
       'd3.chart',
-      'chartynames',
-      'simpledatagroup'
+      'charty/chartynames',
+      'charty/simpledatagroup'
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
@@ -1916,10 +1914,10 @@ Defines a data transformation for composite charts
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('multipledatagroup',[
+    define('charty/multipledatagroup',[
       'd3.chart',
-      'chartynames',
-      'basechart'
+      'charty/chartynames',
+      'charty/basechart'
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
@@ -1968,10 +1966,10 @@ Chart that can represent many data series
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('multipleinstancesmixin',[
+    define('charty/multipleinstancesmixin',[
       'd3.chart',
-      'chartynames',
-      'basechart'
+      'charty/chartynames',
+      'charty/basechart'
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
@@ -2032,10 +2030,10 @@ Base XY system for all the 2D charts.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('xyaxis',[
+    define('charty/xyaxis',[
       'd3.chart',
-      'chartynames',
-      'axis'
+      'charty/chartynames',
+      'charty/axis'
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
@@ -2142,10 +2140,10 @@ One X Axis (bottom)
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('yxyaxis',[
+    define('charty/yxyaxis',[
       'd3.chart',
-      'chartynames',
-      'axis',
+      'charty/chartynames',
+      'charty/axis',
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
@@ -2259,13 +2257,13 @@ N data series
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('barchart',[
+    define('charty/barchart',[
       'd3.chart',
-      'chartynames',
-      'bar',
-      'multipledatagroup',
-      'yxyaxis',
-      'multipleinstancesmixin',
+      'charty/chartynames',
+      'charty/bar',
+      'charty/multipledatagroup',
+      'charty/yxyaxis',
+      'charty/multipleinstancesmixin',
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
@@ -2336,10 +2334,10 @@ doesn't depend on the data value.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('donutwithinnertext',[
+    define( 'charty/donutwithinnertext',[
             'd3.chart',
-            'chartynames',
-            'donut'
+            'charty/chartynames',
+            'charty/donut'
             ],
             function (d3, Charty) {
       /** Export global even in AMD case in case this script
@@ -2465,15 +2463,15 @@ Labeled triangle chart drawer.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('labeledtrianglechart',[
+    define('charty/labeledtrianglechart',[
       'd3.chart',
-      'chartynames',
-      'triangle',
-      'roundedrectangle',
-      'text',
-      'multipleinstancesmixin',
-      'yxyaxis',
-      'multipledatagroup'
+      'charty/chartynames',
+      'charty/triangle',
+      'charty/roundedrectangle',
+      'charty/text',
+      'charty/multipleinstancesmixin',
+      'charty/yxyaxis',
+      'charty/multipledatagroup'
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
@@ -2542,11 +2540,11 @@ Takes N input data series
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('linechart',[
+    define('charty/linechart',[
       'd3.chart',
-      'chartynames',
-      'line',
-      'multipledatagroup'
+      'charty/chartynames',
+      'charty/line',
+      'charty/multipledatagroup'
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
@@ -2609,12 +2607,12 @@ Line chart combined with circles.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('linechartcircles',[
+    define('charty/linechartcircles',[
       'd3.chart',
-      'chartynames',
-      'multipledatagroup',
-      'linechart',
-      'multipleinstancesmixin'
+      'charty/chartynames',
+      'charty/multipledatagroup',
+      'charty/linechart',
+      'charty/multipleinstancesmixin'
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
@@ -2679,13 +2677,13 @@ Scatterplot chart
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('scatterplot',[
+    define('charty/scatterplot',[
       'd3.chart',
-      'chartynames',
-      'circle',
-      'multipledatagroup',
-      'yxyaxis',
-      'multipleinstancesmixin'
+      'charty/chartynames',
+      'charty/circle',
+      'charty/multipledatagroup',
+      'charty/yxyaxis',
+      'charty/multipleinstancesmixin'
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
@@ -2737,7 +2735,7 @@ Accessor will iterate over the data collection.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('accessor', function () {
+    define('charty/accessor', function () {
       /** Export global even in AMD case in case this script
       is loaded with others */
       return factory();
@@ -2745,7 +2743,7 @@ Accessor will iterate over the data collection.
   }
   else {
     /** Browser globals */
-    window.Accessor = factory();
+    root.Accessor = factory();
   }
 }(this, function() {
   function Accessor(d) {
@@ -2834,8 +2832,8 @@ and the data accessor.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('chartinterface',[
-      'accessor'
+    define('charty/chartinterface',[
+      'charty/accessor'
       ],
       function (Accessor) {
       /** Export global even in AMD case in case this script
@@ -2882,18 +2880,18 @@ Full chart api
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('charty',[
-      'chartynames',
-      'scalesfactory',
-      'chartinterface',
-      'datavalidator',
-      'barchart',
-      'labeledtrianglechart',
-      'linechart',
-      'scatterplot',
-      'donut',
-      'donutwithinnertext',
-      'linechartcircles'
+    define('charty/charty',[
+      'charty/chartynames',
+      'charty/scalesfactory',
+      'charty/chartinterface',
+      'charty/datavalidator',
+      'charty/barchart',
+      'charty/labeledtrianglechart',
+      'charty/linechart',
+      'charty/scatterplot',
+      'charty/donut',
+      'charty/donutwithinnertext',
+      'charty/linechartcircles'
       ],
       function (Charty, ScaleFactory, ChartInterface, DataValidator) {
         /** Export global even in AMD case in case this script

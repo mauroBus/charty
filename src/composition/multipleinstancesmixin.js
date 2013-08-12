@@ -15,10 +15,10 @@ Chart that can represent many data series
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('multipleinstancesmixin',[
+    define('charty/multipleinstancesmixin',[
       'd3.chart',
-      'chartynames',
-      'basechart'
+      'charty/chartynames',
+      'charty/basechart'
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script

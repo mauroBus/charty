@@ -19,13 +19,13 @@ N data series
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('barchart',[
+    define('charty/barchart',[
       'd3.chart',
-      'chartynames',
-      'bar',
-      'multipledatagroup',
-      'yxyaxis',
-      'multipleinstancesmixin',
+      'charty/chartynames',
+      'charty/bar',
+      'charty/multipledatagroup',
+      'charty/yxyaxis',
+      'charty/multipleinstancesmixin',
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script

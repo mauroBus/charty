@@ -25,7 +25,7 @@ and it will append a specific chart to it.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('chartyinit',
+    define('charty/chartyinit',
       function () {
         /** Export global even in AMD case in case this script
         is loaded with others */

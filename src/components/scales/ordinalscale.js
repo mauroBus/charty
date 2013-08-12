@@ -14,9 +14,9 @@ Ordinal Scale
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('ordinalscale',[
+    define('charty/ordinalscale',[
 			'd3.chart',
-			'basescale',
+			'charty/basescale',
 			],
 			function (d3, BaseScale) {
 				/** Export global even in AMD case in case this script

@@ -10,18 +10,18 @@ Full chart api
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('charty',[
-      'chartynames',
-      'scalesfactory',
-      'chartinterface',
-      'datavalidator',
-      'barchart',
-      'labeledtrianglechart',
-      'linechart',
-      'scatterplot',
-      'donut',
-      'donutwithinnertext',
-      'linechartcircles'
+    define('charty/charty',[
+      'charty/chartynames',
+      'charty/scalesfactory',
+      'charty/chartinterface',
+      'charty/datavalidator',
+      'charty/barchart',
+      'charty/labeledtrianglechart',
+      'charty/linechart',
+      'charty/scatterplot',
+      'charty/donut',
+      'charty/donutwithinnertext',
+      'charty/linechartcircles'
       ],
       function (Charty, ScaleFactory, ChartInterface, DataValidator) {
         /** Export global even in AMD case in case this script

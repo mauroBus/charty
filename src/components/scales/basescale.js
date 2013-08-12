@@ -12,9 +12,9 @@ for inheritance.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('basescale',[
+    define('charty/basescale',[
       'd3.chart',
-      'chartynames'
+      'charty/chartynames'
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script

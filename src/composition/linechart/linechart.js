@@ -17,11 +17,11 @@ Takes N input data series
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('linechart',[
+    define('charty/linechart',[
       'd3.chart',
-      'chartynames',
-      'line',
-      'multipledatagroup'
+      'charty/chartynames',
+      'charty/line',
+      'charty/multipledatagroup'
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script

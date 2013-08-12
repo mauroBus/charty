@@ -20,14 +20,14 @@ another one for the data mapping.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define([
+    define('GroupedBarChart', [
             'd3.chart',
-            'chartynames',
-            'scalesfactory',
-            'bar',
-            'xyaxis',
-            'multipledatagroup',
-            'multipleinstancesmixin',
+            'charty/chartynames',
+            'charty/scalesfactory',
+            'charty/bar',
+            'charty/xyaxis',
+            'charty/multipledatagroup',
+            'charty/multipleinstancesmixin',
            ],
            function(d3, ScaleFactory, charty) {
       /** Export global even in AMD case in case this script
