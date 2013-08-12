@@ -42,10 +42,6 @@ Contains common functionality
     */
     width : function(newWidth){
 
-      if(!newWidth || !_.isNumber(newWidth) || newWidth < 0){
-        throw new Error('Invalid width value for chart.');
-      }
-
       this.w = newWidth;
       if(this.componentsMixins){
         _.each(this.componentsMixins, function (element){
@@ -63,10 +59,6 @@ Contains common functionality
     @param {Number} newHeight height for the chart
     */
     height : function(newHeight){
-
-      if(!newHeight || !_.isNumber(newHeight) || newHeight < 0){
-        throw new Error('Invalid height value for chart.');
-      }
 
       this.h = newHeight;
       if(this.componentsMixins){
@@ -90,10 +82,6 @@ Contains common functionality
     */
     setXScale : function (scale){
 
-      if ( !scale ){
-        throw new Error('Undefined x scale');
-      }
-
       this.xscale = scale;
       if(this.componentsMixins){
         _.each(this.componentsMixins, function (element){
@@ -115,10 +103,6 @@ Contains common functionality
     @chainable
     */
     setYScale : function (scale){
-
-      if ( !scale ){
-        throw new Error('Undefined y scale');
-      }
 
       this.yscale = scale;
       if ( this.componentsMixins ){
