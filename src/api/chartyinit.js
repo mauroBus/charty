@@ -25,22 +25,20 @@ and it will append a specific chart to it.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('chartyinit',[
-        'datavalidator'
-      ],
-      function (DataValidator) {
+    define('chartyinit',
+      function () {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(DataValidator);
+        return factory();
       });
   } else {
     /** Browser globals */
-    root.Charty = factory(DataValidator);
+    root.Charty = factory();
   }
-}(this, function (DataValidator) {
+}(this, function () {
 
-  var Charty = function() {
-    this.dataValidator = new DataValidator();
+  var Charty = {
+
   };
 
   return Charty;

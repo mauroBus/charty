@@ -118,8 +118,8 @@ and it will append a specific chart to it.
   }
 }(this, function (DataValidator) {
 
-  var Charty = function() {
-    this.dataValidator = new DataValidator();
+  var Charty = {
+
   };
 
   return Charty;
@@ -151,7 +151,7 @@ Define constants that will be used as names for different parts
   }
 }(this, function (Charty) {
 
-  Charty.prototype.CHART_NAMES = {
+  Charty.CHART_NAMES = {
     AXIS: 'Axis',
     BAR: 'Bar',
     BASE_CHART: 'BaseChart',
@@ -178,7 +178,7 @@ Define constants that will be used as names for different parts
   /**
   Axis types are defined as constants
   */
-  Charty.prototype.AXIS_TYPE = {
+  Charty.AXIS_TYPE = {
     ORDINAL: 'ordinal',
     LINEAR: 'linear'
   };
@@ -186,7 +186,7 @@ Define constants that will be used as names for different parts
   /**
   Axis defined as constants
   */
-  Charty.prototype.AXIS = {
+  Charty.AXIS = {
     X : 'x',
     Y : 'y'
   };
@@ -2845,7 +2845,7 @@ and the data accessor.
   }
   else {
     /** Browser globals */
-    window.ChartInterface = factory(Accessor);
+    root.ChartInterface = factory(Accessor);
   }
 }(this, function (Accessor) {
 
@@ -2886,6 +2886,7 @@ Full chart api
       'chartynames',
       'scalesfactory',
       'chartinterface',
+      'datavalidator',
       'barchart',
       'labeledtrianglechart',
       'linechart',
@@ -2894,17 +2895,17 @@ Full chart api
       'donutwithinnertext',
       'linechartcircles'
       ],
-      function (Charty, ScaleFactory, ChartInterface) {
+      function (Charty, ScaleFactory, ChartInterface, DataValidator) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(Charty, ScaleFactory, ChartInterface);
+        return factory(Charty, ScaleFactory, ChartInterface, DataValidator);
     });
   }
   else {
     /** Browser globals */
-    root.Charty = factory(Charty, ScaleFactory, ChartInterface);
+    root.Charty = factory(Charty, ScaleFactory, ChartInterface, DataValidator);
   }
-}(this, function (Charty, ScaleFactory, ChartInterface) {
+}(this, function (Charty, ScaleFactory, ChartInterface, DataValidator) {
 
   /**
   Appends a chart to a root d3.selection element. Chart is determined
@@ -2927,10 +2928,14 @@ Full chart api
                     }
   @return {Object} d3.chart for data drawing
   */
-  Charty.prototype.chart = function(options) {
+  Charty.chart = function(options) {
 
     if( !this.scaleFactory ){
       this.scaleFactory = new ScaleFactory();
+    }
+
+    if( !this.dataValidator ){
+      this.dataValidator = new DataValidator();
     }
 
     if (!options.root || !options.chartName) {

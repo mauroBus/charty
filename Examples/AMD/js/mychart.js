@@ -45,10 +45,6 @@ function(Charty){
 
   'use strict';
 
-  var myApi = new Charty();
-
-  console.log(myApi.CHART_NAMES);
-
   /**
   Data rendering examples.
   */
@@ -168,31 +164,31 @@ function(Charty){
   /**
   Initial charts drawing here.
   */
-  var chart1 = myApi.chart(options1);
+  var chart1 = Charty.chart(options1);
       chart1.draw(datagroup1);
 
-  var chart2 = myApi.chart(options2);
+  var chart2 = Charty.chart(options2);
       chart2.draw(datagroup2);
 
       data1.c = 'redline';
       data2.c = 'blueline';
 
-  var chart3 = myApi.chart(options3);
+  var chart3 = Charty.chart(options3);
       chart3.draw(datagroup1);
 
       data1.c = 'red';
       data2.c = 'blue';
 
-  var chart4 = myApi.chart(options4);
+  var chart4 = Charty.chart(options4);
       chart4.draw(datagroup1);
 
-  var chart6 = myApi.chart(options6);
+  var chart6 = Charty.chart(options6);
       chart6.draw(datagroup4);
 
       data1.c = 'redline';
       data2.c = 'blueline';
 
-  var chart7 = myApi.chart(options7);
+  var chart7 = Charty.chart(options7);
       chart7.draw(datagroup1);
 
   /**

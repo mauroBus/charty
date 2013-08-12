@@ -14,6 +14,7 @@ Full chart api
       'chartynames',
       'scalesfactory',
       'chartinterface',
+      'datavalidator',
       'barchart',
       'labeledtrianglechart',
       'linechart',
@@ -22,17 +23,17 @@ Full chart api
       'donutwithinnertext',
       'linechartcircles'
       ],
-      function (Charty, ScaleFactory, ChartInterface) {
+      function (Charty, ScaleFactory, ChartInterface, DataValidator) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(Charty, ScaleFactory, ChartInterface);
+        return factory(Charty, ScaleFactory, ChartInterface, DataValidator);
     });
   }
   else {
     /** Browser globals */
-    root.Charty = factory(Charty, ScaleFactory, ChartInterface);
+    root.Charty = factory(Charty, ScaleFactory, ChartInterface, DataValidator);
   }
-}(this, function (Charty, ScaleFactory, ChartInterface) {
+}(this, function (Charty, ScaleFactory, ChartInterface, DataValidator) {
 
   /**
   Appends a chart to a root d3.selection element. Chart is determined
@@ -55,10 +56,14 @@ Full chart api
                     }
   @return {Object} d3.chart for data drawing
   */
-  Charty.prototype.chart = function(options) {
+  Charty.chart = function(options) {
 
     if( !this.scaleFactory ){
       this.scaleFactory = new ScaleFactory();
+    }
+
+    if( !this.dataValidator ){
+      this.dataValidator = new DataValidator();
     }
 
     if (!options.root || !options.chartName) {
