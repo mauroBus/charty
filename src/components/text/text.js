@@ -102,7 +102,6 @@ Text labeling.
       Layer creation
       */
       this.layer('texts', this.base.append('g') , options);
-
     }
   });
 }));

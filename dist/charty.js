@@ -1728,7 +1728,6 @@ Text labeling.
       Layer creation
       */
       this.layer('texts', this.base.append('g') , options);
-
     }
   });
 }));
@@ -2855,6 +2854,30 @@ and the data accessor.
   ChartInterface.prototype.draw = function(dataArray){
     this.accessor.setData(dataArray);
     this.chart.draw(this.accessor);
+  };
+
+  /**
+  Alternative for height setting
+
+  @method
+  @param {Number} newHeight
+  @chainable
+  */
+  ChartInterface.prototype.height = function(newHeight){
+    this.chart.height(newHeight);
+    return this;
+  };
+
+  /**
+  Alternative for width setting
+
+  @method
+  @param {Number} newWidth
+  @chainable
+  */
+  ChartInterface.prototype.width = function(newWidth){
+    this.chart.width(newWidth);
+    return this;
   };
 
   return ChartInterface;
