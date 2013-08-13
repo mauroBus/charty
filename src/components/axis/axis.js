@@ -118,7 +118,7 @@ it will implement all the functions needed.
                   axis = axis.tickSize(-chart.tsize,0,0);
               }
 
-              this.attr('class', defaults.c)
+              this.classed(defaults.c, true)
                   .call(axis);
 
               /**

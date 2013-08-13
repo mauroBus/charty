@@ -116,7 +116,7 @@ Rounded rectangle drawer.
                         })
                        .attr('rx', chart.rx)
                        .attr('ry', chart.ry)
-                       .attr('fill',function(d){
+                       .attr('class', function(d){
                           return (d.rc || chart.rc);
                        });
           },

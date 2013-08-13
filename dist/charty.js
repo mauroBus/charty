@@ -879,7 +879,7 @@ it will implement all the functions needed.
                   axis = axis.tickSize(-chart.tsize,0,0);
               }
 
-              this.attr('class', defaults.c)
+              this.classed(defaults.c, true)
                   .call(axis);
 
               /**
@@ -1357,7 +1357,7 @@ Donut drawer.
 
             var chart = this.chart();
 
-            return this.attr('fill', function(d) {
+            return this.attr('class', function(d) {
                         return d.data.c;
                        })
                        .attr('d', arcGen);
@@ -1472,7 +1472,7 @@ Line drawing.
               var chart = this.chart();
 
               return this.datum(chart.datum)
-                         .attr('class', chart.c)
+                         .classed(chart.c, true)
                          .attr('d',line);
           },
           'exit' : function(){
@@ -1607,7 +1607,7 @@ Rounded rectangle drawer.
                         })
                        .attr('rx', chart.rx)
                        .attr('ry', chart.ry)
-                       .attr('fill',function(d){
+                       .attr('class', function(d){
                           return (d.rc || chart.rc);
                        });
           },
