@@ -102,7 +102,8 @@ function(Charty){
     marginleft : 50,
     margintop : 20,
     marginlfactor : 0.85,
-    margintfactor : 0.85
+    margintfactor : 0.85,
+    axisSystem : Charty.CHART_NAMES.YXY_AXIS
   };
 
   var options2 = {
@@ -113,7 +114,8 @@ function(Charty){
     marginleft : 50,
     margintop : 20,
     marginlfactor : 0.85,
-    margintfactor : 0.85
+    margintfactor : 0.85,
+    axisSystem : Charty.CHART_NAMES.YXY_AXIS
   };
 
   var options3 = {
@@ -125,7 +127,8 @@ function(Charty){
     marginleft : 50,
     margintop : 20,
     marginlfactor : 0.85,
-    margintfactor : 0.85
+    margintfactor : 0.85,
+    axisSystem : Charty.CHART_NAMES.YXY_AXIS
   };
 
   var options4 = {
@@ -137,7 +140,8 @@ function(Charty){
     marginleft : 50,
     margintop : 20,
     marginlfactor : 0.85,
-    margintfactor : 0.85
+    margintfactor : 0.85,
+    axisSystem : Charty.CHART_NAMES.XY_AXIS
   };
 
   var options6 = {
@@ -158,7 +162,8 @@ function(Charty){
     marginleft : 50,
     margintop : 20,
     marginlfactor : 0.85,
-    margintfactor : 0.85
+    margintfactor : 0.85,
+    axisSystem : Charty.CHART_NAMES.YXY_AXIS
   };
 
   /**

@@ -618,10 +618,6 @@ Contains common functionality
     */
     width : function(newWidth){
 
-      if(!newWidth || !_.isNumber(newWidth) || newWidth < 0){
-        throw new Error('Invalid width value for chart.');
-      }
-
       this.w = newWidth;
       if(this.componentsMixins){
         _.each(this.componentsMixins, function (element){
@@ -639,10 +635,6 @@ Contains common functionality
     @param {Number} newHeight height for the chart
     */
     height : function(newHeight){
-
-      if(!newHeight || !_.isNumber(newHeight) || newHeight < 0){
-        throw new Error('Invalid height value for chart.');
-      }
 
       this.h = newHeight;
       if(this.componentsMixins){
@@ -666,10 +658,6 @@ Contains common functionality
     */
     setXScale : function (scale){
 
-      if ( !scale ){
-        throw new Error('Undefined x scale');
-      }
-
       this.xscale = scale;
       if(this.componentsMixins){
         _.each(this.componentsMixins, function (element){
@@ -691,10 +679,6 @@ Contains common functionality
     @chainable
     */
     setYScale : function (scale){
-
-      if ( !scale ){
-        throw new Error('Undefined y scale');
-      }
 
       this.yscale = scale;
       if ( this.componentsMixins ){
@@ -849,8 +833,6 @@ it will implement all the functions needed.
             throw new Error('Undefined scale for axis.');
           }
 
-          chart.c = (d.c || defaults.c);
-
           axis = axis.scale(chart.scale.getScale())
                      .orient(chart.o);
 
@@ -877,7 +859,7 @@ it will implement all the functions needed.
                   axis = axis.tickSize(-chart.tsize,0,0);
               }
 
-              this.attr('class', chart.c)
+              this.attr('class', defaults.c)
                   .call(axis);
 
               /**
@@ -2055,11 +2037,11 @@ Base XY system for all the 2D charts.
     */
     initialize : function(args){
 
-        this.xaxis = this.mixin(charty.CHART_NAMES.AXIS,
+        this.xaxis = this.mixin(Charty.CHART_NAMES.AXIS,
                                 this.base.append('g'),
                                 args).orient('bottom');
 
-        this.yaxis = this.mixin(charty.CHART_NAMES.AXIS,
+        this.yaxis = this.mixin(Charty.CHART_NAMES.AXIS,
                                 this.base.append('g'),
                                 args).orient('left');
 
@@ -2262,6 +2244,7 @@ N data series
       'charty/chartynames',
       'charty/bar',
       'charty/multipledatagroup',
+      'charty/xyaxis',
       'charty/yxyaxis',
       'charty/multipleinstancesmixin',
       ],
@@ -2295,9 +2278,9 @@ N data series
 				instances : (args.instances || 1)
 			};
 
-			var yxyaxis = this.mixin(Charty.CHART_NAMES.YXY_AXIS,
-                               this.base.append('g'),
-                               { dataValidator : args.dataValidator }).showAsGrid(),
+			var axis = this.mixin(args.axisSystem,
+                           this.base.append('g'),
+                           { dataValidator : args.dataValidator }).showAsGrid(),
 
 					barChart = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                                 this.base.append('g'),
@@ -2305,7 +2288,7 @@ N data series
 
 			this.componentsMixins = [];
 			this.componentsMixins.push(barChart);
-			this.componentsMixins.push(yxyaxis);
+			this.componentsMixins.push(axis);
 		}
 	});
 }));
@@ -2496,9 +2479,9 @@ Labeled triangle chart drawer.
     */
     initialize: function(args) {
 
-      var yxyaxis = this.mixin(Charty.CHART_NAMES.YXY_AXIS,
-                              this.base.append('g'),
-                              { dataValidator : args.dataValidator }).showAsGrid(),
+      var axis = this.mixin(args.axisSystem,
+                            this.base.append('g'),
+                            { dataValidator : args.dataValidator }).showAsGrid(),
 
           triangles = this.mixin(Charty.CHART_NAMES.TRIANGLE,
                                 this.base.append('g'),
@@ -2516,7 +2499,7 @@ Labeled triangle chart drawer.
       this.componentsMixins.push(triangles);
       this.componentsMixins.push(recs);
       this.componentsMixins.push(texts);
-      this.componentsMixins.push(yxyaxis);
+      this.componentsMixins.push(axis);
 
     }
   });
@@ -2574,9 +2557,9 @@ Takes N input data series
 				instances : (args.instances || 1)
 			};
 
-			var yxyaxis = this.mixin(Charty.CHART_NAMES.YXY_AXIS,
-                              this.base.append('g'),
-                              { dataValidator : args.dataValidator }).showAsGrid(),
+			var axis = this.mixin(args.axisSystem,
+                            this.base.append('g'),
+                            { dataValidator : args.dataValidator }).showAsGrid(),
 
 					lineChart = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                                 this.base.append('g'),
@@ -2584,7 +2567,7 @@ Takes N input data series
 
 			this.componentsMixins = [];
 			this.componentsMixins.push(lineChart);
-			this.componentsMixins.push(yxyaxis);
+			this.componentsMixins.push(axis);
 		}
 	});
 }));
@@ -2640,7 +2623,8 @@ Line chart combined with circles.
 			var options = {
 				chartName : Charty.CHART_NAMES.CIRCLE,
         dataValidator : args.dataValidator,
-				instances : (args.instances || 1)
+				instances : (args.instances || 1),
+        axisSystem : args.axisSystem
 			};
 
 			var lineChart = this.mixin(Charty.CHART_NAMES.LINE_CHART,
@@ -2706,9 +2690,9 @@ Scatterplot chart
 				instances : (args.instances || 1)
 			};
 
-			var yxyaxis = this.mixin(Charty.CHART_NAMES.YXY_AXIS,
-                    this.base.append('g'),
-                    { dataValidator : args.dataValidator }).showAsGrid(),
+			var axis = this.mixin(args.axisSystem,
+                            this.base.append('g'),
+                            { dataValidator : args.dataValidator }).showAsGrid(),
 
           lineChart = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                                  this.base,
@@ -2716,7 +2700,7 @@ Scatterplot chart
 
 			this.componentsMixins = [];
 			this.componentsMixins.push(lineChart);
-			this.componentsMixins.push(yxyaxis);
+			this.componentsMixins.push(axis);
 		}
 	});
 }));
@@ -2981,7 +2965,8 @@ Full chart api
     */
     var chart = svg.chart(options.chartName, {
                     instances: options.instances,
-                    dataValidator : this.dataValidator
+                    dataValidator : this.dataValidator,
+                    axisSystem : options.axisSystem
                   })
                   .height(height)
                   .width(width);

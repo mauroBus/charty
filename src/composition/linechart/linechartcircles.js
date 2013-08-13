@@ -50,7 +50,8 @@ Line chart combined with circles.
 			var options = {
 				chartName : Charty.CHART_NAMES.CIRCLE,
         dataValidator : args.dataValidator,
-				instances : (args.instances || 1)
+				instances : (args.instances || 1),
+        axisSystem : args.axisSystem
 			};
 
 			var lineChart = this.mixin(Charty.CHART_NAMES.LINE_CHART,

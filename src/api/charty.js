@@ -111,7 +111,8 @@ Full chart api
     */
     var chart = svg.chart(options.chartName, {
                     instances: options.instances,
-                    dataValidator : this.dataValidator
+                    dataValidator : this.dataValidator,
+                    axisSystem : options.axisSystem
                   })
                   .height(height)
                   .width(width);

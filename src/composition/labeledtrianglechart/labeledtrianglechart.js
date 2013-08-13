@@ -53,9 +53,9 @@ Labeled triangle chart drawer.
     */
     initialize: function(args) {
 
-      var yxyaxis = this.mixin(Charty.CHART_NAMES.YXY_AXIS,
-                              this.base.append('g'),
-                              { dataValidator : args.dataValidator }).showAsGrid(),
+      var axis = this.mixin(args.axisSystem,
+                            this.base.append('g'),
+                            { dataValidator : args.dataValidator }).showAsGrid(),
 
           triangles = this.mixin(Charty.CHART_NAMES.TRIANGLE,
                                 this.base.append('g'),
@@ -73,7 +73,7 @@ Labeled triangle chart drawer.
       this.componentsMixins.push(triangles);
       this.componentsMixins.push(recs);
       this.componentsMixins.push(texts);
-      this.componentsMixins.push(yxyaxis);
+      this.componentsMixins.push(axis);
 
     }
   });

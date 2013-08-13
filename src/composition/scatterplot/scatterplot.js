@@ -47,9 +47,9 @@ Scatterplot chart
 				instances : (args.instances || 1)
 			};
 
-			var yxyaxis = this.mixin(Charty.CHART_NAMES.YXY_AXIS,
-                    this.base.append('g'),
-                    { dataValidator : args.dataValidator }).showAsGrid(),
+			var axis = this.mixin(args.axisSystem,
+                            this.base.append('g'),
+                            { dataValidator : args.dataValidator }).showAsGrid(),
 
           lineChart = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                                  this.base,
@@ -57,7 +57,7 @@ Scatterplot chart
 
 			this.componentsMixins = [];
 			this.componentsMixins.push(lineChart);
-			this.componentsMixins.push(yxyaxis);
+			this.componentsMixins.push(axis);
 		}
 	});
 }));

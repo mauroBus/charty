@@ -92,8 +92,6 @@ it will implement all the functions needed.
             throw new Error('Undefined scale for axis.');
           }
 
-          chart.c = (d.c || defaults.c);
-
           axis = axis.scale(chart.scale.getScale())
                      .orient(chart.o);
 
@@ -120,7 +118,7 @@ it will implement all the functions needed.
                   axis = axis.tickSize(-chart.tsize,0,0);
               }
 
-              this.attr('class', chart.c)
+              this.attr('class', defaults.c)
                   .call(axis);
 
               /**
