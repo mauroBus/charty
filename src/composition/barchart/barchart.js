@@ -66,9 +66,7 @@ N data series
                                 this.base.append('g'),
                                 options);
 
-			this.componentsMixins = [];
-			this.componentsMixins.push(barChart);
-			this.componentsMixins.push(axis);
+      this.setMixins(barChart, axis);
 		}
 	});
 }));

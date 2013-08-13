@@ -58,7 +58,7 @@ Chart that can represent many data series
                                   args);
 
         instance.factor = ((f--)/args.instances);
-        this.componentsMixins.push(instance);
+        this.setMixins(instance);
       }
     }
   });

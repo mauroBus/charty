@@ -62,9 +62,7 @@ Line chart combined with circles.
                               this.base.append('g'),
                               options);
 
-			this.componentsMixins = [];
-			this.componentsMixins.push(lineChart);
-			this.componentsMixins.push(circles);
+      this.setMixins(lineChart, circles);
 		}
 	});
 }));

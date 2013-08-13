@@ -688,6 +688,26 @@ Contains common functionality
       }
 
       return this;
+    },
+    /**
+    Sets mixins
+
+    @method
+    @chainable
+    */
+    setMixins : function(){
+      if( !this.componentsMixins ){
+        this.componentsMixins = [];
+      }
+
+      var args = Array.prototype.slice.call(arguments,0),
+          self = this;
+
+      _.each(args, function(mixin){
+        self.componentsMixins.push(mixin);
+      });
+
+      return this;
     }
   });
 }));
@@ -1991,7 +2011,7 @@ Chart that can represent many data series
                                   args);
 
         instance.factor = ((f--)/args.instances);
-        this.componentsMixins.push(instance);
+        this.setMixins(instance);
       }
     }
   });
@@ -2286,9 +2306,7 @@ N data series
                                 this.base.append('g'),
                                 options);
 
-			this.componentsMixins = [];
-			this.componentsMixins.push(barChart);
-			this.componentsMixins.push(axis);
+      this.setMixins(barChart, axis);
 		}
 	});
 }));
@@ -2495,12 +2513,7 @@ Labeled triangle chart drawer.
                             this.base.append('g'),
                             args);
 
-      this.componentsMixins = [];
-      this.componentsMixins.push(triangles);
-      this.componentsMixins.push(recs);
-      this.componentsMixins.push(texts);
-      this.componentsMixins.push(axis);
-
+      this.setMixins(triangles, recs, texts, axis);
     }
   });
 }));
@@ -2565,9 +2578,7 @@ Takes N input data series
                                 this.base.append('g'),
                                 options);
 
-			this.componentsMixins = [];
-			this.componentsMixins.push(lineChart);
-			this.componentsMixins.push(axis);
+      this.setMixins(lineChart, axis);
 		}
 	});
 }));
@@ -2635,9 +2646,7 @@ Line chart combined with circles.
                               this.base.append('g'),
                               options);
 
-			this.componentsMixins = [];
-			this.componentsMixins.push(lineChart);
-			this.componentsMixins.push(circles);
+      this.setMixins(lineChart, circles);
 		}
 	});
 }));
@@ -2694,13 +2703,11 @@ Scatterplot chart
                             this.base.append('g'),
                             { dataValidator : args.dataValidator }).showAsGrid(),
 
-          lineChart = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
-                                 this.base,
-                                 options);
+          circles = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
+                               this.base,
+                               options);
 
-			this.componentsMixins = [];
-			this.componentsMixins.push(lineChart);
-			this.componentsMixins.push(axis);
+      this.setMixins(circles, axis);
 		}
 	});
 }));

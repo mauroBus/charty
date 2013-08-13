@@ -51,13 +51,11 @@ Scatterplot chart
                             this.base.append('g'),
                             { dataValidator : args.dataValidator }).showAsGrid(),
 
-          lineChart = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
-                                 this.base,
-                                 options);
+          circles = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
+                               this.base,
+                               options);
 
-			this.componentsMixins = [];
-			this.componentsMixins.push(lineChart);
-			this.componentsMixins.push(axis);
+      this.setMixins(circles, axis);
 		}
 	});
 }));

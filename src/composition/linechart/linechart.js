@@ -59,9 +59,7 @@ Takes N input data series
                                 this.base.append('g'),
                                 options);
 
-			this.componentsMixins = [];
-			this.componentsMixins.push(lineChart);
-			this.componentsMixins.push(axis);
+      this.setMixins(lineChart, axis);
 		}
 	});
 }));

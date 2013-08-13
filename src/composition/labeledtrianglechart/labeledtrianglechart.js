@@ -69,12 +69,7 @@ Labeled triangle chart drawer.
                             this.base.append('g'),
                             args);
 
-      this.componentsMixins = [];
-      this.componentsMixins.push(triangles);
-      this.componentsMixins.push(recs);
-      this.componentsMixins.push(texts);
-      this.componentsMixins.push(axis);
-
+      this.setMixins(triangles, recs, texts, axis);
     }
   });
 }));

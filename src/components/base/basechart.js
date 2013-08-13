@@ -112,6 +112,26 @@ Contains common functionality
       }
 
       return this;
+    },
+    /**
+    Sets mixins
+
+    @method
+    @chainable
+    */
+    setMixins : function(){
+      if( !this.componentsMixins ){
+        this.componentsMixins = [];
+      }
+
+      var args = Array.prototype.slice.call(arguments,0),
+          self = this;
+
+      _.each(args, function(mixin){
+        self.componentsMixins.push(mixin);
+      });
+
+      return this;
     }
   });
 }));
