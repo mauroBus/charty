@@ -119,7 +119,7 @@ Donut drawer.
             var chart = this.chart();
 
             return this.attr('transform', 'translate(' + (chart.xPosition) + ',' + (chart.yPosition) + ')')
-                       .attr('fill', function(d) {
+                       .attr('class', function(d) {
                           return d.data.c;
                        })
                        .attr('d', arcGen);

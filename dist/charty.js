@@ -1347,7 +1347,7 @@ Donut drawer.
             var chart = this.chart();
 
             return this.attr('transform', 'translate(' + (chart.xPosition) + ',' + (chart.yPosition) + ')')
-                       .attr('fill', function(d) {
+                       .attr('class', function(d) {
                           return d.data.c;
                        })
                        .attr('d', arcGen);
@@ -2924,6 +2924,8 @@ Full chart api
   by a defined chart name.
   Margin is used to translate the chart a small distance. A chart can have many
   instances.
+  Whether the chart takes the container dimensions, is it possible to also set
+  the dimensions as initial options
 
   @method
   @param {Object} options options = {
@@ -2937,7 +2939,9 @@ Full chart api
                       top : 20,
                       lfactor : 0.8
                       tfactor : 0.8
-                    }
+                    },
+                    height : 400,
+                    width : 400
   @return {Object} d3.chart for data drawing
   */
   Charty.chart = function(options) {
@@ -2955,8 +2959,8 @@ Full chart api
     }
 
     var selection = d3.select(options.root),
-        height = (parseInt(selection.style('height'), 10) || 200),
-        width  = (parseInt(selection.style('width'), 10) || 200);
+        height = (parseInt(selection.style('height'), 10) || options.height || 200),
+        width  = (parseInt(selection.style('width'), 10) || options.width || 200);
 
     /**
     Set default values for margin, for the svg element.
@@ -2987,8 +2991,8 @@ Full chart api
     /**
     Chart dimension values are porcentaje from svg adapted value.
     */
-    width = (width - marginValues.top) * marginValues.tfactor;
-    height = (height - marginValues.left) * marginValues.lfactor;
+    width = (width - marginValues.top) * marginValues.lfactor;
+    height = (height - marginValues.left) * marginValues.tfactor;
 
     /**
     Appends the chart to the specified html element.
