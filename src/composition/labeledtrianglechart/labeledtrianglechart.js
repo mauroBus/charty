@@ -55,7 +55,7 @@ Labeled triangle chart drawer.
 
       var axis = this.mixin(args.axisSystem,
                             this.base.append('g'),
-                            { dataValidator : args.dataValidator }).showAsGrid(),
+                            { dataValidator : args.dataValidator }).showAsGrid(args.showAsGrid),
 
           triangles = this.mixin(Charty.CHART_NAMES.TRIANGLE,
                                 this.base.append('g'),

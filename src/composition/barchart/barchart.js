@@ -60,7 +60,7 @@ N data series
 
 			var axis = this.mixin(args.axisSystem,
                            this.base.append('g'),
-                           { dataValidator : args.dataValidator }).showAsGrid(),
+                           { dataValidator : args.dataValidator }).showAsGrid(args.showAsGrid),
 
 					barChart = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                                 this.base.append('g'),

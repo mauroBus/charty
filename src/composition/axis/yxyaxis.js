@@ -38,7 +38,7 @@ One X Axis (bottom)
 
     @method
     */
-    initialize : function(args){
+    initialize : function (args){
       this.xaxis = this.mixin(Charty.CHART_NAMES.AXIS,
                               this.base.append('g'),
                               args).orient('bottom');
@@ -58,9 +58,9 @@ One X Axis (bottom)
     @method
     @chainable
     */
-    showAsGrid : function(){
-      this.xaxis.showAsGrid(true);
-      this.yaxisleft.showAsGrid(true);
+    showAsGrid : function (showAsGrid){
+      this.xaxis.showAsGrid(showAsGrid);
+      this.yaxisleft.showAsGrid(showAsGrid);
       return this;
     },
     /**
@@ -70,7 +70,7 @@ One X Axis (bottom)
     @param {Number} newHeight chart's height
     @chainable
     */
-    height : function(newHeight){
+    height : function (newHeight){
       this.xaxis.ytranslate(newHeight).tickSize(newHeight);
       return this;
     },
@@ -82,7 +82,7 @@ One X Axis (bottom)
     @param {Number} newWidth chart's width
     @chainable
     */
-    width : function(newWidth){
+    width : function (newWidth){
       this.yaxisright.xtranslate(newWidth);
       this.yaxisleft.tickSize(newWidth);
       return this;
@@ -94,7 +94,7 @@ One X Axis (bottom)
     @param {Object} scale d3.scale
     @chainable
     */
-    setXScale : function(scale){
+    setXScale : function (scale){
       this.xaxis.setScale(scale);
       return this;
     },
@@ -105,7 +105,7 @@ One X Axis (bottom)
     @param {Object} scale d3.scale
     @chainable
     */
-    setYScale : function(scale){
+    setYScale : function (scale){
       this.yaxisleft.setScale(scale);
       this.yaxisright.setScale(scale);
       return this;

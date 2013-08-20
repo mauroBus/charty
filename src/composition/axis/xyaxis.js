@@ -54,9 +54,9 @@ Base XY system for all the 2D charts.
     @method
     @chainable
     */
-    showAsGrid : function(){
-      this.xaxis.showAsGrid(true);
-      this.yaxis.showAsGrid(true);
+    showAsGrid : function (showAsGrid){
+      this.xaxis.showAsGrid(showAsGrid);
+      this.yaxis.showAsGrid(showAsGrid);
       return this;
     },
     /**
@@ -67,7 +67,7 @@ Base XY system for all the 2D charts.
     @param {Number} newHeight chart's height
     @chainable
     */
-    height : function(newHeight){
+    height : function (newHeight){
       this.xaxis.ytranslate(newHeight).tickSize(newHeight);
       return this;
     },
@@ -78,7 +78,7 @@ Base XY system for all the 2D charts.
     @param {Number} newWidth chart's width
     @chainable
     */
-    width : function(newWidth){
+    width : function (newWidth){
       this.yaxis.tickSize(newWidth);
       return this;
     },
@@ -89,7 +89,7 @@ Base XY system for all the 2D charts.
     @param {Object} scale d3.scale
     @chainable
     */
-    setXScale : function(scale){
+    setXScale : function (scale){
       this.xaxis.setScale(scale);
       return this;
     },
@@ -100,7 +100,7 @@ Base XY system for all the 2D charts.
     @param {Object} scale d3.scale
     @chainable
     */
-    setYScale : function(scale){
+    setYScale : function (scale){
       this.yaxis.setScale(scale);
       return this;
     }

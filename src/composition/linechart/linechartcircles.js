@@ -51,7 +51,8 @@ Line chart combined with circles.
 				chartName : Charty.CHART_NAMES.CIRCLE,
         dataValidator : args.dataValidator,
 				instances : (args.instances || 1),
-        axisSystem : args.axisSystem
+        axisSystem : args.axisSystem,
+        showAsGrid : args.showAsGrid
 			};
 
 			var lineChart = this.mixin(Charty.CHART_NAMES.LINE_CHART,

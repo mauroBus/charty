@@ -103,7 +103,8 @@ function(Charty){
     margintop : 20,
     marginlfactor : 0.85,
     margintfactor : 0.85,
-    axisSystem : Charty.CHART_NAMES.YXY_AXIS
+    axisSystem : Charty.CHART_NAMES.YXY_AXIS,
+    showAsGrid : true
   };
 
   var options2 = {
@@ -115,7 +116,8 @@ function(Charty){
     margintop : 20,
     marginlfactor : 0.85,
     margintfactor : 0.85,
-    axisSystem : Charty.CHART_NAMES.YXY_AXIS
+    axisSystem : Charty.CHART_NAMES.YXY_AXIS,
+    showAsGrid : true
   };
 
   var options3 = {
@@ -128,7 +130,8 @@ function(Charty){
     margintop : 20,
     marginlfactor : 0.85,
     margintfactor : 0.85,
-    axisSystem : Charty.CHART_NAMES.YXY_AXIS
+    axisSystem : Charty.CHART_NAMES.YXY_AXIS,
+    showAsGrid : true
   };
 
   var options4 = {
@@ -141,7 +144,8 @@ function(Charty){
     margintop : 20,
     marginlfactor : 0.85,
     margintfactor : 0.85,
-    axisSystem : Charty.CHART_NAMES.XY_AXIS
+    axisSystem : Charty.CHART_NAMES.XY_AXIS,
+    showAsGrid : true
   };
 
   var options6 = {
@@ -163,7 +167,8 @@ function(Charty){
     margintop : 20,
     marginlfactor : 0.85,
     margintfactor : 0.85,
-    axisSystem : Charty.CHART_NAMES.YXY_AXIS
+    axisSystem : Charty.CHART_NAMES.YXY_AXIS,
+    showAsGrid : true
   };
 
   /**

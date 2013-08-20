@@ -85,16 +85,6 @@ and it will append a specific chart to it.
 
 @class ChartsApi
 @constructor
-@requires d3.chart,
-          scalesfactory,
-          barchart,
-          labeledtrianglechart,
-          linechart,
-          scatterplot,
-          donut,
-          donutwithinnertext,
-          labeleddonutchart,
-          linechartcircles
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -2071,9 +2061,9 @@ Base XY system for all the 2D charts.
     @method
     @chainable
     */
-    showAsGrid : function(){
-      this.xaxis.showAsGrid(true);
-      this.yaxis.showAsGrid(true);
+    showAsGrid : function (showAsGrid){
+      this.xaxis.showAsGrid(showAsGrid);
+      this.yaxis.showAsGrid(showAsGrid);
       return this;
     },
     /**
@@ -2084,7 +2074,7 @@ Base XY system for all the 2D charts.
     @param {Number} newHeight chart's height
     @chainable
     */
-    height : function(newHeight){
+    height : function (newHeight){
       this.xaxis.ytranslate(newHeight).tickSize(newHeight);
       return this;
     },
@@ -2095,7 +2085,7 @@ Base XY system for all the 2D charts.
     @param {Number} newWidth chart's width
     @chainable
     */
-    width : function(newWidth){
+    width : function (newWidth){
       this.yaxis.tickSize(newWidth);
       return this;
     },
@@ -2106,7 +2096,7 @@ Base XY system for all the 2D charts.
     @param {Object} scale d3.scale
     @chainable
     */
-    setXScale : function(scale){
+    setXScale : function (scale){
       this.xaxis.setScale(scale);
       return this;
     },
@@ -2117,7 +2107,7 @@ Base XY system for all the 2D charts.
     @param {Object} scale d3.scale
     @chainable
     */
-    setYScale : function(scale){
+    setYScale : function (scale){
       this.yaxis.setScale(scale);
       return this;
     }
@@ -2163,7 +2153,7 @@ One X Axis (bottom)
 
     @method
     */
-    initialize : function(args){
+    initialize : function (args){
       this.xaxis = this.mixin(Charty.CHART_NAMES.AXIS,
                               this.base.append('g'),
                               args).orient('bottom');
@@ -2183,9 +2173,9 @@ One X Axis (bottom)
     @method
     @chainable
     */
-    showAsGrid : function(){
-      this.xaxis.showAsGrid(true);
-      this.yaxisleft.showAsGrid(true);
+    showAsGrid : function (showAsGrid){
+      this.xaxis.showAsGrid(showAsGrid);
+      this.yaxisleft.showAsGrid(showAsGrid);
       return this;
     },
     /**
@@ -2195,7 +2185,7 @@ One X Axis (bottom)
     @param {Number} newHeight chart's height
     @chainable
     */
-    height : function(newHeight){
+    height : function (newHeight){
       this.xaxis.ytranslate(newHeight).tickSize(newHeight);
       return this;
     },
@@ -2207,7 +2197,7 @@ One X Axis (bottom)
     @param {Number} newWidth chart's width
     @chainable
     */
-    width : function(newWidth){
+    width : function (newWidth){
       this.yaxisright.xtranslate(newWidth);
       this.yaxisleft.tickSize(newWidth);
       return this;
@@ -2219,7 +2209,7 @@ One X Axis (bottom)
     @param {Object} scale d3.scale
     @chainable
     */
-    setXScale : function(scale){
+    setXScale : function (scale){
       this.xaxis.setScale(scale);
       return this;
     },
@@ -2230,7 +2220,7 @@ One X Axis (bottom)
     @param {Object} scale d3.scale
     @chainable
     */
-    setYScale : function(scale){
+    setYScale : function (scale){
       this.yaxisleft.setScale(scale);
       this.yaxisright.setScale(scale);
       return this;
@@ -2299,7 +2289,7 @@ N data series
 
 			var axis = this.mixin(args.axisSystem,
                            this.base.append('g'),
-                           { dataValidator : args.dataValidator }).showAsGrid(),
+                           { dataValidator : args.dataValidator }).showAsGrid(args.showAsGrid),
 
 					barChart = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                                 this.base.append('g'),
@@ -2498,7 +2488,7 @@ Labeled triangle chart drawer.
 
       var axis = this.mixin(args.axisSystem,
                             this.base.append('g'),
-                            { dataValidator : args.dataValidator }).showAsGrid(),
+                            { dataValidator : args.dataValidator }).showAsGrid(args.showAsGrid),
 
           triangles = this.mixin(Charty.CHART_NAMES.TRIANGLE,
                                 this.base.append('g'),
@@ -2571,7 +2561,7 @@ Takes N input data series
 
 			var axis = this.mixin(args.axisSystem,
                             this.base.append('g'),
-                            { dataValidator : args.dataValidator }).showAsGrid(),
+                            { dataValidator : args.dataValidator }).showAsGrid(args.showAsGrid),
 
 					lineChart = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                                 this.base.append('g'),
@@ -2634,7 +2624,8 @@ Line chart combined with circles.
 				chartName : Charty.CHART_NAMES.CIRCLE,
         dataValidator : args.dataValidator,
 				instances : (args.instances || 1),
-        axisSystem : args.axisSystem
+        axisSystem : args.axisSystem,
+        showAsGrid : args.showAsGrid
 			};
 
 			var lineChart = this.mixin(Charty.CHART_NAMES.LINE_CHART,
@@ -2700,7 +2691,7 @@ Scatterplot chart
 
 			var axis = this.mixin(args.axisSystem,
                             this.base.append('g'),
-                            { dataValidator : args.dataValidator }).showAsGrid(),
+                            { dataValidator : args.dataValidator }).showAsGrid(args.showAsGrid),
 
           circles = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                                this.base,
@@ -2919,6 +2910,9 @@ Full chart api
   }
 }(this, function (Charty, ScaleFactory, ChartInterface, DataValidator) {
 
+  Charty.scaleFactory = new ScaleFactory();
+  Charty.dataValidator = new DataValidator();
+
   /**
   Appends a chart to a root d3.selection element. Chart is determined
   by a defined chart name.
@@ -2945,14 +2939,6 @@ Full chart api
   @return {Object} d3.chart for data drawing
   */
   Charty.chart = function(options) {
-
-    if( !this.scaleFactory ){
-      this.scaleFactory = new ScaleFactory();
-    }
-
-    if( !this.dataValidator ){
-      this.dataValidator = new DataValidator();
-    }
 
     if (!options.root || !options.chartName) {
       throw new Error('Root element or chart name not defined');
@@ -3000,7 +2986,8 @@ Full chart api
     var chart = svg.chart(options.chartName, {
                     instances: options.instances,
                     dataValidator : this.dataValidator,
-                    axisSystem : options.axisSystem
+                    axisSystem : options.axisSystem,
+                    showAsGrid : options.showAsGrid
                   })
                   .height(height)
                   .width(width);

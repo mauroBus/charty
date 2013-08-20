@@ -6,16 +6,6 @@ and it will append a specific chart to it.
 
 @class ChartsApi
 @constructor
-@requires d3.chart,
-          scalesfactory,
-          barchart,
-          labeledtrianglechart,
-          linechart,
-          scatterplot,
-          donut,
-          donutwithinnertext,
-          labeleddonutchart,
-          linechartcircles
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */

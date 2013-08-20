@@ -49,7 +49,7 @@ Scatterplot chart
 
 			var axis = this.mixin(args.axisSystem,
                             this.base.append('g'),
-                            { dataValidator : args.dataValidator }).showAsGrid(),
+                            { dataValidator : args.dataValidator }).showAsGrid(args.showAsGrid),
 
           circles = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                                this.base,

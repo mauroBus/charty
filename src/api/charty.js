@@ -35,6 +35,9 @@ Full chart api
   }
 }(this, function (Charty, ScaleFactory, ChartInterface, DataValidator) {
 
+  Charty.scaleFactory = new ScaleFactory();
+  Charty.dataValidator = new DataValidator();
+
   /**
   Appends a chart to a root d3.selection element. Chart is determined
   by a defined chart name.
@@ -61,14 +64,6 @@ Full chart api
   @return {Object} d3.chart for data drawing
   */
   Charty.chart = function(options) {
-
-    if( !this.scaleFactory ){
-      this.scaleFactory = new ScaleFactory();
-    }
-
-    if( !this.dataValidator ){
-      this.dataValidator = new DataValidator();
-    }
 
     if (!options.root || !options.chartName) {
       throw new Error('Root element or chart name not defined');
@@ -116,7 +111,8 @@ Full chart api
     var chart = svg.chart(options.chartName, {
                     instances: options.instances,
                     dataValidator : this.dataValidator,
-                    axisSystem : options.axisSystem
+                    axisSystem : options.axisSystem,
+                    showAsGrid : options.showAsGrid
                   })
                   .height(height)
                   .width(width);
