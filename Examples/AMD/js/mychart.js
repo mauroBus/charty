@@ -206,6 +206,10 @@ function(Charty){
   */
   setTimeout(function(){
 
+    /** Bar chart new dimensions */
+    $('#chart1').removeClass('viewport').addClass('viewport-small');
+    chart1.redimension();
+
     data1 = {
       c: 'blue',
       rh: 30,

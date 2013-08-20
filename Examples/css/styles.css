@@ -2,9 +2,13 @@
   Base examples styles.
 */
 .viewport {
-  float: left;
   width: 600px;
   height: 300px;
+}
+
+.viewport-small {
+  width: 400px;
+  height: 200px;
 }
 
 .axis path {

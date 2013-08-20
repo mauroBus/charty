@@ -29,10 +29,14 @@ and the data accessor.
 
   /**
   @param {Object} chart d3.chart object
+  @param {Object} root chart's container
+  @param {Object} svg svg element that contains the chart
   */
-  var ChartInterface = function(chart){
+  var ChartInterface = function(chart, rootSelection, svg){
     this.accessor = new Accessor();
     this.chart = chart;
+    this.rootSelection = rootSelection;
+    this.svg = svg;
   };
 
   /**
@@ -46,27 +50,26 @@ and the data accessor.
     this.chart.draw(this.accessor);
   };
 
-  /**
-  Alternative for height setting
+  /** 
+  Chart redimension, without redrawing elements
 
   @method
-  @param {Number} newHeight
   @chainable
   */
-  ChartInterface.prototype.height = function(newHeight){
-    this.chart.height(newHeight);
-    return this;
-  };
+  ChartInterface.prototype.redimension = function(){
 
-  /**
-  Alternative for width setting
+    var rootHeight = (parseInt(this.rootSelection.style('height'), 10)),
+        rootWidth  = (parseInt(this.rootSelection.style('width'), 10)),
+        svgHeight  = (parseInt(this.svg.style('height'), 10)),
+        svgWidth   = (parseInt(this.svg.style('width'), 10));
 
-  @method
-  @param {Number} newWidth
-  @chainable
-  */
-  ChartInterface.prototype.width = function(newWidth){
-    this.chart.width(newWidth);
+    /** Sets new dimensions and resizing happens */
+    if ((rootHeight !== svgHeight) || (rootWidth !== svgWidth)){
+
+      this.svg.attr('height', rootHeight);
+      this.svg.attr('width', rootWidth);
+    }
+
     return this;
   };
 

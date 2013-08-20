@@ -96,7 +96,11 @@ Full chart api
     var svg = selection.append('svg')
       .attr('width', width)
       .attr('height', height)
-      .append('g')
+      .attr('viewBox', ('0 0 '+ width + " " + height))
+      .attr('preserveAspectRatio', 'XminYmin');
+
+    /** Append g to svg */
+    var gSvg = svg.append('g')
       .attr('transform', 'translate(' + marginValues.left + ',' + marginValues.top + ')');
 
     /**
@@ -108,7 +112,7 @@ Full chart api
     /**
     Appends the chart to the specified html element.
     */
-    var chart = svg.chart(options.chartName, {
+    var chart = gSvg.chart(options.chartName, {
                     instances: options.instances,
                     dataValidator : this.dataValidator,
                     axisSystem : options.axisSystem,
@@ -131,7 +135,7 @@ Full chart api
     /**
     Returns the interface for the chart drawing
     */
-    return new ChartInterface(chart);
+    return new ChartInterface(chart, selection, svg);
   };
 
   return Charty;

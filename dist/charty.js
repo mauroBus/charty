@@ -2830,10 +2830,14 @@ and the data accessor.
 
   /**
   @param {Object} chart d3.chart object
+  @param {Object} root chart's container
+  @param {Object} svg svg element that contains the chart
   */
-  var ChartInterface = function(chart){
+  var ChartInterface = function(chart, rootSelection, svg){
     this.accessor = new Accessor();
     this.chart = chart;
+    this.rootSelection = rootSelection;
+    this.svg = svg;
   };
 
   /**
@@ -2847,27 +2851,26 @@ and the data accessor.
     this.chart.draw(this.accessor);
   };
 
-  /**
-  Alternative for height setting
+  /** 
+  Chart redimension, without redrawing elements
 
   @method
-  @param {Number} newHeight
   @chainable
   */
-  ChartInterface.prototype.height = function(newHeight){
-    this.chart.height(newHeight);
-    return this;
-  };
+  ChartInterface.prototype.redimension = function(){
 
-  /**
-  Alternative for width setting
+    var rootHeight = (parseInt(this.rootSelection.style('height'), 10)),
+        rootWidth  = (parseInt(this.rootSelection.style('width'), 10)),
+        svgHeight  = (parseInt(this.svg.style('height'), 10)),
+        svgWidth   = (parseInt(this.svg.style('width'), 10));
 
-  @method
-  @param {Number} newWidth
-  @chainable
-  */
-  ChartInterface.prototype.width = function(newWidth){
-    this.chart.width(newWidth);
+    /** Sets new dimensions and resizing happens */
+    if ((rootHeight !== svgHeight) || (rootWidth !== svgWidth)){
+
+      this.svg.attr('height', rootHeight);
+      this.svg.attr('width', rootWidth);
+    }
+
     return this;
   };
 
@@ -2971,7 +2974,11 @@ Full chart api
     var svg = selection.append('svg')
       .attr('width', width)
       .attr('height', height)
-      .append('g')
+      .attr('viewBox', ('0 0 '+ width + " " + height))
+      .attr('preserveAspectRatio', 'XminYmin');
+
+    /** Append g to svg */
+    var gSvg = svg.append('g')
       .attr('transform', 'translate(' + marginValues.left + ',' + marginValues.top + ')');
 
     /**
@@ -2983,7 +2990,7 @@ Full chart api
     /**
     Appends the chart to the specified html element.
     */
-    var chart = svg.chart(options.chartName, {
+    var chart = gSvg.chart(options.chartName, {
                     instances: options.instances,
                     dataValidator : this.dataValidator,
                     axisSystem : options.axisSystem,
@@ -3006,7 +3013,7 @@ Full chart api
     /**
     Returns the interface for the chart drawing
     */
-    return new ChartInterface(chart);
+    return new ChartInterface(chart, selection, svg);
   };
 
   return Charty;
