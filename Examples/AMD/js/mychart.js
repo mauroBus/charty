@@ -78,8 +78,8 @@ function(Charty){
     /*xPosition : 200,
     yPosition : 200,*/
     data : [
-      {x : 25 , c: 'red'},
-      {x : 175, c: 'gray'}
+      {y : 25 , c: 'red'},
+      {y : 175, c: 'gray'}
     ]
   };
 
@@ -260,8 +260,8 @@ function(Charty){
       ir :  50,
       or :  90,
       data : [
-        {x : 50 , c: 'blue'},
-        {x : 155, c: 'gray'}
+        {y : 50 , c: 'blue'},
+        {y : 155, c: 'gray'}
       ]
     };
 

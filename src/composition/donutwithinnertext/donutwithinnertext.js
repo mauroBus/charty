@@ -74,7 +74,7 @@ doesn't depend on the data value.
 
           var chart = this.chart(),
               data = d.data,
-              stringValue = (data[0].x).toString() +'%';
+              stringValue = (data[0].y).toString() +'%';
 
           chart.fontSize = (dataValidator.isPositiveNumber(d.fontSize, errors.invalidFontSize) || defaults.fontSize);
           /** By default, text will be centered inside donut */

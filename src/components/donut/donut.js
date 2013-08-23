@@ -62,7 +62,7 @@ Donut drawer.
         .pie()
         .sort(null)
         .value(function(d) {
-          return d.x;
+          return d.y;
         });
 
       var arcGen = d3.svg.arc();
