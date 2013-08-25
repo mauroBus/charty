@@ -87,12 +87,14 @@ Triangle drawer.
                 y1 = chart.yscale.map(0),
                 band = chart.xscale.band(1);
 
-            return this.attr('class', function(d){
-                          return (d.c || chart.c);
-                        })
-                       .attr('d', function(d){
-                          return chart.getPath(d, y1, band);
-                        });
+            this.attr('class', function(d){
+                  return (d.c || chart.c);
+                })
+                .attr('d', function(d){
+                  return chart.getPath(d, y1, band);
+                });
+
+            return this;
           },
           'exit' : function(){
 

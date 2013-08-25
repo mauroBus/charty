@@ -95,14 +95,16 @@ Circle drawer.
 
             var chart = this.chart();
 
-            return this.attr('class',function(d){
-                        return (d.c || chart.c);
-                      })
-                      .attr("r", function(d){
-                        return (d.r || chart.r);
-                      })
-                      .attr('cx', function(d) { return chart.xscale.map(d.x,0); })
-                      .attr('cy', function(d) { return chart.yscale.map(d.y,0); });
+            this.attr('class',function(d){
+                  return (d.c || chart.c);
+                })
+                .attr("r", function(d){
+                  return (d.r || chart.r);
+                })
+                .attr('cx', function(d) { return chart.xscale.map(d.x,0); })
+                .attr('cy', function(d) { return chart.yscale.map(d.y,0); });
+
+            return this;
           },
           'exit' : function(){
 

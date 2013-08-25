@@ -67,6 +67,10 @@
           { x: 'A', y: 100, c : 'red'},
           { x: 'B', y: -40, c : 'red'},
           { x: 'C', y: 60, c : 'red'}
+        ],
+        axisLabels : [
+          { label : 'X Axis' },
+          { label : 'Y Axis' }
         ]
       };
 
@@ -76,6 +80,27 @@
           { x: 'A', y: 150 , c:'blue'},
           { x: 'B', y: 50 , c: 'blue'},
           { x: 'C', y: 30, c:'blue'}
+        ]
+      };
+
+      /**
+      Data rendering examples.
+      */
+      var data3 = {
+        data: [
+          { x:  25, y: 100, c : 'red'},
+          { x:  50, y:  40, c : 'red'},
+          { x:  75, y:  60, c : 'red'},
+          { x: 100, y:  88, c : 'red'}
+        ]
+      };
+
+      var data5 = {
+        data: [
+          { x: 25,  y: 150, c : 'blue'},
+          { x: 50,  y:  50, c : 'blue'},
+          { x: 75,  y:  30, c : 'blue'},
+          { x: 100, y:  88, c : 'blue'}
         ]
       };
 
@@ -102,6 +127,10 @@
 
       var datagroup4 = [];
           datagroup4.push(data4);
+
+      var datagroup22 = [];
+          datagroup22.push(data3);
+          datagroup22.push(data5);
 
       var options1 = {
         chartName : Charty.CHART_NAMES.BAR_CHART,
@@ -148,7 +177,7 @@
         chartName : Charty.CHART_NAMES.SCATTERPLOT,
         instances : 2,
         root : '#chart4',
-        xAxis : Charty.AXIS_TYPE.ORDINAL,
+        xAxis : Charty.AXIS_TYPE.LINEAR,
         yAxis : Charty.AXIS_TYPE.LINEAR,
         marginleft : 50,
         margintop : 20,
@@ -200,7 +229,7 @@
           data2.c = 'blue';
 
       var chart4 = Charty.chart(options4);
-          chart4.draw(datagroup1);
+          chart4.draw(datagroup22);
 
       var chart6 = Charty.chart(options6);
           chart6.draw(datagroup4);
@@ -262,8 +291,6 @@
         data1.r = 12;
         data2.c = 'red';
         data2.r = 8;
-
-        chart4.draw(datagroup4);
 
         var data9 = {
           ir :  50,

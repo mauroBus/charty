@@ -32,9 +32,7 @@ to provide an easy way to switching scales in a defined chart
     window.ScaleFactory = factory(Charty, OrdinalScale, LinearScale);
   }
 }(this, function(Charty, OrdinalScale, LinearScale) {
-	var ScaleFactory = function(){
-
-	};
+	var ScaleFactory = function(){};
 
 	/**
 	Returns a specified scale object, acording to a scale type

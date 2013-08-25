@@ -315,7 +315,6 @@ Linear scale for linear axis
 	@chainable
 	*/
 	LinearScale.prototype.setRange = function(range){
-
 		this.scale = this.scale.range(this.generateRange(range));
 		return this;
 	};
@@ -370,7 +369,7 @@ Linear scale for linear axis
 
 					max = Math.max(maxg, max);
 					min = Math.min(ming, min);
-			});
+				});
 
 			return this.setDomain(Math.min(0, min), Math.max(0, max));
 	};
@@ -439,7 +438,6 @@ Ordinal Scale
 	@chainable
 	*/
 	OrdinalScale.prototype.setRange = function(range){
-
 		this.scale = this.scale.rangeRoundBands(this.generateRange(range) , 0.1);
 		return this;
 	};
@@ -535,9 +533,7 @@ to provide an easy way to switching scales in a defined chart
     window.ScaleFactory = factory(Charty, OrdinalScale, LinearScale);
   }
 }(this, function(Charty, OrdinalScale, LinearScale) {
-	var ScaleFactory = function(){
-
-	};
+	var ScaleFactory = function(){};
 
 	/**
 	Returns a specified scale object, acording to a scale type
@@ -1193,14 +1189,16 @@ Circle drawer.
 
             var chart = this.chart();
 
-            return this.attr('class',function(d){
-                        return (d.c || chart.c);
-                      })
-                      .attr("r", function(d){
-                        return (d.r || chart.r);
-                      })
-                      .attr('cx', function(d) { return chart.xscale.map(d.x,0); })
-                      .attr('cy', function(d) { return chart.yscale.map(d.y,0); });
+            this.attr('class',function(d){
+                  return (d.c || chart.c);
+                })
+                .attr("r", function(d){
+                  return (d.r || chart.r);
+                })
+                .attr('cx', function(d) { return chart.xscale.map(d.x,0); })
+                .attr('cy', function(d) { return chart.yscale.map(d.y,0); });
+
+            return this;
           },
           'exit' : function(){
 
@@ -1332,25 +1330,17 @@ Donut drawer.
           return this.append('path');
         },
         events: {
-          'enter': function() {
+          'merge': function() {
 
             var chart = this.chart();
 
-            return this.attr('transform', 'translate(' + (chart.xPosition) + ',' + (chart.yPosition) + ')')
-                       .attr('class', function(d) {
-                          return d.data.c;
-                       })
-                       .attr('d', arcGen);
+            this.attr('transform', 'translate(' + (chart.xPosition) + ',' + (chart.yPosition) + ')')
+                .attr('class', function(d) {
+                  return d.data.c;
+                })
+                .attr('d', arcGen);
 
-          },
-          'update': function() {
-
-            var chart = this.chart();
-
-            return this.attr('class', function(d) {
-                        return d.data.c;
-                       })
-                       .attr('d', arcGen);
+            return this;
           },
           'exit': function() {
 
@@ -1461,9 +1451,11 @@ Line drawing.
 
               var chart = this.chart();
 
-              return this.datum(chart.datum)
-                         .classed(chart.c, true)
-                         .attr('d',line);
+              this.datum(chart.datum)
+                  .classed(chart.c, true)
+                  .attr('d',line);
+
+              return this;
           },
           'exit' : function(){
 
@@ -1685,27 +1677,31 @@ Text labeling.
 
               var chart = this.chart();
 
-              return this.attr('x', function(d){
-                            return chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2);
-                          })
-                         .attr('y', function(d){
-                            return chart.yscale.map(d.y);
-                          })
-                         .attr('text-anchor', 'middle')
-                         .attr('dy', '0.35em')
-                         .text(function(d) { return d.y; });
+              this.attr('x', function(d){
+                    return chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2);
+                  })
+                  .attr('y', function(d){
+                    return chart.yscale.map(d.y);
+                  })
+                  .attr('text-anchor', 'middle')
+                  .attr('dy', '0.35em')
+                  .text(function(d) { return d.y; });
+
+              return this;
           },
           'update' : function(){
 
               var chart = this.chart();
 
-              return this.attr('x', function(d){
-                            return chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2);
-                          })
-                         .attr('y', function(d){
-                            return chart.yscale.map(d.y);
-                          })
-                         .text(function(d) { return d.y; });
+              this.attr('x', function(d){
+                    return chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2);
+                  })
+                  .attr('y', function(d){
+                    return chart.yscale.map(d.y);
+                  })
+                  .text(function(d) { return d.y; });
+
+              return this;
           },
           'exit' : function(){
 
@@ -1810,12 +1806,14 @@ Triangle drawer.
                 y1 = chart.yscale.map(0),
                 band = chart.xscale.band(1);
 
-            return this.attr('class', function(d){
-                          return (d.c || chart.c);
-                        })
-                       .attr('d', function(d){
-                          return chart.getPath(d, y1, band);
-                        });
+            this.attr('class', function(d){
+                  return (d.c || chart.c);
+                })
+                .attr('d', function(d){
+                  return chart.getPath(d, y1, band);
+                });
+
+            return this;
           },
           'exit' : function(){
 

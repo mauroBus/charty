@@ -61,7 +61,6 @@ Linear scale for linear axis
 	@chainable
 	*/
 	LinearScale.prototype.setRange = function(range){
-
 		this.scale = this.scale.range(this.generateRange(range));
 		return this;
 	};
@@ -116,7 +115,7 @@ Linear scale for linear axis
 
 					max = Math.max(maxg, max);
 					min = Math.min(ming, min);
-			});
+				});
 
 			return this.setDomain(Math.min(0, min), Math.max(0, max));
 	};

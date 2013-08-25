@@ -114,25 +114,17 @@ Donut drawer.
           return this.append('path');
         },
         events: {
-          'enter': function() {
+          'merge': function() {
 
             var chart = this.chart();
 
-            return this.attr('transform', 'translate(' + (chart.xPosition) + ',' + (chart.yPosition) + ')')
-                       .attr('class', function(d) {
-                          return d.data.c;
-                       })
-                       .attr('d', arcGen);
+            this.attr('transform', 'translate(' + (chart.xPosition) + ',' + (chart.yPosition) + ')')
+                .attr('class', function(d) {
+                  return d.data.c;
+                })
+                .attr('d', arcGen);
 
-          },
-          'update': function() {
-
-            var chart = this.chart();
-
-            return this.attr('class', function(d) {
-                        return d.data.c;
-                       })
-                       .attr('d', arcGen);
+            return this;
           },
           'exit': function() {
 

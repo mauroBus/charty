@@ -69,27 +69,31 @@ Text labeling.
 
               var chart = this.chart();
 
-              return this.attr('x', function(d){
-                            return chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2);
-                          })
-                         .attr('y', function(d){
-                            return chart.yscale.map(d.y);
-                          })
-                         .attr('text-anchor', 'middle')
-                         .attr('dy', '0.35em')
-                         .text(function(d) { return d.y; });
+              this.attr('x', function(d){
+                    return chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2);
+                  })
+                  .attr('y', function(d){
+                    return chart.yscale.map(d.y);
+                  })
+                  .attr('text-anchor', 'middle')
+                  .attr('dy', '0.35em')
+                  .text(function(d) { return d.y; });
+
+              return this;
           },
           'update' : function(){
 
               var chart = this.chart();
 
-              return this.attr('x', function(d){
-                            return chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2);
-                          })
-                         .attr('y', function(d){
-                            return chart.yscale.map(d.y);
-                          })
-                         .text(function(d) { return d.y; });
+              this.attr('x', function(d){
+                    return chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2);
+                  })
+                  .attr('y', function(d){
+                    return chart.yscale.map(d.y);
+                  })
+                  .text(function(d) { return d.y; });
+
+              return this;
           },
           'exit' : function(){
 

@@ -93,9 +93,11 @@ Line drawing.
 
               var chart = this.chart();
 
-              return this.datum(chart.datum)
-                         .classed(chart.c, true)
-                         .attr('d',line);
+              this.datum(chart.datum)
+                  .classed(chart.c, true)
+                  .attr('d',line);
+
+              return this;
           },
           'exit' : function(){
 
