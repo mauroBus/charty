@@ -2977,19 +2977,20 @@ Full chart api
       .attr('viewBox', ('0 0 '+ width + " " + height))
       .attr('preserveAspectRatio', 'XminYmin');
 
+    if (options.gradients){
     /** Creation of linear gradients, if defined */
-    var defs = svg.append('defs');
-
-    /** Possible to define many gradients for one svg element */
-    _.each(options.gradients, function (gradient){
-      var grad = defs.append('linearGradient');
-          grad.attr('id', gradient.id);
-      _.each(gradient.classes, function (gradientClass){
-        grad.append('stop')
-            .attr( 'class', gradientClass.className)
-            .attr('offset', gradientClass.offset);
+      var defs = svg.append('defs');
+      /** Possible to define many gradients for one svg element */
+      _.each(options.gradients, function (gradient){
+        var grad = defs.append('linearGradient');
+            grad.attr('id', gradient.id);
+        _.each(gradient.classes, function (gradientClass){
+          grad.append('stop')
+              .attr( 'class', gradientClass.className)
+              .attr('offset', gradientClass.offset);
+        });
       });
-    });
+    }
 
     /** Append g to svg */
     var gSvg = svg.append('g')
