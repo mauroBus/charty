@@ -133,7 +133,9 @@ Full chart api
                     instances: options.instances,
                     dataValidator : this.dataValidator,
                     axisSystem : options.axisSystem,
-                    showAsGrid : options.showAsGrid
+                    showAsGrid : options.showAsGrid,
+                    xAxisLabel : options.xAxisLabel,
+                    yAxisLabel : options.yAxisLabel
                   })
                   .height(height)
                   .width(width);

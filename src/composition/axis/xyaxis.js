@@ -41,11 +41,11 @@ Base XY system for all the 2D charts.
 
         this.xaxis = this.mixin(Charty.CHART_NAMES.AXIS,
                                 this.base.append('g'),
-                                args).orient('bottom');
+                                args).orient('bottom').setTextLabel(args.xAxisLabel);
 
         this.yaxis = this.mixin(Charty.CHART_NAMES.AXIS,
                                 this.base.append('g'),
-                                args).orient('left');
+                                args).orient('left').setTextLabel(args.yAxisLabel, '-90');
 
     },
     /**
@@ -69,6 +69,7 @@ Base XY system for all the 2D charts.
     */
     height : function (newHeight){
       this.xaxis.ytranslate(newHeight).tickSize(newHeight);
+      this.yaxis.height(newHeight);
       return this;
     },
     /**
@@ -79,7 +80,8 @@ Base XY system for all the 2D charts.
     @chainable
     */
     width : function (newWidth){
-      this.yaxis.tickSize(newWidth);
+      this.yaxis.tickSize(newWidth).width(newWidth);
+      this.xaxis.width(newWidth);
       return this;
     },
     /**

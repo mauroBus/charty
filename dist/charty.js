@@ -783,7 +783,8 @@ it will implement all the functions needed.
   }
 }(this, function (d3, Charty) {
 
-  d3.chart(Charty.CHART_NAMES.AXIS, {
+  d3.chart(Charty.CHART_NAMES.BASE_CHART)
+    .extend(Charty.CHART_NAMES.AXIS, {
     /**
     Basic Axis initialization
 
@@ -854,7 +855,7 @@ it will implement all the functions needed.
           return this.append('g');
         },
         events : {
-          'merge' : function(){
+          'enter' : function(){
 
               var chart = this.chart();
 
@@ -875,7 +876,26 @@ it will implement all the functions needed.
                 this.attr('transform', 'translate(' + chart.xt + ',' + chart.yt + ')');
               }
 
+              /** Adds a text label */
+              if (chart.textLabel){
+                var text = this.append('text')
+                              .text(chart.textLabel);
+
+                /** Y Axis label rotation */
+                if(chart.labelRotate){
+                  text.attr('transform', 'translate('+ (-chart.w/14) +',' + chart.h/2 +  ')' +
+                            ' rotate(' + chart.labelRotate + ')');
+                }
+                else{
+                  text.attr('transform', 'translate(' + chart.w/2 + ',' + chart.yt/6 +')');
+                }
+              }
+
               return this;
+          },
+          'update' : function(){
+
+            return this.call(axis);
           },
           'remove' : function(){
 
@@ -915,7 +935,7 @@ it will implement all the functions needed.
     @param {Object} d3.scale
     @chainable
     */
-    setScale : function(scale){
+    setScale : function (scale){
       this.scale = scale;
       return this;
     },
@@ -927,7 +947,7 @@ it will implement all the functions needed.
     @chainable
     @default false
     */
-    showAsGrid : function(val){
+    showAsGrid : function (val){
       this.grid = val;
       return this;
     },
@@ -939,7 +959,7 @@ it will implement all the functions needed.
     @chainable
     @default bottom
     */
-    orient : function(orient){
+    orient : function (orient){
       this.o = (orient || 'bottom');
       return this;
     },
@@ -950,7 +970,7 @@ it will implement all the functions needed.
     @param {Number} t tranlation value
     @chainable
     */
-    xtranslate : function(t){
+    xtranslate : function (t){
       this.xt = t;
       return this;
     },
@@ -961,8 +981,21 @@ it will implement all the functions needed.
     @param {Number} t tranlation value
     @chainable
     */
-    ytranslate : function(t){
+    ytranslate : function (t){
       this.yt = t;
+      return this;
+    },
+    /** 
+    Text label that will be set next to the axis
+
+    @method
+    @param {String} label Text label
+    @param {Number} labelRotate Rotation for y axis label
+    @chainable
+    */
+    setTextLabel : function (label, labelRotate){
+      this.textLabel = label;
+      this.labelRotate = labelRotate;
       return this;
     }
   });
@@ -2046,11 +2079,11 @@ Base XY system for all the 2D charts.
 
         this.xaxis = this.mixin(Charty.CHART_NAMES.AXIS,
                                 this.base.append('g'),
-                                args).orient('bottom');
+                                args).orient('bottom').setTextLabel(args.xAxisLabel);
 
         this.yaxis = this.mixin(Charty.CHART_NAMES.AXIS,
                                 this.base.append('g'),
-                                args).orient('left');
+                                args).orient('left').setTextLabel(args.yAxisLabel, '-90');
 
     },
     /**
@@ -2074,6 +2107,7 @@ Base XY system for all the 2D charts.
     */
     height : function (newHeight){
       this.xaxis.ytranslate(newHeight).tickSize(newHeight);
+      this.yaxis.height(newHeight);
       return this;
     },
     /**
@@ -2084,7 +2118,8 @@ Base XY system for all the 2D charts.
     @chainable
     */
     width : function (newWidth){
-      this.yaxis.tickSize(newWidth);
+      this.yaxis.tickSize(newWidth).width(newWidth);
+      this.xaxis.width(newWidth);
       return this;
     },
     /**
@@ -2681,6 +2716,7 @@ Scatterplot chart
     .extend(Charty.CHART_NAMES.SCATTERPLOT, {
 
 		initialize : function(args){
+
 			var options = {
 				chartName : Charty.CHART_NAMES.CIRCLE,
         dataValidator : args.dataValidator,
@@ -2689,7 +2725,7 @@ Scatterplot chart
 
 			var axis = this.mixin(args.axisSystem,
                             this.base.append('g'),
-                            { dataValidator : args.dataValidator }).showAsGrid(args.showAsGrid),
+                            args).showAsGrid(args.showAsGrid),
 
           circles = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                                this.base,
@@ -3009,7 +3045,9 @@ Full chart api
                     instances: options.instances,
                     dataValidator : this.dataValidator,
                     axisSystem : options.axisSystem,
-                    showAsGrid : options.showAsGrid
+                    showAsGrid : options.showAsGrid,
+                    xAxisLabel : options.xAxisLabel,
+                    yAxisLabel : options.yAxisLabel
                   })
                   .height(height)
                   .width(width);

@@ -36,7 +36,8 @@ it will implement all the functions needed.
   }
 }(this, function (d3, Charty) {
 
-  d3.chart(Charty.CHART_NAMES.AXIS, {
+  d3.chart(Charty.CHART_NAMES.BASE_CHART)
+    .extend(Charty.CHART_NAMES.AXIS, {
     /**
     Basic Axis initialization
 
@@ -107,7 +108,7 @@ it will implement all the functions needed.
           return this.append('g');
         },
         events : {
-          'merge' : function(){
+          'enter' : function(){
 
               var chart = this.chart();
 
@@ -128,7 +129,26 @@ it will implement all the functions needed.
                 this.attr('transform', 'translate(' + chart.xt + ',' + chart.yt + ')');
               }
 
+              /** Adds a text label */
+              if (chart.textLabel){
+                var text = this.append('text')
+                              .text(chart.textLabel);
+
+                /** Y Axis label rotation */
+                if(chart.labelRotate){
+                  text.attr('transform', 'translate('+ (-chart.w/14) +',' + chart.h/2 +  ')' +
+                            ' rotate(' + chart.labelRotate + ')');
+                }
+                else{
+                  text.attr('transform', 'translate(' + chart.w/2 + ',' + chart.yt/6 +')');
+                }
+              }
+
               return this;
+          },
+          'update' : function(){
+
+            return this.call(axis);
           },
           'remove' : function(){
 
@@ -168,7 +188,7 @@ it will implement all the functions needed.
     @param {Object} d3.scale
     @chainable
     */
-    setScale : function(scale){
+    setScale : function (scale){
       this.scale = scale;
       return this;
     },
@@ -180,7 +200,7 @@ it will implement all the functions needed.
     @chainable
     @default false
     */
-    showAsGrid : function(val){
+    showAsGrid : function (val){
       this.grid = val;
       return this;
     },
@@ -192,7 +212,7 @@ it will implement all the functions needed.
     @chainable
     @default bottom
     */
-    orient : function(orient){
+    orient : function (orient){
       this.o = (orient || 'bottom');
       return this;
     },
@@ -203,7 +223,7 @@ it will implement all the functions needed.
     @param {Number} t tranlation value
     @chainable
     */
-    xtranslate : function(t){
+    xtranslate : function (t){
       this.xt = t;
       return this;
     },
@@ -214,8 +234,21 @@ it will implement all the functions needed.
     @param {Number} t tranlation value
     @chainable
     */
-    ytranslate : function(t){
+    ytranslate : function (t){
       this.yt = t;
+      return this;
+    },
+    /** 
+    Text label that will be set next to the axis
+
+    @method
+    @param {String} label Text label
+    @param {Number} labelRotate Rotation for y axis label
+    @chainable
+    */
+    setTextLabel : function (label, labelRotate){
+      this.textLabel = label;
+      this.labelRotate = labelRotate;
       return this;
     }
   });
