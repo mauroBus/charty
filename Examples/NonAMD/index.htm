@@ -156,7 +156,17 @@
         marginlfactor : 0.85,
         margintfactor : 0.85,
         axisSystem : Charty.CHART_NAMES.YXY_AXIS,
-        showAsGrid : true
+        showAsGrid : true,
+        gradients : [ 
+          {
+            id : 'gradient1',
+            classes : [
+              {className : 'stop1', offset : '0%'},
+              {className : 'stop2', offset : '50%'},
+              {className : 'stop3', offset : '100%'}
+            ]
+          }
+        ]
       };
 
       var options3 = {

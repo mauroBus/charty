@@ -40,8 +40,12 @@
   fill : red;
 }
 
-.gray {
+/*.gray {
   fill : gray;
+}*/
+
+.gray {
+  fill : url(#gradient1);
 }
 
 .yellow {
@@ -86,3 +90,8 @@
 .imgRight {
   background : url('../img/image.png') 100% 50% no-repeat;
 }
+
+/** Testing gradients */
+.stop1 { stop-color: red; }
+.stop2 { stop-color: white }
+.stop3 { stop-color: blue; }

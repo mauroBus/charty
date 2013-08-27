@@ -2968,12 +2968,28 @@ Full chart api
 
     /**
     Svg element creation
+
+    Sets attributes to provide redimensioning without drawing0
     */
     var svg = selection.append('svg')
       .attr('width', width)
       .attr('height', height)
       .attr('viewBox', ('0 0 '+ width + " " + height))
       .attr('preserveAspectRatio', 'XminYmin');
+
+    /** Creation of linear gradients, if defined */
+    var defs = svg.append('defs');
+
+    /** Possible to define many gradients for one svg element */
+    _.each(options.gradients, function (gradient){
+      var grad = defs.append('linearGradient');
+          grad.attr('id', gradient.id);
+      _.each(gradient.classes, function (gradientClass){
+        grad.append('stop')
+            .attr( 'class', gradientClass.className)
+            .attr('offset', gradientClass.offset);
+      });
+    });
 
     /** Append g to svg */
     var gSvg = svg.append('g')
