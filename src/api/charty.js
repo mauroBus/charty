@@ -108,10 +108,19 @@ Full chart api
       _.each(options.gradients, function (gradient){
         var grad = defs.append('linearGradient');
             grad.attr('id', gradient.id);
+
+        if (gradient.orientation === 'vertical'){
+          /** Vertial orientation */
+          grad.attr('x1', 0)
+              .attr('x2', 0)
+              .attr('y1', 0)
+              .attr('y2', 1);
+        }
+
         _.each(gradient.classes, function (gradientClass){
-          grad.append('stop')
-              .attr( 'class', gradientClass.className)
-              .attr('offset', gradientClass.offset);
+            grad.append('stop')
+                .attr( 'class', gradientClass.className)
+                .attr('offset', gradientClass.offset);
         });
       });
     }
