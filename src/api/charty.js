@@ -144,7 +144,8 @@ Full chart api
                     axisSystem : options.axisSystem,
                     showAsGrid : options.showAsGrid,
                     xAxisLabel : options.xAxisLabel,
-                    yAxisLabel : options.yAxisLabel
+                    yAxisLabel : options.yAxisLabel,
+                    barType : options.barType
                   })
                   .height(height)
                   .width(width);

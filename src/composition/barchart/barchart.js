@@ -22,6 +22,7 @@ N data series
     define('charty/barchart',[
       'd3.chart',
       'charty/chartynames',
+      'charty/horizontalbar',
       'charty/bar',
       'charty/multipledatagroup',
       'charty/xyaxis',
@@ -53,7 +54,7 @@ N data series
 		initialize : function(args){
 
 			var options = {
-				chartName : Charty.CHART_NAMES.BAR,
+				chartName : args.barType,
         dataValidator : args.dataValidator,
 				instances : (args.instances || 1)
 			};

@@ -78,6 +78,7 @@ Circle drawer.
 
           chart.c = (d.c || defaults.c);
           chart.r = (dataValidator.isPositiveNumber(d.r, errors.invalidRadio) || defaults.r);
+          chart.clickEvent = d.clickEvent;
 
           return this.selectAll('circle').data(d.data);
         },
@@ -103,6 +104,10 @@ Circle drawer.
                 })
                 .attr('cx', function(d) { return chart.xscale.map(d.x,0); })
                 .attr('cy', function(d) { return chart.yscale.map(d.y,0); });
+
+            if (chart.clickEvent){
+              this.on('click', chart.clickEvent);
+            }
 
             return this;
           },

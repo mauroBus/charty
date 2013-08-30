@@ -50,7 +50,7 @@ and the data accessor.
     this.chart.draw(this.accessor);
   };
 
-  /** 
+  /**
   Chart redimension, without redrawing elements
 
   @method

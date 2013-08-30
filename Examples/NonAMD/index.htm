@@ -55,6 +55,11 @@
     <script>
       'use strict';
 
+      var clickFnt = function (d){
+        var args = Array.prototype.slice.call(arguments,0);
+        console.log(args);
+      }
+
       /**
       Data rendering examples.
       */
@@ -63,6 +68,7 @@
         rw: 30,
         c: 'blueline',
         rc:'gray',
+        clickEvent : clickFnt,
         data: [
           { x: 'A', y: 100, c : 'red'},
           { x: 'B', y: -40, c : 'red'},
@@ -79,6 +85,29 @@
         ]
       };
 
+      /** Horizontal bar chart */
+      var data51 = {
+        rh: 30,
+        rw: 30,
+        c: 'blueline',
+        rc:'gray',
+        clickEvent : clickFnt,
+        data: [
+          { y: 'A', x: 100, c : 'red'},
+          { y: 'B', x: -40, c : 'red'},
+          { y: 'C', x: 60, c : 'red'}
+        ]
+      };
+
+      var data52 = {
+        c: 'redline',
+        data: [
+          { y: 'A', x: 150 , c:'blue'},
+          { y: 'B', x: 50 , c: 'blue'},
+          { y: 'C', x: 30, c:'blue'}
+        ]
+      };
+
       /**
       Data rendering examples.
       */
@@ -88,7 +117,8 @@
           { x:  50, y:  40, c : 'red'},
           { x:  75, y:  60, c : 'red'},
           { x: 100, y:  88, c : 'red'}
-        ]
+        ],
+        clickEvent : clickFnt
       };
 
       var data5 = {
@@ -97,7 +127,8 @@
           { x: 50,  y:  50, c : 'blue'},
           { x: 75,  y:  30, c : 'blue'},
           { x: 100, y:  88, c : 'blue'}
-        ]
+        ],
+        clickEvent : clickFnt
       };
 
       /**
@@ -106,6 +137,7 @@
       var data4 = {
         ir :  90,
         or :  50,
+        clickEvent : clickFnt,
         /*xPosition : 200,
         yPosition : 200,*/
         data : [
@@ -128,17 +160,22 @@
           datagroup22.push(data3);
           datagroup22.push(data5);
 
+      var datagroup51 = [];
+          datagroup51.push(data51);
+          datagroup51.push(data52);
+
       var options1 = {
         chartName : Charty.CHART_NAMES.BAR_CHART,
+        barType : Charty.CHART_NAMES.HORIZONTAL_BAR,
         instances : 2,
         root : '#chart1',
-        xAxis : Charty.AXIS_TYPE.ORDINAL,
-        yAxis : Charty.AXIS_TYPE.LINEAR,
+        xAxis : Charty.AXIS_TYPE.LINEAR,
+        yAxis : Charty.AXIS_TYPE.ORDINAL,
         marginleft : 50,
         margintop : 20,
         marginlfactor : 0.85,
         margintfactor : 0.85,
-        axisSystem : Charty.CHART_NAMES.YXY_AXIS,
+        axisSystem : Charty.CHART_NAMES.XY_AXIS,
         showAsGrid : true
       };
 
@@ -223,7 +260,7 @@
       Initial charts drawing here.
       */
       var chart1 = Charty.chart(options1);
-          chart1.draw(datagroup1);
+          chart1.draw(datagroup51);
 
       var chart2 = Charty.chart(options2);
           chart2.draw(datagroup2);
@@ -288,7 +325,7 @@
         var datagroup5 = [];
             datagroup5.push(data1);
 
-        chart1.draw(datagroup4);
+        //chart1.draw(datagroup4);
         chart2.draw(datagroup5);
 
         data1.c = 'redline';

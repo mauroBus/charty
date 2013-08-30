@@ -28,6 +28,7 @@ Define constants that will be used as names for different parts
   Charty.CHART_NAMES = {
     AXIS: 'Axis',
     BAR: 'Bar',
+    HORIZONTAL_BAR: 'HorizontalBar',
     BASE_CHART: 'BaseChart',
     CIRCLE: 'Circle',
     DONUT: 'Donut',

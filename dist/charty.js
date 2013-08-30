@@ -142,6 +142,7 @@ Define constants that will be used as names for different parts
   Charty.CHART_NAMES = {
     AXIS: 'Axis',
     BAR: 'Bar',
+    HORIZONTAL_BAR: 'HorizontalBar',
     BASE_CHART: 'BaseChart',
     CIRCLE: 'Circle',
     DONUT: 'Donut',
@@ -1017,6 +1018,124 @@ Bar drawer. Takes only one data series as input.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
+    define('charty/horizontalbar',[
+      'd3.chart',
+      'charty/chartynames',
+      'charty/simpledatagroup'
+      ],
+      function (d3, Charty) {
+        /** Export global even in AMD case in case this script
+        is loaded with others*/
+        return factory(d3, Charty);
+    });
+  }
+  else {
+    /** Browser globals */
+    factory (d3, Charty);
+  }
+}(this, function (d3, Charty) {
+  d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
+    .extend(Charty.CHART_NAMES.HORIZONTAL_BAR, {
+    /**
+    Bar initialization
+
+    @method
+    */
+    initialize : function(args){
+
+      /**
+      Sets only bar color as default.
+      */
+      var defaults = {
+        c : 'bar-default'
+      };
+
+      var options = {
+        /**
+        Data bind for a bar serie.
+        Can have a color set for the whole serie, or
+        each bar can have an own color defined.
+
+        @method
+        @param {Object} d example = {
+                                       color : 'red',
+                                       data = [
+                                        {x : 'Jan', y : 200, c : 'blue'}
+                                       ]
+                                    }
+        @chainable
+        */
+        dataBind : function(d){
+
+          var chart = this.chart();
+
+          /**
+          Sets color for the whole data serie.
+          */
+          chart.c = (d.c || defaults.c);
+
+          return this.selectAll('rect').data(d.data);
+        },
+        /**
+        Inserts a svg:rect element.
+
+        @method
+        @chainable
+        */
+        insert : function(){
+          return this.append('rect');
+        },
+        events : {
+          'merge' : function(){
+
+            var chart = this.chart(),
+                zeroX = chart.xscale.map(0);
+
+            this.attr('class', function(d){ return (d.c || chart.c); })
+                .attr("x", function(d) {
+                  return chart.xscale.map(Math.min(0, d.x), chart.factor);
+                })
+                .attr("y", function(d) {
+                  return chart.yscale.map(d.y, chart.factor);
+                })
+                .attr("width", function(d) {
+                  return Math.abs(chart.xscale.map(d.x) - zeroX);
+                })
+                .attr("height", chart.yscale.band(chart.factor));
+
+            return this;
+          },
+          'exit' : function(){
+
+            return this.remove();
+          }
+        }
+      };
+
+      /**
+      Layer creation
+      */
+      this.layer('horizontalayer', this.base ,options);
+    }
+  });
+}));
+/**
+Bar drawer. Takes only one data series as input.
+
+@class Bar
+@constructor
+@extends SimpleDataGroup
+@requires d3.chart,
+          charty,
+          simpledatagroup
+
+@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+*/
+
+(function(root, factory) {
+  /** Setting up AMD support*/
+  if (typeof define === 'function' && define.amd) {
+    /** AMD */
     define('charty/bar',[
       'd3.chart',
       'charty/chartynames',
@@ -1205,6 +1324,7 @@ Circle drawer.
 
           chart.c = (d.c || defaults.c);
           chart.r = (dataValidator.isPositiveNumber(d.r, errors.invalidRadio) || defaults.r);
+          chart.clickEvent = d.clickEvent;
 
           return this.selectAll('circle').data(d.data);
         },
@@ -1230,6 +1350,10 @@ Circle drawer.
                 })
                 .attr('cx', function(d) { return chart.xscale.map(d.x,0); })
                 .attr('cy', function(d) { return chart.yscale.map(d.y,0); });
+
+            if (chart.clickEvent){
+              this.on('click', chart.clickEvent);
+            }
 
             return this;
           },
@@ -1344,6 +1468,8 @@ Donut drawer.
           chart.xPosition = (data.xPosition || (chart.w/2));
           chart.yPosition = (data.yPosition || (chart.h/2));
 
+          chart.clickEvent = data.clickEvent;
+
           /** Radius calculation */
           var radius = Math.min(chart.w, chart.h) / 2,
               ir = (dataValidator.isNumber(data.ir, errors.invalidRadius) || defaults.ir),
@@ -1368,10 +1494,17 @@ Donut drawer.
             var chart = this.chart();
 
             this.attr('transform', 'translate(' + (chart.xPosition) + ',' + (chart.yPosition) + ')')
-                .attr('class', function(d) {
+                .attr('class', function (d) {
+
                   return d.data.c;
                 })
                 .attr('d', arcGen);
+
+            /** Function should come from outside */
+
+            if (chart.clickEvent){
+              this.on('click', chart.clickEvent);
+            }
 
             return this;
           },
@@ -2284,6 +2417,7 @@ N data series
     define('charty/barchart',[
       'd3.chart',
       'charty/chartynames',
+      'charty/horizontalbar',
       'charty/bar',
       'charty/multipledatagroup',
       'charty/xyaxis',
@@ -2315,7 +2449,7 @@ N data series
 		initialize : function(args){
 
 			var options = {
-				chartName : Charty.CHART_NAMES.BAR,
+				chartName : args.barType,
         dataValidator : args.dataValidator,
 				instances : (args.instances || 1)
 			};
@@ -2885,7 +3019,7 @@ and the data accessor.
     this.chart.draw(this.accessor);
   };
 
-  /** 
+  /**
   Chart redimension, without redrawing elements
 
   @method
@@ -3021,10 +3155,7 @@ Full chart api
         var grad = defs.append('linearGradient');
             grad.attr('id', gradient.id);
 
-            console.log(gradient.orientation === 'vertical');
-
         if (gradient.orientation === 'vertical'){
-
           /** Vertial orientation */
           grad.attr('x1', 0)
               .attr('x2', 0)
@@ -3059,7 +3190,8 @@ Full chart api
                     axisSystem : options.axisSystem,
                     showAsGrid : options.showAsGrid,
                     xAxisLabel : options.xAxisLabel,
-                    yAxisLabel : options.yAxisLabel
+                    yAxisLabel : options.yAxisLabel,
+                    barType : options.barType
                   })
                   .height(height)
                   .width(width);
