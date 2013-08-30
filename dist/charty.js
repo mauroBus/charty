@@ -2417,8 +2417,8 @@ N data series
     define('charty/barchart',[
       'd3.chart',
       'charty/chartynames',
-      'charty/horizontalbar',
       'charty/bar',
+      'charty/horizontalbar',
       'charty/multipledatagroup',
       'charty/xyaxis',
       'charty/yxyaxis',
