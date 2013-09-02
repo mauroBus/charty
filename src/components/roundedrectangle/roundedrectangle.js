@@ -90,6 +90,8 @@ Rounded rectangle drawer.
           chart.ry = (dataValidator.isPositiveNumber(d.ry, errors.invalidRY) || defaults.ry);
           chart.rc = (d.rc || defaults.rc);
 
+          chart.clickEvent = d.clickEvent;
+
           return this.selectAll('rect').data(d.data);
         },
         /**
@@ -106,19 +108,25 @@ Rounded rectangle drawer.
 
             var chart = this.chart();
 
-            return this.attr('height', chart.rh)
-                       .attr('width', chart.rw)
-                       .attr('x', function(d){
-                          return chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2)-(chart.rw/2);
-                        })
-                       .attr('y',function(d){
-                          return chart.yscale.map(d.y)-(chart.rh/2);
-                        })
-                       .attr('rx', chart.rx)
-                       .attr('ry', chart.ry)
-                       .attr('class', function(d){
-                          return (d.rc || chart.rc);
-                       });
+            this.attr('height', chart.rh)
+                .attr('width', chart.rw)
+                .attr('x', function(d){
+                  return chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2)-(chart.rw/2);
+                })
+                .attr('y',function(d){
+                  return chart.yscale.map(d.y)-(chart.rh/2);
+                })
+                .attr('rx', chart.rx)
+                .attr('ry', chart.ry)
+                .attr('class', function(d){
+                  return (d.rc || chart.rc);
+                });
+
+            if (chart.clickEvent){
+              this.on('click', chart.clickEvent);
+            }
+
+            return this;
           },
           'exit' : function(){
             return this.remove();

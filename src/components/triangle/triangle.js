@@ -67,6 +67,7 @@ Triangle drawer.
           var chart = this.chart();
 
           chart.c = (d.c || defaults.c);
+          chart.clickEvent = d.clickEvent;
 
           return this.selectAll('path').data(d.data);
 
@@ -93,6 +94,10 @@ Triangle drawer.
                 .attr('d', function(d){
                   return chart.getPath(d, y1, band);
                 });
+
+            if (chart.clickEvent){
+              this.on('click', chart.clickEvent);
+            }
 
             return this;
           },

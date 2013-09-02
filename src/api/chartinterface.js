@@ -54,12 +54,14 @@ and the data accessor.
   Chart redimension, without redrawing elements
 
   @method
+  @param {Number} height Value can be forced
+  @param {Number} width Value can be forced
   @chainable
   */
-  ChartInterface.prototype.redimension = function(){
+  ChartInterface.prototype.redimension = function(height, width){
 
-    var rootHeight = (parseInt(this.rootSelection.style('height'), 10)),
-        rootWidth  = (parseInt(this.rootSelection.style('width'), 10)),
+    var rootHeight = (parseInt(this.rootSelection.style('height') || height, 10)),
+        rootWidth  = (parseInt(this.rootSelection.style('width') || width, 10)),
         svgHeight  = (parseInt(this.svg.style('height'), 10)),
         svgWidth   = (parseInt(this.svg.style('width'), 10));
 

@@ -1501,7 +1501,6 @@ Donut drawer.
                 .attr('d', arcGen);
 
             /** Function should come from outside */
-
             if (chart.clickEvent){
               this.on('click', chart.clickEvent);
             }
@@ -1729,6 +1728,8 @@ Rounded rectangle drawer.
           chart.ry = (dataValidator.isPositiveNumber(d.ry, errors.invalidRY) || defaults.ry);
           chart.rc = (d.rc || defaults.rc);
 
+          chart.clickEvent = d.clickEvent;
+
           return this.selectAll('rect').data(d.data);
         },
         /**
@@ -1745,19 +1746,25 @@ Rounded rectangle drawer.
 
             var chart = this.chart();
 
-            return this.attr('height', chart.rh)
-                       .attr('width', chart.rw)
-                       .attr('x', function(d){
-                          return chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2)-(chart.rw/2);
-                        })
-                       .attr('y',function(d){
-                          return chart.yscale.map(d.y)-(chart.rh/2);
-                        })
-                       .attr('rx', chart.rx)
-                       .attr('ry', chart.ry)
-                       .attr('class', function(d){
-                          return (d.rc || chart.rc);
-                       });
+            this.attr('height', chart.rh)
+                .attr('width', chart.rw)
+                .attr('x', function(d){
+                  return chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2)-(chart.rw/2);
+                })
+                .attr('y',function(d){
+                  return chart.yscale.map(d.y)-(chart.rh/2);
+                })
+                .attr('rx', chart.rx)
+                .attr('ry', chart.ry)
+                .attr('class', function(d){
+                  return (d.rc || chart.rc);
+                });
+
+            if (chart.clickEvent){
+              this.on('click', chart.clickEvent);
+            }
+
+            return this;
           },
           'exit' : function(){
             return this.remove();
@@ -1952,6 +1959,7 @@ Triangle drawer.
           var chart = this.chart();
 
           chart.c = (d.c || defaults.c);
+          chart.clickEvent = d.clickEvent;
 
           return this.selectAll('path').data(d.data);
 
@@ -1978,6 +1986,10 @@ Triangle drawer.
                 .attr('d', function(d){
                   return chart.getPath(d, y1, band);
                 });
+
+            if (chart.clickEvent){
+              this.on('click', chart.clickEvent);
+            }
 
             return this;
           },
@@ -3023,12 +3035,14 @@ and the data accessor.
   Chart redimension, without redrawing elements
 
   @method
+  @param {Number} height Value can be forced
+  @param {Number} width Value can be forced
   @chainable
   */
-  ChartInterface.prototype.redimension = function(){
+  ChartInterface.prototype.redimension = function(height, width){
 
-    var rootHeight = (parseInt(this.rootSelection.style('height'), 10)),
-        rootWidth  = (parseInt(this.rootSelection.style('width'), 10)),
+    var rootHeight = (parseInt(this.rootSelection.style('height') || height, 10)),
+        rootWidth  = (parseInt(this.rootSelection.style('width') || width, 10)),
         svgHeight  = (parseInt(this.svg.style('height'), 10)),
         svgWidth   = (parseInt(this.svg.style('width'), 10));
 

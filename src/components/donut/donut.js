@@ -128,7 +128,6 @@ Donut drawer.
                 .attr('d', arcGen);
 
             /** Function should come from outside */
-
             if (chart.clickEvent){
               this.on('click', chart.clickEvent);
             }
