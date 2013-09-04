@@ -31,12 +31,65 @@ and the data accessor.
   @param {Object} chart d3.chart object
   @param {Object} root chart's container
   @param {Object} svg svg element that contains the chart
+  @param {Object} gSvg g element attached to svg
   */
-  var ChartInterface = function(chart, rootSelection, svg){
+  var ChartInterface = function(chart, rootSelection, svg, gSvg){
     this.accessor = new Accessor();
     this.chart = chart;
     this.rootSelection = rootSelection;
     this.svg = svg;
+    this.gSvg = gSvg;
+  };
+
+  /** 
+  Chart dimensioning via interface. Elements internal dimensioning.
+
+  @param {Number} width Drawing space width
+  @param {Number} height Drawing space height
+  @param {Object} margin margin = {
+                          marginleft = 20,
+                          margintop = 30,
+                          lfactor = 0.9,
+                          tfactor = 0.9
+                        }
+  */
+  ChartInterface.prototype.setDimensions = function (margin, width, height){
+    /** Defaults margin values */
+    var marginValues = {
+      left : 0,
+      top : 0,
+      lfactor : 1,
+      tfactor : 1
+    };
+
+    /** Values are taken from root element, by parameter or by default */
+    var svgHeight = (parseInt(this.rootSelection.style('height'), 10) || height || 200),
+        svgWidth  = (parseInt(this.rootSelection.style('width'), 10) || width || 200);
+
+    /** svg element dimensioning */
+    this.svg.attr('width', svgWidth)
+        .attr('height', svgHeight)
+        .attr('viewBox', ('0 0 '+ svgWidth + " " + svgHeight))
+        .attr('preserveAspectRatio', 'XminYmin');
+
+    if (margin){
+      marginValues = {
+        left: (margin.marginleft || 0),
+        top: (margin.margintop || 0),
+        lfactor: (margin.marginlfactor || 1),
+        tfactor: (margin.margintfactor || 1)
+      };
+
+      /** Translating g element */
+      this.gSvg.attr('transform', 'translate(' + marginValues.left + ',' + marginValues.top + ')');
+    }
+    
+    /** Calculating values according to margin values */
+    svgWidth = (svgWidth - marginValues.top) * marginValues.lfactor;
+    svgHeight = (svgHeight - marginValues.left) * marginValues.tfactor;
+
+    /** Propagate value to chart*/
+    this.chart.height(svgHeight).width(svgWidth);
   };
 
   /**

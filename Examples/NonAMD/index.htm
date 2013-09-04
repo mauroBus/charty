@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Charty 0.4.5 - Non AMD Examples</title>
+    <title>Charty 0.4.9 - Non AMD Examples</title>
     <!--[if lte IE 8]>
       <script src="../../vendor/r2d3/r2d3.js" charset="utf-8"></script>
       <script src="../../Vendor/Polyfills-for-IE8/getComputedStyle.js"></script>
@@ -171,10 +171,6 @@
         root : '#chart1',
         xAxis : Charty.AXIS_TYPE.LINEAR,
         yAxis : Charty.AXIS_TYPE.ORDINAL,
-        marginleft : 50,
-        margintop : 20,
-        marginlfactor : 0.85,
-        margintfactor : 0.85,
         axisSystem : Charty.CHART_NAMES.XY_AXIS,
         showAsGrid : true
       };
@@ -184,10 +180,6 @@
         root : '#chart2',
         xAxis : Charty.AXIS_TYPE.ORDINAL,
         yAxis : Charty.AXIS_TYPE.LINEAR,
-        marginleft : 50,
-        margintop : 20,
-        marginlfactor : 0.85,
-        margintfactor : 0.85,
         axisSystem : Charty.CHART_NAMES.YXY_AXIS,
         showAsGrid : true,
         gradients : [
@@ -209,10 +201,6 @@
         root : '#chart3',
         xAxis : Charty.AXIS_TYPE.ORDINAL,
         yAxis : Charty.AXIS_TYPE.LINEAR,
-        marginleft : 50,
-        margintop : 20,
-        marginlfactor : 0.85,
-        margintfactor : 0.85,
         axisSystem : Charty.CHART_NAMES.YXY_AXIS,
         showAsGrid : true
       };
@@ -223,10 +211,6 @@
         root : '#chart4',
         xAxis : Charty.AXIS_TYPE.LINEAR,
         yAxis : Charty.AXIS_TYPE.LINEAR,
-        marginleft : 50,
-        margintop : 20,
-        marginlfactor : 0.85,
-        margintfactor : 0.85,
         axisSystem : Charty.CHART_NAMES.XY_AXIS,
         showAsGrid : true,
         xAxisLabel : 'X Axis',
@@ -248,43 +232,86 @@
         root : '#chart7',
         xAxis : Charty.AXIS_TYPE.ORDINAL,
         yAxis : Charty.AXIS_TYPE.LINEAR,
-        marginleft : 50,
-        margintop : 20,
-        marginlfactor : 0.85,
-        margintfactor : 0.85,
         axisSystem : Charty.CHART_NAMES.YXY_AXIS,
         showAsGrid : true
       };
 
       /**
-      Initial charts drawing here.
+      Bar chart creation, dimensioning
       */
       var chart1 = Charty.chart(options1);
-          chart1.draw(datagroup51);
+
+      var marginOptions1 = {
+        marginleft : 50,
+        margintop : 20,
+        marginlfactor : 0.85,
+        margintfactor : 0.85
+      };
+      chart1.setDimensions(marginOptions1);
+      chart1.draw(datagroup51);
+
+      /* Triangle chart creation, dimensioning */
+
+      var marginOptions2 = {
+        marginleft : 50,
+        margintop : 20,
+        marginlfactor : 0.85,
+        margintfactor : 0.85,
+      };
 
       var chart2 = Charty.chart(options2);
-          chart2.draw(datagroup2);
+      chart2.setDimensions(marginOptions2);
+      chart2.draw(datagroup2);
 
-          data1.c = 'redline';
-          data2.c = 'blueline';
+      data1.c = 'redline';
+      data2.c = 'blueline';
 
+      /** Line chart creation, instantiation */
       var chart3 = Charty.chart(options3);
-          chart3.draw(datagroup1);
 
-          data1.c = 'red';
-          data2.c = 'blue';
+      var marginOptions3 = {
+        marginleft : 50,
+        margintop : 20,
+        marginlfactor : 0.85,
+        margintfactor : 0.85,
+      };
+      chart3.setDimensions(marginOptions3);
+      chart3.draw(datagroup1);
 
+      data1.c = 'red';
+      data2.c = 'blue';
+
+      /** Scatterplot creation */
       var chart4 = Charty.chart(options4);
-          chart4.draw(datagroup22);
 
+      var marginOptions4 = {
+        marginleft : 50,
+        margintop : 20,
+        marginlfactor : 0.85,
+        margintfactor : 0.85
+      };
+      chart4.setDimensions(marginOptions4);
+      chart4.draw(datagroup22);
+
+      /** Donut chart with inner text and background image*/
       var chart6 = Charty.chart(options6);
-          chart6.draw(datagroup4);
+      chart6.setDimensions();
+      chart6.draw(datagroup4);
 
-          data1.c = 'redline';
-          data2.c = 'blueline';
+      data1.c = 'redline';
+      data2.c = 'blueline';
 
+      /** Mixing scatterplot with lines */
       var chart7 = Charty.chart(options7);
-          chart7.draw(datagroup1);
+
+      var marginOptions7 = {
+        marginleft : 50,
+        margintop : 20,
+        marginlfactor : 0.85,
+        margintfactor : 0.85
+      };
+      chart7.setDimensions(marginOptions7);
+      chart7.draw(datagroup1);
 
       /**
       Charts update here.
