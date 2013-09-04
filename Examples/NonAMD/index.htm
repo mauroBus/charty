@@ -220,10 +220,7 @@
       var options6 = {
         chartName : Charty.CHART_NAMES.DONUT_INNER_TEXT,
         instances : 1,
-        root : '#chart6',
-        imgLocation : 'imgCenter',
-        /*marginlfactor : 0.8,
-        margintfactor : 0.8*/
+        root : '#chart6'
       };
 
       var options7 = {
@@ -251,7 +248,6 @@
       chart1.draw(datagroup51);
 
       /* Triangle chart creation, dimensioning */
-
       var marginOptions2 = {
         marginleft : 50,
         margintop : 20,
@@ -296,6 +292,7 @@
       /** Donut chart with inner text and background image*/
       var chart6 = Charty.chart(options6);
       chart6.setDimensions();
+      chart6.setBackgroundImage('imgCenter');
       chart6.draw(datagroup4);
 
       data1.c = 'redline';
@@ -377,6 +374,7 @@
         var datagroup7 = [];
             datagroup7.push(data9);
 
+        chart6.removeBackgroundImage();
         chart6.draw(datagroup7);
 
       },3000);

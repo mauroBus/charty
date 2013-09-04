@@ -3109,6 +3109,31 @@ and the data accessor.
     return this;
   };
 
+  /** 
+  Sets a background image via css. Class is required
+
+  @param {String} imgClass CSS for the background image
+  @chainable
+  */
+  ChartInterface.prototype.setBackgroundImage = function (imgClass){
+
+    this.rootSelection.classed(imgClass, true);
+
+    /** Reference is kept for removing, if necessary */
+    this.imgClass = imgClass;
+    return this;
+  };
+
+  /** 
+  Removes class containing background image, if present 
+
+  @chainable
+  */
+  ChartInterface.prototype.removeBackgroundImage = function (){
+    this.rootSelection.classed(this.imgClass, false);
+    return this;
+  };
+
   return ChartInterface;
 }));
 /**
