@@ -64,13 +64,6 @@ Full chart api
     var selection = d3.select(options.root);
 
     /**
-    Sets background image via CSS
-    */
-    if (options.imgLocation){
-      selection.classed(options.imgLocation, true);
-    }
-
-    /**
     Svg element creation
 
     Sets attributes to provide redimensioning without drawing0
