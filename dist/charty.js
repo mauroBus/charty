@@ -1470,13 +1470,12 @@ Donut drawer.
 
           chart.clickEvent = data.clickEvent;
 
-          /** Radius calculation */
-          var radius = Math.min(chart.w, chart.h) / 2,
-              ir = (dataValidator.isNumber(data.ir, errors.invalidRadius) || defaults.ir),
+          /** Radius definition */
+          var ir = (dataValidator.isNumber(data.ir, errors.invalidRadius) || defaults.ir),
               or = (dataValidator.isNumber(data.or, errors.invalidRadius) || defaults.or);
 
-          arcGen = arcGen.innerRadius(radius - ir)
-                         .outerRadius(radius - or);
+          arcGen = arcGen.innerRadius(ir)
+                         .outerRadius(or);
 
           return this.selectAll('path').data(pieLayout(data.data));
         },
