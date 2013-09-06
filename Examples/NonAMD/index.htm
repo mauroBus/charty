@@ -72,7 +72,8 @@
         data: [
           { x: 'A', y: 100, c : 'red', c1: 'red', c2:'blue'},
           { x: 'B', y: -40, c : 'red', c1:'yellow', c2:'green'},
-          { x: 'C', y: 60, c : 'red', c1:'green', c2:'yellow'}
+          { x: 'C', y: 60, c : 'red', c1:'green', c2:'yellow'},
+          /*{ x: 'D', y: 30, c1:'green', c2:'blue'}*/
         ]
       };
 
@@ -115,8 +116,7 @@
         data: [
           { x:  25, y: 100, c : 'red'},
           { x:  50, y:  40, c : 'red'},
-          { x:  75, y:  60, c : 'red'},
-          { x: 100, y:  88, c : 'red'}
+          { x:  75, y:  60, c : 'red'}
         ],
         clickEvent : clickFnt
       };
@@ -125,8 +125,7 @@
         data: [
           { x: 25,  y: 150, c : 'blue'},
           { x: 50,  y:  50, c : 'blue'},
-          { x: 75,  y:  30, c : 'blue'},
-          { x: 100, y:  88, c : 'blue'}
+          { x: 75,  y:  30, c : 'blue'}
         ],
         clickEvent : clickFnt
       };
@@ -178,6 +177,7 @@
       var options2 = {
         chartName : Charty.CHART_NAMES.LABELED_TRIANGLE_CHART,
         root : '#chart2',
+        defaultXDomain : ['A', 'B', 'C', 'D', 'E', 'F'],
         xAxis : Charty.AXIS_TYPE.ORDINAL,
         yAxis : Charty.AXIS_TYPE.LINEAR,
         axisSystem : Charty.CHART_NAMES.YXY_AXIS,
@@ -209,6 +209,7 @@
         chartName : Charty.CHART_NAMES.SCATTERPLOT,
         instances : 2,
         root : '#chart4',
+        defaultXDomain : [0, 100],
         xAxis : Charty.AXIS_TYPE.LINEAR,
         yAxis : Charty.AXIS_TYPE.LINEAR,
         axisSystem : Charty.CHART_NAMES.XY_AXIS,
@@ -313,7 +314,7 @@
       /**
       Charts update here.
       */
-      setTimeout(function(){
+      /*setTimeout(function(){
 
         $('#chart1').removeClass('viewport').addClass('viewport-small');
         chart1.redimension();
@@ -350,7 +351,7 @@
             datagroup5.push(data1);
 
         //chart1.draw(datagroup4);
-        chart2.draw(datagroup5);
+        //chart2.draw(datagroup5);
 
         data1.c = 'redline';
         data2.c = 'blueline';
@@ -377,7 +378,7 @@
         chart6.removeBackgroundImage();
         chart6.draw(datagroup7);
 
-      },3000);
+      },3000);*/
     </script>
   </body>
 </html>

@@ -299,12 +299,11 @@ Linear scale for linear axis
 	Sets domain for linear scale
 
 	@method
-	@param {Number} minValue minimum value for scale
-	@param {Number} maxValue maximum value for scale
+	@param {Object} arrayValues Max and min value defined by array
 	@chainable
 	*/
-	LinearScale.prototype.setDomain = function(minValue, maxValue){
-		this.scale = this.scale.domain([minValue, maxValue]);
+	LinearScale.prototype.setDomain = function(arrayValues){
+		this.scale = this.scale.domain(arrayValues);
 		return this;
 	};
 
@@ -372,7 +371,7 @@ Linear scale for linear axis
 					min = Math.min(ming, min);
 				});
 
-			return this.setDomain(Math.min(0, min), Math.max(0, max));
+			return this.setDomain([Math.min(0, min), Math.max(0, max)]);
 	};
 
 	return LinearScale;
@@ -2103,10 +2102,47 @@ Defines a data transformation for composite charts
     */
     transform : function(data){
 
-      this.xscale.calculateDomain(data, function(d){return d.x;}).setRange(this.w);
-      this.yscale.calculateDomain(data, function(d){return d.y;}).setRange(this.h);
+      /** Default x domain */
+      if (this.defaultXDomain){
+        this.xscale.setDomain(this.defaultXDomain);
+      }
+      else{
+        this.xscale.calculateDomain(data, function(d){return d.x;});
+      }
+      this.xscale.setRange(this.w);
+
+      /** Default y domain */
+      if (this.defaultYDomain){
+        this.yscale.setDomain(this.defaultYDomain);
+      }
+      else{
+        this.yscale.calculateDomain(data, function(d){return d.y;});
+      }
+      this.yscale.setRange(this.h);
 
       return data;
+    },
+    /** 
+    Default domain for x scaling
+
+    @method
+    @param {Object} domain Array for x domain
+    @chainable
+    */
+    setDefaultXDomain : function (domain){
+      this.defaultXDomain = domain;
+      return this;
+    },
+    /** 
+    Default domain for y scaling
+
+    @method
+    @param {Object} domain Array for y domain
+    @chainable
+    */
+    setDefaultYDomain : function (domain){
+      this.setDefaultYDomain = domain;
+      return this;
     }
   });
 }));
@@ -3184,7 +3220,8 @@ Full chart api
                     instances : 2,
                     root : 'body',
                     xAxis : 'ordinal',
-                    yAxis : 'linear'
+                    yAxis : 'linear',
+                    xScaleDomain : ['Hi', 'I am', 'a fixed', 'domain']
   @return {Object} d3.chart for data drawing
   */
   Charty.chart = function(options) {
@@ -3251,6 +3288,16 @@ Full chart api
     }
     if (options.yAxis){
       chart = chart.setYScale(this.scaleFactory.scale(options.yAxis,'y'));
+    }
+
+    /** Sets default x domain */
+    if (options.defaultXDomain){
+      chart.setDefaultXDomain(options.defaultXDomain);
+    }
+
+    /** Sets default y domain */
+    if (options.defaultYDomain){
+      chart.setDefaultYDomain(options.defaultYDomain);
     }
 
     /**

@@ -44,12 +44,11 @@ Linear scale for linear axis
 	Sets domain for linear scale
 
 	@method
-	@param {Number} minValue minimum value for scale
-	@param {Number} maxValue maximum value for scale
+	@param {Object} arrayValues Max and min value defined by array
 	@chainable
 	*/
-	LinearScale.prototype.setDomain = function(minValue, maxValue){
-		this.scale = this.scale.domain([minValue, maxValue]);
+	LinearScale.prototype.setDomain = function(arrayValues){
+		this.scale = this.scale.domain(arrayValues);
 		return this;
 	};
 
@@ -117,7 +116,7 @@ Linear scale for linear axis
 					min = Math.min(ming, min);
 				});
 
-			return this.setDomain(Math.min(0, min), Math.max(0, max));
+			return this.setDomain([Math.min(0, min), Math.max(0, max)]);
 	};
 
 	return LinearScale;

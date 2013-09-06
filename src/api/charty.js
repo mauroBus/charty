@@ -52,7 +52,8 @@ Full chart api
                     instances : 2,
                     root : 'body',
                     xAxis : 'ordinal',
-                    yAxis : 'linear'
+                    yAxis : 'linear',
+                    xScaleDomain : ['Hi', 'I am', 'a fixed', 'domain']
   @return {Object} d3.chart for data drawing
   */
   Charty.chart = function(options) {
@@ -119,6 +120,16 @@ Full chart api
     }
     if (options.yAxis){
       chart = chart.setYScale(this.scaleFactory.scale(options.yAxis,'y'));
+    }
+
+    /** Sets default x domain */
+    if (options.defaultXDomain){
+      chart.setDefaultXDomain(options.defaultXDomain);
+    }
+
+    /** Sets default y domain */
+    if (options.defaultYDomain){
+      chart.setDefaultYDomain(options.defaultYDomain);
     }
 
     /**

@@ -42,10 +42,47 @@ Defines a data transformation for composite charts
     */
     transform : function(data){
 
-      this.xscale.calculateDomain(data, function(d){return d.x;}).setRange(this.w);
-      this.yscale.calculateDomain(data, function(d){return d.y;}).setRange(this.h);
+      /** Default x domain */
+      if (this.defaultXDomain){
+        this.xscale.setDomain(this.defaultXDomain);
+      }
+      else{
+        this.xscale.calculateDomain(data, function(d){return d.x;});
+      }
+      this.xscale.setRange(this.w);
+
+      /** Default y domain */
+      if (this.defaultYDomain){
+        this.yscale.setDomain(this.defaultYDomain);
+      }
+      else{
+        this.yscale.calculateDomain(data, function(d){return d.y;});
+      }
+      this.yscale.setRange(this.h);
 
       return data;
+    },
+    /** 
+    Default domain for x scaling
+
+    @method
+    @param {Object} domain Array for x domain
+    @chainable
+    */
+    setDefaultXDomain : function (domain){
+      this.defaultXDomain = domain;
+      return this;
+    },
+    /** 
+    Default domain for y scaling
+
+    @method
+    @param {Object} domain Array for y domain
+    @chainable
+    */
+    setDefaultYDomain : function (domain){
+      this.setDefaultYDomain = domain;
+      return this;
     }
   });
 }));
