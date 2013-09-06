@@ -3096,8 +3096,8 @@ and the data accessor.
     }
     
     /** Calculating values according to margin values */
-    svgWidth = (svgWidth - marginValues.top) * marginValues.lfactor;
-    svgHeight = (svgHeight - marginValues.left) * marginValues.tfactor;
+    svgWidth = svgWidth * marginValues.lfactor;
+    svgHeight = svgHeight * marginValues.tfactor;
 
     /** Propagate value to chart*/
     this.chart.height(svgHeight).width(svgWidth);
