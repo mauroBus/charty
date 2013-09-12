@@ -2122,7 +2122,7 @@ Defines a data transformation for composite charts
 
       return data;
     },
-    /** 
+    /**
     Default domain for x scaling
 
     @method
@@ -2133,7 +2133,7 @@ Defines a data transformation for composite charts
       this.defaultXDomain = domain;
       return this;
     },
-    /** 
+    /**
     Default domain for y scaling
 
     @method
@@ -2141,7 +2141,7 @@ Defines a data transformation for composite charts
     @chainable
     */
     setDefaultYDomain : function (domain){
-      this.setDefaultYDomain = domain;
+      this.defaultYDomain = domain;
       return this;
     }
   });
@@ -3052,7 +3052,7 @@ and the data accessor.
     this.gSvg = gSvg;
   };
 
-  /** 
+  /**
   Chart dimensioning via interface. Elements internal dimensioning.
 
   @param {Number} width Drawing space width
@@ -3074,8 +3074,8 @@ and the data accessor.
     };
 
     /** Values are taken from root element, by parameter or by default */
-    var svgHeight = (parseInt(this.rootSelection.style('height'), 10) || height || 200),
-        svgWidth  = (parseInt(this.rootSelection.style('width'), 10) || width || 200);
+    var svgHeight = (height || parseInt(this.rootSelection.style('height'), 10) || 200),
+        svgWidth  = (width || parseInt(this.rootSelection.style('width'), 10) || 200);
 
     /** svg element dimensioning */
     this.svg.attr('width', svgWidth)
@@ -3094,7 +3094,7 @@ and the data accessor.
       /** Translating g element */
       this.gSvg.attr('transform', 'translate(' + marginValues.left + ',' + marginValues.top + ')');
     }
-    
+
     /** Calculating values according to margin values */
     svgWidth = svgWidth * marginValues.lfactor;
     svgHeight = svgHeight * marginValues.tfactor;
@@ -3139,7 +3139,7 @@ and the data accessor.
     return this;
   };
 
-  /** 
+  /**
   Sets a background image via css. Class is required
 
   @param {String} imgClass CSS for the background image
@@ -3154,8 +3154,8 @@ and the data accessor.
     return this;
   };
 
-  /** 
-  Removes class containing background image, if present 
+  /**
+  Removes class containing background image, if present
 
   @chainable
   */

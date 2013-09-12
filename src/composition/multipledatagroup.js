@@ -62,7 +62,7 @@ Defines a data transformation for composite charts
 
       return data;
     },
-    /** 
+    /**
     Default domain for x scaling
 
     @method
@@ -73,7 +73,7 @@ Defines a data transformation for composite charts
       this.defaultXDomain = domain;
       return this;
     },
-    /** 
+    /**
     Default domain for y scaling
 
     @method
@@ -81,7 +81,7 @@ Defines a data transformation for composite charts
     @chainable
     */
     setDefaultYDomain : function (domain){
-      this.setDefaultYDomain = domain;
+      this.defaultYDomain = domain;
       return this;
     }
   });
