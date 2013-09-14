@@ -116,7 +116,30 @@ Linear scale for linear axis
 					min = Math.min(ming, min);
 				});
 
-			return this.setDomain([Math.min(0, min), Math.max(0, max)]);
+			return this.setMaxValue(max).setDomain([Math.min(0, min), Math.max(0, max)]);
+	};
+
+	/**
+	Maximum value setting for linear scale.
+	Useful when setting discrete ticks for continuous scale
+
+	@method
+	@param {Number} maxVal Scale's maximum value
+	@chainable
+	*/
+	LinearScale.prototype.setMaxValue = function (maxVal){
+			this.maxValue = maxVal;
+			return this;
+	};
+
+	/**
+	Returns max value
+
+	@method
+	@return {Number} scale's maximum value
+	*/
+	LinearScale.prototype.getMaxValue = function (){
+		return this.maxValue;
 	};
 
 	return LinearScale;

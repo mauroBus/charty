@@ -139,6 +139,7 @@ Define constants that will be used as names for different parts
   }
 }(this, function (Charty) {
 
+  /** Chart / Components / Compositions names */
   Charty.CHART_NAMES = {
     AXIS: 'Axis',
     BAR: 'Bar',
@@ -166,6 +167,8 @@ Define constants that will be used as names for different parts
 
   /**
   Axis types are defined as constants
+
+  Related to scaling.
   */
   Charty.AXIS_TYPE = {
     ORDINAL: 'ordinal',
@@ -371,7 +374,30 @@ Linear scale for linear axis
 					min = Math.min(ming, min);
 				});
 
-			return this.setDomain([Math.min(0, min), Math.max(0, max)]);
+			return this.setMaxValue(max).setDomain([Math.min(0, min), Math.max(0, max)]);
+	};
+
+	/**
+	Maximum value setting for linear scale.
+	Useful when setting discrete ticks for continuous scale
+
+	@method
+	@param {Number} maxVal Scale's maximum value
+	@chainable
+	*/
+	LinearScale.prototype.setMaxValue = function (maxVal){
+			this.maxValue = maxVal;
+			return this;
+	};
+
+	/**
+	Returns max value
+
+	@method
+	@return {Number} scale's maximum value
+	*/
+	LinearScale.prototype.getMaxValue = function (){
+		return this.maxValue;
 	};
 
 	return LinearScale;
@@ -859,13 +885,19 @@ it will implement all the functions needed.
 
               var chart = this.chart();
 
+              /** Sets custom tick count */
+              if (chart.tickCount){
+                axis.ticks(chart.tickCount);
+              }
+
               /**
               Renders as a grid.
               */
               if(chart.grid){
-                  axis = axis.tickSize(-chart.tsize,0,0);
+                  axis.tickSize(-chart.tsize,0,0);
               }
 
+              /** Axis drawing */
               this.classed(defaults.c, true)
                   .call(axis);
 
@@ -996,6 +1028,21 @@ it will implement all the functions needed.
     setTextLabel : function (label, labelRotate){
       this.textLabel = label;
       this.labelRotate = labelRotate;
+      return this;
+    },
+    /** 
+    Custom tick count setting for particular
+    axis.
+
+    This options will only work in linear scales,
+    since the domain, by defaut, is continuous.
+
+    @method
+    @param {Number} tCount ticks count
+    @chainable
+    */
+    tickCount : function (tCount){
+      this.tickCount = tCount;
       return this;
     }
   });
@@ -2254,11 +2301,11 @@ Base XY system for all the 2D charts.
 
         this.xaxis = this.mixin(Charty.CHART_NAMES.AXIS,
                                 this.base.append('g'),
-                                args).orient('bottom').setTextLabel(args.xAxisLabel);
+                                args).orient('bottom').setTextLabel(args.xAxisLabel).tickCount(args.xTickCount);
 
         this.yaxis = this.mixin(Charty.CHART_NAMES.AXIS,
                                 this.base.append('g'),
-                                args).orient('left').setTextLabel(args.yAxisLabel, '-90');
+                                args).orient('left').setTextLabel(args.yAxisLabel, '-90').tickCount(args.yTickCount);
 
     },
     /**
@@ -2364,15 +2411,15 @@ One X Axis (bottom)
     initialize : function (args){
       this.xaxis = this.mixin(Charty.CHART_NAMES.AXIS,
                               this.base.append('g'),
-                              args).orient('bottom');
+                              args).orient('bottom').tickCount(args.xTickCount);
 
       this.yaxisleft = this.mixin(Charty.CHART_NAMES.AXIS,
                             this.base.append('g'),
-                            args).orient('left');
+                            args).orient('left').tickCount(args.yTickCount);
 
       this.yaxisright = this.mixin(Charty.CHART_NAMES.AXIS,
                                    this.base.append('g'),
-                                   args).orient('right');
+                                   args).orient('right').tickCount(args.yTickCount);
 
     },
     /**
@@ -2498,7 +2545,7 @@ N data series
 
 			var axis = this.mixin(args.axisSystem,
                            this.base.append('g'),
-                           { dataValidator : args.dataValidator }).showAsGrid(args.showAsGrid),
+                           args).showAsGrid(args.showAsGrid),
 
 					barChart = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                                 this.base.append('g'),
@@ -2697,7 +2744,7 @@ Labeled triangle chart drawer.
 
       var axis = this.mixin(args.axisSystem,
                             this.base.append('g'),
-                            { dataValidator : args.dataValidator }).showAsGrid(args.showAsGrid),
+                            args).showAsGrid(args.showAsGrid),
 
           triangles = this.mixin(Charty.CHART_NAMES.TRIANGLE,
                                 this.base.append('g'),
@@ -2770,7 +2817,7 @@ Takes N input data series
 
 			var axis = this.mixin(args.axisSystem,
                             this.base.append('g'),
-                            { dataValidator : args.dataValidator }).showAsGrid(args.showAsGrid),
+                            args).showAsGrid(args.showAsGrid),
 
 					lineChart = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                                 this.base.append('g'),
@@ -3276,7 +3323,9 @@ Full chart api
                     showAsGrid : options.showAsGrid,
                     xAxisLabel : options.xAxisLabel,
                     yAxisLabel : options.yAxisLabel,
-                    barType : options.barType
+                    barType : options.barType,
+                    yTickCount : options.yTickCount,
+                    xTickCount : options.xTickCount
                   });
 
     /**

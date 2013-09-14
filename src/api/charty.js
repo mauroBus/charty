@@ -108,7 +108,9 @@ Full chart api
                     showAsGrid : options.showAsGrid,
                     xAxisLabel : options.xAxisLabel,
                     yAxisLabel : options.yAxisLabel,
-                    barType : options.barType
+                    barType : options.barType,
+                    yTickCount : options.yTickCount,
+                    xTickCount : options.xTickCount
                   });
 
     /**

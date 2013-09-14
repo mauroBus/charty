@@ -112,13 +112,19 @@ it will implement all the functions needed.
 
               var chart = this.chart();
 
+              /** Sets custom tick count */
+              if (chart.tickCount){
+                axis.ticks(chart.tickCount);
+              }
+
               /**
               Renders as a grid.
               */
               if(chart.grid){
-                  axis = axis.tickSize(-chart.tsize,0,0);
+                  axis.tickSize(-chart.tsize,0,0);
               }
 
+              /** Axis drawing */
               this.classed(defaults.c, true)
                   .call(axis);
 
@@ -249,6 +255,21 @@ it will implement all the functions needed.
     setTextLabel : function (label, labelRotate){
       this.textLabel = label;
       this.labelRotate = labelRotate;
+      return this;
+    },
+    /** 
+    Custom tick count setting for particular
+    axis.
+
+    This options will only work in linear scales,
+    since the domain, by defaut, is continuous.
+
+    @method
+    @param {Number} tCount ticks count
+    @chainable
+    */
+    tickCount : function (tCount){
+      this.tickCount = tCount;
       return this;
     }
   });

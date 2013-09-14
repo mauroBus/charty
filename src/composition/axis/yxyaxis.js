@@ -41,15 +41,15 @@ One X Axis (bottom)
     initialize : function (args){
       this.xaxis = this.mixin(Charty.CHART_NAMES.AXIS,
                               this.base.append('g'),
-                              args).orient('bottom');
+                              args).orient('bottom').tickCount(args.xTickCount);
 
       this.yaxisleft = this.mixin(Charty.CHART_NAMES.AXIS,
                             this.base.append('g'),
-                            args).orient('left');
+                            args).orient('left').tickCount(args.yTickCount);
 
       this.yaxisright = this.mixin(Charty.CHART_NAMES.AXIS,
                                    this.base.append('g'),
-                                   args).orient('right');
+                                   args).orient('right').tickCount(args.yTickCount);
 
     },
     /**

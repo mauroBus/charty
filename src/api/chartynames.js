@@ -25,6 +25,7 @@ Define constants that will be used as names for different parts
   }
 }(this, function (Charty) {
 
+  /** Chart / Components / Compositions names */
   Charty.CHART_NAMES = {
     AXIS: 'Axis',
     BAR: 'Bar',
@@ -52,6 +53,8 @@ Define constants that will be used as names for different parts
 
   /**
   Axis types are defined as constants
+
+  Related to scaling.
   */
   Charty.AXIS_TYPE = {
     ORDINAL: 'ordinal',

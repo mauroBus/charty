@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Charty 0.4.9 - Non AMD Examples</title>
+    <title>Charty 0.5.1 - Non AMD Examples</title>
     <!--[if lte IE 8]>
       <script src="../../vendor/r2d3/r2d3.js" charset="utf-8"></script>
       <script src="../../Vendor/Polyfills-for-IE8/getComputedStyle.js"></script>
@@ -71,7 +71,7 @@
         clickEvent : clickFnt,
         data: [
           { x: 'A', y: 100, c : 'red', c1: 'red', c2:'blue'},
-          { x: 'B', y: -40, c : 'red', c1:'yellow', c2:'green'},
+          { x: 'B', y: 40, c : 'red', c1:'yellow', c2:'green'},
           { x: 'C', y: 60, c : 'red', c1:'green', c2:'yellow'},
           /*{ x: 'D', y: 30, c1:'green', c2:'blue'}*/
         ]
@@ -171,6 +171,7 @@
         xAxis : Charty.AXIS_TYPE.LINEAR,
         yAxis : Charty.AXIS_TYPE.ORDINAL,
         axisSystem : Charty.CHART_NAMES.XY_AXIS,
+        xTickCount : 4,
         showAsGrid : true
       };
 
@@ -182,6 +183,7 @@
         yAxis : Charty.AXIS_TYPE.LINEAR,
         axisSystem : Charty.CHART_NAMES.YXY_AXIS,
         showAsGrid : true,
+        yTickCount : 4,
         gradients : [
           {
             id : 'gradient1',
