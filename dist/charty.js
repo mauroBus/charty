@@ -107,7 +107,6 @@ and it will append a specific chart to it.
 }(this, function () {
 
   var Charty = {
-
   };
 
   return Charty;
@@ -2147,8 +2146,7 @@ Defines a data transformation for composite charts
   d3.chart(Charty.CHART_NAMES.BASE_CHART)
     .extend(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP, {
     /**
-    Data transformation for multiple data series
-    Once scales are obtained, they have to be set to the mixins contained
+    Data transformation for multiple data series.
 
     @method
     @param {Object} data Data accessor
@@ -2156,24 +2154,7 @@ Defines a data transformation for composite charts
     */
     transform : function(data){
 
-      /** Default x domain */
-      if (this.defaultXDomain){
-        this.xscale.setDomain(this.defaultXDomain);
-      }
-      else{
-        this.xscale.calculateDomain(data, function(d){return d.x;});
-      }
-      this.xscale.setRange(this.w);
-
-      /** Default y domain */
-      if (this.defaultYDomain){
-        this.yscale.setDomain(this.defaultYDomain);
-      }
-      else{
-        this.yscale.calculateDomain(data, function(d){return d.y;});
-      }
-      this.yscale.setRange(this.h);
-
+      this._calculateDomains(data);
       return data;
     },
     /**
@@ -2197,6 +2178,30 @@ Defines a data transformation for composite charts
     setDefaultYDomain : function (domain){
       this.defaultYDomain = domain;
       return this;
+    },
+    /** 
+    Domain calculation
+
+    @method
+    */
+    _calculateDomains : function (data){
+       /** Default x domain */
+      if (this.defaultXDomain){
+        this.xscale.setDomain(this.defaultXDomain);
+      }
+      else{
+        this.xscale.calculateDomain(data, function(d){return d.x;});
+      }
+      this.xscale.setRange(this.w);
+
+      /** Default y domain */
+      if (this.defaultYDomain){
+        this.yscale.setDomain(this.defaultYDomain);
+      }
+      else{
+        this.yscale.calculateDomain(data, function(d){return d.y;});
+      }
+      this.yscale.setRange(this.h);
     }
   });
 }));
@@ -2563,6 +2568,86 @@ N data series
 	});
 }));
 /**
+Grouped bar chart.
+Unlike regular bar char, grouped needs to define
+two scales for x axis : one for the axis itself, and
+another one for the data mapping.
+
+@class GroupedBarChart
+@extends MultipleDataGroup
+@requires d3.chart,
+          charty/chartynames,
+          charty/scalesfactory,
+          charty/bar,
+          charty/xyaxis,
+          charty/multipledatagroup,
+          charty/multipleinstancesmixin
+*/
+
+(function(root, factory) {
+  /** Setting up AMD support*/
+  if (typeof define === 'function' && define.amd) {
+    /** AMD */
+    define('charty/groupedbarchart', [
+            'd3.chart',
+            'charty/scalesfactory',
+            'charty/chartynames',
+            'charty/bar',
+            'charty/xyaxis',
+            'charty/multipledatagroup',
+            'charty/multipleinstancesmixin',
+           ],
+           function(d3, ScaleFactory, Charty) {
+      /** Export global even in AMD case in case this script
+      is loaded with others */
+      return factory(d3, ScaleFactory, Charty);
+    });
+  }
+  else {
+    /** Browser globals */
+    return factory(d3, ScaleFactory, Charty);
+  }
+}(this, function(d3, ScaleFactory, Charty) {
+  d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
+    .extend(Charty.CHART_NAMES.GROUPED_BAR_CHART, {
+    /**
+    Grouper Bar Chart initializer.
+
+    @method
+    */
+    initialize : function(args){
+
+      var options = {
+        chartName : Charty.CHART_NAMES.BAR,
+        instances : (args.instances || 1)
+      };
+
+      var bars = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base.append('g'), options),
+          axis = this.mixin(args.axisSystem, this.base.append('g'), args).showAsGrid(args.showAsGrid);
+
+      this.scaleFactory = args.scaleFactory;
+
+      this.setMixins(bars, axis);
+    },
+    /**
+    It is necessary to rewrite transform data, in order to
+    generate a new scale.
+
+    Two scales are needed : one for the axis, and another
+    one for bar drawing.
+
+    @method
+    @param {Object} data Data Accessor
+    */
+    transform : function(data){
+
+      var d = data.first();
+      console.log(d);
+
+    }
+  });
+}));
+/**
 Custom donut chart.
 Sets a text inside the donut, showing a text label
 with the represented value.
@@ -2666,9 +2751,7 @@ doesn't depend on the data value.
                 .attr('dy', '0.35em')
                 .attr('text-anchor', 'middle')
                 .attr('font-size', chart.fontSize)
-                .text(function(d){
-                  return d;
-                });
+                .text(function(d){ return d; });
 
             return this;
           },
@@ -3221,7 +3304,7 @@ and the data accessor.
   return ChartInterface;
 }));
 /**
-Full chart api
+Chart creation API
 
 @class Charty
 
@@ -3243,7 +3326,8 @@ Full chart api
       'charty/scatterplot',
       'charty/donut',
       'charty/donutwithinnertext',
-      'charty/linechartcircles'
+      'charty/linechartcircles',
+      'charty/groupedbarchart'
       ],
       function (Charty, ScaleFactory, ChartInterface, DataValidator) {
         /** Export global even in AMD case in case this script
@@ -3324,6 +3408,8 @@ Full chart api
     Appends the chart to the specified html element.
     */
     options.dataValidator = this.dataValidator;
+    options.scaleFactory = this.scaleFactory;
+    
     var chart = gSvg.chart(options.chartName,options);
 
     /**

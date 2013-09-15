@@ -102,9 +102,7 @@ doesn't depend on the data value.
                 .attr('dy', '0.35em')
                 .attr('text-anchor', 'middle')
                 .attr('font-size', chart.fontSize)
-                .text(function(d){
-                  return d;
-                });
+                .text(function(d){ return d; });
 
             return this;
           },

@@ -33,8 +33,7 @@ Defines a data transformation for composite charts
   d3.chart(Charty.CHART_NAMES.BASE_CHART)
     .extend(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP, {
     /**
-    Data transformation for multiple data series
-    Once scales are obtained, they have to be set to the mixins contained
+    Data transformation for multiple data series.
 
     @method
     @param {Object} data Data accessor
@@ -42,24 +41,7 @@ Defines a data transformation for composite charts
     */
     transform : function(data){
 
-      /** Default x domain */
-      if (this.defaultXDomain){
-        this.xscale.setDomain(this.defaultXDomain);
-      }
-      else{
-        this.xscale.calculateDomain(data, function(d){return d.x;});
-      }
-      this.xscale.setRange(this.w);
-
-      /** Default y domain */
-      if (this.defaultYDomain){
-        this.yscale.setDomain(this.defaultYDomain);
-      }
-      else{
-        this.yscale.calculateDomain(data, function(d){return d.y;});
-      }
-      this.yscale.setRange(this.h);
-
+      this._calculateDomains(data);
       return data;
     },
     /**
@@ -83,6 +65,30 @@ Defines a data transformation for composite charts
     setDefaultYDomain : function (domain){
       this.defaultYDomain = domain;
       return this;
+    },
+    /** 
+    Domain calculation
+
+    @method
+    */
+    _calculateDomains : function (data){
+       /** Default x domain */
+      if (this.defaultXDomain){
+        this.xscale.setDomain(this.defaultXDomain);
+      }
+      else{
+        this.xscale.calculateDomain(data, function(d){return d.x;});
+      }
+      this.xscale.setRange(this.w);
+
+      /** Default y domain */
+      if (this.defaultYDomain){
+        this.yscale.setDomain(this.defaultYDomain);
+      }
+      else{
+        this.yscale.calculateDomain(data, function(d){return d.y;});
+      }
+      this.yscale.setRange(this.h);
     }
   });
 }));

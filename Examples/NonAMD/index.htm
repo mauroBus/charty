@@ -46,6 +46,9 @@
     <div id='chart7' class='viewport'>
     </div>
 
+    <div id='chart8' class='viewport'>
+    </div>
+
     <script src="../../vendor/d3.chart/d3.chart.min.js"></script>
     <script src="../../vendor/underscore/underscore-min.js"></script>
     <script src="../../vendor/jquery/jquery.min.js"></script>
@@ -72,8 +75,7 @@
         data: [
           { x: 'A', y: 2, c : 'red', c1: 'red', c2:'blue'},
           { x: 'B', y: 2, c : 'red', c1:'yellow', c2:'green'},
-          { x: 'C', y: 2, c : 'red', c1:'green', c2:'yellow'},
-          /*{ x: 'D', y: 30, c1:'green', c2:'blue'}*/
+          { x: 'C', y: 2, c : 'red', c1:'green', c2:'yellow'}
         ]
       };
 
@@ -144,6 +146,21 @@
           {y : 175, c: 'gray'}
         ]
       };
+
+      /** Data Test for Grouped bar chart */
+      var data88 = {
+        data : [
+          {x : 'A', y : 100, z : '2012'},
+          {x : 'B', y :  50, z : '2012'},
+          {x : 'C', y : 150, z : '2012'},
+          {x : 'A', y :  30, z : '2013'},
+          {x : 'B', y :  70, z : '2013'},
+          {x : 'C', y : 180, z : '2013'}
+        ]
+      };
+
+      var datagroup33 = [];
+          datagroup33.push(data88);
 
       var datagroup1 = [];
           datagroup1.push(data1);
@@ -237,6 +254,16 @@
         showAsGrid : true
       };
 
+      /** For the first test, only vertical bars are defined */
+      var options8 = {
+        chartName : Charty.CHART_NAMES.GROUPED_BAR_CHART,
+        axisSystem : Charty.CHART_NAMES.YXY_AXIS,
+        xAxis : Charty.AXIS_TYPE.ORDINAL,
+        yAxis : Charty.AXIS_TYPE.LINEAR,
+        root : '#chart8',
+        showAsGrid : true
+      }
+
       /**
       Bar chart creation, dimensioning
       */
@@ -314,74 +341,17 @@
       chart7.setDimensions(marginOptions7);
       chart7.draw(datagroup1);
 
-      /**
-      Charts update here.
-      */
-      /*setTimeout(function(){
+      /** Grouped bar chart */
+      var chart8 = Charty.chart(options8);
 
-        $('#chart1').removeClass('viewport').addClass('viewport-small');
-        chart1.redimension();
-
-        data1 = {
-          c: 'blue',
-          rh: 30,
-          rw: 30,
-          rc:'gray',
-          data: [
-            { x: 'A', y: 100, c1:'yellow', c2:'green'},
-            { x: 'B', y: 40, c1:'yellow', c2:'green'},
-            { x: 'C', y: 60, c1:'yellow', c2:'green'},
-            { x: 'D', y: 80, c1:'yellow', c2:'green'}
-          ]
-        };
-
-        data2 = {
-          c: 'red',
-          r : 8,
-          data: [
-            { x: 'A', y: 150 },
-            { x: 'B', y: 50 },
-            { x: 'C', y: 30 },
-            { x: 'D', y: 230 }
-          ]
-        };
-
-        var datagroup4 = [];
-            datagroup4.push(data1);
-            datagroup4.push(data2);
-
-        var datagroup5 = [];
-            datagroup5.push(data1);
-
-        //chart1.draw(datagroup4);
-        //chart2.draw(datagroup5);
-
-        data1.c = 'redline';
-        data2.c = 'blueline';
-
-        chart3.draw(datagroup4);
-
-        data1.c = 'gray';
-        data1.r = 12;
-        data2.c = 'red';
-        data2.r = 8;
-
-        var data9 = {
-          ir :  50,
-          or :  90,
-          data : [
-            {y : 50 , c: 'blue'},
-            {y : 155, c: 'gray'}
-          ]
-        };
-
-        var datagroup7 = [];
-            datagroup7.push(data9);
-
-        chart6.removeBackgroundImage();
-        chart6.draw(datagroup7);
-
-      },3000);*/
+      var marginOptions8 = {
+        marginleft : 50,
+        margintop : 20,
+        marginlfactor : 0.85,
+        margintfactor : 0.85
+      };
+      chart8.setDimensions(marginOptions8);
+      chart8.draw(datagroup33);
     </script>
   </body>
 </html>

@@ -6,42 +6,41 @@ another one for the data mapping.
 
 @class GroupedBarChart
 @extends MultipleDataGroup
-@requires d3,
-          scalesfactory,
-          charty,
-          d3.chart,
-          bar,
-          xyaxis,
-          multipledatagroup,
-          multipleinstancesmixin
+@requires d3.chart,
+          charty/chartynames,
+          charty/scalesfactory,
+          charty/bar,
+          charty/xyaxis,
+          charty/multipledatagroup,
+          charty/multipleinstancesmixin
 */
 
 (function(root, factory) {
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('GroupedBarChart', [
+    define('charty/groupedbarchart', [
             'd3.chart',
-            'charty/chartynames',
             'charty/scalesfactory',
+            'charty/chartynames',
             'charty/bar',
             'charty/xyaxis',
             'charty/multipledatagroup',
             'charty/multipleinstancesmixin',
            ],
-           function(d3, ScaleFactory, charty) {
+           function(d3, ScaleFactory, Charty) {
       /** Export global even in AMD case in case this script
       is loaded with others */
-      return factory(d3, ScaleFactory, charty);
+      return factory(d3, ScaleFactory, Charty);
     });
   }
   else {
     /** Browser globals */
-    return factory(d3, ScaleFactory, charty);
+    return factory(d3, ScaleFactory, Charty);
   }
-}(this, function(d3, ScaleFactory, charty) {
-  d3.chart(charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
-    .extend(charty.CHART_NAMES.GROUPED_BAR_CHART, {
+}(this, function(d3, ScaleFactory, Charty) {
+  d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
+    .extend(Charty.CHART_NAMES.GROUPED_BAR_CHART, {
     /**
     Grouper Bar Chart initializer.
 
@@ -50,16 +49,16 @@ another one for the data mapping.
     initialize : function(args){
 
       var options = {
-        chartName : charty.CHART_NAMES.BAR,
+        chartName : Charty.CHART_NAMES.BAR,
         instances : (args.instances || 1)
       };
 
-      var barChart = this.mixin(charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base.append('g'), options);
-      var xyaxis = this.mixin(charty.CHART_NAMES.XY_AXIS, this.base.append('g')).showAsGrid();
+      var bars = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base.append('g'), options),
+          axis = this.mixin(args.axisSystem, this.base.append('g'), args).showAsGrid(args.showAsGrid);
 
-      this.componentsMixin = [];
-      this.componentsMixin.push(barChart);
-      this.componentsMixin.push(xyaxis);
+      this.scaleFactory = args.scaleFactory;
+
+      this.setMixins(bars, axis);
     },
     /**
     It is necessary to rewrite transform data, in order to
@@ -73,29 +72,8 @@ another one for the data mapping.
     */
     transform : function(data){
 
-      var d = data.getData();
-
-      /**
-      Scale for axis drawing
-
-      @property
-      @type {Object} LinearScale / OrdinalScale
-      */
-      this.xscale.calculateDomain(data, function(d){return d.x;}).setRange(this.w);
-
-      /**
-      Since it is a regular bar chart, an ordinal scale
-      will be used for bar drawing.
-      */
-      var scales = new ScaleFactory();
-
-      var barScale = scales.scale('ordinal','x');
-
-      var barDomain = d.map(function(element){
-        console.log(element);
-      });
-
-      this.yscale.calculateDomain(data, function(d){return d.y;}).setRange(this.h);
+      var d = data.first();
+      console.log(d);
 
     }
   });

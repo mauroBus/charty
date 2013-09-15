@@ -44,6 +44,7 @@ module.exports = function(grunt) {
           '<%= yeoman.app %>/composition/axis/xyaxis.js',
           '<%= yeoman.app %>/composition/axis/yxyaxis.js',
           '<%= yeoman.app %>/composition/barchart/barchart.js',
+          '<%= yeoman.app %>/composition/groupedbarchart/groupedbarchart.js',
           '<%= yeoman.app %>/composition/donutwithinnertext/donutwithinnertext.js',
           '<%= yeoman.app %>/composition/labeledtrianglechart/labeledtrianglechart.js',
           '<%= yeoman.app %>/composition/linechart/*.js',

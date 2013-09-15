@@ -28,7 +28,6 @@ and it will append a specific chart to it.
 }(this, function () {
 
   var Charty = {
-
   };
 
   return Charty;

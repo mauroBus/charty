@@ -1,5 +1,5 @@
 /**
-Full chart api
+Chart creation API
 
 @class Charty
 
@@ -21,7 +21,8 @@ Full chart api
       'charty/scatterplot',
       'charty/donut',
       'charty/donutwithinnertext',
-      'charty/linechartcircles'
+      'charty/linechartcircles',
+      'charty/groupedbarchart'
       ],
       function (Charty, ScaleFactory, ChartInterface, DataValidator) {
         /** Export global even in AMD case in case this script
@@ -102,6 +103,8 @@ Full chart api
     Appends the chart to the specified html element.
     */
     options.dataValidator = this.dataValidator;
+    options.scaleFactory = this.scaleFactory;
+    
     var chart = gSvg.chart(options.chartName,options);
 
     /**
