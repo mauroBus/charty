@@ -844,12 +844,7 @@ it will implement all the functions needed.
         c : 'axis'
       };
 
-      var axis = d3.svg.axis();
-
-      /** Sets default tick format */
-      if (args.tickFormat){
-        axis.tickFormat(d3.format(args.tickFormat));
-      }
+      this.axis = d3.svg.axis();
 
       /**
       Layer options
@@ -864,15 +859,6 @@ it will implement all the functions needed.
         @param {Object} d
         */
         dataBind : function(d){
-
-          var chart = this.chart();
-
-          if(!chart.scale){
-            throw new Error('Undefined scale for axis.');
-          }
-
-          axis = axis.scale(chart.scale.getScale())
-                     .orient(chart.o);
 
           return this.selectAll('g').data([true]);
         },
@@ -890,26 +876,16 @@ it will implement all the functions needed.
 
               var chart = this.chart();
 
-              /** Sets custom tick count */
-              if (chart.tickCount){
-                axis.ticks(chart.tickCount);
-              }
-
-              /** Tick format */
-              if (chart.tickFormat){
-                axis.tickFormat(d3.format(chart.tickFormat));
-              }
-
               /**
               Renders as a grid.
               */
               if(chart.grid){
-                  axis.tickSize(-chart.tsize,0,0);
+                  chart.axis.tickSize(-chart.tsize,0,0);
               }
 
               /** Axis drawing */
               this.classed(defaults.c, true)
-                  .call(axis);
+                  .call(chart.axis);
 
               /**
               Axis translation in x or y direction.
@@ -936,8 +912,8 @@ it will implement all the functions needed.
               return this;
           },
           'update' : function(){
-
-            return this.call(axis);
+            
+            return this.call(this.chart().axis);
           },
           'remove' : function(){
 
@@ -978,7 +954,12 @@ it will implement all the functions needed.
     @chainable
     */
     setScale : function (scale){
-      this.scale = scale;
+
+      if(!scale){
+        throw new Error('Undefined scale for axis.');
+      }
+
+      this.axis.scale(scale.getScale());
       return this;
     },
     /**
@@ -1002,7 +983,8 @@ it will implement all the functions needed.
     @default bottom
     */
     orient : function (orient){
-      this.o = (orient || 'bottom');
+
+      this.axis.orient(orient || 'bottom');
       return this;
     },
     /**
@@ -1052,7 +1034,9 @@ it will implement all the functions needed.
     @chainable
     */
     tickCount : function (tCount){
-      this.tickCount = tCount;
+      if (tCount){
+        this.axis.ticks(tCount);
+      }
       return this;
     },
     /** 
@@ -1063,7 +1047,9 @@ it will implement all the functions needed.
     @chainable
     */
     tickFormat : function (format){
-      this.tickFormat = format;
+      if (format){
+        this.axis.tickFormat(d3.format(format));
+      }
       return this;
     }
   });
