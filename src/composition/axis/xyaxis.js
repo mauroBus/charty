@@ -41,11 +41,11 @@ Base XY system for all the 2D charts.
 
         this.xaxis = this.mixin(Charty.CHART_NAMES.AXIS,
                                 this.base.append('g'),
-                                args).orient('bottom').setTextLabel(args.xAxisLabel).tickCount(args.xTickCount);
+                                args).orient('bottom').setTextLabel(args.xAxisLabel).tickCount(args.xTickCount).tickFormat(args.xAxisTickFormat);
 
         this.yaxis = this.mixin(Charty.CHART_NAMES.AXIS,
                                 this.base.append('g'),
-                                args).orient('left').setTextLabel(args.yAxisLabel, '-90').tickCount(args.yTickCount);
+                                args).orient('left').setTextLabel(args.yAxisLabel, '-90').tickCount(args.yTickCount).tickFormat(args.yAxisTickFormat);
 
     },
     /**

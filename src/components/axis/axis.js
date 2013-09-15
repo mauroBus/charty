@@ -73,6 +73,11 @@ it will implement all the functions needed.
 
       var axis = d3.svg.axis();
 
+      /** Sets default tick format */
+      if (args.tickFormat){
+        axis.tickFormat(d3.format(args.tickFormat));
+      }
+
       /**
       Layer options
       */
@@ -115,6 +120,11 @@ it will implement all the functions needed.
               /** Sets custom tick count */
               if (chart.tickCount){
                 axis.ticks(chart.tickCount);
+              }
+
+              /** Tick format */
+              if (chart.tickFormat){
+                axis.tickFormat(d3.format(chart.tickFormat));
               }
 
               /**
@@ -270,6 +280,17 @@ it will implement all the functions needed.
     */
     tickCount : function (tCount){
       this.tickCount = tCount;
+      return this;
+    },
+    /** 
+    Tick format
+
+    @method
+    @param {String} format Tick format option
+    @chainable
+    */
+    tickFormat : function (format){
+      this.tickFormat = format;
       return this;
     }
   });

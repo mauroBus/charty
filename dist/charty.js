@@ -846,6 +846,11 @@ it will implement all the functions needed.
 
       var axis = d3.svg.axis();
 
+      /** Sets default tick format */
+      if (args.tickFormat){
+        axis.tickFormat(d3.format(args.tickFormat));
+      }
+
       /**
       Layer options
       */
@@ -888,6 +893,11 @@ it will implement all the functions needed.
               /** Sets custom tick count */
               if (chart.tickCount){
                 axis.ticks(chart.tickCount);
+              }
+
+              /** Tick format */
+              if (chart.tickFormat){
+                axis.tickFormat(d3.format(chart.tickFormat));
               }
 
               /**
@@ -1043,6 +1053,17 @@ it will implement all the functions needed.
     */
     tickCount : function (tCount){
       this.tickCount = tCount;
+      return this;
+    },
+    /** 
+    Tick format
+
+    @method
+    @param {String} format Tick format option
+    @chainable
+    */
+    tickFormat : function (format){
+      this.tickFormat = format;
       return this;
     }
   });
@@ -2301,11 +2322,11 @@ Base XY system for all the 2D charts.
 
         this.xaxis = this.mixin(Charty.CHART_NAMES.AXIS,
                                 this.base.append('g'),
-                                args).orient('bottom').setTextLabel(args.xAxisLabel).tickCount(args.xTickCount);
+                                args).orient('bottom').setTextLabel(args.xAxisLabel).tickCount(args.xTickCount).tickFormat(args.xAxisTickFormat);
 
         this.yaxis = this.mixin(Charty.CHART_NAMES.AXIS,
                                 this.base.append('g'),
-                                args).orient('left').setTextLabel(args.yAxisLabel, '-90').tickCount(args.yTickCount);
+                                args).orient('left').setTextLabel(args.yAxisLabel, '-90').tickCount(args.yTickCount).tickFormat(args.yAxisTickFormat);
 
     },
     /**
@@ -2411,15 +2432,15 @@ One X Axis (bottom)
     initialize : function (args){
       this.xaxis = this.mixin(Charty.CHART_NAMES.AXIS,
                               this.base.append('g'),
-                              args).orient('bottom').tickCount(args.xTickCount);
+                              args).orient('bottom').tickCount(args.xTickCount).tickFormat(args.xAxisTickFormat);
 
       this.yaxisleft = this.mixin(Charty.CHART_NAMES.AXIS,
                             this.base.append('g'),
-                            args).orient('left').tickCount(args.yTickCount);
+                            args).orient('left').tickCount(args.yTickCount).tickFormat(args.yAxisTickFormat);
 
       this.yaxisright = this.mixin(Charty.CHART_NAMES.AXIS,
                                    this.base.append('g'),
-                                   args).orient('right').tickCount(args.yTickCount);
+                                   args).orient('right').tickCount(args.yTickCount).tickFormat(args.yAxisTickFormat);
 
     },
     /**
@@ -3316,17 +3337,8 @@ Full chart api
     /**
     Appends the chart to the specified html element.
     */
-    var chart = gSvg.chart(options.chartName, {
-                    instances: options.instances,
-                    dataValidator : this.dataValidator,
-                    axisSystem : options.axisSystem,
-                    showAsGrid : options.showAsGrid,
-                    xAxisLabel : options.xAxisLabel,
-                    yAxisLabel : options.yAxisLabel,
-                    barType : options.barType,
-                    yTickCount : options.yTickCount,
-                    xTickCount : options.xTickCount
-                  });
+    options.dataValidator = this.dataValidator;
+    var chart = gSvg.chart(options.chartName,options);
 
     /**
     Scale definition.

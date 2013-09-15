@@ -101,17 +101,8 @@ Full chart api
     /**
     Appends the chart to the specified html element.
     */
-    var chart = gSvg.chart(options.chartName, {
-                    instances: options.instances,
-                    dataValidator : this.dataValidator,
-                    axisSystem : options.axisSystem,
-                    showAsGrid : options.showAsGrid,
-                    xAxisLabel : options.xAxisLabel,
-                    yAxisLabel : options.yAxisLabel,
-                    barType : options.barType,
-                    yTickCount : options.yTickCount,
-                    xTickCount : options.xTickCount
-                  });
+    options.dataValidator = this.dataValidator;
+    var chart = gSvg.chart(options.chartName,options);
 
     /**
     Scale definition.
