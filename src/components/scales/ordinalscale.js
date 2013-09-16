@@ -60,7 +60,7 @@ Ordinal Scale
 	@chainable
 	*/
 	OrdinalScale.prototype.setRange = function(range){
-		this.scale = this.scale.rangeRoundBands(this.generateRange(range) , .1);
+		this.scale = this.scale.rangeRoundBands(this.generateRange(range) , 0.1);
 		return this;
 	};
 
