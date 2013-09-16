@@ -71,7 +71,7 @@ Defines a data transformation for composite charts
 
     @method
     */
-    _calculateDomains : function (data){
+    _calculateDomains : function (data, zScale){
        /** Default x domain */
       if (this.defaultXDomain){
         this.xscale.setDomain(this.defaultXDomain);
@@ -79,7 +79,13 @@ Defines a data transformation for composite charts
       else{
         this.xscale.calculateDomain(data, function(d){return d.x;});
       }
-      this.xscale.setRange(this.w);
+
+      if (this.zScale){
+        this.xscale.setRange(this.zScale.band(1));
+      }
+      else{
+        this.xscale.setRange(this.w);
+      }
 
       /** Default y domain */
       if (this.defaultYDomain){

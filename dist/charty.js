@@ -215,7 +215,6 @@ for inheritance.
 }(this, function (d3, Charty) {
 
 	var BaseScale = function(){
-
 	};
 
 	/**
@@ -246,7 +245,7 @@ for inheritance.
 				r = [range,0];
 			}
 			else{
-				throw new Error('No scale was defined for this scale.');
+				throw new Error('No range was defined for this scale.');
 			}
 		}
 
@@ -463,7 +462,7 @@ Ordinal Scale
 	@chainable
 	*/
 	OrdinalScale.prototype.setRange = function(range){
-		this.scale = this.scale.rangeRoundBands(this.generateRange(range) , 0.1);
+		this.scale = this.scale.rangeRoundBands(this.generateRange(range) , .1);
 		return this;
 	};
 
@@ -1270,8 +1269,14 @@ Bar drawer. Takes only one data series as input.
             this.attr('class', function(d){
                   return (d.c || chart.c);
                 })
-                .attr('x', function(d) { return chart.xscale.map(d.x, chart.factor);} )
-                .attr('width', chart.xscale.band(chart.factor))
+                .attr('x', function(d) {
+                  var pos = 0;
+                  if (chart.zScale){
+                    pos += chart.zScale.map(d.z, 1);
+                  }
+                  return (pos += chart.xscale.map(d.x, (chart.factor || 1) ));
+                })
+                .attr('width', chart.xscale.band(chart.factor || 1))
                 .attr('y', function(d) {
                   return Math.min(zeroY, chart.yscale.map(d.y, chart.factor));
                 })
@@ -1293,6 +1298,17 @@ Bar drawer. Takes only one data series as input.
       */
       this.layer('barlayer', this.base ,options);
 
+    },
+    /** 
+    Adds z scale if necessary
+
+    @method
+    @param {Object} zScale d3.scale
+    @chainable
+    */
+    setZScale : function (zScale){
+      this.zScale = zScale;
+      return this;
     }
   });
 }));
@@ -2184,7 +2200,7 @@ Defines a data transformation for composite charts
 
     @method
     */
-    _calculateDomains : function (data){
+    _calculateDomains : function (data, zScale){
        /** Default x domain */
       if (this.defaultXDomain){
         this.xscale.setDomain(this.defaultXDomain);
@@ -2192,7 +2208,13 @@ Defines a data transformation for composite charts
       else{
         this.xscale.calculateDomain(data, function(d){return d.x;});
       }
-      this.xscale.setRange(this.w);
+
+      if (this.zScale){
+        this.xscale.setRange(this.zScale.band(1));
+      }
+      else{
+        this.xscale.setRange(this.w);
+      }
 
       /** Default y domain */
       if (this.defaultYDomain){
@@ -2617,17 +2639,10 @@ another one for the data mapping.
     */
     initialize : function(args){
 
-      var options = {
-        chartName : Charty.CHART_NAMES.BAR,
-        instances : (args.instances || 1)
-      };
+      this.axisSystem = this.mixin(args.axisSystem, this.base.append('g'), args).showAsGrid(args.showAsGrid);
+      this.bars = this.mixin(Charty.CHART_NAMES.BAR, this.base.append('g'), args);
 
-      var bars = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base.append('g'), options),
-          axis = this.mixin(args.axisSystem, this.base.append('g'), args).showAsGrid(args.showAsGrid);
-
-      this.scaleFactory = args.scaleFactory;
-
-      this.setMixins(bars, axis);
+      this.setMixins(this.axisSystem, this.bars);
     },
     /**
     It is necessary to rewrite transform data, in order to
@@ -2642,8 +2657,46 @@ another one for the data mapping.
     transform : function(data){
 
       var d = data.first();
-      console.log(d);
 
+      if (this.defaultZDomain){
+        this.zScale.setDomain(this.defaultZDomain);
+      }
+      else{
+        this.zScale.calculateDomain(data, function (d){ return d.z; });
+      }
+      this.zScale.setRange(this.w);
+
+      this._calculateDomains(data);
+
+      /** x scale is replaced with z scale */
+      this.axisSystem.setXScale(this.zScale);
+
+      /** Adds z scale to bars */
+      this.bars.setZScale(this.zScale);
+
+      return data;
+    },
+    /** 
+    Adding new scale for bars grouping
+
+    @method
+    @param {Object} zScale d3.scale
+    @chainable
+    */
+    setZScale : function (zScale){
+      this.zScale = zScale;
+      return this;
+    },
+    /** 
+    Default z domain 
+
+    @method
+    @param {Object} zDomain
+    @chainable
+    */
+    setDefaultZDomain : function (zDomain){
+      this.defaultZDomain = zDomain;
+      return this;
     }
   });
 }));
@@ -3408,8 +3461,7 @@ Chart creation API
     Appends the chart to the specified html element.
     */
     options.dataValidator = this.dataValidator;
-    options.scaleFactory = this.scaleFactory;
-    
+
     var chart = gSvg.chart(options.chartName,options);
 
     /**
@@ -3417,10 +3469,14 @@ Chart creation API
     Some charts can use direct mapping instead of scaling.
     */
     if (options.xAxis){
-      chart = chart.setXScale(this.scaleFactory.scale(options.xAxis,'x'));
+      chart.setXScale(this.scaleFactory.scale(options.xAxis,'x'));
     }
     if (options.yAxis){
-      chart = chart.setYScale(this.scaleFactory.scale(options.yAxis,'y'));
+      chart.setYScale(this.scaleFactory.scale(options.yAxis,'y'));
+    }
+    /** Grouped bar chart uses another scale */
+    if (options.zAxis){
+      chart.setZScale(this.scaleFactory.scale(options.zAxis,'x'));
     }
 
     /** Sets default x domain */
@@ -3431,6 +3487,11 @@ Chart creation API
     /** Sets default y domain */
     if (options.defaultYDomain){
       chart.setDefaultYDomain(options.defaultYDomain);
+    }
+
+    /** Sets default z domain */
+    if (options.defaultZDomain){
+      chart.setDefaultZDomain(options.defaultZDomain);
     }
 
     /**

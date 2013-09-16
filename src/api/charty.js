@@ -103,8 +103,7 @@ Chart creation API
     Appends the chart to the specified html element.
     */
     options.dataValidator = this.dataValidator;
-    options.scaleFactory = this.scaleFactory;
-    
+
     var chart = gSvg.chart(options.chartName,options);
 
     /**
@@ -112,10 +111,14 @@ Chart creation API
     Some charts can use direct mapping instead of scaling.
     */
     if (options.xAxis){
-      chart = chart.setXScale(this.scaleFactory.scale(options.xAxis,'x'));
+      chart.setXScale(this.scaleFactory.scale(options.xAxis,'x'));
     }
     if (options.yAxis){
-      chart = chart.setYScale(this.scaleFactory.scale(options.yAxis,'y'));
+      chart.setYScale(this.scaleFactory.scale(options.yAxis,'y'));
+    }
+    /** Grouped bar chart uses another scale */
+    if (options.zAxis){
+      chart.setZScale(this.scaleFactory.scale(options.zAxis,'x'));
     }
 
     /** Sets default x domain */
@@ -126,6 +129,11 @@ Chart creation API
     /** Sets default y domain */
     if (options.defaultYDomain){
       chart.setDefaultYDomain(options.defaultYDomain);
+    }
+
+    /** Sets default z domain */
+    if (options.defaultZDomain){
+      chart.setDefaultZDomain(options.defaultZDomain);
     }
 
     /**

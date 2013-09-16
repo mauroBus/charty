@@ -45,6 +45,11 @@ function(Charty){
 
   'use strict';
 
+  var clickFnt = function (d){
+    var args = Array.prototype.slice.call(arguments,0);
+    console.log(args);
+  };
+
   /**
   Data rendering examples.
   */
@@ -53,10 +58,11 @@ function(Charty){
     rw: 30,
     c: 'blueline',
     rc:'gray',
+    clickEvent : clickFnt,
     data: [
-      { x: 'A', y: 100, c : 'red'},
-      { x: 'B', y: -40, c : 'red'},
-      { x: 'C', y: 60, c : 'red'}
+      { x: 'A', y: 2, c : 'red', c1: 'red', c2:'blue'},
+      { x: 'B', y: 2, c : 'red', c1:'yellow', c2:'green'},
+      { x: 'C', y: 2, c : 'red', c1:'green', c2:'yellow'}
     ]
   };
 
@@ -69,12 +75,57 @@ function(Charty){
     ]
   };
 
+  /** Horizontal bar chart */
+  var data51 = {
+    rh: 30,
+    rw: 30,
+    c: 'blueline',
+    rc:'gray',
+    clickEvent : clickFnt,
+    data: [
+      { y: 'A', x: 100, c : 'red'},
+      { y: 'B', x: -40, c : 'red'},
+      { y: 'C', x: 60, c : 'red'}
+    ]
+  };
+
+  var data52 = {
+    c: 'redline',
+    data: [
+      { y: 'A', x: 150 , c:'blue'},
+      { y: 'B', x: 50 , c: 'blue'},
+      { y: 'C', x: 30, c:'blue'}
+    ]
+  };
+
+  /**
+  Data rendering examples.
+  */
+  var data3 = {
+    data: [
+      { x:  25, y: 100, c : 'red'},
+      { x:  50, y:  40, c : 'red'},
+      { x:  75, y:  60, c : 'red'}
+    ],
+    clickEvent : clickFnt
+  };
+
+  var data5 = {
+    data: [
+      { x: 25,  y: 150, c : 'blue'},
+      { x: 50,  y:  50, c : 'blue'},
+      { x: 75,  y:  30, c : 'blue'}
+    ],
+    clickEvent : clickFnt
+  };
+
   /**
   Data test for donut chart with inner text
   */
   var data4 = {
-    ir :  90,
-    or :  50,
+    ir :  110,
+    or :  70,
+    clickEvent : clickFnt,
     /*xPosition : 200,
     yPosition : 200,*/
     data : [
@@ -82,6 +133,21 @@ function(Charty){
       {y : 175, c: 'gray'}
     ]
   };
+
+  /** Data Test for Grouped bar chart */
+  var data88 = {
+    data : [
+      {x : 'A', y : 100, z : '2012', c : 'green'},
+      {x : 'B', y :  50, z : '2012', c : 'red'},
+      {x : 'C', y : 150, z : '2012', c : 'blue'},
+      {x : 'A', y :  30, z : '2013', c : 'green'},
+      {x : 'B', y :  70, z : '2013', c : 'blue'},
+      {x : 'C', y : 180, z : '2013', c : 'blue'}
+    ]
+  };
+
+  var datagroup33 = [];
+      datagroup33.push(data88);
 
   var datagroup1 = [];
       datagroup1.push(data1);
@@ -93,31 +159,47 @@ function(Charty){
   var datagroup4 = [];
       datagroup4.push(data4);
 
+  var datagroup22 = [];
+      datagroup22.push(data3);
+      datagroup22.push(data5);
+
+  var datagroup51 = [];
+      datagroup51.push(data51);
+      datagroup51.push(data52);
+
   var options1 = {
     chartName : Charty.CHART_NAMES.BAR_CHART,
+    barType : Charty.CHART_NAMES.HORIZONTAL_BAR,
     instances : 2,
     root : '#chart1',
-    xAxis : Charty.AXIS_TYPE.ORDINAL,
-    yAxis : Charty.AXIS_TYPE.LINEAR,
-    marginleft : 50,
-    margintop : 20,
-    marginlfactor : 0.85,
-    margintfactor : 0.85,
-    axisSystem : Charty.CHART_NAMES.YXY_AXIS,
+    xAxis : Charty.AXIS_TYPE.LINEAR,
+    yAxis : Charty.AXIS_TYPE.ORDINAL,
+    axisSystem : Charty.CHART_NAMES.XY_AXIS,
+    xTickCount : 4,
     showAsGrid : true
   };
 
   var options2 = {
     chartName : Charty.CHART_NAMES.LABELED_TRIANGLE_CHART,
     root : '#chart2',
+    defaultXDomain : ['A', 'B', 'C', 'D', 'E', 'F'],
     xAxis : Charty.AXIS_TYPE.ORDINAL,
     yAxis : Charty.AXIS_TYPE.LINEAR,
-    marginleft : 50,
-    margintop : 20,
-    marginlfactor : 0.85,
-    margintfactor : 0.85,
     axisSystem : Charty.CHART_NAMES.YXY_AXIS,
-    showAsGrid : true
+    showAsGrid : true,
+    yTickCount : 4,
+    yAxisTickFormat : "d",
+    gradients : [
+      {
+        id : 'gradient1',
+        orientation : 'vertical',
+        classes : [
+          {className : 'stop1', offset : '0%'},
+          {className : 'stop2', offset : '50%'},
+          {className : 'stop3', offset : '100%'}
+        ]
+      }
+    ]
   };
 
   var options3 = {
@@ -126,10 +208,6 @@ function(Charty){
     root : '#chart3',
     xAxis : Charty.AXIS_TYPE.ORDINAL,
     yAxis : Charty.AXIS_TYPE.LINEAR,
-    marginleft : 50,
-    margintop : 20,
-    marginlfactor : 0.85,
-    margintfactor : 0.85,
     axisSystem : Charty.CHART_NAMES.YXY_AXIS,
     showAsGrid : true
   };
@@ -138,23 +216,19 @@ function(Charty){
     chartName : Charty.CHART_NAMES.SCATTERPLOT,
     instances : 2,
     root : '#chart4',
-    xAxis : Charty.AXIS_TYPE.ORDINAL,
+    defaultXDomain : [0, 100],
+    xAxis : Charty.AXIS_TYPE.LINEAR,
     yAxis : Charty.AXIS_TYPE.LINEAR,
-    marginleft : 50,
-    margintop : 20,
-    marginlfactor : 0.85,
-    margintfactor : 0.85,
     axisSystem : Charty.CHART_NAMES.XY_AXIS,
-    showAsGrid : true
+    showAsGrid : true,
+    xAxisLabel : 'X Axis',
+    yAxisLabel : 'Y Axis'
   };
 
   var options6 = {
     chartName : Charty.CHART_NAMES.DONUT_INNER_TEXT,
     instances : 1,
-    root : '#chart6',
-    imgLocation : 'imgCenter',
-    /*marginlfactor : 0.8,
-    margintfactor : 0.8*/
+    root : '#chart6'
   };
 
   var options7 = {
@@ -163,112 +237,112 @@ function(Charty){
     root : '#chart7',
     xAxis : Charty.AXIS_TYPE.ORDINAL,
     yAxis : Charty.AXIS_TYPE.LINEAR,
-    marginleft : 50,
-    margintop : 20,
-    marginlfactor : 0.85,
-    margintfactor : 0.85,
     axisSystem : Charty.CHART_NAMES.YXY_AXIS,
     showAsGrid : true
   };
 
+  /** 
+  For the first test, only vertical bars are defined
+
+  zAxis : chart uses another scale, like drawing two axis
+  */
+  var options8 = {
+    chartName : Charty.CHART_NAMES.GROUPED_BAR_CHART,
+    axisSystem : Charty.CHART_NAMES.YXY_AXIS,
+    xAxis : Charty.AXIS_TYPE.ORDINAL,
+    zAxis : Charty.AXIS_TYPE.ORDINAL,
+    defaultZDomain : ['2012','2013'],
+    yAxis : Charty.AXIS_TYPE.LINEAR,
+    root : '#chart8',
+    showAsGrid : true
+  };
+
   /**
-  Initial charts drawing here.
+  Bar chart creation, dimensioning
   */
   var chart1 = Charty.chart(options1);
-      chart1.draw(datagroup1);
+
+  var marginOptions1 = {
+    marginleft : 30,
+    margintop : 20,
+    marginlfactor : 0.85,
+    margintfactor : 0.85
+  };
+  chart1.setDimensions(marginOptions1);
+  chart1.draw(datagroup51);
+
+  /* Triangle chart creation, dimensioning */
+  var marginOptions2 = {
+    marginleft : 50,
+    margintop : 20,
+    marginlfactor : 0.85,
+    margintfactor : 0.85,
+  };
 
   var chart2 = Charty.chart(options2);
-      chart2.draw(datagroup2);
+  chart2.setDimensions(marginOptions2);
+  chart2.draw(datagroup2);
 
-      data1.c = 'redline';
-      data2.c = 'blueline';
+  data1.c = 'redline';
+  data2.c = 'blueline';
 
+  /** Line chart creation, instantiation */
   var chart3 = Charty.chart(options3);
-      chart3.draw(datagroup1);
 
-      data1.c = 'red';
-      data2.c = 'blue';
+  var marginOptions3 = {
+    marginleft : 50,
+    margintop : 20,
+    marginlfactor : 0.85,
+    margintfactor : 0.85,
+  };
+  chart3.setDimensions(marginOptions3);
+  chart3.draw(datagroup1);
 
+  data1.c = 'red';
+  data2.c = 'blue';
+
+  /** Scatterplot creation */
   var chart4 = Charty.chart(options4);
-      chart4.draw(datagroup1);
 
+  var marginOptions4 = {
+    marginleft : 50,
+    margintop : 20,
+    marginlfactor : 0.85,
+    margintfactor : 0.85
+  };
+  chart4.setDimensions(marginOptions4);
+  chart4.draw(datagroup22);
+
+  /** Donut chart with inner text and background image*/
   var chart6 = Charty.chart(options6);
-      chart6.draw(datagroup4);
+  chart6.setDimensions();
+  chart6.setBackgroundImage('imgCenter');
+  chart6.draw(datagroup4);
 
-      data1.c = 'redline';
-      data2.c = 'blueline';
+  data1.c = 'redline';
+  data2.c = 'blueline';
 
+  /** Mixing scatterplot with lines */
   var chart7 = Charty.chart(options7);
-      chart7.draw(datagroup1);
 
-  /**
-  Charts update here.
-  */
-  setTimeout(function(){
+  var marginOptions7 = {
+    marginleft : 50,
+    margintop : 20,
+    marginlfactor : 0.85,
+    margintfactor : 0.85
+  };
+  chart7.setDimensions(marginOptions7);
+  chart7.draw(datagroup1);
 
-    /** Bar chart new dimensions */
-    $('#chart1').removeClass('viewport').addClass('viewport-small');
-    chart1.redimension();
+  /** Grouped bar chart */
+  var chart8 = Charty.chart(options8);
 
-    data1 = {
-      c: 'blue',
-      rh: 30,
-      rw: 30,
-      rc:'gray',
-      data: [
-        { x: 'A', y: 100},
-        { x: 'B', y: 40},
-        { x: 'C', y: 60},
-        { x: 'D', y: 80}
-      ]
-    };
-
-    data2 = {
-      c: 'red',
-      r : 8,
-      data: [
-        { x: 'A', y: 150 },
-        { x: 'B', y: 50 },
-        { x: 'C', y: 30 },
-        { x: 'D', y: 230 }
-      ]
-    };
-
-    var datagroup4 = [];
-        datagroup4.push(data1);
-        datagroup4.push(data2);
-
-    var datagroup5 = [];
-        datagroup5.push(data1);
-
-    chart1.draw(datagroup4);
-    chart2.draw(datagroup5);
-
-    data1.c = 'redline';
-    data2.c = 'blueline';
-
-    chart3.draw(datagroup4);
-
-    data1.c = 'gray';
-    data1.r = 12;
-    data2.c = 'red';
-    data2.r = 8;
-
-    chart4.draw(datagroup4);
-
-    var data9 = {
-      ir :  50,
-      or :  90,
-      data : [
-        {y : 50 , c: 'blue'},
-        {y : 155, c: 'gray'}
-      ]
-    };
-
-    var datagroup7 = [];
-        datagroup7.push(data9);
-
-    chart6.draw(datagroup7);
-
-  },3000);
+  var marginOptions8 = {
+    marginleft : 50,
+    margintop : 20,
+    marginlfactor : 0.85,
+    margintfactor : 0.85
+  };
+  chart8.setDimensions(marginOptions8);
+  chart8.draw(datagroup33);
 });

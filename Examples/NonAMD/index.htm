@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Charty 0.5.1 - Non AMD Examples</title>
+    <title>Charty 0.5.3 - Non AMD Examples</title>
     <!--[if lte IE 8]>
       <script src="../../vendor/r2d3/r2d3.js" charset="utf-8"></script>
       <script src="../../Vendor/Polyfills-for-IE8/getComputedStyle.js"></script>
@@ -61,7 +61,7 @@
       var clickFnt = function (d){
         var args = Array.prototype.slice.call(arguments,0);
         console.log(args);
-      }
+      };
 
       /**
       Data rendering examples.
@@ -150,12 +150,12 @@
       /** Data Test for Grouped bar chart */
       var data88 = {
         data : [
-          {x : 'A', y : 100, z : '2012'},
-          {x : 'B', y :  50, z : '2012'},
-          {x : 'C', y : 150, z : '2012'},
-          {x : 'A', y :  30, z : '2013'},
-          {x : 'B', y :  70, z : '2013'},
-          {x : 'C', y : 180, z : '2013'}
+          {x : 'A', y : 100, z : '2012', c : 'green' },
+          {x : 'B', y :  50, z : '2012', c : 'red'   },
+          {x : 'C', y : 150, z : '2012', c : 'blue'  },
+          {x : 'A', y :  30, z : '2013', c : 'green' },
+          {x : 'B', y :  70, z : '2013', c : 'red'   },
+          {x : 'C', y : 180, z : '2013', c : 'blue'  }
         ]
       };
 
@@ -254,15 +254,21 @@
         showAsGrid : true
       };
 
-      /** For the first test, only vertical bars are defined */
+      /** 
+      For the first test, only vertical bars are defined
+
+      zAxis : chart uses another scale, like drawing two axis
+      */
       var options8 = {
         chartName : Charty.CHART_NAMES.GROUPED_BAR_CHART,
         axisSystem : Charty.CHART_NAMES.YXY_AXIS,
         xAxis : Charty.AXIS_TYPE.ORDINAL,
+        zAxis : Charty.AXIS_TYPE.ORDINAL,
+        defaultZDomain : ['2012','2013'],
         yAxis : Charty.AXIS_TYPE.LINEAR,
         root : '#chart8',
         showAsGrid : true
-      }
+      };
 
       /**
       Bar chart creation, dimensioning

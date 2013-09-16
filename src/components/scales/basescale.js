@@ -29,7 +29,6 @@ for inheritance.
 }(this, function (d3, Charty) {
 
 	var BaseScale = function(){
-
 	};
 
 	/**
@@ -60,7 +59,7 @@ for inheritance.
 				r = [range,0];
 			}
 			else{
-				throw new Error('No scale was defined for this scale.');
+				throw new Error('No range was defined for this scale.');
 			}
 		}
 

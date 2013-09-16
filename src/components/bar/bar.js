@@ -97,8 +97,14 @@ Bar drawer. Takes only one data series as input.
             this.attr('class', function(d){
                   return (d.c || chart.c);
                 })
-                .attr('x', function(d) { return chart.xscale.map(d.x, chart.factor);} )
-                .attr('width', chart.xscale.band(chart.factor))
+                .attr('x', function(d) {
+                  var pos = 0;
+                  if (chart.zScale){
+                    pos += chart.zScale.map(d.z, 1);
+                  }
+                  return (pos += chart.xscale.map(d.x, (chart.factor || 1) ));
+                })
+                .attr('width', chart.xscale.band(chart.factor || 1))
                 .attr('y', function(d) {
                   return Math.min(zeroY, chart.yscale.map(d.y, chart.factor));
                 })
@@ -120,6 +126,17 @@ Bar drawer. Takes only one data series as input.
       */
       this.layer('barlayer', this.base ,options);
 
+    },
+    /** 
+    Adds z scale if necessary
+
+    @method
+    @param {Object} zScale d3.scale
+    @chainable
+    */
+    setZScale : function (zScale){
+      this.zScale = zScale;
+      return this;
     }
   });
 }));

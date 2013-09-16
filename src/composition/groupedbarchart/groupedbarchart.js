@@ -48,17 +48,10 @@ another one for the data mapping.
     */
     initialize : function(args){
 
-      var options = {
-        chartName : Charty.CHART_NAMES.BAR,
-        instances : (args.instances || 1)
-      };
+      this.axisSystem = this.mixin(args.axisSystem, this.base.append('g'), args).showAsGrid(args.showAsGrid);
+      this.bars = this.mixin(Charty.CHART_NAMES.BAR, this.base.append('g'), args);
 
-      var bars = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base.append('g'), options),
-          axis = this.mixin(args.axisSystem, this.base.append('g'), args).showAsGrid(args.showAsGrid);
-
-      this.scaleFactory = args.scaleFactory;
-
-      this.setMixins(bars, axis);
+      this.setMixins(this.axisSystem, this.bars);
     },
     /**
     It is necessary to rewrite transform data, in order to
@@ -73,8 +66,46 @@ another one for the data mapping.
     transform : function(data){
 
       var d = data.first();
-      console.log(d);
 
+      if (this.defaultZDomain){
+        this.zScale.setDomain(this.defaultZDomain);
+      }
+      else{
+        this.zScale.calculateDomain(data, function (d){ return d.z; });
+      }
+      this.zScale.setRange(this.w);
+
+      this._calculateDomains(data);
+
+      /** x scale is replaced with z scale */
+      this.axisSystem.setXScale(this.zScale);
+
+      /** Adds z scale to bars */
+      this.bars.setZScale(this.zScale);
+
+      return data;
+    },
+    /** 
+    Adding new scale for bars grouping
+
+    @method
+    @param {Object} zScale d3.scale
+    @chainable
+    */
+    setZScale : function (zScale){
+      this.zScale = zScale;
+      return this;
+    },
+    /** 
+    Default z domain 
+
+    @method
+    @param {Object} zDomain
+    @chainable
+    */
+    setDefaultZDomain : function (zDomain){
+      this.defaultZDomain = zDomain;
+      return this;
     }
   });
 }));
