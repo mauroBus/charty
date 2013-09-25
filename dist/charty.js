@@ -2157,24 +2157,29 @@ Triangle drawer.
     @param {Object} data Data Acccessor
     @return {Object} already mapped values for each datapoint
     */
-    transform : function(data){
+    transform: function (data) {
       var result = [],
           dataArray = data.next().data,
           self = this,
           xBand = this.xscale.band(1),
           zeroY = this.yscale.map(0);
 
-      _.each(dataArray, function (element){
-        var x1 = self.xscale.map(element.x,1),
-            x2 = x1 + (xBand/2),
-            x3 = x1 + xBand,
-            y1 = zeroY,
-            y2 = self.yscale.map(element.y);
+      _.each(dataArray, function (element) {
+          var x1 = self.xscale.map(element.x, 1),
+              x2 = x1 + (xBand / 2),
+              x3 = x1 + xBand,
+              y1 = zeroY,
+              y2 = self.yscale.map(element.y);
 
-          result.unshift({x1 : x1, y1: y1, x2 : x2, y2 : y2, x3 : x2, y3 : y1, c: element.c1});
-          result.unshift({x1 : x2, y1: y1, x2 : x2, y2 : y2, x3 : x3, y3 : y1, c: element.c2});
+          result.unshift({ x1: x1, y1: y1, x2: x2, y2: y2, x3: x2, y3: y1, c: element.c1, x: element.x, y: element.y });
+          result.unshift({ x1: x2, y1: y1, x2: x2, y2: y2, x3: x3, y3: y1, c: element.c2, x: element.x, y: element.y });
       });
-      return result;
+
+      return {
+          data: result,
+          c: data.first().c,
+          clickEvent: data.first().clickEvent
+      };
     },
     /**
     Path is defined as a string connecting different
