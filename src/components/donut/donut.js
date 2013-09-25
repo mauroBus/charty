@@ -115,7 +115,7 @@ Donut drawer.
           return this.append('path');
         },
         events: {
-          'merge': function() {
+          'enter': function() {
 
             var chart = this.chart();
 
@@ -130,6 +130,20 @@ Donut drawer.
             if (chart.clickEvent){
               this.on('click', chart.clickEvent);
             }
+
+            return this;
+          },
+          'update' : function(){
+
+            var chart = this.chart();
+
+            /** No click event is considered, it should be added on enter */
+            this.attr('transform', 'translate(' + (chart.xPosition) + ',' + (chart.yPosition) + ')')
+                .attr('class', function (d) {
+
+                  return d.data.c;
+                })
+                .attr('d', arcGen);
 
             return this;
           },

@@ -92,7 +92,7 @@ Circle drawer.
           return this.append('circle');
         },
         events : {
-          'merge' : function(){
+          'enter' : function(){
 
             var chart = this.chart();
 
@@ -108,6 +108,21 @@ Circle drawer.
             if (chart.clickEvent){
               this.on('click', chart.clickEvent);
             }
+
+            return this;
+          },
+          'update' : function (){
+            /** No click event handled on update */
+            var chart = this.chart();
+
+            this.attr('class',function(d){
+                  return (d.c || chart.c);
+                })
+                .attr("r", function(d){
+                  return (d.r || chart.r);
+                })
+                .attr('cx', function(d) { return chart.xscale.map(d.x,0); })
+                .attr('cy', function(d) { return chart.yscale.map(d.y,0); });
 
             return this;
           },

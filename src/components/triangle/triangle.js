@@ -83,7 +83,7 @@ Triangle drawer.
           return this.append('path');
         },
         events : {
-          'merge' : function(){
+          'enter' : function(){
 
             var chart = this.chart();
 
@@ -97,6 +97,19 @@ Triangle drawer.
             if (chart.clickEvent){
               this.on('click', chart.clickEvent);
             }
+
+            return this;
+          },
+          'update' : function (){
+            /** Click event won't be managed here */
+            var chart = this.chart();
+
+            this.attr('class', function(d){
+                  return (d.c || chart.c);
+                })
+                .attr('d', function(d){
+                  return chart.getPath(d);
+                });
 
             return this;
           },
