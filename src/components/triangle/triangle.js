@@ -70,7 +70,7 @@ Triangle drawer.
           chart.c = (d.c || defaults.c);
           chart.clickEvent = d.clickEvent;
 
-          return this.selectAll('path').data(d);
+          return this.selectAll('path').data(d.data);
 
         },
         /**

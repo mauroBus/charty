@@ -2078,7 +2078,7 @@ Triangle drawer.
           chart.c = (d.c || defaults.c);
           chart.clickEvent = d.clickEvent;
 
-          return this.selectAll('path').data(d);
+          return this.selectAll('path').data(d.data);
 
         },
         /**
@@ -2710,40 +2710,6 @@ another one for the data mapping.
       this.bars = this.mixin(Charty.CHART_NAMES.BAR, this.base.append('g'), args);
 
       this.setMixins(this.axisSystem, this.bars);
-
-      /** Defaults for this layer */
-      var defaults = {
-        fontSize : 18
-      };
-
-      var labelOptions = {
-        dataBind : function (d){
-          return this.selectAll('text').data(d.next().data);
-        },
-        insert : function (){
-          return this.append('text');
-        },
-        events : {
-          'merge' : function (){
-
-            var chart = this.chart();
-
-            this.attr('font-size', defaults.fontSize)
-            .attr('x', function (d){
-              return chart.zScale.map(d.z, 1) + chart.xscale.map(d.x, 1) + chart.xscale.band(1)/2 - defaults.fontSize/4;
-            })
-            .attr('y', function (d){return chart.yscale.map(d.y, 1);})
-            .text(function (d){ return d.x ;});
-
-            return this;
-          },
-          'exit' : function (){
-            return this.remove();
-          }
-        }
-      };
-
-      this.layer('labels', this.base.append('g'), labelOptions);
     },
     /**
     It is necessary to rewrite transform data, in order to
