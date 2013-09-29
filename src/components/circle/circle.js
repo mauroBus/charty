@@ -103,11 +103,20 @@ Circle drawer.
                   return (d.r || chart.r);
                 })
                 .attr('cx', function(d) { return chart.xscale.map(d.x,0); })
-                .attr('cy', function(d) { return chart.yscale.map(d.y,0); });
+                .attr('cy', function(d) { return chart.yscale.map(d.y,0); })
+                .attr('data-toggle', 'popover');
 
-            if (chart.clickEvent){
-              this.on('click', chart.clickEvent);
-            }
+            $('circle[data-toggle="popover"]').each(function (){
+              $(this).popover({
+                placement : 'right',
+                container : 'body',
+                trigger : 'click',
+                html : true,
+                content : function (){
+                  return '<div>hue</div>';
+                }
+              });
+            });
 
             return this;
           },
