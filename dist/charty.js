@@ -1418,18 +1418,16 @@ Circle drawer.
                 })
                 .attr('cx', function(d) { return chart.xscale.map(d.x,0); })
                 .attr('cy', function(d) { return chart.yscale.map(d.y,0); })
-                .attr('data-toggle', 'popover');
+                .attr('data-toggle', 'tooltip');
 
-            console.log(this);
-
-            $('circle[data-toggle="popover"]').each(function (){
-              $(this).popover({
+            $('circle[data-toggle="tooltip"]').each(function (){
+              $(this).tooltip({
                 placement : 'right',
                 container : 'body',
                 trigger : 'click',
                 html : true,
-                content : function (){
-                  return '<div>hue</div>';
+                title : function (){
+                  return '<div><b>h</b>ue</div>';
                 }
               });
             });
