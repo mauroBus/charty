@@ -45,7 +45,8 @@ Scatterplot chart
 			var options = {
 				chartName : Charty.CHART_NAMES.CIRCLE,
         dataValidator : args.dataValidator,
-				instances : (args.instances || 1)
+				instances : (args.instances || 1),
+        showOnClick : args.showOnClick
 			};
 
 			var axis = this.mixin(args.axisSystem,

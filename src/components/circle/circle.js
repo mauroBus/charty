@@ -41,6 +41,7 @@ Circle drawer.
     initialize : function(args){
 
       var dataValidator = args.dataValidator,
+          showOnClick = args.showOnClick,
           errors = {
             invalidRadio : 'Invalid value : radius for circles must be positive.'
           };
@@ -103,20 +104,25 @@ Circle drawer.
                   return (d.r || chart.r);
                 })
                 .attr('cx', function(d) { return chart.xscale.map(d.x,0); })
-                .attr('cy', function(d) { return chart.yscale.map(d.y,0); })
-                .attr('data-toggle', 'tooltip');
+                .attr('cy', function(d) { return chart.yscale.map(d.y,0); });
 
-            $('circle[data-toggle="tooltip"]').each(function (){
-              $(this).tooltip({
-                placement : 'right',
-                container : 'body',
-                trigger : 'click',
-                html : true,
-                title : function (){
-                  return '<div><b>h</b>ue</div>';
-                }
+            /** Adding bootstrap popover/tooltip/etc*/
+            if (showOnClick){
+
+              this.attr('data-toggle', showOnClick);
+
+              $('circle[data-toggle="'+showOnClick+'"]').each(function (){
+                $(this)[showOnClick]({
+                  placement : 'right',
+                  container : 'body',
+                  trigger : 'click',
+                  html : true,
+                  title : function (){
+                    return '<div><b>h</b>ue</div>';
+                  }
+                });
               });
-            });
+            }
 
             return this;
           },
