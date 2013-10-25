@@ -1418,23 +1418,15 @@ Circle drawer.
                   return (d.r || chart.r);
                 })
                 .attr('cx', function(d) { return chart.xscale.map(d.x,0); })
-                .attr('cy', function(d) { return chart.yscale.map(d.y,0); });
+                .attr('cy', function(d) { return chart.yscale.map(d.y,0); })
+                .attr('dx', function (d) { return d.x; })
+                .attr('dy', function (d) { return d.y; });
 
             /** Adding bootstrap popover/tooltip/etc*/
             if (showOnClick){
-
               this.attr('data-toggle', showOnClick);
-
-              $('circle[data-toggle="'+showOnClick+'"]').each(function (){
-                $(this)[showOnClick]({
-                  placement : 'right',
-                  container : 'body',
-                  trigger : 'click',
-                  html : true,
-                  title : function (){
-                    return '<div><b>h</b>ue</div>';
-                  }
-                });
+              $('circle[data-toggle="' + 'popover' + '"]').each(function () {
+                  chart.circlePopover(chart.popoverData, this);
               });
             }
 
@@ -1451,7 +1443,9 @@ Circle drawer.
                   return (d.r || chart.r);
                 })
                 .attr('cx', function(d) { return chart.xscale.map(d.x,0); })
-                .attr('cy', function(d) { return chart.yscale.map(d.y,0); });
+                .attr('cy', function(d) { return chart.yscale.map(d.y,0); })
+                .attr('dx', function (d) { return d.x; })
+                .attr('dy', function (d) { return d.y; });
 
             return this;
           },
