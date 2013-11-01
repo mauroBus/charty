@@ -1463,6 +1463,9 @@ Circle drawer.
           chart.r = (dataValidator.isPositiveNumber(d.r, errors.invalidRadio) || defaults.r);
           chart.clickEvent = d.clickEvent;
 
+          chart.popoverData = d.popoverData;
+          chart.circlePopover = d.circlePopover;
+
           return this.selectAll('circle').data(d.data);
         },
         /**
