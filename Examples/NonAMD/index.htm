@@ -198,7 +198,7 @@
         showAsGrid : true,
         yTickCount : 4,
         yAxisTickFormat : "d",
-        /*gradients : [
+        gradients : [
           {
             id : 'gradient1',
             orientation : 'vertical',
@@ -208,7 +208,7 @@
               {className : 'stop3', offset : '100%'}
             ]
           }
-        ]*/
+        ]
       };
 
       var options3 = {
@@ -274,11 +274,12 @@
 
       var marginOptions1 = {
         marginleft : 30,
-        margintop : 20,
+        margintop : 50,
         marginlfactor : 0.85,
-        margintfactor : 0.85
+        margintfactor : 0.75
       };
       chart1.setDimensions(marginOptions1);
+      chart1.setTitle('Testing chart title', 100);
       chart1.draw(datagroup51);
 
       /* Triangle chart creation, dimensioning */

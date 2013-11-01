@@ -3431,6 +3431,21 @@ and the data accessor.
     return this;
   };
 
+  /**
+  Sets title as a header
+
+  @chainable
+  */
+  ChartInterface.prototype.setTitle = function (title, xPosition, yPosition){
+
+    this.svg.append('text')
+            .attr('x', xPosition || 0)
+            .attr('y', yPosition || 30)
+            .text(title);
+
+    return this;
+  };
+
   return ChartInterface;
 }));
 /**
