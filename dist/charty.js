@@ -1362,7 +1362,10 @@ Bar drawer. Takes only one data series as input.
       Layer creation
       */
       this.layer('barlayer', this.base.append('g') , options);
-      this.layer('textlabels', this.base.append('g'), labelsOptions);
+
+      if (args.setTextLabels){
+        this.layer('textlabels', this.base.append('g'), labelsOptions);
+      }
     },
     /**
     Adds z scale if necessary
