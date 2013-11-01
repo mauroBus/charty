@@ -121,13 +121,46 @@ Bar drawer. Takes only one data series as input.
         }
       };
 
+      var labelsOptions = {
+        dataBind : function (d){
+          return this.selectAll('text').data(d);
+        },
+        insert : function (){
+          return this.append('text');
+        },
+        events : {
+          'merge' : function (){
+
+              var chart = this.chart(),
+                zeroY = chart.yscale.map(0),
+                heightZeroY = chart.h - zeroY;
+
+              this.attr('x', function (d){
+                var pos = 0;
+                if (chart.zScale){
+                  pos += chart.zScale.map(d.z, 1);
+                }
+
+                return (pos += chart.xscale.map(d.x, (chart.factor || 1) ));
+              }).attr('y', function (d){
+                return Math.min(zeroY, chart.yscale.map(d.y, chart.factor));
+              }).text(function (d){
+                return d.x;
+              });
+          },
+          'exit' : function (){
+            return this.remove();
+          }
+        }
+      };
+
       /**
       Layer creation
       */
-      this.layer('barlayer', this.base ,options);
-
+      this.layer('barlayer', this.base.append('g') , options);
+      this.layer('textlabels', this.base.append('g'), labelsOptions);
     },
-    /** 
+    /**
     Adds z scale if necessary
 
     @method

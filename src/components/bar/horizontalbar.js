@@ -109,10 +109,42 @@ Bar drawer. Takes only one data series as input.
         }
       };
 
+      var labelsOptions = {
+        dataBind : function (d){
+          return this.selectAll('text').data(d.data);
+        },
+        insert : function (){
+          return this.append('text');
+        },
+        events : {
+          'merge' : function (){
+
+              var chart = this.chart();
+
+              this.attr('x', function (d){
+                return chart.xscale.map(d.x, chart.factor);
+              }).attr('y', function (d){
+                return chart.yscale.map(d.y, chart.factor) + chart.yscale.band(chart.factor)/2;
+              }).text(function (d){
+                return d.x;
+              });
+
+              return this;
+          },
+          'exit' : function (){
+            return this.remove();
+          }
+        }
+      };
+
       /**
       Layer creation
       */
-      this.layer('horizontalayer', this.base ,options);
+      this.layer('horizontalayer', this.base.append('g') ,options);
+
+      if (args.setTextLabels){
+        this.layer('textlabels', this.base.append('g'), labelsOptions);
+      }
     }
   });
 }));

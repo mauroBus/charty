@@ -56,7 +56,8 @@ N data series
 			var options = {
 				chartName : args.barType,
         dataValidator : args.dataValidator,
-				instances : (args.instances || 1)
+				instances : (args.instances || 1),
+        setTextLabels : args.setTextLabels
 			};
 
 			var axis = this.mixin(args.axisSystem,
