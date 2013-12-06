@@ -1327,7 +1327,7 @@ Bar drawer. Takes only one data series as input.
 
       var labelsOptions = {
         dataBind : function (d){
-          return this.selectAll('text').data(d);
+          return this.selectAll('text').data(d.data);
         },
         insert : function (){
           return this.append('text');
@@ -1345,11 +1345,11 @@ Bar drawer. Takes only one data series as input.
                   pos += chart.zScale.map(d.z, 1);
                 }
 
-                return (pos += chart.xscale.map(d.x, (chart.factor || 1) ));
+                return (pos += chart.xscale.map(d.x, (chart.factor || 1))+(chart.xscale.band(chart.factor || 1)*0.45));
               }).attr('y', function (d){
                 return Math.min(zeroY, chart.yscale.map(d.y, chart.factor));
               }).text(function (d){
-                return d.x;
+                return d.y;
               });
           },
           'exit' : function (){
