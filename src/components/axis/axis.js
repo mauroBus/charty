@@ -20,64 +20,63 @@ it will implement all the functions needed.
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('charty/axis',[
-      'd3.chart',
-      'charty/chartynames'
+    define('charty/axis', [
+        'd3.chart',
+        'charty/chartynames'
       ],
-      function (d3, Charty) {
+      function(d3, Charty) {
         /** Export global even in AMD case in case this script
         is loaded with others */
         return factory(d3, Charty);
-    });
-  }
-  else {
+      });
+  } else {
     /** Browser globals */
     factory(d3, Charty);
   }
-}(this, function (d3, Charty) {
+}(this, function(d3, Charty) {
 
   d3.chart(Charty.CHART_NAMES.BASE_CHART)
     .extend(Charty.CHART_NAMES.AXIS, {
-    /**
+      /**
     Basic Axis initialization
 
     @method
     */
-    initialize : function(args){
+      initialize: function(args) {
 
-      /**
+        /**
       Tranlation value in the x direction
 
       @property
       @type Number
       @default 0
       */
-      this.xt = 0;
-      /**
+        this.xt = 0;
+        /**
       Tranlation value in the y direction
 
       @property
       @type Number
       @default 0
       */
-      this.yt = 0;
+        this.yt = 0;
 
-      /**
+        /**
       Defaults for axis
 
       c : axis style class
       */
-      var defaults = {
-        c : 'axis'
-      };
+        var defaults = {
+          c: 'axis'
+        };
 
-      this.axis = d3.svg.axis();
+        this.axis = d3.svg.axis();
 
-      /**
+        /**
       Layer options
       */
-      var axisLayerOptions = {
-        /**
+        var axisLayerOptions = {
+          /**
         Data bind for axis
         Since axis requires just a scale, only one element
         will be set for the data selection
@@ -85,84 +84,88 @@ it will implement all the functions needed.
         @method
         @param {Object} d
         */
-        dataBind : function(d){
+          dataBind: function(d) {
+            /** Case there is no data to display must be checked */
+            if (d.hasNext()) {
+              return this.selectAll('g').data([true]);
+            } else {
+              return this.selectAll('g').data([]);
+            }
+          },
 
-          return this.selectAll('g').data([true]);
-        },
-        /**
+          /**
         Insert for axis. Just inserts one svg:g
         element.
 
         @method
         */
-        insert : function(){
-          return this.append('g');
-        },
-        events : {
-          'enter' : function(){
+          insert: function() {
+            return this.append('g');
+          },
+          events: {
+            'enter': function() {
 
               var chart = this.chart();
 
               /**
               Renders as a grid.
               */
-              if(chart.grid){
-                  chart.axis.tickSize(-chart.tsize,0,0);
+              if (chart.grid) {
+                chart.axis.tickSize(-chart.tsize, 0, 0);
               }
 
               /** Axis drawing */
               this.classed(defaults.c, true)
-                  .call(chart.axis);
+                .call(chart.axis);
 
               /**
               Axis translation in x or y direction.
               */
-              if(chart.xt !== 0 || chart.yt !== 0){
+              if (chart.xt !== 0 || chart.yt !== 0) {
                 this.attr('transform', 'translate(' + chart.xt + ',' + chart.yt + ')');
               }
 
               /** Adds a text label */
-              if (chart.textLabel){
+              if (chart.textLabel) {
                 var text = this.append('text')
-                              .text(chart.textLabel);
+                  .text(chart.textLabel);
 
                 /** Y Axis label rotation */
-                if(chart.labelRotate){
-                  text.attr('transform', 'translate('+ (-chart.w/14) +',' + chart.h/2 +  ')' +
-                            ' rotate(' + chart.labelRotate + ')');
-                }
-                else{
-                  text.attr('transform', 'translate(' + chart.w/2 + ',' + chart.yt/6 +')');
+                if (chart.labelRotate) {
+                  text.attr('transform', 'translate(' + (-chart.w / 14) + ',' + chart.h / 2 + ')' +
+                    ' rotate(' + chart.labelRotate + ')');
+                } else {
+                  text.attr('transform', 'translate(' + chart.w / 2 + ',' + chart.yt / 6 + ')');
                 }
               }
 
               return this;
-          },
-          'update' : function(){
-            
-            return this.call(this.chart().axis);
-          },
-          'remove' : function(){
+            },
+            'update': function() {
 
-            return this.remove();
+              return this.call(this.chart().axis);
+            },
+            'remove': function() {
+
+              return this.remove();
+            }
           }
-        }
-      };
+        };
 
-      /**
+        /**
       Axis layer creation
       */
-      this.layer('axis',this.base.append('g'), axisLayerOptions);
-    },
-    /**
+        this.layer('axis', this.base.append('g'), axisLayerOptions);
+      },
+      /**
     Sets tick size for the axis
 
     @method
     @param {Number} size ticksize
     @chainable
     */
-    tickSize : function(size){
-      /**
+      tickSize: function(size) {
+        /**
       Size for the ticks. Necessary
       to define a grid chart.
 
@@ -170,26 +173,26 @@ it will implement all the functions needed.
       @type Number
       @default 0
       */
-      this.tsize = (size || 0);
-      return this;
-    },
-    /**
+        this.tsize = (size || 0);
+        return this;
+      },
+      /**
     Sets the scale that will be used for the axis
 
     @method
     @param {Object} d3.scale
     @chainable
     */
-    setScale : function (scale){
+      setScale: function(scale) {
 
-      if(!scale){
-        throw new Error('Undefined scale for axis.');
-      }
+        if (!scale) {
+          throw new Error('Undefined scale for axis.');
+        }
 
-      this.axis.scale(scale.getScale());
-      return this;
-    },
-    /**
+        this.axis.scale(scale.getScale());
+        return this;
+      },
+      /**
     Shows the axis as a grid
 
     @method
@@ -197,11 +200,11 @@ it will implement all the functions needed.
     @chainable
     @default false
     */
-    showAsGrid : function (val){
-      this.grid = val;
-      return this;
-    },
-    /**
+      showAsGrid: function(val) {
+        this.grid = val;
+        return this;
+      },
+      /**
     Sets axis orientation
 
     @method
@@ -209,34 +212,34 @@ it will implement all the functions needed.
     @chainable
     @default bottom
     */
-    orient : function (orient){
+      orient: function(orient) {
 
-      this.axis.orient(orient || 'bottom');
-      return this;
-    },
-    /**
+        this.axis.orient(orient || 'bottom');
+        return this;
+      },
+      /**
     Sets x translation for axis.
 
     @method
     @param {Number} t tranlation value
     @chainable
     */
-    xtranslate : function (t){
-      this.xt = t;
-      return this;
-    },
-    /**
+      xtranslate: function(t) {
+        this.xt = t;
+        return this;
+      },
+      /**
     Sets y translation for axis.
 
     @method
     @param {Number} t tranlation value
     @chainable
     */
-    ytranslate : function (t){
-      this.yt = t;
-      return this;
-    },
-    /** 
+      ytranslate: function(t) {
+        this.yt = t;
+        return this;
+      },
+      /**
     Text label that will be set next to the axis
 
     @method
@@ -244,12 +247,12 @@ it will implement all the functions needed.
     @param {Number} labelRotate Rotation for y axis label
     @chainable
     */
-    setTextLabel : function (label, labelRotate){
-      this.textLabel = label;
-      this.labelRotate = labelRotate;
-      return this;
-    },
-    /** 
+      setTextLabel: function(label, labelRotate) {
+        this.textLabel = label;
+        this.labelRotate = labelRotate;
+        return this;
+      },
+      /**
     Custom tick count setting for particular
     axis.
 
@@ -260,24 +263,24 @@ it will implement all the functions needed.
     @param {Number} tCount ticks count
     @chainable
     */
-    tickCount : function (tCount){
-      if (tCount){
-        this.axis.ticks(tCount);
-      }
-      return this;
-    },
-    /** 
+      tickCount: function(tCount) {
+        if (tCount) {
+          this.axis.ticks(tCount);
+        }
+        return this;
+      },
+      /**
     Tick format
 
     @method
     @param {String} format Tick format option
     @chainable
     */
-    tickFormat : function (format){
-      if (format){
-        this.axis.tickFormat(d3.format(format));
+      tickFormat: function(format) {
+        if (format) {
+          this.axis.tickFormat(d3.format(format));
+        }
+        return this;
       }
-      return this;
-    }
-  });
+    });
 }));

@@ -25,7 +25,7 @@ Data checker for different data input
     /** Browser globals */
     root.DataValidator = factory(_);
   }
-}(this, function() {
+}(this, function (_) {
   function DataValidator (_){
 
   }
