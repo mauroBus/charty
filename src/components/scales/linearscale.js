@@ -115,8 +115,8 @@ Linear scale for linear axis
 
         /** Chart can receive no data, should draw nothing or remove already drawn elements */
         if (chartData && !_.isEmpty(chartData)) {
-          var maxg = d3.max(d, f),
-            ming = d3.min(d, f);
+          var maxg = d3.max(chartData, f),
+            ming = d3.min(chartData, f);
 
           max = Math.max(maxg, max);
           min = Math.min(ming, min);
