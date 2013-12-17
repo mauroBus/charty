@@ -1508,10 +1508,9 @@ Circle drawer.
                 .attr('dy', function (d) { return d.y; });
 
             /** Adding bootstrap popover/tooltip/etc*/
-            if (showOnClick){
-              this.attr('data-toggle', showOnClick);
-              $('circle[data-toggle="' + 'popover' + '"]').each(function () {
-                  chart.circlePopover(chart.popoverData, this);
+            if (showOnClick) {
+              _.each(this[0], function(circle) {
+                chart.circlePopover(chart.popoverData, d3.select(circle));
               });
             }
 
