@@ -17,7 +17,8 @@ Linear scale for linear axis
     /** AMD */
     define('charty/linearscale', [
         'd3.chart',
-        'charty/basescale'
+        'charty/basescale',
+        'underscore'
       ],
       function(d3, BaseScale, _) {
         /** Export global even in AMD case in case this script
