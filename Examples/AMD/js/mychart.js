@@ -14,6 +14,7 @@ require.config({
     'underscore'              : '../../../vendor/underscore/underscore-min',
     'feature'                 : '../../../vendor/feature/feature',
     'jquery'                  : '../../../vendor/jquery/jquery.min',
+    'bootstrap'               : '../../../vendor/bootstrap/dist/bootstrap.min',
     'charty/charty'           : '../../../dist/charty',
 
     /** Conditional loading */
@@ -22,6 +23,10 @@ require.config({
   },
   shim:{
     'jquery' : {
+      exports : '$'
+    },
+    'bootstrap' : {
+      deps : ['jquery'],
       exports : '$'
     },
     'underscore' : {
@@ -241,7 +246,7 @@ function(Charty){
     showAsGrid : true
   };
 
-  /** 
+  /**
   For the first test, only vertical bars are defined
 
   zAxis : chart uses another scale, like drawing two axis

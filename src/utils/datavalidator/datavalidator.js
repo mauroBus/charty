@@ -3,7 +3,8 @@ Data checker for different data input
 
 @class DataValidator
 @constructor
-@requires underscore
+@requires d3,
+          underscore
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -12,21 +13,21 @@ Data checker for different data input
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('charty/datavalidator',[
-      'underscore'
+    define('charty/datavalidator', [
+        'd3',
+        'underscore'
       ],
-      function (_) {
-      /** Export global even in AMD case in case this script
+      function(d3, _) {
+        /** Export global even in AMD case in case this script
       is loaded with others */
-      return factory(_);
-    });
-  }
-  else {
+        return factory(_);
+      });
+  } else {
     /** Browser globals */
     root.DataValidator = factory(_);
   }
-}(this, function (_) {
-  function DataValidator (_){
+}(this, function(_) {
+  function DataValidator(_) {
 
   }
 
@@ -38,8 +39,8 @@ Data checker for different data input
   @param {String} message error message to show
   @return {Number} value
   */
-  DataValidator.prototype.isPositiveNumber = function (value, message){
-    if(!_.isUndefined(value) && (!_.isNumber(value) || value < 0)){
+  DataValidator.prototype.isPositiveNumber = function(value, message) {
+    if (!_.isUndefined(value) && (!_.isNumber(value) || value < 0)) {
       throw new Error(message);
     }
     return value;
@@ -53,8 +54,8 @@ Data checker for different data input
   @param {String} error message
   @return {Number} value
   */
-  DataValidator.prototype.isNumber = function(value, message){
-    if(!_.isUndefined(value) && !_.isNumber(value)){
+  DataValidator.prototype.isNumber = function(value, message) {
+    if (!_.isUndefined(value) && !_.isNumber(value)) {
       throw new Error(message);
     }
     return value;
@@ -68,8 +69,8 @@ Data checker for different data input
   @param {String} message error message
   @return {Number} value
   */
-  DataValidator.prototype.isUndefined = function(value, message){
-    if(_.isUndefined(value)){
+  DataValidator.prototype.isUndefined = function(value, message) {
+    if (_.isUndefined(value)) {
       throw new Error(message);
     }
     return value;
