@@ -279,6 +279,23 @@ function(Charty){
     margintfactor : 0.85,
   };
 
+  var secondEvent = function (element){
+
+    var x = $(element).attr('dx'),
+        y = $(element).attr('dy');
+
+    var tpl = '<div><p><b>X: '+ x +', Y: ' + y + '</b></p></div>';
+
+    return tpl;
+  };
+
+  var evts = [],
+      evt1 = { evt : 'mouseover', type : 'function', bind : clickFnt},
+      evt2 = { evt : 'click', type : 'bootstrap', element : 'popover', bind : secondEvent};
+
+  evts.push(evt1);
+  evts.push(evt2);
+
   var chart2 = Charty.chart(options2);
   chart2.setDimensions(marginOptions2);
   chart2.draw(datagroup2);
@@ -310,23 +327,6 @@ function(Charty){
     marginlfactor : 0.85,
     margintfactor : 0.85
   };
-
-  var secondEvent = function (element){
-
-    var x = $(element).attr('dx'),
-        y = $(element).attr('dy');
-
-    var tpl = '<div><p><b>X: '+ x +', Y: ' + y + '</b></p></div>';
-
-    return tpl;
-  };
-
-  var evts = [],
-      evt1 = { evt : 'mouseover', type : 'function', bind : clickFnt},
-      evt2 = { evt : 'click', type : 'bootstrap', element : 'popover', bind : secondEvent};
-
-  evts.push(evt1);
-  evts.push(evt2);
 
   chart4.setDimensions(marginOptions4);
   chart4.setEvents(evts);
