@@ -351,6 +351,7 @@ function(Charty){
     margintfactor : 0.85
   };
   chart7.setDimensions(marginOptions7);
+  chart7.setEvents(evts);
   chart7.draw(datagroup1);
 
   /** Grouped bar chart */
@@ -362,6 +363,24 @@ function(Charty){
     marginlfactor : 0.85,
     margintfactor : 0.85
   };
+
+  var thirdEvent = function (element){
+
+    var x = $(element).attr('x'),
+        y = $(element).attr('y');
+
+    var tpl = '<div><p><b>X: '+ x +', Y: ' + y + '</b></p></div>';
+
+    return tpl;
+  };
+
+  var evt3 = { evt : 'click', type : 'bootstrap', element : 'popover', bind : thirdEvent};
+
+  var evts2 = [];
+  evts2.push(evt1);
+  evts2.push(evt3);
+
   chart8.setDimensions(marginOptions8);
+  chart8.setEvents(evts2);
   chart8.draw(datagroup33);
 });

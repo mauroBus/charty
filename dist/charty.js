@@ -1724,6 +1724,8 @@ Donut drawer.
 /**
 Line drawing.
 
+Note : this charts doesn't take events, as it doesn't seem necessary for now.
+
 @class Line
 @extends SimpleDataGroup
 @constructor
@@ -1819,8 +1821,6 @@ Line drawing.
               this.datum(chart.datum)
                   .classed(chart.c, true)
                   .attr('d',line);
-
-              chart.eventManager.bindAll(this);
 
               return this;
           },
