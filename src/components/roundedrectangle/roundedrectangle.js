@@ -90,8 +90,6 @@ Rounded rectangle drawer.
           chart.ry = (dataValidator.isPositiveNumber(d.ry, errors.invalidRY) || defaults.ry);
           chart.rc = (d.rc || defaults.rc);
 
-          chart.clickEvent = d.clickEvent;
-
           return this.selectAll('rect').data(d.data);
         },
         /**
@@ -122,9 +120,7 @@ Rounded rectangle drawer.
                   return (d.rc || chart.rc);
                 });
 
-            if (chart.clickEvent){
-              this.on('click', chart.clickEvent);
-            }
+            chart.eventManager.bindAll(this);
 
             return this;
           },

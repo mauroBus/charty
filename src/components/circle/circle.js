@@ -79,10 +79,8 @@ Circle drawer.
 
           chart.c = (d.c || defaults.c);
           chart.r = (dataValidator.isPositiveNumber(d.r, errors.invalidRadio) || defaults.r);
-          chart.clickEvent = d.clickEvent;
 
           chart.popoverData = d.popoverData;
-          chart.circlePopover = d.circlePopover;
 
           return this.selectAll('circle').data(d.data);
         },
@@ -106,17 +104,12 @@ Circle drawer.
                 .attr("r", function(d){
                   return (d.r || chart.r);
                 })
-                .attr('cx', function(d) { return chart.xscale.map(d.x,0); })
-                .attr('cy', function(d) { return chart.yscale.map(d.y,0); })
+                .attr('cx', function (d) { return chart.xscale.map(d.x,0); })
+                .attr('cy', function (d) { return chart.yscale.map(d.y,0); })
                 .attr('dx', function (d) { return d.x; })
                 .attr('dy', function (d) { return d.y; });
 
-            /** Adding bootstrap popover/tooltip/etc*/
-            if (showOnClick) {
-              _.each(this[0], function(circle) {
-                chart.circlePopover(chart.popoverData, d3.select(circle));
-              });
-            }
+            chart.eventManager.bindAll(this);
 
             return this;
           },

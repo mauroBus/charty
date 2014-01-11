@@ -36,23 +36,21 @@ so manager won't be working over only one element, but for the collection itself
 
 	/**
 	 * Class constructor
-	 *
-	 * @param t Target selection
 	 */
-	function EventManager(t) {
+	function EventManager() {
 
 		this.events = [];
-		this.t = t;
 	}
 
 	/**
 	 * Adds specific defined event to queue
 	 *
 	 * @method
-	 * @param e Charty event to bind
+	 * @param {Event} e Charty event to bind
 	 * @chainable
 	 */
 	EventManager.prototype.addEvent = function(e) {
+
 		this.events.push(e);
 
 		return this;
@@ -64,11 +62,12 @@ so manager won't be working over only one element, but for the collection itself
 	 * Each event wrapper must have a way to bind itself to the specified
 	 * elements.
 	 *
+	 * @param {d3.selection} t Elements selection
 	 * @chainable
 	 */
-	EventManager.prototype.bindAll = function() {
+	EventManager.prototype.bindAll = function(t) {
 		_.each(this.events, function(e) {
-			e.bind(this.t);
+			e.bind(t);
 		});
 
 		return this;

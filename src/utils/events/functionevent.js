@@ -15,25 +15,25 @@ This is for events that don't depende on an specific API.
 		define('charty/functionevent', [
 			'd3'
 			],
-			function() {
+			function (d3) {
 			/**
 			 * Export global even in AMD case in case this script
 			 * is loaded with others
 			 * */
-			return factory();
+			return factory(d3);
 		});
 	} else {
 		/** Browser globals */
-		root.FunctionEvent = factory();
+		root.FunctionEvent = factory(d3);
 	}
-}(this, function() {
+}(this, function (d3) {
 
 	/**
 	 * Class constructor
 	 *
 	 * In the execute function, d represents a specific data element
 	 *
-	 * @param object options = {
+	 * @param {Object} options = {
 	 *                       on : 'click',
 	 *                       execute : function (d) {}
 	 *                       }
@@ -46,7 +46,7 @@ This is for events that don't depende on an specific API.
 	/**
 	 * Binds a function to a specific event
 	 *
-	 * @param  d3.selection target Target to bind event
+	 * @param {d3.selection} target Target to bind event
 	 * @chainable
 	 */
 	FunctionEvent.prototype.bind = function(target) {

@@ -2,9 +2,15 @@
 Sets an interface for adding a link between the chart
 and the data accessor.
 
+Uses an event manager for defining different charty events. This is
+unique for each chart.
+
 @class ChartInterface
 @constructor
-@requires accessor
+@requires accessor,
+          eventmanager
+          eventfactory
+          underscore
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -13,32 +19,43 @@ and the data accessor.
   if (typeof define === 'function' && define.amd) {
     /** AMD */
     define('charty/chartinterface',[
-      'charty/accessor'
+      'charty/accessor',
+      'charty/eventmanager',
+      'charty/eventfactory',
+      'underscore'
       ],
-      function (Accessor) {
+      function (Accessor, EventManager, EventFactory, _) {
       /** Export global even in AMD case in case this script
       is loaded with others */
-      return factory(Accessor);
+      return factory(Accessor, EventManager, EventFactory, _);
     });
   }
   else {
     /** Browser globals */
-    root.ChartInterface = factory(Accessor);
+    root.ChartInterface = factory(Accessor, EventManager, EventFactory, _);
   }
-}(this, function (Accessor) {
+}(this, function (Accessor, EventManager, EventFactory, _) {
 
   /**
+  Class constructor
+
   @param {Object} chart d3.chart object
   @param {Object} root chart's container
   @param {Object} svg svg element that contains the chart
   @param {Object} gSvg g element attached to svg
+  @param {EventFactory} eventFactory Returns instances of Charty events
   */
-  var ChartInterface = function(chart, rootSelection, svg, gSvg){
+  var ChartInterface = function(chart, rootSelection, svg, gSvg, eventFactory){
     this.accessor = new Accessor();
+    this.eventManager = new EventManager();
     this.chart = chart;
     this.rootSelection = rootSelection;
     this.svg = svg;
     this.gSvg = gSvg;
+    this.eventFactory = eventFactory;
+
+    /** Sets reference in chart for Event Manager */
+    this.chart.setEventManager(this.eventManager);
   };
 
   /**
@@ -137,9 +154,9 @@ and the data accessor.
   ChartInterface.prototype.setBackgroundImage = function (imgClass){
 
     this.rootSelection.classed(imgClass, true);
-
     /** Reference is kept for removing, if necessary */
     this.imgClass = imgClass;
+
     return this;
   };
 
@@ -150,13 +167,17 @@ and the data accessor.
   */
   ChartInterface.prototype.removeBackgroundImage = function (){
     this.rootSelection.classed(this.imgClass, false);
+
     return this;
   };
 
   /**
   Sets title as a header
 
-  @chainable
+  @param {String} title Chart title 
+  @param {Number} xPosition Position along horizontal axis
+  @param {Number} yPosition Position along vertical axis
+  @chainable 
   */
   ChartInterface.prototype.setTitle = function (title, xPosition, yPosition){
 
@@ -164,6 +185,26 @@ and the data accessor.
             .attr('x', xPosition || 0)
             .attr('y', yPosition || 30)
             .text(title);
+
+    return this;
+  };
+
+  /**
+  Sets events for the chart.
+
+  @param Array evs example = [
+                                { evt : 'click', type : 'function', bind : function (){ } },
+                                { evt : 'hover', type : 'bootstrap', element : 'tooltip', bind : function (){ } }
+                              ]                          
+  @chainable
+  */
+  ChartInterface.prototype.setEvents = function (evs){
+
+    var self = this;
+
+    _.each(evs, function (e){
+      self.eventManager.addEvent(self.eventFactory.createEvent(e));
+    });
 
     return this;
   };

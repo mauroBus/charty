@@ -3,7 +3,8 @@ Data checker for different data input
 
 @class DataValidator
 @constructor
-@requires underscore
+@requires d3,
+          underscore
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -12,21 +13,21 @@ Data checker for different data input
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('charty/datavalidator',[
-      'underscore'
+    define('charty/datavalidator', [
+        'd3',
+        'underscore'
       ],
-      function (_) {
-      /** Export global even in AMD case in case this script
+      function(d3, _) {
+        /** Export global even in AMD case in case this script
       is loaded with others */
-      return factory(_);
-    });
-  }
-  else {
+        return factory(_);
+      });
+  } else {
     /** Browser globals */
     root.DataValidator = factory(_);
   }
-}(this, function (_) {
-  function DataValidator (_){
+}(this, function(_) {
+  function DataValidator(_) {
 
   }
 
@@ -38,8 +39,8 @@ Data checker for different data input
   @param {String} message error message to show
   @return {Number} value
   */
-  DataValidator.prototype.isPositiveNumber = function (value, message){
-    if(!_.isUndefined(value) && (!_.isNumber(value) || value < 0)){
+  DataValidator.prototype.isPositiveNumber = function(value, message) {
+    if (!_.isUndefined(value) && (!_.isNumber(value) || value < 0)) {
       throw new Error(message);
     }
     return value;
@@ -53,8 +54,8 @@ Data checker for different data input
   @param {String} error message
   @return {Number} value
   */
-  DataValidator.prototype.isNumber = function(value, message){
-    if(!_.isUndefined(value) && !_.isNumber(value)){
+  DataValidator.prototype.isNumber = function(value, message) {
+    if (!_.isUndefined(value) && !_.isNumber(value)) {
       throw new Error(message);
     }
     return value;
@@ -68,8 +69,8 @@ Data checker for different data input
   @param {String} message error message
   @return {Number} value
   */
-  DataValidator.prototype.isUndefined = function(value, message){
-    if(_.isUndefined(value)){
+  DataValidator.prototype.isUndefined = function(value, message) {
+    if (_.isUndefined(value)) {
       throw new Error(message);
     }
     return value;
@@ -730,6 +731,23 @@ Contains common functionality
       });
 
       return this;
+    },
+    /**
+    Propagates the event manager to component parts.
+
+    @param {EventManager} evtManager Event Manager for chart.
+    @chainable
+    */
+    setEventManager : function (evtManager){
+      this.eventManager = evtManager;
+
+      _.each(this.componentsMixins, function (mixin){
+        if ( mixin.setEventManager ){
+          mixin.setEventManager(evtManager);
+        }
+      });
+
+      return this;
     }
   });
 }));
@@ -1169,6 +1187,8 @@ Bar drawer. Takes only one data series as input.
                 })
                 .attr("height", chart.yscale.band(chart.factor));
 
+            chart.eventManager.bindAll(this);
+
             return this;
           },
           'exit' : function(){
@@ -1331,6 +1351,8 @@ Bar drawer. Takes only one data series as input.
                   return Math.abs(chart.yscale.band(chart.h,d.y) - heightZeroY);}
                 );
 
+            chart.eventManager.bindAll(this);
+
             return this;
           },
           'exit' : function(){
@@ -1476,10 +1498,8 @@ Circle drawer.
 
           chart.c = (d.c || defaults.c);
           chart.r = (dataValidator.isPositiveNumber(d.r, errors.invalidRadio) || defaults.r);
-          chart.clickEvent = d.clickEvent;
 
           chart.popoverData = d.popoverData;
-          chart.circlePopover = d.circlePopover;
 
           return this.selectAll('circle').data(d.data);
         },
@@ -1503,17 +1523,12 @@ Circle drawer.
                 .attr("r", function(d){
                   return (d.r || chart.r);
                 })
-                .attr('cx', function(d) { return chart.xscale.map(d.x,0); })
-                .attr('cy', function(d) { return chart.yscale.map(d.y,0); })
+                .attr('cx', function (d) { return chart.xscale.map(d.x,0); })
+                .attr('cy', function (d) { return chart.yscale.map(d.y,0); })
                 .attr('dx', function (d) { return d.x; })
                 .attr('dy', function (d) { return d.y; });
 
-            /** Adding bootstrap popover/tooltip/etc*/
-            if (showOnClick) {
-              _.each(this[0], function(circle) {
-                chart.circlePopover(chart.popoverData, d3.select(circle));
-              });
-            }
+            chart.eventManager.bindAll(this);
 
             return this;
           },
@@ -1645,8 +1660,6 @@ Donut drawer.
           chart.xPosition = (data.xPosition || (chart.w/2));
           chart.yPosition = (data.yPosition || (chart.h/2));
 
-          chart.clickEvent = data.clickEvent;
-
           /** Radius definition */
           var ir = (dataValidator.isNumber(data.ir, errors.invalidRadius) || defaults.ir),
               or = (dataValidator.isNumber(data.or, errors.invalidRadius) || defaults.or);
@@ -1676,10 +1689,7 @@ Donut drawer.
                 })
                 .attr('d', arcGen);
 
-            /** Function should come from outside */
-            if (chart.clickEvent){
-              this.on('click', chart.clickEvent);
-            }
+            chart.eventManager.bindAll(this);
 
             return this;
           },
@@ -1810,6 +1820,8 @@ Line drawing.
                   .classed(chart.c, true)
                   .attr('d',line);
 
+              chart.eventManager.bindAll(this);
+
               return this;
           },
           'exit' : function(){
@@ -1918,8 +1930,6 @@ Rounded rectangle drawer.
           chart.ry = (dataValidator.isPositiveNumber(d.ry, errors.invalidRY) || defaults.ry);
           chart.rc = (d.rc || defaults.rc);
 
-          chart.clickEvent = d.clickEvent;
-
           return this.selectAll('rect').data(d.data);
         },
         /**
@@ -1950,9 +1960,7 @@ Rounded rectangle drawer.
                   return (d.rc || chart.rc);
                 });
 
-            if (chart.clickEvent){
-              this.on('click', chart.clickEvent);
-            }
+            chart.eventManager.bindAll(this);
 
             return this;
           },
@@ -2070,6 +2078,8 @@ Text labeling.
                   .attr('dy', '0.35em')
                   .text(function(d) { return d.y; });
 
+              chart.eventManager.bindAll(this);
+
               return this;
           },
           'update' : function(){
@@ -2170,7 +2180,6 @@ Triangle drawer.
           var chart = this.chart();
 
           chart.c = (d.c || defaults.c);
-          chart.clickEvent = d.clickEvent;
 
           return this.selectAll('path').data(d.data);
 
@@ -2196,9 +2205,7 @@ Triangle drawer.
                   return chart.getPath(d);
                 });
 
-            if (chart.clickEvent){
-              this.on('click', chart.clickEvent);
-            }
+            chart.eventManager.bindAll(this);
 
             return this;
           },
@@ -2228,22 +2235,6 @@ Triangle drawer.
       this.layer('triangles', this.base.append('g') , options);
     },
     /**
-    Path is defined as a string connecting different
-    data, visualized as dots.
-
-    @method
-    @param {Object} d
-    @return {String} path
-    */
-    /*getPath : function(d, y1, band){
-
-      var x1 = this.xscale.map(d.x,1);
-
-      return  ('M ' + x1 + ' ' + y1 +
-              ' L ' + (x1 + band/2) + ' ' + this.yscale.map(d.y) +
-              ' L ' + (x1 + band) + ' ' + y1);
-    }*/
-    /**
     Transform must be redefined in order to
     separate a triangle in two constituting parts
 
@@ -2271,8 +2262,7 @@ Triangle drawer.
 
       return {
           data: result,
-          c: data.first().c,
-          clickEvent: data.first().clickEvent
+          c: data.first().c
       };
     },
     /**
@@ -3363,12 +3353,313 @@ Accessor will iterate over the data collection.
   return Accessor;
 }));
 /**
+When an event occurs, a defined function will be exectuted.
+This is for events that don't depende on an specific API.
+
+@class FunctionEvent
+@constructor
+@requires d3
+
+@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+*/
+(function(root, factory) {
+	/** Setting up AMD support*/
+	if (typeof define === 'function' && define.amd) {
+		/** AMD */
+		define('charty/functionevent', [
+			'd3'
+			],
+			function (d3) {
+			/**
+			 * Export global even in AMD case in case this script
+			 * is loaded with others
+			 * */
+			return factory(d3);
+		});
+	} else {
+		/** Browser globals */
+		root.FunctionEvent = factory(d3);
+	}
+}(this, function (d3) {
+
+	/**
+	 * Class constructor
+	 *
+	 * In the execute function, d represents a specific data element
+	 *
+	 * @param {Object} options = {
+	 *                       on : 'click',
+	 *                       execute : function (d) {}
+	 *                       }
+	 */
+	function FunctionEvent(options) {
+
+		this.opts = options;
+	}
+
+	/**
+	 * Binds a function to a specific event
+	 *
+	 * @param {d3.selection} target Target to bind event
+	 * @chainable
+	 */
+	FunctionEvent.prototype.bind = function(target) {
+
+		target.on(this.opts.on, this.opts.execute);
+		return this;
+	};
+
+	return FunctionEvent;
+
+}));
+/**
+Hooks to specified element a bootstrap feature (for instance, a popover).
+Since data will be handled a specific way, a custom bootstrap event is given in
+order to facilitate instantiation.
+
+Note : since SVG element won't render contained divs, every element will
+be added to the 'body' element. This workaround is easier than dealing with
+SVG foreing objects.
+
+Supported bootstrap features : popovers, tooltips.
+
+@class BootstrapEvent
+@constructor
+@requires bootstrap
+
+@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+*/
+(function(root, factory) {
+	/** Setting up AMD support */
+	if (typeof define === 'function' && define.amd) {
+		/** AMD */
+		define('charty/bootstrapevent', [
+			'bootstrap',
+			'underscore',
+			'd3'
+		], function ($, _) {
+			/**
+			 * Export global even in AMD case in case this script
+			 * is loaded with others
+			 * */
+			return factory($, _);
+		});
+	} else {
+		/** Browser globals */
+		root.BootstrapEvent = factory($, _);
+	}
+}(this, function ($, _) {
+
+	/**
+	Class constructor
+	@param Object options example = {
+																		type : 'popover',
+																		placement: 'left',
+																		trigger: 'click',
+																		content : function () {}
+																	}
+	*/
+	function BootstrapEvent(options) {
+		this.opts = options;
+	}
+
+	/**
+	 * Binds the bootstrap feature to a specified target selection
+	 * @param  {d3.selection} target Target selection
+	 * @chainable
+	 */
+	BootstrapEvent.prototype.bind = function(target) {
+
+		var self = this;
+
+		/**
+		 * Traversing d3 structure to allow jquery bootstrap bindings
+		 */
+		_.each(target[0], function (element){
+
+			var d3Element = d3.select(element);
+
+			d3Element.attr('data-toggle', self.opts.type);
+
+			$(element)[self.opts.type]({
+				placement : self.opts.placement,
+				trigger : self.opts.trigger,
+				html : true,
+				container : 'body',
+				context : d3Element,
+				content : function (){
+					return self.opts.content(element);
+				}
+			});
+		});
+
+		return this;
+	};
+
+	return BootstrapEvent;
+}));
+/**
+Event factory. 
+
+@class EventManager
+@constructor
+@requires functionevent,
+					bootstrapevent
+
+@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+*/
+(function(root, factory) {
+	/** Setting up AMD support*/
+	if (typeof define === 'function' && define.amd) {
+		/** AMD */
+		define('charty/eventfactory', [
+			'charty/functionevent',
+			'charty/bootstrapevent',
+		], function (FunctionEvent, BootstrapEvent) {
+			/**
+			 * Export global even in AMD case in case this script
+			 * is loaded with others
+			 * */
+			return factory(FunctionEvent, BootstrapEvent);
+		});
+	} else {
+		/** Browser globals */
+		root.EventFactory = factory(FunctionEvent, BootstrapEvent);
+	}
+}(this, function (FunctionEvent, BootstrapEvent) {
+
+	/** 
+	Class constructor
+	*/
+	function EventFactory (){
+
+	}
+
+	/**
+	Creates a specific Charty event object.
+
+	@param {Object} e Defined event options
+	@returns {Event} Charty event
+	*/
+	EventFactory.prototype.createEvent = function (e){
+
+		var EventObject = null;
+
+		switch (e.type){
+			case 'function':
+				EventObject = new FunctionEvent ({
+					on : e.evt,
+					execute : e.bind
+				});
+				break;
+			case 'bootstrap':
+				EventObject = new BootstrapEvent({
+					trigger : e.evt,
+					type : e.element,
+					content : e.bind,
+					placement : e.placement
+				});
+				break;
+			default :
+				break;
+		}
+
+		return EventObject;
+	};
+
+	return EventFactory;
+}));
+/**
+Event manager. A simple way of adding multiple events to only one target,
+if necessary.
+
+Since d3 works over selections, a "target" will represent an element selection,
+so manager won't be working over only one element, but for the collection itself.
+
+@class EventManager
+@constructor
+@requires functionevent,
+					bootstrapevent,
+					underscore
+
+@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+*/
+(function(root, factory) {
+	/** Setting up AMD support*/
+	if (typeof define === 'function' && define.amd) {
+		/** AMD */
+		define('charty/eventmanager', [
+			'charty/functionevent',
+			'charty/bootstrapevent',
+			'underscore'
+		], function (FunctionEvent, BootstrapEvent, _) {
+			/**
+			 * Export global even in AMD case in case this script
+			 * is loaded with others
+			 * */
+			return factory(FunctionEvent, BootstrapEvent, _);
+		});
+	} else {
+		/** Browser globals */
+		root.EventManager = factory(FunctionEvent, BootstrapEvent, _);
+	}
+}(this, function (FunctionEvent, BootstrapEvent, _) {
+
+	/**
+	 * Class constructor
+	 */
+	function EventManager() {
+
+		this.events = [];
+	}
+
+	/**
+	 * Adds specific defined event to queue
+	 *
+	 * @method
+	 * @param {Event} e Charty event to bind
+	 * @chainable
+	 */
+	EventManager.prototype.addEvent = function(e) {
+
+		this.events.push(e);
+
+		return this;
+	};
+
+	/**
+	 * Binds all available events to specified targets.
+	 *
+	 * Each event wrapper must have a way to bind itself to the specified
+	 * elements.
+	 *
+	 * @param {d3.selection} t Elements selection
+	 * @chainable
+	 */
+	EventManager.prototype.bindAll = function(t) {
+		_.each(this.events, function(e) {
+			e.bind(t);
+		});
+
+		return this;
+	};
+
+	return EventManager;
+
+}));
+/**
 Sets an interface for adding a link between the chart
 and the data accessor.
 
+Uses an event manager for defining different charty events. This is
+unique for each chart.
+
 @class ChartInterface
 @constructor
-@requires accessor
+@requires accessor,
+          eventmanager
+          eventfactory
+          underscore
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -3377,32 +3668,43 @@ and the data accessor.
   if (typeof define === 'function' && define.amd) {
     /** AMD */
     define('charty/chartinterface',[
-      'charty/accessor'
+      'charty/accessor',
+      'charty/eventmanager',
+      'charty/eventfactory',
+      'underscore'
       ],
-      function (Accessor) {
+      function (Accessor, EventManager, EventFactory, _) {
       /** Export global even in AMD case in case this script
       is loaded with others */
-      return factory(Accessor);
+      return factory(Accessor, EventManager, EventFactory, _);
     });
   }
   else {
     /** Browser globals */
-    root.ChartInterface = factory(Accessor);
+    root.ChartInterface = factory(Accessor, EventManager, EventFactory, _);
   }
-}(this, function (Accessor) {
+}(this, function (Accessor, EventManager, EventFactory, _) {
 
   /**
+  Class constructor
+
   @param {Object} chart d3.chart object
   @param {Object} root chart's container
   @param {Object} svg svg element that contains the chart
   @param {Object} gSvg g element attached to svg
+  @param {EventFactory} eventFactory Returns instances of Charty events
   */
-  var ChartInterface = function(chart, rootSelection, svg, gSvg){
+  var ChartInterface = function(chart, rootSelection, svg, gSvg, eventFactory){
     this.accessor = new Accessor();
+    this.eventManager = new EventManager();
     this.chart = chart;
     this.rootSelection = rootSelection;
     this.svg = svg;
     this.gSvg = gSvg;
+    this.eventFactory = eventFactory;
+
+    /** Sets reference in chart for Event Manager */
+    this.chart.setEventManager(this.eventManager);
   };
 
   /**
@@ -3501,9 +3803,9 @@ and the data accessor.
   ChartInterface.prototype.setBackgroundImage = function (imgClass){
 
     this.rootSelection.classed(imgClass, true);
-
     /** Reference is kept for removing, if necessary */
     this.imgClass = imgClass;
+
     return this;
   };
 
@@ -3514,13 +3816,17 @@ and the data accessor.
   */
   ChartInterface.prototype.removeBackgroundImage = function (){
     this.rootSelection.classed(this.imgClass, false);
+
     return this;
   };
 
   /**
   Sets title as a header
 
-  @chainable
+  @param {String} title Chart title 
+  @param {Number} xPosition Position along horizontal axis
+  @param {Number} yPosition Position along vertical axis
+  @chainable 
   */
   ChartInterface.prototype.setTitle = function (title, xPosition, yPosition){
 
@@ -3528,6 +3834,26 @@ and the data accessor.
             .attr('x', xPosition || 0)
             .attr('y', yPosition || 30)
             .text(title);
+
+    return this;
+  };
+
+  /**
+  Sets events for the chart.
+
+  @param Array evs example = [
+                                { evt : 'click', type : 'function', bind : function (){ } },
+                                { evt : 'hover', type : 'bootstrap', element : 'tooltip', bind : function (){ } }
+                              ]                          
+  @chainable
+  */
+  ChartInterface.prototype.setEvents = function (evs){
+
+    var self = this;
+
+    _.each(evs, function (e){
+      self.eventManager.addEvent(self.eventFactory.createEvent(e));
+    });
 
     return this;
   };
@@ -3551,6 +3877,7 @@ Chart creation API
       'charty/scalesfactory',
       'charty/chartinterface',
       'charty/datavalidator',
+      'charty/eventfactory',
       'charty/barchart',
       'charty/labeledtrianglechart',
       'charty/linechart',
@@ -3560,20 +3887,22 @@ Chart creation API
       'charty/linechartcircles',
       'charty/groupedbarchart'
       ],
-      function (Charty, ScaleFactory, ChartInterface, DataValidator) {
+      function (Charty, ScaleFactory, ChartInterface, DataValidator, EventFactory) {
         /** Export global even in AMD case in case this script
         is loaded with others */
-        return factory(Charty, ScaleFactory, ChartInterface, DataValidator);
+        return factory(Charty, ScaleFactory, ChartInterface, DataValidator, EventFactory);
     });
   }
   else {
     /** Browser globals */
-    root.Charty = factory(Charty, ScaleFactory, ChartInterface, DataValidator);
+    root.Charty = factory(Charty, ScaleFactory, ChartInterface, DataValidator, EventFactory);
   }
-}(this, function (Charty, ScaleFactory, ChartInterface, DataValidator) {
+}(this, function (Charty, ScaleFactory, ChartInterface, DataValidator, EventFactory) {
 
-  Charty.scaleFactory = new ScaleFactory();
-  Charty.dataValidator = new DataValidator();
+  var scaleFactory = new ScaleFactory(),
+      dataValidator = new DataValidator(),
+      eventFactory = new EventFactory();
+
 
   /**
   Appends a chart to a root d3.selection element. Chart is determined
@@ -3582,15 +3911,17 @@ Chart creation API
   instances.
   Whether the chart takes the container dimensions, is it possible to also set
   the dimensions as initial options
+  Defined events will be spread to every chart's component.
 
   @method
   @param {Object} options options = {
-                    chartName : 'BarChart',
-                    instances : 2,
-                    root : 'body',
-                    xAxis : 'ordinal',
-                    yAxis : 'linear',
-                    xScaleDomain : ['Hi', 'I am', 'a fixed', 'domain']
+                      chartName : 'BarChart',
+                      instances : 2,
+                      root : 'body',
+                      xAxis : 'ordinal',
+                      yAxis : 'linear',
+                      xScaleDomain : ['Hi', 'I am', 'a fixed', 'domain']
+                    }
   @return {Object} d3.chart for data drawing
   */
   Charty.chart = function(options) {
@@ -3638,7 +3969,7 @@ Chart creation API
     /**
     Appends the chart to the specified html element.
     */
-    options.dataValidator = this.dataValidator;
+    options.dataValidator = dataValidator;
 
     var chart = gSvg.chart(options.chartName,options);
 
@@ -3647,14 +3978,14 @@ Chart creation API
     Some charts can use direct mapping instead of scaling.
     */
     if (options.xAxis){
-      chart.setXScale(this.scaleFactory.scale(options.xAxis,'x'));
+      chart.setXScale(scaleFactory.scale(options.xAxis,'x'));
     }
     if (options.yAxis){
-      chart.setYScale(this.scaleFactory.scale(options.yAxis,'y'));
+      chart.setYScale(scaleFactory.scale(options.yAxis,'y'));
     }
     /** Grouped bar chart uses another scale */
     if (options.zAxis){
-      chart.setZScale(this.scaleFactory.scale(options.zAxis,'x'));
+      chart.setZScale(scaleFactory.scale(options.zAxis,'x'));
     }
 
     /** Sets default x domain */
@@ -3674,8 +4005,10 @@ Chart creation API
 
     /**
     Returns the interface for the chart drawing
+
+    Interface will manage the events creation.
     */
-    return new ChartInterface(chart, selection, svg, gSvg);
+    return new ChartInterface(chart, selection, svg, gSvg, eventFactory);
   };
 
   return Charty;

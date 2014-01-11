@@ -7,6 +7,8 @@ Note : since SVG element won't render contained divs, every element will
 be added to the 'body' element. This workaround is easier than dealing with
 SVG foreing objects.
 
+Supported bootstrap features : popovers, tooltips.
+
 @class BootstrapEvent
 @constructor
 @requires bootstrap
@@ -49,26 +51,30 @@ SVG foreing objects.
 
 	/**
 	 * Binds the bootstrap feature to a specified target selection
-	 * @param  d3.selection target Target selection
+	 * @param  {d3.selection} target Target selection
 	 * @chainable
 	 */
 	BootstrapEvent.prototype.bind = function(target) {
 
+		var self = this;
+
 		/**
 		 * Traversing d3 structure to allow jquery bootstrap bindings
 		 */
-		_.each(this[0], function (element){
+		_.each(target[0], function (element){
 
 			var d3Element = d3.select(element);
 
-			$(element)[this.opts.type]({
-				placement : this.opts.placement,
-				trigger : this.opts.trigger,
-				htlm : true,
+			d3Element.attr('data-toggle', self.opts.type);
+
+			$(element)[self.opts.type]({
+				placement : self.opts.placement,
+				trigger : self.opts.trigger,
+				html : true,
 				container : 'body',
 				context : d3Element,
 				content : function (){
-					return this.opts.content(d3Element);
+					return self.opts.content(element);
 				}
 			});
 		});
@@ -77,5 +83,4 @@ SVG foreing objects.
 	};
 
 	return BootstrapEvent;
-
 }));

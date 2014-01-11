@@ -100,6 +100,8 @@ Bar drawer. Takes only one data series as input.
                 })
                 .attr("height", chart.yscale.band(chart.factor));
 
+            chart.eventManager.bindAll(this);
+
             return this;
           },
           'exit' : function(){

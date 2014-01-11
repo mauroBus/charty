@@ -14,7 +14,7 @@ require.config({
     'underscore'              : '../../../vendor/underscore/underscore-min',
     'feature'                 : '../../../vendor/feature/feature',
     'jquery'                  : '../../../vendor/jquery/jquery.min',
-    'bootstrap'               : '../../../vendor/bootstrap/dist/bootstrap.min',
+    'bootstrap'               : '../../../vendor/bootstrap/dist/js/bootstrap.min',
     'charty/charty'           : '../../../dist/charty',
 
     /** Conditional loading */
@@ -63,7 +63,6 @@ function(Charty){
     rw: 30,
     c: 'blueline',
     rc:'gray',
-    clickEvent : clickFnt,
     data: [
       { x: 'A', y: 2, c : 'red', c1: 'red', c2:'blue'},
       { x: 'B', y: 2, c : 'red', c1:'yellow', c2:'green'},
@@ -86,7 +85,6 @@ function(Charty){
     rw: 30,
     c: 'blueline',
     rc:'gray',
-    clickEvent : clickFnt,
     data: [
       { y: 'A', x: 100, c : 'red'},
       { y: 'B', x: -40, c : 'red'},
@@ -111,8 +109,7 @@ function(Charty){
       { x:  25, y: 100, c : 'red'},
       { x:  50, y:  40, c : 'red'},
       { x:  75, y:  60, c : 'red'}
-    ],
-    clickEvent : clickFnt
+    ]
   };
 
   var data5 = {
@@ -120,8 +117,7 @@ function(Charty){
       { x: 25,  y: 150, c : 'blue'},
       { x: 50,  y:  50, c : 'blue'},
       { x: 75,  y:  30, c : 'blue'}
-    ],
-    clickEvent : clickFnt
+    ]
   };
 
   /**
@@ -130,7 +126,6 @@ function(Charty){
   var data4 = {
     ir :  110,
     or :  70,
-    clickEvent : clickFnt,
     /*xPosition : 200,
     yPosition : 200,*/
     data : [
@@ -315,7 +310,26 @@ function(Charty){
     marginlfactor : 0.85,
     margintfactor : 0.85
   };
+
+  var secondEvent = function (element){
+
+    var x = $(element).attr('dx'),
+        y = $(element).attr('dy');
+
+    var tpl = '<div><p><b>X: '+ x +', Y: ' + y + '</b></p></div>';
+
+    return tpl;
+  };
+
+  var evts = [],
+      evt1 = { evt : 'mouseover', type : 'function', bind : clickFnt},
+      evt2 = { evt : 'click', type : 'bootstrap', element : 'popover', bind : secondEvent};
+
+  evts.push(evt1);
+  evts.push(evt2);
+
   chart4.setDimensions(marginOptions4);
+  chart4.setEvents(evts);
   chart4.draw(datagroup22);
 
   /** Donut chart with inner text and background image*/

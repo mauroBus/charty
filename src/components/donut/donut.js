@@ -95,8 +95,6 @@ Donut drawer.
           chart.xPosition = (data.xPosition || (chart.w/2));
           chart.yPosition = (data.yPosition || (chart.h/2));
 
-          chart.clickEvent = data.clickEvent;
-
           /** Radius definition */
           var ir = (dataValidator.isNumber(data.ir, errors.invalidRadius) || defaults.ir),
               or = (dataValidator.isNumber(data.or, errors.invalidRadius) || defaults.or);
@@ -126,10 +124,7 @@ Donut drawer.
                 })
                 .attr('d', arcGen);
 
-            /** Function should come from outside */
-            if (chart.clickEvent){
-              this.on('click', chart.clickEvent);
-            }
+            chart.eventManager.bindAll(this);
 
             return this;
           },

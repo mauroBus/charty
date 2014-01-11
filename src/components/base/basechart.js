@@ -132,6 +132,23 @@ Contains common functionality
       });
 
       return this;
+    },
+    /**
+    Propagates the event manager to component parts.
+
+    @param {EventManager} evtManager Event Manager for chart.
+    @chainable
+    */
+    setEventManager : function (evtManager){
+      this.eventManager = evtManager;
+
+      _.each(this.componentsMixins, function (mixin){
+        if ( mixin.setEventManager ){
+          mixin.setEventManager(evtManager);
+        }
+      });
+
+      return this;
     }
   });
 }));

@@ -79,6 +79,8 @@ Text labeling.
                   .attr('dy', '0.35em')
                   .text(function(d) { return d.y; });
 
+              chart.eventManager.bindAll(this);
+
               return this;
           },
           'update' : function(){

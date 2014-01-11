@@ -68,7 +68,6 @@ Triangle drawer.
           var chart = this.chart();
 
           chart.c = (d.c || defaults.c);
-          chart.clickEvent = d.clickEvent;
 
           return this.selectAll('path').data(d.data);
 
@@ -94,9 +93,7 @@ Triangle drawer.
                   return chart.getPath(d);
                 });
 
-            if (chart.clickEvent){
-              this.on('click', chart.clickEvent);
-            }
+            chart.eventManager.bindAll(this);
 
             return this;
           },
@@ -126,22 +123,6 @@ Triangle drawer.
       this.layer('triangles', this.base.append('g') , options);
     },
     /**
-    Path is defined as a string connecting different
-    data, visualized as dots.
-
-    @method
-    @param {Object} d
-    @return {String} path
-    */
-    /*getPath : function(d, y1, band){
-
-      var x1 = this.xscale.map(d.x,1);
-
-      return  ('M ' + x1 + ' ' + y1 +
-              ' L ' + (x1 + band/2) + ' ' + this.yscale.map(d.y) +
-              ' L ' + (x1 + band) + ' ' + y1);
-    }*/
-    /**
     Transform must be redefined in order to
     separate a triangle in two constituting parts
 
@@ -169,8 +150,7 @@ Triangle drawer.
 
       return {
           data: result,
-          c: data.first().c,
-          clickEvent: data.first().clickEvent
+          c: data.first().c
       };
     },
     /**

@@ -97,6 +97,8 @@ Line drawing.
                   .classed(chart.c, true)
                   .attr('d',line);
 
+              chart.eventManager.bindAll(this);
+
               return this;
           },
           'exit' : function(){

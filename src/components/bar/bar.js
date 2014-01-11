@@ -112,6 +112,8 @@ Bar drawer. Takes only one data series as input.
                   return Math.abs(chart.yscale.band(chart.h,d.y) - heightZeroY);}
                 );
 
+            chart.eventManager.bindAll(this);
+
             return this;
           },
           'exit' : function(){
