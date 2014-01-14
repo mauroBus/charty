@@ -26,7 +26,7 @@ Ordinal Scale
   }
   else {
     /** Browser globals */
-    window.OrdinalScale = factory(d3, BaseScale);
+    root.OrdinalScale = factory(d3, BaseScale);
   }
 }(this, function (d3, BaseScale) {
 

@@ -118,9 +118,11 @@ Chart creation API
     if (options.xAxis){
       chart.setXScale(scaleFactory.scale(options.xAxis,'x'));
     }
+    
     if (options.yAxis){
       chart.setYScale(scaleFactory.scale(options.yAxis,'y'));
     }
+
     /** Grouped bar chart uses another scale */
     if (options.zAxis){
       chart.setZScale(scaleFactory.scale(options.zAxis,'x'));

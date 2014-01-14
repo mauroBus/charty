@@ -211,7 +211,7 @@ for inheritance.
   }
   else {
     /** Browser globals */
-    window.BaseScale = factory(d3, Charty);
+    root.BaseScale = factory(d3, Charty);
   }
 }(this, function (d3, Charty) {
 
@@ -284,7 +284,7 @@ Linear scale for linear axis
       });
   } else {
     /** Browser globals */
-    window.LinearScale = factory(d3, BaseScale, _);
+    root.LinearScale = factory(d3, BaseScale, _);
   }
 }(this, function(d3, BaseScale, _) {
 
@@ -441,7 +441,7 @@ Ordinal Scale
   }
   else {
     /** Browser globals */
-    window.OrdinalScale = factory(d3, BaseScale);
+    root.OrdinalScale = factory(d3, BaseScale);
   }
 }(this, function (d3, BaseScale) {
 
@@ -537,7 +537,7 @@ Ordinal Scale
 	return OrdinalScale;
 }));
 /**
-Scale factory. Separation is provived in an intent
+Scale factory. Separation is provived in an attempt
 to provide an easy way to switching scales in a defined chart
 
 @class ScaleFactory
@@ -567,7 +567,7 @@ to provide an easy way to switching scales in a defined chart
   }
   else {
     /** Browser globals */
-    window.ScaleFactory = factory(Charty, OrdinalScale, LinearScale);
+    root.ScaleFactory = factory(Charty, OrdinalScale, LinearScale);
   }
 }(this, function(Charty, OrdinalScale, LinearScale) {
 	var ScaleFactory = function(){};
@@ -2836,7 +2836,10 @@ another one for the data mapping.
     @chainable
     */
     setZScale : function (zScale){
-      this.zScale = zScale;
+      if (zScale){
+        this.zScale = zScale;
+      }
+      
       return this;
     },
     /** 
@@ -3425,7 +3428,9 @@ Supported bootstrap features : popovers, tooltips.
 
 @class BootstrapEvent
 @constructor
-@requires bootstrap
+@requires bootstrap,
+					underscore,
+					d3
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -3437,16 +3442,16 @@ Supported bootstrap features : popovers, tooltips.
 			'bootstrap',
 			'underscore',
 			'd3'
-		], function ($, _) {
+		], function ($, _, d3) {
 			/**
 			 * Export global even in AMD case in case this script
 			 * is loaded with others
 			 * */
-			return factory($, _);
+			return factory($, _, d3);
 		});
 	} else {
 		/** Browser globals */
-		root.BootstrapEvent = factory($, _);
+		root.BootstrapEvent = factory($, _, d3);
 	}
 }(this, function ($, _) {
 
@@ -3481,6 +3486,7 @@ Supported bootstrap features : popovers, tooltips.
 
 			d3Element.attr('data-toggle', self.opts.type);
 
+			/** Bootstrap popover / tooltip instantiation */
 			$(element)[self.opts.type]({
 				placement : self.opts.placement,
 				trigger : self.opts.trigger,
@@ -3651,8 +3657,13 @@ so manager won't be working over only one element, but for the collection itself
 Sets an interface for adding a link between the chart
 and the data accessor.
 
-Uses an event manager for defining different charty events. This is
-unique for each chart.
+Uses an event manager for defining different charty events. Since events 
+need to be present when chart is rendered, for attachment to every SVG node,
+they should be defined by draw method. This makes an easy way of propagating
+events to each base rendering class.
+
+Note : events are NOT defined in chart init, it can happen that, at this point,
+events handler are not yet defined or they don't have all necessary data.
 
 @class ChartInterface
 @constructor
@@ -3695,16 +3706,14 @@ unique for each chart.
   @param {EventFactory} eventFactory Returns instances of Charty events
   */
   var ChartInterface = function(chart, rootSelection, svg, gSvg, eventFactory){
+
     this.accessor = new Accessor();
-    this.eventManager = new EventManager();
+
     this.chart = chart;
     this.rootSelection = rootSelection;
     this.svg = svg;
     this.gSvg = gSvg;
     this.eventFactory = eventFactory;
-
-    /** Sets reference in chart for Event Manager */
-    this.chart.setEventManager(this.eventManager);
   };
 
   /**
@@ -3763,10 +3772,26 @@ unique for each chart.
 
   @method
   @param {Object} dataArray Data series contained in one array
+  @param {Object} eventsArray Events to be attached to data elements
+  @chainable
   */
-  ChartInterface.prototype.draw = function(dataArray){
+  ChartInterface.prototype.draw = function(dataArray, eventsArray){
+
+    var eventManager = new EventManager(),
+        self = this;
+
+    /** Adding events to manager */
+    _.each(eventsArray, function (e){
+      eventManager.addEvent(self.eventFactory.createEvent(e));
+    });
+
+    /** Sets reference in chart for Event Manager */
+    this.chart.setEventManager(eventManager);
+
     this.accessor.setData(dataArray);
     this.chart.draw(this.accessor);
+
+    return this;
   };
 
   /**
@@ -3834,26 +3859,6 @@ unique for each chart.
             .attr('x', xPosition || 0)
             .attr('y', yPosition || 30)
             .text(title);
-
-    return this;
-  };
-
-  /**
-  Sets events for the chart.
-
-  @param Array evs example = [
-                                { evt : 'click', type : 'function', bind : function (){ } },
-                                { evt : 'hover', type : 'bootstrap', element : 'tooltip', bind : function (){ } }
-                              ]                          
-  @chainable
-  */
-  ChartInterface.prototype.setEvents = function (evs){
-
-    var self = this;
-
-    _.each(evs, function (e){
-      self.eventManager.addEvent(self.eventFactory.createEvent(e));
-    });
 
     return this;
   };
@@ -3980,9 +3985,11 @@ Chart creation API
     if (options.xAxis){
       chart.setXScale(scaleFactory.scale(options.xAxis,'x'));
     }
+    
     if (options.yAxis){
       chart.setYScale(scaleFactory.scale(options.yAxis,'y'));
     }
+
     /** Grouped bar chart uses another scale */
     if (options.zAxis){
       chart.setZScale(scaleFactory.scale(options.zAxis,'x'));

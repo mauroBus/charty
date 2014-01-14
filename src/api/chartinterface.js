@@ -2,8 +2,13 @@
 Sets an interface for adding a link between the chart
 and the data accessor.
 
-Uses an event manager for defining different charty events. This is
-unique for each chart.
+Uses an event manager for defining different charty events. Since events 
+need to be present when chart is rendered, for attachment to every SVG node,
+they should be defined by draw method. This makes an easy way of propagating
+events to each base rendering class.
+
+Note : events are NOT defined in chart init, it can happen that, at this point,
+events handler are not yet defined or they don't have all necessary data.
 
 @class ChartInterface
 @constructor
@@ -46,16 +51,14 @@ unique for each chart.
   @param {EventFactory} eventFactory Returns instances of Charty events
   */
   var ChartInterface = function(chart, rootSelection, svg, gSvg, eventFactory){
+
     this.accessor = new Accessor();
-    this.eventManager = new EventManager();
+
     this.chart = chart;
     this.rootSelection = rootSelection;
     this.svg = svg;
     this.gSvg = gSvg;
     this.eventFactory = eventFactory;
-
-    /** Sets reference in chart for Event Manager */
-    this.chart.setEventManager(this.eventManager);
   };
 
   /**
@@ -114,10 +117,26 @@ unique for each chart.
 
   @method
   @param {Object} dataArray Data series contained in one array
+  @param {Object} eventsArray Events to be attached to data elements
+  @chainable
   */
-  ChartInterface.prototype.draw = function(dataArray){
+  ChartInterface.prototype.draw = function(dataArray, eventsArray){
+
+    var eventManager = new EventManager(),
+        self = this;
+
+    /** Adding events to manager */
+    _.each(eventsArray, function (e){
+      eventManager.addEvent(self.eventFactory.createEvent(e));
+    });
+
+    /** Sets reference in chart for Event Manager */
+    this.chart.setEventManager(eventManager);
+
     this.accessor.setData(dataArray);
     this.chart.draw(this.accessor);
+
+    return this;
   };
 
   /**
@@ -185,26 +204,6 @@ unique for each chart.
             .attr('x', xPosition || 0)
             .attr('y', yPosition || 30)
             .text(title);
-
-    return this;
-  };
-
-  /**
-  Sets events for the chart.
-
-  @param Array evs example = [
-                                { evt : 'click', type : 'function', bind : function (){ } },
-                                { evt : 'hover', type : 'bootstrap', element : 'tooltip', bind : function (){ } }
-                              ]                          
-  @chainable
-  */
-  ChartInterface.prototype.setEvents = function (evs){
-
-    var self = this;
-
-    _.each(evs, function (e){
-      self.eventManager.addEvent(self.eventFactory.createEvent(e));
-    });
 
     return this;
   };

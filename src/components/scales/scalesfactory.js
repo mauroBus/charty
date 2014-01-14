@@ -1,5 +1,5 @@
 /**
-Scale factory. Separation is provived in an intent
+Scale factory. Separation is provived in an attempt
 to provide an easy way to switching scales in a defined chart
 
 @class ScaleFactory
@@ -29,7 +29,7 @@ to provide an easy way to switching scales in a defined chart
   }
   else {
     /** Browser globals */
-    window.ScaleFactory = factory(Charty, OrdinalScale, LinearScale);
+    root.ScaleFactory = factory(Charty, OrdinalScale, LinearScale);
   }
 }(this, function(Charty, OrdinalScale, LinearScale) {
 	var ScaleFactory = function(){};

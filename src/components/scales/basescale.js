@@ -24,7 +24,7 @@ for inheritance.
   }
   else {
     /** Browser globals */
-    window.BaseScale = factory(d3, Charty);
+    root.BaseScale = factory(d3, Charty);
   }
 }(this, function (d3, Charty) {
 

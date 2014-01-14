@@ -27,7 +27,7 @@ Linear scale for linear axis
       });
   } else {
     /** Browser globals */
-    window.LinearScale = factory(d3, BaseScale, _);
+    root.LinearScale = factory(d3, BaseScale, _);
   }
 }(this, function(d3, BaseScale, _) {
 

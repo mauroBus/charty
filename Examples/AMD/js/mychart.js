@@ -329,8 +329,7 @@ function(Charty){
   };
 
   chart4.setDimensions(marginOptions4);
-  chart4.setEvents(evts);
-  chart4.draw(datagroup22);
+  chart4.draw(datagroup22, evts);
 
   /** Donut chart with inner text and background image*/
   var chart6 = Charty.chart(options6);
@@ -351,8 +350,7 @@ function(Charty){
     margintfactor : 0.85
   };
   chart7.setDimensions(marginOptions7);
-  chart7.setEvents(evts);
-  chart7.draw(datagroup1);
+  chart7.draw(datagroup1, evts);
 
   /** Grouped bar chart */
   var chart8 = Charty.chart(options8);
@@ -381,6 +379,5 @@ function(Charty){
   evts2.push(evt3);
 
   chart8.setDimensions(marginOptions8);
-  chart8.setEvents(evts2);
-  chart8.draw(datagroup33);
+  chart8.draw(datagroup33, evts2);
 });

@@ -93,7 +93,10 @@ another one for the data mapping.
     @chainable
     */
     setZScale : function (zScale){
-      this.zScale = zScale;
+      if (zScale){
+        this.zScale = zScale;
+      }
+      
       return this;
     },
     /** 

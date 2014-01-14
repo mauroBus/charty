@@ -11,7 +11,9 @@ Supported bootstrap features : popovers, tooltips.
 
 @class BootstrapEvent
 @constructor
-@requires bootstrap
+@requires bootstrap,
+					underscore,
+					d3
 
 @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -23,16 +25,16 @@ Supported bootstrap features : popovers, tooltips.
 			'bootstrap',
 			'underscore',
 			'd3'
-		], function ($, _) {
+		], function ($, _, d3) {
 			/**
 			 * Export global even in AMD case in case this script
 			 * is loaded with others
 			 * */
-			return factory($, _);
+			return factory($, _, d3);
 		});
 	} else {
 		/** Browser globals */
-		root.BootstrapEvent = factory($, _);
+		root.BootstrapEvent = factory($, _, d3);
 	}
 }(this, function ($, _) {
 
@@ -67,6 +69,7 @@ Supported bootstrap features : popovers, tooltips.
 
 			d3Element.attr('data-toggle', self.opts.type);
 
+			/** Bootstrap popover / tooltip instantiation */
 			$(element)[self.opts.type]({
 				placement : self.opts.placement,
 				trigger : self.opts.trigger,
