@@ -83,6 +83,12 @@ Bar drawer. Takes only one data series as input.
           return this.append('rect');
         },
         events : {
+          /** Events are set, drawing of new elements is handled by merger */
+          'enter' : function (){
+            this.chart().eventManager.bindAll(this);
+
+            return this;
+          },
           'merge' : function(){
 
             var chart = this.chart(),
@@ -111,8 +117,6 @@ Bar drawer. Takes only one data series as input.
                 .attr('height', function(d) {
                   return Math.abs(chart.yscale.band(chart.h,d.y) - heightZeroY);}
                 );
-
-            chart.eventManager.bindAll(this);
 
             return this;
           },

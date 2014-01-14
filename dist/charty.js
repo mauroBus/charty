@@ -1170,6 +1170,12 @@ Bar drawer. Takes only one data series as input.
           return this.append('rect');
         },
         events : {
+          /** Events are set, drawing of new elements is handled by merge */
+          'enter' : function (){
+            this.chart().eventManager.bindAll(this);
+
+            return this;
+          },
           'merge' : function(){
 
             var chart = this.chart(),
@@ -1322,6 +1328,12 @@ Bar drawer. Takes only one data series as input.
           return this.append('rect');
         },
         events : {
+          /** Events are set, drawing of new elements is handled by merger */
+          'enter' : function (){
+            this.chart().eventManager.bindAll(this);
+
+            return this;
+          },
           'merge' : function(){
 
             var chart = this.chart(),
@@ -1350,8 +1362,6 @@ Bar drawer. Takes only one data series as input.
                 .attr('height', function(d) {
                   return Math.abs(chart.yscale.band(chart.h,d.y) - heightZeroY);}
                 );
-
-            chart.eventManager.bindAll(this);
 
             return this;
           },
@@ -1499,8 +1509,6 @@ Circle drawer.
           chart.c = (d.c || defaults.c);
           chart.r = (dataValidator.isPositiveNumber(d.r, errors.invalidRadio) || defaults.r);
 
-          chart.popoverData = d.popoverData;
-
           return this.selectAll('circle').data(d.data);
         },
         /**
@@ -1514,25 +1522,11 @@ Circle drawer.
         },
         events : {
           'enter' : function(){
-
-            var chart = this.chart();
-
-            this.attr('class',function(d){
-                  return (d.c || chart.c);
-                })
-                .attr("r", function(d){
-                  return (d.r || chart.r);
-                })
-                .attr('cx', function (d) { return chart.xscale.map(d.x,0); })
-                .attr('cy', function (d) { return chart.yscale.map(d.y,0); })
-                .attr('dx', function (d) { return d.x; })
-                .attr('dy', function (d) { return d.y; });
-
-            chart.eventManager.bindAll(this);
+            this.chart().eventManager.bindAll(this);
 
             return this;
           },
-          'update' : function (){
+          'merge' : function (){
             /** No click event handled on update */
             var chart = this.chart();
 
@@ -1679,21 +1673,11 @@ Donut drawer.
         },
         events: {
           'enter': function() {
-
-            var chart = this.chart();
-
-            this.attr('transform', 'translate(' + (chart.xPosition) + ',' + (chart.yPosition) + ')')
-                .attr('class', function (d) {
-
-                  return d.data.c;
-                })
-                .attr('d', arcGen);
-
-            chart.eventManager.bindAll(this);
+            this.chart().eventManager.bindAll(this);
 
             return this;
           },
-          'update' : function(){
+          'merge' : function(){
 
             var chart = this.chart();
 
@@ -1943,28 +1927,11 @@ Rounded rectangle drawer.
         },
         events : {
           'enter' : function(){
-
-            var chart = this.chart();
-
-            this.attr('height', chart.rh)
-                .attr('width', chart.rw)
-                .attr('x', function(d){
-                  return chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2)-(chart.rw/2);
-                })
-                .attr('y',function(d){
-                  return chart.yscale.map(d.y)-(chart.rh/2);
-                })
-                .attr('rx', chart.rx)
-                .attr('ry', chart.ry)
-                .attr('class', function(d){
-                  return (d.rc || chart.rc);
-                });
-
-            chart.eventManager.bindAll(this);
+            this.chart().eventManager.bindAll(this);
 
             return this;
           },
-          'update' : function (){
+          'merge' : function (){
             /** Click event only on enter */
             var chart = this.chart();
 
@@ -2195,21 +2162,11 @@ Triangle drawer.
         },
         events : {
           'enter' : function(){
-
-            var chart = this.chart();
-
-            this.attr('class', function(d){
-                  return (d.c || chart.c);
-                })
-                .attr('d', function(d){
-                  return chart.getPath(d);
-                });
-
-            chart.eventManager.bindAll(this);
+            this.chart().eventManager.bindAll(this);
 
             return this;
           },
-          'update' : function (){
+          'merge' : function (){
             /** Click event won't be managed here */
             var chart = this.chart();
 

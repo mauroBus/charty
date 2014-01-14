@@ -103,28 +103,11 @@ Rounded rectangle drawer.
         },
         events : {
           'enter' : function(){
-
-            var chart = this.chart();
-
-            this.attr('height', chart.rh)
-                .attr('width', chart.rw)
-                .attr('x', function(d){
-                  return chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2)-(chart.rw/2);
-                })
-                .attr('y',function(d){
-                  return chart.yscale.map(d.y)-(chart.rh/2);
-                })
-                .attr('rx', chart.rx)
-                .attr('ry', chart.ry)
-                .attr('class', function(d){
-                  return (d.rc || chart.rc);
-                });
-
-            chart.eventManager.bindAll(this);
+            this.chart().eventManager.bindAll(this);
 
             return this;
           },
-          'update' : function (){
+          'merge' : function (){
             /** Click event only on enter */
             var chart = this.chart();
 

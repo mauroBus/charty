@@ -83,6 +83,12 @@ Bar drawer. Takes only one data series as input.
           return this.append('rect');
         },
         events : {
+          /** Events are set, drawing of new elements is handled by merge */
+          'enter' : function (){
+            this.chart().eventManager.bindAll(this);
+
+            return this;
+          },
           'merge' : function(){
 
             var chart = this.chart(),

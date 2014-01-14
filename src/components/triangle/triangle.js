@@ -83,21 +83,11 @@ Triangle drawer.
         },
         events : {
           'enter' : function(){
-
-            var chart = this.chart();
-
-            this.attr('class', function(d){
-                  return (d.c || chart.c);
-                })
-                .attr('d', function(d){
-                  return chart.getPath(d);
-                });
-
-            chart.eventManager.bindAll(this);
+            this.chart().eventManager.bindAll(this);
 
             return this;
           },
-          'update' : function (){
+          'merge' : function (){
             /** Click event won't be managed here */
             var chart = this.chart();
 
