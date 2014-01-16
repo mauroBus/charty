@@ -1,16 +1,16 @@
 /**
-Donut drawer.
-
-@class Donut
-@extends SimpleDataGroup
-@constructor
-@requires d3,
-          underscore,
-          d3.chart,
-          charty,
-          simpledatagroup
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Donut drawer.
+* 
+* @class Donut
+* @extends SimpleDataGroup
+* @constructor
+* @requires d3,
+*           underscore,
+*           d3.chart,
+*           charty,
+*           simpledatagroup
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -24,7 +24,7 @@ Donut drawer.
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
       });
   } else {
@@ -35,9 +35,9 @@ Donut drawer.
   d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.DONUT, {
     /**
-    Donut initialization
-
-    @method
+    * Donut initialization
+    *
+    * @method
     */
     initialize: function(args) {
 
@@ -47,8 +47,8 @@ Donut drawer.
           };
 
       /**
-      ir : inner radius
-      or : outter radius
+      * ir : inner radius
+      * or : outter radius
       */
       var defaults = {
         ir: 90,
@@ -56,7 +56,7 @@ Donut drawer.
       };
 
       /**
-      d3 layout for pie data mapping.
+      * d3 layout for pie data mapping.
       */
       var pieLayout = d3.layout
         .pie()
@@ -69,23 +69,23 @@ Donut drawer.
 
       var options = {
         /**
-        Data bind for donut.
-        Will take x elements as data for drawing
-        or : outter radius
-        ir : inner radius
-        Each part of the donut must have a color set
-
-        @method
-        @param {Object} data example = {
-                                          ir : 150,
-                                          or : 100,
-                                          xPosition : 100,
-                                          yPosition : 100,
-                                          data : [
-                                            {x : 200, c: 'red' }
-                                            {x : 500, c: 'blue'}
-                                          ]
-                                        }
+        * Data bind for donut.
+        * Will take x elements as data for drawing
+        * or : outter radius
+        * ir : inner radius
+        * Each part of the donut must have a color set
+        *
+        * @method
+        * @param {Object} data example = {
+        *                                  ir : 150,
+        *                                  or : 100,
+        *                                  xPosition : 100,
+        *                                  yPosition : 100,
+        *                                  data : [
+        *                                    {x : 200, c: 'red' }
+        *                                    {x : 500, c: 'blue'}
+        *                                  ]
+        *                                }
         */
         dataBind: function(data) {
 
@@ -105,9 +105,9 @@ Donut drawer.
           return this.selectAll('path').data(pieLayout(data.data));
         },
         /**
-        Adds a svg:path element for the donut
-
-        @method
+        * Adds a svg:path element for the donut
+        *
+        * @method
         */
         insert: function() {
           return this.append('path');
@@ -140,7 +140,7 @@ Donut drawer.
       };
 
       /**
-      Layer creation
+      * Layer creation
       */
       this.layer('paths', this.base.append('g'), options);
     }

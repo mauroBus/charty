@@ -1,18 +1,18 @@
 /**
-Grouped bar chart.
-Unlike regular bar char, grouped needs to define
-two scales for x axis : one for the axis itself, and
-another one for the data mapping.
-
-@class GroupedBarChart
-@extends MultipleDataGroup
-@requires d3.chart,
-          charty/chartynames,
-          charty/scalesfactory,
-          charty/bar,
-          charty/xyaxis,
-          charty/multipledatagroup,
-          charty/multipleinstancesmixin
+* Grouped bar chart.
+* Unlike regular bar char, grouped needs to define
+* two scales for x axis : one for the axis itself, and
+* another one for the data mapping.
+*
+* @class GroupedBarChart
+* @extends MultipleDataGroup
+* @requires d3.chart,
+*           charty/chartynames,
+*           charty/scalesfactory,
+*           charty/bar,
+*           charty/xyaxis,
+*           charty/multipledatagroup,
+*           charty/multipleinstancesmixin
 */
 
 (function(root, factory) {
@@ -30,7 +30,7 @@ another one for the data mapping.
            ],
            function(d3, ScaleFactory, Charty) {
       /** Export global even in AMD case in case this script
-      is loaded with others */
+      * is loaded with others */
       return factory(d3, ScaleFactory, Charty);
     });
   }
@@ -41,10 +41,11 @@ another one for the data mapping.
 }(this, function(d3, ScaleFactory, Charty) {
   d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.GROUPED_BAR_CHART, {
-    /**
-    Grouper Bar Chart initializer.
 
-    @method
+    /**
+    * Grouper Bar Chart initializer.
+    *
+    * @method
     */
     initialize : function(args){
 
@@ -54,14 +55,14 @@ another one for the data mapping.
       this.setMixins(this.axisSystem, this.bars);
     },
     /**
-    It is necessary to rewrite transform data, in order to
-    generate a new scale.
-
-    Two scales are needed : one for the axis, and another
-    one for bar drawing.
-
-    @method
-    @param {Object} data Data Accessor
+    * It is necessary to rewrite transform data, in order to
+    * generate a new scale.
+    *
+    * Two scales are needed : one for the axis, and another
+    * one for bar drawing.
+    *
+    * @method
+    * @param {Object} data Data Accessor
     */
     transform : function(data){
 
@@ -86,11 +87,11 @@ another one for the data mapping.
       return data;
     },
     /** 
-    Adding new scale for bars grouping
-
-    @method
-    @param {Object} zScale d3.scale
-    @chainable
+    * Adding new scale for bars grouping
+    *
+    * @method
+    * @param {Object} zScale d3.scale
+    * @chainable
     */
     setZScale : function (zScale){
       if (zScale){
@@ -100,11 +101,11 @@ another one for the data mapping.
       return this;
     },
     /** 
-    Default z domain 
-
-    @method
-    @param {Object} zDomain
-    @chainable
+    * Default z domain 
+    *
+    * @method
+    * @param {Object} zDomain
+    * @chainable
     */
     setDefaultZDomain : function (zDomain){
       this.defaultZDomain = zDomain;

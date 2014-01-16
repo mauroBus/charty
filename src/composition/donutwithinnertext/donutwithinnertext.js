@@ -1,22 +1,22 @@
 /**
-Custom donut chart.
-Sets a text inside the donut, showing a text label
-with the represented value.
-
-So, this representation will get only one value. The
-other one must be calculated (rest).
-
-The problem can't be solved using mixins, since the text position
-doesn't depend on the data value.
-
-@class DonutWithInnerText
-@constructor
-@extends Donut
-@requires d3.chart,
-          charty,
-          donut
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Custom donut chart.
+* Sets a text inside the donut, showing a text label
+* with the represented value.
+*
+* So, this representation will get only one value. The
+* other one must be calculated (rest).
+* 
+* The problem can't be solved using mixins, since the text position
+* doesn't depend on the data value.
+*
+* @class DonutWithInnerText
+* @constructor
+* @extends Donut
+* @requires d3.chart,
+*           charty,
+*           donut
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -30,7 +30,7 @@ doesn't depend on the data value.
             ],
             function (d3, Charty) {
       /** Export global even in AMD case in case this script
-      is loaded with others */
+      * is loaded with others */
       return factory(d3, Charty);
     });
   }
@@ -50,7 +50,7 @@ doesn't depend on the data value.
           };
 
       /**
-      Defaults for Inner text
+      * Defaults for Inner text
       */
       var defaults = {
         fontSize : 55
@@ -58,17 +58,17 @@ doesn't depend on the data value.
 
       var options = {
         /**
-        First element will be shown as label.
-
-        Data here will take two elements, since is necessary
-        to render two paths for the donut chart.
-
-        The first one is the one that will be shown in label.
-        The second one is the rest of the donut.
-
-        @method
-        @param {Object} data
-        @chainable
+        * First element will be shown as label.
+        * 
+        * Data here will take two elements, since is necessary
+        * to render two paths for the donut chart.
+        * 
+        * The first one is the one that will be shown in label.
+        * The second one is the rest of the donut.
+        * 
+        * @method
+        * @param {Object} data
+        * @chainable
         */
         dataBind : function(d){
 
@@ -84,10 +84,10 @@ doesn't depend on the data value.
           return this.selectAll('text').data([stringValue]);
         },
         /**
-        Inserts one text for the value to display
-
-        @method
-        @chainable
+        * Inserts one text for the value to display
+        *
+        * @method
+        * @chainable
         */
         insert : function(){
           return this.append('text');
@@ -122,7 +122,7 @@ doesn't depend on the data value.
       };
 
       /**
-      Layer creation
+      * Layer creation
       */
       this.layer('donutText', this.base.append('g'), options);
     }

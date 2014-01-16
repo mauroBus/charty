@@ -1,12 +1,12 @@
 /**
-Data checker for different data input
-
-@class DataValidator
-@constructor
-@requires d3,
-          underscore
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Data checker for different data input
+*
+* @class DataValidator
+* @constructor
+* @requires d3,
+*           underscore
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -17,27 +17,28 @@ Data checker for different data input
         'd3',
         'underscore'
       ],
-      function(d3, _) {
+      function (d3, _) {
         /** Export global even in AMD case in case this script
-      is loaded with others */
+        * is loaded with others */
         return factory(_);
       });
   } else {
     /** Browser globals */
     root.DataValidator = factory(_);
   }
-}(this, function(_) {
-  function DataValidator(_) {
+}(this, function (_) {
 
+  /** Class constructor */
+  function DataValidator() {
   }
 
   /**
-  Checks if a given value is defined and > 0
-
-  @method
-  @param {Number} value number to check
-  @param {String} message error message to show
-  @return {Number} value
+  * Checks if a given value is defined and > 0
+  *
+  * @method
+  * @param {Number} value number to check
+  * @param {String} message error message to show
+  * @return {Number} value
   */
   DataValidator.prototype.isPositiveNumber = function(value, message) {
     if (!_.isUndefined(value) && (!_.isNumber(value) || value < 0)) {
@@ -47,12 +48,12 @@ Data checker for different data input
   };
 
   /**
-  Checks if value is number, or is defined
-
-  @method
-  @param {Number} value to check
-  @param {String} error message
-  @return {Number} value
+  * Checks if value is number, or is defined
+  *
+  * @method
+  * @param {Number} value to check
+  * @param {String} error message
+  * @return {Number} value
   */
   DataValidator.prototype.isNumber = function(value, message) {
     if (!_.isUndefined(value) && !_.isNumber(value)) {
@@ -62,12 +63,12 @@ Data checker for different data input
   };
 
   /**
-  Checks if a value is defined
-
-  @method
-  @param {Number} value to check
-  @param {String} message error message
-  @return {Number} value
+  * Checks if a value is defined
+  *
+  * @method
+  * @param {Number} value to check
+  * @param {String} message error message
+  * @return {Number} value
   */
   DataValidator.prototype.isUndefined = function(value, message) {
     if (_.isUndefined(value)) {
@@ -79,15 +80,15 @@ Data checker for different data input
   return DataValidator;
 }));
 /**
-Api for chart creation management.
-
-Having the api, it is possible to set a root html element,
-and it will append a specific chart to it.
-
-@class ChartsApi
-@constructor
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Api for chart creation management.
+* 
+* Having the api, it is possible to set a root html element,
+* and it will append a specific chart to it.
+* 
+* @class ChartsApi
+* @constructor
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -98,7 +99,7 @@ and it will append a specific chart to it.
     define('charty/chartyinit',
       function () {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory();
       });
   } else {
@@ -113,11 +114,11 @@ and it will append a specific chart to it.
   return Charty;
 }));
 /**
-Define constants that will be used as names for different parts
-
-@class ChartNames
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Define constants that will be used as names for different parts
+* 
+* @class ChartNames
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -129,7 +130,7 @@ Define constants that will be used as names for different parts
       ],
       function (Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(Charty);
     });
   }
@@ -166,9 +167,9 @@ Define constants that will be used as names for different parts
   };
 
   /**
-  Axis types are defined as constants
-
-  Related to scaling.
+  * Axis types are defined as constants
+  *
+  * Related to scaling.
   */
   Charty.AXIS_TYPE = {
     ORDINAL: 'ordinal',
@@ -176,7 +177,7 @@ Define constants that will be used as names for different parts
   };
 
   /**
-  Axis defined as constants
+  * Axis defined as constants
   */
   Charty.AXIS = {
     X : 'x',
@@ -186,14 +187,14 @@ Define constants that will be used as names for different parts
   return Charty;
 }));
 /**
-Defines common scale functionality. Used as base element
-for inheritance.
-
-@class BaseScale
-@requires d3.chart,
-          charty
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+*	Defines common scale functionality. Used as base element
+*	for inheritance.
+*
+*	@class BaseScale
+*	@requires d3.chart,
+*						charty
+*
+*	@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 (function(root, factory) {
   /** Setting up AMD support*/
@@ -205,7 +206,7 @@ for inheritance.
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        *	is loaded with others */
         return factory(d3, Charty);
     });
   }
@@ -215,25 +216,26 @@ for inheritance.
   }
 }(this, function (d3, Charty) {
 
+	/** Class constructor */
 	var BaseScale = function(){
 	};
 
 	/**
-	Returns the created scale
-
-	@method
-	@return {Object} d3.scale Linear / Ordinal scale
+	*	Returns the created scale
+	*
+	*	@method
+	*	@return {Object} d3.scale Linear / Ordinal scale
 	*/
 	BaseScale.prototype.getScale = function(){
 		return this.scale;
 	};
 
 	/**
-	Generates range value for a scale.
-
-	@method
-	@param {Number} range value for the range
-	@return {Number} generated range value
+	*	Generates range value for a scale.
+	*
+	*	@method
+	*	@param {Number} range value for the range
+	*	@return {Number} generated range value
 	*/
 	BaseScale.prototype.generateRange = function(range){
 		var r ;
@@ -256,16 +258,16 @@ for inheritance.
 	return BaseScale;
 }));
 /**
-Linear scale for linear axis
-
-@class LinearScale
-@constructor
-@extends BaseScale
-@requires d3.chart,
-          basescale,
-          uderscore
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Linear scale for linear axis
+* 
+* @class LinearScale
+* @constructor
+* @extends BaseScale
+* @requires d3.chart,
+*           basescale,
+*           uderscore
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -279,7 +281,7 @@ Linear scale for linear axis
       ],
       function(d3, BaseScale, _) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, BaseScale, _);
       });
   } else {
@@ -288,22 +290,27 @@ Linear scale for linear axis
   }
 }(this, function(d3, BaseScale, _) {
 
+  /** 
+  * Class constructor
+  *
+  * @param {String} axisType Axis type, defined in Charty names
+  */
   var LinearScale = function(axisType) {
     this.scale = d3.scale.linear();
     this.axisType = axisType;
   };
 
   /**
-  Inheritance from BaseScale
+  * Inheritance from BaseScale
   */
   LinearScale.prototype = new BaseScale();
 
   /**
-  Sets domain for linear scale
-
-  @method
-  @param {Object} arrayValues Max and min value defined by array
-  @chainable
+  * Sets domain for linear scale
+  *
+  * @method
+  * @param {Object} arrayValues Max and min value defined by array
+  * @chainable
   */
   LinearScale.prototype.setDomain = function(arrayValues) {
     this.scale = this.scale.domain(arrayValues);
@@ -311,11 +318,11 @@ Linear scale for linear axis
   };
 
   /**
-  Sets the range for the linear scale
-
-  @method
-  @param {Number} range numeric value for linear scale
-  @chainable
+  * Sets the range for the linear scale
+  *
+  * @method
+  * @param {Number} range numeric value for linear scale
+  * @chainable
   */
   LinearScale.prototype.setRange = function(range) {
     this.scale = this.scale.range(this.generateRange(range));
@@ -323,42 +330,42 @@ Linear scale for linear axis
   };
 
   /**
-  Returns scaled value
-
-  @method
-  @param {Number} value number to map to scale
-  @return {Number} mapped value
+  * Returns scaled value
+  *
+  * @method
+  * @param {Number} value number to map to scale
+  * @return {Number} mapped value
   */
   LinearScale.prototype.map = function(value) {
     return this.scale(value);
   };
 
   /**
-  Returns band for a specified value
-
-  @method
-  @param {Number} max max value for a scale
-  @param {Number} value to map
-  @return {Number} similar to ordinal band but for
-  linear scale
+  * Returns band for a specified value
+  *
+  * @method
+  * @param {Number} max max value for a scale
+  * @param {Number} value to map
+  * @return {Number} similar to ordinal band but for
+  * linear scale
   */
   LinearScale.prototype.band = function(max, value) {
     return (max - this.scale(value));
   };
 
   /**
-  Calculates the domain for the linear scale
-
-  Data probably won't be uniform, so for each data element,
-  a maximum value is obtained. The maximum element will be kept.
-  Same situation is for the minimum element
-
-  Keeps a reference for the minimum value
-
-  @method
-  @param {Object} data Accessor for the data collection
-  @param {Object} f callback function
-  @chainable
+  * Calculates the domain for the linear scale
+  *
+  * Data probably won't be uniform, so for each data element,
+  * a maximum value is obtained. The maximum element will be kept.
+  * Same situation is for the minimum element
+  *
+  * Keeps a reference for the minimum value
+  *
+  * @method
+  * @param {Object} data Accessor for the data collection
+  * @param {Object} f callback function
+  * @chainable
   */
   LinearScale.prototype.calculateDomain = function(data, f) {
     var max = -Infinity,
@@ -389,12 +396,12 @@ Linear scale for linear axis
   };
 
   /**
-  Maximum value setting for linear scale.
-  Useful when setting discrete ticks for continuous scale
-
-  @method
-  @param {Number} maxVal Scale's maximum value
-  @chainable
+  * Maximum value setting for linear scale.
+  * Useful when setting discrete ticks for continuous scale
+  *
+  * @method
+  * @param {Number} maxVal Scale's maximum value
+  * @chainable
   */
   LinearScale.prototype.setMaxValue = function(maxVal) {
     this.maxValue = maxVal;
@@ -402,10 +409,10 @@ Linear scale for linear axis
   };
 
   /**
-  Returns max value
-
-  @method
-  @return {Number} scale's maximum value
+  * Returns max value
+  *
+  * @method
+  * @return {Number} scale's maximum value
   */
   LinearScale.prototype.getMaxValue = function() {
     return this.maxValue;
@@ -414,15 +421,15 @@ Linear scale for linear axis
   return LinearScale;
 }));
 /**
-Ordinal Scale
-
-@class OrdinalScale
-@constructor
-@extends BaseScale
-@requires d3.chart,
-					basescale
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+*	Ordinal Scale
+*	
+*	@class OrdinalScale
+*	@constructor
+*	@extends BaseScale
+*	@requires d3.chart,
+*						basescale
+*	
+*	@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -435,7 +442,7 @@ Ordinal Scale
 			],
 			function (d3, BaseScale) {
 				/** Export global even in AMD case in case this script
-				is loaded with others */
+				*	is loaded with others */
 				return factory(d3, BaseScale);
     });
   }
@@ -445,22 +452,27 @@ Ordinal Scale
   }
 }(this, function (d3, BaseScale) {
 
+	/** 
+  * Class constructor
+  *
+  * @param {String} axisType Axis type, defined in Charty names
+  */
 	var OrdinalScale = function(axisType){
 		this.scale = d3.scale.ordinal();
 		this.axisType = axisType;
 	};
 
 	/**
-	Inheritance from BaseScale
+	*	Inheritance from BaseScale
 	*/
 	OrdinalScale.prototype = new BaseScale();
 
 	/**
-	Sets the domain data for the scale
-
-	@param {Array} domain values for ordinal domain
-	@method
-	@chainable
+	*	Sets the domain data for the scale
+	*
+	*	@method
+	*	@param {Array} domain values for ordinal domain
+	*	@chainable
 	*/
 	OrdinalScale.prototype.setDomain = function(domain){
 		this.scale = this.scale.domain(domain);
@@ -468,11 +480,11 @@ Ordinal Scale
 	};
 
 	/**
-	Sets the range for the scale
-
-	@param {Number} range numeric value for the range
-	@method
-	@chainable
+	*	Sets the range for the scale
+	*
+	*	@method
+	*	@param {Number} range numeric value for the range
+	*	@chainable
 	*/
 	OrdinalScale.prototype.setRange = function(range){
 		this.scale = this.scale.rangeRoundBands(this.generateRange(range) , 0.1);
@@ -480,42 +492,42 @@ Ordinal Scale
 	};
 
 	/**
-	Maps a value to the current scaling
-	Since ordinal scales computes a band width
-	A value needs to be mapped and moved according
-	to that band width
-
-	@method
-	@param {String} value String value that belongs to the domain
-	@param {Number} factor reduce factor for overlapping charts
-	@return {Number} mapped String value
+	*	Maps a value to the current scaling
+	*	Since ordinal scales computes a band width
+	*	A value needs to be mapped and moved according
+	*	to that band width
+	*
+	*	@method
+	*	@param {String} value String value that belongs to the domain
+	*	@param {Number} factor reduce factor for overlapping charts
+	*	@return {Number} mapped String value
 	*/
 	OrdinalScale.prototype.map = function(value, factor){
 		return (this.scale(value) + ((this.scale.rangeBand() - (this.scale.rangeBand() * factor))/2));
 	};
 
 	/**
-	Returns the range band for the scale
-	Can be reduced if (factor < 1)
-
-	@method
-	@param {Number} factor reduce factor
-	@return {Number} scale width
+	*	Returns the range band for the scale
+	*	Can be reduced if (factor < 1)
+	*
+	*	@method
+	*	@param {Number} factor reduce factor
+	*	@return {Number} scale width
 	*/
 	OrdinalScale.prototype.band = function(factor){
 		return (this.scale.rangeBand() * factor);
 	};
 
 	/**
-	Calculates the scale domain, based on a data collection and a
-	callback function
-	Regarding the data series, ordinal scales should be uniform, whether
-	they have values for that specific ordinal element or not.
-
-	@method
-	@param {Object} data Accessor for the data collection
-	@param {Object} f callback function
-	@chainable
+	*	Calculates the scale domain, based on a data collection and a
+	*	callback function
+	*	Regarding the data series, ordinal scales should be uniform, whether
+	*	they have values for that specific ordinal element or not.
+	*
+	*	@method
+	*	@param {Object} data Accessor for the data collection
+	*	@param {Object} f callback function
+	*	@chainable
 	*/
 	OrdinalScale.prototype.calculateDomain = function(data, f){
 		var dataSample = data.first().data,
@@ -525,10 +537,10 @@ Ordinal Scale
 	};
 
 	/**
-	Checks if domain wasn't previously calculated
-
-	@method
-	@return {Boolean} True if domain isn't set
+	*	Checks if domain wasn't previously calculated
+	*
+	*	@method
+	*	@return {Boolean} True if domain isn't set
 	*/
 	OrdinalScale.prototype.defaultDomain = function(){
 		return (this.scale.domain().length === 0);
@@ -537,17 +549,17 @@ Ordinal Scale
 	return OrdinalScale;
 }));
 /**
-Scale factory. Separation is provived in an attempt
-to provide an easy way to switching scales in a defined chart
-
-@class ScaleFactory
-@constructor
-@requires d3.chart,
-          charty,
-          ordinalscale,
-          linearscale
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+*	Scale factory. Separation is provived in an attempt
+*	to provide an easy way to switching scales in a defined chart
+*	
+*	@class ScaleFactory
+*	@constructor
+* @requires d3.chart,
+*						charty,
+*						ordinalscale,
+*						linearscale
+*
+*	@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -561,7 +573,7 @@ to provide an easy way to switching scales in a defined chart
       ],
       function(Charty, OrdinalScale, LinearScale) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        *	is loaded with others */
         return factory(Charty, OrdinalScale, LinearScale);
     });
   }
@@ -573,12 +585,12 @@ to provide an easy way to switching scales in a defined chart
 	var ScaleFactory = function(){};
 
 	/**
-	Returns a specified scale object, acording to a scale type
-
-	@method
-	@param {String} scaleType Available scale type
-	@param {String} axisType Related axis type ('x'-'y')
-	@return {Object} LinearScale / OrdinalScale
+	*	Returns a specified scale object, acording to a scale type
+	*
+	*	@method
+	*	@param {String} scaleType Available scale type
+	*	@param {String} axisType Related axis type ('x'-'y')
+	*	@return {Object} LinearScale / OrdinalScale
 	*/
 	ScaleFactory.prototype.scale = function(scaleType, axisType){
 		var scale;
@@ -598,15 +610,107 @@ to provide an easy way to switching scales in a defined chart
 	return ScaleFactory;
 }));
 /**
-Base class for charts
-Contains common functionality
+* Maps every data point, taking into account one to many
+* scales. Works as a scale composite object.
+*
+* It is possible to requiere more than one scale to map certain
+* elements, so this component will make the correct positioning.
+*
+* Each chart will have two mappers : one for horizontal axis and 
+* other for vertical axis.
+*
+* @class DataMapper
+* @constructor
+* @requires linearscale,
+*           basescale,
+*           underscore
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+*/
+(function(root, factory) {
+  /** Setting up AMD support*/
+  if (typeof define === 'function' && define.amd) {
+    /** AMD */
+    define('charty/datamapper',[
+      'charty/linearscale',
+      'charty/ordinalscale',
+      'underscore'
+      ],
+      function (LinearScale, OrdinalScale, _) {
+        /** Export global even in AMD case in case this script
+        * is loaded with others */
+        return factory(LinearScale, OrdinalScale, _);
+    });
+  }
+  else {
+    /** Browser globals */
+    root.DataMapper = factory(LinearScale, OrdinalScale, _);
+  }
+}(this, function (LinearScale, OrdinalScale, _) {
 
-@class BaseChart
-@requires d3,
-          underscore,
-          d3.chart
+  /** Class constructor */
+  var DataMapper = function (){
+    this.scales = [];
+  };
 
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+  /** 
+  * Adds scale for mapping 
+  *
+  * @method
+  * @param {BaseScale} scale Scale to add
+  * @param {Boolean} setAsBase Defines a scale that will be taken as base
+  * @chainable
+  */
+  DataMapper.prototype.addScale = function (scale, setAsBase){
+
+    this.baseScale = (setAsBase) ? scale : null;
+    this.scales.push(scale);
+  };
+
+  /** 
+  * Returns the defined base scale.
+  *
+  * @method
+  * @returns {BaseScale} Base scale defined
+  */
+  DataMapper.prototype.getBaseScale = function (){
+
+    return this.baseScale;
+  };
+
+  /** 
+  * Maps a data point, according to the defined scales
+  * 
+  * @method
+  * @param {Object} dataElement Data to be mapped
+  * @param {Number} chartFactor Factor that affects some chart's drawing
+  * @returns {Number} Data position in SVG canvas.
+  */
+  DataMapper.prototype.map = function (dataElement, chartFactor){
+
+    /** Different scales adds some value to the final position */
+    var pos = 0;
+
+    _.each(this.scales, function (scale){
+      pos += scale.map(dataElement, chartFactor);
+    });
+
+    return pos;
+  };
+
+  return DataMapper;
+
+}));
+/**
+* Base class for charts
+* Contains common functionality
+* 
+* @class BaseChart
+* @requires d3,
+*           underscore,
+*           d3.chart
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -619,7 +723,7 @@ Contains common functionality
       ],
       function (d3, _) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, _);
     });
   }
@@ -631,13 +735,13 @@ Contains common functionality
 
   d3.chart('BaseChart',{
     /**
-    Sets the width for the chart
-    In case chart contains components, width will
-    propagate to them
-
-    @method
-    @param {Number} newWidth width for the chart
-    @chainable
+    * Sets the width for the chart
+    * In case chart contains components, width will
+    * propagate to them
+    *
+    * @method
+    * @param {Number} newWidth width for the chart
+    * @chainable
     */
     width : function(newWidth){
 
@@ -651,11 +755,11 @@ Contains common functionality
       return this;
     },
     /**
-    Sets the height for the chart. Propagates to
-    components.
-
-    @method
-    @param {Number} newHeight height for the chart
+    * Sets the height for the chart. Propagates to
+    * components.
+    *
+    * @method
+    * @param {Number} newHeight height for the chart
     */
     height : function(newHeight){
 
@@ -669,15 +773,15 @@ Contains common functionality
       return this;
     },
     /**
-    Sets the scale type for the x data mapping chart.
-    Propagates to components
-
-    Not all charts use scales. Some can use direct
-    mapping.
-
-    @method
-    @param {Oject} LinearScale, OrdinalScale
-    @chainable
+    * Sets the scale type for the x data mapping chart.
+    * Propagates to components
+    * 
+    * Not all charts use scales. Some can use direct
+    * mapping.
+    *
+    * @method
+    * @param {Oject} LinearScale, OrdinalScale
+    * @chainable
     */
     setXScale : function (scale){
 
@@ -691,15 +795,15 @@ Contains common functionality
       return this;
     },
     /**
-    Sets the scale type for the y data mapping chart.
-    Propagates to components.
-
-    Not all charts use scales. Some can use direct
-    mapping.
-
-    @method
-    @param {Oject} LinearScale, OrdinalScale
-    @chainable
+    * Sets the scale type for the y data mapping chart.
+    * Propagates to components.
+    *
+    * Not all charts use scales. Some can use direct
+    * mapping.
+    * 
+    * @method
+    * @param {Oject} LinearScale, OrdinalScale
+    * @chainable
     */
     setYScale : function (scale){
 
@@ -713,10 +817,10 @@ Contains common functionality
       return this;
     },
     /**
-    Sets mixins
-
-    @method
-    @chainable
+    * Sets mixins
+    *
+    * @method
+    * @chainable
     */
     setMixins : function(){
       if( !this.componentsMixins ){
@@ -733,10 +837,10 @@ Contains common functionality
       return this;
     },
     /**
-    Propagates the event manager to component parts.
-
-    @param {EventManager} evtManager Event Manager for chart.
-    @chainable
+    * Propagates the event manager to component parts.
+    * 
+    * @param {EventManager} evtManager Event Manager for chart.
+    * @chainable
     */
     setEventManager : function (evtManager){
       this.eventManager = evtManager;
@@ -751,16 +855,16 @@ Contains common functionality
     }
   });
 }));
- /**
-Defines a basic chart to process individual data series
-
-@class SimpleDataGroup
-@extends BaseChart
-@requires d3.chart,
-          charty,
-          basechart
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+/**
+* Defines a basic chart to process individual data series
+* 
+* @class SimpleDataGroup
+* @extends BaseChart
+* @requires d3.chart,
+*           charty,
+*           basechart
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -774,7 +878,7 @@ Defines a basic chart to process individual data series
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
     });
   }
@@ -787,11 +891,11 @@ Defines a basic chart to process individual data series
   d3.chart(Charty.CHART_NAMES.BASE_CHART)
     .extend(Charty.CHART_NAMES.SIMPLE_DATA_GROUP, {
     /**
-    Returns the next element of the data collection
-
-    @method
-    @param {Object} data Data Accessor
-    @return {Object} next element in the collection
+    * Returns the next element of the data collection
+    *
+    * @method
+    * @param {Object} data Data Accessor
+    * @return {Object} next element in the collection
     */
     transform : function (data) {
 
@@ -800,21 +904,21 @@ Defines a basic chart to process individual data series
   });
 }));
 /**
-Basic Axis representation.
-
-Only one X/Y is sufficient for chart drawing, but can
-contain more. The idea is to draw an axis and locate it
-wherever is necessary.
-
-Wether Axis is a BaseChart, no need to extend it, since
-it will implement all the functions needed.
-
-@class Axis
-@constructor
-@requires d3.chart,
-          charty
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Basic Axis representation.
+*
+* Only one X/Y is sufficient for chart drawing, but can
+* contain more. The idea is to draw an axis and locate it
+* wherever is necessary.
+*
+* Wether Axis is a BaseChart, no need to extend it, since
+* it will implement all the functions needed.
+* 
+* @class Axis
+* @constructor
+* @requires d3.chart,
+*           charty
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -827,7 +931,7 @@ it will implement all the functions needed.
       ],
       function(d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
       });
   } else {
@@ -839,34 +943,34 @@ it will implement all the functions needed.
   d3.chart(Charty.CHART_NAMES.BASE_CHART)
     .extend(Charty.CHART_NAMES.AXIS, {
       /**
-    Basic Axis initialization
-
-    @method
-    */
+      * Basic Axis initialization
+      *
+      * @method
+      */
       initialize: function(args) {
 
         /**
-      Tranlation value in the x direction
-
-      @property
-      @type Number
-      @default 0
-      */
+        * Tranlation value in the x direction
+        *
+        * @property
+        * @type Number
+        * @default 0
+        */
         this.xt = 0;
         /**
-      Tranlation value in the y direction
-
-      @property
-      @type Number
-      @default 0
-      */
+        * Tranlation value in the y direction
+        *
+        * @property
+        * @type Number
+        * @default 0
+        */
         this.yt = 0;
 
         /**
-      Defaults for axis
-
-      c : axis style class
-      */
+        * Defaults for axis
+        *
+        * c : axis style class
+        */
         var defaults = {
           c: 'axis'
         };
@@ -874,17 +978,17 @@ it will implement all the functions needed.
         this.axis = d3.svg.axis();
 
         /**
-      Layer options
-      */
+        * Layer options
+        */
         var axisLayerOptions = {
           /**
-        Data bind for axis
-        Since axis requires just a scale, only one element
-        will be set for the data selection
-
-        @method
-        @param {Object} d
-        */
+          * Data bind for axis
+          * Since axis requires just a scale, only one element
+          * will be set for the data selection
+          *
+          * @method
+          * @param {Object} d
+          */
           dataBind: function(d) {
             /** Case there is no data to display must be checked */
             if (d.hasNext()) {
@@ -895,11 +999,11 @@ it will implement all the functions needed.
           },
 
           /**
-        Insert for axis. Just inserts one svg:g
-        element.
-
-        @method
-        */
+          * Insert for axis. Just inserts one svg:g
+          * element.
+          *
+          * @method
+          */
           insert: function() {
             return this.append('g');
           },
@@ -909,7 +1013,7 @@ it will implement all the functions needed.
               var chart = this.chart();
 
               /**
-              Renders as a grid.
+              * Renders as a grid.
               */
               if (chart.grid) {
                 chart.axis.tickSize(-chart.tsize, 0, 0);
@@ -920,7 +1024,7 @@ it will implement all the functions needed.
                 .call(chart.axis);
 
               /**
-              Axis translation in x or y direction.
+              * Axis translation in x or y direction.
               */
               if (chart.xt !== 0 || chart.yt !== 0) {
                 this.attr('transform', 'translate(' + chart.xt + ',' + chart.yt + ')');
@@ -954,36 +1058,36 @@ it will implement all the functions needed.
         };
 
         /**
-      Axis layer creation
-      */
+        * Axis layer creation
+        */
         this.layer('axis', this.base.append('g'), axisLayerOptions);
       },
       /**
-    Sets tick size for the axis
-
-    @method
-    @param {Number} size ticksize
-    @chainable
-    */
+      * Sets tick size for the axis
+      * 
+      * @method
+      * @param {Number} size ticksize
+      * @chainable
+      */
       tickSize: function(size) {
         /**
-      Size for the ticks. Necessary
-      to define a grid chart.
-
-      @property
-      @type Number
-      @default 0
-      */
+        * Size for the ticks. Necessary
+        * to define a grid chart.
+        * 
+        * @property
+        * @type Number
+        * @default 0
+        */
         this.tsize = (size || 0);
         return this;
       },
       /**
-    Sets the scale that will be used for the axis
-
-    @method
-    @param {Object} d3.scale
-    @chainable
-    */
+      * Sets the scale that will be used for the axis
+      *
+      * @method
+      * @param {Object} d3.scale
+      * @chainable
+      */
       setScale: function(scale) {
 
         if (!scale) {
@@ -994,76 +1098,76 @@ it will implement all the functions needed.
         return this;
       },
       /**
-    Shows the axis as a grid
-
-    @method
-    @param {Boolean} val true/false value
-    @chainable
-    @default false
-    */
+      * Shows the axis as a grid
+      * 
+      * @method
+      * @param {Boolean} val true/false value
+      * @chainable
+      * @default false
+      */
       showAsGrid: function(val) {
         this.grid = val;
         return this;
       },
       /**
-    Sets axis orientation
-
-    @method
-    @param {String} orient
-    @chainable
-    @default bottom
-    */
+      * Sets axis orientation
+      *
+      * @method
+      * @param {String} orient
+      * @chainable
+      * @default bottom
+      */
       orient: function(orient) {
 
         this.axis.orient(orient || 'bottom');
         return this;
       },
       /**
-    Sets x translation for axis.
-
-    @method
-    @param {Number} t tranlation value
-    @chainable
-    */
+      * Sets x translation for axis.
+      * 
+      * @method
+      * @param {Number} t tranlation value
+      * @chainable
+      */
       xtranslate: function(t) {
         this.xt = t;
         return this;
       },
       /**
-    Sets y translation for axis.
-
-    @method
-    @param {Number} t tranlation value
-    @chainable
-    */
+      * Sets y translation for axis.
+      *
+      * @method
+      * @param {Number} t tranlation value
+      * @chainable
+      */
       ytranslate: function(t) {
         this.yt = t;
         return this;
       },
       /**
-    Text label that will be set next to the axis
-
-    @method
-    @param {String} label Text label
-    @param {Number} labelRotate Rotation for y axis label
-    @chainable
-    */
+      * Text label that will be set next to the axis
+      *
+      * @method
+      * @param {String} label Text label
+      * @param {Number} labelRotate Rotation for y axis label
+      * @chainable
+      */
       setTextLabel: function(label, labelRotate) {
         this.textLabel = label;
         this.labelRotate = labelRotate;
         return this;
       },
       /**
-    Custom tick count setting for particular
-    axis.
-
-    This options will only work in linear scales,
-    since the domain, by defaut, is continuous.
-
-    @method
-    @param {Number} tCount ticks count
-    @chainable
-    */
+      * Custom tick count setting for particular
+      * axis.
+      *
+      * This options will only work in linear scales,
+      * since the domain, by defaut, is continuous.
+      * 
+      * @method
+      * @param {Number} tCount ticks count
+      * @chainable
+      */
       tickCount: function(tCount) {
         if (tCount) {
           this.axis.ticks(tCount);
@@ -1071,12 +1175,12 @@ it will implement all the functions needed.
         return this;
       },
       /**
-    Tick format
-
-    @method
-    @param {String} format Tick format option
-    @chainable
-    */
+      * Tick format
+      *
+      * @method
+      * @param {String} format Tick format option
+      * @chainable
+      */
       tickFormat: function(format) {
         if (format) {
           this.axis.tickFormat(d3.format(format));
@@ -1109,7 +1213,7 @@ Bar drawer. Takes only one data series as input.
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others*/
+        * is loaded with others*/
         return factory(d3, Charty);
     });
   }
@@ -1244,16 +1348,16 @@ Bar drawer. Takes only one data series as input.
   });
 }));
 /**
-Bar drawer. Takes only one data series as input.
-
-@class Bar
-@constructor
-@extends SimpleDataGroup
-@requires d3.chart,
-          charty,
-          simpledatagroup
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Bar drawer. Takes only one data series as input.
+* 
+* @class Bar
+* @constructor
+* @extends SimpleDataGroup
+* @requires d3.chart,
+*           charty,
+*           simpledatagroup
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -1267,7 +1371,7 @@ Bar drawer. Takes only one data series as input.
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others*/
+        * is loaded with others*/
         return factory(d3, Charty);
     });
   }
@@ -1279,14 +1383,14 @@ Bar drawer. Takes only one data series as input.
   d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.BAR, {
     /**
-    Bar initialization
-
-    @method
+    * Bar initialization
+    *
+    * @method
     */
     initialize : function(args){
 
       /**
-      Sets only bar color as default.
+      * Sets only bar color as default.
       */
       var defaults = {
         c : 'bar-default'
@@ -1294,35 +1398,35 @@ Bar drawer. Takes only one data series as input.
 
       var options = {
         /**
-        Data bind for a bar serie.
-        Can have a color set for the whole serie, or
-        each bar can have an own color defined.
-
-        @method
-        @param {Object} d example = {
-                                       color : 'red',
-                                       data = [
-                                        {x : 'Jan', y : 200, c : 'blue'}
-                                       ]
-                                    }
-        @chainable
+        * Data bind for a bar serie.
+        * Can have a color set for the whole serie, or
+        * each bar can have an own color defined.
+        *
+        * @method
+        * @param {Object} d example = {
+        *                               color : 'red',
+        *                               data = [
+        *                                {x : 'Jan', y : 200, c : 'blue'}
+        *                               ]
+        *                            }
+        * @chainable
         */
         dataBind : function(d){
 
           var chart = this.chart();
 
           /**
-          Sets color for the whole data serie.
+          * Sets color for the whole data serie.
           */
           chart.c = (d.c || defaults.c);
 
           return this.selectAll('rect').data(d.data);
         },
         /**
-        Inserts a svg:rect element.
-
-        @method
-        @chainable
+        * Inserts a svg:rect element.
+        *
+        * @method
+        * @chainable
         */
         insert : function(){
           return this.append('rect');
@@ -1341,9 +1445,9 @@ Bar drawer. Takes only one data series as input.
                 heightZeroY = chart.h - zeroY;
 
             /**
-            chart.factor : value used to define bar's width. It can
-            be useful to reduce the width, in case many data series
-            are draw using bars.
+            * chart.factor : value used to define bar's width. It can
+            * be useful to reduce the width, in case many data series
+            * are draw using bars.
             */
             this.attr('class', function(d){
                   return (d.c || chart.c);
@@ -1406,7 +1510,7 @@ Bar drawer. Takes only one data series as input.
       };
 
       /**
-      Layer creation
+      * Layer creation
       */
       this.layer('barlayer', this.base.append('g') , options);
 
@@ -1415,11 +1519,11 @@ Bar drawer. Takes only one data series as input.
       }
     },
     /**
-    Adds z scale if necessary
-
-    @method
-    @param {Object} zScale d3.scale
-    @chainable
+    * Adds z scale if necessary
+    *
+    * @method
+    * @param {Object} zScale d3.scale
+    * @chainable
     */
     setZScale : function (zScale){
       this.zScale = zScale;
@@ -1428,16 +1532,16 @@ Bar drawer. Takes only one data series as input.
   });
 }));
 /**
-Circle drawer.
-
-@class Circle
-@extends SimpleDataGroup
-@constructor
-@requires d3.chart,
-          underscore,
-          simpledatagroup
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Circle drawer.
+* 
+* @class Circle
+* @extends SimpleDataGroup
+* @constructor
+* @requires d3.chart,
+*           underscore,
+*           simpledatagroup
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -1451,7 +1555,7 @@ Circle drawer.
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
     });
   }
@@ -1463,9 +1567,9 @@ Circle drawer.
   d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.CIRCLE,{
     /**
-    Circle initializator
-
-    @method
+    * Circle initializator
+    *
+    * @method
     */
     initialize : function(args){
 
@@ -1476,10 +1580,10 @@ Circle drawer.
           };
 
       /**
-      Defaults for circles.
-
-      r : circle radius
-      c : circle color
+      * Defaults for circles.
+      *
+      * r : circle radius
+      * c : circle color
       */
       var defaults = {
         r : 5,
@@ -1488,19 +1592,19 @@ Circle drawer.
 
       var options = {
         /**
-        Data bind for a circle serie.
-        Can have color and circle radius set for the whole serie,
-        or own values for each data point.
-
-        @method
-        @param {Object} d example = {
-                                      color : 'red',
-                                      r : 5
-                                      data : [
-                                        {x : 'Jan', y: 300, c : 'blue', r : 20}
-                                      ]
-                                    }
-        @chainable
+        * Data bind for a circle serie.
+        * Can have color and circle radius set for the whole serie,
+        * or own values for each data point.
+        *
+        * @method
+        * @param {Object} d example = {
+        *                              color : 'red',
+        *                              r : 5
+        *                              data : [
+        *                                {x : 'Jan', y: 300, c : 'blue', r : 20}
+        *                              ]
+        *                            }
+        * @chainable
         */
         dataBind: function(d){
 
@@ -1512,10 +1616,10 @@ Circle drawer.
           return this.selectAll('circle').data(d.data);
         },
         /**
-        Appends a svg:circle
-
-        @method
-        @chainable
+        * Appends a svg:circle
+        *
+        * @method
+        * @chainable
         */
         insert : function(){
           return this.append('circle');
@@ -1551,25 +1655,25 @@ Circle drawer.
       };
 
       /**
-      Layer creation
+      * Layer creation
       */
       this.layer('circles', this.base.append('g'), options);
     }
   });
 }));
 /**
-Donut drawer.
-
-@class Donut
-@extends SimpleDataGroup
-@constructor
-@requires d3,
-          underscore,
-          d3.chart,
-          charty,
-          simpledatagroup
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Donut drawer.
+* 
+* @class Donut
+* @extends SimpleDataGroup
+* @constructor
+* @requires d3,
+*           underscore,
+*           d3.chart,
+*           charty,
+*           simpledatagroup
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -1583,7 +1687,7 @@ Donut drawer.
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
       });
   } else {
@@ -1594,9 +1698,9 @@ Donut drawer.
   d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.DONUT, {
     /**
-    Donut initialization
-
-    @method
+    * Donut initialization
+    *
+    * @method
     */
     initialize: function(args) {
 
@@ -1606,8 +1710,8 @@ Donut drawer.
           };
 
       /**
-      ir : inner radius
-      or : outter radius
+      * ir : inner radius
+      * or : outter radius
       */
       var defaults = {
         ir: 90,
@@ -1615,7 +1719,7 @@ Donut drawer.
       };
 
       /**
-      d3 layout for pie data mapping.
+      * d3 layout for pie data mapping.
       */
       var pieLayout = d3.layout
         .pie()
@@ -1628,23 +1732,23 @@ Donut drawer.
 
       var options = {
         /**
-        Data bind for donut.
-        Will take x elements as data for drawing
-        or : outter radius
-        ir : inner radius
-        Each part of the donut must have a color set
-
-        @method
-        @param {Object} data example = {
-                                          ir : 150,
-                                          or : 100,
-                                          xPosition : 100,
-                                          yPosition : 100,
-                                          data : [
-                                            {x : 200, c: 'red' }
-                                            {x : 500, c: 'blue'}
-                                          ]
-                                        }
+        * Data bind for donut.
+        * Will take x elements as data for drawing
+        * or : outter radius
+        * ir : inner radius
+        * Each part of the donut must have a color set
+        *
+        * @method
+        * @param {Object} data example = {
+        *                                  ir : 150,
+        *                                  or : 100,
+        *                                  xPosition : 100,
+        *                                  yPosition : 100,
+        *                                  data : [
+        *                                    {x : 200, c: 'red' }
+        *                                    {x : 500, c: 'blue'}
+        *                                  ]
+        *                                }
         */
         dataBind: function(data) {
 
@@ -1664,9 +1768,9 @@ Donut drawer.
           return this.selectAll('path').data(pieLayout(data.data));
         },
         /**
-        Adds a svg:path element for the donut
-
-        @method
+        * Adds a svg:path element for the donut
+        *
+        * @method
         */
         insert: function() {
           return this.append('path');
@@ -1699,25 +1803,25 @@ Donut drawer.
       };
 
       /**
-      Layer creation
+      * Layer creation
       */
       this.layer('paths', this.base.append('g'), options);
     }
   });
 }));
 /**
-Line drawing.
-
-Note : this charts doesn't take events, as it doesn't seem necessary for now.
-
-@class Line
-@extends SimpleDataGroup
-@constructor
-@requires d3.chart,
-          charty,
-          simpledatagroup
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Line drawing.
+* 
+* Note : this charts doesn't take events, as it doesn't seem necessary for now.
+* 
+* @class Line
+* @extends SimpleDataGroup
+* @constructor
+* @requires d3.chart,
+*           charty,
+*           simpledatagroup
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -1731,7 +1835,7 @@ Note : this charts doesn't take events, as it doesn't seem necessary for now.
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
     });
   }
@@ -1743,14 +1847,14 @@ Note : this charts doesn't take events, as it doesn't seem necessary for now.
   d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.LINE, {
     /**
-    Line initialization
-
-    @method
+    * Line initialization
+    *
+    * @method
     */
     initialize : function(){
 
       /**
-      c : default color line
+      * c : default color line
       */
       var defaults = {
         c : 'line-default'
@@ -1760,19 +1864,19 @@ Note : this charts doesn't take events, as it doesn't seem necessary for now.
 
       var options = {
         /**
-        Data bind for a line serie.
-        Since a line is drawed using d3.line
-        a datum must be defined. Can also have a color
-        for the whole serie.
-
-        @method
-        @param {Object} d example = {
-                                      color : 'redline'
-                                      data : [
-                                        {x : 'Jan', y: 200},
-                                        ...
-                                      ]
-                                    }
+        * Data bind for a line serie.
+        * Since a line is drawed using d3.line
+        * a datum must be defined. Can also have a color
+        * for the whole serie.
+        * 
+        * @method
+        * @param {Object} d example = {
+        *                              color : 'redline'
+        *                              data : [
+        *                                {x : 'Jan', y: 200},
+        *                                ...
+        *                              ]
+        *                            }
         */
         dataBind : function(d){
 
@@ -1788,10 +1892,10 @@ Note : this charts doesn't take events, as it doesn't seem necessary for now.
 
         },
         /**
-        Appends a svg:path
-
-        @method
-        @chainable
+        * Appends a svg:path
+        *
+        * @method
+        * @chainable
         */
         insert : function(){
 
@@ -1816,23 +1920,23 @@ Note : this charts doesn't take events, as it doesn't seem necessary for now.
       };
 
       /**
-      Layer creation
+      * Layer creation
       */
       this.layer('lineslayer', this.base.append('g'), options);
     }
   });
 }));
 /**
-Rounded rectangle drawer.
-
-@class RoundedRectangle
-@constructor
-@extends SimpleDataGroup
-@requires d3.chart,
-          charty,
-          simpledatagroup
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Rounded rectangle drawer.
+* 
+* @class RoundedRectangle
+* @constructor
+* @extends SimpleDataGroup
+* @requires d3.chart,
+*           charty,
+*           simpledatagroup
+* 
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -1846,7 +1950,7 @@ Rounded rectangle drawer.
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
     });
   }
@@ -1858,9 +1962,9 @@ Rounded rectangle drawer.
   d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.ROUNDED_RECTANGLE,{
     /**
-    Rounded rectangle initialization.
-
-    @method
+    * Rounded rectangle initialization.
+    *
+    * @method
     */
     initialize : function(args){
 
@@ -1873,12 +1977,12 @@ Rounded rectangle drawer.
           };
 
       /**
-      Defaults for rectangle
-
-      rh : rectangle height
-      rw : rectangle width
-      rc : rectangle color
-      rx, ry : value for rounded corners
+      * Defaults for rectangle
+      *
+      * rh : rectangle height
+      * rw : rectangle width
+      * rc : rectangle color
+      * rx, ry : value for rounded corners
       */
       var defaults = {
         rh : 20,
@@ -1890,19 +1994,19 @@ Rounded rectangle drawer.
 
       var options = {
         /**
-        Data bind for Rounded Rectangle.
-        Data defines a rectangle height (rh), width (rw),
-        color (rc), rx, ry. If not defined, defauls are
-        used.
-
-        @method
-        @param {Object} d example = {
-                                      rh : 20,
-                                      rw : 20,
-                                      rc : 'red'
-                                      data : [...]
-                                    }
-        @chainable
+        * Data bind for Rounded Rectangle.
+        * Data defines a rectangle height (rh), width (rw),
+        * color (rc), rx, ry. If not defined, defauls are
+        * used.
+        *
+        * @method
+        * @param {Object} d example = {
+        *                              rh : 20,
+        *                              rw : 20,
+        *                              rc : 'red'
+        *                              data : [...]
+        *                            }
+        * @chainable
         */
         dataBind : function(d){
 
@@ -1917,10 +2021,10 @@ Rounded rectangle drawer.
           return this.selectAll('rect').data(d.data);
         },
         /**
-        Appends a svg:rect element.
-
-        @method
-        @chainable
+        * Appends a svg:rect element.
+        *
+        * @method
+        * @chainable
         */
         insert : function(){
           return this.append('rect');
@@ -1958,23 +2062,23 @@ Rounded rectangle drawer.
       };
 
       /**
-      Layer creation
+      * Layer creation
       */
       this.layer('roundedrects', this.base, options);
     }
   });
 }));
 /**
-Text labeling.
-
-@class Text
-@extends SimpleDataGroup
-@constructor
-@requires d3.chart,
-          charty,
-          simpledatagroup
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Text labeling.
+* 
+* @class Text
+* @extends SimpleDataGroup
+* @constructor
+* @requires d3.chart,
+*          charty,
+*          simpledatagroup
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -1988,7 +2092,7 @@ Text labeling.
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
     });
   }
@@ -2000,32 +2104,32 @@ Text labeling.
   d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.TEXT, {
     /**
-    Text label initializator
-
-    @method
+    * Text label initializator
+    *
+    * @method
     */
     initialize : function(){
 
       var options = {
         /**
-        Data bind for text labeling.
-        Can depend on other elements, for instance,
-        the rounded rectangles to form a label.
-
-        @method
-        @param {Object} d example = {
-                                      data : [...]
-                                    }
+        * Data bind for text labeling.
+        * Can depend on other elements, for instance,
+        * the rounded rectangles to form a label.
+        *
+        * @method
+        * @param {Object} d example = {
+        *                              data : [...]
+        *                            }
         */
         dataBind : function(d){
 
           return this.selectAll('text').data(d.data);
         },
         /**
-        Insert a svg:text element for each data input.
-
-        @mehtod
-        @chainable
+        * Insert a svg:text element for each data input.
+        * 
+        * @mehtod
+        * @chainable
         */
         insert : function(){
           return this.append('text');
@@ -2036,14 +2140,14 @@ Text labeling.
               var chart = this.chart();
 
               this.attr('x', function(d){
-                    return chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2);
-                  })
-                  .attr('y', function(d){
-                    return chart.yscale.map(d.y);
-                  })
-                  .attr('text-anchor', 'middle')
-                  .attr('dy', '0.35em')
-                  .text(function(d) { return d.y; });
+                return chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2);
+              })
+              .attr('y', function(d){
+                return chart.yscale.map(d.y);
+              })
+              .attr('text-anchor', 'middle')
+              .attr('dy', '0.35em')
+              .text(function(d) { return d.y; });
 
               chart.eventManager.bindAll(this);
 
@@ -2054,12 +2158,12 @@ Text labeling.
               var chart = this.chart();
 
               this.attr('x', function(d){
-                    return chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2);
-                  })
-                  .attr('y', function(d){
-                    return chart.yscale.map(d.y);
-                  })
-                  .text(function(d) { return d.y; });
+                return chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2);
+              })
+              .attr('y', function(d){
+                return chart.yscale.map(d.y);
+              })
+              .text(function(d) { return d.y; });
 
               return this;
           },
@@ -2071,23 +2175,23 @@ Text labeling.
       };
 
       /**
-      Layer creation
+      * Layer creation
       */
       this.layer('texts', this.base.append('g') , options);
     }
   });
 }));
 /**
-Triangle drawer.
-
-@class Triangle
-@constructor
-@extends SimpleDataGroup
-@requires d3.chart,
-          charty,
-          simpledatagroup
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Triangle drawer.
+* 
+* @class Triangle
+* @constructor
+* @extends SimpleDataGroup
+* @requires d3.chart,
+*           charty,
+*           simpledatagroup
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -2102,7 +2206,7 @@ Triangle drawer.
       ],
       function (d3, Charty, _) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty, _);
     });
   }
@@ -2114,14 +2218,14 @@ Triangle drawer.
   d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.TRIANGLE, {
     /**
-    Triangle initialization
-
-    @method
+    * Triangle initialization
+    *
+    * @method
     */
     initialize : function(){
 
       /**
-      c : triangle color
+      * c : triangle color
       */
       var defaults = {
         c : 'triangle-default'
@@ -2129,18 +2233,18 @@ Triangle drawer.
 
       var options = {
         /**
-        Data bind for a triangle serie.
-        Will set a color for the whole serie.
-
-        @method
-        @param {Object} d example = {
-                                      color : 'red',
-                                      data : [
-                                        {x : 'Jun', y : 200 , c:'blue'},
-                                        ...
-                                      ]
-                                    }
-        @chainable
+        * Data bind for a triangle serie.
+        * Will set a color for the whole serie.
+        *
+        * @method
+        * @param {Object} d example = {
+        *                              color : 'red',
+        *                              data : [
+        *                                {x : 'Jun', y : 200 , c:'blue'},
+        *                                ...
+        *                              ]
+        *                            }
+        * @chainable
         */
         dataBind : function(d){
 
@@ -2152,10 +2256,10 @@ Triangle drawer.
 
         },
         /**
-        Appends a svg:path
-
-        @method
-        @chainable
+        * Appends a svg:path
+        *
+        * @method
+        * @chainable
         */
         insert : function(){
           return this.append('path');
@@ -2187,17 +2291,17 @@ Triangle drawer.
       };
 
       /**
-      Layer creation
+      * Layer creation
       */
       this.layer('triangles', this.base.append('g') , options);
     },
     /**
-    Transform must be redefined in order to
-    separate a triangle in two constituting parts
-
-    @method
-    @param {Object} data Data Acccessor
-    @return {Object} already mapped values for each datapoint
+    * Transform must be redefined in order to
+    * separate a triangle in two constituting parts
+    *
+    * @method
+    * @param {Object} data Data Acccessor
+    * @return {Object} already mapped values for each datapoint
     */
     transform: function (data) {
       var result = [],
@@ -2206,6 +2310,7 @@ Triangle drawer.
           xBand = this.xscale.band(1),
           zeroY = this.yscale.map(0);
 
+      /** Obtains necessary point to draw both paths */
       _.each(dataArray, function (element) {
           var x1 = self.xscale.map(element.x, 1),
               x2 = x1 + (xBand / 2),
@@ -2223,12 +2328,12 @@ Triangle drawer.
       };
     },
     /**
-    Path is defined as a string connecting different
-    data, visualized as dots.
-
-    @method
-    @param {Object} d Data point
-    @return {String} path
+    * Path is defined as a string connecting different
+    * data, visualized as dots. 
+    *
+    * @method
+    * @param {Object} d Data point
+    * @return {String} path
     */
     getPath : function(d){
       return ('M '+ d.x1 + ' ' + d.y1 + ' L ' + d.x2 +' ' + d.y2 + ' L '+ d.x3 + ' ' + d.y3);
@@ -2236,15 +2341,15 @@ Triangle drawer.
   });
 }));
 /**
-Defines a data transformation for composite charts
-
-@class MultipleDataGroup
-@extend BaseChart
-@requires d3.chart,
-          charty,
-          basechart
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Defines a data transformation for composite charts
+* 
+* @class MultipleDataGroup
+* @extend BaseChart
+* @requires d3.chart,
+*           charty,
+*           basechart
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -2258,7 +2363,7 @@ Defines a data transformation for composite charts
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
     });
   }
@@ -2270,11 +2375,11 @@ Defines a data transformation for composite charts
   d3.chart(Charty.CHART_NAMES.BASE_CHART)
     .extend(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP, {
     /**
-    Data transformation for multiple data series.
-
-    @method
-    @param {Object} data Data accessor
-    @return {Object} Data accesor
+    * Data transformation for multiple data series.
+    *
+    * @method
+    * @param {Object} data Data accessor
+    * @return {Object} Data accesor
     */
     transform : function(data){
 
@@ -2282,31 +2387,31 @@ Defines a data transformation for composite charts
       return data;
     },
     /**
-    Default domain for x scaling
-
-    @method
-    @param {Object} domain Array for x domain
-    @chainable
+    * Default domain for x scaling
+    *
+    * @method
+    * @param {Object} domain Array for x domain
+    * @chainable
     */
     setDefaultXDomain : function (domain){
       this.defaultXDomain = domain;
       return this;
     },
     /**
-    Default domain for y scaling
-
-    @method
-    @param {Object} domain Array for y domain
-    @chainable
+    * Default domain for y scaling
+    *
+    * @method
+    * @param {Object} domain Array for y domain
+    * @chainable
     */
     setDefaultYDomain : function (domain){
       this.defaultYDomain = domain;
       return this;
     },
     /** 
-    Domain calculation
-
-    @method
+    * Domain calculation
+    *
+    * @method
     */
     _calculateDomains : function (data, zScale){
        /** Default x domain */
@@ -2336,16 +2441,16 @@ Defines a data transformation for composite charts
   });
 }));
 /**
-Chart that can represent many data series
-
-@class MultipleInstancesMixin
-@extends BaseChart
-@constructor
-@requires d3.chart,
-          charty,
-          basechart
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Chart that can represent many data series
+* 
+* @class MultipleInstancesMixin
+* @extends BaseChart
+* @constructor
+* @requires d3.chart,
+*           charty,
+*           basechart
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -2359,7 +2464,7 @@ Chart that can represent many data series
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
     });
   }
@@ -2371,16 +2476,17 @@ Chart that can represent many data series
 
   d3.chart(Charty.CHART_NAMES.BASE_CHART)
     .extend(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, {
+      
     /**
-    Creates multiple mixin instances of a specific chart.
-    It is necessary to set the instances count
-    and the chart name.
-
-    @method
-    @param {Object} args example = {
-                                        instances : 2,
-                                        chartName : 'Bar'
-                                      }
+    * Creates multiple mixin instances of a specific chart.
+    * It is necessary to set the instances count
+    * and the chart name.
+    *
+    * @method
+    * @param {Object} args example = {
+    *                                    instances : 2,
+    *                                    chartName : 'Bar'
+    *                                  }
     */
     initialize : function(args){
 
@@ -2401,15 +2507,15 @@ Chart that can represent many data series
   });
 }));
 /**
-Base XY system for all the 2D charts.
-
-@class XYAxis
-@constructor
-@requires d3.chart,
-          charty,
-          axis
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Base XY system for all the 2D charts.
+* 
+* @class XYAxis
+* @constructor
+* @requires d3.chart,
+*           charty,
+*           axis
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -2423,7 +2529,7 @@ Base XY system for all the 2D charts.
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
     });
   }
@@ -2435,9 +2541,9 @@ Base XY system for all the 2D charts.
 
   d3.chart(Charty.CHART_NAMES.XY_AXIS, {
     /**
-    XY axis system initializer
-
-    @method
+    * XY axis system initializer
+    *
+    * @method
     */
     initialize : function(args){
 
@@ -2451,10 +2557,10 @@ Base XY system for all the 2D charts.
 
     },
     /**
-    Show whole chart as a grid.
-
-    @method
-    @chainable
+    * Show whole chart as a grid.
+    *
+    * @method
+    * @chainable
     */
     showAsGrid : function (showAsGrid){
       this.xaxis.showAsGrid(showAsGrid);
@@ -2462,12 +2568,12 @@ Base XY system for all the 2D charts.
       return this;
     },
     /**
-    Moves x axis according to given height value, and sets
-    tick size value.
-
-    @method
-    @param {Number} newHeight chart's height
-    @chainable
+    * Moves x axis according to given height value, and sets
+    * tick size value.
+    *
+    * @method
+    * @param {Number} newHeight chart's height
+    * @chainable
     */
     height : function (newHeight){
       this.xaxis.ytranslate(newHeight).tickSize(newHeight);
@@ -2475,11 +2581,11 @@ Base XY system for all the 2D charts.
       return this;
     },
     /**
-    Sets tick size, based on given width value
-
-    @method
-    @param {Number} newWidth chart's width
-    @chainable
+    * Sets tick size, based on given width value
+    *
+    * @method
+    * @param {Number} newWidth chart's width
+    * @chainable
     */
     width : function (newWidth){
       this.yaxis.tickSize(newWidth).width(newWidth);
@@ -2487,22 +2593,22 @@ Base XY system for all the 2D charts.
       return this;
     },
     /**
-    Sets x scale.
-
-    @method
-    @param {Object} scale d3.scale
-    @chainable
+    * Sets x scale.
+    *
+    * @method
+    * @param {Object} scale d3.scale
+    * @chainable
     */
     setXScale : function (scale){
       this.xaxis.setScale(scale);
       return this;
     },
     /**
-    Sets y scale.
-
-    @method
-    @param {Object} scale d3.scale
-    @chainable
+    * Sets y scale.
+    *
+    * @method
+    * @param {Object} scale d3.scale
+    * @chainable
     */
     setYScale : function (scale){
       this.yaxis.setScale(scale);
@@ -2535,7 +2641,7 @@ One X Axis (bottom)
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
     });
   }
@@ -2625,20 +2731,20 @@ One X Axis (bottom)
   });
 }));
 /**
-Create a bar chart that will render
-N data series
-
-@class BarChart
-@extends MultipleDataGroup
-@constructor
-@requires d3.chart,
-          charty,
-          bar,
-          multipledatagroup,
-          yxyaxis,
-          multipleinstancesmixin
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Create a bar chart that will render
+* N data series
+* 
+* @class BarChart
+* @extends MultipleDataGroup
+* @constructor
+* @requires d3.chart,
+*           charty,
+*           bar,
+*           multipledatagroup,
+*           yxyaxis,
+*           multipleinstancesmixin
+* 
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -2657,7 +2763,7 @@ N data series
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
     });
   }
@@ -2669,13 +2775,14 @@ N data series
 
 	d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.BAR_CHART,{
+      
 		/**
-		BarChart initialization.
-
-		@method
-		@param {Object} args example = {
-                          instances : 2,
-                        }
+		* BarChart initialization.
+    * 
+		* @method
+		* @param {Object} args example = {
+    *                      instances : 2,
+    *                    }
 		*/
 		initialize : function(args){
 
@@ -2699,20 +2806,20 @@ N data series
 	});
 }));
 /**
-Grouped bar chart.
-Unlike regular bar char, grouped needs to define
-two scales for x axis : one for the axis itself, and
-another one for the data mapping.
-
-@class GroupedBarChart
-@extends MultipleDataGroup
-@requires d3.chart,
-          charty/chartynames,
-          charty/scalesfactory,
-          charty/bar,
-          charty/xyaxis,
-          charty/multipledatagroup,
-          charty/multipleinstancesmixin
+* Grouped bar chart.
+* Unlike regular bar char, grouped needs to define
+* two scales for x axis : one for the axis itself, and
+* another one for the data mapping.
+*
+* @class GroupedBarChart
+* @extends MultipleDataGroup
+* @requires d3.chart,
+*           charty/chartynames,
+*           charty/scalesfactory,
+*           charty/bar,
+*           charty/xyaxis,
+*           charty/multipledatagroup,
+*           charty/multipleinstancesmixin
 */
 
 (function(root, factory) {
@@ -2730,7 +2837,7 @@ another one for the data mapping.
            ],
            function(d3, ScaleFactory, Charty) {
       /** Export global even in AMD case in case this script
-      is loaded with others */
+      * is loaded with others */
       return factory(d3, ScaleFactory, Charty);
     });
   }
@@ -2741,10 +2848,11 @@ another one for the data mapping.
 }(this, function(d3, ScaleFactory, Charty) {
   d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.GROUPED_BAR_CHART, {
-    /**
-    Grouper Bar Chart initializer.
 
-    @method
+    /**
+    * Grouper Bar Chart initializer.
+    *
+    * @method
     */
     initialize : function(args){
 
@@ -2754,14 +2862,14 @@ another one for the data mapping.
       this.setMixins(this.axisSystem, this.bars);
     },
     /**
-    It is necessary to rewrite transform data, in order to
-    generate a new scale.
-
-    Two scales are needed : one for the axis, and another
-    one for bar drawing.
-
-    @method
-    @param {Object} data Data Accessor
+    * It is necessary to rewrite transform data, in order to
+    * generate a new scale.
+    *
+    * Two scales are needed : one for the axis, and another
+    * one for bar drawing.
+    *
+    * @method
+    * @param {Object} data Data Accessor
     */
     transform : function(data){
 
@@ -2786,11 +2894,11 @@ another one for the data mapping.
       return data;
     },
     /** 
-    Adding new scale for bars grouping
-
-    @method
-    @param {Object} zScale d3.scale
-    @chainable
+    * Adding new scale for bars grouping
+    *
+    * @method
+    * @param {Object} zScale d3.scale
+    * @chainable
     */
     setZScale : function (zScale){
       if (zScale){
@@ -2800,11 +2908,11 @@ another one for the data mapping.
       return this;
     },
     /** 
-    Default z domain 
-
-    @method
-    @param {Object} zDomain
-    @chainable
+    * Default z domain 
+    *
+    * @method
+    * @param {Object} zDomain
+    * @chainable
     */
     setDefaultZDomain : function (zDomain){
       this.defaultZDomain = zDomain;
@@ -2813,24 +2921,24 @@ another one for the data mapping.
   });
 }));
 /**
-Custom donut chart.
-Sets a text inside the donut, showing a text label
-with the represented value.
-
-So, this representation will get only one value. The
-other one must be calculated (rest).
-
-The problem can't be solved using mixins, since the text position
-doesn't depend on the data value.
-
-@class DonutWithInnerText
-@constructor
-@extends Donut
-@requires d3.chart,
-          charty,
-          donut
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Custom donut chart.
+* Sets a text inside the donut, showing a text label
+* with the represented value.
+*
+* So, this representation will get only one value. The
+* other one must be calculated (rest).
+* 
+* The problem can't be solved using mixins, since the text position
+* doesn't depend on the data value.
+*
+* @class DonutWithInnerText
+* @constructor
+* @extends Donut
+* @requires d3.chart,
+*           charty,
+*           donut
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -2844,7 +2952,7 @@ doesn't depend on the data value.
             ],
             function (d3, Charty) {
       /** Export global even in AMD case in case this script
-      is loaded with others */
+      * is loaded with others */
       return factory(d3, Charty);
     });
   }
@@ -2864,7 +2972,7 @@ doesn't depend on the data value.
           };
 
       /**
-      Defaults for Inner text
+      * Defaults for Inner text
       */
       var defaults = {
         fontSize : 55
@@ -2872,17 +2980,17 @@ doesn't depend on the data value.
 
       var options = {
         /**
-        First element will be shown as label.
-
-        Data here will take two elements, since is necessary
-        to render two paths for the donut chart.
-
-        The first one is the one that will be shown in label.
-        The second one is the rest of the donut.
-
-        @method
-        @param {Object} data
-        @chainable
+        * First element will be shown as label.
+        * 
+        * Data here will take two elements, since is necessary
+        * to render two paths for the donut chart.
+        * 
+        * The first one is the one that will be shown in label.
+        * The second one is the rest of the donut.
+        * 
+        * @method
+        * @param {Object} data
+        * @chainable
         */
         dataBind : function(d){
 
@@ -2898,10 +3006,10 @@ doesn't depend on the data value.
           return this.selectAll('text').data([stringValue]);
         },
         /**
-        Inserts one text for the value to display
-
-        @method
-        @chainable
+        * Inserts one text for the value to display
+        *
+        * @method
+        * @chainable
         */
         insert : function(){
           return this.append('text');
@@ -2936,28 +3044,28 @@ doesn't depend on the data value.
       };
 
       /**
-      Layer creation
+      * Layer creation
       */
       this.layer('donutText', this.base.append('g'), options);
     }
   });
 }));
 /**
-Labeled triangle chart drawer.
-
-@class LabeledTriangleChart
-@extends MultipleDataGroup
-@constructor
-@requires d3.chart,
-          charty,
-          triangle,
-          roundedrectangle,
-          textlabel,
-          multipleinstancesmixin,
-          yxyaxis,
-          multipledatagroup
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Labeled triangle chart drawer.
+* 
+* @class LabeledTriangleChart
+* @extends MultipleDataGroup
+* @constructor
+* @requires d3.chart,
+*           charty,
+*           triangle,
+*           roundedrectangle,
+*           textlabel,
+*           multipleinstancesmixin,
+*           yxyaxis,
+*           multipledatagroup
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -2976,7 +3084,7 @@ Labeled triangle chart drawer.
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
     });
   }
@@ -2988,12 +3096,12 @@ Labeled triangle chart drawer.
   d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.LABELED_TRIANGLE_CHART, {
     /**
-    Labeled triangle constructor.
-
-    Will contain only one instance of each component chart, since no
-    resize can be assumed.
-
-    @method
+    * Labeled triangle constructor.
+    *
+    * Will contain only one instance of each component chart, since no
+    * resize can be assumed.
+    *
+    * @method
     */
     initialize: function(args) {
 
@@ -3044,7 +3152,7 @@ Takes N input data series
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
       });
   }
@@ -3083,18 +3191,19 @@ Takes N input data series
 	});
 }));
 /**
-Line chart combined with circles.
-
-@class LineChartCircles
-@constructor
-@extends MultipleDataGroup
-@requires	d3.chart,
-          charty,
-					multipledatagroup,
-					linechart,
-					multipleinstancesmixin
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Line chart combined with circles. Combines the line chart and the circle component,
+* defining both as mixins.
+*
+* @class LineChartCircles
+* @constructor
+* @extends MultipleDataGroup
+* @requires	d3.chart,
+*           charty,
+*           multipledatagroup,
+*           linechart,
+*           multipleinstancesmixin
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -3110,7 +3219,7 @@ Line chart combined with circles.
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
     });
   }
@@ -3121,13 +3230,14 @@ Line chart combined with circles.
 }(this, function (d3, Charty) {
 	d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.LINE_CHART_CIRCLES,{
+      
 		/**
-		Line and circles chart initializator.
-
-		@method
-		@param {Object} args example = {
-                              instances : 2
-                          }
+		* Line and circles chart initializator.
+    *
+		* @method
+		* @param {Object} args example = {
+    *                          instances : 2
+    *                      }
 		*/
 		initialize : function(args){
 
@@ -3152,19 +3262,19 @@ Line chart combined with circles.
 	});
 }));
 /**
-Scatterplot chart
-
-@class Scatterplot
-@extends MultipleDataGroup
-@constructor
-@requires d3.chart,
-          charty,
-          circle,
-          multipledatagroup,
-          yxyaxis,
-          multipleinstancesmixin
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Scatterplot chart. Defined combining an axis system and a circles mixin.
+*
+* @class Scatterplot
+* @extends MultipleDataGroup
+* @constructor
+* @requires d3.chart,
+*           charty,
+*           circle,
+*           multipledatagroup,
+*           yxyaxis,
+*           multipleinstancesmixin
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -3181,7 +3291,7 @@ Scatterplot chart
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
     });
   }
@@ -3198,8 +3308,7 @@ Scatterplot chart
 			var options = {
 				chartName : Charty.CHART_NAMES.CIRCLE,
         dataValidator : args.dataValidator,
-				instances : (args.instances || 1),
-        showOnClick : args.showOnClick
+				instances : (args.instances || 1)
 			};
 
 			var axis = this.mixin(args.axisSystem,
@@ -3215,14 +3324,14 @@ Scatterplot chart
 	});
 }));
 /**
-Accessor for data collection
-
-Accessor will iterate over the data collection.
-
-@class Accessor
-@constructor
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Accessor for data collection
+* 
+* Accessor will iterate over the data collection.
+* 
+* @class Accessor
+* @constructor
+* 
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -3231,7 +3340,7 @@ Accessor will iterate over the data collection.
     /** AMD */
     define('charty/accessor', function () {
       /** Export global even in AMD case in case this script
-      is loaded with others */
+      * is loaded with others */
       return factory();
     });
   }
@@ -3240,28 +3349,30 @@ Accessor will iterate over the data collection.
     root.Accessor = factory();
   }
 }(this, function() {
-  function Accessor(d) {
+
+  /** Class constructor */
+  function Accessor() {
     this.index = -1;
   }
 
   /**
-  Returns first element of the collection
-
-  @method
-  @return {Object} data element from the collection
+  * Returns first element of the collection
+  *
+  * @method
+  * @return {Object} data element from the collection
   */
   Accessor.prototype.first = function() {
     return this.data[0];
   };
 
   /**
-  Returns the next element of the collection
-  If no more elements are available,
-  collection index will reset itself
-
-  @method
-  @return {Object} next element in the collection,
-  first element in case of reset
+  * Returns the next element of the collection
+  * If no more elements are available,
+  * collection index will reset itself
+  *
+  * @method
+  * @return {Object} next element in the collection,
+  * first element in case of reset
   */
   Accessor.prototype.next = function() {
     if(!this.hasNext()){
@@ -3271,40 +3382,40 @@ Accessor will iterate over the data collection.
   };
 
   /**
-  Determines if the collection has more elements
-
-  @method
-  @return {Boolean} true if collection has more elements,
-  false if not
+  * Determines if the collection has more elements
+  *
+  * @method
+  * @return {Boolean} true if collection has more elements,
+  * false if not
   */
   Accessor.prototype.hasNext = function() {
     return this.index + 1 < this.data.length;
   };
 
   /**
-  Resets the colletion to restart iteration automatically
-
-  @method
+  * Resets the colletion to restart iteration automatically
+  *
+  * @method
   */
   Accessor.prototype.restart = function() {
     this.index = -1;
   };
 
   /**
-  Returns the data contained in the accessor
-
-  @method
-  @return {Object} data collection
+  * Returns the data contained in the accessor
+  *
+  * @method
+  * @return {Object} data collection
   */
   Accessor.prototype.getData = function() {
     return this.data;
   };
 
   /**
-  Sets a specific data set to this accessor
-
-  @method
-  @param {Object} data Data series
+  * Sets a specific data set to this accessor
+  *
+  * @method
+  * @param {Object} data Data series
   */
   Accessor.prototype.setData = function(data){
     this.data = data;
@@ -3313,14 +3424,14 @@ Accessor will iterate over the data collection.
   return Accessor;
 }));
 /**
-When an event occurs, a defined function will be exectuted.
-This is for events that don't depende on an specific API.
-
-@class FunctionEvent
-@constructor
-@requires d3
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+*	When an event occurs, a defined function will be exectuted.
+*	This is for events that don't depende on an specific API.
+*	
+*	@class FunctionEvent
+*	@constructor
+*	@requires d3
+*	
+*	@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 (function(root, factory) {
 	/** Setting up AMD support*/
@@ -3333,7 +3444,7 @@ This is for events that don't depende on an specific API.
 			/**
 			 * Export global even in AMD case in case this script
 			 * is loaded with others
-			 * */
+			 */
 			return factory(d3);
 		});
 	} else {
@@ -3373,23 +3484,23 @@ This is for events that don't depende on an specific API.
 
 }));
 /**
-Hooks to specified element a bootstrap feature (for instance, a popover).
-Since data will be handled a specific way, a custom bootstrap event is given in
-order to facilitate instantiation.
-
-Note : since SVG element won't render contained divs, every element will
-be added to the 'body' element. This workaround is easier than dealing with
-SVG foreing objects.
-
-Supported bootstrap features : popovers, tooltips.
-
-@class BootstrapEvent
-@constructor
-@requires bootstrap,
-					underscore,
-					d3
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+*	Hooks to specified element a bootstrap feature (for instance, a popover).
+*	Since data will be handled a specific way, a custom bootstrap event is given in
+*	order to facilitate instantiation.
+*	
+*	Note : since SVG element won't render contained divs, every element will
+*	be added to the 'body' element. This workaround is easier than dealing with
+*	SVG foreing objects.
+*
+*	Supported bootstrap features : popovers, tooltips.
+*	
+*	@class BootstrapEvent
+*	@constructor
+*	@requires bootstrap,
+*						underscore,
+*						d3
+*
+*	@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 (function(root, factory) {
 	/** Setting up AMD support */
@@ -3403,7 +3514,7 @@ Supported bootstrap features : popovers, tooltips.
 			/**
 			 * Export global even in AMD case in case this script
 			 * is loaded with others
-			 * */
+			 */
 			return factory($, _, d3);
 		});
 	} else {
@@ -3413,13 +3524,13 @@ Supported bootstrap features : popovers, tooltips.
 }(this, function ($, _) {
 
 	/**
-	Class constructor
-	@param Object options example = {
-																		type : 'popover',
-																		placement: 'left',
-																		trigger: 'click',
-																		content : function () {}
-																	}
+	*	Class constructor
+	*	@param Object options example = {
+	*																	type : 'popover',
+	*																	placement: 'left',
+	*																	trigger: 'click',
+	*																	content : function () {}
+	*																}
 	*/
 	function BootstrapEvent(options) {
 		this.opts = options;
@@ -3462,14 +3573,14 @@ Supported bootstrap features : popovers, tooltips.
 	return BootstrapEvent;
 }));
 /**
-Event factory. 
-
-@class EventManager
-@constructor
-@requires functionevent,
-					bootstrapevent
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+*	Event factory. 
+*	
+*	@class EventManager
+*	@constructor
+*	@requires functionevent,
+*						bootstrapevent
+*
+*	@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 (function(root, factory) {
 	/** Setting up AMD support*/
@@ -3482,7 +3593,7 @@ Event factory.
 			/**
 			 * Export global even in AMD case in case this script
 			 * is loaded with others
-			 * */
+			 */
 			return factory(FunctionEvent, BootstrapEvent);
 		});
 	} else {
@@ -3492,17 +3603,17 @@ Event factory.
 }(this, function (FunctionEvent, BootstrapEvent) {
 
 	/** 
-	Class constructor
+	*	Class constructor
 	*/
 	function EventFactory (){
 
 	}
 
 	/**
-	Creates a specific Charty event object.
-
-	@param {Object} e Defined event options
-	@returns {Event} Charty event
+	*	Creates a specific Charty event object.
+	*
+	*	@param {Object} e Defined event options
+	*	@returns {Event} Charty event
 	*/
 	EventFactory.prototype.createEvent = function (e){
 
@@ -3533,19 +3644,19 @@ Event factory.
 	return EventFactory;
 }));
 /**
-Event manager. A simple way of adding multiple events to only one target,
-if necessary.
-
-Since d3 works over selections, a "target" will represent an element selection,
-so manager won't be working over only one element, but for the collection itself.
-
-@class EventManager
-@constructor
-@requires functionevent,
-					bootstrapevent,
-					underscore
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Event manager. A simple way of adding multiple events to only one target,
+* if necessary.
+* 
+* Since d3 works over selections, a "target" will represent an element selection,
+* so manager won't be working over only one element, but for the collection itself.
+*
+* @class EventManager
+* @constructor
+* @requires functionevent,
+*						bootstrapevent,
+*						underscore
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 (function(root, factory) {
 	/** Setting up AMD support*/
@@ -3559,7 +3670,7 @@ so manager won't be working over only one element, but for the collection itself
 			/**
 			 * Export global even in AMD case in case this script
 			 * is loaded with others
-			 * */
+			 */
 			return factory(FunctionEvent, BootstrapEvent, _);
 		});
 	} else {
@@ -3611,25 +3722,25 @@ so manager won't be working over only one element, but for the collection itself
 
 }));
 /**
-Sets an interface for adding a link between the chart
-and the data accessor.
-
-Uses an event manager for defining different charty events. Since events 
-need to be present when chart is rendered, for attachment to every SVG node,
-they should be defined by draw method. This makes an easy way of propagating
-events to each base rendering class.
-
-Note : events are NOT defined in chart init, it can happen that, at this point,
-events handler are not yet defined or they don't have all necessary data.
-
-@class ChartInterface
-@constructor
-@requires accessor,
-          eventmanager
-          eventfactory
-          underscore
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Sets an interface for adding a link between the chart
+* and the data accessor.
+* 
+* Uses an event manager for defining different charty events. Since events 
+* need to be present when chart is rendered, for attachment to every SVG node,
+* they should be defined by draw method. This makes an easy way of propagating
+* events to each base rendering class.
+*
+* Note : events are NOT defined in chart init, it can happen that, at this point,
+* events handler are not yet defined or they don't have all necessary data.
+*
+* @class ChartInterface
+* @constructor
+* @requires accessor,
+*           eventmanager
+*           eventfactory
+*           underscore
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 (function(root, factory) {
   /** Setting up AMD support*/
@@ -3643,7 +3754,7 @@ events handler are not yet defined or they don't have all necessary data.
       ],
       function (Accessor, EventManager, EventFactory, _) {
       /** Export global even in AMD case in case this script
-      is loaded with others */
+      * is loaded with others */
       return factory(Accessor, EventManager, EventFactory, _);
     });
   }
@@ -3654,13 +3765,13 @@ events handler are not yet defined or they don't have all necessary data.
 }(this, function (Accessor, EventManager, EventFactory, _) {
 
   /**
-  Class constructor
-
-  @param {Object} chart d3.chart object
-  @param {Object} root chart's container
-  @param {Object} svg svg element that contains the chart
-  @param {Object} gSvg g element attached to svg
-  @param {EventFactory} eventFactory Returns instances of Charty events
+  * Class constructor
+  *
+  * @param {Object} chart d3.chart object
+  * @param {Object} root chart's container
+  * @param {Object} svg svg element that contains the chart
+  * @param {Object} gSvg g element attached to svg
+  * @param {EventFactory} eventFactory Returns instances of Charty events
   */
   var ChartInterface = function(chart, rootSelection, svg, gSvg, eventFactory){
 
@@ -3674,16 +3785,16 @@ events handler are not yet defined or they don't have all necessary data.
   };
 
   /**
-  Chart dimensioning via interface. Elements internal dimensioning.
-
-  @param {Number} width Drawing space width
-  @param {Number} height Drawing space height
-  @param {Object} margin margin = {
-                          marginleft = 20,
-                          margintop = 30,
-                          lfactor = 0.9,
-                          tfactor = 0.9
-                        }
+  * Chart dimensioning via interface. Elements internal dimensioning.
+  *
+  * @param {Number} width Drawing space width
+  * @param {Number} height Drawing space height
+  * @param {Object} margin margin = {
+  *                        marginleft = 20,
+  *                        margintop = 30,
+  *                        lfactor = 0.9,
+  *                        tfactor = 0.9
+  *                      }
   */
   ChartInterface.prototype.setDimensions = function (margin, width, height){
     /** Defaults margin values */
@@ -3725,12 +3836,12 @@ events handler are not yet defined or they don't have all necessary data.
   };
 
   /**
-  Interface to the chart drawing stage
-
-  @method
-  @param {Object} dataArray Data series contained in one array
-  @param {Object} eventsArray Events to be attached to data elements
-  @chainable
+  * Interface to the chart drawing stage
+  *
+  * @method
+  * @param {Object} dataArray Data series contained in one array
+  * @param {Object} eventsArray Events to be attached to data elements
+  * @chainable
   */
   ChartInterface.prototype.draw = function(dataArray, eventsArray){
 
@@ -3752,12 +3863,12 @@ events handler are not yet defined or they don't have all necessary data.
   };
 
   /**
-  Chart redimension, without redrawing elements
-
-  @method
-  @param {Number} height Value can be forced
-  @param {Number} width Value can be forced
-  @chainable
+  * Chart redimension, without redrawing elements
+  *
+  * @method
+  * @param {Number} height Value can be forced
+  * @param {Number} width Value can be forced
+  * @chainable
   */
   ChartInterface.prototype.redimension = function(height, width){
 
@@ -3777,10 +3888,10 @@ events handler are not yet defined or they don't have all necessary data.
   };
 
   /**
-  Sets a background image via css. Class is required
-
-  @param {String} imgClass CSS for the background image
-  @chainable
+  * Sets a background image via css. Class is required
+  *
+  * @param {String} imgClass CSS for the background image
+  * @chainable
   */
   ChartInterface.prototype.setBackgroundImage = function (imgClass){
 
@@ -3792,9 +3903,9 @@ events handler are not yet defined or they don't have all necessary data.
   };
 
   /**
-  Removes class containing background image, if present
-
-  @chainable
+  * Removes class containing background image, if present
+  *
+  * @chainable
   */
   ChartInterface.prototype.removeBackgroundImage = function (){
     this.rootSelection.classed(this.imgClass, false);
@@ -3803,12 +3914,12 @@ events handler are not yet defined or they don't have all necessary data.
   };
 
   /**
-  Sets title as a header
-
-  @param {String} title Chart title 
-  @param {Number} xPosition Position along horizontal axis
-  @param {Number} yPosition Position along vertical axis
-  @chainable 
+  * Sets title as a header
+  *
+  * @param {String} title Chart title 
+  * @param {Number} xPosition Position along horizontal axis
+  * @param {Number} yPosition Position along vertical axis
+  * @chainable 
   */
   ChartInterface.prototype.setTitle = function (title, xPosition, yPosition){
 
@@ -3823,11 +3934,11 @@ events handler are not yet defined or they don't have all necessary data.
   return ChartInterface;
 }));
 /**
-Chart creation API
-
-@class Charty
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Chart creation API
+* 
+* @class Charty
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -3851,7 +3962,7 @@ Chart creation API
       ],
       function (Charty, ScaleFactory, ChartInterface, DataValidator, EventFactory) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(Charty, ScaleFactory, ChartInterface, DataValidator, EventFactory);
     });
   }
@@ -3867,24 +3978,24 @@ Chart creation API
 
 
   /**
-  Appends a chart to a root d3.selection element. Chart is determined
-  by a defined chart name.
-  Margin is used to translate the chart a small distance. A chart can have many
-  instances.
-  Whether the chart takes the container dimensions, is it possible to also set
-  the dimensions as initial options
-  Defined events will be spread to every chart's component.
-
-  @method
-  @param {Object} options options = {
-                      chartName : 'BarChart',
-                      instances : 2,
-                      root : 'body',
-                      xAxis : 'ordinal',
-                      yAxis : 'linear',
-                      xScaleDomain : ['Hi', 'I am', 'a fixed', 'domain']
-                    }
-  @return {Object} d3.chart for data drawing
+  * Appends a chart to a root d3.selection element. Chart is determined
+  * by a defined chart name.
+  * Margin is used to translate the chart a small distance. A chart can have many
+  * instances.
+  * Whether the chart takes the container dimensions, is it possible to also set
+  * the dimensions as initial options
+  * Defined events will be spread to every chart's component.
+  *
+  * @method
+  * @param {Object} options options = {
+  *                    chartName : 'BarChart',
+  *                    instances : 2,
+  *                    root : 'body',
+  *                    xAxis : 'ordinal',
+  *                    yAxis : 'linear',
+  *                    xScaleDomain : ['Hi', 'I am', 'a fixed', 'domain']
+  *                  }
+  * @return {Object} d3.chart for data drawing
   */
   Charty.chart = function(options) {
 
@@ -3895,9 +4006,9 @@ Chart creation API
     var selection = d3.select(options.root);
 
     /**
-    Svg element creation
-
-    Sets attributes to provide redimensioning without drawing0
+    * Svg element creation
+    *
+    * Sets attributes to provide redimensioning without drawing0
     */
     var svg = selection.append('svg');
 
@@ -3929,15 +4040,15 @@ Chart creation API
     var gSvg = svg.append('g');
 
     /**
-    Appends the chart to the specified html element.
+    * Appends the chart to the specified html element.
     */
     options.dataValidator = dataValidator;
 
     var chart = gSvg.chart(options.chartName,options);
 
     /**
-    Scale definition.
-    Some charts can use direct mapping instead of scaling.
+    * Scale definition.
+    * Some charts can use direct mapping instead of scaling.
     */
     if (options.xAxis){
       chart.setXScale(scaleFactory.scale(options.xAxis,'x'));
@@ -3968,9 +4079,9 @@ Chart creation API
     }
 
     /**
-    Returns the interface for the chart drawing
-
-    Interface will manage the events creation.
+    * Returns the interface for the chart drawing
+    * 
+    * Interface will manage the events creation.
     */
     return new ChartInterface(chart, selection, svg, gSvg, eventFactory);
   };

@@ -1,14 +1,14 @@
 /**
-Triangle drawer.
-
-@class Triangle
-@constructor
-@extends SimpleDataGroup
-@requires d3.chart,
-          charty,
-          simpledatagroup
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Triangle drawer.
+* 
+* @class Triangle
+* @constructor
+* @extends SimpleDataGroup
+* @requires d3.chart,
+*           charty,
+*           simpledatagroup
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -23,7 +23,7 @@ Triangle drawer.
       ],
       function (d3, Charty, _) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty, _);
     });
   }
@@ -35,14 +35,14 @@ Triangle drawer.
   d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.TRIANGLE, {
     /**
-    Triangle initialization
-
-    @method
+    * Triangle initialization
+    *
+    * @method
     */
     initialize : function(){
 
       /**
-      c : triangle color
+      * c : triangle color
       */
       var defaults = {
         c : 'triangle-default'
@@ -50,18 +50,18 @@ Triangle drawer.
 
       var options = {
         /**
-        Data bind for a triangle serie.
-        Will set a color for the whole serie.
-
-        @method
-        @param {Object} d example = {
-                                      color : 'red',
-                                      data : [
-                                        {x : 'Jun', y : 200 , c:'blue'},
-                                        ...
-                                      ]
-                                    }
-        @chainable
+        * Data bind for a triangle serie.
+        * Will set a color for the whole serie.
+        *
+        * @method
+        * @param {Object} d example = {
+        *                              color : 'red',
+        *                              data : [
+        *                                {x : 'Jun', y : 200 , c:'blue'},
+        *                                ...
+        *                              ]
+        *                            }
+        * @chainable
         */
         dataBind : function(d){
 
@@ -73,10 +73,10 @@ Triangle drawer.
 
         },
         /**
-        Appends a svg:path
-
-        @method
-        @chainable
+        * Appends a svg:path
+        *
+        * @method
+        * @chainable
         */
         insert : function(){
           return this.append('path');
@@ -108,17 +108,17 @@ Triangle drawer.
       };
 
       /**
-      Layer creation
+      * Layer creation
       */
       this.layer('triangles', this.base.append('g') , options);
     },
     /**
-    Transform must be redefined in order to
-    separate a triangle in two constituting parts
-
-    @method
-    @param {Object} data Data Acccessor
-    @return {Object} already mapped values for each datapoint
+    * Transform must be redefined in order to
+    * separate a triangle in two constituting parts
+    *
+    * @method
+    * @param {Object} data Data Acccessor
+    * @return {Object} already mapped values for each datapoint
     */
     transform: function (data) {
       var result = [],
@@ -127,6 +127,7 @@ Triangle drawer.
           xBand = this.xscale.band(1),
           zeroY = this.yscale.map(0);
 
+      /** Obtains necessary point to draw both paths */
       _.each(dataArray, function (element) {
           var x1 = self.xscale.map(element.x, 1),
               x2 = x1 + (xBand / 2),
@@ -144,12 +145,12 @@ Triangle drawer.
       };
     },
     /**
-    Path is defined as a string connecting different
-    data, visualized as dots.
-
-    @method
-    @param {Object} d Data point
-    @return {String} path
+    * Path is defined as a string connecting different
+    * data, visualized as dots. 
+    *
+    * @method
+    * @param {Object} d Data point
+    * @return {String} path
     */
     getPath : function(d){
       return ('M '+ d.x1 + ' ' + d.y1 + ' L ' + d.x2 +' ' + d.y2 + ' L '+ d.x3 + ' ' + d.y3);

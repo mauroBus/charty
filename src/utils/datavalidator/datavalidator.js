@@ -1,12 +1,12 @@
 /**
-Data checker for different data input
-
-@class DataValidator
-@constructor
-@requires d3,
-          underscore
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Data checker for different data input
+*
+* @class DataValidator
+* @constructor
+* @requires d3,
+*           underscore
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -17,27 +17,28 @@ Data checker for different data input
         'd3',
         'underscore'
       ],
-      function(d3, _) {
+      function (d3, _) {
         /** Export global even in AMD case in case this script
-      is loaded with others */
+        * is loaded with others */
         return factory(_);
       });
   } else {
     /** Browser globals */
     root.DataValidator = factory(_);
   }
-}(this, function(_) {
-  function DataValidator(_) {
+}(this, function (_) {
 
+  /** Class constructor */
+  function DataValidator() {
   }
 
   /**
-  Checks if a given value is defined and > 0
-
-  @method
-  @param {Number} value number to check
-  @param {String} message error message to show
-  @return {Number} value
+  * Checks if a given value is defined and > 0
+  *
+  * @method
+  * @param {Number} value number to check
+  * @param {String} message error message to show
+  * @return {Number} value
   */
   DataValidator.prototype.isPositiveNumber = function(value, message) {
     if (!_.isUndefined(value) && (!_.isNumber(value) || value < 0)) {
@@ -47,12 +48,12 @@ Data checker for different data input
   };
 
   /**
-  Checks if value is number, or is defined
-
-  @method
-  @param {Number} value to check
-  @param {String} error message
-  @return {Number} value
+  * Checks if value is number, or is defined
+  *
+  * @method
+  * @param {Number} value to check
+  * @param {String} error message
+  * @return {Number} value
   */
   DataValidator.prototype.isNumber = function(value, message) {
     if (!_.isUndefined(value) && !_.isNumber(value)) {
@@ -62,12 +63,12 @@ Data checker for different data input
   };
 
   /**
-  Checks if a value is defined
-
-  @method
-  @param {Number} value to check
-  @param {String} message error message
-  @return {Number} value
+  * Checks if a value is defined
+  *
+  * @method
+  * @param {Number} value to check
+  * @param {String} message error message
+  * @return {Number} value
   */
   DataValidator.prototype.isUndefined = function(value, message) {
     if (_.isUndefined(value)) {

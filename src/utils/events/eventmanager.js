@@ -1,17 +1,17 @@
 /**
-Event manager. A simple way of adding multiple events to only one target,
-if necessary.
-
-Since d3 works over selections, a "target" will represent an element selection,
-so manager won't be working over only one element, but for the collection itself.
-
-@class EventManager
-@constructor
-@requires functionevent,
-					bootstrapevent,
-					underscore
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Event manager. A simple way of adding multiple events to only one target,
+* if necessary.
+* 
+* Since d3 works over selections, a "target" will represent an element selection,
+* so manager won't be working over only one element, but for the collection itself.
+*
+* @class EventManager
+* @constructor
+* @requires functionevent,
+*						bootstrapevent,
+*						underscore
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 (function(root, factory) {
 	/** Setting up AMD support*/
@@ -25,7 +25,7 @@ so manager won't be working over only one element, but for the collection itself
 			/**
 			 * Export global even in AMD case in case this script
 			 * is loaded with others
-			 * */
+			 */
 			return factory(FunctionEvent, BootstrapEvent, _);
 		});
 	} else {

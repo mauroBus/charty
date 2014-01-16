@@ -1,17 +1,17 @@
 /**
-Scatterplot chart
-
-@class Scatterplot
-@extends MultipleDataGroup
-@constructor
-@requires d3.chart,
-          charty,
-          circle,
-          multipledatagroup,
-          yxyaxis,
-          multipleinstancesmixin
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Scatterplot chart. Defined combining an axis system and a circles mixin.
+*
+* @class Scatterplot
+* @extends MultipleDataGroup
+* @constructor
+* @requires d3.chart,
+*           charty,
+*           circle,
+*           multipledatagroup,
+*           yxyaxis,
+*           multipleinstancesmixin
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -28,7 +28,7 @@ Scatterplot chart
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
     });
   }
@@ -45,8 +45,7 @@ Scatterplot chart
 			var options = {
 				chartName : Charty.CHART_NAMES.CIRCLE,
         dataValidator : args.dataValidator,
-				instances : (args.instances || 1),
-        showOnClick : args.showOnClick
+				instances : (args.instances || 1)
 			};
 
 			var axis = this.mixin(args.axisSystem,

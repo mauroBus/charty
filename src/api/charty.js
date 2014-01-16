@@ -1,9 +1,9 @@
 /**
-Chart creation API
-
-@class Charty
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Chart creation API
+* 
+* @class Charty
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -27,7 +27,7 @@ Chart creation API
       ],
       function (Charty, ScaleFactory, ChartInterface, DataValidator, EventFactory) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(Charty, ScaleFactory, ChartInterface, DataValidator, EventFactory);
     });
   }
@@ -43,24 +43,24 @@ Chart creation API
 
 
   /**
-  Appends a chart to a root d3.selection element. Chart is determined
-  by a defined chart name.
-  Margin is used to translate the chart a small distance. A chart can have many
-  instances.
-  Whether the chart takes the container dimensions, is it possible to also set
-  the dimensions as initial options
-  Defined events will be spread to every chart's component.
-
-  @method
-  @param {Object} options options = {
-                      chartName : 'BarChart',
-                      instances : 2,
-                      root : 'body',
-                      xAxis : 'ordinal',
-                      yAxis : 'linear',
-                      xScaleDomain : ['Hi', 'I am', 'a fixed', 'domain']
-                    }
-  @return {Object} d3.chart for data drawing
+  * Appends a chart to a root d3.selection element. Chart is determined
+  * by a defined chart name.
+  * Margin is used to translate the chart a small distance. A chart can have many
+  * instances.
+  * Whether the chart takes the container dimensions, is it possible to also set
+  * the dimensions as initial options
+  * Defined events will be spread to every chart's component.
+  *
+  * @method
+  * @param {Object} options options = {
+  *                    chartName : 'BarChart',
+  *                    instances : 2,
+  *                    root : 'body',
+  *                    xAxis : 'ordinal',
+  *                    yAxis : 'linear',
+  *                    xScaleDomain : ['Hi', 'I am', 'a fixed', 'domain']
+  *                  }
+  * @return {Object} d3.chart for data drawing
   */
   Charty.chart = function(options) {
 
@@ -71,9 +71,9 @@ Chart creation API
     var selection = d3.select(options.root);
 
     /**
-    Svg element creation
-
-    Sets attributes to provide redimensioning without drawing0
+    * Svg element creation
+    *
+    * Sets attributes to provide redimensioning without drawing0
     */
     var svg = selection.append('svg');
 
@@ -105,15 +105,15 @@ Chart creation API
     var gSvg = svg.append('g');
 
     /**
-    Appends the chart to the specified html element.
+    * Appends the chart to the specified html element.
     */
     options.dataValidator = dataValidator;
 
     var chart = gSvg.chart(options.chartName,options);
 
     /**
-    Scale definition.
-    Some charts can use direct mapping instead of scaling.
+    * Scale definition.
+    * Some charts can use direct mapping instead of scaling.
     */
     if (options.xAxis){
       chart.setXScale(scaleFactory.scale(options.xAxis,'x'));
@@ -144,9 +144,9 @@ Chart creation API
     }
 
     /**
-    Returns the interface for the chart drawing
-
-    Interface will manage the events creation.
+    * Returns the interface for the chart drawing
+    * 
+    * Interface will manage the events creation.
     */
     return new ChartInterface(chart, selection, svg, gSvg, eventFactory);
   };

@@ -1,12 +1,12 @@
 /**
-Event factory. 
-
-@class EventManager
-@constructor
-@requires functionevent,
-					bootstrapevent
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+*	Event factory. 
+*	
+*	@class EventManager
+*	@constructor
+*	@requires functionevent,
+*						bootstrapevent
+*
+*	@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 (function(root, factory) {
 	/** Setting up AMD support*/
@@ -19,7 +19,7 @@ Event factory.
 			/**
 			 * Export global even in AMD case in case this script
 			 * is loaded with others
-			 * */
+			 */
 			return factory(FunctionEvent, BootstrapEvent);
 		});
 	} else {
@@ -29,17 +29,17 @@ Event factory.
 }(this, function (FunctionEvent, BootstrapEvent) {
 
 	/** 
-	Class constructor
+	*	Class constructor
 	*/
 	function EventFactory (){
 
 	}
 
 	/**
-	Creates a specific Charty event object.
-
-	@param {Object} e Defined event options
-	@returns {Event} Charty event
+	*	Creates a specific Charty event object.
+	*
+	*	@param {Object} e Defined event options
+	*	@returns {Event} Charty event
 	*/
 	EventFactory.prototype.createEvent = function (e){
 

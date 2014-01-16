@@ -1,13 +1,13 @@
- /**
-Defines a basic chart to process individual data series
-
-@class SimpleDataGroup
-@extends BaseChart
-@requires d3.chart,
-          charty,
-          basechart
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+/**
+* Defines a basic chart to process individual data series
+* 
+* @class SimpleDataGroup
+* @extends BaseChart
+* @requires d3.chart,
+*           charty,
+*           basechart
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -21,7 +21,7 @@ Defines a basic chart to process individual data series
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
     });
   }
@@ -34,11 +34,11 @@ Defines a basic chart to process individual data series
   d3.chart(Charty.CHART_NAMES.BASE_CHART)
     .extend(Charty.CHART_NAMES.SIMPLE_DATA_GROUP, {
     /**
-    Returns the next element of the data collection
-
-    @method
-    @param {Object} data Data Accessor
-    @return {Object} next element in the collection
+    * Returns the next element of the data collection
+    *
+    * @method
+    * @param {Object} data Data Accessor
+    * @return {Object} next element in the collection
     */
     transform : function (data) {
 

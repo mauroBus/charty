@@ -1,18 +1,18 @@
 /**
-Create a bar chart that will render
-N data series
-
-@class BarChart
-@extends MultipleDataGroup
-@constructor
-@requires d3.chart,
-          charty,
-          bar,
-          multipledatagroup,
-          yxyaxis,
-          multipleinstancesmixin
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Create a bar chart that will render
+* N data series
+* 
+* @class BarChart
+* @extends MultipleDataGroup
+* @constructor
+* @requires d3.chart,
+*           charty,
+*           bar,
+*           multipledatagroup,
+*           yxyaxis,
+*           multipleinstancesmixin
+* 
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -31,7 +31,7 @@ N data series
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
     });
   }
@@ -43,13 +43,14 @@ N data series
 
 	d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.BAR_CHART,{
+      
 		/**
-		BarChart initialization.
-
-		@method
-		@param {Object} args example = {
-                          instances : 2,
-                        }
+		* BarChart initialization.
+    * 
+		* @method
+		* @param {Object} args example = {
+    *                      instances : 2,
+    *                    }
 		*/
 		initialize : function(args){
 

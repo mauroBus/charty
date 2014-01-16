@@ -1,17 +1,19 @@
-# Chart library
+# Charty - d3 based chart library
 
-[Demo](index.html)
+Greetings fellow developer, and welcome to the Charty proyect! Let's have some fun making charts!
 
-- [D3](http://d3js.org/)
-- [D3.Chart](https://github.com/misoproject/d3.chart/)
+## What we need
+
+- [d3](http://d3js.org/)
+- [d3.chart](https://github.com/misoproject/d3.chart/)
 - [YUI Comments Standard](http://yui.github.io/yuidoc/syntax/index.html)
-- [R2D3](https://github.com/mhemesath/r2d3)
+- [r2d3](https://github.com/mhemesath/r2d3)
 - [Raphäel](https://github.com/DmitryBaranovskiy/raphael)
 - [IE8 polyfills](https://github.com/jonathantneal/Polyfills-for-IE8)
 - [AMD feature](https://github.com/jensarps/AMD-feature)
 - [bower](https://github.com/bower/bower)
 - [bind function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind#Browser_compatibility)
-- requirejs, jquery, underscore
+- Other dependencies : requirejs, jquery, underscore
 
 ## Browser Support
 
@@ -21,58 +23,39 @@
 - Chrome, Firefox, Safari, above IE8
 	+ Via d3
 - Below IE8
-	+ No support added. 
+	+ Sorry mate, no support added. 
 
 Important : r2d3 is used as a library, not polyfills to add d3 support, so conditional loading was added, via AMD feature. In case of IE8, r2d3 is used (and some polyfills wich r2d3 doesn't provide). Other case, d3 is used. 
 
 ## Installing
 
 + Clone the repository
-+ Install bower (via nodejs, if necessary) : npm install bower -g
-+ bower install
++ `npm install bower -g` (if necessary)
++ `bower install`
 
-## What's new
+## Roadmap to v0.6
 
-- Charts Api defined : a chart can be append directly to a html root element
-- Support for negative values
-- LinearScale, OrdinalScale : separate objects for data mapping
-- Directory components relocation
-  + Components : each individual component goes here
-  + Composition : each composed chart is defined here
-  + Utils : utilities for data managing
-- Chart instantiation using different preset options
-- Simple way for chart creation and instantiaton
-- Most charts were renamed.
-  + SimpleDataGroup : takes only one data series to process
-  + MultipleDataGroup : takes N series to draw.
-  + MultipleInstancesMixin : creates N instances of a specific mixin.
-  Since it is the same mixin, creation is the same.
-- Documentation was added to the code, following the YUI standard
-- bower added for dependencies install
-- IE8 support via r2d3 and some polyfills
-
-## Known issues
-
-+ Updating some charts that have an axis system displayed as a grid, can have unusual drawing behaviour (for example, the LabeledTriangleChart, some grid lines are displayed before the triangles, but some others not)
-+ Adding a background image to the chart : can't be done via SVG:image, since it doesn't have full support for IE8 yet. 
++	Multiple scales support and simple instantiation (work in progress)
++	The wiki !
++ Github pages for examples
 
 ## WTF
 
-The main idea in this approach is to separate a chart in its constituting parts. So, a x-y axis system can be seen as a linear scale for x, and another linear scale for y, wich are conceived as two separated objects. Having that, it will be possible to use a custom xy axis system, to build more charts, like for example, a bar chart.
+The main idea in this approach is to separate a chart in its constituting parts. So, a XY axis system can be seen as a linear scale for x, and another linear scale for y, wich are conceived as two separated objects. Having that, it will be possible to use a custom xy axis system, to build more charts, like for example, a bar chart.
 
 d3.chart will provide a way of defining reusable charts : it's only necessary to call the draw method with the necessary data, and the chart will handle the states of data update.
 
 For that purpose , each drawable chart will have events that represent data's lifecycle : 'enter' for the new data, 'update' for existing data that changes, 'merge' for managing enter and update together, and 'exit', for elemens that no longer exist. For example, if I need to draw 4 circles, when the draw method is called, 4 'circles' svg elements will be added to the root element defined. Merge will handle this situation too.
 
-If I use the same chart with 6 elements, the 'enter' event will handle the two new events, since no svg elements belong to them yet. Update will handle the already defined 4 elements. If the next time I get 3 elements, 'exit' will handle the missing 3 elements.
+If we use the same chart with 6 elements, the 'enter' event will handle the two new events, since no svg elements belong to them yet. Update will handle the already defined 4 elements. If the next time I get 3 elements, 'exit' will handle the missing 3 elements.
 
-## D3
+## d3.chart
 
-d3.chart is a framework designed for chart drawing using d3. d3 also provides a way of working over svg elements, so a bit of knowledge in both concepts are recommended.
+d3.chart is a framework designed for chart drawing using d3. d3 also provides a way of working over svg elements, so a bit of knowledge in both concepts are recommended. It provides a template for easy chart instantiation. Thanks so much d3.chart!
 
-## D3 for drawing
+## d3 for drawing
 
-d3 works defining selections of svg elements (or classes), and will compute a join between svg elements and data to be rendered. Svg elements work defining attributes , so they must be explicitly set (for example, width must be set using something like this.attr('width', value)).
+d3 works defining selections of elements, and will compute a join between svg elements and data to be rendered. SVG elements work by defining attributes, so they must be explicitly set (for example, width must be set using something like this.attr('width', value)).
 
 With the selection, it is possible to define common attributes or styles for every svg:element attached to every data element.
 
@@ -96,10 +79,10 @@ At this point, there are some parts defined that can be used to create a custom 
 
 + Axis : will render an axis. Configuration options will determine whether it will render and x or y axis.
 + Bar : will render bars (like in a bar chart) for one data serie.
-+ Circles : renders circles for one data serie.
++ Circle : renders circles for one data serie.
 + Donut : pie chart, renders as a donut
 + Line : draws a line for a data serie.
-+ Rounded rectangles : used for labeling. Should be related to a text.
++ Rounded rectangle : used for labeling. Should be related to a text.
 + TextLabel : defines text for labeling. Can be used combined with rounded rectangles to create a label.
 + Triangle : similar to Bar, but it draws a triangle instead of a bar.
 
@@ -111,6 +94,7 @@ At this point, there are some parts defined that can be used to create a custom 
 + LabeledTriangleChart : defines a chart, similar to a bar chart, but using triangles instead of bars. Also, labels are added where the triangle points, showing the data value.
 + LineChart : lines drawing for many data series.
 + Scatterplot : chart that renders data as circles in an axis system. This chart doesn't use an axis system.
++ GroupedBarChart : groups many bars by some data criteria. Note : code is still under development, since it is part of the multiple scaling approach.
 
 ### Basic elements for extending and mixin
 
@@ -122,6 +106,8 @@ At this point, there are some parts defined that can be used to create a custom 
 ### Utilities
 
 + Accessor : provides a way for data series iteration. This accessor will provide the chance of drawing multiple data series in a same chart.
++ DataValidator : simple underscore wrapper for checking some correct values.
++ Events : management of chart's events. 
 
 ### Drawing components
 

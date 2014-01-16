@@ -1,9 +1,9 @@
 /**
-Define constants that will be used as names for different parts
-
-@class ChartNames
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Define constants that will be used as names for different parts
+* 
+* @class ChartNames
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -15,7 +15,7 @@ Define constants that will be used as names for different parts
       ],
       function (Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(Charty);
     });
   }
@@ -52,9 +52,9 @@ Define constants that will be used as names for different parts
   };
 
   /**
-  Axis types are defined as constants
-
-  Related to scaling.
+  * Axis types are defined as constants
+  *
+  * Related to scaling.
   */
   Charty.AXIS_TYPE = {
     ORDINAL: 'ordinal',
@@ -62,7 +62,7 @@ Define constants that will be used as names for different parts
   };
 
   /**
-  Axis defined as constants
+  * Axis defined as constants
   */
   Charty.AXIS = {
     X : 'x',

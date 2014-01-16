@@ -1,21 +1,21 @@
 /**
-Hooks to specified element a bootstrap feature (for instance, a popover).
-Since data will be handled a specific way, a custom bootstrap event is given in
-order to facilitate instantiation.
-
-Note : since SVG element won't render contained divs, every element will
-be added to the 'body' element. This workaround is easier than dealing with
-SVG foreing objects.
-
-Supported bootstrap features : popovers, tooltips.
-
-@class BootstrapEvent
-@constructor
-@requires bootstrap,
-					underscore,
-					d3
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+*	Hooks to specified element a bootstrap feature (for instance, a popover).
+*	Since data will be handled a specific way, a custom bootstrap event is given in
+*	order to facilitate instantiation.
+*	
+*	Note : since SVG element won't render contained divs, every element will
+*	be added to the 'body' element. This workaround is easier than dealing with
+*	SVG foreing objects.
+*
+*	Supported bootstrap features : popovers, tooltips.
+*	
+*	@class BootstrapEvent
+*	@constructor
+*	@requires bootstrap,
+*						underscore,
+*						d3
+*
+*	@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 (function(root, factory) {
 	/** Setting up AMD support */
@@ -29,7 +29,7 @@ Supported bootstrap features : popovers, tooltips.
 			/**
 			 * Export global even in AMD case in case this script
 			 * is loaded with others
-			 * */
+			 */
 			return factory($, _, d3);
 		});
 	} else {
@@ -39,13 +39,13 @@ Supported bootstrap features : popovers, tooltips.
 }(this, function ($, _) {
 
 	/**
-	Class constructor
-	@param Object options example = {
-																		type : 'popover',
-																		placement: 'left',
-																		trigger: 'click',
-																		content : function () {}
-																	}
+	*	Class constructor
+	*	@param Object options example = {
+	*																	type : 'popover',
+	*																	placement: 'left',
+	*																	trigger: 'click',
+	*																	content : function () {}
+	*																}
 	*/
 	function BootstrapEvent(options) {
 		this.opts = options;

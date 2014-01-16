@@ -1,23 +1,23 @@
 /**
-Sets an interface for adding a link between the chart
-and the data accessor.
-
-Uses an event manager for defining different charty events. Since events 
-need to be present when chart is rendered, for attachment to every SVG node,
-they should be defined by draw method. This makes an easy way of propagating
-events to each base rendering class.
-
-Note : events are NOT defined in chart init, it can happen that, at this point,
-events handler are not yet defined or they don't have all necessary data.
-
-@class ChartInterface
-@constructor
-@requires accessor,
-          eventmanager
-          eventfactory
-          underscore
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Sets an interface for adding a link between the chart
+* and the data accessor.
+* 
+* Uses an event manager for defining different charty events. Since events 
+* need to be present when chart is rendered, for attachment to every SVG node,
+* they should be defined by draw method. This makes an easy way of propagating
+* events to each base rendering class.
+*
+* Note : events are NOT defined in chart init, it can happen that, at this point,
+* events handler are not yet defined or they don't have all necessary data.
+*
+* @class ChartInterface
+* @constructor
+* @requires accessor,
+*           eventmanager
+*           eventfactory
+*           underscore
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 (function(root, factory) {
   /** Setting up AMD support*/
@@ -31,7 +31,7 @@ events handler are not yet defined or they don't have all necessary data.
       ],
       function (Accessor, EventManager, EventFactory, _) {
       /** Export global even in AMD case in case this script
-      is loaded with others */
+      * is loaded with others */
       return factory(Accessor, EventManager, EventFactory, _);
     });
   }
@@ -42,13 +42,13 @@ events handler are not yet defined or they don't have all necessary data.
 }(this, function (Accessor, EventManager, EventFactory, _) {
 
   /**
-  Class constructor
-
-  @param {Object} chart d3.chart object
-  @param {Object} root chart's container
-  @param {Object} svg svg element that contains the chart
-  @param {Object} gSvg g element attached to svg
-  @param {EventFactory} eventFactory Returns instances of Charty events
+  * Class constructor
+  *
+  * @param {Object} chart d3.chart object
+  * @param {Object} root chart's container
+  * @param {Object} svg svg element that contains the chart
+  * @param {Object} gSvg g element attached to svg
+  * @param {EventFactory} eventFactory Returns instances of Charty events
   */
   var ChartInterface = function(chart, rootSelection, svg, gSvg, eventFactory){
 
@@ -62,16 +62,16 @@ events handler are not yet defined or they don't have all necessary data.
   };
 
   /**
-  Chart dimensioning via interface. Elements internal dimensioning.
-
-  @param {Number} width Drawing space width
-  @param {Number} height Drawing space height
-  @param {Object} margin margin = {
-                          marginleft = 20,
-                          margintop = 30,
-                          lfactor = 0.9,
-                          tfactor = 0.9
-                        }
+  * Chart dimensioning via interface. Elements internal dimensioning.
+  *
+  * @param {Number} width Drawing space width
+  * @param {Number} height Drawing space height
+  * @param {Object} margin margin = {
+  *                        marginleft = 20,
+  *                        margintop = 30,
+  *                        lfactor = 0.9,
+  *                        tfactor = 0.9
+  *                      }
   */
   ChartInterface.prototype.setDimensions = function (margin, width, height){
     /** Defaults margin values */
@@ -113,12 +113,12 @@ events handler are not yet defined or they don't have all necessary data.
   };
 
   /**
-  Interface to the chart drawing stage
-
-  @method
-  @param {Object} dataArray Data series contained in one array
-  @param {Object} eventsArray Events to be attached to data elements
-  @chainable
+  * Interface to the chart drawing stage
+  *
+  * @method
+  * @param {Object} dataArray Data series contained in one array
+  * @param {Object} eventsArray Events to be attached to data elements
+  * @chainable
   */
   ChartInterface.prototype.draw = function(dataArray, eventsArray){
 
@@ -140,12 +140,12 @@ events handler are not yet defined or they don't have all necessary data.
   };
 
   /**
-  Chart redimension, without redrawing elements
-
-  @method
-  @param {Number} height Value can be forced
-  @param {Number} width Value can be forced
-  @chainable
+  * Chart redimension, without redrawing elements
+  *
+  * @method
+  * @param {Number} height Value can be forced
+  * @param {Number} width Value can be forced
+  * @chainable
   */
   ChartInterface.prototype.redimension = function(height, width){
 
@@ -165,10 +165,10 @@ events handler are not yet defined or they don't have all necessary data.
   };
 
   /**
-  Sets a background image via css. Class is required
-
-  @param {String} imgClass CSS for the background image
-  @chainable
+  * Sets a background image via css. Class is required
+  *
+  * @param {String} imgClass CSS for the background image
+  * @chainable
   */
   ChartInterface.prototype.setBackgroundImage = function (imgClass){
 
@@ -180,9 +180,9 @@ events handler are not yet defined or they don't have all necessary data.
   };
 
   /**
-  Removes class containing background image, if present
-
-  @chainable
+  * Removes class containing background image, if present
+  *
+  * @chainable
   */
   ChartInterface.prototype.removeBackgroundImage = function (){
     this.rootSelection.classed(this.imgClass, false);
@@ -191,12 +191,12 @@ events handler are not yet defined or they don't have all necessary data.
   };
 
   /**
-  Sets title as a header
-
-  @param {String} title Chart title 
-  @param {Number} xPosition Position along horizontal axis
-  @param {Number} yPosition Position along vertical axis
-  @chainable 
+  * Sets title as a header
+  *
+  * @param {String} title Chart title 
+  * @param {Number} xPosition Position along horizontal axis
+  * @param {Number} yPosition Position along vertical axis
+  * @chainable 
   */
   ChartInterface.prototype.setTitle = function (title, xPosition, yPosition){
 

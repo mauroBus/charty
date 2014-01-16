@@ -1,19 +1,19 @@
 /**
-Labeled triangle chart drawer.
-
-@class LabeledTriangleChart
-@extends MultipleDataGroup
-@constructor
-@requires d3.chart,
-          charty,
-          triangle,
-          roundedrectangle,
-          textlabel,
-          multipleinstancesmixin,
-          yxyaxis,
-          multipledatagroup
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Labeled triangle chart drawer.
+* 
+* @class LabeledTriangleChart
+* @extends MultipleDataGroup
+* @constructor
+* @requires d3.chart,
+*           charty,
+*           triangle,
+*           roundedrectangle,
+*           textlabel,
+*           multipleinstancesmixin,
+*           yxyaxis,
+*           multipledatagroup
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -32,7 +32,7 @@ Labeled triangle chart drawer.
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
     });
   }
@@ -44,12 +44,12 @@ Labeled triangle chart drawer.
   d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.LABELED_TRIANGLE_CHART, {
     /**
-    Labeled triangle constructor.
-
-    Will contain only one instance of each component chart, since no
-    resize can be assumed.
-
-    @method
+    * Labeled triangle constructor.
+    *
+    * Will contain only one instance of each component chart, since no
+    * resize can be assumed.
+    *
+    * @method
     */
     initialize: function(args) {
 

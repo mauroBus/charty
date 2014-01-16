@@ -1,13 +1,13 @@
 /**
-Base XY system for all the 2D charts.
-
-@class XYAxis
-@constructor
-@requires d3.chart,
-          charty,
-          axis
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Base XY system for all the 2D charts.
+* 
+* @class XYAxis
+* @constructor
+* @requires d3.chart,
+*           charty,
+*           axis
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -21,7 +21,7 @@ Base XY system for all the 2D charts.
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
     });
   }
@@ -33,9 +33,9 @@ Base XY system for all the 2D charts.
 
   d3.chart(Charty.CHART_NAMES.XY_AXIS, {
     /**
-    XY axis system initializer
-
-    @method
+    * XY axis system initializer
+    *
+    * @method
     */
     initialize : function(args){
 
@@ -49,10 +49,10 @@ Base XY system for all the 2D charts.
 
     },
     /**
-    Show whole chart as a grid.
-
-    @method
-    @chainable
+    * Show whole chart as a grid.
+    *
+    * @method
+    * @chainable
     */
     showAsGrid : function (showAsGrid){
       this.xaxis.showAsGrid(showAsGrid);
@@ -60,12 +60,12 @@ Base XY system for all the 2D charts.
       return this;
     },
     /**
-    Moves x axis according to given height value, and sets
-    tick size value.
-
-    @method
-    @param {Number} newHeight chart's height
-    @chainable
+    * Moves x axis according to given height value, and sets
+    * tick size value.
+    *
+    * @method
+    * @param {Number} newHeight chart's height
+    * @chainable
     */
     height : function (newHeight){
       this.xaxis.ytranslate(newHeight).tickSize(newHeight);
@@ -73,11 +73,11 @@ Base XY system for all the 2D charts.
       return this;
     },
     /**
-    Sets tick size, based on given width value
-
-    @method
-    @param {Number} newWidth chart's width
-    @chainable
+    * Sets tick size, based on given width value
+    *
+    * @method
+    * @param {Number} newWidth chart's width
+    * @chainable
     */
     width : function (newWidth){
       this.yaxis.tickSize(newWidth).width(newWidth);
@@ -85,22 +85,22 @@ Base XY system for all the 2D charts.
       return this;
     },
     /**
-    Sets x scale.
-
-    @method
-    @param {Object} scale d3.scale
-    @chainable
+    * Sets x scale.
+    *
+    * @method
+    * @param {Object} scale d3.scale
+    * @chainable
     */
     setXScale : function (scale){
       this.xaxis.setScale(scale);
       return this;
     },
     /**
-    Sets y scale.
-
-    @method
-    @param {Object} scale d3.scale
-    @chainable
+    * Sets y scale.
+    *
+    * @method
+    * @param {Object} scale d3.scale
+    * @chainable
     */
     setYScale : function (scale){
       this.yaxis.setScale(scale);

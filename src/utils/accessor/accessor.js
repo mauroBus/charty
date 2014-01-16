@@ -1,12 +1,12 @@
 /**
-Accessor for data collection
-
-Accessor will iterate over the data collection.
-
-@class Accessor
-@constructor
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Accessor for data collection
+* 
+* Accessor will iterate over the data collection.
+* 
+* @class Accessor
+* @constructor
+* 
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -15,7 +15,7 @@ Accessor will iterate over the data collection.
     /** AMD */
     define('charty/accessor', function () {
       /** Export global even in AMD case in case this script
-      is loaded with others */
+      * is loaded with others */
       return factory();
     });
   }
@@ -24,28 +24,30 @@ Accessor will iterate over the data collection.
     root.Accessor = factory();
   }
 }(this, function() {
-  function Accessor(d) {
+
+  /** Class constructor */
+  function Accessor() {
     this.index = -1;
   }
 
   /**
-  Returns first element of the collection
-
-  @method
-  @return {Object} data element from the collection
+  * Returns first element of the collection
+  *
+  * @method
+  * @return {Object} data element from the collection
   */
   Accessor.prototype.first = function() {
     return this.data[0];
   };
 
   /**
-  Returns the next element of the collection
-  If no more elements are available,
-  collection index will reset itself
-
-  @method
-  @return {Object} next element in the collection,
-  first element in case of reset
+  * Returns the next element of the collection
+  * If no more elements are available,
+  * collection index will reset itself
+  *
+  * @method
+  * @return {Object} next element in the collection,
+  * first element in case of reset
   */
   Accessor.prototype.next = function() {
     if(!this.hasNext()){
@@ -55,40 +57,40 @@ Accessor will iterate over the data collection.
   };
 
   /**
-  Determines if the collection has more elements
-
-  @method
-  @return {Boolean} true if collection has more elements,
-  false if not
+  * Determines if the collection has more elements
+  *
+  * @method
+  * @return {Boolean} true if collection has more elements,
+  * false if not
   */
   Accessor.prototype.hasNext = function() {
     return this.index + 1 < this.data.length;
   };
 
   /**
-  Resets the colletion to restart iteration automatically
-
-  @method
+  * Resets the colletion to restart iteration automatically
+  *
+  * @method
   */
   Accessor.prototype.restart = function() {
     this.index = -1;
   };
 
   /**
-  Returns the data contained in the accessor
-
-  @method
-  @return {Object} data collection
+  * Returns the data contained in the accessor
+  *
+  * @method
+  * @return {Object} data collection
   */
   Accessor.prototype.getData = function() {
     return this.data;
   };
 
   /**
-  Sets a specific data set to this accessor
-
-  @method
-  @param {Object} data Data series
+  * Sets a specific data set to this accessor
+  *
+  * @method
+  * @param {Object} data Data series
   */
   Accessor.prototype.setData = function(data){
     this.data = data;

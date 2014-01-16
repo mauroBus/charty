@@ -1,13 +1,13 @@
 /**
-Base class for charts
-Contains common functionality
-
-@class BaseChart
-@requires d3,
-          underscore,
-          d3.chart
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Base class for charts
+* Contains common functionality
+* 
+* @class BaseChart
+* @requires d3,
+*           underscore,
+*           d3.chart
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -20,7 +20,7 @@ Contains common functionality
       ],
       function (d3, _) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, _);
     });
   }
@@ -32,13 +32,13 @@ Contains common functionality
 
   d3.chart('BaseChart',{
     /**
-    Sets the width for the chart
-    In case chart contains components, width will
-    propagate to them
-
-    @method
-    @param {Number} newWidth width for the chart
-    @chainable
+    * Sets the width for the chart
+    * In case chart contains components, width will
+    * propagate to them
+    *
+    * @method
+    * @param {Number} newWidth width for the chart
+    * @chainable
     */
     width : function(newWidth){
 
@@ -52,11 +52,11 @@ Contains common functionality
       return this;
     },
     /**
-    Sets the height for the chart. Propagates to
-    components.
-
-    @method
-    @param {Number} newHeight height for the chart
+    * Sets the height for the chart. Propagates to
+    * components.
+    *
+    * @method
+    * @param {Number} newHeight height for the chart
     */
     height : function(newHeight){
 
@@ -70,15 +70,15 @@ Contains common functionality
       return this;
     },
     /**
-    Sets the scale type for the x data mapping chart.
-    Propagates to components
-
-    Not all charts use scales. Some can use direct
-    mapping.
-
-    @method
-    @param {Oject} LinearScale, OrdinalScale
-    @chainable
+    * Sets the scale type for the x data mapping chart.
+    * Propagates to components
+    * 
+    * Not all charts use scales. Some can use direct
+    * mapping.
+    *
+    * @method
+    * @param {Oject} LinearScale, OrdinalScale
+    * @chainable
     */
     setXScale : function (scale){
 
@@ -92,15 +92,15 @@ Contains common functionality
       return this;
     },
     /**
-    Sets the scale type for the y data mapping chart.
-    Propagates to components.
-
-    Not all charts use scales. Some can use direct
-    mapping.
-
-    @method
-    @param {Oject} LinearScale, OrdinalScale
-    @chainable
+    * Sets the scale type for the y data mapping chart.
+    * Propagates to components.
+    *
+    * Not all charts use scales. Some can use direct
+    * mapping.
+    * 
+    * @method
+    * @param {Oject} LinearScale, OrdinalScale
+    * @chainable
     */
     setYScale : function (scale){
 
@@ -114,10 +114,10 @@ Contains common functionality
       return this;
     },
     /**
-    Sets mixins
-
-    @method
-    @chainable
+    * Sets mixins
+    *
+    * @method
+    * @chainable
     */
     setMixins : function(){
       if( !this.componentsMixins ){
@@ -134,10 +134,10 @@ Contains common functionality
       return this;
     },
     /**
-    Propagates the event manager to component parts.
-
-    @param {EventManager} evtManager Event Manager for chart.
-    @chainable
+    * Propagates the event manager to component parts.
+    * 
+    * @param {EventManager} evtManager Event Manager for chart.
+    * @chainable
     */
     setEventManager : function (evtManager){
       this.eventManager = evtManager;

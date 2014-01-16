@@ -1,13 +1,13 @@
 /**
-Api for chart creation management.
-
-Having the api, it is possible to set a root html element,
-and it will append a specific chart to it.
-
-@class ChartsApi
-@constructor
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Api for chart creation management.
+* 
+* Having the api, it is possible to set a root html element,
+* and it will append a specific chart to it.
+* 
+* @class ChartsApi
+* @constructor
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -18,7 +18,7 @@ and it will append a specific chart to it.
     define('charty/chartyinit',
       function () {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory();
       });
   } else {

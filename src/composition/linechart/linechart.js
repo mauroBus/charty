@@ -25,7 +25,7 @@ Takes N input data series
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
       });
   }

@@ -1,14 +1,14 @@
 /**
-Chart that can represent many data series
-
-@class MultipleInstancesMixin
-@extends BaseChart
-@constructor
-@requires d3.chart,
-          charty,
-          basechart
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Chart that can represent many data series
+* 
+* @class MultipleInstancesMixin
+* @extends BaseChart
+* @constructor
+* @requires d3.chart,
+*           charty,
+*           basechart
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -22,7 +22,7 @@ Chart that can represent many data series
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
     });
   }
@@ -34,16 +34,17 @@ Chart that can represent many data series
 
   d3.chart(Charty.CHART_NAMES.BASE_CHART)
     .extend(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, {
+      
     /**
-    Creates multiple mixin instances of a specific chart.
-    It is necessary to set the instances count
-    and the chart name.
-
-    @method
-    @param {Object} args example = {
-                                        instances : 2,
-                                        chartName : 'Bar'
-                                      }
+    * Creates multiple mixin instances of a specific chart.
+    * It is necessary to set the instances count
+    * and the chart name.
+    *
+    * @method
+    * @param {Object} args example = {
+    *                                    instances : 2,
+    *                                    chartName : 'Bar'
+    *                                  }
     */
     initialize : function(args){
 

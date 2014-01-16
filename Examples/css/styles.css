@@ -1,9 +1,12 @@
 /**
-  Base examples styles.
+*  Base examples styles.
 */
+
+/** SVG viewport */
 .viewport {
   width: 600px;
   height: 300px;
+  float : left;
 }
 
 .viewport-small {
@@ -11,8 +14,15 @@
   height: 200px;
 }
 
+/** Axis styles */
 .axis path {
   fill: none;
+  shape-rendering: crispEdges;
+}
+
+.axis .tick line {
+  fill: none;
+  stroke: lightgrey;
   shape-rendering: crispEdges;
 }
 
@@ -24,6 +34,7 @@
   stroke: #000;
 }
 
+/** Basic colors */
 .yellow {
   fill : yellow;
 }
@@ -40,22 +51,24 @@
   fill : red;
 }
 
-/*.gray {
-  fill : gray;
-}*/
-
-.gray {
-  fill : url(#gradient1);
-}
-
-.yellow {
-  fill : yellow;
-}
-
 .white {
   fill : white;
 }
 
+.charty-dark-gray{
+  fill : darkgray;
+}
+
+.charty-light-gray{
+  fill : lightgrey;
+}
+
+/** Gradient definition */
+.gray {
+  fill : url(#gradient1);
+}
+
+/** Line colors*/
 .blueline {
    fill: none;
    stroke: steelblue;
@@ -74,11 +87,7 @@
   stroke-width: 1.5px;
 }
 
-.axis .tick line {
-  fill: none;
-  stroke: lightgrey;
-}
-
+/** Background images differents positions */
 .imgCenter {
   background: url('../img/image.png') 50% 50% no-repeat;
 }
@@ -91,15 +100,7 @@
   background : url('../img/image.png') 100% 50% no-repeat;
 }
 
-/** Testing gradients */
+/** Stop colors for gradients */
 .stop1 { stop-color: red; }
 .stop2 { stop-color: white }
 .stop3 { stop-color: blue; }
-
-.charty-dark-gray{
-  fill : darkgray;
-}
-
-.charty-light-gray{
-  fill : lightgrey;
-}

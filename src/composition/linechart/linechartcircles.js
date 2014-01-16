@@ -1,16 +1,17 @@
 /**
-Line chart combined with circles.
-
-@class LineChartCircles
-@constructor
-@extends MultipleDataGroup
-@requires	d3.chart,
-          charty,
-					multipledatagroup,
-					linechart,
-					multipleinstancesmixin
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Line chart combined with circles. Combines the line chart and the circle component,
+* defining both as mixins.
+*
+* @class LineChartCircles
+* @constructor
+* @extends MultipleDataGroup
+* @requires	d3.chart,
+*           charty,
+*           multipledatagroup,
+*           linechart,
+*           multipleinstancesmixin
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -26,7 +27,7 @@ Line chart combined with circles.
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
     });
   }
@@ -37,13 +38,14 @@ Line chart combined with circles.
 }(this, function (d3, Charty) {
 	d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.LINE_CHART_CIRCLES,{
+      
 		/**
-		Line and circles chart initializator.
-
-		@method
-		@param {Object} args example = {
-                              instances : 2
-                          }
+		* Line and circles chart initializator.
+    *
+		* @method
+		* @param {Object} args example = {
+    *                          instances : 2
+    *                      }
 		*/
 		initialize : function(args){
 

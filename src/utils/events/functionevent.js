@@ -1,12 +1,12 @@
 /**
-When an event occurs, a defined function will be exectuted.
-This is for events that don't depende on an specific API.
-
-@class FunctionEvent
-@constructor
-@requires d3
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+*	When an event occurs, a defined function will be exectuted.
+*	This is for events that don't depende on an specific API.
+*	
+*	@class FunctionEvent
+*	@constructor
+*	@requires d3
+*	
+*	@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 (function(root, factory) {
 	/** Setting up AMD support*/
@@ -19,7 +19,7 @@ This is for events that don't depende on an specific API.
 			/**
 			 * Export global even in AMD case in case this script
 			 * is loaded with others
-			 * */
+			 */
 			return factory(d3);
 		});
 	} else {

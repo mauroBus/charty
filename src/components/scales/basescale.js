@@ -1,12 +1,12 @@
 /**
-Defines common scale functionality. Used as base element
-for inheritance.
-
-@class BaseScale
-@requires d3.chart,
-          charty
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+*	Defines common scale functionality. Used as base element
+*	for inheritance.
+*
+*	@class BaseScale
+*	@requires d3.chart,
+*						charty
+*
+*	@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 (function(root, factory) {
   /** Setting up AMD support*/
@@ -18,7 +18,7 @@ for inheritance.
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        *	is loaded with others */
         return factory(d3, Charty);
     });
   }
@@ -28,25 +28,26 @@ for inheritance.
   }
 }(this, function (d3, Charty) {
 
+	/** Class constructor */
 	var BaseScale = function(){
 	};
 
 	/**
-	Returns the created scale
-
-	@method
-	@return {Object} d3.scale Linear / Ordinal scale
+	*	Returns the created scale
+	*
+	*	@method
+	*	@return {Object} d3.scale Linear / Ordinal scale
 	*/
 	BaseScale.prototype.getScale = function(){
 		return this.scale;
 	};
 
 	/**
-	Generates range value for a scale.
-
-	@method
-	@param {Number} range value for the range
-	@return {Number} generated range value
+	*	Generates range value for a scale.
+	*
+	*	@method
+	*	@param {Number} range value for the range
+	*	@return {Number} generated range value
 	*/
 	BaseScale.prototype.generateRange = function(range){
 		var r ;

@@ -1,5 +1,5 @@
 /**
-Build generator via grunt
+* Build generator via Grunt
 */
 var mountFolder = function(connect, dir) {
   return connect.static(require('path').resolve(dir));
@@ -28,6 +28,7 @@ module.exports = function(grunt) {
           '<%= yeoman.app %>/api/chartyinit.js',
           '<%= yeoman.app %>/api/chartynames.js',
           '<%= yeoman.app %>/components/scales/*.js',
+          '<%= yeoman.app %>/composition/datamapper/datamapper.js',
           '<%= yeoman.app %>/components/base/basechart.js',
           '<%= yeoman.app %>/composition/simpledatagroup.js',
           '<%= yeoman.app %>/components/axis/axis.js',
@@ -69,12 +70,28 @@ module.exports = function(grunt) {
           '<%= yeoman.dist %>/charty.min.js': '<%= yeoman.dist %>/charty.js'
         }
       }
-    }
+    },
+
+    /** Platojs */
+    plato: {
+      your_task: {
+        files: {
+          'report': ['<%= yeoman.app %>/**/*.js'],
+        }
+      },
+  },
 
   });
 
   /** Build js */
   grunt.registerTask('build-js', [
+    'concat',
+    'uglify'
+  ]);
+
+  /** Build js with plato */
+  grunt.registerTask('build-js-plato', [
+    'plato',
     'concat',
     'uglify'
   ]);

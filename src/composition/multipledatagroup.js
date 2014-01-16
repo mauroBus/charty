@@ -1,13 +1,13 @@
 /**
-Defines a data transformation for composite charts
-
-@class MultipleDataGroup
-@extend BaseChart
-@requires d3.chart,
-          charty,
-          basechart
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Defines a data transformation for composite charts
+* 
+* @class MultipleDataGroup
+* @extend BaseChart
+* @requires d3.chart,
+*           charty,
+*           basechart
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -21,7 +21,7 @@ Defines a data transformation for composite charts
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
     });
   }
@@ -33,11 +33,11 @@ Defines a data transformation for composite charts
   d3.chart(Charty.CHART_NAMES.BASE_CHART)
     .extend(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP, {
     /**
-    Data transformation for multiple data series.
-
-    @method
-    @param {Object} data Data accessor
-    @return {Object} Data accesor
+    * Data transformation for multiple data series.
+    *
+    * @method
+    * @param {Object} data Data accessor
+    * @return {Object} Data accesor
     */
     transform : function(data){
 
@@ -45,31 +45,31 @@ Defines a data transformation for composite charts
       return data;
     },
     /**
-    Default domain for x scaling
-
-    @method
-    @param {Object} domain Array for x domain
-    @chainable
+    * Default domain for x scaling
+    *
+    * @method
+    * @param {Object} domain Array for x domain
+    * @chainable
     */
     setDefaultXDomain : function (domain){
       this.defaultXDomain = domain;
       return this;
     },
     /**
-    Default domain for y scaling
-
-    @method
-    @param {Object} domain Array for y domain
-    @chainable
+    * Default domain for y scaling
+    *
+    * @method
+    * @param {Object} domain Array for y domain
+    * @chainable
     */
     setDefaultYDomain : function (domain){
       this.defaultYDomain = domain;
       return this;
     },
     /** 
-    Domain calculation
-
-    @method
+    * Domain calculation
+    *
+    * @method
     */
     _calculateDomains : function (data, zScale){
        /** Default x domain */

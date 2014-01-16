@@ -1,19 +1,19 @@
 /**
-Basic Axis representation.
-
-Only one X/Y is sufficient for chart drawing, but can
-contain more. The idea is to draw an axis and locate it
-wherever is necessary.
-
-Wether Axis is a BaseChart, no need to extend it, since
-it will implement all the functions needed.
-
-@class Axis
-@constructor
-@requires d3.chart,
-          charty
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Basic Axis representation.
+*
+* Only one X/Y is sufficient for chart drawing, but can
+* contain more. The idea is to draw an axis and locate it
+* wherever is necessary.
+*
+* Wether Axis is a BaseChart, no need to extend it, since
+* it will implement all the functions needed.
+* 
+* @class Axis
+* @constructor
+* @requires d3.chart,
+*           charty
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -26,7 +26,7 @@ it will implement all the functions needed.
       ],
       function(d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
       });
   } else {
@@ -38,34 +38,34 @@ it will implement all the functions needed.
   d3.chart(Charty.CHART_NAMES.BASE_CHART)
     .extend(Charty.CHART_NAMES.AXIS, {
       /**
-    Basic Axis initialization
-
-    @method
-    */
+      * Basic Axis initialization
+      *
+      * @method
+      */
       initialize: function(args) {
 
         /**
-      Tranlation value in the x direction
-
-      @property
-      @type Number
-      @default 0
-      */
+        * Tranlation value in the x direction
+        *
+        * @property
+        * @type Number
+        * @default 0
+        */
         this.xt = 0;
         /**
-      Tranlation value in the y direction
-
-      @property
-      @type Number
-      @default 0
-      */
+        * Tranlation value in the y direction
+        *
+        * @property
+        * @type Number
+        * @default 0
+        */
         this.yt = 0;
 
         /**
-      Defaults for axis
-
-      c : axis style class
-      */
+        * Defaults for axis
+        *
+        * c : axis style class
+        */
         var defaults = {
           c: 'axis'
         };
@@ -73,17 +73,17 @@ it will implement all the functions needed.
         this.axis = d3.svg.axis();
 
         /**
-      Layer options
-      */
+        * Layer options
+        */
         var axisLayerOptions = {
           /**
-        Data bind for axis
-        Since axis requires just a scale, only one element
-        will be set for the data selection
-
-        @method
-        @param {Object} d
-        */
+          * Data bind for axis
+          * Since axis requires just a scale, only one element
+          * will be set for the data selection
+          *
+          * @method
+          * @param {Object} d
+          */
           dataBind: function(d) {
             /** Case there is no data to display must be checked */
             if (d.hasNext()) {
@@ -94,11 +94,11 @@ it will implement all the functions needed.
           },
 
           /**
-        Insert for axis. Just inserts one svg:g
-        element.
-
-        @method
-        */
+          * Insert for axis. Just inserts one svg:g
+          * element.
+          *
+          * @method
+          */
           insert: function() {
             return this.append('g');
           },
@@ -108,7 +108,7 @@ it will implement all the functions needed.
               var chart = this.chart();
 
               /**
-              Renders as a grid.
+              * Renders as a grid.
               */
               if (chart.grid) {
                 chart.axis.tickSize(-chart.tsize, 0, 0);
@@ -119,7 +119,7 @@ it will implement all the functions needed.
                 .call(chart.axis);
 
               /**
-              Axis translation in x or y direction.
+              * Axis translation in x or y direction.
               */
               if (chart.xt !== 0 || chart.yt !== 0) {
                 this.attr('transform', 'translate(' + chart.xt + ',' + chart.yt + ')');
@@ -153,36 +153,36 @@ it will implement all the functions needed.
         };
 
         /**
-      Axis layer creation
-      */
+        * Axis layer creation
+        */
         this.layer('axis', this.base.append('g'), axisLayerOptions);
       },
       /**
-    Sets tick size for the axis
-
-    @method
-    @param {Number} size ticksize
-    @chainable
-    */
+      * Sets tick size for the axis
+      * 
+      * @method
+      * @param {Number} size ticksize
+      * @chainable
+      */
       tickSize: function(size) {
         /**
-      Size for the ticks. Necessary
-      to define a grid chart.
-
-      @property
-      @type Number
-      @default 0
-      */
+        * Size for the ticks. Necessary
+        * to define a grid chart.
+        * 
+        * @property
+        * @type Number
+        * @default 0
+        */
         this.tsize = (size || 0);
         return this;
       },
       /**
-    Sets the scale that will be used for the axis
-
-    @method
-    @param {Object} d3.scale
-    @chainable
-    */
+      * Sets the scale that will be used for the axis
+      *
+      * @method
+      * @param {Object} d3.scale
+      * @chainable
+      */
       setScale: function(scale) {
 
         if (!scale) {
@@ -193,76 +193,76 @@ it will implement all the functions needed.
         return this;
       },
       /**
-    Shows the axis as a grid
-
-    @method
-    @param {Boolean} val true/false value
-    @chainable
-    @default false
-    */
+      * Shows the axis as a grid
+      * 
+      * @method
+      * @param {Boolean} val true/false value
+      * @chainable
+      * @default false
+      */
       showAsGrid: function(val) {
         this.grid = val;
         return this;
       },
       /**
-    Sets axis orientation
-
-    @method
-    @param {String} orient
-    @chainable
-    @default bottom
-    */
+      * Sets axis orientation
+      *
+      * @method
+      * @param {String} orient
+      * @chainable
+      * @default bottom
+      */
       orient: function(orient) {
 
         this.axis.orient(orient || 'bottom');
         return this;
       },
       /**
-    Sets x translation for axis.
-
-    @method
-    @param {Number} t tranlation value
-    @chainable
-    */
+      * Sets x translation for axis.
+      * 
+      * @method
+      * @param {Number} t tranlation value
+      * @chainable
+      */
       xtranslate: function(t) {
         this.xt = t;
         return this;
       },
       /**
-    Sets y translation for axis.
-
-    @method
-    @param {Number} t tranlation value
-    @chainable
-    */
+      * Sets y translation for axis.
+      *
+      * @method
+      * @param {Number} t tranlation value
+      * @chainable
+      */
       ytranslate: function(t) {
         this.yt = t;
         return this;
       },
       /**
-    Text label that will be set next to the axis
-
-    @method
-    @param {String} label Text label
-    @param {Number} labelRotate Rotation for y axis label
-    @chainable
-    */
+      * Text label that will be set next to the axis
+      *
+      * @method
+      * @param {String} label Text label
+      * @param {Number} labelRotate Rotation for y axis label
+      * @chainable
+      */
       setTextLabel: function(label, labelRotate) {
         this.textLabel = label;
         this.labelRotate = labelRotate;
         return this;
       },
       /**
-    Custom tick count setting for particular
-    axis.
-
-    This options will only work in linear scales,
-    since the domain, by defaut, is continuous.
-
-    @method
-    @param {Number} tCount ticks count
-    @chainable
-    */
+      * Custom tick count setting for particular
+      * axis.
+      *
+      * This options will only work in linear scales,
+      * since the domain, by defaut, is continuous.
+      * 
+      * @method
+      * @param {Number} tCount ticks count
+      * @chainable
+      */
       tickCount: function(tCount) {
         if (tCount) {
           this.axis.ticks(tCount);
@@ -270,12 +270,12 @@ it will implement all the functions needed.
         return this;
       },
       /**
-    Tick format
-
-    @method
-    @param {String} format Tick format option
-    @chainable
-    */
+      * Tick format
+      *
+      * @method
+      * @param {String} format Tick format option
+      * @chainable
+      */
       tickFormat: function(format) {
         if (format) {
           this.axis.tickFormat(d3.format(format));

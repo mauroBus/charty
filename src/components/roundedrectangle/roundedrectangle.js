@@ -1,14 +1,14 @@
 /**
-Rounded rectangle drawer.
-
-@class RoundedRectangle
-@constructor
-@extends SimpleDataGroup
-@requires d3.chart,
-          charty,
-          simpledatagroup
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Rounded rectangle drawer.
+* 
+* @class RoundedRectangle
+* @constructor
+* @extends SimpleDataGroup
+* @requires d3.chart,
+*           charty,
+*           simpledatagroup
+* 
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -22,7 +22,7 @@ Rounded rectangle drawer.
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
     });
   }
@@ -34,9 +34,9 @@ Rounded rectangle drawer.
   d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.ROUNDED_RECTANGLE,{
     /**
-    Rounded rectangle initialization.
-
-    @method
+    * Rounded rectangle initialization.
+    *
+    * @method
     */
     initialize : function(args){
 
@@ -49,12 +49,12 @@ Rounded rectangle drawer.
           };
 
       /**
-      Defaults for rectangle
-
-      rh : rectangle height
-      rw : rectangle width
-      rc : rectangle color
-      rx, ry : value for rounded corners
+      * Defaults for rectangle
+      *
+      * rh : rectangle height
+      * rw : rectangle width
+      * rc : rectangle color
+      * rx, ry : value for rounded corners
       */
       var defaults = {
         rh : 20,
@@ -66,19 +66,19 @@ Rounded rectangle drawer.
 
       var options = {
         /**
-        Data bind for Rounded Rectangle.
-        Data defines a rectangle height (rh), width (rw),
-        color (rc), rx, ry. If not defined, defauls are
-        used.
-
-        @method
-        @param {Object} d example = {
-                                      rh : 20,
-                                      rw : 20,
-                                      rc : 'red'
-                                      data : [...]
-                                    }
-        @chainable
+        * Data bind for Rounded Rectangle.
+        * Data defines a rectangle height (rh), width (rw),
+        * color (rc), rx, ry. If not defined, defauls are
+        * used.
+        *
+        * @method
+        * @param {Object} d example = {
+        *                              rh : 20,
+        *                              rw : 20,
+        *                              rc : 'red'
+        *                              data : [...]
+        *                            }
+        * @chainable
         */
         dataBind : function(d){
 
@@ -93,10 +93,10 @@ Rounded rectangle drawer.
           return this.selectAll('rect').data(d.data);
         },
         /**
-        Appends a svg:rect element.
-
-        @method
-        @chainable
+        * Appends a svg:rect element.
+        *
+        * @method
+        * @chainable
         */
         insert : function(){
           return this.append('rect');
@@ -134,7 +134,7 @@ Rounded rectangle drawer.
       };
 
       /**
-      Layer creation
+      * Layer creation
       */
       this.layer('roundedrects', this.base, options);
     }

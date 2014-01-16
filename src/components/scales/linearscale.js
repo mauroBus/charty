@@ -1,14 +1,14 @@
 /**
-Linear scale for linear axis
-
-@class LinearScale
-@constructor
-@extends BaseScale
-@requires d3.chart,
-          basescale,
-          uderscore
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Linear scale for linear axis
+* 
+* @class LinearScale
+* @constructor
+* @extends BaseScale
+* @requires d3.chart,
+*           basescale,
+*           uderscore
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -22,7 +22,7 @@ Linear scale for linear axis
       ],
       function(d3, BaseScale, _) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, BaseScale, _);
       });
   } else {
@@ -31,22 +31,27 @@ Linear scale for linear axis
   }
 }(this, function(d3, BaseScale, _) {
 
+  /** 
+  * Class constructor
+  *
+  * @param {String} axisType Axis type, defined in Charty names
+  */
   var LinearScale = function(axisType) {
     this.scale = d3.scale.linear();
     this.axisType = axisType;
   };
 
   /**
-  Inheritance from BaseScale
+  * Inheritance from BaseScale
   */
   LinearScale.prototype = new BaseScale();
 
   /**
-  Sets domain for linear scale
-
-  @method
-  @param {Object} arrayValues Max and min value defined by array
-  @chainable
+  * Sets domain for linear scale
+  *
+  * @method
+  * @param {Object} arrayValues Max and min value defined by array
+  * @chainable
   */
   LinearScale.prototype.setDomain = function(arrayValues) {
     this.scale = this.scale.domain(arrayValues);
@@ -54,11 +59,11 @@ Linear scale for linear axis
   };
 
   /**
-  Sets the range for the linear scale
-
-  @method
-  @param {Number} range numeric value for linear scale
-  @chainable
+  * Sets the range for the linear scale
+  *
+  * @method
+  * @param {Number} range numeric value for linear scale
+  * @chainable
   */
   LinearScale.prototype.setRange = function(range) {
     this.scale = this.scale.range(this.generateRange(range));
@@ -66,42 +71,42 @@ Linear scale for linear axis
   };
 
   /**
-  Returns scaled value
-
-  @method
-  @param {Number} value number to map to scale
-  @return {Number} mapped value
+  * Returns scaled value
+  *
+  * @method
+  * @param {Number} value number to map to scale
+  * @return {Number} mapped value
   */
   LinearScale.prototype.map = function(value) {
     return this.scale(value);
   };
 
   /**
-  Returns band for a specified value
-
-  @method
-  @param {Number} max max value for a scale
-  @param {Number} value to map
-  @return {Number} similar to ordinal band but for
-  linear scale
+  * Returns band for a specified value
+  *
+  * @method
+  * @param {Number} max max value for a scale
+  * @param {Number} value to map
+  * @return {Number} similar to ordinal band but for
+  * linear scale
   */
   LinearScale.prototype.band = function(max, value) {
     return (max - this.scale(value));
   };
 
   /**
-  Calculates the domain for the linear scale
-
-  Data probably won't be uniform, so for each data element,
-  a maximum value is obtained. The maximum element will be kept.
-  Same situation is for the minimum element
-
-  Keeps a reference for the minimum value
-
-  @method
-  @param {Object} data Accessor for the data collection
-  @param {Object} f callback function
-  @chainable
+  * Calculates the domain for the linear scale
+  *
+  * Data probably won't be uniform, so for each data element,
+  * a maximum value is obtained. The maximum element will be kept.
+  * Same situation is for the minimum element
+  *
+  * Keeps a reference for the minimum value
+  *
+  * @method
+  * @param {Object} data Accessor for the data collection
+  * @param {Object} f callback function
+  * @chainable
   */
   LinearScale.prototype.calculateDomain = function(data, f) {
     var max = -Infinity,
@@ -132,12 +137,12 @@ Linear scale for linear axis
   };
 
   /**
-  Maximum value setting for linear scale.
-  Useful when setting discrete ticks for continuous scale
-
-  @method
-  @param {Number} maxVal Scale's maximum value
-  @chainable
+  * Maximum value setting for linear scale.
+  * Useful when setting discrete ticks for continuous scale
+  *
+  * @method
+  * @param {Number} maxVal Scale's maximum value
+  * @chainable
   */
   LinearScale.prototype.setMaxValue = function(maxVal) {
     this.maxValue = maxVal;
@@ -145,10 +150,10 @@ Linear scale for linear axis
   };
 
   /**
-  Returns max value
-
-  @method
-  @return {Number} scale's maximum value
+  * Returns max value
+  *
+  * @method
+  * @return {Number} scale's maximum value
   */
   LinearScale.prototype.getMaxValue = function() {
     return this.maxValue;

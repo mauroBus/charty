@@ -1,14 +1,14 @@
 /**
-Circle drawer.
-
-@class Circle
-@extends SimpleDataGroup
-@constructor
-@requires d3.chart,
-          underscore,
-          simpledatagroup
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Circle drawer.
+* 
+* @class Circle
+* @extends SimpleDataGroup
+* @constructor
+* @requires d3.chart,
+*           underscore,
+*           simpledatagroup
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -22,7 +22,7 @@ Circle drawer.
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
     });
   }
@@ -34,9 +34,9 @@ Circle drawer.
   d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.CIRCLE,{
     /**
-    Circle initializator
-
-    @method
+    * Circle initializator
+    *
+    * @method
     */
     initialize : function(args){
 
@@ -47,10 +47,10 @@ Circle drawer.
           };
 
       /**
-      Defaults for circles.
-
-      r : circle radius
-      c : circle color
+      * Defaults for circles.
+      *
+      * r : circle radius
+      * c : circle color
       */
       var defaults = {
         r : 5,
@@ -59,19 +59,19 @@ Circle drawer.
 
       var options = {
         /**
-        Data bind for a circle serie.
-        Can have color and circle radius set for the whole serie,
-        or own values for each data point.
-
-        @method
-        @param {Object} d example = {
-                                      color : 'red',
-                                      r : 5
-                                      data : [
-                                        {x : 'Jan', y: 300, c : 'blue', r : 20}
-                                      ]
-                                    }
-        @chainable
+        * Data bind for a circle serie.
+        * Can have color and circle radius set for the whole serie,
+        * or own values for each data point.
+        *
+        * @method
+        * @param {Object} d example = {
+        *                              color : 'red',
+        *                              r : 5
+        *                              data : [
+        *                                {x : 'Jan', y: 300, c : 'blue', r : 20}
+        *                              ]
+        *                            }
+        * @chainable
         */
         dataBind: function(d){
 
@@ -83,10 +83,10 @@ Circle drawer.
           return this.selectAll('circle').data(d.data);
         },
         /**
-        Appends a svg:circle
-
-        @method
-        @chainable
+        * Appends a svg:circle
+        *
+        * @method
+        * @chainable
         */
         insert : function(){
           return this.append('circle');
@@ -122,7 +122,7 @@ Circle drawer.
       };
 
       /**
-      Layer creation
+      * Layer creation
       */
       this.layer('circles', this.base.append('g'), options);
     }

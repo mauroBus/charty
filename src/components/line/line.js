@@ -1,16 +1,16 @@
 /**
-Line drawing.
-
-Note : this charts doesn't take events, as it doesn't seem necessary for now.
-
-@class Line
-@extends SimpleDataGroup
-@constructor
-@requires d3.chart,
-          charty,
-          simpledatagroup
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Line drawing.
+* 
+* Note : this charts doesn't take events, as it doesn't seem necessary for now.
+* 
+* @class Line
+* @extends SimpleDataGroup
+* @constructor
+* @requires d3.chart,
+*           charty,
+*           simpledatagroup
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -24,7 +24,7 @@ Note : this charts doesn't take events, as it doesn't seem necessary for now.
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
-        is loaded with others */
+        * is loaded with others */
         return factory(d3, Charty);
     });
   }
@@ -36,14 +36,14 @@ Note : this charts doesn't take events, as it doesn't seem necessary for now.
   d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.LINE, {
     /**
-    Line initialization
-
-    @method
+    * Line initialization
+    *
+    * @method
     */
     initialize : function(){
 
       /**
-      c : default color line
+      * c : default color line
       */
       var defaults = {
         c : 'line-default'
@@ -53,19 +53,19 @@ Note : this charts doesn't take events, as it doesn't seem necessary for now.
 
       var options = {
         /**
-        Data bind for a line serie.
-        Since a line is drawed using d3.line
-        a datum must be defined. Can also have a color
-        for the whole serie.
-
-        @method
-        @param {Object} d example = {
-                                      color : 'redline'
-                                      data : [
-                                        {x : 'Jan', y: 200},
-                                        ...
-                                      ]
-                                    }
+        * Data bind for a line serie.
+        * Since a line is drawed using d3.line
+        * a datum must be defined. Can also have a color
+        * for the whole serie.
+        * 
+        * @method
+        * @param {Object} d example = {
+        *                              color : 'redline'
+        *                              data : [
+        *                                {x : 'Jan', y: 200},
+        *                                ...
+        *                              ]
+        *                            }
         */
         dataBind : function(d){
 
@@ -81,10 +81,10 @@ Note : this charts doesn't take events, as it doesn't seem necessary for now.
 
         },
         /**
-        Appends a svg:path
-
-        @method
-        @chainable
+        * Appends a svg:path
+        *
+        * @method
+        * @chainable
         */
         insert : function(){
 
@@ -109,7 +109,7 @@ Note : this charts doesn't take events, as it doesn't seem necessary for now.
       };
 
       /**
-      Layer creation
+      * Layer creation
       */
       this.layer('lineslayer', this.base.append('g'), options);
     }
