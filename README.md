@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/dendril/charty.png)](https://codeclimate.com/github/dendril/charty)
+
 # Charty - d3 based chart library
 
 Greetings fellow developer, and welcome to the Charty proyect! Let's have some fun making charts!
