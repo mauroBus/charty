@@ -1,4 +1,4 @@
-[![Code Climate](https://codeclimate.com/github/dendril/charty.png)](https://codeclimate.com/github/dendril/charty)
+[![Code Climate](https://codeclimate.com/repos/52d7fc9ae30ba059d70177b8/badges/51ccb3e5b026c3f07fd9/gpa.png)](https://codeclimate.com/repos/52d7fc9ae30ba059d70177b8/feed)
 
 # Charty - d3 based chart library
 
