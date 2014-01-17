@@ -1190,16 +1190,16 @@
     });
 }));
 /**
-Bar drawer. Takes only one data series as input.
-
-@class Bar
-@constructor
-@extends SimpleDataGroup
-@requires d3.chart,
-          charty,
-          simpledatagroup
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Bar drawer. Takes only one data series as input.
+* 
+* @class Bar
+* @constructor
+* @extends SimpleDataGroup
+* @requires d3.chart,
+*           charty,
+*           simpledatagroup
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -1225,14 +1225,14 @@ Bar drawer. Takes only one data series as input.
   d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.HORIZONTAL_BAR, {
     /**
-    Bar initialization
-
-    @method
+    * Bar initialization
+    *
+    * @method
     */
     initialize : function(args){
 
       /**
-      Sets only bar color as default.
+      * Sets only bar color as default.
       */
       var defaults = {
         c : 'bar-default'
@@ -1240,35 +1240,35 @@ Bar drawer. Takes only one data series as input.
 
       var options = {
         /**
-        Data bind for a bar serie.
-        Can have a color set for the whole serie, or
-        each bar can have an own color defined.
-
-        @method
-        @param {Object} d example = {
-                                       color : 'red',
-                                       data = [
-                                        {x : 'Jan', y : 200, c : 'blue'}
-                                       ]
-                                    }
-        @chainable
+        * Data bind for a bar serie.
+        * Can have a color set for the whole serie, or
+        * each bar can have an own color defined.
+        *
+        * @method
+        * @param {Object} d example = {
+        *                               color : 'red',
+        *                               data = [
+        *                                {x : 'Jan', y : 200, c : 'blue'}
+        *                               ]
+        *                            }
+        * @chainable
         */
         dataBind : function(d){
 
           var chart = this.chart();
 
           /**
-          Sets color for the whole data serie.
+          * Sets color for the whole data serie.
           */
           chart.c = (d.c || defaults.c);
 
           return this.selectAll('rect').data(d.data);
         },
         /**
-        Inserts a svg:rect element.
-
-        @method
-        @chainable
+        * Inserts a svg:rect element.
+        *
+        * @method
+        * @chainable
         */
         insert : function(){
           return this.append('rect');
@@ -1285,17 +1285,18 @@ Bar drawer. Takes only one data series as input.
             var chart = this.chart(),
                 zeroX = chart.xscale.map(0);
 
-            this.attr('class', function(d){ return (d.c || chart.c); })
-                .attr("x", function(d) {
-                  return chart.xscale.map(Math.min(0, d.x), chart.factor);
-                })
-                .attr("y", function(d) {
-                  return chart.yscale.map(d.y, chart.factor);
-                })
-                .attr("width", function(d) {
-                  return Math.abs(chart.xscale.map(d.x) - zeroX);
-                })
-                .attr("height", chart.yscale.band(chart.factor));
+            this.attr('class', function(d){
+              return (d.c || chart.c);
+            }).attr("x", function(d) {
+              return chart.xscale.map(Math.min(0, d.x), chart.factor);
+            })
+            .attr("y", function(d) {
+              return chart.yscale.map(d.y, chart.factor);
+            })
+            .attr("width", function(d) {
+              return Math.abs(chart.xscale.map(d.x) - zeroX);
+            })
+            .attr("height", chart.yscale.band(chart.factor));
 
             chart.eventManager.bindAll(this);
 
@@ -1337,7 +1338,7 @@ Bar drawer. Takes only one data series as input.
       };
 
       /**
-      Layer creation
+      * Layer creation
       */
       this.layer('horizontalayer', this.base.append('g') ,options);
 
