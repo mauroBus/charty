@@ -2638,7 +2638,7 @@ One X Axis (bottom)
     define('charty/yxyaxis',[
       'd3.chart',
       'charty/chartynames',
-      'charty/axis',
+      'charty/xyaxis'
       ],
       function (d3, Charty) {
         /** Export global even in AMD case in case this script
@@ -2658,13 +2658,9 @@ One X Axis (bottom)
     @method
     */
     initialize : function (args){
-      this.xaxis = this.mixin(Charty.CHART_NAMES.AXIS,
+      this.xyaxis = this.mixin(Charty.CHART_NAMES.XY_AXIS,
                               this.base.append('g'),
-                              args).orient('bottom').tickCount(args.xTickCount).tickFormat(args.xAxisTickFormat);
-
-      this.yaxisleft = this.mixin(Charty.CHART_NAMES.AXIS,
-                            this.base.append('g'),
-                            args).orient('left').tickCount(args.yTickCount).tickFormat(args.yAxisTickFormat);
+                              args);
 
       this.yaxisright = this.mixin(Charty.CHART_NAMES.AXIS,
                                    this.base.append('g'),
@@ -2678,54 +2674,53 @@ One X Axis (bottom)
     @chainable
     */
     showAsGrid : function (showAsGrid){
-      this.xaxis.showAsGrid(showAsGrid);
-      this.yaxisleft.showAsGrid(showAsGrid);
+      this.xyaxis.showAsGrid(showAsGrid);
       return this;
     },
     /**
-    Sets x axis position and tick size
-
-    @method
-    @param {Number} newHeight chart's height
-    @chainable
+    * Sets x axis position and tick size
+    *
+    * @method
+    * @param {Number} newHeight chart's height
+    * @chainable
     */
     height : function (newHeight){
-      this.xaxis.ytranslate(newHeight).tickSize(newHeight);
+      this.xyaxis.height(newHeight);
       return this;
     },
     /**
-    Sets y axis disposition, based on a given
-    width value, and tick size for only one y axis.
-
-    @method
-    @param {Number} newWidth chart's width
-    @chainable
+    * Sets y axis disposition, based on a given
+    * width value, and tick size for only one y axis.
+    *
+    * @method
+    * @param {Number} newWidth chart's width
+    * @chainable
     */
     width : function (newWidth){
       this.yaxisright.xtranslate(newWidth);
-      this.yaxisleft.tickSize(newWidth);
+      this.xyaxis.width(newWidth);
       return this;
     },
     /**
-    Redefinition of x scale setter
-
-    @method
-    @param {Object} scale d3.scale
-    @chainable
+    * Redefinition of x scale setter
+    *
+    * @method
+    * @param {Object} scale d3.scale
+    * @chainable
     */
     setXScale : function (scale){
-      this.xaxis.setScale(scale);
+      this.xyaxis.setXScale(scale);
       return this;
     },
     /**
-    Redefinition of y scale setter
-
-    @method
-    @param {Object} scale d3.scale
-    @chainable
+    * Redefinition of y scale setter
+    *
+    * @method
+    * @param {Object} scale d3.scale
+    * @chainable
     */
     setYScale : function (scale){
-      this.yaxisleft.setScale(scale);
+      this.xyaxis.setYScale(scale);
       this.yaxisright.setScale(scale);
       return this;
     }
