@@ -912,7 +912,7 @@
 *
 * Wether Axis is a BaseChart, no need to extend it, since
 * it will implement all the functions needed.
-* 
+*
 * @class Axis
 * @constructor
 * @requires d3.chart,
@@ -1037,10 +1037,10 @@
 
                 /** Y Axis label rotation */
                 if (chart.labelRotate) {
-                  text.attr('transform', 'translate(' + (-chart.w / 14) + ',' + chart.h / 2 + ')' +
+                  text.attr('transform', 'translate(' + (-chart.w / 14) + ',' + (chart.h + (chart.textLabel.length * chart.h)/32) / 2 + ')' +
                     ' rotate(' + chart.labelRotate + ')');
                 } else {
-                  text.attr('transform', 'translate(' + chart.w / 2 + ',' + chart.yt / 6 + ')');
+                  text.attr('transform', 'translate(' + (chart.w / 2 - chart.textLabel.length * 3.2 ) + ',' + chart.yt / 6 + ')');
                 }
               }
 
@@ -1064,7 +1064,7 @@
       },
       /**
       * Sets tick size for the axis
-      * 
+      *
       * @method
       * @param {Number} size ticksize
       * @chainable
@@ -1073,7 +1073,7 @@
         /**
         * Size for the ticks. Necessary
         * to define a grid chart.
-        * 
+        *
         * @property
         * @type Number
         * @default 0
@@ -1099,7 +1099,7 @@
       },
       /**
       * Shows the axis as a grid
-      * 
+      *
       * @method
       * @param {Boolean} val true/false value
       * @chainable
@@ -1124,7 +1124,7 @@
       },
       /**
       * Sets x translation for axis.
-      * 
+      *
       * @method
       * @param {Number} t tranlation value
       * @chainable
@@ -1163,7 +1163,7 @@
       *
       * This options will only work in linear scales,
       * since the domain, by defaut, is continuous.
-      * 
+      *
       * @method
       * @param {Number} tCount ticks count
       * @chainable

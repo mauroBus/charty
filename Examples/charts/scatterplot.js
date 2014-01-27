@@ -1,4 +1,4 @@
-/** 
+/**
 *	Scatterplot (Bubble chart) creation.
 */
 
@@ -23,7 +23,7 @@
 
   "use strict";
 
-  /** 
+  /**
   * c : circle color
   */
   var data3 = {
@@ -47,7 +47,7 @@
   datagroup22.push(data3);
   datagroup22.push(data5);
 
-  /** 
+  /**
   * instances : how many data groups will be rendered
   * root : container div
   * defaultXDomain : default values for x axis
