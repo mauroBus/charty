@@ -21,7 +21,8 @@ require.config({
     'implementations'         : 'dynamic',
 
     /** Examples */
-    'barchart'                : '../../charts/barchart',
+    'horizontalbarchart'      : '../../charts/horizontalbarchart',
+    'verticalbarchart'        : '../../charts/verticalbarchart',
     'donutinnertext'          : '../../charts/donutinnertext',
     'groupedbarchart'         : '../../charts/groupedbarchart',
     'labeledtrianglechart'    : '../../charts/labeledtrianglechart',
@@ -55,7 +56,8 @@ require.config({
 
 requirejs(
   [
-  'barchart',
+  'horizontalbarchart',
+  'verticalbarchart',
   'donutinnertext',
   'groupedbarchart',
   'labeledtrianglechart',

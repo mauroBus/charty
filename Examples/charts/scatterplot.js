@@ -96,7 +96,7 @@
   var chart4 = Charty.chart(options4);
 
   var marginOptions4 = {
-    marginleft : 50,
+    marginleft : 70,
     margintop : 20,
     marginlfactor : 0.85,
     margintfactor : 0.80
