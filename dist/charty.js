@@ -2,7 +2,6 @@
 * Data checker for different data input
 *
 * @class DataValidator
-* @constructor
 * @requires d3,
 *           underscore
 *
@@ -28,14 +27,18 @@
   }
 }(this, function (_) {
 
-  /** Class constructor */
+  /** 
+  * Class constructor
+  *
+  * @constructor
+  */
   function DataValidator() {
   }
 
   /**
   * Checks if a given value is defined and > 0
   *
-  * @method
+  * @method isPositiveNumber
   * @param {Number} value number to check
   * @param {String} message error message to show
   * @return {Number} value
@@ -50,7 +53,7 @@
   /**
   * Checks if value is number, or is defined
   *
-  * @method
+  * @method isNumber
   * @param {Number} value to check
   * @param {String} error message
   * @return {Number} value
@@ -65,7 +68,7 @@
   /**
   * Checks if a value is defined
   *
-  * @method
+  * @method isUndefined
   * @param {Number} value to check
   * @param {String} message error message
   * @return {Number} value
@@ -216,14 +219,18 @@
   }
 }(this, function (d3, Charty) {
 
-	/** Class constructor */
+	/** 
+	* Class constructor 
+	*
+	* @constructor
+	*/
 	var BaseScale = function(){
 	};
 
 	/**
-	*	Returns the created scale
+	*	Returns the contained scale.
 	*
-	*	@method
+	*	@method getScale
 	*	@return {Object} d3.scale Linear / Ordinal scale
 	*/
 	BaseScale.prototype.getScale = function(){
@@ -233,7 +240,7 @@
 	/**
 	*	Generates range value for a scale.
 	*
-	*	@method
+	*	@method generateRange
 	*	@param {Number} range value for the range
 	*	@return {Number} generated range value
 	*/
@@ -261,7 +268,6 @@
 * Linear scale for linear axis
 * 
 * @class LinearScale
-* @constructor
 * @extends BaseScale
 * @requires d3.chart,
 *           basescale,
@@ -293,6 +299,7 @@
   /** 
   * Class constructor
   *
+  * @constructor
   * @param {String} axisType Axis type, defined in Charty names
   */
   var LinearScale = function(axisType) {
@@ -308,7 +315,7 @@
   /**
   * Sets domain for linear scale
   *
-  * @method
+  * @method setDomain
   * @param {Object} arrayValues Max and min value defined by array
   * @chainable
   */
@@ -320,7 +327,7 @@
   /**
   * Sets the range for the linear scale
   *
-  * @method
+  * @method setRange
   * @param {Number} range numeric value for linear scale
   * @chainable
   */
@@ -332,7 +339,7 @@
   /**
   * Returns scaled value
   *
-  * @method
+  * @method map
   * @param {Number} value number to map to scale
   * @return {Number} mapped value
   */
@@ -343,7 +350,7 @@
   /**
   * Returns band for a specified value
   *
-  * @method
+  * @method band
   * @param {Number} max max value for a scale
   * @param {Number} value to map
   * @return {Number} similar to ordinal band but for
@@ -362,7 +369,7 @@
   *
   * Keeps a reference for the minimum value
   *
-  * @method
+  * @method calculateDomain
   * @param {Object} data Accessor for the data collection
   * @param {Object} f callback function
   * @chainable
@@ -399,7 +406,7 @@
   * Maximum value setting for linear scale.
   * Useful when setting discrete ticks for continuous scale
   *
-  * @method
+  * @method setMaxValue
   * @param {Number} maxVal Scale's maximum value
   * @chainable
   */
@@ -411,7 +418,7 @@
   /**
   * Returns max value
   *
-  * @method
+  * @method getMaxValue
   * @return {Number} scale's maximum value
   */
   LinearScale.prototype.getMaxValue = function() {
@@ -424,7 +431,6 @@
 *	Ordinal Scale
 *	
 *	@class OrdinalScale
-*	@constructor
 *	@extends BaseScale
 *	@requires d3.chart,
 *						basescale
@@ -455,6 +461,7 @@
 	/** 
   * Class constructor
   *
+  *	@constructor
   * @param {String} axisType Axis type, defined in Charty names
   */
 	var OrdinalScale = function(axisType){
@@ -470,7 +477,7 @@
 	/**
 	*	Sets the domain data for the scale
 	*
-	*	@method
+	*	@method setDomain
 	*	@param {Array} domain values for ordinal domain
 	*	@chainable
 	*/
@@ -482,7 +489,7 @@
 	/**
 	*	Sets the range for the scale
 	*
-	*	@method
+	*	@method setRange
 	*	@param {Number} range numeric value for the range
 	*	@chainable
 	*/
@@ -497,7 +504,7 @@
 	*	A value needs to be mapped and moved according
 	*	to that band width
 	*
-	*	@method
+	*	@method map
 	*	@param {String} value String value that belongs to the domain
 	*	@param {Number} factor reduce factor for overlapping charts
 	*	@return {Number} mapped String value
@@ -510,7 +517,7 @@
 	*	Returns the range band for the scale
 	*	Can be reduced if (factor < 1)
 	*
-	*	@method
+	*	@method band
 	*	@param {Number} factor reduce factor
 	*	@return {Number} scale width
 	*/
@@ -524,7 +531,7 @@
 	*	Regarding the data series, ordinal scales should be uniform, whether
 	*	they have values for that specific ordinal element or not.
 	*
-	*	@method
+	*	@method calculateDomain
 	*	@param {Object} data Accessor for the data collection
 	*	@param {Object} f callback function
 	*	@chainable
@@ -539,7 +546,7 @@
 	/**
 	*	Checks if domain wasn't previously calculated
 	*
-	*	@method
+	*	@method defaultDomain
 	*	@return {Boolean} True if domain isn't set
 	*/
 	OrdinalScale.prototype.defaultDomain = function(){
@@ -553,7 +560,6 @@
 *	to provide an easy way to switching scales in a defined chart
 *	
 *	@class ScaleFactory
-*	@constructor
 * @requires d3.chart,
 *						charty,
 *						ordinalscale,
@@ -582,12 +588,17 @@
     root.ScaleFactory = factory(Charty, OrdinalScale, LinearScale);
   }
 }(this, function(Charty, OrdinalScale, LinearScale) {
+	/** 
+	* Class constructor
+	*
+	* @constructor
+	*/
 	var ScaleFactory = function(){};
 
 	/**
 	*	Returns a specified scale object, acording to a scale type
 	*
-	*	@method
+	*	@method scale
 	*	@param {String} scaleType Available scale type
 	*	@param {String} axisType Related axis type ('x'-'y')
 	*	@return {Object} LinearScale / OrdinalScale
@@ -620,7 +631,6 @@
 * other for vertical axis.
 *
 * @class DataMapper
-* @constructor
 * @requires linearscale,
 *           basescale,
 *           underscore
@@ -648,7 +658,11 @@
   }
 }(this, function (LinearScale, OrdinalScale, _) {
 
-  /** Class constructor */
+  /** 
+  * Class constructor 
+  *
+  * @constructor
+  */
   var DataMapper = function (){
     this.scales = [];
   };
@@ -656,7 +670,7 @@
   /** 
   * Adds scale for mapping 
   *
-  * @method
+  * @method addScale
   * @param {BaseScale} scale Scale to add
   * @param {Boolean} setAsBase Defines a scale that will be taken as base
   * @chainable
@@ -670,7 +684,7 @@
   /** 
   * Returns the defined base scale.
   *
-  * @method
+  * @method getBaseScale
   * @returns {BaseScale} Base scale defined
   */
   DataMapper.prototype.getBaseScale = function (){
@@ -681,7 +695,7 @@
   /** 
   * Maps a data point, according to the defined scales
   * 
-  * @method
+  * @method map
   * @param {Object} dataElement Data to be mapped
   * @param {Number} chartFactor Factor that affects some chart's drawing
   * @returns {Number} Data position in SVG canvas.
@@ -739,8 +753,8 @@
     * In case chart contains components, width will
     * propagate to them
     *
-    * @method
-    * @param {Number} newWidth width for the chart
+    * @method width
+    * @param {Number} newWidth Width for the chart
     * @chainable
     */
     width : function(newWidth){
@@ -758,8 +772,8 @@
     * Sets the height for the chart. Propagates to
     * components.
     *
-    * @method
-    * @param {Number} newHeight height for the chart
+    * @method height
+    * @param {Number} newHeight Height for the chart
     */
     height : function(newHeight){
 
@@ -779,7 +793,7 @@
     * Not all charts use scales. Some can use direct
     * mapping.
     *
-    * @method
+    * @method setXScale
     * @param {Oject} LinearScale, OrdinalScale
     * @chainable
     */
@@ -801,7 +815,7 @@
     * Not all charts use scales. Some can use direct
     * mapping.
     * 
-    * @method
+    * @method setYScale
     * @param {Oject} LinearScale, OrdinalScale
     * @chainable
     */
@@ -817,9 +831,9 @@
       return this;
     },
     /**
-    * Sets mixins
+    * Keeps outter reference to defined mixins.
     *
-    * @method
+    * @method setMixins
     * @chainable
     */
     setMixins : function(){
@@ -837,8 +851,9 @@
       return this;
     },
     /**
-    * Propagates the event manager to component parts.
+    * Propagates the Event Manager to component parts.
     * 
+    * @method setEventManager
     * @param {EventManager} evtManager Event Manager for chart.
     * @chainable
     */
@@ -893,7 +908,7 @@
     /**
     * Returns the next element of the data collection
     *
-    * @method
+    * @method transform
     * @param {Object} data Data Accessor
     * @return {Object} next element in the collection
     */
@@ -914,7 +929,6 @@
 * it will implement all the functions needed.
 *
 * @class Axis
-* @constructor
 * @requires d3.chart,
 *           charty
 *
@@ -945,7 +959,8 @@
       /**
       * Basic Axis initialization
       *
-      * @method
+      * @constructor
+      * @param {Object} args Arguments for axis component
       */
       initialize: function(args) {
 
@@ -986,7 +1001,7 @@
           * Since axis requires just a scale, only one element
           * will be set for the data selection
           *
-          * @method
+          * @method dataBind
           * @param {Object} d
           */
           dataBind: function(d) {
@@ -1002,7 +1017,7 @@
           * Insert for axis. Just inserts one svg:g
           * element.
           *
-          * @method
+          * @method insert
           */
           insert: function() {
             return this.append('g');
@@ -1192,7 +1207,7 @@
 /**
 * Bar drawer. Takes only one data series as input.
 * 
-* @class Bar
+* @class HorizontalBar
 * @constructor
 * @extends SimpleDataGroup
 * @requires d3.chart,
@@ -1227,7 +1242,8 @@
     /**
     * Bar initialization
     *
-    * @method
+    * @constructor
+    * @param {Object} args Arguments for horizontal bar component.
     */
     initialize : function(args){
 
@@ -1244,7 +1260,7 @@
         * Can have a color set for the whole serie, or
         * each bar can have an own color defined.
         *
-        * @method
+        * @method dataBind
         * @param {Object} d example = {
         *                               color : 'red',
         *                               data = [
@@ -1267,7 +1283,7 @@
         /**
         * Inserts a svg:rect element.
         *
-        * @method
+        * @method insert
         * @chainable
         */
         insert : function(){
@@ -1352,7 +1368,6 @@
 * Bar drawer. Takes only one data series as input.
 * 
 * @class Bar
-* @constructor
 * @extends SimpleDataGroup
 * @requires d3.chart,
 *           charty,
@@ -1386,7 +1401,8 @@
     /**
     * Bar initialization
     *
-    * @method
+    * @constructor
+    * @param {Object} args Arguments for axis component
     */
     initialize : function(args){
 
@@ -1403,7 +1419,7 @@
         * Can have a color set for the whole serie, or
         * each bar can have an own color defined.
         *
-        * @method
+        * @method dataBind
         * @param {Object} d example = {
         *                               color : 'red',
         *                               data = [
@@ -1426,7 +1442,7 @@
         /**
         * Inserts a svg:rect element.
         *
-        * @method
+        * @method insert
         * @chainable
         */
         insert : function(){
@@ -1522,8 +1538,9 @@
     /**
     * Adds z scale if necessary
     *
-    * @method
-    * @param {Object} zScale d3.scale
+    * @method setZScale
+    * @param {Object} zScale d3.scale for mapping along x axis. In fact, 
+    * is the second scale for this axis.
     * @chainable
     */
     setZScale : function (zScale){
@@ -1537,7 +1554,6 @@
 * 
 * @class Circle
 * @extends SimpleDataGroup
-* @constructor
 * @requires d3.chart,
 *           underscore,
 *           simpledatagroup
@@ -1570,7 +1586,8 @@
     /**
     * Circle initializator
     *
-    * @method
+    * @constructor
+    * @param {Object} args Arguments for the circle component.
     */
     initialize : function(args){
 
@@ -1597,7 +1614,7 @@
         * Can have color and circle radius set for the whole serie,
         * or own values for each data point.
         *
-        * @method
+        * @method dataBind
         * @param {Object} d example = {
         *                              color : 'red',
         *                              r : 5
@@ -1619,7 +1636,7 @@
         /**
         * Appends a svg:circle
         *
-        * @method
+        * @method insert
         * @chainable
         */
         insert : function(){
@@ -1667,7 +1684,6 @@
 * 
 * @class Donut
 * @extends SimpleDataGroup
-* @constructor
 * @requires d3,
 *           underscore,
 *           d3.chart,
@@ -1701,7 +1717,8 @@
     /**
     * Donut initialization
     *
-    * @method
+    * @constructor
+    * @param {Object} args Arguments for the donut chart.
     */
     initialize: function(args) {
 
@@ -1739,7 +1756,7 @@
         * ir : inner radius
         * Each part of the donut must have a color set
         *
-        * @method
+        * @method dataBind
         * @param {Object} data example = {
         *                                  ir : 150,
         *                                  or : 100,
@@ -1771,7 +1788,8 @@
         /**
         * Adds a svg:path element for the donut
         *
-        * @method
+        * @method insert
+        * @chainable
         */
         insert: function() {
           return this.append('path');
@@ -1817,7 +1835,6 @@
 * 
 * @class Line
 * @extends SimpleDataGroup
-* @constructor
 * @requires d3.chart,
 *           charty,
 *           simpledatagroup
@@ -1850,9 +1867,10 @@
     /**
     * Line initialization
     *
-    * @method
+    * @constructor
+    * @param {Object} args Arguments for the line component.
     */
-    initialize : function(){
+    initialize : function(args){
 
       /**
       * c : default color line
@@ -1870,7 +1888,7 @@
         * a datum must be defined. Can also have a color
         * for the whole serie.
         * 
-        * @method
+        * @method dataBind
         * @param {Object} d example = {
         *                              color : 'redline'
         *                              data : [
@@ -1895,7 +1913,7 @@
         /**
         * Appends a svg:path
         *
-        * @method
+        * @method insert
         * @chainable
         */
         insert : function(){
@@ -1931,7 +1949,6 @@
 * Rounded rectangle drawer.
 * 
 * @class RoundedRectangle
-* @constructor
 * @extends SimpleDataGroup
 * @requires d3.chart,
 *           charty,
@@ -1965,7 +1982,8 @@
     /**
     * Rounded rectangle initialization.
     *
-    * @method
+    * @constructor
+    * @param {Object} args Arguments for rounded rectangles component.
     */
     initialize : function(args){
 
@@ -2000,7 +2018,7 @@
         * color (rc), rx, ry. If not defined, defauls are
         * used.
         *
-        * @method
+        * @method dataBind
         * @param {Object} d example = {
         *                              rh : 20,
         *                              rw : 20,
@@ -2024,7 +2042,7 @@
         /**
         * Appends a svg:rect element.
         *
-        * @method
+        * @method insert
         * @chainable
         */
         insert : function(){
@@ -2074,7 +2092,6 @@
 * 
 * @class Text
 * @extends SimpleDataGroup
-* @constructor
 * @requires d3.chart,
 *          charty,
 *          simpledatagroup
@@ -2107,9 +2124,10 @@
     /**
     * Text label initializator
     *
-    * @method
+    * @constructor
+    * @param {Object} args Arguments for text component.
     */
-    initialize : function(){
+    initialize : function(args){
 
       var options = {
         /**
@@ -2117,7 +2135,7 @@
         * Can depend on other elements, for instance,
         * the rounded rectangles to form a label.
         *
-        * @method
+        * @method dataBind
         * @param {Object} d example = {
         *                              data : [...]
         *                            }
@@ -2129,7 +2147,7 @@
         /**
         * Insert a svg:text element for each data input.
         * 
-        * @mehtod
+        * @method insert
         * @chainable
         */
         insert : function(){
@@ -2179,7 +2197,6 @@
 * Triangle drawer.
 * 
 * @class Triangle
-* @constructor
 * @extends SimpleDataGroup
 * @requires d3.chart,
 *           charty,
@@ -2214,9 +2231,10 @@
     /**
     * Triangle initialization
     *
-    * @method
+    * @constructor
+    * @param {Object} args Arguments for triangle component.
     */
-    initialize : function(){
+    initialize : function(args){
 
       /**
       * c : triangle color
@@ -2230,7 +2248,7 @@
         * Data bind for a triangle serie.
         * Will set a color for the whole serie.
         *
-        * @method
+        * @method dataBind
         * @param {Object} d example = {
         *                              color : 'red',
         *                              data : [
@@ -2252,7 +2270,7 @@
         /**
         * Appends a svg:path
         *
-        * @method
+        * @method insert
         * @chainable
         */
         insert : function(){
@@ -2293,7 +2311,7 @@
     * Transform must be redefined in order to
     * separate a triangle in two constituting parts
     *
-    * @method
+    * @method transform
     * @param {Object} data Data Acccessor
     * @return {Object} already mapped values for each datapoint
     */
@@ -2325,7 +2343,7 @@
     * Path is defined as a string connecting different
     * data, visualized as dots. 
     *
-    * @method
+    * @method getPath
     * @param {Object} d Data point
     * @return {String} path
     */
@@ -2371,7 +2389,7 @@
     /**
     * Data transformation for multiple data series.
     *
-    * @method
+    * @method tranform
     * @param {Object} data Data accessor
     * @return {Object} Data accesor
     */
@@ -2383,7 +2401,7 @@
     /**
     * Default domain for x scaling
     *
-    * @method
+    * @method setDefaultXDomain
     * @param {Object} domain Array for x domain
     * @chainable
     */
@@ -2394,7 +2412,7 @@
     /**
     * Default domain for y scaling
     *
-    * @method
+    * @method setDefaultYDomain
     * @param {Object} domain Array for y domain
     * @chainable
     */
@@ -2405,7 +2423,9 @@
     /** 
     * Domain calculation
     *
-    * @method
+    * @method _calculateDomains
+    * @param {Object} data Data for domains
+    * @param {Object} zScale d3.scale
     */
     _calculateDomains : function (data, zScale){
        /** Default x domain */
@@ -2439,7 +2459,6 @@
 * 
 * @class MultipleInstancesMixin
 * @extends BaseChart
-* @constructor
 * @requires d3.chart,
 *           charty,
 *           basechart
@@ -2476,7 +2495,7 @@
     * It is necessary to set the instances count
     * and the chart name.
     *
-    * @method
+    * @constructor
     * @param {Object} args example = {
     *                                    instances : 2,
     *                                    chartName : 'Bar'
@@ -2504,7 +2523,6 @@
 * Base XY system for all the 2D charts.
 * 
 * @class XYAxis
-* @constructor
 * @requires d3.chart,
 *           charty,
 *           axis
@@ -2537,7 +2555,8 @@
     /**
     * XY axis system initializer
     *
-    * @method
+    * @constructor
+    * @param {Object} args Arguments for xy axis system.
     */
     initialize : function(args){
 
@@ -2553,7 +2572,7 @@
     /**
     * Show whole chart as a grid.
     *
-    * @method
+    * @method showAsGrid
     * @chainable
     */
     showAsGrid : function (showAsGrid){
@@ -2565,7 +2584,7 @@
     * Moves x axis according to given height value, and sets
     * tick size value.
     *
-    * @method
+    * @method height
     * @param {Number} newHeight chart's height
     * @chainable
     */
@@ -2577,7 +2596,7 @@
     /**
     * Sets tick size, based on given width value
     *
-    * @method
+    * @method width
     * @param {Number} newWidth chart's width
     * @chainable
     */
@@ -2589,7 +2608,7 @@
     /**
     * Sets x scale.
     *
-    * @method
+    * @method setXScale
     * @param {Object} scale d3.scale
     * @chainable
     */
@@ -2600,7 +2619,7 @@
     /**
     * Sets y scale.
     *
-    * @method
+    * @method setYScale
     * @param {Object} scale d3.scale
     * @chainable
     */
@@ -2611,17 +2630,18 @@
   });
 }));
 /**
-Defines a YXY axis system.
-Two Y Axis (one left, one right)
-One X Axis (bottom)
-
-@class YXYAxis
-@constructor
-@requires d3.chart,
-          charty,
-          axis
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Defines a YXY axis system.
+* Two Y Axis (one left, one right)
+* One X Axis (bottom).
+*
+* It is built on top of the XY axis system that is already defined.
+*
+* @class YXYAxis
+* @requires d3.chart,
+*          charty,
+*          xyaxis
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -2646,9 +2666,10 @@ One X Axis (bottom)
 }(this, function (d3, Charty) {
   d3.chart(Charty.CHART_NAMES.YXY_AXIS, {
     /**
-    Defines as a mixin a right Y axis, a left Y axis, a X bottom axis
-
-    @method
+    * Defines as a mixin a right Y axis, a left Y axis, a X bottom axis
+    *
+    * @constructor
+    * @param {Object} args Arguments for yxy axis system.
     */
     initialize : function (args){
       this.xyaxis = this.mixin(Charty.CHART_NAMES.XY_AXIS,
@@ -2661,10 +2682,10 @@ One X Axis (bottom)
 
     },
     /**
-    Show whole chart as a grid.
-
-    @method
-    @chainable
+    * Show whole chart as a grid.
+    *
+    * @method showAsGrid
+    * @chainable
     */
     showAsGrid : function (showAsGrid){
       this.xyaxis.showAsGrid(showAsGrid);
@@ -2673,7 +2694,7 @@ One X Axis (bottom)
     /**
     * Sets x axis position and tick size
     *
-    * @method
+    * @method height
     * @param {Number} newHeight chart's height
     * @chainable
     */
@@ -2685,7 +2706,7 @@ One X Axis (bottom)
     * Sets y axis disposition, based on a given
     * width value, and tick size for only one y axis.
     *
-    * @method
+    * @method width
     * @param {Number} newWidth chart's width
     * @chainable
     */
@@ -2697,7 +2718,7 @@ One X Axis (bottom)
     /**
     * Redefinition of x scale setter
     *
-    * @method
+    * @method setXScale
     * @param {Object} scale d3.scale
     * @chainable
     */
@@ -2708,7 +2729,7 @@ One X Axis (bottom)
     /**
     * Redefinition of y scale setter
     *
-    * @method
+    * @method setYScale
     * @param {Object} scale d3.scale
     * @chainable
     */
@@ -2725,7 +2746,6 @@ One X Axis (bottom)
 * 
 * @class BarChart
 * @extends MultipleDataGroup
-* @constructor
 * @requires d3.chart,
 *           charty,
 *           bar,
@@ -2768,7 +2788,7 @@ One X Axis (bottom)
 		/**
 		* BarChart initialization.
     * 
-		* @method
+		* @constructor
 		* @param {Object} args example = {
     *                      instances : 2,
     *                    }
@@ -2841,7 +2861,8 @@ One X Axis (bottom)
     /**
     * Grouper Bar Chart initializer.
     *
-    * @method
+    * @constructor
+    * @param {Object} args Arguments for grouped bar chart.
     */
     initialize : function(args){
 
@@ -2921,7 +2942,6 @@ One X Axis (bottom)
 * doesn't depend on the data value.
 *
 * @class DonutWithInnerText
-* @constructor
 * @extends Donut
 * @requires d3.chart,
 *           charty,
@@ -2953,98 +2973,104 @@ One X Axis (bottom)
 
   d3.chart(Charty.CHART_NAMES.DONUT)
     .extend(Charty.CHART_NAMES.DONUT_INNER_TEXT,{
-    initialize : function(args){
 
-      var dataValidator = args.dataValidator,
-          errors = {
-            invalidFontSize : 'Invalid value : font size must be positive'
-          };
-
-      /**
-      * Defaults for Inner text
+      /** 
+      * Constructor
+      *
+      * @constructor
+      * @param {Object} args Arguments for donnut with inner text.
       */
-      var defaults = {
-        fontSize : 55
-      };
+      initialize : function(args){
 
-      var options = {
+        var dataValidator = args.dataValidator,
+            errors = {
+              invalidFontSize : 'Invalid value : font size must be positive'
+            };
+
         /**
-        * First element will be shown as label.
-        * 
-        * Data here will take two elements, since is necessary
-        * to render two paths for the donut chart.
-        * 
-        * The first one is the one that will be shown in label.
-        * The second one is the rest of the donut.
-        * 
-        * @method
-        * @param {Object} data
-        * @chainable
+        * Defaults for Inner text
         */
-        dataBind : function(d){
+        var defaults = {
+          fontSize : 55
+        };
 
-          var chart = this.chart(),
-              data = d.data,
-              stringValue = (data[0].y).toString() +'%';
+        var options = {
+          /**
+          * First element will be shown as label.
+          * 
+          * Data here will take two elements, since is necessary
+          * to render two paths for the donut chart.
+          * 
+          * The first one is the one that will be shown in label.
+          * The second one is the rest of the donut.
+          * 
+          * @method dataBind
+          * @param {Object} data
+          * @chainable
+          */
+          dataBind : function(d){
 
-          chart.fontSize = (dataValidator.isPositiveNumber(d.fontSize, errors.invalidFontSize) || defaults.fontSize);
-          /** By default, text will be centered inside donut */
-          chart.xPosition = (d.xPosition || (chart.w/2));
-          chart.yPosition = (d.yPosition || (chart.h/2));
+            var chart = this.chart(),
+                data = d.data,
+                stringValue = (data[0].y).toString() +'%';
 
-          return this.selectAll('text').data([stringValue]);
-        },
-        /**
-        * Inserts one text for the value to display
-        *
-        * @method
-        * @chainable
-        */
-        insert : function(){
-          return this.append('text');
-        },
-        events : {
-          'enter' : function(){
+            chart.fontSize = (dataValidator.isPositiveNumber(d.fontSize, errors.invalidFontSize) || defaults.fontSize);
+            /** By default, text will be centered inside donut */
+            chart.xPosition = (d.xPosition || (chart.w/2));
+            chart.yPosition = (d.yPosition || (chart.h/2));
 
-            var chart = this.chart();
-
-            this.attr('x', chart.xPosition)
-                .attr('y', chart.yPosition)
-                .attr('dy', '0.35em')
-                .attr('text-anchor', 'middle')
-                .attr('font-size', chart.fontSize)
-                .text(function(d){ return d; });
-
-            return this;
+            return this.selectAll('text').data([stringValue]);
           },
-          'update' : function(){
-
-            this.text(function(d){
-              return d;
-            });
-
-            return this;
+          /**
+          * Inserts one text for the value to display
+          *
+          * @method insert
+          * @chainable
+          */
+          insert : function(){
+            return this.append('text');
           },
-          'exit' : function(){
+          events : {
+            'enter' : function(){
 
-            return this.remove();
+              var chart = this.chart();
+
+              this.attr('x', chart.xPosition)
+                  .attr('y', chart.yPosition)
+                  .attr('dy', '0.35em')
+                  .attr('text-anchor', 'middle')
+                  .attr('font-size', chart.fontSize)
+                  .text(function(d){ return d; });
+
+              return this;
+            },
+            'update' : function(){
+
+              this.text(function(d){
+                return d;
+              });
+
+              return this;
+            },
+            'exit' : function(){
+
+              return this.remove();
+            }
           }
-        }
-      };
+        };
 
-      /**
-      * Layer creation
-      */
-      this.layer('donutText', this.base.append('g'), options);
-    }
-  });
+        /**
+        * Layer creation
+        */
+        this.layer('donutText', this.base.append('g'), options);
+      }
+    });
 }));
 /**
 * Labeled triangle chart drawer.
 * 
 * @class LabeledTriangleChart
 * @extends MultipleDataGroup
-* @constructor
 * @requires d3.chart,
 *           charty,
 *           triangle,
@@ -3090,7 +3116,8 @@ One X Axis (bottom)
     * Will contain only one instance of each component chart, since no
     * resize can be assumed.
     *
-    * @method
+    * @constructor
+    * @param {Object} args Arguments for triangle chart.
     */
     initialize: function(args) {
 
@@ -3120,7 +3147,6 @@ Takes N input data series
 
 @class LineChart
 @extends MultipleDataGroup
-@constructor
 @requires d3.chart,
           charty,
           line,
@@ -3153,12 +3179,12 @@ Takes N input data series
 	d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.LINE_CHART,{
 		/**
-		Multiple data group initializator.
-
-		Creates N instances of a given mixin.
-
-		@method
-		@param {Object} args N = args.instances
+		* Multiple data group initializator.
+    *
+		* Creates N instances of a given mixin.
+    *
+		* @constructor
+		* @param {Object} args N = args.instances
 		*/
 		initialize : function(args){
 			var options = {
@@ -3180,11 +3206,10 @@ Takes N input data series
 	});
 }));
 /**
-* Line chart combined with circles. Combines the line chart and the circle component,
-* defining both as mixins.
+* Line chart combined with circles. Combines the line chart and 
+* the circle component, defining both as mixins.
 *
 * @class LineChartCircles
-* @constructor
 * @extends MultipleDataGroup
 * @requires	d3.chart,
 *           charty,
@@ -3223,7 +3248,7 @@ Takes N input data series
 		/**
 		* Line and circles chart initializator.
     *
-		* @method
+		* @constructor
 		* @param {Object} args example = {
     *                          instances : 2
     *                      }
@@ -3255,7 +3280,6 @@ Takes N input data series
 *
 * @class Scatterplot
 * @extends MultipleDataGroup
-* @constructor
 * @requires d3.chart,
 *           charty,
 *           circle,
@@ -3292,15 +3316,21 @@ Takes N input data series
 	d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.SCATTERPLOT, {
 
-		initialize : function(args){
+      /** 
+      * Chart constructor
+      *
+      * @constructor
+      * @param {Object} args Arguments for scatterplot chart.
+      */
+      initialize : function(args){
 
-			var options = {
-				chartName : Charty.CHART_NAMES.CIRCLE,
+      var options = {
+        chartName : Charty.CHART_NAMES.CIRCLE,
         dataValidator : args.dataValidator,
-				instances : (args.instances || 1)
-			};
+        instances : (args.instances || 1)
+      };
 
-			var axis = this.mixin(args.axisSystem,
+      var axis = this.mixin(args.axisSystem,
                             this.base.append('g'),
                             args).showAsGrid(args.showAsGrid),
 
@@ -3309,7 +3339,7 @@ Takes N input data series
                                options);
 
       this.setMixins(circles, axis);
-		}
+      }
 	});
 }));
 /**
@@ -3318,7 +3348,6 @@ Takes N input data series
 * Accessor will iterate over the data collection.
 * 
 * @class Accessor
-* @constructor
 * 
 * @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -3339,7 +3368,11 @@ Takes N input data series
   }
 }(this, function() {
 
-  /** Class constructor */
+  /** 
+  * Class constructor 
+  *
+  * @constructor
+  */
   function Accessor() {
     this.index = -1;
   }
@@ -3347,7 +3380,7 @@ Takes N input data series
   /**
   * Returns first element of the collection
   *
-  * @method
+  * @method first
   * @return {Object} data element from the collection
   */
   Accessor.prototype.first = function() {
@@ -3359,7 +3392,7 @@ Takes N input data series
   * If no more elements are available,
   * collection index will reset itself
   *
-  * @method
+  * @method next
   * @return {Object} next element in the collection,
   * first element in case of reset
   */
@@ -3373,7 +3406,7 @@ Takes N input data series
   /**
   * Determines if the collection has more elements
   *
-  * @method
+  * @method hasNext
   * @return {Boolean} true if collection has more elements,
   * false if not
   */
@@ -3384,16 +3417,18 @@ Takes N input data series
   /**
   * Resets the colletion to restart iteration automatically
   *
-  * @method
+  * @method restart
+  * @chainable
   */
   Accessor.prototype.restart = function() {
     this.index = -1;
+    return this;
   };
 
   /**
   * Returns the data contained in the accessor
   *
-  * @method
+  * @method getData
   * @return {Object} data collection
   */
   Accessor.prototype.getData = function() {
@@ -3403,11 +3438,13 @@ Takes N input data series
   /**
   * Sets a specific data set to this accessor
   *
-  * @method
+  * @method setDate
   * @param {Object} data Data series
+  * @chainable
   */
   Accessor.prototype.setData = function(data){
     this.data = data;
+    return this;
   };
 
   return Accessor;
@@ -3447,6 +3484,7 @@ Takes N input data series
 	 *
 	 * In the execute function, d represents a specific data element
 	 *
+	 * @constructor
 	 * @param {Object} options = {
 	 *                       on : 'click',
 	 *                       execute : function (d) {}
@@ -3460,6 +3498,7 @@ Takes N input data series
 	/**
 	 * Binds a function to a specific event
 	 *
+	 * @method bind
 	 * @param {d3.selection} target Target to bind event
 	 * @chainable
 	 */
@@ -3514,6 +3553,8 @@ Takes N input data series
 
 	/**
 	*	Class constructor
+	*	
+	*	@constructor
 	*	@param Object options example = {
 	*																	type : 'popover',
 	*																	placement: 'left',
@@ -3527,6 +3568,8 @@ Takes N input data series
 
 	/**
 	 * Binds the bootstrap feature to a specified target selection
+	 *	
+	 * @method bind
 	 * @param  {d3.selection} target Target selection
 	 * @chainable
 	 */
@@ -3562,7 +3605,7 @@ Takes N input data series
 	return BootstrapEvent;
 }));
 /**
-*	Event factory. 
+*	Event factory. Creates instances of predefined events objects. 
 *	
 *	@class EventManager
 *	@constructor
@@ -3593,6 +3636,8 @@ Takes N input data series
 
 	/** 
 	*	Class constructor
+	*	
+	* @constructor
 	*/
 	function EventFactory (){
 
@@ -3601,6 +3646,7 @@ Takes N input data series
 	/**
 	*	Creates a specific Charty event object.
 	*
+	*	@method
 	*	@param {Object} e Defined event options
 	*	@returns {Event} Charty event
 	*/
@@ -3670,6 +3716,8 @@ Takes N input data series
 
 	/**
 	 * Class constructor
+	 *	
+	 * @constructor
 	 */
 	function EventManager() {
 
@@ -3679,7 +3727,7 @@ Takes N input data series
 	/**
 	 * Adds specific defined event to queue
 	 *
-	 * @method
+	 * @method addEvent
 	 * @param {Event} e Charty event to bind
 	 * @chainable
 	 */
@@ -3696,6 +3744,7 @@ Takes N input data series
 	 * Each event wrapper must have a way to bind itself to the specified
 	 * elements.
 	 *
+	 * @method bindAll
 	 * @param {d3.selection} t Elements selection
 	 * @chainable
 	 */
@@ -3723,7 +3772,6 @@ Takes N input data series
 * events handler are not yet defined or they don't have all necessary data.
 *
 * @class ChartInterface
-* @constructor
 * @requires accessor,
 *           eventmanager
 *           eventfactory
@@ -3756,6 +3804,7 @@ Takes N input data series
   /**
   * Class constructor
   *
+  * @constructor
   * @param {Object} chart d3.chart object
   * @param {Object} root chart's container
   * @param {Object} svg svg element that contains the chart
@@ -3776,6 +3825,7 @@ Takes N input data series
   /**
   * Chart dimensioning via interface. Elements internal dimensioning.
   *
+  * @method setDimensions
   * @param {Number} width Drawing space width
   * @param {Number} height Drawing space height
   * @param {Object} margin margin = {
@@ -3827,7 +3877,7 @@ Takes N input data series
   /**
   * Interface to the chart drawing stage
   *
-  * @method
+  * @method draw
   * @param {Object} dataArray Data series contained in one array
   * @param {Object} eventsArray Events to be attached to data elements
   * @chainable
@@ -3854,7 +3904,7 @@ Takes N input data series
   /**
   * Chart redimension, without redrawing elements
   *
-  * @method
+  * @method redimension
   * @param {Number} height Value can be forced
   * @param {Number} width Value can be forced
   * @chainable
@@ -3879,6 +3929,7 @@ Takes N input data series
   /**
   * Sets a background image via css. Class is required
   *
+  * @method setBackgroundImage
   * @param {String} imgClass CSS for the background image
   * @chainable
   */
@@ -3894,6 +3945,7 @@ Takes N input data series
   /**
   * Removes class containing background image, if present
   *
+  * @method removeBackgroundImage
   * @chainable
   */
   ChartInterface.prototype.removeBackgroundImage = function (){
@@ -3905,6 +3957,7 @@ Takes N input data series
   /**
   * Sets title as a header
   *
+  * @method setTitle
   * @param {String} title Chart title 
   * @param {Number} xPosition Position along horizontal axis
   * @param {Number} yPosition Position along vertical axis
@@ -3975,7 +4028,7 @@ Takes N input data series
   * the dimensions as initial options
   * Defined events will be spread to every chart's component.
   *
-  * @method
+  * @method chart
   * @param {Object} options options = {
   *                    chartName : 'BarChart',
   *                    instances : 2,

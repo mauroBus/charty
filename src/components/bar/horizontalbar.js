@@ -1,7 +1,7 @@
 /**
 * Bar drawer. Takes only one data series as input.
 * 
-* @class Bar
+* @class HorizontalBar
 * @constructor
 * @extends SimpleDataGroup
 * @requires d3.chart,
