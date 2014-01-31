@@ -2140,21 +2140,14 @@
 
               var chart = this.chart();
 
-              this.attr('x', function(d){
-                return chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2);
-              })
-              .attr('y', function(d){
-                return chart.yscale.map(d.y);
-              })
-              .attr('text-anchor', 'middle')
-              .attr('dy', '0.35em')
-              .text(function(d) { return d.y; });
+              this.attr('text-anchor', 'middle')
+                .attr('dy', '0.35em');
 
               chart.eventManager.bindAll(this);
 
               return this;
           },
-          'update' : function(){
+          'merge' : function(){
 
               var chart = this.chart();
 

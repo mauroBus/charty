@@ -28,14 +28,18 @@
   }
 }(this, function (d3, Charty) {
 
-	/** Class constructor */
+	/** 
+	* Class constructor 
+	*
+	* @constructor
+	*/
 	var BaseScale = function(){
 	};
 
 	/**
-	*	Returns the created scale
+	*	Returns the contained scale.
 	*
-	*	@method
+	*	@method getScale
 	*	@return {Object} d3.scale Linear / Ordinal scale
 	*/
 	BaseScale.prototype.getScale = function(){
@@ -45,7 +49,7 @@
 	/**
 	*	Generates range value for a scale.
 	*
-	*	@method
+	*	@method generateRange
 	*	@param {Number} range value for the range
 	*	@return {Number} generated range value
 	*/

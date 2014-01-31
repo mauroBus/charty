@@ -1,9 +1,8 @@
 /**
-* Line chart combined with circles. Combines the line chart and the circle component,
-* defining both as mixins.
+* Line chart combined with circles. Combines the line chart and 
+* the circle component, defining both as mixins.
 *
 * @class LineChartCircles
-* @constructor
 * @extends MultipleDataGroup
 * @requires	d3.chart,
 *           charty,
@@ -42,7 +41,7 @@
 		/**
 		* Line and circles chart initializator.
     *
-		* @method
+		* @constructor
 		* @param {Object} args example = {
     *                          instances : 2
     *                      }

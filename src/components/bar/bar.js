@@ -2,7 +2,6 @@
 * Bar drawer. Takes only one data series as input.
 * 
 * @class Bar
-* @constructor
 * @extends SimpleDataGroup
 * @requires d3.chart,
 *           charty,
@@ -36,7 +35,8 @@
     /**
     * Bar initialization
     *
-    * @method
+    * @constructor
+    * @param {Object} args Arguments for axis component
     */
     initialize : function(args){
 
@@ -53,7 +53,7 @@
         * Can have a color set for the whole serie, or
         * each bar can have an own color defined.
         *
-        * @method
+        * @method dataBind
         * @param {Object} d example = {
         *                               color : 'red',
         *                               data = [
@@ -76,7 +76,7 @@
         /**
         * Inserts a svg:rect element.
         *
-        * @method
+        * @method insert
         * @chainable
         */
         insert : function(){
@@ -172,8 +172,9 @@
     /**
     * Adds z scale if necessary
     *
-    * @method
-    * @param {Object} zScale d3.scale
+    * @method setZScale
+    * @param {Object} zScale d3.scale for mapping along x axis. In fact, 
+    * is the second scale for this axis.
     * @chainable
     */
     setZScale : function (zScale){

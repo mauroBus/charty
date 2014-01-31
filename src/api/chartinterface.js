@@ -11,7 +11,6 @@
 * events handler are not yet defined or they don't have all necessary data.
 *
 * @class ChartInterface
-* @constructor
 * @requires accessor,
 *           eventmanager
 *           eventfactory
@@ -44,6 +43,7 @@
   /**
   * Class constructor
   *
+  * @constructor
   * @param {Object} chart d3.chart object
   * @param {Object} root chart's container
   * @param {Object} svg svg element that contains the chart
@@ -64,6 +64,7 @@
   /**
   * Chart dimensioning via interface. Elements internal dimensioning.
   *
+  * @method setDimensions
   * @param {Number} width Drawing space width
   * @param {Number} height Drawing space height
   * @param {Object} margin margin = {
@@ -115,7 +116,7 @@
   /**
   * Interface to the chart drawing stage
   *
-  * @method
+  * @method draw
   * @param {Object} dataArray Data series contained in one array
   * @param {Object} eventsArray Events to be attached to data elements
   * @chainable
@@ -142,7 +143,7 @@
   /**
   * Chart redimension, without redrawing elements
   *
-  * @method
+  * @method redimension
   * @param {Number} height Value can be forced
   * @param {Number} width Value can be forced
   * @chainable
@@ -167,6 +168,7 @@
   /**
   * Sets a background image via css. Class is required
   *
+  * @method setBackgroundImage
   * @param {String} imgClass CSS for the background image
   * @chainable
   */
@@ -182,6 +184,7 @@
   /**
   * Removes class containing background image, if present
   *
+  * @method removeBackgroundImage
   * @chainable
   */
   ChartInterface.prototype.removeBackgroundImage = function (){
@@ -193,6 +196,7 @@
   /**
   * Sets title as a header
   *
+  * @method setTitle
   * @param {String} title Chart title 
   * @param {Number} xPosition Position along horizontal axis
   * @param {Number} yPosition Position along vertical axis

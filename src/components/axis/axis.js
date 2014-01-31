@@ -9,7 +9,6 @@
 * it will implement all the functions needed.
 *
 * @class Axis
-* @constructor
 * @requires d3.chart,
 *           charty
 *
@@ -40,7 +39,8 @@
       /**
       * Basic Axis initialization
       *
-      * @method
+      * @constructor
+      * @param {Object} args Arguments for axis component
       */
       initialize: function(args) {
 
@@ -81,7 +81,7 @@
           * Since axis requires just a scale, only one element
           * will be set for the data selection
           *
-          * @method
+          * @method dataBind
           * @param {Object} d
           */
           dataBind: function(d) {
@@ -97,7 +97,7 @@
           * Insert for axis. Just inserts one svg:g
           * element.
           *
-          * @method
+          * @method insert
           */
           insert: function() {
             return this.append('g');

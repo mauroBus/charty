@@ -33,6 +33,7 @@
 	 *
 	 * In the execute function, d represents a specific data element
 	 *
+	 * @constructor
 	 * @param {Object} options = {
 	 *                       on : 'click',
 	 *                       execute : function (d) {}
@@ -46,6 +47,7 @@
 	/**
 	 * Binds a function to a specific event
 	 *
+	 * @method bind
 	 * @param {d3.selection} target Target to bind event
 	 * @chainable
 	 */

@@ -3,7 +3,6 @@
 *	to provide an easy way to switching scales in a defined chart
 *	
 *	@class ScaleFactory
-*	@constructor
 * @requires d3.chart,
 *						charty,
 *						ordinalscale,
@@ -32,12 +31,17 @@
     root.ScaleFactory = factory(Charty, OrdinalScale, LinearScale);
   }
 }(this, function(Charty, OrdinalScale, LinearScale) {
+	/** 
+	* Class constructor
+	*
+	* @constructor
+	*/
 	var ScaleFactory = function(){};
 
 	/**
 	*	Returns a specified scale object, acording to a scale type
 	*
-	*	@method
+	*	@method scale
 	*	@param {String} scaleType Available scale type
 	*	@param {String} axisType Related axis type ('x'-'y')
 	*	@return {Object} LinearScale / OrdinalScale

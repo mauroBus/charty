@@ -5,7 +5,6 @@
 * 
 * @class Line
 * @extends SimpleDataGroup
-* @constructor
 * @requires d3.chart,
 *           charty,
 *           simpledatagroup
@@ -38,9 +37,10 @@
     /**
     * Line initialization
     *
-    * @method
+    * @constructor
+    * @param {Object} args Arguments for the line component.
     */
-    initialize : function(){
+    initialize : function(args){
 
       /**
       * c : default color line
@@ -58,7 +58,7 @@
         * a datum must be defined. Can also have a color
         * for the whole serie.
         * 
-        * @method
+        * @method dataBind
         * @param {Object} d example = {
         *                              color : 'redline'
         *                              data : [
@@ -83,7 +83,7 @@
         /**
         * Appends a svg:path
         *
-        * @method
+        * @method insert
         * @chainable
         */
         insert : function(){

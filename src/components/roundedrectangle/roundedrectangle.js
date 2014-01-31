@@ -2,7 +2,6 @@
 * Rounded rectangle drawer.
 * 
 * @class RoundedRectangle
-* @constructor
 * @extends SimpleDataGroup
 * @requires d3.chart,
 *           charty,
@@ -36,7 +35,8 @@
     /**
     * Rounded rectangle initialization.
     *
-    * @method
+    * @constructor
+    * @param {Object} args Arguments for rounded rectangles component.
     */
     initialize : function(args){
 
@@ -71,7 +71,7 @@
         * color (rc), rx, ry. If not defined, defauls are
         * used.
         *
-        * @method
+        * @method dataBind
         * @param {Object} d example = {
         *                              rh : 20,
         *                              rw : 20,
@@ -95,7 +95,7 @@
         /**
         * Appends a svg:rect element.
         *
-        * @method
+        * @method insert
         * @chainable
         */
         insert : function(){

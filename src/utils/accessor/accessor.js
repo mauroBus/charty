@@ -4,7 +4,6 @@
 * Accessor will iterate over the data collection.
 * 
 * @class Accessor
-* @constructor
 * 
 * @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -25,7 +24,11 @@
   }
 }(this, function() {
 
-  /** Class constructor */
+  /** 
+  * Class constructor 
+  *
+  * @constructor
+  */
   function Accessor() {
     this.index = -1;
   }
@@ -33,7 +36,7 @@
   /**
   * Returns first element of the collection
   *
-  * @method
+  * @method first
   * @return {Object} data element from the collection
   */
   Accessor.prototype.first = function() {
@@ -45,7 +48,7 @@
   * If no more elements are available,
   * collection index will reset itself
   *
-  * @method
+  * @method next
   * @return {Object} next element in the collection,
   * first element in case of reset
   */
@@ -59,7 +62,7 @@
   /**
   * Determines if the collection has more elements
   *
-  * @method
+  * @method hasNext
   * @return {Boolean} true if collection has more elements,
   * false if not
   */
@@ -70,16 +73,18 @@
   /**
   * Resets the colletion to restart iteration automatically
   *
-  * @method
+  * @method restart
+  * @chainable
   */
   Accessor.prototype.restart = function() {
     this.index = -1;
+    return this;
   };
 
   /**
   * Returns the data contained in the accessor
   *
-  * @method
+  * @method getData
   * @return {Object} data collection
   */
   Accessor.prototype.getData = function() {
@@ -89,11 +94,13 @@
   /**
   * Sets a specific data set to this accessor
   *
-  * @method
+  * @method setDate
   * @param {Object} data Data series
+  * @chainable
   */
   Accessor.prototype.setData = function(data){
     this.data = data;
+    return this;
   };
 
   return Accessor;

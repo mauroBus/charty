@@ -3,7 +3,6 @@
 * 
 * @class Donut
 * @extends SimpleDataGroup
-* @constructor
 * @requires d3,
 *           underscore,
 *           d3.chart,
@@ -37,7 +36,8 @@
     /**
     * Donut initialization
     *
-    * @method
+    * @constructor
+    * @param {Object} args Arguments for the donut chart.
     */
     initialize: function(args) {
 
@@ -75,7 +75,7 @@
         * ir : inner radius
         * Each part of the donut must have a color set
         *
-        * @method
+        * @method dataBind
         * @param {Object} data example = {
         *                                  ir : 150,
         *                                  or : 100,
@@ -107,7 +107,8 @@
         /**
         * Adds a svg:path element for the donut
         *
-        * @method
+        * @method insert
+        * @chainable
         */
         insert: function() {
           return this.append('path');

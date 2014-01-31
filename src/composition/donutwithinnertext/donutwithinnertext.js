@@ -10,7 +10,6 @@
 * doesn't depend on the data value.
 *
 * @class DonutWithInnerText
-* @constructor
 * @extends Donut
 * @requires d3.chart,
 *           charty,
@@ -42,89 +41,96 @@
 
   d3.chart(Charty.CHART_NAMES.DONUT)
     .extend(Charty.CHART_NAMES.DONUT_INNER_TEXT,{
-    initialize : function(args){
 
-      var dataValidator = args.dataValidator,
-          errors = {
-            invalidFontSize : 'Invalid value : font size must be positive'
-          };
-
-      /**
-      * Defaults for Inner text
+      /** 
+      * Constructor
+      *
+      * @constructor
+      * @param {Object} args Arguments for donnut with inner text.
       */
-      var defaults = {
-        fontSize : 55
-      };
+      initialize : function(args){
 
-      var options = {
+        var dataValidator = args.dataValidator,
+            errors = {
+              invalidFontSize : 'Invalid value : font size must be positive'
+            };
+
         /**
-        * First element will be shown as label.
-        * 
-        * Data here will take two elements, since is necessary
-        * to render two paths for the donut chart.
-        * 
-        * The first one is the one that will be shown in label.
-        * The second one is the rest of the donut.
-        * 
-        * @method
-        * @param {Object} data
-        * @chainable
+        * Defaults for Inner text
         */
-        dataBind : function(d){
+        var defaults = {
+          fontSize : 55
+        };
 
-          var chart = this.chart(),
-              data = d.data,
-              stringValue = (data[0].y).toString() +'%';
+        var options = {
+          /**
+          * First element will be shown as label.
+          * 
+          * Data here will take two elements, since is necessary
+          * to render two paths for the donut chart.
+          * 
+          * The first one is the one that will be shown in label.
+          * The second one is the rest of the donut.
+          * 
+          * @method dataBind
+          * @param {Object} data
+          * @chainable
+          */
+          dataBind : function(d){
 
-          chart.fontSize = (dataValidator.isPositiveNumber(d.fontSize, errors.invalidFontSize) || defaults.fontSize);
-          /** By default, text will be centered inside donut */
-          chart.xPosition = (d.xPosition || (chart.w/2));
-          chart.yPosition = (d.yPosition || (chart.h/2));
+            var chart = this.chart(),
+                data = d.data,
+                stringValue = (data[0].y).toString() +'%';
 
-          return this.selectAll('text').data([stringValue]);
-        },
-        /**
-        * Inserts one text for the value to display
-        *
-        * @method
-        * @chainable
-        */
-        insert : function(){
-          return this.append('text');
-        },
-        events : {
-          'enter' : function(){
+            chart.fontSize = (dataValidator.isPositiveNumber(d.fontSize, errors.invalidFontSize) || defaults.fontSize);
+            /** By default, text will be centered inside donut */
+            chart.xPosition = (d.xPosition || (chart.w/2));
+            chart.yPosition = (d.yPosition || (chart.h/2));
 
-            var chart = this.chart();
-
-            this.attr('x', chart.xPosition)
-                .attr('y', chart.yPosition)
-                .attr('dy', '0.35em')
-                .attr('text-anchor', 'middle')
-                .attr('font-size', chart.fontSize)
-                .text(function(d){ return d; });
-
-            return this;
+            return this.selectAll('text').data([stringValue]);
           },
-          'update' : function(){
-
-            this.text(function(d){
-              return d;
-            });
-
-            return this;
+          /**
+          * Inserts one text for the value to display
+          *
+          * @method insert
+          * @chainable
+          */
+          insert : function(){
+            return this.append('text');
           },
-          'exit' : function(){
+          events : {
+            'enter' : function(){
 
-            return this.remove();
+              var chart = this.chart();
+
+              this.attr('x', chart.xPosition)
+                  .attr('y', chart.yPosition)
+                  .attr('dy', '0.35em')
+                  .attr('text-anchor', 'middle')
+                  .attr('font-size', chart.fontSize)
+                  .text(function(d){ return d; });
+
+              return this;
+            },
+            'update' : function(){
+
+              this.text(function(d){
+                return d;
+              });
+
+              return this;
+            },
+            'exit' : function(){
+
+              return this.remove();
+            }
           }
-        }
-      };
+        };
 
-      /**
-      * Layer creation
-      */
-      this.layer('donutText', this.base.append('g'), options);
-    }
-  });
+        /**
+        * Layer creation
+        */
+        this.layer('donutText', this.base.append('g'), options);
+      }
+    });
 }));

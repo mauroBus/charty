@@ -36,8 +36,8 @@
     * In case chart contains components, width will
     * propagate to them
     *
-    * @method
-    * @param {Number} newWidth width for the chart
+    * @method width
+    * @param {Number} newWidth Width for the chart
     * @chainable
     */
     width : function(newWidth){
@@ -55,8 +55,8 @@
     * Sets the height for the chart. Propagates to
     * components.
     *
-    * @method
-    * @param {Number} newHeight height for the chart
+    * @method height
+    * @param {Number} newHeight Height for the chart
     */
     height : function(newHeight){
 
@@ -76,7 +76,7 @@
     * Not all charts use scales. Some can use direct
     * mapping.
     *
-    * @method
+    * @method setXScale
     * @param {Oject} LinearScale, OrdinalScale
     * @chainable
     */
@@ -98,7 +98,7 @@
     * Not all charts use scales. Some can use direct
     * mapping.
     * 
-    * @method
+    * @method setYScale
     * @param {Oject} LinearScale, OrdinalScale
     * @chainable
     */
@@ -114,9 +114,9 @@
       return this;
     },
     /**
-    * Sets mixins
+    * Keeps outter reference to defined mixins.
     *
-    * @method
+    * @method setMixins
     * @chainable
     */
     setMixins : function(){
@@ -134,8 +134,9 @@
       return this;
     },
     /**
-    * Propagates the event manager to component parts.
+    * Propagates the Event Manager to component parts.
     * 
+    * @method setEventManager
     * @param {EventManager} evtManager Event Manager for chart.
     * @chainable
     */

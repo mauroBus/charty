@@ -45,7 +45,8 @@
     /**
     * Grouper Bar Chart initializer.
     *
-    * @method
+    * @constructor
+    * @param {Object} args Arguments for grouped bar chart.
     */
     initialize : function(args){
 

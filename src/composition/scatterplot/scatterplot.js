@@ -3,7 +3,6 @@
 *
 * @class Scatterplot
 * @extends MultipleDataGroup
-* @constructor
 * @requires d3.chart,
 *           charty,
 *           circle,
@@ -40,15 +39,21 @@
 	d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.SCATTERPLOT, {
 
-		initialize : function(args){
+      /** 
+      * Chart constructor
+      *
+      * @constructor
+      * @param {Object} args Arguments for scatterplot chart.
+      */
+      initialize : function(args){
 
-			var options = {
-				chartName : Charty.CHART_NAMES.CIRCLE,
+      var options = {
+        chartName : Charty.CHART_NAMES.CIRCLE,
         dataValidator : args.dataValidator,
-				instances : (args.instances || 1)
-			};
+        instances : (args.instances || 1)
+      };
 
-			var axis = this.mixin(args.axisSystem,
+      var axis = this.mixin(args.axisSystem,
                             this.base.append('g'),
                             args).showAsGrid(args.showAsGrid),
 
@@ -57,6 +62,6 @@
                                options);
 
       this.setMixins(circles, axis);
-		}
+      }
 	});
 }));

@@ -36,7 +36,8 @@
     /**
     * Bar initialization
     *
-    * @method
+    * @constructor
+    * @param {Object} args Arguments for horizontal bar component.
     */
     initialize : function(args){
 
@@ -53,7 +54,7 @@
         * Can have a color set for the whole serie, or
         * each bar can have an own color defined.
         *
-        * @method
+        * @method dataBind
         * @param {Object} d example = {
         *                               color : 'red',
         *                               data = [
@@ -76,7 +77,7 @@
         /**
         * Inserts a svg:rect element.
         *
-        * @method
+        * @method insert
         * @chainable
         */
         insert : function(){

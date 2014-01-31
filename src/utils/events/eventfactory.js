@@ -1,5 +1,5 @@
 /**
-*	Event factory. 
+*	Event factory. Creates instances of predefined events objects. 
 *	
 *	@class EventManager
 *	@constructor
@@ -30,6 +30,8 @@
 
 	/** 
 	*	Class constructor
+	*	
+	* @constructor
 	*/
 	function EventFactory (){
 
@@ -38,6 +40,7 @@
 	/**
 	*	Creates a specific Charty event object.
 	*
+	*	@method
 	*	@param {Object} e Defined event options
 	*	@returns {Event} Charty event
 	*/

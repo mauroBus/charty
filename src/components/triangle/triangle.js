@@ -2,7 +2,6 @@
 * Triangle drawer.
 * 
 * @class Triangle
-* @constructor
 * @extends SimpleDataGroup
 * @requires d3.chart,
 *           charty,
@@ -37,9 +36,10 @@
     /**
     * Triangle initialization
     *
-    * @method
+    * @constructor
+    * @param {Object} args Arguments for triangle component.
     */
-    initialize : function(){
+    initialize : function(args){
 
       /**
       * c : triangle color
@@ -53,7 +53,7 @@
         * Data bind for a triangle serie.
         * Will set a color for the whole serie.
         *
-        * @method
+        * @method dataBind
         * @param {Object} d example = {
         *                              color : 'red',
         *                              data : [
@@ -75,7 +75,7 @@
         /**
         * Appends a svg:path
         *
-        * @method
+        * @method insert
         * @chainable
         */
         insert : function(){
@@ -116,7 +116,7 @@
     * Transform must be redefined in order to
     * separate a triangle in two constituting parts
     *
-    * @method
+    * @method transform
     * @param {Object} data Data Acccessor
     * @return {Object} already mapped values for each datapoint
     */
@@ -148,7 +148,7 @@
     * Path is defined as a string connecting different
     * data, visualized as dots. 
     *
-    * @method
+    * @method getPath
     * @param {Object} d Data point
     * @return {String} path
     */

@@ -3,7 +3,6 @@
 * 
 * @class Text
 * @extends SimpleDataGroup
-* @constructor
 * @requires d3.chart,
 *          charty,
 *          simpledatagroup
@@ -36,9 +35,10 @@
     /**
     * Text label initializator
     *
-    * @method
+    * @constructor
+    * @param {Object} args Arguments for text component.
     */
-    initialize : function(){
+    initialize : function(args){
 
       var options = {
         /**
@@ -46,7 +46,7 @@
         * Can depend on other elements, for instance,
         * the rounded rectangles to form a label.
         *
-        * @method
+        * @method dataBind
         * @param {Object} d example = {
         *                              data : [...]
         *                            }
@@ -58,7 +58,7 @@
         /**
         * Insert a svg:text element for each data input.
         * 
-        * @mehtod
+        * @method insert
         * @chainable
         */
         insert : function(){
@@ -69,21 +69,14 @@
 
               var chart = this.chart();
 
-              this.attr('x', function(d){
-                return chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2);
-              })
-              .attr('y', function(d){
-                return chart.yscale.map(d.y);
-              })
-              .attr('text-anchor', 'middle')
-              .attr('dy', '0.35em')
-              .text(function(d) { return d.y; });
+              this.attr('text-anchor', 'middle')
+                .attr('dy', '0.35em');
 
               chart.eventManager.bindAll(this);
 
               return this;
           },
-          'update' : function(){
+          'merge' : function(){
 
               var chart = this.chart();
 

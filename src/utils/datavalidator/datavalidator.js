@@ -2,7 +2,6 @@
 * Data checker for different data input
 *
 * @class DataValidator
-* @constructor
 * @requires d3,
 *           underscore
 *
@@ -28,14 +27,18 @@
   }
 }(this, function (_) {
 
-  /** Class constructor */
+  /** 
+  * Class constructor
+  *
+  * @constructor
+  */
   function DataValidator() {
   }
 
   /**
   * Checks if a given value is defined and > 0
   *
-  * @method
+  * @method isPositiveNumber
   * @param {Number} value number to check
   * @param {String} message error message to show
   * @return {Number} value
@@ -50,7 +53,7 @@
   /**
   * Checks if value is number, or is defined
   *
-  * @method
+  * @method isNumber
   * @param {Number} value to check
   * @param {String} error message
   * @return {Number} value
@@ -65,7 +68,7 @@
   /**
   * Checks if a value is defined
   *
-  * @method
+  * @method isUndefined
   * @param {Number} value to check
   * @param {String} message error message
   * @return {Number} value

@@ -2,7 +2,6 @@
 *	Ordinal Scale
 *	
 *	@class OrdinalScale
-*	@constructor
 *	@extends BaseScale
 *	@requires d3.chart,
 *						basescale
@@ -33,6 +32,7 @@
 	/** 
   * Class constructor
   *
+  *	@constructor
   * @param {String} axisType Axis type, defined in Charty names
   */
 	var OrdinalScale = function(axisType){
@@ -48,7 +48,7 @@
 	/**
 	*	Sets the domain data for the scale
 	*
-	*	@method
+	*	@method setDomain
 	*	@param {Array} domain values for ordinal domain
 	*	@chainable
 	*/
@@ -60,7 +60,7 @@
 	/**
 	*	Sets the range for the scale
 	*
-	*	@method
+	*	@method setRange
 	*	@param {Number} range numeric value for the range
 	*	@chainable
 	*/
@@ -75,7 +75,7 @@
 	*	A value needs to be mapped and moved according
 	*	to that band width
 	*
-	*	@method
+	*	@method map
 	*	@param {String} value String value that belongs to the domain
 	*	@param {Number} factor reduce factor for overlapping charts
 	*	@return {Number} mapped String value
@@ -88,7 +88,7 @@
 	*	Returns the range band for the scale
 	*	Can be reduced if (factor < 1)
 	*
-	*	@method
+	*	@method band
 	*	@param {Number} factor reduce factor
 	*	@return {Number} scale width
 	*/
@@ -102,7 +102,7 @@
 	*	Regarding the data series, ordinal scales should be uniform, whether
 	*	they have values for that specific ordinal element or not.
 	*
-	*	@method
+	*	@method calculateDomain
 	*	@param {Object} data Accessor for the data collection
 	*	@param {Object} f callback function
 	*	@chainable
@@ -117,7 +117,7 @@
 	/**
 	*	Checks if domain wasn't previously calculated
 	*
-	*	@method
+	*	@method defaultDomain
 	*	@return {Boolean} True if domain isn't set
 	*/
 	OrdinalScale.prototype.defaultDomain = function(){

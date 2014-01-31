@@ -3,7 +3,6 @@
 * 
 * @class LabeledTriangleChart
 * @extends MultipleDataGroup
-* @constructor
 * @requires d3.chart,
 *           charty,
 *           triangle,
@@ -49,7 +48,8 @@
     * Will contain only one instance of each component chart, since no
     * resize can be assumed.
     *
-    * @method
+    * @constructor
+    * @param {Object} args Arguments for triangle chart.
     */
     initialize: function(args) {
 

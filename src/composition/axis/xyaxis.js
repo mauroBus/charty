@@ -2,7 +2,6 @@
 * Base XY system for all the 2D charts.
 * 
 * @class XYAxis
-* @constructor
 * @requires d3.chart,
 *           charty,
 *           axis
@@ -35,7 +34,8 @@
     /**
     * XY axis system initializer
     *
-    * @method
+    * @constructor
+    * @param {Object} args Arguments for xy axis system.
     */
     initialize : function(args){
 
@@ -51,7 +51,7 @@
     /**
     * Show whole chart as a grid.
     *
-    * @method
+    * @method showAsGrid
     * @chainable
     */
     showAsGrid : function (showAsGrid){
@@ -63,7 +63,7 @@
     * Moves x axis according to given height value, and sets
     * tick size value.
     *
-    * @method
+    * @method height
     * @param {Number} newHeight chart's height
     * @chainable
     */
@@ -75,7 +75,7 @@
     /**
     * Sets tick size, based on given width value
     *
-    * @method
+    * @method width
     * @param {Number} newWidth chart's width
     * @chainable
     */
@@ -87,7 +87,7 @@
     /**
     * Sets x scale.
     *
-    * @method
+    * @method setXScale
     * @param {Object} scale d3.scale
     * @chainable
     */
@@ -98,7 +98,7 @@
     /**
     * Sets y scale.
     *
-    * @method
+    * @method setYScale
     * @param {Object} scale d3.scale
     * @chainable
     */

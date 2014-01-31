@@ -1,15 +1,16 @@
 /**
-Defines a YXY axis system.
-Two Y Axis (one left, one right)
-One X Axis (bottom)
-
-@class YXYAxis
-@constructor
-@requires d3.chart,
-          charty,
-          axis
-
-@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* Defines a YXY axis system.
+* Two Y Axis (one left, one right)
+* One X Axis (bottom).
+*
+* It is built on top of the XY axis system that is already defined.
+*
+* @class YXYAxis
+* @requires d3.chart,
+*          charty,
+*          xyaxis
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 
 (function(root, factory) {
@@ -34,9 +35,10 @@ One X Axis (bottom)
 }(this, function (d3, Charty) {
   d3.chart(Charty.CHART_NAMES.YXY_AXIS, {
     /**
-    Defines as a mixin a right Y axis, a left Y axis, a X bottom axis
-
-    @method
+    * Defines as a mixin a right Y axis, a left Y axis, a X bottom axis
+    *
+    * @constructor
+    * @param {Object} args Arguments for yxy axis system.
     */
     initialize : function (args){
       this.xyaxis = this.mixin(Charty.CHART_NAMES.XY_AXIS,
@@ -49,10 +51,10 @@ One X Axis (bottom)
 
     },
     /**
-    Show whole chart as a grid.
-
-    @method
-    @chainable
+    * Show whole chart as a grid.
+    *
+    * @method showAsGrid
+    * @chainable
     */
     showAsGrid : function (showAsGrid){
       this.xyaxis.showAsGrid(showAsGrid);
@@ -61,7 +63,7 @@ One X Axis (bottom)
     /**
     * Sets x axis position and tick size
     *
-    * @method
+    * @method height
     * @param {Number} newHeight chart's height
     * @chainable
     */
@@ -73,7 +75,7 @@ One X Axis (bottom)
     * Sets y axis disposition, based on a given
     * width value, and tick size for only one y axis.
     *
-    * @method
+    * @method width
     * @param {Number} newWidth chart's width
     * @chainable
     */
@@ -85,7 +87,7 @@ One X Axis (bottom)
     /**
     * Redefinition of x scale setter
     *
-    * @method
+    * @method setXScale
     * @param {Object} scale d3.scale
     * @chainable
     */
@@ -96,7 +98,7 @@ One X Axis (bottom)
     /**
     * Redefinition of y scale setter
     *
-    * @method
+    * @method setYScale
     * @param {Object} scale d3.scale
     * @chainable
     */

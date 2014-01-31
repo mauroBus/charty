@@ -4,7 +4,6 @@ Takes N input data series
 
 @class LineChart
 @extends MultipleDataGroup
-@constructor
 @requires d3.chart,
           charty,
           line,
@@ -37,12 +36,12 @@ Takes N input data series
 	d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.LINE_CHART,{
 		/**
-		Multiple data group initializator.
-
-		Creates N instances of a given mixin.
-
-		@method
-		@param {Object} args N = args.instances
+		* Multiple data group initializator.
+    *
+		* Creates N instances of a given mixin.
+    *
+		* @constructor
+		* @param {Object} args N = args.instances
 		*/
 		initialize : function(args){
 			var options = {

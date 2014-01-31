@@ -40,6 +40,8 @@
 
 	/**
 	*	Class constructor
+	*	
+	*	@constructor
 	*	@param Object options example = {
 	*																	type : 'popover',
 	*																	placement: 'left',
@@ -53,6 +55,8 @@
 
 	/**
 	 * Binds the bootstrap feature to a specified target selection
+	 *	
+	 * @method bind
 	 * @param  {d3.selection} target Target selection
 	 * @chainable
 	 */

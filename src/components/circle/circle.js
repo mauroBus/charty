@@ -3,7 +3,6 @@
 * 
 * @class Circle
 * @extends SimpleDataGroup
-* @constructor
 * @requires d3.chart,
 *           underscore,
 *           simpledatagroup
@@ -36,7 +35,8 @@
     /**
     * Circle initializator
     *
-    * @method
+    * @constructor
+    * @param {Object} args Arguments for the circle component.
     */
     initialize : function(args){
 
@@ -63,7 +63,7 @@
         * Can have color and circle radius set for the whole serie,
         * or own values for each data point.
         *
-        * @method
+        * @method dataBind
         * @param {Object} d example = {
         *                              color : 'red',
         *                              r : 5
@@ -85,7 +85,7 @@
         /**
         * Appends a svg:circle
         *
-        * @method
+        * @method insert
         * @chainable
         */
         insert : function(){

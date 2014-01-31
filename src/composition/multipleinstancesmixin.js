@@ -3,7 +3,6 @@
 * 
 * @class MultipleInstancesMixin
 * @extends BaseChart
-* @constructor
 * @requires d3.chart,
 *           charty,
 *           basechart
@@ -40,7 +39,7 @@
     * It is necessary to set the instances count
     * and the chart name.
     *
-    * @method
+    * @constructor
     * @param {Object} args example = {
     *                                    instances : 2,
     *                                    chartName : 'Bar'

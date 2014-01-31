@@ -51,7 +51,7 @@
   * the dimensions as initial options
   * Defined events will be spread to every chart's component.
   *
-  * @method
+  * @method chart
   * @param {Object} options options = {
   *                    chartName : 'BarChart',
   *                    instances : 2,

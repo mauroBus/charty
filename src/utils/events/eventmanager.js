@@ -36,6 +36,8 @@
 
 	/**
 	 * Class constructor
+	 *	
+	 * @constructor
 	 */
 	function EventManager() {
 
@@ -45,7 +47,7 @@
 	/**
 	 * Adds specific defined event to queue
 	 *
-	 * @method
+	 * @method addEvent
 	 * @param {Event} e Charty event to bind
 	 * @chainable
 	 */
@@ -62,6 +64,7 @@
 	 * Each event wrapper must have a way to bind itself to the specified
 	 * elements.
 	 *
+	 * @method bindAll
 	 * @param {d3.selection} t Elements selection
 	 * @chainable
 	 */

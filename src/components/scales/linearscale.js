@@ -2,7 +2,6 @@
 * Linear scale for linear axis
 * 
 * @class LinearScale
-* @constructor
 * @extends BaseScale
 * @requires d3.chart,
 *           basescale,
@@ -34,6 +33,7 @@
   /** 
   * Class constructor
   *
+  * @constructor
   * @param {String} axisType Axis type, defined in Charty names
   */
   var LinearScale = function(axisType) {
@@ -49,7 +49,7 @@
   /**
   * Sets domain for linear scale
   *
-  * @method
+  * @method setDomain
   * @param {Object} arrayValues Max and min value defined by array
   * @chainable
   */
@@ -61,7 +61,7 @@
   /**
   * Sets the range for the linear scale
   *
-  * @method
+  * @method setRange
   * @param {Number} range numeric value for linear scale
   * @chainable
   */
@@ -73,7 +73,7 @@
   /**
   * Returns scaled value
   *
-  * @method
+  * @method map
   * @param {Number} value number to map to scale
   * @return {Number} mapped value
   */
@@ -84,7 +84,7 @@
   /**
   * Returns band for a specified value
   *
-  * @method
+  * @method band
   * @param {Number} max max value for a scale
   * @param {Number} value to map
   * @return {Number} similar to ordinal band but for
@@ -103,7 +103,7 @@
   *
   * Keeps a reference for the minimum value
   *
-  * @method
+  * @method calculateDomain
   * @param {Object} data Accessor for the data collection
   * @param {Object} f callback function
   * @chainable
@@ -140,7 +140,7 @@
   * Maximum value setting for linear scale.
   * Useful when setting discrete ticks for continuous scale
   *
-  * @method
+  * @method setMaxValue
   * @param {Number} maxVal Scale's maximum value
   * @chainable
   */
@@ -152,7 +152,7 @@
   /**
   * Returns max value
   *
-  * @method
+  * @method getMaxValue
   * @return {Number} scale's maximum value
   */
   LinearScale.prototype.getMaxValue = function() {

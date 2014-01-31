@@ -4,7 +4,6 @@
 * 
 * @class BarChart
 * @extends MultipleDataGroup
-* @constructor
 * @requires d3.chart,
 *           charty,
 *           bar,
@@ -47,7 +46,7 @@
 		/**
 		* BarChart initialization.
     * 
-		* @method
+		* @constructor
 		* @param {Object} args example = {
     *                      instances : 2,
     *                    }

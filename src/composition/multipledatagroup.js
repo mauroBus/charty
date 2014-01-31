@@ -35,7 +35,7 @@
     /**
     * Data transformation for multiple data series.
     *
-    * @method
+    * @method tranform
     * @param {Object} data Data accessor
     * @return {Object} Data accesor
     */
@@ -47,7 +47,7 @@
     /**
     * Default domain for x scaling
     *
-    * @method
+    * @method setDefaultXDomain
     * @param {Object} domain Array for x domain
     * @chainable
     */
@@ -58,7 +58,7 @@
     /**
     * Default domain for y scaling
     *
-    * @method
+    * @method setDefaultYDomain
     * @param {Object} domain Array for y domain
     * @chainable
     */
@@ -69,7 +69,9 @@
     /** 
     * Domain calculation
     *
-    * @method
+    * @method _calculateDomains
+    * @param {Object} data Data for domains
+    * @param {Object} zScale d3.scale
     */
     _calculateDomains : function (data, zScale){
        /** Default x domain */

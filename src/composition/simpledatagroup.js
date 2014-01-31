@@ -36,7 +36,7 @@
     /**
     * Returns the next element of the data collection
     *
-    * @method
+    * @method transform
     * @param {Object} data Data Accessor
     * @return {Object} next element in the collection
     */

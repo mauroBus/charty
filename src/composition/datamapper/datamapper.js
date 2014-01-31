@@ -9,7 +9,6 @@
 * other for vertical axis.
 *
 * @class DataMapper
-* @constructor
 * @requires linearscale,
 *           basescale,
 *           underscore
@@ -37,7 +36,11 @@
   }
 }(this, function (LinearScale, OrdinalScale, _) {
 
-  /** Class constructor */
+  /** 
+  * Class constructor 
+  *
+  * @constructor
+  */
   var DataMapper = function (){
     this.scales = [];
   };
@@ -45,7 +48,7 @@
   /** 
   * Adds scale for mapping 
   *
-  * @method
+  * @method addScale
   * @param {BaseScale} scale Scale to add
   * @param {Boolean} setAsBase Defines a scale that will be taken as base
   * @chainable
@@ -59,7 +62,7 @@
   /** 
   * Returns the defined base scale.
   *
-  * @method
+  * @method getBaseScale
   * @returns {BaseScale} Base scale defined
   */
   DataMapper.prototype.getBaseScale = function (){
@@ -70,7 +73,7 @@
   /** 
   * Maps a data point, according to the defined scales
   * 
-  * @method
+  * @method map
   * @param {Object} dataElement Data to be mapped
   * @param {Number} chartFactor Factor that affects some chart's drawing
   * @returns {Number} Data position in SVG canvas.
