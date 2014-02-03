@@ -2795,12 +2795,8 @@
 		*/
 		initialize : function(args){
 
-			var options = {
-				chartName : args.barType,
-        dataValidator : args.dataValidator,
-				instances : (args.instances || 1),
-        setTextLabels : args.setTextLabels
-			};
+      args.instances = (args.instances || 1);
+      args.chartName = args.barType;
 
 			var axis = this.mixin(args.axisSystem,
                            this.base.append('g'),
@@ -2808,7 +2804,7 @@
 
 					barChart = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                                 this.base.append('g'),
-                                options);
+                                args);
 
       this.setMixins(barChart, axis);
 		}
@@ -3187,11 +3183,9 @@ Takes N input data series
 		* @param {Object} args N = args.instances
 		*/
 		initialize : function(args){
-			var options = {
-				chartName : Charty.CHART_NAMES.LINE,
-        dataValidator : args.dataValidator,
-				instances : (args.instances || 1)
-			};
+
+      args.chartName = Charty.CHART_NAMES.LINE;
+      args.instances = (args.instances || 1);
 
 			var axis = this.mixin(args.axisSystem,
                             this.base.append('g'),
@@ -3199,7 +3193,7 @@ Takes N input data series
 
 					lineChart = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                                 this.base.append('g'),
-                                options);
+                                args);
 
       this.setMixins(lineChart, axis);
 		}
@@ -3255,21 +3249,16 @@ Takes N input data series
 		*/
 		initialize : function(args){
 
-			var options = {
-				chartName : Charty.CHART_NAMES.CIRCLE,
-        dataValidator : args.dataValidator,
-				instances : (args.instances || 1),
-        axisSystem : args.axisSystem,
-        showAsGrid : args.showAsGrid
-			};
-
 			var lineChart = this.mixin(Charty.CHART_NAMES.LINE_CHART,
                                 this.base.append('g'),
-                                options),
+                                args);
 
-					circles = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
+      args.chartName = Charty.CHART_NAMES.CIRCLE;
+      args.instances = (args.instances || 1);
+
+			var circles = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                               this.base.append('g'),
-                              options);
+                              args);
 
       this.setMixins(lineChart, circles);
 		}
@@ -3324,21 +3313,18 @@ Takes N input data series
       */
       initialize : function(args){
 
-      var options = {
-        chartName : Charty.CHART_NAMES.CIRCLE,
-        dataValidator : args.dataValidator,
-        instances : (args.instances || 1)
-      };
+        args.chartName =  Charty.CHART_NAMES.CIRCLE;
+        args.instances = (args.instances || 1);
 
-      var axis = this.mixin(args.axisSystem,
-                            this.base.append('g'),
-                            args).showAsGrid(args.showAsGrid),
+        var axis = this.mixin(args.axisSystem,
+                              this.base.append('g'),
+                              args).showAsGrid(args.showAsGrid),
 
-          circles = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
-                               this.base,
-                               options);
+            circles = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
+                                 this.base,
+                                 args);
 
-      this.setMixins(circles, axis);
+        this.setMixins(circles, axis);
       }
 	});
 }));

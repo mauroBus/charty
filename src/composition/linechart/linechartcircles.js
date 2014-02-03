@@ -48,21 +48,16 @@
 		*/
 		initialize : function(args){
 
-			var options = {
-				chartName : Charty.CHART_NAMES.CIRCLE,
-        dataValidator : args.dataValidator,
-				instances : (args.instances || 1),
-        axisSystem : args.axisSystem,
-        showAsGrid : args.showAsGrid
-			};
-
 			var lineChart = this.mixin(Charty.CHART_NAMES.LINE_CHART,
                                 this.base.append('g'),
-                                options),
+                                args);
 
-					circles = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
+      args.chartName = Charty.CHART_NAMES.CIRCLE;
+      args.instances = (args.instances || 1);
+
+			var circles = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                               this.base.append('g'),
-                              options);
+                              args);
 
       this.setMixins(lineChart, circles);
 		}

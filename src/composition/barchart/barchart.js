@@ -53,12 +53,8 @@
 		*/
 		initialize : function(args){
 
-			var options = {
-				chartName : args.barType,
-        dataValidator : args.dataValidator,
-				instances : (args.instances || 1),
-        setTextLabels : args.setTextLabels
-			};
+      args.instances = (args.instances || 1);
+      args.chartName = args.barType;
 
 			var axis = this.mixin(args.axisSystem,
                            this.base.append('g'),
@@ -66,7 +62,7 @@
 
 					barChart = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                                 this.base.append('g'),
-                                options);
+                                args);
 
       this.setMixins(barChart, axis);
 		}

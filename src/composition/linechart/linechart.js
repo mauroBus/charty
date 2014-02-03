@@ -44,11 +44,9 @@ Takes N input data series
 		* @param {Object} args N = args.instances
 		*/
 		initialize : function(args){
-			var options = {
-				chartName : Charty.CHART_NAMES.LINE,
-        dataValidator : args.dataValidator,
-				instances : (args.instances || 1)
-			};
+
+      args.chartName = Charty.CHART_NAMES.LINE;
+      args.instances = (args.instances || 1);
 
 			var axis = this.mixin(args.axisSystem,
                             this.base.append('g'),
@@ -56,7 +54,7 @@ Takes N input data series
 
 					lineChart = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                                 this.base.append('g'),
-                                options);
+                                args);
 
       this.setMixins(lineChart, axis);
 		}

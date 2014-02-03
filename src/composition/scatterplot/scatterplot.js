@@ -47,21 +47,18 @@
       */
       initialize : function(args){
 
-      var options = {
-        chartName : Charty.CHART_NAMES.CIRCLE,
-        dataValidator : args.dataValidator,
-        instances : (args.instances || 1)
-      };
+        args.chartName =  Charty.CHART_NAMES.CIRCLE;
+        args.instances = (args.instances || 1);
 
-      var axis = this.mixin(args.axisSystem,
-                            this.base.append('g'),
-                            args).showAsGrid(args.showAsGrid),
+        var axis = this.mixin(args.axisSystem,
+                              this.base.append('g'),
+                              args).showAsGrid(args.showAsGrid),
 
-          circles = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
-                               this.base,
-                               options);
+            circles = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
+                                 this.base,
+                                 args);
 
-      this.setMixins(circles, axis);
+        this.setMixins(circles, axis);
       }
 	});
 }));
