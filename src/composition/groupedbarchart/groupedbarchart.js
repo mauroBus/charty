@@ -52,8 +52,6 @@
 
       this.axisSystem = this.mixin(args.axisSystem, this.base.append('g'), args).showAsGrid(args.showAsGrid);
       this.bars = this.mixin(Charty.CHART_NAMES.BAR, this.base.append('g'), args);
-
-      this.setMixins(this.axisSystem, this.bars);
     },
     /**
     * It is necessary to rewrite transform data, in order to

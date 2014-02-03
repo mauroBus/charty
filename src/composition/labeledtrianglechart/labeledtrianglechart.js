@@ -68,8 +68,6 @@
           texts = this.mixin(Charty.CHART_NAMES.TEXT,
                             this.base.append('g'),
                             args);
-
-      this.setMixins(triangles, recs, texts, axis);
     }
   });
 }));

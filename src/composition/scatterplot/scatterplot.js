@@ -57,8 +57,6 @@
             circles = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                                  this.base,
                                  args);
-
-        this.setMixins(circles, axis);
       }
 	});
 }));

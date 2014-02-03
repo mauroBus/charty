@@ -760,11 +760,9 @@
     width : function(newWidth){
 
       this.w = newWidth;
-      if(this.componentsMixins){
-        _.each(this.componentsMixins, function (element){
-          element.width(newWidth);
-        });
-      }
+      _.each(this._mixins, function (element){
+        element.width(newWidth);
+      });
 
       return this;
     },
@@ -778,11 +776,9 @@
     height : function(newHeight){
 
       this.h = newHeight;
-      if(this.componentsMixins){
-        _.each(this.componentsMixins, function (element){
-          element.height(newHeight);
-        });
-      }
+      _.each(this._mixins, function (element){
+        element.height(newHeight);
+      });
 
       return this;
     },
@@ -800,11 +796,9 @@
     setXScale : function (scale){
 
       this.xscale = scale;
-      if(this.componentsMixins){
-        _.each(this.componentsMixins, function (element){
-          element.setXScale(scale);
-        });
-      }
+      _.each(this._mixins, function (element){
+        element.setXScale(scale);
+      });
 
       return this;
     },
@@ -822,30 +816,8 @@
     setYScale : function (scale){
 
       this.yscale = scale;
-      if ( this.componentsMixins ){
-        _.each(this.componentsMixins, function (element){
-          element.setYScale(scale);
-        });
-      }
-
-      return this;
-    },
-    /**
-    * Keeps outter reference to defined mixins.
-    *
-    * @method setMixins
-    * @chainable
-    */
-    setMixins : function(){
-      if( !this.componentsMixins ){
-        this.componentsMixins = [];
-      }
-
-      var args = Array.prototype.slice.call(arguments,0),
-          self = this;
-
-      _.each(args, function(mixin){
-        self.componentsMixins.push(mixin);
+      _.each(this._mixins, function (element){
+        element.setYScale(scale);
       });
 
       return this;
@@ -860,7 +832,7 @@
     setEventManager : function (evtManager){
       this.eventManager = evtManager;
 
-      _.each(this.componentsMixins, function (mixin){
+      _.each(this._mixins, function (mixin){
         if ( mixin.setEventManager ){
           mixin.setEventManager(evtManager);
         }
@@ -2514,7 +2486,6 @@
                                   args);
 
         instance.factor = ((f--)/args.instances);
-        this.setMixins(instance);
       }
     }
   });
@@ -2805,8 +2776,6 @@
 					barChart = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                                 this.base.append('g'),
                                 args);
-
-      this.setMixins(barChart, axis);
 		}
 	});
 }));
@@ -2864,8 +2833,6 @@
 
       this.axisSystem = this.mixin(args.axisSystem, this.base.append('g'), args).showAsGrid(args.showAsGrid);
       this.bars = this.mixin(Charty.CHART_NAMES.BAR, this.base.append('g'), args);
-
-      this.setMixins(this.axisSystem, this.bars);
     },
     /**
     * It is necessary to rewrite transform data, in order to
@@ -3132,8 +3099,6 @@
           texts = this.mixin(Charty.CHART_NAMES.TEXT,
                             this.base.append('g'),
                             args);
-
-      this.setMixins(triangles, recs, texts, axis);
     }
   });
 }));
@@ -3194,8 +3159,6 @@ Takes N input data series
 					lineChart = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                                 this.base.append('g'),
                                 args);
-
-      this.setMixins(lineChart, axis);
 		}
 	});
 }));
@@ -3259,8 +3222,6 @@ Takes N input data series
 			var circles = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                               this.base.append('g'),
                               args);
-
-      this.setMixins(lineChart, circles);
 		}
 	});
 }));
@@ -3323,8 +3284,6 @@ Takes N input data series
             circles = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                                  this.base,
                                  args);
-
-        this.setMixins(circles, axis);
       }
 	});
 }));

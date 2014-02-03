@@ -63,8 +63,6 @@
 					barChart = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                                 this.base.append('g'),
                                 args);
-
-      this.setMixins(barChart, axis);
 		}
 	});
 }));

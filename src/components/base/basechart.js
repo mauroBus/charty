@@ -43,11 +43,9 @@
     width : function(newWidth){
 
       this.w = newWidth;
-      if(this.componentsMixins){
-        _.each(this.componentsMixins, function (element){
-          element.width(newWidth);
-        });
-      }
+      _.each(this._mixins, function (element){
+        element.width(newWidth);
+      });
 
       return this;
     },
@@ -61,11 +59,9 @@
     height : function(newHeight){
 
       this.h = newHeight;
-      if(this.componentsMixins){
-        _.each(this.componentsMixins, function (element){
-          element.height(newHeight);
-        });
-      }
+      _.each(this._mixins, function (element){
+        element.height(newHeight);
+      });
 
       return this;
     },
@@ -83,11 +79,9 @@
     setXScale : function (scale){
 
       this.xscale = scale;
-      if(this.componentsMixins){
-        _.each(this.componentsMixins, function (element){
-          element.setXScale(scale);
-        });
-      }
+      _.each(this._mixins, function (element){
+        element.setXScale(scale);
+      });
 
       return this;
     },
@@ -105,30 +99,8 @@
     setYScale : function (scale){
 
       this.yscale = scale;
-      if ( this.componentsMixins ){
-        _.each(this.componentsMixins, function (element){
-          element.setYScale(scale);
-        });
-      }
-
-      return this;
-    },
-    /**
-    * Keeps outter reference to defined mixins.
-    *
-    * @method setMixins
-    * @chainable
-    */
-    setMixins : function(){
-      if( !this.componentsMixins ){
-        this.componentsMixins = [];
-      }
-
-      var args = Array.prototype.slice.call(arguments,0),
-          self = this;
-
-      _.each(args, function(mixin){
-        self.componentsMixins.push(mixin);
+      _.each(this._mixins, function (element){
+        element.setYScale(scale);
       });
 
       return this;
@@ -143,7 +115,7 @@
     setEventManager : function (evtManager){
       this.eventManager = evtManager;
 
-      _.each(this.componentsMixins, function (mixin){
+      _.each(this._mixins, function (mixin){
         if ( mixin.setEventManager ){
           mixin.setEventManager(evtManager);
         }

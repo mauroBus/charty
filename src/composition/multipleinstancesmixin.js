@@ -58,7 +58,6 @@
                                   args);
 
         instance.factor = ((f--)/args.instances);
-        this.setMixins(instance);
       }
     }
   });
