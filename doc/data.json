@@ -1427,7 +1427,7 @@
             "line": 47,
             "description": "Tranlation value in the x direction",
             "itemtype": "property",
-            "name": "",
+            "name": "xt",
             "type": "Number",
             "default": "0",
             "class": "Axis"
@@ -1437,7 +1437,7 @@
             "line": 55,
             "description": "Tranlation value in the y direction",
             "itemtype": "property",
-            "name": "",
+            "name": "yt",
             "type": "Number",
             "default": "0",
             "class": "Axis"
@@ -1495,32 +1495,32 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 121,
+            "line": 120,
             "description": "Axis translation in x or y direction.",
             "class": "Axis"
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 128,
+            "line": 127,
             "class": "Axis"
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 133,
+            "line": 132,
             "class": "Axis"
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 155,
+            "line": 154,
             "description": "Axis layer creation",
             "class": "Axis"
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 160,
+            "line": 159,
             "description": "Sets tick size for the axis",
             "itemtype": "method",
-            "name": "",
+            "name": "tickSize",
             "params": [
                 {
                     "name": "size",
@@ -1533,20 +1533,20 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 168,
+            "line": 167,
             "description": "Size for the ticks. Necessary\nto define a grid chart.",
             "itemtype": "property",
-            "name": "",
+            "name": "tsize",
             "type": "Number",
             "default": "0",
             "class": "Axis"
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 179,
+            "line": 178,
             "description": "Sets the scale that will be used for the axis",
             "itemtype": "method",
-            "name": "",
+            "name": "setScale",
             "params": [
                 {
                     "name": "d3.scale",
@@ -1559,10 +1559,10 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 195,
+            "line": 194,
             "description": "Shows the axis as a grid",
             "itemtype": "method",
-            "name": "",
+            "name": "showAsGrid",
             "params": [
                 {
                     "name": "val",
@@ -1576,10 +1576,10 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 207,
+            "line": 206,
             "description": "Sets axis orientation",
             "itemtype": "method",
-            "name": "",
+            "name": "orient",
             "params": [
                 {
                     "name": "orient",
@@ -1593,10 +1593,10 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 220,
+            "line": 219,
             "description": "Sets x translation for axis.",
             "itemtype": "method",
-            "name": "",
+            "name": "xtranslate",
             "params": [
                 {
                     "name": "t",
@@ -1609,10 +1609,10 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 231,
+            "line": 230,
             "description": "Sets y translation for axis.",
             "itemtype": "method",
-            "name": "",
+            "name": "ytranslate",
             "params": [
                 {
                     "name": "t",
@@ -1625,10 +1625,10 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 242,
+            "line": 241,
             "description": "Text label that will be set next to the axis",
             "itemtype": "method",
-            "name": "",
+            "name": "setTextLabel",
             "params": [
                 {
                     "name": "label",
@@ -1646,10 +1646,10 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 255,
+            "line": 254,
             "description": "Custom tick count setting for particular\naxis.\n\nThis options will only work in linear scales,\nsince the domain, by defaut, is continuous.",
             "itemtype": "method",
-            "name": "",
+            "name": "tickCount",
             "params": [
                 {
                     "name": "tCount",
@@ -1662,10 +1662,10 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 272,
+            "line": 271,
             "description": "Tick format",
             "itemtype": "method",
-            "name": "",
+            "name": "tickFormat",
             "params": [
                 {
                     "name": "format",
@@ -4344,19 +4344,19 @@
         },
         {
             "message": "Missing item type\nAxis translation in x or y direction.",
-            "line": " src\\components\\axis\\axis.js:121"
+            "line": " src\\components\\axis\\axis.js:120"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\axis\\axis.js:128"
+            "line": " src\\components\\axis\\axis.js:127"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\axis\\axis.js:133"
+            "line": " src\\components\\axis\\axis.js:132"
         },
         {
             "message": "Missing item type\nAxis layer creation",
-            "line": " src\\components\\axis\\axis.js:155"
+            "line": " src\\components\\axis\\axis.js:154"
         },
         {
             "message": "Missing item type",

@@ -47,7 +47,7 @@
         /**
         * Tranlation value in the x direction
         *
-        * @property
+        * @property xt
         * @type Number
         * @default 0
         */
@@ -55,7 +55,7 @@
         /**
         * Tranlation value in the y direction
         *
-        * @property
+        * @property yt
         * @type Number
         * @default 0
         */
@@ -115,8 +115,7 @@
               }
 
               /** Axis drawing */
-              this.classed(defaults.c, true)
-                .call(chart.axis);
+              this.classed(defaults.c, true);
 
               /**
               * Axis translation in x or y direction.
@@ -141,7 +140,7 @@
 
               return this;
             },
-            'update': function() {
+            'merge': function() {
 
               return this.call(this.chart().axis);
             },
@@ -160,7 +159,7 @@
       /**
       * Sets tick size for the axis
       *
-      * @method
+      * @method tickSize
       * @param {Number} size ticksize
       * @chainable
       */
@@ -169,7 +168,7 @@
         * Size for the ticks. Necessary
         * to define a grid chart.
         *
-        * @property
+        * @property tsize
         * @type Number
         * @default 0
         */
@@ -179,7 +178,7 @@
       /**
       * Sets the scale that will be used for the axis
       *
-      * @method
+      * @method setScale
       * @param {Object} d3.scale
       * @chainable
       */
@@ -195,7 +194,7 @@
       /**
       * Shows the axis as a grid
       *
-      * @method
+      * @method showAsGrid
       * @param {Boolean} val true/false value
       * @chainable
       * @default false
@@ -207,7 +206,7 @@
       /**
       * Sets axis orientation
       *
-      * @method
+      * @method orient
       * @param {String} orient
       * @chainable
       * @default bottom
@@ -220,7 +219,7 @@
       /**
       * Sets x translation for axis.
       *
-      * @method
+      * @method xtranslate
       * @param {Number} t tranlation value
       * @chainable
       */
@@ -231,7 +230,7 @@
       /**
       * Sets y translation for axis.
       *
-      * @method
+      * @method ytranslate
       * @param {Number} t tranlation value
       * @chainable
       */
@@ -242,7 +241,7 @@
       /**
       * Text label that will be set next to the axis
       *
-      * @method
+      * @method setTextLabel
       * @param {String} label Text label
       * @param {Number} labelRotate Rotation for y axis label
       * @chainable
@@ -259,7 +258,7 @@
       * This options will only work in linear scales,
       * since the domain, by defaut, is continuous.
       *
-      * @method
+      * @method tickCount
       * @param {Number} tCount ticks count
       * @chainable
       */
@@ -272,7 +271,7 @@
       /**
       * Tick format
       *
-      * @method
+      * @method tickFormat
       * @param {String} format Tick format option
       * @chainable
       */
