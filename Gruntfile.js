@@ -79,7 +79,20 @@ module.exports = function(grunt) {
           'report': ['<%= yeoman.app %>/**/*.js'],
         }
       },
-  },
+    },
+
+    /** Yuidoc */
+    yuidoc: {
+      compile: {
+        name: 'ChartyJS',
+        description: 'ChartyJS Api doc',
+        version: '0.5.8',
+        options: {
+          paths: 'src/',
+          outdir: 'doc/'
+        }
+      }
+    }
 
   });
 
@@ -94,5 +107,13 @@ module.exports = function(grunt) {
     'plato',
     'concat',
     'uglify'
+  ]);
+
+  /** Build js with plato and yuidoc */
+  grunt.registerTask('build-js-all', [
+    'plato',
+    'concat',
+    'uglify',
+    'yuidoc'
   ]);
 };
