@@ -28,7 +28,8 @@ require.config({
     'labeledtrianglechart'    : '../../charts/labeledtrianglechart',
     'linechart'               : '../../charts/linechart',
     'linecirclechart'         : '../../charts/linecirclechart',
-    'scatterplot'             : '../../charts/scatterplot'
+    'scatterplot'             : '../../charts/scatterplot',
+    'winlossbarchart'         : '../../charts/winlossbarchart'
   },
   shim:{
     'jquery' : {
@@ -63,7 +64,8 @@ requirejs(
   'labeledtrianglechart',
   'linechart',
   'linecirclechart',
-  'scatterplot'
+  'scatterplot',
+  'winlossbarchart'
   ],
 function(){
   /** Keep going, nothing to see here */

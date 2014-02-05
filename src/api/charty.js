@@ -36,7 +36,9 @@
       'charty/donut',
       'charty/donutwithinnertext',
       'charty/linechartcircles',
-      'charty/groupedbarchart'
+      'charty/groupedbarchart',
+      'charty/winlossbar',
+      'charty/valuedependanttext'
       ],
       function (Charty, ScaleFactory, ChartInterface, DataValidator, EventFactory) {
         /** Export global even in AMD case in case this script

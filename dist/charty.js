@@ -147,6 +147,7 @@
     AXIS: 'Axis',
     BAR: 'Bar',
     HORIZONTAL_BAR: 'HorizontalBar',
+    WIN_LOSS_BAR: 'WinLossBar',
     BASE_CHART: 'BaseChart',
     CIRCLE: 'Circle',
     DONUT: 'Donut',
@@ -155,6 +156,7 @@
     TEXT: 'Text',
     ABOVE_TEXT : 'AboveText',
     RIGHT_TEXT : 'RightText',
+    VALUE_DEPENDANT_TEXT : 'ValueDependatText',
     TRIANGLE: 'Triangle',
     XY_AXIS: 'XYAxis',
     YXY_AXIS: 'YXYAxis',
@@ -1396,6 +1398,80 @@
   });
 }));
 /**
+ * Win Loss Bar drawer. Takes only one data series as input.
+ *
+ * @class WinLossBar
+ * @extends Bar
+ * @requires d3.chart,
+ *           charty,
+ *           bar
+ *
+ * @author "Cesar Del Soldato <cesar.delsoldato@gmail.com>"
+ */
+(function(root, factory) {
+  /** Setting up AMD support*/
+  if (typeof define === 'function' && define.amd) {
+    /** AMD */
+    define('charty/winlossbar', [
+        'd3.chart',
+        'charty/chartynames',
+        'charty/simpledatagroup',
+        'charty/bar'
+      ],
+      function(d3, Charty) {
+        /** Export global even in AMD case in case this script
+         * is loaded with others*/
+        return factory(d3, Charty);
+      });
+  } else {
+    /** Browser globals */
+    factory(d3, Charty);
+  }
+}(this, function (d3, Charty) {
+  d3.chart(Charty.CHART_NAMES.BAR)
+    .extend(Charty.CHART_NAMES.WIN_LOSS_BAR, {
+      /**
+       * Win Loss Bar initialization
+       *
+       * @constructor
+       * @param {Object} args Arguments for axis component
+       */
+      initialize: function(args) {
+
+        /**
+         * Sets offset for bars.
+         */
+        var offset = 0;
+
+        /**
+         * Layers extensions.
+         */
+        this.layer('barlayer').on('merge', function() {
+
+          var chart = this.chart(),
+            zeroY = chart.yscale.map(0);
+
+          this.attr('class', function(d) {
+            if (d.y > 0) {
+              return 'win';
+            } else {
+              return 'loss';
+            }
+            return (d.c || chart.c);
+          })
+            .attr('y', function(d) {
+              var yScaleMap = chart.yscale.map(d.y, chart.factor),
+                yPos = Math.min(zeroY, yScaleMap) + offset;
+              offset = offset + yScaleMap - zeroY;
+              return yPos;
+            });
+
+          return this;
+        });
+      }
+    });
+}));
+/**
 * Circle drawer.
 * 
 * @class Circle
@@ -2162,6 +2238,85 @@
           });
 
           return this;
+      });
+    }
+  });
+}));
+/**
+* Text labeling above the data element. Redefindes "merge"
+* Useful for vertical bar chart
+*
+* @class AboveText
+* @extends Text
+* @requires d3.chart,
+*           charty,
+*           text
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+*/
+
+(function(root, factory) {
+  /** Setting up AMD support*/
+  if (typeof define === 'function' && define.amd) {
+    /** AMD */
+    define('charty/valuedependanttext',[
+      'd3.chart',
+      'charty/chartynames',
+      'charty/text'
+      ],
+      function (d3, Charty) {
+        /** Export global even in AMD case in case this script
+        * is loaded with others */
+        return factory(d3, Charty);
+    });
+  }
+  else {
+    /** Browser globals */
+    factory(d3, Charty);
+  }
+}(this, function (d3, Charty) {
+  d3.chart(Charty.CHART_NAMES.TEXT)
+    .extend(Charty.CHART_NAMES.VALUE_DEPENDANT_TEXT, {
+    /**
+    * @constructor
+    * @param {Object} args Arguments for above text component.
+    */
+    initialize : function(args){
+
+      var textLayer = this.layer('texts');
+
+        /**
+       * Sets offset for label.
+       */
+      var labelOffset = 0;
+
+      textLayer.off('merge');
+      textLayer.on('merge', function () {
+
+        var chart = this.chart(),
+          zeroY = chart.yscale.map(0),
+          heightZeroY = chart.h - zeroY;
+
+        this.attr('x', function (d){
+          var pos = 0;
+          if (chart.zScale){
+            pos += chart.zScale.map(d.z, 1);
+          }
+
+          return (pos += chart.xscale.map(d.x, (chart.factor || 1))+(chart.xscale.band(chart.factor || 1)/2));
+        }).attr('y', function (d){
+          var yScaleMap = chart.yscale.map(d.y, chart.factor),
+            yPos = Math.min(zeroY, yScaleMap) + labelOffset -7;
+          labelOffset = labelOffset + yScaleMap - zeroY;
+
+          if (d.y < 0) {
+            yPos = yPos + 14 + Math.abs(chart.yscale.band(chart.h,d.y) - heightZeroY);
+          }
+
+          return yPos;
+        }).text(function (d){
+          return d.y;
+        });
       });
     }
   });
@@ -3973,7 +4128,9 @@ Takes N input data series
       'charty/donut',
       'charty/donutwithinnertext',
       'charty/linechartcircles',
-      'charty/groupedbarchart'
+      'charty/groupedbarchart',
+      'charty/winlossbar',
+      'charty/valuedependanttext'
       ],
       function (Charty, ScaleFactory, ChartInterface, DataValidator, EventFactory) {
         /** Export global even in AMD case in case this script
