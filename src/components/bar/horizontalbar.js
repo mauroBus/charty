@@ -1,7 +1,7 @@
 /**
 * Bar drawer. Takes only one data series as input.
 * Extends Bar component, since only merge will be redefined.
-* 
+*
 * @class HorizontalBar
 * @constructor
 * @extends Bar
@@ -38,9 +38,9 @@
     * Horizontal bars initialization
     *
     * @constructor
-    * @param {Object} args Arguments for horizontal bar component.
+    * @param {Object} [args] Arguments for horizontal bar component.
     */
-    initialize : function(args){
+    initialize : function(){
 
       var barLayer =  this.layer('barlayer');
 

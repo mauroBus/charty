@@ -37,7 +37,7 @@
     * @constructor
     * @param {Object} args Arguments for right text component.
     */
-    initialize : function(args){
+    initialize : function(){
 
       var textLayer = this.layer('texts');
 

@@ -1,7 +1,7 @@
 /**
 * Create a bar chart that will render
 * N data series
-* 
+*
 * @class BarChart
 * @extends MultipleDataGroup
 * @requires d3.chart,
@@ -11,10 +11,9 @@
 *           multipledatagroup,
 *           yxyaxis,
 *           multipleinstancesmixin
-* 
+*
 * @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
-
 (function(root, factory) {
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
@@ -47,10 +46,10 @@
 
 	d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.BAR_CHART,{
-      
+
 		/**
 		* BarChart initialization.
-    * 
+    *
 		* @constructor
 		* @param {Object} args example = {
     *                       instances : 2,
@@ -62,20 +61,23 @@
       args.instances = (args.instances || 1);
       args.chartName = args.barType;
 
-			var axis = this.mixin(args.axisSystem,
-                           this.base.append('g'),
-                           args).showAsGrid(args.showAsGrid),
+      this.mixin(args.axisSystem, this.base.append('g'), args)
+            .showAsGrid(args.showAsGrid);
 
-					barChart = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
-                                this.base.append('g'),
-                                args);
+			this.mixin(
+        Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
+        this.base.append('g'),
+        args
+      );
 
       /** Optional */
-      if (args.labelType){
-
-        textLabels = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
-                                this.base.append('g'),
-                                _.extend(args, { chartName : args.labelType }));
+      if (args.labelType) {
+        this.mixin(
+          Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
+          this.base.append('g'),
+          // @TODO review extend vs defaults
+          _.extend(args, { chartName : args.labelType })
+        );
       }
 		}
 	});

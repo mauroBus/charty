@@ -40,9 +40,9 @@
       * Basic Axis initialization
       *
       * @constructor
-      * @param {Object} args Arguments for axis component
+      * @param {Object} [args] Arguments for axis component
       */
-      initialize: function(args) {
+      initialize: function() {
 
         /**
         * Tranlation value in the x direction

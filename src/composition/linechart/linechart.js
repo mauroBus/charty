@@ -44,17 +44,17 @@ Takes N input data series
 		* @param {Object} args N = args.instances
 		*/
 		initialize : function(args){
-
       args.chartName = Charty.CHART_NAMES.LINE;
       args.instances = (args.instances || 1);
 
-			var axis = this.mixin(args.axisSystem,
-                            this.base.append('g'),
-                            args).showAsGrid(args.showAsGrid),
+			this.mixin(args.axisSystem, this.base.append('g'), args)
+            .showAsGrid(args.showAsGrid);
 
-					lineChart = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
-                                this.base.append('g'),
-                                args);
+			this.mixin(
+        Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
+        this.base.append('g'),
+        args
+      );
 		}
 	});
 }));

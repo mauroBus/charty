@@ -1,8 +1,8 @@
 /**
 * Line drawing.
-* 
+*
 * Note : this charts doesn't take events, as it doesn't seem necessary for now.
-* 
+*
 * @class Line
 * @extends SimpleDataGroup
 * @requires d3.chart,
@@ -40,7 +40,7 @@
     * @constructor
     * @param {Object} args Arguments for the line component.
     */
-    initialize : function(args){
+    initialize : function(){
 
       /**
       * c : default color line
@@ -57,7 +57,7 @@
         * Since a line is drawed using d3.line
         * a datum must be defined. Can also have a color
         * for the whole serie.
-        * 
+        *
         * @method dataBind
         * @param {Object} d example = {
         *                              color : 'redline'

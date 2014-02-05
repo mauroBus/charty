@@ -1,6 +1,6 @@
 /**
 * Bar drawer. Takes only one data series as input.
-* 
+*
 * @class Bar
 * @extends SimpleDataGroup
 * @requires d3.chart,
@@ -36,9 +36,9 @@
     * Bar initialization
     *
     * @constructor
-    * @param {Object} args Arguments for axis component
+    * @param {Object} [args] Arguments for axis component
     */
-    initialize : function(args){
+    initialize : function(){
 
       /**
       * Sets only bar color as default.
@@ -136,7 +136,7 @@
     * Adds z scale if necessary
     *
     * @method setZScale
-    * @param {Object} zScale d3.scale for mapping along x axis. In fact, 
+    * @param {Object} zScale d3.scale for mapping along x axis. In fact,
     * is the second scale for this axis.
     * @chainable
     */

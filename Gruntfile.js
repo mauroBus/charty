@@ -94,8 +94,17 @@ module.exports = function(grunt) {
           outdir: 'doc/'
         }
       }
-    }
+    },
 
+    /** JSHint */
+    jshint: {
+      options: {
+        jshintrc: '.jshintrc'
+      },
+      all: [
+        '<%= yeoman.app %>/**/*.js'
+      ]
+    }
   });
 
   /** Build js */

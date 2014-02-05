@@ -1,7 +1,8 @@
+/*global FunctionEvent: true, BootstrapEvent: true*/
 /**
 * Event manager. A simple way of adding multiple events to only one target,
 * if necessary.
-* 
+*
 * Since d3 works over selections, a "target" will represent an element selection,
 * so manager won't be working over only one element, but for the collection itself.
 *
@@ -36,7 +37,7 @@
 
 	/**
 	 * Class constructor
-	 *	
+	 *
 	 * @constructor
 	 */
 	function EventManager() {

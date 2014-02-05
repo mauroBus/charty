@@ -1,6 +1,6 @@
 /**
 * Text labeling.
-* 
+*
 * @class Text
 * @extends SimpleDataGroup
 * @requires d3.chart,
@@ -38,7 +38,7 @@
     * @constructor
     * @param {Object} args Arguments for text component.
     */
-    initialize : function(args){
+    initialize : function(){
 
       var options = {
         /**
@@ -57,7 +57,7 @@
         },
         /**
         * Insert a svg:text element for each data input.
-        * 
+        *
         * @method insert
         * @chainable
         */

@@ -1,8 +1,9 @@
+/*global Accessor: true, EventManager: true, EventFactory: true*/
 /**
 * Sets an interface for adding a link between the chart
 * and the data accessor.
-* 
-* Uses an event manager for defining different charty events. Since events 
+*
+* Uses an event manager for defining different charty events. Since events
 * need to be present when chart is rendered, for attachment to every SVG node,
 * they should be defined by draw method. This makes an easy way of propagating
 * events to each base rendering class.
@@ -197,10 +198,10 @@
   * Sets title as a header
   *
   * @method setTitle
-  * @param {String} title Chart title 
+  * @param {String} title Chart title
   * @param {Number} xPosition Position along horizontal axis
   * @param {Number} yPosition Position along vertical axis
-  * @chainable 
+  * @chainable
   */
   ChartInterface.prototype.setTitle = function (title, xPosition, yPosition){
 

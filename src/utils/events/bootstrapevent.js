@@ -1,14 +1,15 @@
+/*global $: true*/
 /**
 *	Hooks to specified element a bootstrap feature (for instance, a popover).
 *	Since data will be handled a specific way, a custom bootstrap event is given in
 *	order to facilitate instantiation.
-*	
+*
 *	Note : since SVG element won't render contained divs, every element will
 *	be added to the 'body' element. This workaround is easier than dealing with
 *	SVG foreing objects.
 *
 *	Supported bootstrap features : popovers, tooltips.
-*	
+*
 *	@class BootstrapEvent
 *	@constructor
 *	@requires bootstrap,
@@ -40,7 +41,7 @@
 
 	/**
 	*	Class constructor
-	*	
+	*
 	*	@constructor
 	*	@param Object options example = {
 	*																	type : 'popover',
@@ -55,7 +56,7 @@
 
 	/**
 	 * Binds the bootstrap feature to a specified target selection
-	 *	
+	 *
 	 * @method bind
 	 * @param  {d3.selection} target Target selection
 	 * @chainable

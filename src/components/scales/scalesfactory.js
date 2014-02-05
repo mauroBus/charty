@@ -1,7 +1,8 @@
+/* global OrdinalScale: true, LinearScale: true */
 /**
 *	Scale factory. Separation is provived in an attempt
 *	to provide an easy way to switching scales in a defined chart
-*	
+*
 *	@class ScaleFactory
 * @requires d3.chart,
 *						charty,
@@ -10,7 +11,6 @@
 *
 *	@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
-
 (function(root, factory) {
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
@@ -31,7 +31,7 @@
     root.ScaleFactory = factory(Charty, OrdinalScale, LinearScale);
   }
 }(this, function(Charty, OrdinalScale, LinearScale) {
-	/** 
+	/**
 	* Class constructor
 	*
 	* @constructor

@@ -37,7 +37,7 @@
     * @constructor
     * @param {Object} args Arguments for above text component.
     */
-    initialize : function(args){
+    initialize : function(){
 
       var textLayer = this.layer('texts');
 
@@ -45,8 +45,7 @@
       textLayer.on('merge', function () {
 
         var chart = this.chart(),
-          zeroY = chart.yscale.map(0),
-          heightZeroY = chart.h - zeroY;
+          zeroY = chart.yscale.map(0);
 
         this.attr('x', function (d){
           var pos = 0;

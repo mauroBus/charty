@@ -1,6 +1,6 @@
 /**
 * Triangle drawer.
-* 
+*
 * @class Triangle
 * @extends SimpleDataGroup
 * @requires d3.chart,
@@ -39,7 +39,7 @@
     * @constructor
     * @param {Object} args Arguments for triangle component.
     */
-    initialize : function(args){
+    initialize : function(){
 
       /**
       * c : triangle color
@@ -146,7 +146,7 @@
     },
     /**
     * Path is defined as a string connecting different
-    * data, visualized as dots. 
+    * data, visualized as dots.
     *
     * @method getPath
     * @param {Object} d Data point

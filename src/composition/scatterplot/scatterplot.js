@@ -39,7 +39,7 @@
 	d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.SCATTERPLOT, {
 
-      /** 
+      /**
       * Chart constructor
       *
       * @constructor
@@ -50,13 +50,10 @@
         args.chartName =  Charty.CHART_NAMES.CIRCLE;
         args.instances = (args.instances || 1);
 
-        var axis = this.mixin(args.axisSystem,
-                              this.base.append('g'),
-                              args).showAsGrid(args.showAsGrid),
+        this.mixin(args.axisSystem, this.base.append('g'), args)
+              .showAsGrid(args.showAsGrid);
 
-            circles = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
-                                 this.base,
-                                 args);
+        this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base, args);
       }
 	});
 }));

@@ -1,32 +1,29 @@
 /**
 *	When an event occurs, a defined function will be exectuted.
 *	This is for events that don't depende on an specific API.
-*	
+*
 *	@class FunctionEvent
 *	@constructor
 *	@requires d3
-*	
+*
 *	@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
 (function(root, factory) {
 	/** Setting up AMD support*/
 	if (typeof define === 'function' && define.amd) {
 		/** AMD */
-		define('charty/functionevent', [
-			'd3'
-			],
-			function (d3) {
+		define('charty/functionevent', [], function () {
 			/**
 			 * Export global even in AMD case in case this script
 			 * is loaded with others
 			 */
-			return factory(d3);
+			return factory();
 		});
 	} else {
 		/** Browser globals */
-		root.FunctionEvent = factory(d3);
+		root.FunctionEvent = factory();
 	}
-}(this, function (d3) {
+}(this, function () {
 
 	/**
 	 * Class constructor

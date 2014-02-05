@@ -1,6 +1,7 @@
+/*global Charty: true, ScaleFactory: true, ChartInterface: true, DataValidator: true, EventFactory: true*/
 /**
 * Chart instantiation API
-* 
+*
 * @class Charty
 * @requires chartynames
 *           scalesfactory
@@ -18,7 +19,6 @@
 *
 * @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
-
 (function(root, factory) {
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
@@ -129,7 +129,7 @@
     if (options.xAxis){
       chart.setXScale(scaleFactory.scale(options.xAxis,'x'));
     }
-    
+
     if (options.yAxis){
       chart.setYScale(scaleFactory.scale(options.yAxis,'y'));
     }
@@ -156,7 +156,7 @@
 
     /**
     * Returns the interface for the chart drawing
-    * 
+    *
     * Interface will manage the events creation.
     */
     return new ChartInterface(chart, selection, svg, gSvg, eventFactory);

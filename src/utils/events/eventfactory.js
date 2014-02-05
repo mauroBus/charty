@@ -1,6 +1,7 @@
+/*global FunctionEvent: true, BootstrapEvent: true*/
 /**
-*	Event factory. Creates instances of predefined events objects. 
-*	
+*	Event factory. Creates instances of predefined events objects.
+*
 *	@class EventManager
 *	@constructor
 *	@requires functionevent,
@@ -28,9 +29,9 @@
 	}
 }(this, function (FunctionEvent, BootstrapEvent) {
 
-	/** 
+	/**
 	*	Class constructor
-	*	
+	*
 	* @constructor
 	*/
 	function EventFactory (){

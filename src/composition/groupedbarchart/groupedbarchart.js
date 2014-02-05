@@ -1,3 +1,4 @@
+/*global ScaleFactory: true*/
 /**
 * Grouped bar chart.
 * Unlike regular bar char, grouped needs to define
@@ -65,7 +66,8 @@
     */
     transform : function(data){
 
-      var d = data.first();
+      // @TODO review this call.
+      data.first();
 
       if (this.defaultZDomain){
         this.zScale.setDomain(this.defaultZDomain);
@@ -85,7 +87,7 @@
 
       return data;
     },
-    /** 
+    /**
     * Adding new scale for bars grouping
     *
     * @method
@@ -96,11 +98,11 @@
       if (zScale){
         this.zScale = zScale;
       }
-      
+
       return this;
     },
-    /** 
-    * Default z domain 
+    /**
+    * Default z domain
     *
     * @method
     * @param {Object} zDomain

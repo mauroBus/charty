@@ -1,5 +1,5 @@
 /**
-* Line chart combined with circles. Combines the line chart and 
+* Line chart combined with circles. Combines the line chart and
 * the circle component, defining both as mixins.
 *
 * @class LineChartCircles
@@ -37,7 +37,7 @@
 }(this, function (d3, Charty) {
 	d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.LINE_CHART_CIRCLES,{
-      
+
 		/**
 		* Line and circles chart initializator.
     *
@@ -47,17 +47,20 @@
     *                      }
 		*/
 		initialize : function(args){
-
-			var lineChart = this.mixin(Charty.CHART_NAMES.LINE_CHART,
-                                this.base.append('g'),
-                                args);
+			this.mixin(
+        Charty.CHART_NAMES.LINE_CHART,
+        this.base.append('g'),
+        args
+      );
 
       args.chartName = Charty.CHART_NAMES.CIRCLE;
       args.instances = (args.instances || 1);
 
-			var circles = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
-                              this.base.append('g'),
-                              args);
+			this.mixin(
+        Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
+        this.base.append('g'),
+        args
+      );
 		}
 	});
 }));

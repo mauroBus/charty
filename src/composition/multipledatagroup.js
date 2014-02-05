@@ -1,6 +1,7 @@
+/**/
 /**
 * Defines a data transformation for composite charts
-* 
+*
 * @class MultipleDataGroup
 * @extend BaseChart
 * @requires d3.chart,
@@ -66,14 +67,14 @@
       this.defaultYDomain = domain;
       return this;
     },
-    /** 
+    /**
     * Domain calculation
     *
     * @method _calculateDomains
     * @param {Object} data Data for domains
     * @param {Object} zScale d3.scale
     */
-    _calculateDomains : function (data, zScale){
+    _calculateDomains : function (data){
        /** Default x domain */
       if (this.defaultXDomain){
         this.xscale.setDomain(this.defaultXDomain);

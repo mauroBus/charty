@@ -1,6 +1,6 @@
 /**
 * Labeled triangle chart drawer.
-* 
+*
 * @class LabeledTriangleChart
 * @extends MultipleDataGroup
 * @requires d3.chart,
@@ -14,7 +14,6 @@
 *
 * @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
-
 (function(root, factory) {
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
@@ -52,22 +51,14 @@
     * @param {Object} args Arguments for triangle chart.
     */
     initialize: function(args) {
+      this.mixin(args.axisSystem, this.base.append('g'), args)
+            .showAsGrid(args.showAsGrid);
 
-      var axis = this.mixin(args.axisSystem,
-                            this.base.append('g'),
-                            args).showAsGrid(args.showAsGrid),
+      this.mixin(Charty.CHART_NAMES.TRIANGLE, this.base.append('g'), args);
 
-          triangles = this.mixin(Charty.CHART_NAMES.TRIANGLE,
-                                this.base.append('g'),
-                                args),
+      this.mixin(Charty.CHART_NAMES.ROUNDED_RECTANGLE, this.base.append('g'), args);
 
-          recs = this.mixin(Charty.CHART_NAMES.ROUNDED_RECTANGLE,
-                            this.base.append('g'),
-                            args),
-
-          texts = this.mixin(Charty.CHART_NAMES.TEXT,
-                            this.base.append('g'),
-                            args);
+      this.mixin(Charty.CHART_NAMES.TEXT, this.base.append('g'), args);
     }
   });
 }));

@@ -1,3 +1,4 @@
+/*global LinearScale: true, OrdinalScale: true*/
 /**
 * Maps every data point, taking into account one to many
 * scales. Works as a scale composite object.
@@ -5,7 +6,7 @@
 * It is possible to requiere more than one scale to map certain
 * elements, so this component will make the correct positioning.
 *
-* Each chart will have two mappers : one for horizontal axis and 
+* Each chart will have two mappers : one for horizontal axis and
 * other for vertical axis.
 *
 * @class DataMapper
@@ -36,8 +37,8 @@
   }
 }(this, function (LinearScale, OrdinalScale, _) {
 
-  /** 
-  * Class constructor 
+  /**
+  * Class constructor
   *
   * @constructor
   */
@@ -45,8 +46,8 @@
     this.scales = [];
   };
 
-  /** 
-  * Adds scale for mapping 
+  /**
+  * Adds scale for mapping
   *
   * @method addScale
   * @param {BaseScale} scale Scale to add
@@ -59,7 +60,7 @@
     this.scales.push(scale);
   };
 
-  /** 
+  /**
   * Returns the defined base scale.
   *
   * @method getBaseScale
@@ -70,9 +71,9 @@
     return this.baseScale;
   };
 
-  /** 
+  /**
   * Maps a data point, according to the defined scales
-  * 
+  *
   * @method map
   * @param {Object} dataElement Data to be mapped
   * @param {Number} chartFactor Factor that affects some chart's drawing

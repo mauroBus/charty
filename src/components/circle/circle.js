@@ -1,6 +1,6 @@
 /**
 * Circle drawer.
-* 
+*
 * @class Circle
 * @extends SimpleDataGroup
 * @requires d3.chart,
@@ -9,7 +9,6 @@
 *
 * @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
-
 (function(root, factory) {
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
@@ -41,7 +40,6 @@
     initialize : function(args){
 
       var dataValidator = args.dataValidator,
-          showOnClick = args.showOnClick,
           errors = {
             invalidRadio : 'Invalid value : radius for circles must be positive.'
           };

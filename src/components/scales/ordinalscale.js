@@ -1,14 +1,14 @@
+/* global BaseScale: true */
 /**
 *	Ordinal Scale
-*	
+*
 *	@class OrdinalScale
 *	@extends BaseScale
 *	@requires d3.chart,
 *						basescale
-*	
+*
 *	@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
-
 (function(root, factory) {
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
@@ -29,7 +29,7 @@
   }
 }(this, function (d3, BaseScale) {
 
-	/** 
+	/**
   * Class constructor
   *
   *	@constructor
