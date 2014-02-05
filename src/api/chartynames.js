@@ -2,6 +2,7 @@
 * Define constants that will be used as names for different parts
 * 
 * @class ChartNames
+* @requires chartyinit
 *
 * @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -36,6 +37,8 @@
     LINE: 'Line',
     ROUNDED_RECTANGLE: 'RoundedRectangle',
     TEXT: 'Text',
+    ABOVE_TEXT : 'AboveText',
+    RIGHT_TEXT : 'RightText',
     TRIANGLE: 'Triangle',
     XY_AXIS: 'XYAxis',
     YXY_AXIS: 'YXYAxis',

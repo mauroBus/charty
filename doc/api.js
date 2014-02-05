@@ -1,6 +1,7 @@
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
+        "AboveText",
         "Accessor",
         "Axis",
         "Bar",
@@ -29,6 +30,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "MultipleDataGroup",
         "MultipleInstancesMixin",
         "OrdinalScale",
+        "RightText",
         "RoundedRectangle",
         "ScaleFactory",
         "Scatterplot",

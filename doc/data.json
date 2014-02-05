@@ -149,6 +149,24 @@
             "fors": {},
             "namespaces": {}
         },
+        "src\\components\\text\\abovetext.js": {
+            "name": "src\\components\\text\\abovetext.js",
+            "modules": {},
+            "classes": {
+                "AboveText": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\components\\text\\righttext.js": {
+            "name": "src\\components\\text\\righttext.js",
+            "modules": {},
+            "classes": {
+                "RightText": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src\\components\\text\\text.js": {
             "name": "src\\components\\text\\text.js",
             "modules": {},
@@ -366,7 +384,10 @@
             "extension_for": [],
             "file": "src\\api\\charty.js",
             "line": 1,
-            "description": "Chart creation API",
+            "description": "Chart instantiation API",
+            "requires": [
+                "chartynames\n          scalesfactory\n          chartinterface\n          datavalidator\n          eventfactory\n          barchart\n          labeledtrianglechart\n          linechart\n          scatterplot\n          donut\n          donnutwithinnertext\n          linechartcircles\n          groupedbarchart"
+            ],
             "author": "\"Marcio Caraballo <marcio.caraballososa@gmail.com>\""
         },
         "ChartsApi": {
@@ -379,7 +400,7 @@
             "extension_for": [],
             "file": "src\\api\\chartyinit.js",
             "line": 1,
-            "description": "Api for chart creation management.\n\nHaving the api, it is possible to set a root html element,\nand it will append a specific chart to it.",
+            "description": "Api init for chart creation management.",
             "is_constructor": 1,
             "author": "\"Marcio Caraballo <marcio.caraballososa@gmail.com>\""
         },
@@ -394,6 +415,9 @@
             "file": "src\\api\\chartynames.js",
             "line": 1,
             "description": "Define constants that will be used as names for different parts",
+            "requires": [
+                "chartyinit"
+            ],
             "author": "\"Marcio Caraballo <marcio.caraballososa@gmail.com>\""
         },
         "Axis": {
@@ -442,13 +466,13 @@
             "extension_for": [],
             "file": "src\\components\\bar\\horizontalbar.js",
             "line": 1,
-            "description": "Bar drawer. Takes only one data series as input.",
+            "description": "Bar drawer. Takes only one data series as input.\nExtends Bar component, since only merge will be redefined.",
             "is_constructor": 1,
-            "extends": "SimpleDataGroup",
+            "extends": "Bar",
             "requires": [
                 "d3.chart",
                 "charty",
-                "simpledatagroup"
+                "bar"
             ],
             "author": "\"Marcio Caraballo <marcio.caraballososa@gmail.com>\""
         },
@@ -621,6 +645,44 @@
             ],
             "author": "\"Marcio Caraballo <marcio.caraballososa@gmail.com>\""
         },
+        "AboveText": {
+            "name": "AboveText",
+            "shortname": "AboveText",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src\\components\\text\\abovetext.js",
+            "line": 1,
+            "description": "Text labeling above the data element. Redefindes \"merge\"\nUseful for vertical bar chart",
+            "extends": "Text",
+            "requires": [
+                "d3.chart",
+                "charty",
+                "text"
+            ],
+            "author": "\"Marcio Caraballo <marcio.caraballososa@gmail.com>\""
+        },
+        "RightText": {
+            "name": "RightText",
+            "shortname": "RightText",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src\\components\\text\\righttext.js",
+            "line": 1,
+            "description": "Text labeling right to the data element. Redefindes \"merge\"\nUseful for horizonal bar chart",
+            "extends": "Text",
+            "requires": [
+                "d3.chart",
+                "charty",
+                "text"
+            ],
+            "author": "\"Marcio Caraballo <marcio.caraballososa@gmail.com>\""
+        },
         "Text": {
             "name": "Text",
             "shortname": "Text",
@@ -710,6 +772,7 @@
             "requires": [
                 "d3.chart",
                 "charty",
+                "underscore",
                 "bar",
                 "multipledatagroup",
                 "yxyaxis",
@@ -1230,27 +1293,27 @@
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 10,
+            "line": 23,
             "class": "Charty"
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 12,
+            "line": 25,
             "class": "Charty"
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 29,
+            "line": 42,
             "class": "Charty"
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 35,
+            "line": 48,
             "class": "Charty"
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 45,
+            "line": 58,
             "description": "Appends a chart to a root d3.selection element. Chart is determined\nby a defined chart name.\nMargin is used to translate the chart a small distance. A chart can have many\ninstances.\nWhether the chart takes the container dimensions, is it possible to also set\nthe dimensions as initial options\nDefined events will be spread to every chart's component.",
             "itemtype": "method",
             "name": "chart",
@@ -1269,67 +1332,72 @@
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 73,
-            "description": "Svg element creation\n\nSets attributes to provide redimensioning without drawing0",
+            "line": 86,
+            "description": "Svg element creation",
             "class": "Charty"
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 81,
+            "line": 92,
             "class": "Charty"
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 83,
+            "line": 94,
             "class": "Charty"
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 89,
+            "line": 100,
             "class": "Charty"
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 104,
+            "line": 115,
             "class": "Charty"
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 107,
+            "line": 120,
             "description": "Appends the chart to the specified html element.",
             "class": "Charty"
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 114,
+            "line": 125,
             "description": "Scale definition.\nSome charts can use direct mapping instead of scaling.",
             "class": "Charty"
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 126,
+            "line": 137,
             "class": "Charty"
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 131,
+            "line": 142,
             "class": "Charty"
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 136,
+            "line": 147,
             "class": "Charty"
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 141,
+            "line": 152,
             "class": "Charty"
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 146,
+            "line": 157,
             "description": "Returns the interface for the chart drawing\n\nInterface will manage the events creation.",
             "class": "Charty"
+        },
+        {
+            "file": "src\\api\\chartyinit.js",
+            "line": 13,
+            "class": "ChartsApi"
         },
         {
             "file": "src\\api\\chartyinit.js",
@@ -1338,53 +1406,48 @@
         },
         {
             "file": "src\\api\\chartyinit.js",
-            "line": 17,
+            "line": 18,
             "class": "ChartsApi"
         },
         {
             "file": "src\\api\\chartyinit.js",
-            "line": 20,
-            "class": "ChartsApi"
-        },
-        {
-            "file": "src\\api\\chartyinit.js",
-            "line": 25,
-            "class": "ChartsApi"
-        },
-        {
-            "file": "src\\api\\chartynames.js",
-            "line": 10,
-            "class": "ChartNames"
-        },
-        {
-            "file": "src\\api\\chartynames.js",
-            "line": 12,
-            "class": "ChartNames"
-        },
-        {
-            "file": "src\\api\\chartynames.js",
-            "line": 17,
-            "class": "ChartNames"
-        },
-        {
-            "file": "src\\api\\chartynames.js",
             "line": 23,
+            "class": "ChartsApi"
+        },
+        {
+            "file": "src\\api\\chartynames.js",
+            "line": 11,
             "class": "ChartNames"
         },
         {
             "file": "src\\api\\chartynames.js",
-            "line": 28,
+            "line": 13,
             "class": "ChartNames"
         },
         {
             "file": "src\\api\\chartynames.js",
-            "line": 54,
+            "line": 18,
+            "class": "ChartNames"
+        },
+        {
+            "file": "src\\api\\chartynames.js",
+            "line": 24,
+            "class": "ChartNames"
+        },
+        {
+            "file": "src\\api\\chartynames.js",
+            "line": 29,
+            "class": "ChartNames"
+        },
+        {
+            "file": "src\\api\\chartynames.js",
+            "line": 57,
             "description": "Axis types are defined as constants\n\nRelated to scaling.",
             "class": "ChartNames"
         },
         {
             "file": "src\\api\\chartynames.js",
-            "line": 64,
+            "line": 67,
             "description": "Axis defined as constants",
             "class": "ChartNames"
         },
@@ -1760,13 +1823,13 @@
         },
         {
             "file": "src\\components\\bar\\bar.js",
-            "line": 163,
+            "line": 130,
             "description": "Layer creation",
             "class": "Bar"
         },
         {
             "file": "src\\components\\bar\\bar.js",
-            "line": 172,
+            "line": 135,
             "description": "Adds z scale if necessary",
             "itemtype": "method",
             "name": "setZScale",
@@ -1782,28 +1845,28 @@
         },
         {
             "file": "src\\components\\bar\\horizontalbar.js",
-            "line": 15,
+            "line": 16,
             "class": "HorizontalBar"
         },
         {
             "file": "src\\components\\bar\\horizontalbar.js",
-            "line": 17,
+            "line": 18,
             "class": "HorizontalBar"
         },
         {
             "file": "src\\components\\bar\\horizontalbar.js",
-            "line": 24,
+            "line": 25,
             "class": "HorizontalBar"
         },
         {
             "file": "src\\components\\bar\\horizontalbar.js",
-            "line": 30,
+            "line": 31,
             "class": "HorizontalBar"
         },
         {
             "file": "src\\components\\bar\\horizontalbar.js",
-            "line": 36,
-            "description": "Bar initialization",
+            "line": 37,
+            "description": "Horizontal bars initialization",
             "is_constructor": 1,
             "params": [
                 {
@@ -1816,50 +1879,7 @@
         },
         {
             "file": "src\\components\\bar\\horizontalbar.js",
-            "line": 44,
-            "description": "Sets only bar color as default.",
-            "class": "HorizontalBar"
-        },
-        {
-            "file": "src\\components\\bar\\horizontalbar.js",
-            "line": 52,
-            "description": "Data bind for a bar serie.\nCan have a color set for the whole serie, or\neach bar can have an own color defined.",
-            "itemtype": "method",
-            "name": "dataBind",
-            "params": [
-                {
-                    "name": "d",
-                    "description": "example = {\n                              color : 'red',\n                              data = [\n                               {x : 'Jan', y : 200, c : 'blue'}\n                              ]\n                           }",
-                    "type": "Object"
-                }
-            ],
-            "chainable": 1,
-            "class": "HorizontalBar"
-        },
-        {
-            "file": "src\\components\\bar\\horizontalbar.js",
-            "line": 70,
-            "description": "Sets color for the whole data serie.",
-            "class": "HorizontalBar"
-        },
-        {
-            "file": "src\\components\\bar\\horizontalbar.js",
-            "line": 77,
-            "description": "Inserts a svg:rect element.",
-            "itemtype": "method",
-            "name": "insert",
-            "chainable": 1,
-            "class": "HorizontalBar"
-        },
-        {
-            "file": "src\\components\\bar\\horizontalbar.js",
-            "line": 87,
-            "class": "HorizontalBar"
-        },
-        {
-            "file": "src\\components\\bar\\horizontalbar.js",
-            "line": 150,
-            "description": "Layer creation",
+            "line": 47,
             "class": "HorizontalBar"
         },
         {
@@ -2701,6 +2721,72 @@
             "class": "ScaleFactory"
         },
         {
+            "file": "src\\components\\text\\abovetext.js",
+            "line": 15,
+            "class": "AboveText"
+        },
+        {
+            "file": "src\\components\\text\\abovetext.js",
+            "line": 17,
+            "class": "AboveText"
+        },
+        {
+            "file": "src\\components\\text\\abovetext.js",
+            "line": 24,
+            "class": "AboveText"
+        },
+        {
+            "file": "src\\components\\text\\abovetext.js",
+            "line": 30,
+            "class": "AboveText"
+        },
+        {
+            "file": "src\\components\\text\\abovetext.js",
+            "line": 36,
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "args",
+                    "description": "Arguments for above text component.",
+                    "type": "Object"
+                }
+            ],
+            "class": "AboveText"
+        },
+        {
+            "file": "src\\components\\text\\righttext.js",
+            "line": 15,
+            "class": "RightText"
+        },
+        {
+            "file": "src\\components\\text\\righttext.js",
+            "line": 17,
+            "class": "RightText"
+        },
+        {
+            "file": "src\\components\\text\\righttext.js",
+            "line": 24,
+            "class": "RightText"
+        },
+        {
+            "file": "src\\components\\text\\righttext.js",
+            "line": 30,
+            "class": "RightText"
+        },
+        {
+            "file": "src\\components\\text\\righttext.js",
+            "line": 36,
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "args",
+                    "description": "Arguments for right text component.",
+                    "type": "Object"
+                }
+            ],
+            "class": "RightText"
+        },
+        {
             "file": "src\\components\\text\\text.js",
             "line": 14,
             "class": "Text"
@@ -3099,36 +3185,41 @@
         },
         {
             "file": "src\\composition\\barchart\\barchart.js",
-            "line": 18,
+            "line": 19,
             "class": "BarChart"
         },
         {
             "file": "src\\composition\\barchart\\barchart.js",
-            "line": 20,
+            "line": 21,
             "class": "BarChart"
         },
         {
             "file": "src\\composition\\barchart\\barchart.js",
-            "line": 32,
+            "line": 37,
             "class": "BarChart"
         },
         {
             "file": "src\\composition\\barchart\\barchart.js",
-            "line": 38,
+            "line": 43,
             "class": "BarChart"
         },
         {
             "file": "src\\composition\\barchart\\barchart.js",
-            "line": 46,
+            "line": 51,
             "description": "BarChart initialization.",
             "is_constructor": 1,
             "params": [
                 {
                     "name": "args",
-                    "description": "example = {\n                     instances : 2,\n                   }",
+                    "description": "example = {\n                      instances : 2,\n                      labelType : Charty.CHART_NAMES.ABOVE_TEXT\n                   }",
                     "type": "Object"
                 }
             ],
+            "class": "BarChart"
+        },
+        {
+            "file": "src\\composition\\barchart\\barchart.js",
+            "line": 73,
             "class": "BarChart"
         },
         {
@@ -4196,67 +4287,71 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\charty.js:10"
+            "line": " src\\api\\charty.js:23"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\charty.js:12"
+            "line": " src\\api\\charty.js:25"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\charty.js:29"
+            "line": " src\\api\\charty.js:42"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\charty.js:35"
+            "line": " src\\api\\charty.js:48"
         },
         {
-            "message": "Missing item type\nSvg element creation\n\nSets attributes to provide redimensioning without drawing0",
-            "line": " src\\api\\charty.js:73"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src\\api\\charty.js:81"
+            "message": "Missing item type\nSvg element creation",
+            "line": " src\\api\\charty.js:86"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\charty.js:83"
+            "line": " src\\api\\charty.js:92"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\charty.js:89"
+            "line": " src\\api\\charty.js:94"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\charty.js:104"
+            "line": " src\\api\\charty.js:100"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\api\\charty.js:115"
         },
         {
             "message": "Missing item type\nAppends the chart to the specified html element.",
-            "line": " src\\api\\charty.js:107"
+            "line": " src\\api\\charty.js:120"
         },
         {
             "message": "Missing item type\nScale definition.\nSome charts can use direct mapping instead of scaling.",
-            "line": " src\\api\\charty.js:114"
+            "line": " src\\api\\charty.js:125"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\charty.js:126"
+            "line": " src\\api\\charty.js:137"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\charty.js:131"
+            "line": " src\\api\\charty.js:142"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\charty.js:136"
+            "line": " src\\api\\charty.js:147"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\charty.js:141"
+            "line": " src\\api\\charty.js:152"
         },
         {
             "message": "Missing item type\nReturns the interface for the chart drawing\n\nInterface will manage the events creation.",
-            "line": " src\\api\\charty.js:146"
+            "line": " src\\api\\charty.js:157"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\api\\chartyinit.js:13"
         },
         {
             "message": "Missing item type",
@@ -4264,43 +4359,39 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartyinit.js:17"
+            "line": " src\\api\\chartyinit.js:18"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartyinit.js:20"
+            "line": " src\\api\\chartyinit.js:23"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartyinit.js:25"
+            "line": " src\\api\\chartynames.js:11"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartynames.js:10"
+            "line": " src\\api\\chartynames.js:13"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartynames.js:12"
+            "line": " src\\api\\chartynames.js:18"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartynames.js:17"
+            "line": " src\\api\\chartynames.js:24"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartynames.js:23"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src\\api\\chartynames.js:28"
+            "line": " src\\api\\chartynames.js:29"
         },
         {
             "message": "Missing item type\nAxis types are defined as constants\n\nRelated to scaling.",
-            "line": " src\\api\\chartynames.js:54"
+            "line": " src\\api\\chartynames.js:57"
         },
         {
             "message": "Missing item type\nAxis defined as constants",
-            "line": " src\\api\\chartynames.js:64"
+            "line": " src\\api\\chartynames.js:67"
         },
         {
             "message": "Missing item type",
@@ -4396,43 +4487,31 @@
         },
         {
             "message": "Missing item type\nLayer creation",
-            "line": " src\\components\\bar\\bar.js:163"
+            "line": " src\\components\\bar\\bar.js:130"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\bar\\horizontalbar.js:15"
+            "line": " src\\components\\bar\\horizontalbar.js:16"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\bar\\horizontalbar.js:17"
+            "line": " src\\components\\bar\\horizontalbar.js:18"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\bar\\horizontalbar.js:24"
+            "line": " src\\components\\bar\\horizontalbar.js:25"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\bar\\horizontalbar.js:30"
+            "line": " src\\components\\bar\\horizontalbar.js:31"
         },
         {
-            "message": "Missing item type\nBar initialization",
-            "line": " src\\components\\bar\\horizontalbar.js:36"
-        },
-        {
-            "message": "Missing item type\nSets only bar color as default.",
-            "line": " src\\components\\bar\\horizontalbar.js:44"
-        },
-        {
-            "message": "Missing item type\nSets color for the whole data serie.",
-            "line": " src\\components\\bar\\horizontalbar.js:70"
+            "message": "Missing item type\nHorizontal bars initialization",
+            "line": " src\\components\\bar\\horizontalbar.js:37"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\bar\\horizontalbar.js:87"
-        },
-        {
-            "message": "Missing item type\nLayer creation",
-            "line": " src\\components\\bar\\horizontalbar.js:150"
+            "line": " src\\components\\bar\\horizontalbar.js:47"
         },
         {
             "message": "Missing item type",
@@ -4680,6 +4759,46 @@
         },
         {
             "message": "Missing item type",
+            "line": " src\\components\\text\\abovetext.js:15"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\components\\text\\abovetext.js:17"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\components\\text\\abovetext.js:24"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\components\\text\\abovetext.js:30"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\components\\text\\abovetext.js:36"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\components\\text\\righttext.js:15"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\components\\text\\righttext.js:17"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\components\\text\\righttext.js:24"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\components\\text\\righttext.js:30"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\components\\text\\righttext.js:36"
+        },
+        {
+            "message": "Missing item type",
             "line": " src\\components\\text\\text.js:14"
         },
         {
@@ -4780,23 +4899,27 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\barchart\\barchart.js:18"
+            "line": " src\\composition\\barchart\\barchart.js:19"
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\barchart\\barchart.js:20"
+            "line": " src\\composition\\barchart\\barchart.js:21"
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\barchart\\barchart.js:32"
+            "line": " src\\composition\\barchart\\barchart.js:37"
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\barchart\\barchart.js:38"
+            "line": " src\\composition\\barchart\\barchart.js:43"
         },
         {
             "message": "Missing item type\nBarChart initialization.",
-            "line": " src\\composition\\barchart\\barchart.js:46"
+            "line": " src\\composition\\barchart\\barchart.js:51"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\composition\\barchart\\barchart.js:73"
         },
         {
             "message": "Missing item type",

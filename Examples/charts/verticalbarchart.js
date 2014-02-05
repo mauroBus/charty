@@ -62,10 +62,12 @@
     * barType : horizontal / vertical
     * instances : how many data groups are for drawing
     * setTextLabels : shows labels above bars
+    * labelType : positioning for the labels.
     */
     var options9 = {
         chartName : Charty.CHART_NAMES.BAR_CHART,
         barType : Charty.CHART_NAMES.BAR,
+        labelType : Charty.CHART_NAMES.ABOVE_TEXT,
         instances : 2,
         root : '#chart9',
         xAxis : Charty.AXIS_TYPE.ORDINAL,

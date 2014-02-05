@@ -64,6 +64,7 @@
     var options1 = {
         chartName : Charty.CHART_NAMES.BAR_CHART,
         barType : Charty.CHART_NAMES.HORIZONTAL_BAR,
+        labelType : Charty.CHART_NAMES.RIGHT_TEXT,
         instances : 2,
         root : '#chart1',
         xAxis : Charty.AXIS_TYPE.LINEAR,

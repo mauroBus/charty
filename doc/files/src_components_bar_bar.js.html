@@ -41,6 +41,8 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
+                <li><a href="../classes/AboveText.html">AboveText</a></li>
+            
                 <li><a href="../classes/Accessor.html">Accessor</a></li>
             
                 <li><a href="../classes/Axis.html">Axis</a></li>
@@ -96,6 +98,8 @@
                 <li><a href="../classes/MultipleInstancesMixin.html">MultipleInstancesMixin</a></li>
             
                 <li><a href="../classes/OrdinalScale.html">OrdinalScale</a></li>
+            
+                <li><a href="../classes/RightText.html">RightText</a></li>
             
                 <li><a href="../classes/RoundedRectangle.html">RoundedRectangle</a></li>
             
@@ -285,47 +289,10 @@
         }
       };
 
-      var labelsOptions = {
-        dataBind : function (d){
-          return this.selectAll(&#x27;text&#x27;).data(d.data);
-        },
-        insert : function (){
-          return this.append(&#x27;text&#x27;);
-        },
-        events : {
-          &#x27;merge&#x27; : function (){
-
-              var chart = this.chart(),
-                zeroY = chart.yscale.map(0),
-                heightZeroY = chart.h - zeroY;
-
-              this.attr(&#x27;x&#x27;, function (d){
-                var pos = 0;
-                if (chart.zScale){
-                  pos += chart.zScale.map(d.z, 1);
-                }
-
-                return (pos += chart.xscale.map(d.x, (chart.factor || 1))+(chart.xscale.band(chart.factor || 1)*0.45));
-              }).attr(&#x27;y&#x27;, function (d){
-                return Math.min(zeroY, chart.yscale.map(d.y, chart.factor));
-              }).text(function (d){
-                return d.y;
-              });
-          },
-          &#x27;exit&#x27; : function (){
-            return this.remove();
-          }
-        }
-      };
-
       /**
       * Layer creation
       */
       this.layer(&#x27;barlayer&#x27;, this.base.append(&#x27;g&#x27;) , options);
-
-      if (args.setTextLabels){
-        this.layer(&#x27;textlabels&#x27;, this.base.append(&#x27;g&#x27;), labelsOptions);
-      }
     },
     /**
     * Adds z scale if necessary

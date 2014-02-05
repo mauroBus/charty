@@ -83,10 +83,8 @@
   return DataValidator;
 }));
 /**
-* Api for chart creation management.
+* Api init for chart creation management.
 * 
-* Having the api, it is possible to set a root html element,
-* and it will append a specific chart to it.
 * 
 * @class ChartsApi
 * @constructor
@@ -120,6 +118,7 @@
 * Define constants that will be used as names for different parts
 * 
 * @class ChartNames
+* @requires chartyinit
 *
 * @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -154,6 +153,8 @@
     LINE: 'Line',
     ROUNDED_RECTANGLE: 'RoundedRectangle',
     TEXT: 'Text',
+    ABOVE_TEXT : 'AboveText',
+    RIGHT_TEXT : 'RightText',
     TRIANGLE: 'Triangle',
     XY_AXIS: 'XYAxis',
     YXY_AXIS: 'YXYAxis',
@@ -1178,166 +1179,6 @@
 /**
 * Bar drawer. Takes only one data series as input.
 * 
-* @class HorizontalBar
-* @constructor
-* @extends SimpleDataGroup
-* @requires d3.chart,
-*           charty,
-*           simpledatagroup
-*
-* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
-*/
-
-(function(root, factory) {
-  /** Setting up AMD support*/
-  if (typeof define === 'function' && define.amd) {
-    /** AMD */
-    define('charty/horizontalbar',[
-      'd3.chart',
-      'charty/chartynames',
-      'charty/simpledatagroup'
-      ],
-      function (d3, Charty) {
-        /** Export global even in AMD case in case this script
-        * is loaded with others*/
-        return factory(d3, Charty);
-    });
-  }
-  else {
-    /** Browser globals */
-    factory (d3, Charty);
-  }
-}(this, function (d3, Charty) {
-  d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
-    .extend(Charty.CHART_NAMES.HORIZONTAL_BAR, {
-    /**
-    * Bar initialization
-    *
-    * @constructor
-    * @param {Object} args Arguments for horizontal bar component.
-    */
-    initialize : function(args){
-
-      /**
-      * Sets only bar color as default.
-      */
-      var defaults = {
-        c : 'bar-default'
-      };
-
-      var options = {
-        /**
-        * Data bind for a bar serie.
-        * Can have a color set for the whole serie, or
-        * each bar can have an own color defined.
-        *
-        * @method dataBind
-        * @param {Object} d example = {
-        *                               color : 'red',
-        *                               data = [
-        *                                {x : 'Jan', y : 200, c : 'blue'}
-        *                               ]
-        *                            }
-        * @chainable
-        */
-        dataBind : function(d){
-
-          var chart = this.chart();
-
-          /**
-          * Sets color for the whole data serie.
-          */
-          chart.c = (d.c || defaults.c);
-
-          return this.selectAll('rect').data(d.data);
-        },
-        /**
-        * Inserts a svg:rect element.
-        *
-        * @method insert
-        * @chainable
-        */
-        insert : function(){
-          return this.append('rect');
-        },
-        events : {
-          /** Events are set, drawing of new elements is handled by merge */
-          'enter' : function (){
-            this.chart().eventManager.bindAll(this);
-
-            return this;
-          },
-          'merge' : function(){
-
-            var chart = this.chart(),
-                zeroX = chart.xscale.map(0);
-
-            this.attr('class', function(d){
-              return (d.c || chart.c);
-            }).attr("x", function(d) {
-              return chart.xscale.map(Math.min(0, d.x), chart.factor);
-            })
-            .attr("y", function(d) {
-              return chart.yscale.map(d.y, chart.factor);
-            })
-            .attr("width", function(d) {
-              return Math.abs(chart.xscale.map(d.x) - zeroX);
-            })
-            .attr("height", chart.yscale.band(chart.factor));
-
-            chart.eventManager.bindAll(this);
-
-            return this;
-          },
-          'exit' : function(){
-
-            return this.remove();
-          }
-        }
-      };
-
-      var labelsOptions = {
-        dataBind : function (d){
-          return this.selectAll('text').data(d.data);
-        },
-        insert : function (){
-          return this.append('text');
-        },
-        events : {
-          'merge' : function (){
-
-              var chart = this.chart();
-
-              this.attr('x', function (d){
-                return chart.xscale.map(d.x, chart.factor);
-              }).attr('y', function (d){
-                return chart.yscale.map(d.y, chart.factor) + chart.yscale.band(chart.factor)/2;
-              }).text(function (d){
-                return d.x;
-              });
-
-              return this;
-          },
-          'exit' : function (){
-            return this.remove();
-          }
-        }
-      };
-
-      /**
-      * Layer creation
-      */
-      this.layer('horizontalayer', this.base.append('g') ,options);
-
-      if (args.setTextLabels){
-        this.layer('textlabels', this.base.append('g'), labelsOptions);
-      }
-    }
-  });
-}));
-/**
-* Bar drawer. Takes only one data series as input.
-* 
 * @class Bar
 * @extends SimpleDataGroup
 * @requires d3.chart,
@@ -1464,47 +1305,10 @@
         }
       };
 
-      var labelsOptions = {
-        dataBind : function (d){
-          return this.selectAll('text').data(d.data);
-        },
-        insert : function (){
-          return this.append('text');
-        },
-        events : {
-          'merge' : function (){
-
-              var chart = this.chart(),
-                zeroY = chart.yscale.map(0),
-                heightZeroY = chart.h - zeroY;
-
-              this.attr('x', function (d){
-                var pos = 0;
-                if (chart.zScale){
-                  pos += chart.zScale.map(d.z, 1);
-                }
-
-                return (pos += chart.xscale.map(d.x, (chart.factor || 1))+(chart.xscale.band(chart.factor || 1)*0.45));
-              }).attr('y', function (d){
-                return Math.min(zeroY, chart.yscale.map(d.y, chart.factor));
-              }).text(function (d){
-                return d.y;
-              });
-          },
-          'exit' : function (){
-            return this.remove();
-          }
-        }
-      };
-
       /**
       * Layer creation
       */
       this.layer('barlayer', this.base.append('g') , options);
-
-      if (args.setTextLabels){
-        this.layer('textlabels', this.base.append('g'), labelsOptions);
-      }
     },
     /**
     * Adds z scale if necessary
@@ -1517,6 +1321,77 @@
     setZScale : function (zScale){
       this.zScale = zScale;
       return this;
+    }
+  });
+}));
+/**
+* Bar drawer. Takes only one data series as input.
+* Extends Bar component, since only merge will be redefined.
+* 
+* @class HorizontalBar
+* @constructor
+* @extends Bar
+* @requires d3.chart,
+*           charty,
+*           bar
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+*/
+
+(function(root, factory) {
+  /** Setting up AMD support*/
+  if (typeof define === 'function' && define.amd) {
+    /** AMD */
+    define('charty/horizontalbar',[
+      'd3.chart',
+      'charty/chartynames',
+      'charty/bar'
+      ],
+      function (d3, Charty) {
+        /** Export global even in AMD case in case this script
+        * is loaded with others*/
+        return factory(d3, Charty);
+    });
+  }
+  else {
+    /** Browser globals */
+    factory (d3, Charty);
+  }
+}(this, function (d3, Charty) {
+  d3.chart(Charty.CHART_NAMES.BAR)
+    .extend(Charty.CHART_NAMES.HORIZONTAL_BAR, {
+    /**
+    * Horizontal bars initialization
+    *
+    * @constructor
+    * @param {Object} args Arguments for horizontal bar component.
+    */
+    initialize : function(args){
+
+      var barLayer =  this.layer('barlayer');
+
+      /** Necessary for the way d3.chart handles events */
+      barLayer.off('merge');
+      barLayer.on('merge', function (){
+
+        var chart = this.chart(),
+            zeroX = chart.xscale.map(0);
+
+        this.attr('class', function(d){
+          return (d.c || chart.c);
+        }).attr("x", function(d) {
+          return chart.xscale.map(Math.min(0, d.x), chart.factor);
+        })
+        .attr("y", function(d) {
+          return chart.yscale.map(d.y, chart.factor);
+        })
+        .attr("width", function(d) {
+          return Math.abs(chart.xscale.map(d.x) - zeroX);
+        })
+        .attr("height", chart.yscale.band(chart.factor));
+
+        return this;
+      });
     }
   });
 }));
@@ -2165,6 +2040,133 @@
   });
 }));
 /**
+* Text labeling above the data element. Redefindes "merge"
+* Useful for vertical bar chart
+*
+* @class AboveText
+* @extends Text
+* @requires d3.chart,
+*           charty,
+*           text
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+*/
+
+(function(root, factory) {
+  /** Setting up AMD support*/
+  if (typeof define === 'function' && define.amd) {
+    /** AMD */
+    define('charty/abovetext',[
+      'd3.chart',
+      'charty/chartynames',
+      'charty/text'
+      ],
+      function (d3, Charty) {
+        /** Export global even in AMD case in case this script
+        * is loaded with others */
+        return factory(d3, Charty);
+    });
+  }
+  else {
+    /** Browser globals */
+    factory(d3, Charty);
+  }
+}(this, function (d3, Charty) {
+  d3.chart(Charty.CHART_NAMES.TEXT)
+    .extend(Charty.CHART_NAMES.ABOVE_TEXT, {
+    /**
+    * @constructor
+    * @param {Object} args Arguments for above text component.
+    */
+    initialize : function(args){
+
+      var textLayer = this.layer('texts');
+
+      textLayer.off('merge');
+      textLayer.on('merge', function () {
+
+        var chart = this.chart(),
+          zeroY = chart.yscale.map(0),
+          heightZeroY = chart.h - zeroY;
+
+        this.attr('x', function (d){
+          var pos = 0;
+          if (chart.zScale){
+            pos += chart.zScale.map(d.z, 1);
+          }
+
+          return (pos += chart.xscale.map(d.x, (chart.factor || 1))+(chart.xscale.band(chart.factor || 1)/2));
+        }).attr('y', function (d){
+          return Math.min(zeroY, chart.yscale.map(d.y, chart.factor)) - 7;
+        }).text(function (d){
+          return d.y;
+        });
+      });
+    }
+  });
+}));
+/**
+* Text labeling right to the data element. Redefindes "merge"
+* Useful for horizonal bar chart
+*
+* @class RightText
+* @extends Text
+* @requires d3.chart,
+*           charty,
+*           text
+*
+* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+*/
+
+(function(root, factory) {
+  /** Setting up AMD support*/
+  if (typeof define === 'function' && define.amd) {
+    /** AMD */
+    define('charty/righttext',[
+      'd3.chart',
+      'charty/chartynames',
+      'charty/text'
+      ],
+      function (d3, Charty) {
+        /** Export global even in AMD case in case this script
+        * is loaded with others */
+        return factory(d3, Charty);
+    });
+  }
+  else {
+    /** Browser globals */
+    factory(d3, Charty);
+  }
+}(this, function (d3, Charty) {
+  d3.chart(Charty.CHART_NAMES.TEXT)
+    .extend(Charty.CHART_NAMES.RIGHT_TEXT, {
+    /**
+    * @constructor
+    * @param {Object} args Arguments for right text component.
+    */
+    initialize : function(args){
+
+      var textLayer = this.layer('texts');
+
+      textLayer.off('merge');
+      textLayer.on('merge', function () {
+
+         var chart = this.chart();
+
+          this.attr('x', function (d){
+            return chart.xscale.map(d.x, chart.factor) + 12;
+          }).attr('y', function (d){
+            return chart.yscale.map(d.y, chart.factor) + chart.yscale.band(chart.factor || 1)/2;
+          }).text(function (d){
+            return d.x;
+          });
+
+          return this;
+      });
+    }
+  });
+}));
+/**
 * Triangle drawer.
 * 
 * @class Triangle
@@ -2718,6 +2720,7 @@
 * @extends MultipleDataGroup
 * @requires d3.chart,
 *           charty,
+*           underscore,
 *           bar,
 *           multipledatagroup,
 *           yxyaxis,
@@ -2733,24 +2736,28 @@
     define('charty/barchart',[
       'd3.chart',
       'charty/chartynames',
+      'underscore',
       'charty/bar',
       'charty/horizontalbar',
       'charty/multipledatagroup',
       'charty/xyaxis',
       'charty/yxyaxis',
       'charty/multipleinstancesmixin',
+      'charty/text',
+      'charty/abovetext',
+      'charty/righttext'
       ],
-      function (d3, Charty) {
+      function (d3, Charty, _) {
         /** Export global even in AMD case in case this script
         * is loaded with others */
-        return factory(d3, Charty);
+        return factory(d3, Charty, _);
     });
   }
   else {
     /** Browser globals */
-    factory(d3, Charty);
+    factory(d3, Charty, _);
   }
-}(this, function (d3, Charty) {
+}(this, function (d3, Charty, _) {
 
 	d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
     .extend(Charty.CHART_NAMES.BAR_CHART,{
@@ -2760,7 +2767,8 @@
     * 
 		* @constructor
 		* @param {Object} args example = {
-    *                      instances : 2,
+    *                       instances : 2,
+    *                       labelType : Charty.CHART_NAMES.ABOVE_TEXT
     *                    }
 		*/
 		initialize : function(args){
@@ -2775,6 +2783,14 @@
 					barChart = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
                                 this.base.append('g'),
                                 args);
+
+      /** Optional */
+      if (args.labelType){
+
+        textLabels = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
+                                this.base.append('g'),
+                                _.extend(args, { chartName : args.labelType }));
+      }
 		}
 	});
 }));
@@ -3920,9 +3936,22 @@ Takes N input data series
   return ChartInterface;
 }));
 /**
-* Chart creation API
+* Chart instantiation API
 * 
 * @class Charty
+* @requires chartynames
+*           scalesfactory
+*           chartinterface
+*           datavalidator
+*           eventfactory
+*           barchart
+*           labeledtrianglechart
+*           linechart
+*           scatterplot
+*           donut
+*           donnutwithinnertext
+*           linechartcircles
+*           groupedbarchart
 *
 * @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -3993,8 +4022,6 @@ Takes N input data series
 
     /**
     * Svg element creation
-    *
-    * Sets attributes to provide redimensioning without drawing0
     */
     var svg = selection.append('svg');
 
@@ -4025,11 +4052,11 @@ Takes N input data series
     /** Append g to svg */
     var gSvg = svg.append('g');
 
+    options.dataValidator = dataValidator;
+
     /**
     * Appends the chart to the specified html element.
     */
-    options.dataValidator = dataValidator;
-
     var chart = gSvg.chart(options.chartName,options);
 
     /**

@@ -1,7 +1,20 @@
 /**
-* Chart creation API
+* Chart instantiation API
 * 
 * @class Charty
+* @requires chartynames
+*           scalesfactory
+*           chartinterface
+*           datavalidator
+*           eventfactory
+*           barchart
+*           labeledtrianglechart
+*           linechart
+*           scatterplot
+*           donut
+*           donnutwithinnertext
+*           linechartcircles
+*           groupedbarchart
 *
 * @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -72,8 +85,6 @@
 
     /**
     * Svg element creation
-    *
-    * Sets attributes to provide redimensioning without drawing0
     */
     var svg = selection.append('svg');
 
@@ -104,11 +115,11 @@
     /** Append g to svg */
     var gSvg = svg.append('g');
 
+    options.dataValidator = dataValidator;
+
     /**
     * Appends the chart to the specified html element.
     */
-    options.dataValidator = dataValidator;
-
     var chart = gSvg.chart(options.chartName,options);
 
     /**

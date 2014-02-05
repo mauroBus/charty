@@ -81,11 +81,12 @@ At this point, there are some parts defined that can be used to create a custom 
 
 + Axis : will render an axis. Configuration options will determine whether it will render and x or y axis.
 + Bar : will render bars (like in a bar chart) for one data serie.
++ HorizontalBar : redefinition of Bar component, in order to draw horizontal bars instead of vertical.
 + Circle : renders circles for one data serie.
 + Donut : pie chart, renders as a donut
 + Line : draws a line for a data serie.
 + Rounded rectangle : used for labeling. Should be related to a text.
-+ TextLabel : defines text for labeling. Can be used combined with rounded rectangles to create a label.
++ TextLabel : defines text for labeling. Can be used combined with rounded rectangles to create a label. Also, text component itself can be extended to redefine the positioning calculation , in order to create new text components.
 + Triangle : similar to Bar, but it draws a triangle instead of a bar.
 
 ### Composite Charts
@@ -120,7 +121,7 @@ At this point, there are some parts defined that can be used to create a custom 
 
 ### API
 
-+ ChartsApi : defines a way to get charts and append them to an html element. Using configuration options, a root must be defined, and a chart will be returned in order to set the data and draw.
++ Charty : defines a way to get charts and append them to an html element. Using configuration options, a root must be defined, and a chart will be returned in order to set the data and draw.
 
 ### Considerations defining a chart
 

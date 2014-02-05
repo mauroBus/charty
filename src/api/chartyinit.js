@@ -1,8 +1,6 @@
 /**
-* Api for chart creation management.
+* Api init for chart creation management.
 * 
-* Having the api, it is possible to set a root html element,
-* and it will append a specific chart to it.
 * 
 * @class ChartsApi
 * @constructor

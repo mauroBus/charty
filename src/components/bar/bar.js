@@ -127,47 +127,10 @@
         }
       };
 
-      var labelsOptions = {
-        dataBind : function (d){
-          return this.selectAll('text').data(d.data);
-        },
-        insert : function (){
-          return this.append('text');
-        },
-        events : {
-          'merge' : function (){
-
-              var chart = this.chart(),
-                zeroY = chart.yscale.map(0),
-                heightZeroY = chart.h - zeroY;
-
-              this.attr('x', function (d){
-                var pos = 0;
-                if (chart.zScale){
-                  pos += chart.zScale.map(d.z, 1);
-                }
-
-                return (pos += chart.xscale.map(d.x, (chart.factor || 1))+(chart.xscale.band(chart.factor || 1)*0.45));
-              }).attr('y', function (d){
-                return Math.min(zeroY, chart.yscale.map(d.y, chart.factor));
-              }).text(function (d){
-                return d.y;
-              });
-          },
-          'exit' : function (){
-            return this.remove();
-          }
-        }
-      };
-
       /**
       * Layer creation
       */
       this.layer('barlayer', this.base.append('g') , options);
-
-      if (args.setTextLabels){
-        this.layer('textlabels', this.base.append('g'), labelsOptions);
-      }
     },
     /**
     * Adds z scale if necessary
