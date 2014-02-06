@@ -104,7 +104,25 @@ module.exports = function(grunt) {
       all: [
         '<%= yeoman.app %>/**/*.js'
       ]
+    },
+
+    /** JSBeautifier */
+    jsbeautifier: {
+      modify: {
+        src: ['Gruntfile.js', '<%= yeoman.app %>/**/*.js'],
+        options: {
+          config: '.jsbeautifyrc'
+        }
+      },
+      verify: {
+        src: ['Gruntfile.js', '<%= yeoman.app %>/**/*.js'],
+        options: {
+          mode: 'VERIFY_ONLY',
+          config: '.jsbeautifyrc'
+        }
+      }
     }
+
   });
 
   /** Build js */
