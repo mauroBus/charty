@@ -38,7 +38,7 @@
     * Horizontal bars initialization
     *
     * @constructor
-    * @param {Object} [args] Arguments for horizontal bar component.
+    * @param {Object} args Arguments for horizontal bar component.
     */
     initialize : function(){
 

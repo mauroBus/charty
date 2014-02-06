@@ -36,7 +36,7 @@
     * Bar initialization
     *
     * @constructor
-    * @param {Object} [args] Arguments for axis component
+    * @param {Object} args Arguments for axis component
     */
     initialize : function(){
 
