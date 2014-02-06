@@ -87,6 +87,14 @@
   stroke-width: 1.5px;
 }
 
+.win {
+  fill : steelblue;
+}
+
+.loss {
+  fill : red;
+}
+
 /** Background images differents positions */
 .imgCenter {
   background: url('../img/image.png') 50% 50% no-repeat;
@@ -104,12 +112,3 @@
 .stop1 { stop-color: red; }
 .stop2 { stop-color: white }
 .stop3 { stop-color: blue; }
-
-
-.win {
-  fill : steelblue;
-}
-
-.loss {
-  fill : red;
-}
