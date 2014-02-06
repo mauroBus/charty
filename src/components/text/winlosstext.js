@@ -1,22 +1,22 @@
 /**
-* Text labeling above the data element for positive elements,
-* and below for negative ones. Redefindes "merge"
+* Text labeling in the middle the data element with Win Loss offser calculation.
+* Redefindes "merge"
 * Useful for vertical bar chart
 *
-* @class ValueDependantText
+* @class AboveText
 * @extends Text
 * @requires d3.chart,
 *           charty,
 *           text
 *
-* @author "Cesar Del Soldato <cesar.delsoldato@gmail.com>"
+* @author "Cesar Del Soldato <cesards@gmail.com>"
 */
 
 (function(root, factory) {
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('charty/valuedependanttext',[
+    define('charty/winlosstext',[
       'd3.chart',
       'charty/chartynames',
       'charty/text'
@@ -33,7 +33,7 @@
   }
 }(this, function (d3, Charty) {
   d3.chart(Charty.CHART_NAMES.TEXT)
-    .extend(Charty.CHART_NAMES.VALUE_DEPENDANT_TEXT, {
+    .extend(Charty.CHART_NAMES.WIN_LOSS_TEXT, {
     /**
     * @constructor
     * @param {Object} args Arguments for above text component.
@@ -42,9 +42,9 @@
 
       var textLayer = this.layer('texts');
 
-        /**
-       * Sets offset for label.
-       */
+      /**
+      * Sets offset for label.
+      */
       var labelOffset = 0;
 
       textLayer.off('merge');
@@ -63,13 +63,8 @@
           return (pos += chart.xscale.map(d.x, (chart.factor || 1))+(chart.xscale.band(chart.factor || 1)/2));
         }).attr('y', function (d){
           var yScaleMap = chart.yscale.map(d.y, chart.factor),
-            yPos = Math.min(zeroY, yScaleMap) + labelOffset -7;
+          yPos = yScaleMap + labelOffset + (chart.yscale.band(chart.h,d.y) - heightZeroY) / 2;
           labelOffset = labelOffset + yScaleMap - zeroY;
-
-          if (d.y < 0) {
-            yPos = yPos + 14 + Math.abs(chart.yscale.band(chart.h,d.y) - heightZeroY);
-          }
-
           return yPos;
         }).text(function (d){
           return d.y;

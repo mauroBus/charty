@@ -40,7 +40,7 @@
     TEXT: 'Text',
     ABOVE_TEXT : 'AboveText',
     RIGHT_TEXT : 'RightText',
-    VALUE_DEPENDANT_TEXT : 'ValueDependatText',
+    WIN_LOSS_TEXT : 'WinLossText',
     TRIANGLE: 'Triangle',
     XY_AXIS: 'XYAxis',
     YXY_AXIS: 'YXYAxis',
@@ -63,7 +63,8 @@
   */
   Charty.AXIS_TYPE = {
     ORDINAL: 'ordinal',
-    LINEAR: 'linear'
+    LINEAR: 'linear',
+    PEAK_VALLEY_LINEAR: 'peakValleyLinear'
   };
 
   /**

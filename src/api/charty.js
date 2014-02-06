@@ -38,7 +38,7 @@
       'charty/linechartcircles',
       'charty/groupedbarchart',
       'charty/winlossbar',
-      'charty/valuedependanttext'
+      'charty/winlosstext'
       ],
       function (Charty, ScaleFactory, ChartInterface, DataValidator, EventFactory) {
         /** Export global even in AMD case in case this script

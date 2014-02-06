@@ -156,7 +156,7 @@
     TEXT: 'Text',
     ABOVE_TEXT : 'AboveText',
     RIGHT_TEXT : 'RightText',
-    VALUE_DEPENDANT_TEXT : 'ValueDependatText',
+    WIN_LOSS_TEXT : 'WinLossText',
     TRIANGLE: 'Triangle',
     XY_AXIS: 'XYAxis',
     YXY_AXIS: 'YXYAxis',
@@ -179,7 +179,8 @@
   */
   Charty.AXIS_TYPE = {
     ORDINAL: 'ordinal',
-    LINEAR: 'linear'
+    LINEAR: 'linear',
+    PEAK_VALLEY_LINEAR: 'peakValleyLinear'
   };
 
   /**
@@ -559,6 +560,108 @@
 	return OrdinalScale;
 }));
 /**
+* Peak Valley scale for linear axis
+* 
+* @class PeakValleyLinearScale
+* @extends BaseScale
+* @requires d3.chart,
+*           linearscale,
+*           charty,
+*           uderscore
+*
+* @author "Cesar Del Soldato <cesar.delsoldato@gmail.com>"
+*/
+
+(function(root, factory) {
+  /** Setting up AMD support*/
+  if (typeof define === 'function' && define.amd) {
+    /** AMD */
+    define('charty/peakvalleylinearscale', [
+        'd3.chart',
+        'charty/linearscale',
+        'charty/chartynames',
+        'underscore'
+      ],
+      function(d3, LinearScale, Charty, _) {
+        /** Export global even in AMD case in case this script
+        * is loaded with others */
+        return factory(d3, LinearScale, Charty, _);
+      });
+  } else {
+    /** Browser globals */
+    root.PeakValleyLinearScale = factory(d3, LinearScale, Charty, _);
+  }
+}(this, function(d3, LinearScale, Charty, _) {
+
+  /** 
+  * Class constructor
+  *
+  * @constructor
+  * @param {String} axisType Axis type, defined in Charty names
+  */
+  var PeakValleyLinearScale = function(axisType) {
+    this.scale = d3.scale.linear();
+    this.axisType = axisType;
+  };
+
+  /**
+  * Inheritance from LinearScale
+  */
+  PeakValleyLinearScale.prototype = new LinearScale();
+
+  /**
+  * Calculates the domain for the peak valley linear scale
+  *
+  * The domain is calculated by adding all the data points one by one
+  * and keeping the highest and lowest value it reaches.
+  * It sets the domain and the maximum value.
+  *
+  * @method calculateDomain
+  * @param {Object} data Accessor for the data collection
+  * @param {Object} f callback function
+  * @chainable
+  */
+  PeakValleyLinearScale.prototype.calculateDomain = function(data, f) {
+    var max = 0,
+      valley = 0,
+      peak = 0,
+      sum = 0,
+      d = data.getData(),
+      self = this;
+
+    if (d && !_.isEmpty(d)) {
+
+      _.each(d, function(element) {
+        var chartData = element.data;
+
+        /** Chart can receive no data, should draw nothing or remove already drawn elements */
+        if (chartData && !_.isEmpty(chartData)) {
+          var maxg = d3.max(chartData, f);
+          max = Math.max(maxg, max);
+
+          _.each(chartData, function(dataPoint) {
+
+            sum = f ? sum + f(dataPoint) : sum + dataPoint;
+
+            if (sum > peak) {
+              peak = sum;
+            } else if (sum < valley) {
+              valley = sum;
+            }
+          });
+        }
+
+        /** Case when there is no data, sometimes can receive a NaN */
+        if (!_.isNaN(peak) && !_.isNaN(valley) && !_.isNaN(max)) {
+          return self.setMaxValue(max).setDomain([valley, peak]);
+        }
+      });
+    }
+  };
+
+  return PeakValleyLinearScale;
+}));
+/**
 *	Scale factory. Separation is provived in an attempt
 *	to provide an easy way to switching scales in a defined chart
 *	
@@ -566,7 +669,8 @@
 * @requires d3.chart,
 *						charty,
 *						ordinalscale,
-*						linearscale
+*						linearscale,
+*						peakvalleylinearscale
 *
 *	@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -579,18 +683,19 @@
       'charty/chartynames',
       'charty/ordinalscale',
       'charty/linearscale',
+      'charty/peakvalleylinearscale'
       ],
-      function(Charty, OrdinalScale, LinearScale) {
+      function(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale) {
         /** Export global even in AMD case in case this script
         *	is loaded with others */
-        return factory(Charty, OrdinalScale, LinearScale);
+        return factory(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale);
     });
   }
   else {
     /** Browser globals */
-    root.ScaleFactory = factory(Charty, OrdinalScale, LinearScale);
+    root.ScaleFactory = factory(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale);
   }
-}(this, function(Charty, OrdinalScale, LinearScale) {
+}(this, function(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale) {
 	/** 
 	* Class constructor
 	*
@@ -615,6 +720,9 @@
 				break;
 			case Charty.AXIS_TYPE.LINEAR :
 				scale = new LinearScale(axisType);
+				break;
+			case Charty.AXIS_TYPE.PEAK_VALLEY_LINEAR :
+				scale = new PeakValleyLinearScale(axisType);
 				break;
 		}
 
@@ -2243,7 +2351,7 @@
   });
 }));
 /**
-* Text labeling above the data element. Redefindes "merge"
+* Text labeling in the middle the data element. Redefindes "merge"
 * Useful for vertical bar chart
 *
 * @class AboveText
@@ -2252,14 +2360,14 @@
 *           charty,
 *           text
 *
-* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+* @author "Cesar Del Soldato <cesar.delsoldato@gmail.com>"
 */
 
 (function(root, factory) {
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
     /** AMD */
-    define('charty/valuedependanttext',[
+    define('charty/winlosstext',[
       'd3.chart',
       'charty/chartynames',
       'charty/text'
@@ -2276,7 +2384,7 @@
   }
 }(this, function (d3, Charty) {
   d3.chart(Charty.CHART_NAMES.TEXT)
-    .extend(Charty.CHART_NAMES.VALUE_DEPENDANT_TEXT, {
+    .extend(Charty.CHART_NAMES.WIN_LOSS_TEXT, {
     /**
     * @constructor
     * @param {Object} args Arguments for above text component.
@@ -2285,9 +2393,9 @@
 
       var textLayer = this.layer('texts');
 
-        /**
-       * Sets offset for label.
-       */
+      /**
+      * Sets offset for label.
+      */
       var labelOffset = 0;
 
       textLayer.off('merge');
@@ -2306,13 +2414,8 @@
           return (pos += chart.xscale.map(d.x, (chart.factor || 1))+(chart.xscale.band(chart.factor || 1)/2));
         }).attr('y', function (d){
           var yScaleMap = chart.yscale.map(d.y, chart.factor),
-            yPos = Math.min(zeroY, yScaleMap) + labelOffset -7;
+          yPos = yScaleMap + labelOffset + (chart.yscale.band(chart.h,d.y) - heightZeroY) / 2;
           labelOffset = labelOffset + yScaleMap - zeroY;
-
-          if (d.y < 0) {
-            yPos = yPos + 14 + Math.abs(chart.yscale.band(chart.h,d.y) - heightZeroY);
-          }
-
           return yPos;
         }).text(function (d){
           return d.y;
@@ -4130,7 +4233,7 @@ Takes N input data series
       'charty/linechartcircles',
       'charty/groupedbarchart',
       'charty/winlossbar',
-      'charty/valuedependanttext'
+      'charty/winlosstext'
       ],
       function (Charty, ScaleFactory, ChartInterface, DataValidator, EventFactory) {
         /** Export global even in AMD case in case this script

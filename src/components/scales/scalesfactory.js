@@ -6,7 +6,8 @@
 * @requires d3.chart,
 *						charty,
 *						ordinalscale,
-*						linearscale
+*						linearscale,
+*						peakvalleylinearscale
 *
 *	@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
 */
@@ -19,18 +20,19 @@
       'charty/chartynames',
       'charty/ordinalscale',
       'charty/linearscale',
+      'charty/peakvalleylinearscale'
       ],
-      function(Charty, OrdinalScale, LinearScale) {
+      function(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale) {
         /** Export global even in AMD case in case this script
         *	is loaded with others */
-        return factory(Charty, OrdinalScale, LinearScale);
+        return factory(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale);
     });
   }
   else {
     /** Browser globals */
-    root.ScaleFactory = factory(Charty, OrdinalScale, LinearScale);
+    root.ScaleFactory = factory(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale);
   }
-}(this, function(Charty, OrdinalScale, LinearScale) {
+}(this, function(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale) {
 	/** 
 	* Class constructor
 	*
@@ -55,6 +57,9 @@
 				break;
 			case Charty.AXIS_TYPE.LINEAR :
 				scale = new LinearScale(axisType);
+				break;
+			case Charty.AXIS_TYPE.PEAK_VALLEY_LINEAR :
+				scale = new PeakValleyLinearScale(axisType);
 				break;
 		}
 

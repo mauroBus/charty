@@ -47,28 +47,6 @@
     var datagroup666 = [];
     datagroup666.push(data666);
 
-    /** Logic to be moved */
-    var peakValleyDomain = function (data, func) {
-      var peak = 0, valley = 0, sum = 0;
-      for (var i = 0; i < data.length; i++) {
-        if (func) {
-          sum = sum + func(data[i]);
-        } else {
-          sum = sum + data[i];
-        }
-        if (sum > peak) {
-          peak = sum;
-        } else if (sum < valley) {
-          valley = sum;
-        }
-      };
-      return [valley, peak];
-    };
-
-    var yDomain = peakValleyDomain(data666.data, function (data) {
-      return data.y;
-    });
-
     /** 
     * Bar chart options
     * 
@@ -82,14 +60,13 @@
     var options11 = {
         chartName : Charty.CHART_NAMES.BAR_CHART,
         barType : Charty.CHART_NAMES.WIN_LOSS_BAR,
-        labelType : Charty.CHART_NAMES.VALUE_DEPENDANT_TEXT,
+        labelType : Charty.CHART_NAMES.WIN_LOSS_TEXT,
         root : '#chart11',
         xAxis : Charty.AXIS_TYPE.ORDINAL,
-        yAxis : Charty.AXIS_TYPE.LINEAR,
+        yAxis : Charty.AXIS_TYPE.PEAK_VALLEY_LINEAR,
         axisSystem : Charty.CHART_NAMES.YXY_AXIS,
         showAsGrid : true,
-        setTextLabels : true,
-        defaultYDomain: yDomain
+        setTextLabels : true
     };
 
     /** Bar chart creation */

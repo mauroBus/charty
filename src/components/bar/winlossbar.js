@@ -7,7 +7,7 @@
  *           charty,
  *           bar
  *
- * @author "Cesar Del Soldato <cesar.delsoldato@gmail.com>"
+ * @author "Cesar Del Soldato <cesards@gmail.com>"
  */
 (function(root, factory) {
   /** Setting up AMD support*/
