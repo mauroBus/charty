@@ -561,7 +561,7 @@
 }));
 /**
 * Peak Valley scale for linear axis
-* 
+*
 * @class PeakValleyLinearScale
 * @extends BaseScale
 * @requires d3.chart,
@@ -569,7 +569,7 @@
 *           charty,
 *           uderscore
 *
-* @author "Cesar Del Soldato <cesar.delsoldato@gmail.com>"
+* @author "Cesar Del Soldato <cesards@gmail.com>"
 */
 
 (function(root, factory) {
@@ -593,7 +593,7 @@
   }
 }(this, function(d3, LinearScale, Charty, _) {
 
-  /** 
+  /**
   * Class constructor
   *
   * @constructor
@@ -661,6 +661,7 @@
 
   return PeakValleyLinearScale;
 }));
+
 /**
 *	Scale factory. Separation is provived in an attempt
 *	to provide an easy way to switching scales in a defined chart
@@ -731,6 +732,7 @@
 
 	return ScaleFactory;
 }));
+
 /**
 * Maps every data point, taking into account one to many
 * scales. Works as a scale composite object.
@@ -1514,7 +1516,7 @@
  *           charty,
  *           bar
  *
- * @author "Cesar Del Soldato <cesar.delsoldato@gmail.com>"
+ * @author "Cesar Del Soldato <cesards@gmail.com>"
  */
 (function(root, factory) {
   /** Setting up AMD support*/
@@ -2351,7 +2353,8 @@
   });
 }));
 /**
-* Text labeling in the middle the data element. Redefindes "merge"
+* Text labeling in the middle the data element with Win Loss offser calculation.
+* Redefindes "merge"
 * Useful for vertical bar chart
 *
 * @class AboveText
@@ -2360,7 +2363,7 @@
 *           charty,
 *           text
 *
-* @author "Cesar Del Soldato <cesar.delsoldato@gmail.com>"
+* @author "Cesar Del Soldato <cesards@gmail.com>"
 */
 
 (function(root, factory) {
@@ -2424,6 +2427,7 @@
     }
   });
 }));
+
 /**
 * Triangle drawer.
 * 
