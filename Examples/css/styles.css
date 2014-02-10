@@ -34,6 +34,15 @@
   stroke: #000;
 }
 
+/** WinLoss default colors **/
+.win {
+  fill : steelblue;
+}
+
+.loss {
+  fill : crimson;
+}
+
 /** Basic colors */
 .yellow {
   fill : yellow;
@@ -53,6 +62,14 @@
 
 .white {
   fill : white;
+}
+
+.orange {
+  fill : orange;
+}
+
+.purple {
+  fill : mediumpurple;
 }
 
 .charty-dark-gray{
@@ -85,14 +102,6 @@
   fill: none;
   stroke: gray;
   stroke-width: 1.5px;
-}
-
-.win {
-  fill : steelblue;
-}
-
-.loss {
-  fill : red;
 }
 
 /** Background images differents positions */

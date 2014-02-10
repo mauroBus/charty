@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>BaseScale - ChartyJS</title>
+    <title>PeakValleyLinearScale - ChartyJS</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -160,15 +160,19 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>BaseScale Class</h1>
+                        <h1>PeakValleyLinearScale Class</h1>
 <div class="box meta">
     
 
     
+        <div class="extends">
+            Extends <a href="..\classes\BaseScale.html" class="crosslink">BaseScale</a>
+        </div>
+    
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_components_scales_basescale.js.html#l1"><code>src\components\scales\basescale.js:1</code></a>
+            Defined in: <a href="../files/src_components_scales_peakvalleylinearscale.js.html#l1"><code>src\components\scales\peakvalleylinearscale.js:1</code></a>
         </div>
     
 
@@ -180,8 +184,7 @@
 
 
 <div class="box intro">
-    <p>Defines common scale functionality. Used as base element
-for inheritance.</p>
+    <p>Peak Valley scale for linear axis</p>
 
 </div>
 
@@ -207,16 +210,23 @@ for inheritance.</p>
                 <div class="index-section methods">
                     <h3>Methods</h3>
 
-                    <ul class="index-list methods">
+                    <ul class="index-list methods extends">
                         
                             <li class="index-item method">
+                                <a href="#method_calculateDomain">calculateDomain</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
                                 <a href="#method_generateRange">generateRange</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method">
+                            <li class="index-item method inherited">
                                 <a href="#method_getScale">getScale</a>
 
                                 
@@ -239,7 +249,123 @@ for inheritance.</p>
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_generateRange" class="method item">
+                    <div id="method_calculateDomain" class="method item">
+    <h3 class="name"><code>calculateDomain</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>data</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>f</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_scales_peakvalleylinearscale.js.html#l51"><code>src\components\scales\peakvalleylinearscale.js:51</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Calculates the domain for the peak valley linear scale</p>
+<p>The domain is calculated by adding all the data points one by one
+and keeping the highest and lowest value it reaches.
+It sets the domain and the maximum value.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">data</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Accessor for the data collection</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">f</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>callback function</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_generateRange" class="method item inherited">
     <h3 class="name"><code>generateRange</code></h3>
 
     
@@ -277,11 +403,8 @@ for inheritance.</p>
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="..\classes\BaseScale.html#method_generateRange">BaseScale</a>:
             
         
         
@@ -346,7 +469,7 @@ for inheritance.</p>
 </div>
 
                 
-                    <div id="method_getScale" class="method item">
+                    <div id="method_getScale" class="method item inherited">
     <h3 class="name"><code>getScale</code></h3>
 
     
@@ -374,11 +497,8 @@ for inheritance.</p>
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="..\classes\BaseScale.html#method_getScale">BaseScale</a>:
             
         
         

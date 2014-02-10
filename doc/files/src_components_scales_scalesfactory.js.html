@@ -99,6 +99,8 @@
             
                 <li><a href="../classes/OrdinalScale.html">OrdinalScale</a></li>
             
+                <li><a href="../classes/PeakValleyLinearScale.html">PeakValleyLinearScale</a></li>
+            
                 <li><a href="../classes/RightText.html">RightText</a></li>
             
                 <li><a href="../classes/RoundedRectangle.html">RoundedRectangle</a></li>
@@ -112,6 +114,8 @@
                 <li><a href="../classes/Text.html">Text</a></li>
             
                 <li><a href="../classes/Triangle.html">Triangle</a></li>
+            
+                <li><a href="../classes/WinLossBar.html">WinLossBar</a></li>
             
                 <li><a href="../classes/XYAxis.html">XYAxis</a></li>
             
@@ -168,7 +172,8 @@
 * @requires d3.chart,
 *						charty,
 *						ordinalscale,
-*						linearscale
+*						linearscale,
+*						peakvalleylinearscale
 *
 *	@author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
 */
@@ -181,18 +186,19 @@
       &#x27;charty/chartynames&#x27;,
       &#x27;charty/ordinalscale&#x27;,
       &#x27;charty/linearscale&#x27;,
+      &#x27;charty/peakvalleylinearscale&#x27;
       ],
-      function(Charty, OrdinalScale, LinearScale) {
+      function(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale) {
         /** Export global even in AMD case in case this script
         *	is loaded with others */
-        return factory(Charty, OrdinalScale, LinearScale);
+        return factory(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale);
     });
   }
   else {
     /** Browser globals */
-    root.ScaleFactory = factory(Charty, OrdinalScale, LinearScale);
+    root.ScaleFactory = factory(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale);
   }
-}(this, function(Charty, OrdinalScale, LinearScale) {
+}(this, function(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale) {
 	/** 
 	* Class constructor
 	*
@@ -218,6 +224,9 @@
 			case Charty.AXIS_TYPE.LINEAR :
 				scale = new LinearScale(axisType);
 				break;
+			case Charty.AXIS_TYPE.PEAK_VALLEY_LINEAR :
+				scale = new PeakValleyLinearScale(axisType);
+				break;
 		}
 
 		return scale;
@@ -225,6 +234,7 @@
 
 	return ScaleFactory;
 }));
+
     </pre>
 </div>
 

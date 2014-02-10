@@ -68,6 +68,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "src\\components\\bar\\winlossbar.js": {
+            "name": "src\\components\\bar\\winlossbar.js",
+            "modules": {},
+            "classes": {
+                "WinLossBar": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src\\components\\base\\basechart.js": {
             "name": "src\\components\\base\\basechart.js",
             "modules": {},
@@ -140,6 +149,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "src\\components\\scales\\peakvalleylinearscale.js": {
+            "name": "src\\components\\scales\\peakvalleylinearscale.js",
+            "modules": {},
+            "classes": {
+                "PeakValleyLinearScale": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src\\components\\scales\\scalesfactory.js": {
             "name": "src\\components\\scales\\scalesfactory.js",
             "modules": {},
@@ -152,9 +170,7 @@
         "src\\components\\text\\abovetext.js": {
             "name": "src\\components\\text\\abovetext.js",
             "modules": {},
-            "classes": {
-                "AboveText": 1
-            },
+            "classes": {},
             "fors": {},
             "namespaces": {}
         },
@@ -172,6 +188,15 @@
             "modules": {},
             "classes": {
                 "Text": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\components\\text\\winlosstext.js": {
+            "name": "src\\components\\text\\winlosstext.js",
+            "modules": {},
+            "classes": {
+                "AboveText": 1
             },
             "fors": {},
             "namespaces": {}
@@ -476,6 +501,25 @@
             ],
             "author": "\"Marcio Caraballo <marcio.caraballososa@gmail.com>\""
         },
+        "WinLossBar": {
+            "name": "WinLossBar",
+            "shortname": "WinLossBar",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src\\components\\bar\\winlossbar.js",
+            "line": 1,
+            "description": "Win Loss Bar drawer. Takes only one data series as input.\n\nWin Loss bar data elements allow the following options:\n\n {\n   x: 'Jan',\n   y: 200,\n   c: 'String',\n   reset: false\n }\n\nThe reset parameter is a boolean that resets the offset of\n  the graph back to 0.",
+            "extends": "Bar",
+            "requires": [
+                "d3.chart",
+                "charty",
+                "bar"
+            ],
+            "author": "\"Cesar Del Soldato <cesards@gmail.com>\""
+        },
         "BaseChart": {
             "name": "BaseChart",
             "shortname": "BaseChart",
@@ -626,6 +670,26 @@
             ],
             "author": "\"Marcio Caraballo <marcio.caraballososa@gmail.com>\""
         },
+        "PeakValleyLinearScale": {
+            "name": "PeakValleyLinearScale",
+            "shortname": "PeakValleyLinearScale",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src\\components\\scales\\peakvalleylinearscale.js",
+            "line": 1,
+            "description": "Peak Valley scale for linear axis",
+            "extends": "BaseScale",
+            "requires": [
+                "d3.chart",
+                "linearscale",
+                "charty",
+                "uderscore"
+            ],
+            "author": "\"Cesar Del Soldato <cesards@gmail.com>\""
+        },
         "ScaleFactory": {
             "name": "ScaleFactory",
             "shortname": "ScaleFactory",
@@ -641,7 +705,8 @@
                 "d3.chart",
                 "charty",
                 "ordinalscale",
-                "linearscale"
+                "linearscale",
+                "peakvalleylinearscale"
             ],
             "author": "\"Marcio Caraballo <marcio.caraballososa@gmail.com>\""
         },
@@ -653,9 +718,9 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "file": "src\\components\\text\\abovetext.js",
+            "file": "src\\components\\text\\winlosstext.js",
             "line": 1,
-            "description": "Text labeling above the data element. Redefindes \"merge\"\nUseful for vertical bar chart",
+            "description": "Text labeling in the middle the data element with Win Loss offser calculation.\nRedefindes \"merge\"\nUseful for vertical bar chart.",
             "extends": "Text",
             "requires": [
                 "d3.chart",
@@ -1303,17 +1368,17 @@
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 42,
+            "line": 44,
             "class": "Charty"
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 48,
+            "line": 50,
             "class": "Charty"
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 58,
+            "line": 60,
             "description": "Appends a chart to a root d3.selection element. Chart is determined\nby a defined chart name.\nMargin is used to translate the chart a small distance. A chart can have many\ninstances.\nWhether the chart takes the container dimensions, is it possible to also set\nthe dimensions as initial options\nDefined events will be spread to every chart's component.",
             "itemtype": "method",
             "name": "chart",
@@ -1332,13 +1397,8 @@
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 86,
+            "line": 88,
             "description": "Svg element creation",
-            "class": "Charty"
-        },
-        {
-            "file": "src\\api\\charty.js",
-            "line": 92,
             "class": "Charty"
         },
         {
@@ -1348,49 +1408,54 @@
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 100,
+            "line": 96,
             "class": "Charty"
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 115,
+            "line": 102,
             "class": "Charty"
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 120,
+            "line": 117,
+            "class": "Charty"
+        },
+        {
+            "file": "src\\api\\charty.js",
+            "line": 122,
             "description": "Appends the chart to the specified html element.",
             "class": "Charty"
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 125,
+            "line": 127,
             "description": "Scale definition.\nSome charts can use direct mapping instead of scaling.",
             "class": "Charty"
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 137,
+            "line": 139,
             "class": "Charty"
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 142,
+            "line": 144,
             "class": "Charty"
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 147,
+            "line": 149,
             "class": "Charty"
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 152,
+            "line": 154,
             "class": "Charty"
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 157,
+            "line": 159,
             "description": "Returns the interface for the chart drawing\n\nInterface will manage the events creation.",
             "class": "Charty"
         },
@@ -1441,13 +1506,13 @@
         },
         {
             "file": "src\\api\\chartynames.js",
-            "line": 57,
+            "line": 59,
             "description": "Axis types are defined as constants\n\nRelated to scaling.",
             "class": "ChartNames"
         },
         {
             "file": "src\\api\\chartynames.js",
-            "line": 67,
+            "line": 70,
             "description": "Axis defined as constants",
             "class": "ChartNames"
         },
@@ -1881,6 +1946,52 @@
             "file": "src\\components\\bar\\horizontalbar.js",
             "line": 47,
             "class": "HorizontalBar"
+        },
+        {
+            "file": "src\\components\\bar\\winlossbar.js",
+            "line": 25,
+            "class": "WinLossBar"
+        },
+        {
+            "file": "src\\components\\bar\\winlossbar.js",
+            "line": 27,
+            "class": "WinLossBar"
+        },
+        {
+            "file": "src\\components\\bar\\winlossbar.js",
+            "line": 35,
+            "class": "WinLossBar"
+        },
+        {
+            "file": "src\\components\\bar\\winlossbar.js",
+            "line": 40,
+            "class": "WinLossBar"
+        },
+        {
+            "file": "src\\components\\bar\\winlossbar.js",
+            "line": 46,
+            "description": "Win Loss Bar initialization",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "args",
+                    "description": "Arguments for axis component",
+                    "type": "Object"
+                }
+            ],
+            "class": "WinLossBar"
+        },
+        {
+            "file": "src\\components\\bar\\winlossbar.js",
+            "line": 54,
+            "description": "Sets offset for bars.",
+            "class": "WinLossBar"
+        },
+        {
+            "file": "src\\components\\bar\\winlossbar.js",
+            "line": 59,
+            "description": "Layers extensions.",
+            "class": "WinLossBar"
         },
         {
             "file": "src\\components\\base\\basechart.js",
@@ -2670,35 +2781,106 @@
             "class": "OrdinalScale"
         },
         {
-            "file": "src\\components\\scales\\scalesfactory.js",
+            "file": "src\\components\\scales\\peakvalleylinearscale.js",
             "line": 15,
-            "class": "ScaleFactory"
+            "class": "PeakValleyLinearScale"
         },
         {
-            "file": "src\\components\\scales\\scalesfactory.js",
+            "file": "src\\components\\scales\\peakvalleylinearscale.js",
             "line": 17,
-            "class": "ScaleFactory"
+            "class": "PeakValleyLinearScale"
         },
         {
-            "file": "src\\components\\scales\\scalesfactory.js",
-            "line": 24,
-            "class": "ScaleFactory"
+            "file": "src\\components\\scales\\peakvalleylinearscale.js",
+            "line": 25,
+            "class": "PeakValleyLinearScale"
         },
         {
-            "file": "src\\components\\scales\\scalesfactory.js",
+            "file": "src\\components\\scales\\peakvalleylinearscale.js",
             "line": 30,
+            "class": "PeakValleyLinearScale"
+        },
+        {
+            "file": "src\\components\\scales\\peakvalleylinearscale.js",
+            "line": 35,
+            "description": "Class constructor",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "axisType",
+                    "description": "Axis type, defined in Charty names",
+                    "type": "String"
+                }
+            ],
+            "class": "PeakValleyLinearScale"
+        },
+        {
+            "file": "src\\components\\scales\\peakvalleylinearscale.js",
+            "line": 46,
+            "description": "Inheritance from LinearScale",
+            "class": "PeakValleyLinearScale"
+        },
+        {
+            "file": "src\\components\\scales\\peakvalleylinearscale.js",
+            "line": 51,
+            "description": "Calculates the domain for the peak valley linear scale\n\nThe domain is calculated by adding all the data points one by one\nand keeping the highest and lowest value it reaches.\nIt sets the domain and the maximum value.",
+            "itemtype": "method",
+            "name": "calculateDomain",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Accessor for the data collection",
+                    "type": "Object"
+                },
+                {
+                    "name": "f",
+                    "description": "callback function",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "PeakValleyLinearScale"
+        },
+        {
+            "file": "src\\components\\scales\\peakvalleylinearscale.js",
+            "line": 76,
+            "class": "PeakValleyLinearScale"
+        },
+        {
+            "file": "src\\components\\scales\\peakvalleylinearscale.js",
+            "line": 97,
+            "class": "PeakValleyLinearScale"
+        },
+        {
+            "file": "src\\components\\scales\\scalesfactory.js",
+            "line": 16,
             "class": "ScaleFactory"
         },
         {
             "file": "src\\components\\scales\\scalesfactory.js",
-            "line": 34,
+            "line": 18,
+            "class": "ScaleFactory"
+        },
+        {
+            "file": "src\\components\\scales\\scalesfactory.js",
+            "line": 26,
+            "class": "ScaleFactory"
+        },
+        {
+            "file": "src\\components\\scales\\scalesfactory.js",
+            "line": 32,
+            "class": "ScaleFactory"
+        },
+        {
+            "file": "src\\components\\scales\\scalesfactory.js",
+            "line": 36,
             "description": "Class constructor",
             "is_constructor": 1,
             "class": "ScaleFactory"
         },
         {
             "file": "src\\components\\scales\\scalesfactory.js",
-            "line": 41,
+            "line": 43,
             "description": "Returns a specified scale object, acording to a scale type",
             "itemtype": "method",
             "name": "scale",
@@ -2849,6 +3031,45 @@
             "line": 100,
             "description": "Layer creation",
             "class": "Text"
+        },
+        {
+            "file": "src\\components\\text\\winlosstext.js",
+            "line": 16,
+            "class": "AboveText"
+        },
+        {
+            "file": "src\\components\\text\\winlosstext.js",
+            "line": 18,
+            "class": "AboveText"
+        },
+        {
+            "file": "src\\components\\text\\winlosstext.js",
+            "line": 25,
+            "class": "AboveText"
+        },
+        {
+            "file": "src\\components\\text\\winlosstext.js",
+            "line": 31,
+            "class": "AboveText"
+        },
+        {
+            "file": "src\\components\\text\\winlosstext.js",
+            "line": 37,
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "args",
+                    "description": "Arguments for above text component.",
+                    "type": "Object"
+                }
+            ],
+            "class": "AboveText"
+        },
+        {
+            "file": "src\\components\\text\\winlosstext.js",
+            "line": 45,
+            "description": "Sets offset for label.",
+            "class": "AboveText"
         },
         {
             "file": "src\\components\\triangle\\triangle.js",
@@ -4295,19 +4516,15 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\charty.js:42"
+            "line": " src\\api\\charty.js:44"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\charty.js:48"
+            "line": " src\\api\\charty.js:50"
         },
         {
             "message": "Missing item type\nSvg element creation",
-            "line": " src\\api\\charty.js:86"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src\\api\\charty.js:92"
+            "line": " src\\api\\charty.js:88"
         },
         {
             "message": "Missing item type",
@@ -4315,39 +4532,43 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\charty.js:100"
+            "line": " src\\api\\charty.js:96"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\charty.js:115"
+            "line": " src\\api\\charty.js:102"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\api\\charty.js:117"
         },
         {
             "message": "Missing item type\nAppends the chart to the specified html element.",
-            "line": " src\\api\\charty.js:120"
+            "line": " src\\api\\charty.js:122"
         },
         {
             "message": "Missing item type\nScale definition.\nSome charts can use direct mapping instead of scaling.",
-            "line": " src\\api\\charty.js:125"
+            "line": " src\\api\\charty.js:127"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\charty.js:137"
+            "line": " src\\api\\charty.js:139"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\charty.js:142"
+            "line": " src\\api\\charty.js:144"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\charty.js:147"
+            "line": " src\\api\\charty.js:149"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\charty.js:152"
+            "line": " src\\api\\charty.js:154"
         },
         {
             "message": "Missing item type\nReturns the interface for the chart drawing\n\nInterface will manage the events creation.",
-            "line": " src\\api\\charty.js:157"
+            "line": " src\\api\\charty.js:159"
         },
         {
             "message": "Missing item type",
@@ -4387,11 +4608,11 @@
         },
         {
             "message": "Missing item type\nAxis types are defined as constants\n\nRelated to scaling.",
-            "line": " src\\api\\chartynames.js:57"
+            "line": " src\\api\\chartynames.js:59"
         },
         {
             "message": "Missing item type\nAxis defined as constants",
-            "line": " src\\api\\chartynames.js:67"
+            "line": " src\\api\\chartynames.js:70"
         },
         {
             "message": "Missing item type",
@@ -4512,6 +4733,34 @@
         {
             "message": "Missing item type",
             "line": " src\\components\\bar\\horizontalbar.js:47"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\components\\bar\\winlossbar.js:25"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\components\\bar\\winlossbar.js:27"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\components\\bar\\winlossbar.js:35"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\components\\bar\\winlossbar.js:40"
+        },
+        {
+            "message": "Missing item type\nWin Loss Bar initialization",
+            "line": " src\\components\\bar\\winlossbar.js:46"
+        },
+        {
+            "message": "Missing item type\nSets offset for bars.",
+            "line": " src\\components\\bar\\winlossbar.js:54"
+        },
+        {
+            "message": "Missing item type\nLayers extensions.",
+            "line": " src\\components\\bar\\winlossbar.js:59"
         },
         {
             "message": "Missing item type",
@@ -4739,23 +4988,55 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\scales\\scalesfactory.js:15"
+            "line": " src\\components\\scales\\peakvalleylinearscale.js:15"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\scales\\scalesfactory.js:17"
+            "line": " src\\components\\scales\\peakvalleylinearscale.js:17"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\scales\\scalesfactory.js:24"
+            "line": " src\\components\\scales\\peakvalleylinearscale.js:25"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\scales\\scalesfactory.js:30"
+            "line": " src\\components\\scales\\peakvalleylinearscale.js:30"
         },
         {
             "message": "Missing item type\nClass constructor",
-            "line": " src\\components\\scales\\scalesfactory.js:34"
+            "line": " src\\components\\scales\\peakvalleylinearscale.js:35"
+        },
+        {
+            "message": "Missing item type\nInheritance from LinearScale",
+            "line": " src\\components\\scales\\peakvalleylinearscale.js:46"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\components\\scales\\peakvalleylinearscale.js:76"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\components\\scales\\peakvalleylinearscale.js:97"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\components\\scales\\scalesfactory.js:16"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\components\\scales\\scalesfactory.js:18"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\components\\scales\\scalesfactory.js:26"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\components\\scales\\scalesfactory.js:32"
+        },
+        {
+            "message": "Missing item type\nClass constructor",
+            "line": " src\\components\\scales\\scalesfactory.js:36"
         },
         {
             "message": "Missing item type",
@@ -4820,6 +5101,30 @@
         {
             "message": "Missing item type\nLayer creation",
             "line": " src\\components\\text\\text.js:100"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\components\\text\\winlosstext.js:16"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\components\\text\\winlosstext.js:18"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\components\\text\\winlosstext.js:25"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\components\\text\\winlosstext.js:31"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\components\\text\\winlosstext.js:37"
+        },
+        {
+            "message": "Missing item type\nSets offset for label.",
+            "line": " src\\components\\text\\winlosstext.js:45"
         },
         {
             "message": "Missing item type",

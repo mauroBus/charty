@@ -30,18 +30,21 @@
     */
     var data666 = {
         data: [
-          { x: 'A', y: 100},
-          { x: 'B', y: -10},
-          { x: 'C', y: -80},
-          { x: 'D', y: -40},
-          { x: 'E', y:  60},
-          { x: 'F', y:  90},
-          { x: 'G', y:  50},
-          { x: 'H', y: -30},
-          { x: 'I', y:  50},
-          { x: 'J', y: -30}
+          { x: 'A',     y: 100},
+          { x: 'B',     y: -10},
+          { x: 'C',     y: -80},
+          { x: 'D',     y: -40},
+          { x: 'E',     y:  60},
+          { x: 'F',     y:  90},
+          { x: 'G',     y: -30},
+          { x: 'H',     y:  50},
+          { x: 'Total', y: 140, reset: true, c: 'green'},
+          { x: 'Cost',  y: -20, c: 'purple'},
+          { x: 'Net',   y: 120, reset: true, c: 'orange' }
         ]
     };
+
+document.data = data666.data;
 
     /** Data series */
     var datagroup666 = [];

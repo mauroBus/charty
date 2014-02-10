@@ -80,6 +80,10 @@
 
           _.each(chartData, function(dataPoint) {
 
+            if (dataPoint.reset) {
+              sum = 0;
+            }
+
             sum = f ? sum + f(dataPoint) : sum + dataPoint;
 
             if (sum > peak) {

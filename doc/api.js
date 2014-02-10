@@ -30,6 +30,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "MultipleDataGroup",
         "MultipleInstancesMixin",
         "OrdinalScale",
+        "PeakValleyLinearScale",
         "RightText",
         "RoundedRectangle",
         "ScaleFactory",
@@ -37,6 +38,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "SimpleDataGroup",
         "Text",
         "Triangle",
+        "WinLossBar",
         "XYAxis",
         "YXYAxis"
     ],

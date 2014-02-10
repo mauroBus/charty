@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>ChartsApi - ChartyJS</title>
+    <title>src\components\scales\peakvalleylinearscale.js - ChartyJS</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -160,120 +160,118 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>ChartsApi Class</h1>
-<div class="box meta">
-    
+                        <h1 class="file-heading">File: src\components\scales\peakvalleylinearscale.js</h1>
 
-    
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+* Peak Valley scale for linear axis
+*
+* @class PeakValleyLinearScale
+* @extends BaseScale
+* @requires d3.chart,
+*           linearscale,
+*           charty,
+*           uderscore
+*
+* @author &quot;Cesar Del Soldato &lt;cesards@gmail.com&gt;&quot;
+*/
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/src_api_chartyinit.js.html#l1"><code>src\api\chartyinit.js:1</code></a>
-        </div>
-    
+(function(root, factory) {
+  /** Setting up AMD support*/
+  if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
+    /** AMD */
+    define(&#x27;charty/peakvalleylinearscale&#x27;, [
+        &#x27;d3.chart&#x27;,
+        &#x27;charty/linearscale&#x27;,
+        &#x27;charty/chartynames&#x27;,
+        &#x27;underscore&#x27;
+      ],
+      function(d3, LinearScale, Charty, _) {
+        /** Export global even in AMD case in case this script
+        * is loaded with others */
+        return factory(d3, LinearScale, Charty, _);
+      });
+  } else {
+    /** Browser globals */
+    root.PeakValleyLinearScale = factory(d3, LinearScale, Charty, _);
+  }
+}(this, function(d3, LinearScale, Charty, _) {
 
-    
+  /**
+  * Class constructor
+  *
+  * @constructor
+  * @param {String} axisType Axis type, defined in Charty names
+  */
+  var PeakValleyLinearScale = function(axisType) {
+    this.scale = d3.scale.linear();
+    this.axisType = axisType;
+  };
 
-    
-</div>
+  /**
+  * Inheritance from LinearScale
+  */
+  PeakValleyLinearScale.prototype = new LinearScale();
 
+  /**
+  * Calculates the domain for the peak valley linear scale
+  *
+  * The domain is calculated by adding all the data points one by one
+  * and keeping the highest and lowest value it reaches.
+  * It sets the domain and the maximum value.
+  *
+  * @method calculateDomain
+  * @param {Object} data Accessor for the data collection
+  * @param {Object} f callback function
+  * @chainable
+  */
+  PeakValleyLinearScale.prototype.calculateDomain = function(data, f) {
+    var max = 0,
+      valley = 0,
+      peak = 0,
+      sum = 0,
+      d = data.getData(),
+      self = this;
 
+    if (d &amp;&amp; !_.isEmpty(d)) {
 
-<div class="box intro">
-    <p>Api init for chart creation management.</p>
+      _.each(d, function(element) {
+        var chartData = element.data;
 
-</div>
+        /** Chart can receive no data, should draw nothing or remove already drawn elements */
+        if (chartData &amp;&amp; !_.isEmpty(chartData)) {
+          var maxg = d3.max(chartData, f);
+          max = Math.max(maxg, max);
 
+          _.each(chartData, function(dataPoint) {
 
-    <div class="constructor">
-        <h2>Constructor</h2>
-        <div id="method_ChartsApi" class="method item">
-    <h3 class="name"><code>ChartsApi</code></h3>
+            if (dataPoint.reset) {
+              sum = 0;
+            }
 
-    
-        <span class="paren">()</span>
-    
+            sum = f ? sum + f(dataPoint) : sum + dataPoint;
 
-    
+            if (sum &gt; peak) {
+              peak = sum;
+            } else if (sum &lt; valley) {
+              valley = sum;
+            }
+          });
+        }
 
-    
+        /** Case when there is no data, sometimes can receive a NaN */
+        if (!_.isNaN(peak) &amp;&amp; !_.isNaN(valley) &amp;&amp; !_.isNaN(max)) {
+          return self.setMaxValue(max).setDomain([valley, peak]);
+        }
+      });
+    }
+  };
 
-    
+  return PeakValleyLinearScale;
+}));
 
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_api_chartyinit.js.html#l1"><code>src\api\chartyinit.js:1</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-    </div>
-
-
-<div id="classdocs" class="tabview">
-    <ul class="api-class-tabs">
-        <li class="api-class-tab index"><a href="#index">Index</a></li>
-
-        
-        
-        
-        
-    </ul>
-
-    <div>
-        <div id="index" class="api-class-tabpanel index">
-            <h2 class="off-left">Item Index</h2>
-
-            
-
-            
-
-            
-
-            
-        </div>
-
-        
-
-        
-
-        
-
-        
-    </div>
+    </pre>
 </div>
 
                     </div>

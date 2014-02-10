@@ -641,6 +641,10 @@
 
           _.each(chartData, function(dataPoint) {
 
+            if (dataPoint.reset) {
+              sum = 0;
+            }
+
             sum = f ? sum + f(dataPoint) : sum + dataPoint;
 
             if (sum > peak) {
@@ -1510,6 +1514,18 @@
 /**
  * Win Loss Bar drawer. Takes only one data series as input.
  *
+ * Win Loss bar data elements allow the following options:
+ *
+ *  {
+ *    x: 'Jan',
+ *    y: 200,
+ *    c: 'String',
+ *    reset: false
+ *  }
+ *
+ * The reset parameter is a boolean that resets the offset of
+ *   the graph back to 0.
+ *
  * @class WinLossBar
  * @extends Bar
  * @requires d3.chart,
@@ -1562,16 +1578,26 @@
             zeroY = chart.yscale.map(0);
 
           this.attr('class', function(d) {
+
+            var customValue = d.c || chart.c || '';
+
             if (d.y > 0) {
-              return 'win';
+              return 'win ' + customValue;
             } else {
-              return 'loss';
+              return 'loss ' + customValue;
             }
             return (d.c || chart.c);
           })
             .attr('y', function(d) {
               var yScaleMap = chart.yscale.map(d.y, chart.factor),
-                yPos = Math.min(zeroY, yScaleMap) + offset;
+                yPos;
+
+              // Reset the offset if the element asks for it.
+              if (d.reset) {
+                offset = 0;
+              }
+
+              yPos = Math.min(zeroY, yScaleMap) + offset;
               offset = offset + yScaleMap - zeroY;
               return yPos;
             });
@@ -2356,7 +2382,7 @@
 /**
 * Text labeling in the middle the data element with Win Loss offser calculation.
 * Redefindes "merge"
-* Useful for vertical bar chart
+* Useful for vertical bar chart.
 *
 * @class AboveText
 * @extends Text
@@ -2400,7 +2426,7 @@
       /**
       * Sets offset for label.
       */
-      var labelOffset = 0;
+      var offset = 0;
 
       textLayer.off('merge');
       textLayer.on('merge', function () {
@@ -2418,8 +2444,16 @@
           return (pos += chart.xscale.map(d.x, (chart.factor || 1))+(chart.xscale.band(chart.factor || 1)/2));
         }).attr('y', function (d){
           var yScaleMap = chart.yscale.map(d.y, chart.factor),
-          yPos = yScaleMap + labelOffset + (chart.yscale.band(chart.h,d.y) - heightZeroY) / 2;
-          labelOffset = labelOffset + yScaleMap - zeroY;
+          yPos;
+
+          // Reset the offset if the element asks for it.
+          if (d.reset) {
+            offset = 0;
+          }
+
+
+          yPos = yScaleMap + offset + (chart.yscale.band(chart.h,d.y) - heightZeroY) / 2;
+          offset = offset + yScaleMap - zeroY;
           return yPos;
         }).text(function (d){
           return d.y;

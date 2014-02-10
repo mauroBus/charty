@@ -1,6 +1,18 @@
 /**
  * Win Loss Bar drawer. Takes only one data series as input.
  *
+ * Win Loss bar data elements allow the following options:
+ *
+ *  {
+ *    x: 'Jan',
+ *    y: 200,
+ *    c: 'String',
+ *    reset: false
+ *  }
+ *
+ * The reset parameter is a boolean that resets the offset of
+ *   the graph back to 0.
+ *
  * @class WinLossBar
  * @extends Bar
  * @requires d3.chart,
@@ -53,16 +65,26 @@
             zeroY = chart.yscale.map(0);
 
           this.attr('class', function(d) {
+
+            var customValue = d.c || chart.c || '';
+
             if (d.y > 0) {
-              return 'win';
+              return 'win ' + customValue;
             } else {
-              return 'loss';
+              return 'loss ' + customValue;
             }
             return (d.c || chart.c);
           })
             .attr('y', function(d) {
               var yScaleMap = chart.yscale.map(d.y, chart.factor),
-                yPos = Math.min(zeroY, yScaleMap) + offset;
+                yPos;
+
+              // Reset the offset if the element asks for it.
+              if (d.reset) {
+                offset = 0;
+              }
+
+              yPos = Math.min(zeroY, yScaleMap) + offset;
               offset = offset + yScaleMap - zeroY;
               return yPos;
             });
