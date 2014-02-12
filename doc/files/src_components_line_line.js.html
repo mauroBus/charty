@@ -165,122 +165,127 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-* Line drawing.
-* 
-* Note : this charts doesn&#x27;t take events, as it doesn&#x27;t seem necessary for now.
-* 
-* @class Line
-* @extends SimpleDataGroup
-* @requires d3.chart,
-*           charty,
-*           simpledatagroup
-*
-* @author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
-*/
+ * Line drawing.
+ *
+ * Note : this charts doesn&#x27;t take events, as it doesn&#x27;t seem necessary for now.
+ *
+ * @class Line
+ * @extends SimpleDataGroup
+ * @requires d3.chart,
+ *           charty,
+ *           simpledatagroup
+ *
+ * @author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
+ */
 
 (function(root, factory) {
-  /** Setting up AMD support*/
-  if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
-    /** AMD */
-    define(&#x27;charty/line&#x27;,[
-      &#x27;d3.chart&#x27;,
-      &#x27;charty/chartynames&#x27;,
-      &#x27;charty/simpledatagroup&#x27;
-      ],
-      function (d3, Charty) {
-        /** Export global even in AMD case in case this script
-        * is loaded with others */
-        return factory(d3, Charty);
-    });
-  }
-  else {
-    /** Browser globals */
-    factory(d3, Charty);
-  }
-}(this, function (d3, Charty) {
-  d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
-    .extend(Charty.CHART_NAMES.LINE, {
-    /**
-    * Line initialization
-    *
-    * @constructor
-    * @param {Object} args Arguments for the line component.
-    */
-    initialize : function(args){
-
-      /**
-      * c : default color line
-      */
-      var defaults = {
-        c : &#x27;line-default&#x27;
-      };
-
-      var line = d3.svg.line();
-
-      var options = {
-        /**
-        * Data bind for a line serie.
-        * Since a line is drawed using d3.line
-        * a datum must be defined. Can also have a color
-        * for the whole serie.
-        * 
-        * @method dataBind
-        * @param {Object} d example = {
-        *                              color : &#x27;redline&#x27;
-        *                              data : [
-        *                                {x : &#x27;Jan&#x27;, y: 200},
-        *                                ...
-        *                              ]
-        *                            }
-        */
-        dataBind : function(d){
-
-          var chart = this.chart();
-
-          line.x(function(d) { return chart.xscale.map(d.x, 0); })
-              .y(function(d) { return chart.yscale.map(d.y, 0); });
-
-          chart.datum = d.data;
-          chart.c = (d.c || defaults.c);
-
-          return this.selectAll(&#x27;path&#x27;).data([0]);
-
-        },
-        /**
-        * Appends a svg:path
-        *
-        * @method insert
-        * @chainable
-        */
-        insert : function(){
-
-          return this.append(&#x27;path&#x27;);
-        },
-        events : {
-          &#x27;merge&#x27; : function(){
-
-              var chart = this.chart();
-
-              this.datum(chart.datum)
-                  .classed(chart.c, true)
-                  .attr(&#x27;d&#x27;,line);
-
-              return this;
-          },
-          &#x27;exit&#x27; : function(){
-
-            return this.remove();
-          }
-        }
-      };
-
-      /**
-      * Layer creation
-      */
-      this.layer(&#x27;lineslayer&#x27;, this.base.append(&#x27;g&#x27;), options);
+    /** Setting up AMD support*/
+    if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
+        /** AMD */
+        define(&#x27;charty/line&#x27;, [
+                &#x27;d3.chart&#x27;,
+                &#x27;charty/chartynames&#x27;,
+                &#x27;charty/simpledatagroup&#x27;
+            ],
+            function(d3, Charty) {
+                /** Export global even in AMD case in case this script
+                 * is loaded with others */
+                return factory(d3, Charty);
+            });
+    } else {
+        /** Browser globals */
+        factory(d3, Charty);
     }
-  });
+}(this, function(d3, Charty) {
+    d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
+        .extend(Charty.CHART_NAMES.LINE, {
+            /**
+             * Line initialization
+             *
+             * @constructor
+             * @param {Object} args Arguments for the line component.
+             */
+            initialize: function() {
+
+                /**
+                 * c : default color line
+                 */
+                var defaults = {
+                    c: &#x27;line-default&#x27;
+                };
+
+                var line = d3.svg.line();
+
+                var options = {
+                    /**
+                     * Data bind for a line serie.
+                     * Since a line is drawed using d3.line
+                     * a datum must be defined. Can also have a color
+                     * for the whole serie.
+                     *
+                     * @method dataBind
+                     * @param {Object} d example = {
+                     *                              color : &#x27;redline&#x27;
+                     *                              data : [
+                     *                                {x : &#x27;Jan&#x27;, y: 200},
+                     *                                ...
+                     *                              ]
+                     *                            }
+                     */
+                    dataBind: function(d) {
+
+                        var chart = this.chart();
+
+                        line.x(function(d) {
+                            return chart.xscale.map(d.x, 0);
+                        })
+                            .y(function(d) {
+                                return chart.yscale.map(d.y, 0);
+                            });
+
+                        chart.datum = d.data;
+                        chart.c = (d.c || defaults.c);
+
+                        return this.selectAll(&#x27;path&#x27;)
+                            .data([0]);
+
+                    },
+                    /**
+                     * Appends a svg:path
+                     *
+                     * @method insert
+                     * @chainable
+                     */
+                    insert: function() {
+
+                        return this.append(&#x27;path&#x27;);
+                    },
+                    events: {
+                        &#x27;merge&#x27;: function() {
+
+                            var chart = this.chart();
+
+                            this.datum(chart.datum)
+                                .classed(chart.c, true)
+                                .attr(&#x27;d&#x27;, line);
+
+                            return this;
+                        },
+                        &#x27;exit&#x27;: function() {
+
+                            return this.remove();
+                        }
+                    }
+                };
+
+                /**
+                 * Layer creation
+                 */
+                this.layer(&#x27;lineslayer&#x27;, this.base.append(&#x27;g&#x27;), options);
+            }
+        });
 }));
+
     </pre>
 </div>
 

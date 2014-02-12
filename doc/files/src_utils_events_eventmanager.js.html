@@ -164,87 +164,89 @@
 
 <div class="file">
     <pre class="code prettyprint linenums">
+/*global FunctionEvent: true, BootstrapEvent: true*/
 /**
-* Event manager. A simple way of adding multiple events to only one target,
-* if necessary.
-* 
-* Since d3 works over selections, a &quot;target&quot; will represent an element selection,
-* so manager won&#x27;t be working over only one element, but for the collection itself.
-*
-* @class EventManager
-* @constructor
-* @requires functionevent,
-*						bootstrapevent,
-*						underscore
-*
-* @author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
-*/
+ * Event manager. A simple way of adding multiple events to only one target,
+ * if necessary.
+ *
+ * Since d3 works over selections, a &quot;target&quot; will represent an element selection,
+ * so manager won&#x27;t be working over only one element, but for the collection itself.
+ *
+ * @class EventManager
+ * @constructor
+ * @requires functionevent,
+ *						bootstrapevent,
+ *						underscore
+ *
+ * @author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
+ */
 (function(root, factory) {
-	/** Setting up AMD support*/
-	if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
-		/** AMD */
-		define(&#x27;charty/eventmanager&#x27;, [
-			&#x27;charty/functionevent&#x27;,
-			&#x27;charty/bootstrapevent&#x27;,
-			&#x27;underscore&#x27;
-		], function (FunctionEvent, BootstrapEvent, _) {
-			/**
-			 * Export global even in AMD case in case this script
-			 * is loaded with others
-			 */
-			return factory(FunctionEvent, BootstrapEvent, _);
-		});
-	} else {
-		/** Browser globals */
-		root.EventManager = factory(FunctionEvent, BootstrapEvent, _);
-	}
-}(this, function (FunctionEvent, BootstrapEvent, _) {
+    /** Setting up AMD support*/
+    if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
+        /** AMD */
+        define(&#x27;charty/eventmanager&#x27;, [
+            &#x27;charty/functionevent&#x27;,
+            &#x27;charty/bootstrapevent&#x27;,
+            &#x27;underscore&#x27;
+        ], function(FunctionEvent, BootstrapEvent, _) {
+            /**
+             * Export global even in AMD case in case this script
+             * is loaded with others
+             */
+            return factory(FunctionEvent, BootstrapEvent, _);
+        });
+    } else {
+        /** Browser globals */
+        root.EventManager = factory(FunctionEvent, BootstrapEvent, _);
+    }
+}(this, function(FunctionEvent, BootstrapEvent, _) {
 
-	/**
-	 * Class constructor
-	 *	
-	 * @constructor
-	 */
-	function EventManager() {
+    /**
+     * Class constructor
+     *
+     * @constructor
+     */
+    function EventManager() {
 
-		this.events = [];
-	}
+        this.events = [];
+    }
 
-	/**
-	 * Adds specific defined event to queue
-	 *
-	 * @method addEvent
-	 * @param {Event} e Charty event to bind
-	 * @chainable
-	 */
-	EventManager.prototype.addEvent = function(e) {
+    /**
+     * Adds specific defined event to queue
+     *
+     * @method addEvent
+     * @param {Event} e Charty event to bind
+     * @chainable
+     */
+    EventManager.prototype.addEvent = function(e) {
 
-		this.events.push(e);
+        this.events.push(e);
 
-		return this;
-	};
+        return this;
+    };
 
-	/**
-	 * Binds all available events to specified targets.
-	 *
-	 * Each event wrapper must have a way to bind itself to the specified
-	 * elements.
-	 *
-	 * @method bindAll
-	 * @param {d3.selection} t Elements selection
-	 * @chainable
-	 */
-	EventManager.prototype.bindAll = function(t) {
-		_.each(this.events, function(e) {
-			e.bind(t);
-		});
+    /**
+     * Binds all available events to specified targets.
+     *
+     * Each event wrapper must have a way to bind itself to the specified
+     * elements.
+     *
+     * @method bindAll
+     * @param {d3.selection} t Elements selection
+     * @chainable
+     */
+    EventManager.prototype.bindAll = function(t) {
+        _.each(this.events, function(e) {
+            e.bind(t);
+        });
 
-		return this;
-	};
+        return this;
+    };
 
-	return EventManager;
+    return EventManager;
 
 }));
+
     </pre>
 </div>
 

@@ -165,76 +165,77 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-* Bar drawer. Takes only one data series as input.
-* Extends Bar component, since only merge will be redefined.
-* 
-* @class HorizontalBar
-* @constructor
-* @extends Bar
-* @requires d3.chart,
-*           charty,
-*           bar
-*
-* @author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
-*/
+ * Bar drawer. Takes only one data series as input.
+ * Extends Bar component, since only merge will be redefined.
+ *
+ * @class HorizontalBar
+ * @constructor
+ * @extends Bar
+ * @requires d3.chart,
+ *           charty,
+ *           bar
+ *
+ * @author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
+ */
 
 (function(root, factory) {
-  /** Setting up AMD support*/
-  if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
-    /** AMD */
-    define(&#x27;charty/horizontalbar&#x27;,[
-      &#x27;d3.chart&#x27;,
-      &#x27;charty/chartynames&#x27;,
-      &#x27;charty/bar&#x27;
-      ],
-      function (d3, Charty) {
-        /** Export global even in AMD case in case this script
-        * is loaded with others*/
-        return factory(d3, Charty);
-    });
-  }
-  else {
-    /** Browser globals */
-    factory (d3, Charty);
-  }
-}(this, function (d3, Charty) {
-  d3.chart(Charty.CHART_NAMES.BAR)
-    .extend(Charty.CHART_NAMES.HORIZONTAL_BAR, {
-    /**
-    * Horizontal bars initialization
-    *
-    * @constructor
-    * @param {Object} args Arguments for horizontal bar component.
-    */
-    initialize : function(args){
-
-      var barLayer =  this.layer(&#x27;barlayer&#x27;);
-
-      /** Necessary for the way d3.chart handles events */
-      barLayer.off(&#x27;merge&#x27;);
-      barLayer.on(&#x27;merge&#x27;, function (){
-
-        var chart = this.chart(),
-            zeroX = chart.xscale.map(0);
-
-        this.attr(&#x27;class&#x27;, function(d){
-          return (d.c || chart.c);
-        }).attr(&quot;x&quot;, function(d) {
-          return chart.xscale.map(Math.min(0, d.x), chart.factor);
-        })
-        .attr(&quot;y&quot;, function(d) {
-          return chart.yscale.map(d.y, chart.factor);
-        })
-        .attr(&quot;width&quot;, function(d) {
-          return Math.abs(chart.xscale.map(d.x) - zeroX);
-        })
-        .attr(&quot;height&quot;, chart.yscale.band(chart.factor));
-
-        return this;
-      });
+    /** Setting up AMD support*/
+    if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
+        /** AMD */
+        define(&#x27;charty/horizontalbar&#x27;, [
+                &#x27;d3.chart&#x27;,
+                &#x27;charty/chartynames&#x27;,
+                &#x27;charty/bar&#x27;
+            ],
+            function(d3, Charty) {
+                /** Export global even in AMD case in case this script
+                 * is loaded with others*/
+                return factory(d3, Charty);
+            });
+    } else {
+        /** Browser globals */
+        factory(d3, Charty);
     }
-  });
+}(this, function(d3, Charty) {
+    d3.chart(Charty.CHART_NAMES.BAR)
+        .extend(Charty.CHART_NAMES.HORIZONTAL_BAR, {
+            /**
+             * Horizontal bars initialization
+             *
+             * @constructor
+             * @param {Object} args Arguments for horizontal bar component.
+             */
+            initialize: function() {
+
+                var barLayer = this.layer(&#x27;barlayer&#x27;);
+
+                /** Necessary for the way d3.chart handles events */
+                barLayer.off(&#x27;merge&#x27;);
+                barLayer.on(&#x27;merge&#x27;, function() {
+
+                    var chart = this.chart(),
+                        zeroX = chart.xscale.map(0);
+
+                    this.attr(&#x27;class&#x27;, function(d) {
+                        return (d.c || chart.c);
+                    })
+                        .attr(&quot;x&quot;, function(d) {
+                            return chart.xscale.map(Math.min(0, d.x), chart.factor);
+                        })
+                        .attr(&quot;y&quot;, function(d) {
+                            return chart.yscale.map(d.y, chart.factor);
+                        })
+                        .attr(&quot;width&quot;, function(d) {
+                            return Math.abs(chart.xscale.map(d.x) - zeroX);
+                        })
+                        .attr(&quot;height&quot;, chart.yscale.band(chart.factor));
+
+                    return this;
+                });
+            }
+        });
 }));
+
     </pre>
 </div>
 

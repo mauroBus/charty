@@ -164,111 +164,113 @@
 
 <div class="file">
     <pre class="code prettyprint linenums">
+/*global LinearScale: true*/
 /**
-* Peak Valley scale for linear axis
-*
-* @class PeakValleyLinearScale
-* @extends BaseScale
-* @requires d3.chart,
-*           linearscale,
-*           charty,
-*           uderscore
-*
-* @author &quot;Cesar Del Soldato &lt;cesards@gmail.com&gt;&quot;
-*/
+ * Peak Valley scale for linear axis
+ *
+ * @class PeakValleyLinearScale
+ * @extends BaseScale
+ * @requires d3.chart,
+ *           linearscale,
+ *           charty,
+ *           uderscore
+ *
+ * @author &quot;Cesar Del Soldato &lt;cesards@gmail.com&gt;&quot;
+ */
 
 (function(root, factory) {
-  /** Setting up AMD support*/
-  if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
-    /** AMD */
-    define(&#x27;charty/peakvalleylinearscale&#x27;, [
-        &#x27;d3.chart&#x27;,
-        &#x27;charty/linearscale&#x27;,
-        &#x27;charty/chartynames&#x27;,
-        &#x27;underscore&#x27;
-      ],
-      function(d3, LinearScale, Charty, _) {
-        /** Export global even in AMD case in case this script
-        * is loaded with others */
-        return factory(d3, LinearScale, Charty, _);
-      });
-  } else {
-    /** Browser globals */
-    root.PeakValleyLinearScale = factory(d3, LinearScale, Charty, _);
-  }
+    /** Setting up AMD support*/
+    if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
+        /** AMD */
+        define(&#x27;charty/peakvalleylinearscale&#x27;, [
+                &#x27;d3.chart&#x27;,
+                &#x27;charty/linearscale&#x27;,
+                &#x27;charty/chartynames&#x27;,
+                &#x27;underscore&#x27;
+            ],
+            function(d3, LinearScale, Charty, _) {
+                /** Export global even in AMD case in case this script
+                 * is loaded with others */
+                return factory(d3, LinearScale, Charty, _);
+            });
+    } else {
+        /** Browser globals */
+        root.PeakValleyLinearScale = factory(d3, LinearScale, Charty, _);
+    }
 }(this, function(d3, LinearScale, Charty, _) {
 
-  /**
-  * Class constructor
-  *
-  * @constructor
-  * @param {String} axisType Axis type, defined in Charty names
-  */
-  var PeakValleyLinearScale = function(axisType) {
-    this.scale = d3.scale.linear();
-    this.axisType = axisType;
-  };
+    /**
+     * Class constructor
+     *
+     * @constructor
+     * @param {String} axisType Axis type, defined in Charty names
+     */
+    var PeakValleyLinearScale = function(axisType) {
+        this.scale = d3.scale.linear();
+        this.axisType = axisType;
+    };
 
-  /**
-  * Inheritance from LinearScale
-  */
-  PeakValleyLinearScale.prototype = new LinearScale();
+    /**
+     * Inheritance from LinearScale
+     */
+    PeakValleyLinearScale.prototype = new LinearScale();
 
-  /**
-  * Calculates the domain for the peak valley linear scale
-  *
-  * The domain is calculated by adding all the data points one by one
-  * and keeping the highest and lowest value it reaches.
-  * It sets the domain and the maximum value.
-  *
-  * @method calculateDomain
-  * @param {Object} data Accessor for the data collection
-  * @param {Object} f callback function
-  * @chainable
-  */
-  PeakValleyLinearScale.prototype.calculateDomain = function(data, f) {
-    var max = 0,
-      valley = 0,
-      peak = 0,
-      sum = 0,
-      d = data.getData(),
-      self = this;
+    /**
+     * Calculates the domain for the peak valley linear scale
+     *
+     * The domain is calculated by adding all the data points one by one
+     * and keeping the highest and lowest value it reaches.
+     * It sets the domain and the maximum value.
+     *
+     * @method calculateDomain
+     * @param {Object} data Accessor for the data collection
+     * @param {Object} f callback function
+     * @chainable
+     */
+    PeakValleyLinearScale.prototype.calculateDomain = function(data, f) {
+        var max = 0,
+            valley = 0,
+            peak = 0,
+            sum = 0,
+            d = data.getData(),
+            self = this;
 
-    if (d &amp;&amp; !_.isEmpty(d)) {
+        if (d &amp;&amp; !_.isEmpty(d)) {
 
-      _.each(d, function(element) {
-        var chartData = element.data;
+            _.each(d, function(element) {
+                var chartData = element.data;
 
-        /** Chart can receive no data, should draw nothing or remove already drawn elements */
-        if (chartData &amp;&amp; !_.isEmpty(chartData)) {
-          var maxg = d3.max(chartData, f);
-          max = Math.max(maxg, max);
+                /** Chart can receive no data, should draw nothing or remove already drawn elements */
+                if (chartData &amp;&amp; !_.isEmpty(chartData)) {
+                    var maxg = d3.max(chartData, f);
+                    max = Math.max(maxg, max);
 
-          _.each(chartData, function(dataPoint) {
+                    _.each(chartData, function(dataPoint) {
 
-            if (dataPoint.reset) {
-              sum = 0;
-            }
+                        if (dataPoint.reset) {
+                            sum = 0;
+                        }
 
-            sum = f ? sum + f(dataPoint) : sum + dataPoint;
+                        sum = f ? sum + f(dataPoint) : sum + dataPoint;
 
-            if (sum &gt; peak) {
-              peak = sum;
-            } else if (sum &lt; valley) {
-              valley = sum;
-            }
-          });
+                        if (sum &gt; peak) {
+                            peak = sum;
+                        } else if (sum &lt; valley) {
+                            valley = sum;
+                        }
+                    });
+                }
+
+                /** Case when there is no data, sometimes can receive a NaN */
+                if (!_.isNaN(peak) &amp;&amp; !_.isNaN(valley) &amp;&amp; !_.isNaN(max)) {
+                    return self.setMaxValue(max)
+                        .setDomain([valley, peak]);
+                }
+            });
         }
+    };
 
-        /** Case when there is no data, sometimes can receive a NaN */
-        if (!_.isNaN(peak) &amp;&amp; !_.isNaN(valley) &amp;&amp; !_.isNaN(max)) {
-          return self.setMaxValue(max).setDomain([valley, peak]);
-        }
-      });
-    }
-  };
-
-  return PeakValleyLinearScale;
+    return PeakValleyLinearScale;
 }));
 
     </pre>

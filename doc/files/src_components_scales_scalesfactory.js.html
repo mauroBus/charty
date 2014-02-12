@@ -164,75 +164,75 @@
 
 <div class="file">
     <pre class="code prettyprint linenums">
+/* global OrdinalScale: true, LinearScale: true, PeakValleyLinearScale:true */
 /**
-*	Scale factory. Separation is provived in an attempt
-*	to provide an easy way to switching scales in a defined chart
-*	
-*	@class ScaleFactory
-* @requires d3.chart,
-*						charty,
-*						ordinalscale,
-*						linearscale,
-*						peakvalleylinearscale
-*
-*	@author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
-*/
+ *	Scale factory. Separation is provived in an attempt
+ *	to provide an easy way to switching scales in a defined chart
+ *
+ *	@class ScaleFactory
+ * @requires d3.chart,
+ *						charty,
+ *						ordinalscale,
+ *						linearscale,
+ *						peakvalleylinearscale
+ *
+ *	@author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
+ */
 
 (function(root, factory) {
-  /** Setting up AMD support*/
-  if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
-    /** AMD */
-    define(&#x27;charty/scalesfactory&#x27;,[
-      &#x27;charty/chartynames&#x27;,
-      &#x27;charty/ordinalscale&#x27;,
-      &#x27;charty/linearscale&#x27;,
-      &#x27;charty/peakvalleylinearscale&#x27;
-      ],
-      function(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale) {
-        /** Export global even in AMD case in case this script
-        *	is loaded with others */
-        return factory(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale);
-    });
-  }
-  else {
-    /** Browser globals */
-    root.ScaleFactory = factory(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale);
-  }
+    /** Setting up AMD support*/
+    if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
+        /** AMD */
+        define(&#x27;charty/scalesfactory&#x27;, [
+                &#x27;charty/chartynames&#x27;,
+                &#x27;charty/ordinalscale&#x27;,
+                &#x27;charty/linearscale&#x27;,
+                &#x27;charty/peakvalleylinearscale&#x27;
+            ],
+            function(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale) {
+                /** Export global even in AMD case in case this script
+                 *	is loaded with others */
+                return factory(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale);
+            });
+    } else {
+        /** Browser globals */
+        root.ScaleFactory = factory(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale);
+    }
 }(this, function(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale) {
-	/** 
-	* Class constructor
-	*
-	* @constructor
-	*/
-	var ScaleFactory = function(){};
+    /**
+     * Class constructor
+     *
+     * @constructor
+     */
+    var ScaleFactory = function() {};
 
-	/**
-	*	Returns a specified scale object, acording to a scale type
-	*
-	*	@method scale
-	*	@param {String} scaleType Available scale type
-	*	@param {String} axisType Related axis type (&#x27;x&#x27;-&#x27;y&#x27;)
-	*	@return {Object} LinearScale / OrdinalScale
-	*/
-	ScaleFactory.prototype.scale = function(scaleType, axisType){
-		var scale;
+    /**
+     *	Returns a specified scale object, acording to a scale type
+     *
+     *	@method scale
+     *	@param {String} scaleType Available scale type
+     *	@param {String} axisType Related axis type (&#x27;x&#x27;-&#x27;y&#x27;)
+     *	@return {Object} LinearScale / OrdinalScale
+     */
+    ScaleFactory.prototype.scale = function(scaleType, axisType) {
+        var scale;
 
-		switch(scaleType){
-			case Charty.AXIS_TYPE.ORDINAL :
-				scale = new OrdinalScale(axisType);
-				break;
-			case Charty.AXIS_TYPE.LINEAR :
-				scale = new LinearScale(axisType);
-				break;
-			case Charty.AXIS_TYPE.PEAK_VALLEY_LINEAR :
-				scale = new PeakValleyLinearScale(axisType);
-				break;
-		}
+        switch (scaleType) {
+            case Charty.AXIS_TYPE.ORDINAL:
+                scale = new OrdinalScale(axisType);
+                break;
+            case Charty.AXIS_TYPE.LINEAR:
+                scale = new LinearScale(axisType);
+                break;
+            case Charty.AXIS_TYPE.PEAK_VALLEY_LINEAR:
+                scale = new PeakValleyLinearScale(axisType);
+                break;
+        }
 
-		return scale;
-	};
+        return scale;
+    };
 
-	return ScaleFactory;
+    return ScaleFactory;
 }));
 
     </pre>

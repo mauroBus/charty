@@ -165,67 +165,64 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-* Scatterplot chart. Defined combining an axis system and a circles mixin.
-*
-* @class Scatterplot
-* @extends MultipleDataGroup
-* @requires d3.chart,
-*           charty,
-*           circle,
-*           multipledatagroup,
-*           yxyaxis,
-*           multipleinstancesmixin
-*
-* @author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
-*/
+ * Scatterplot chart. Defined combining an axis system and a circles mixin.
+ *
+ * @class Scatterplot
+ * @extends MultipleDataGroup
+ * @requires d3.chart,
+ *           charty,
+ *           circle,
+ *           multipledatagroup,
+ *           yxyaxis,
+ *           multipleinstancesmixin
+ *
+ * @author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
+ */
 
 (function(root, factory) {
-  /** Setting up AMD support*/
-  if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
-    /** AMD */
-    define(&#x27;charty/scatterplot&#x27;,[
-      &#x27;d3.chart&#x27;,
-      &#x27;charty/chartynames&#x27;,
-      &#x27;charty/circle&#x27;,
-      &#x27;charty/multipledatagroup&#x27;,
-      &#x27;charty/yxyaxis&#x27;,
-      &#x27;charty/multipleinstancesmixin&#x27;
-      ],
-      function (d3, Charty) {
-        /** Export global even in AMD case in case this script
-        * is loaded with others */
-        return factory(d3, Charty);
-    });
-  }
-  else {
-    /** Browser globals */
-    factory(d3, Charty);
-  }
-}(this, function (d3, Charty) {
-	d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
-    .extend(Charty.CHART_NAMES.SCATTERPLOT, {
+    /** Setting up AMD support*/
+    if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
+        /** AMD */
+        define(&#x27;charty/scatterplot&#x27;, [
+                &#x27;d3.chart&#x27;,
+                &#x27;charty/chartynames&#x27;,
+                &#x27;charty/circle&#x27;,
+                &#x27;charty/multipledatagroup&#x27;,
+                &#x27;charty/yxyaxis&#x27;,
+                &#x27;charty/multipleinstancesmixin&#x27;
+            ],
+            function(d3, Charty) {
+                /** Export global even in AMD case in case this script
+                 * is loaded with others */
+                return factory(d3, Charty);
+            });
+    } else {
+        /** Browser globals */
+        factory(d3, Charty);
+    }
+}(this, function(d3, Charty) {
+    d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
+        .extend(Charty.CHART_NAMES.SCATTERPLOT, {
 
-      /** 
-      * Chart constructor
-      *
-      * @constructor
-      * @param {Object} args Arguments for scatterplot chart.
-      */
-      initialize : function(args){
+            /**
+             * Chart constructor
+             *
+             * @constructor
+             * @param {Object} args Arguments for scatterplot chart.
+             */
+            initialize: function(args) {
 
-        args.chartName =  Charty.CHART_NAMES.CIRCLE;
-        args.instances = (args.instances || 1);
+                args.chartName = Charty.CHART_NAMES.CIRCLE;
+                args.instances = (args.instances || 1);
 
-        var axis = this.mixin(args.axisSystem,
-                              this.base.append(&#x27;g&#x27;),
-                              args).showAsGrid(args.showAsGrid),
+                this.mixin(args.axisSystem, this.base.append(&#x27;g&#x27;), args)
+                    .showAsGrid(args.showAsGrid);
 
-            circles = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
-                                 this.base,
-                                 args);
-      }
-	});
+                this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base, args);
+            }
+        });
 }));
+
     </pre>
 </div>
 

@@ -165,71 +165,72 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-* Text labeling above the data element. Redefindes &quot;merge&quot;
-* Useful for vertical bar chart
-*
-* @class AboveText
-* @extends Text
-* @requires d3.chart,
-*           charty,
-*           text
-*
-* @author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
-*/
+ * Text labeling above the data element. Redefindes &quot;merge&quot;
+ * Useful for vertical bar chart
+ *
+ * @class AboveText
+ * @extends Text
+ * @requires d3.chart,
+ *           charty,
+ *           text
+ *
+ * @author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
+ */
 
 (function(root, factory) {
-  /** Setting up AMD support*/
-  if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
-    /** AMD */
-    define(&#x27;charty/abovetext&#x27;,[
-      &#x27;d3.chart&#x27;,
-      &#x27;charty/chartynames&#x27;,
-      &#x27;charty/text&#x27;
-      ],
-      function (d3, Charty) {
-        /** Export global even in AMD case in case this script
-        * is loaded with others */
-        return factory(d3, Charty);
-    });
-  }
-  else {
-    /** Browser globals */
-    factory(d3, Charty);
-  }
-}(this, function (d3, Charty) {
-  d3.chart(Charty.CHART_NAMES.TEXT)
-    .extend(Charty.CHART_NAMES.ABOVE_TEXT, {
-    /**
-    * @constructor
-    * @param {Object} args Arguments for above text component.
-    */
-    initialize : function(args){
-
-      var textLayer = this.layer(&#x27;texts&#x27;);
-
-      textLayer.off(&#x27;merge&#x27;);
-      textLayer.on(&#x27;merge&#x27;, function () {
-
-        var chart = this.chart(),
-          zeroY = chart.yscale.map(0),
-          heightZeroY = chart.h - zeroY;
-
-        this.attr(&#x27;x&#x27;, function (d){
-          var pos = 0;
-          if (chart.zScale){
-            pos += chart.zScale.map(d.z, 1);
-          }
-
-          return (pos += chart.xscale.map(d.x, (chart.factor || 1))+(chart.xscale.band(chart.factor || 1)/2));
-        }).attr(&#x27;y&#x27;, function (d){
-          return Math.min(zeroY, chart.yscale.map(d.y, chart.factor)) - 7;
-        }).text(function (d){
-          return d.y;
-        });
-      });
+    /** Setting up AMD support*/
+    if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
+        /** AMD */
+        define(&#x27;charty/abovetext&#x27;, [
+                &#x27;d3.chart&#x27;,
+                &#x27;charty/chartynames&#x27;,
+                &#x27;charty/text&#x27;
+            ],
+            function(d3, Charty) {
+                /** Export global even in AMD case in case this script
+                 * is loaded with others */
+                return factory(d3, Charty);
+            });
+    } else {
+        /** Browser globals */
+        factory(d3, Charty);
     }
-  });
+}(this, function(d3, Charty) {
+    d3.chart(Charty.CHART_NAMES.TEXT)
+        .extend(Charty.CHART_NAMES.ABOVE_TEXT, {
+            /**
+             * @constructor
+             * @param {Object} args Arguments for above text component.
+             */
+            initialize: function() {
+
+                var textLayer = this.layer(&#x27;texts&#x27;);
+
+                textLayer.off(&#x27;merge&#x27;);
+                textLayer.on(&#x27;merge&#x27;, function() {
+
+                    var chart = this.chart(),
+                        zeroY = chart.yscale.map(0);
+
+                    this.attr(&#x27;x&#x27;, function(d) {
+                        var pos = 0;
+                        if (chart.zScale) {
+                            pos += chart.zScale.map(d.z, 1);
+                        }
+
+                        return (pos += chart.xscale.map(d.x, (chart.factor || 1)) + (chart.xscale.band(chart.factor || 1) / 2));
+                    })
+                        .attr(&#x27;y&#x27;, function(d) {
+                            return Math.min(zeroY, chart.yscale.map(d.y, chart.factor)) - 7;
+                        })
+                        .text(function(d) {
+                            return d.y;
+                        });
+                });
+            }
+        });
 }));
+
     </pre>
 </div>
 

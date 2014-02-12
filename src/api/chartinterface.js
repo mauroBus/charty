@@ -70,6 +70,8 @@
      * @param {Object} margin margin = {
      *                        marginleft = 20,
      *                        margintop = 30,
+     *                        marginright = 20,
+     *                        marginbottom = 30,
      *                        lfactor = 0.9,
      *                        tfactor = 0.9
      *                      }
@@ -79,6 +81,8 @@
         var marginValues = {
             left: 0,
             top: 0,
+            right: 0,
+            bottom: 0,
             lfactor: 1,
             tfactor: 1
         };
@@ -97,6 +101,8 @@
             marginValues = {
                 left: (margin.marginleft || 0),
                 top: (margin.margintop || 0),
+                right: (margin.marginright || 0),
+                bottom: (margin.marginbottom || 0),
                 lfactor: (margin.marginlfactor || 1),
                 tfactor: (margin.margintfactor || 1)
             };
@@ -106,8 +112,8 @@
         }
 
         /** Calculating values according to margin values */
-        svgWidth = svgWidth * marginValues.lfactor;
-        svgHeight = svgHeight * marginValues.tfactor;
+        svgWidth = (svgWidth - marginValues.right) * marginValues.lfactor;
+        svgHeight = (svgHeight - marginValues.bottom) * marginValues.tfactor;
 
         /** Propagate value to chart*/
         this.chart.height(svgHeight)

@@ -165,141 +165,145 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-* Custom donut chart.
-* Sets a text inside the donut, showing a text label
-* with the represented value.
-*
-* So, this representation will get only one value. The
-* other one must be calculated (rest).
-* 
-* The problem can&#x27;t be solved using mixins, since the text position
-* doesn&#x27;t depend on the data value.
-*
-* @class DonutWithInnerText
-* @extends Donut
-* @requires d3.chart,
-*           charty,
-*           donut
-*
-* @author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
-*/
+ * Custom donut chart.
+ * Sets a text inside the donut, showing a text label
+ * with the represented value.
+ *
+ * So, this representation will get only one value. The
+ * other one must be calculated (rest).
+ *
+ * The problem can&#x27;t be solved using mixins, since the text position
+ * doesn&#x27;t depend on the data value.
+ *
+ * @class DonutWithInnerText
+ * @extends Donut
+ * @requires d3.chart,
+ *           charty,
+ *           donut
+ *
+ * @author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
+ */
 
 (function(root, factory) {
-  /** Setting up AMD support*/
-  if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
-    /** AMD */
-    define( &#x27;charty/donutwithinnertext&#x27;,[
-            &#x27;d3.chart&#x27;,
-            &#x27;charty/chartynames&#x27;,
-            &#x27;charty/donut&#x27;
+    /** Setting up AMD support*/
+    if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
+        /** AMD */
+        define(&#x27;charty/donutwithinnertext&#x27;, [
+                &#x27;d3.chart&#x27;,
+                &#x27;charty/chartynames&#x27;,
+                &#x27;charty/donut&#x27;
             ],
-            function (d3, Charty) {
-      /** Export global even in AMD case in case this script
-      * is loaded with others */
-      return factory(d3, Charty);
-    });
-  }
-  else {
-    /** Browser globals */
-    factory(d3, Charty);
-  }
-}(this, function (d3, Charty) {
+            function(d3, Charty) {
+                /** Export global even in AMD case in case this script
+                 * is loaded with others */
+                return factory(d3, Charty);
+            });
+    } else {
+        /** Browser globals */
+        factory(d3, Charty);
+    }
+}(this, function(d3, Charty) {
 
-  d3.chart(Charty.CHART_NAMES.DONUT)
-    .extend(Charty.CHART_NAMES.DONUT_INNER_TEXT,{
+    d3.chart(Charty.CHART_NAMES.DONUT)
+        .extend(Charty.CHART_NAMES.DONUT_INNER_TEXT, {
 
-      /** 
-      * Constructor
-      *
-      * @constructor
-      * @param {Object} args Arguments for donnut with inner text.
-      */
-      initialize : function(args){
+            /** 
+             * Constructor
+             *
+             * @constructor
+             * @param {Object} args Arguments for donnut with inner text.
+             */
+            initialize: function(args) {
 
-        var dataValidator = args.dataValidator,
-            errors = {
-              invalidFontSize : &#x27;Invalid value : font size must be positive&#x27;
-            };
+                var dataValidator = args.dataValidator,
+                    errors = {
+                        invalidFontSize: &#x27;Invalid value : font size must be positive&#x27;
+                    };
 
-        /**
-        * Defaults for Inner text
-        */
-        var defaults = {
-          fontSize : 55
-        };
+                /**
+                 * Defaults for Inner text
+                 */
+                var defaults = {
+                    fontSize: 55
+                };
 
-        var options = {
-          /**
-          * First element will be shown as label.
-          * 
-          * Data here will take two elements, since is necessary
-          * to render two paths for the donut chart.
-          * 
-          * The first one is the one that will be shown in label.
-          * The second one is the rest of the donut.
-          * 
-          * @method dataBind
-          * @param {Object} data
-          * @chainable
-          */
-          dataBind : function(d){
+                var options = {
+                    /**
+                     * First element will be shown as label.
+                     *
+                     * Data here will take two elements, since is necessary
+                     * to render two paths for the donut chart.
+                     *
+                     * The first one is the one that will be shown in label.
+                     * The second one is the rest of the donut.
+                     *
+                     * @method dataBind
+                     * @param {Object} data
+                     * @chainable
+                     */
+                    dataBind: function(d) {
 
-            var chart = this.chart(),
-                data = d.data,
-                stringValue = (data[0].y).toString() +&#x27;%&#x27;;
+                        var chart = this.chart(),
+                            data = d.data,
+                            stringValue = (data[0].y)
+                                .toString() + &#x27;%&#x27;;
 
-            chart.fontSize = (dataValidator.isPositiveNumber(d.fontSize, errors.invalidFontSize) || defaults.fontSize);
-            /** By default, text will be centered inside donut */
-            chart.xPosition = (d.xPosition || (chart.w/2));
-            chart.yPosition = (d.yPosition || (chart.h/2));
+                        chart.fontSize = (dataValidator.isPositiveNumber(d.fontSize, errors.invalidFontSize) || defaults.fontSize);
+                        /** By default, text will be centered inside donut */
+                        chart.xPosition = (d.xPosition || (chart.w / 2));
+                        chart.yPosition = (d.yPosition || (chart.h / 2));
 
-            return this.selectAll(&#x27;text&#x27;).data([stringValue]);
-          },
-          /**
-          * Inserts one text for the value to display
-          *
-          * @method insert
-          * @chainable
-          */
-          insert : function(){
-            return this.append(&#x27;text&#x27;);
-          },
-          events : {
-            &#x27;enter&#x27; : function(){
+                        return this.selectAll(&#x27;text&#x27;)
+                            .data([stringValue]);
+                    },
+                    /**
+                     * Inserts one text for the value to display
+                     *
+                     * @method insert
+                     * @chainable
+                     */
+                    insert: function() {
+                        return this.append(&#x27;text&#x27;);
+                    },
+                    events: {
+                        &#x27;enter&#x27;: function() {
 
-              var chart = this.chart();
+                            var chart = this.chart();
 
-              this.attr(&#x27;x&#x27;, chart.xPosition)
-                  .attr(&#x27;y&#x27;, chart.yPosition)
-                  .attr(&#x27;dy&#x27;, &#x27;0.35em&#x27;)
-                  .attr(&#x27;text-anchor&#x27;, &#x27;middle&#x27;)
-                  .attr(&#x27;font-size&#x27;, chart.fontSize)
-                  .text(function(d){ return d; });
+                            this.attr(&#x27;x&#x27;, chart.xPosition)
+                                .attr(&#x27;y&#x27;, chart.yPosition)
+                                .attr(&#x27;dy&#x27;, &#x27;0.35em&#x27;)
+                                .attr(&#x27;text-anchor&#x27;, &#x27;middle&#x27;)
+                                .attr(&#x27;font-size&#x27;, chart.fontSize)
+                                .text(function(d) {
+                                    return d;
+                                });
 
-              return this;
-            },
-            &#x27;update&#x27; : function(){
+                            return this;
+                        },
+                        &#x27;update&#x27;: function() {
 
-              this.text(function(d){
-                return d;
-              });
+                            this.text(function(d) {
+                                return d;
+                            });
 
-              return this;
-            },
-            &#x27;exit&#x27; : function(){
+                            return this;
+                        },
+                        &#x27;exit&#x27;: function() {
 
-              return this.remove();
+                            return this.remove();
+                        }
+                    }
+                };
+
+                /**
+                 * Layer creation
+                 */
+                this.layer(&#x27;donutText&#x27;, this.base.append(&#x27;g&#x27;), options);
             }
-          }
-        };
-
-        /**
-        * Layer creation
-        */
-        this.layer(&#x27;donutText&#x27;, this.base.append(&#x27;g&#x27;), options);
-      }
-    });
+        });
 }));
+
     </pre>
 </div>
 

@@ -391,8 +391,8 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "src\\api\\chartinterface.js",
-            "line": 1,
-            "description": "Sets an interface for adding a link between the chart\nand the data accessor.\n\nUses an event manager for defining different charty events. Since events \nneed to be present when chart is rendered, for attachment to every SVG node,\nthey should be defined by draw method. This makes an easy way of propagating\nevents to each base rendering class.\n\nNote : events are NOT defined in chart init, it can happen that, at this point,\nevents handler are not yet defined or they don't have all necessary data.",
+            "line": 2,
+            "description": "Sets an interface for adding a link between the chart\nand the data accessor.\n\nUses an event manager for defining different charty events. Since events\nneed to be present when chart is rendered, for attachment to every SVG node,\nthey should be defined by draw method. This makes an easy way of propagating\nevents to each base rendering class.\n\nNote : events are NOT defined in chart init, it can happen that, at this point,\nevents handler are not yet defined or they don't have all necessary data.",
             "requires": [
                 "accessor",
                 "eventmanager\n          eventfactory\n          underscore"
@@ -408,7 +408,7 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "src\\api\\charty.js",
-            "line": 1,
+            "line": 2,
             "description": "Chart instantiation API",
             "requires": [
                 "chartynames\n          scalesfactory\n          chartinterface\n          datavalidator\n          eventfactory\n          barchart\n          labeledtrianglechart\n          linechart\n          scatterplot\n          donut\n          donnutwithinnertext\n          linechartcircles\n          groupedbarchart"
@@ -642,7 +642,7 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "src\\components\\scales\\linearscale.js",
-            "line": 1,
+            "line": 2,
             "description": "Linear scale for linear axis",
             "extends": "BaseScale",
             "requires": [
@@ -661,7 +661,7 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "src\\components\\scales\\ordinalscale.js",
-            "line": 1,
+            "line": 2,
             "description": "Ordinal Scale",
             "extends": "BaseScale",
             "requires": [
@@ -679,7 +679,7 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "src\\components\\scales\\peakvalleylinearscale.js",
-            "line": 1,
+            "line": 2,
             "description": "Peak Valley scale for linear axis",
             "extends": "BaseScale",
             "requires": [
@@ -699,7 +699,7 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "src\\components\\scales\\scalesfactory.js",
-            "line": 1,
+            "line": 2,
             "description": "Scale factory. Separation is provived in an attempt\nto provide an easy way to switching scales in a defined chart",
             "requires": [
                 "d3.chart",
@@ -854,8 +854,8 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "src\\composition\\datamapper\\datamapper.js",
-            "line": 1,
-            "description": "Maps every data point, taking into account one to many\nscales. Works as a scale composite object.\n\nIt is possible to requiere more than one scale to map certain\nelements, so this component will make the correct positioning.\n\nEach chart will have two mappers : one for horizontal axis and \nother for vertical axis.",
+            "line": 2,
+            "description": "Maps every data point, taking into account one to many\nscales. Works as a scale composite object.\n\nIt is possible to requiere more than one scale to map certain\nelements, so this component will make the correct positioning.\n\nEach chart will have two mappers : one for horizontal axis and\nother for vertical axis.",
             "requires": [
                 "linearscale",
                 "basescale",
@@ -891,7 +891,7 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "src\\composition\\groupedbarchart\\groupedbarchart.js",
-            "line": 1,
+            "line": 2,
             "description": "Grouped bar chart.\nUnlike regular bar char, grouped needs to define\ntwo scales for x axis : one for the axis itself, and\nanother one for the data mapping.",
             "extends": "MultipleDataGroup",
             "requires": [
@@ -958,7 +958,7 @@
             "extension_for": [],
             "file": "src\\composition\\linechart\\linechartcircles.js",
             "line": 1,
-            "description": "Line chart combined with circles. Combines the line chart and \nthe circle component, defining both as mixins.",
+            "description": "Line chart combined with circles. Combines the line chart and\nthe circle component, defining both as mixins.",
             "extends": "MultipleDataGroup",
             "requires": [
                 "d3.chart",
@@ -1000,7 +1000,7 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "src\\composition\\multipledatagroup.js",
-            "line": 1,
+            "line": 2,
             "description": "Defines a data transformation for composite charts",
             "extends": "BaseChart",
             "requires": [
@@ -1087,7 +1087,7 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "src\\utils\\events\\bootstrapevent.js",
-            "line": 1,
+            "line": 2,
             "description": "Hooks to specified element a bootstrap feature (for instance, a popover).\nSince data will be handled a specific way, a custom bootstrap event is given in\norder to facilitate instantiation.\n\nNote : since SVG element won't render contained divs, every element will\nbe added to the 'body' element. This workaround is easier than dealing with\nSVG foreing objects.\n\nSupported bootstrap features : popovers, tooltips.",
             "is_constructor": 1,
             "requires": [
@@ -1106,7 +1106,7 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "src\\utils\\events\\eventmanager.js",
-            "line": 1,
+            "line": 2,
             "description": "Event manager. A simple way of adding multiple events to only one target,\nif necessary.\n\nSince d3 works over selections, a \"target\" will represent an element selection,\nso manager won't be working over only one element, but for the collection itself.",
             "is_constructor": 1,
             "requires": [
@@ -1136,17 +1136,17 @@
     "classitems": [
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 22,
+            "line": 23,
             "class": "ChartInterface"
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 24,
+            "line": 25,
             "class": "ChartInterface"
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 32,
+            "line": 33,
             "class": "ChartInterface"
         },
         {
@@ -1207,7 +1207,7 @@
                 },
                 {
                     "name": "margin",
-                    "description": "margin = {\n                       marginleft = 20,\n                       margintop = 30,\n                       lfactor = 0.9,\n                       tfactor = 0.9\n                     }",
+                    "description": "margin = {\n                       marginleft = 20,\n                       margintop = 30,\n                       marginright = 20,\n                       marginbottom = 30,\n                       lfactor = 0.9,\n                       tfactor = 0.9\n                     }",
                     "type": "Object"
                 }
             ],
@@ -1215,12 +1215,7 @@
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 78,
-            "class": "ChartInterface"
-        },
-        {
-            "file": "src\\api\\chartinterface.js",
-            "line": 86,
+            "line": 80,
             "class": "ChartInterface"
         },
         {
@@ -1230,22 +1225,27 @@
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 104,
+            "line": 94,
             "class": "ChartInterface"
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 108,
+            "line": 110,
             "class": "ChartInterface"
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 112,
+            "line": 114,
             "class": "ChartInterface"
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 116,
+            "line": 118,
+            "class": "ChartInterface"
+        },
+        {
+            "file": "src\\api\\chartinterface.js",
+            "line": 123,
             "description": "Interface to the chart drawing stage",
             "itemtype": "method",
             "name": "draw",
@@ -1266,17 +1266,17 @@
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 129,
+            "line": 136,
             "class": "ChartInterface"
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 134,
+            "line": 141,
             "class": "ChartInterface"
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 143,
+            "line": 150,
             "description": "Chart redimension, without redrawing elements",
             "itemtype": "method",
             "name": "redimension",
@@ -1297,12 +1297,12 @@
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 158,
+            "line": 165,
             "class": "ChartInterface"
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 168,
+            "line": 175,
             "description": "Sets a background image via css. Class is required",
             "itemtype": "method",
             "name": "setBackgroundImage",
@@ -1318,12 +1318,12 @@
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 178,
+            "line": 185,
             "class": "ChartInterface"
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 184,
+            "line": 191,
             "description": "Removes class containing background image, if present",
             "itemtype": "method",
             "name": "removeBackgroundImage",
@@ -1332,7 +1332,7 @@
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 196,
+            "line": 203,
             "description": "Sets title as a header",
             "itemtype": "method",
             "name": "setTitle",
@@ -1358,17 +1358,17 @@
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 23,
+            "line": 24,
             "class": "Charty"
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 25,
+            "line": 26,
             "class": "Charty"
         },
         {
             "file": "src\\api\\charty.js",
-            "line": 44,
+            "line": 45,
             "class": "Charty"
         },
         {
@@ -1496,23 +1496,23 @@
         },
         {
             "file": "src\\api\\chartynames.js",
-            "line": 24,
+            "line": 23,
             "class": "ChartNames"
         },
         {
             "file": "src\\api\\chartynames.js",
-            "line": 29,
+            "line": 28,
             "class": "ChartNames"
         },
         {
             "file": "src\\api\\chartynames.js",
-            "line": 59,
+            "line": 58,
             "description": "Axis types are defined as constants\n\nRelated to scaling.",
             "class": "ChartNames"
         },
         {
             "file": "src\\api\\chartynames.js",
-            "line": 70,
+            "line": 69,
             "description": "Axis defined as constants",
             "class": "ChartNames"
         },
@@ -1573,7 +1573,11 @@
         {
             "file": "src\\components\\axis\\axis.js",
             "line": 64,
-            "description": "Defaults for axis\n\nc : axis style class",
+            "description": "Axis default CSS class",
+            "itemtype": "property",
+            "name": "cssClass",
+            "type": "String",
+            "default": "'axis'",
             "class": "Axis"
         },
         {
@@ -1604,7 +1608,7 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 96,
+            "line": 98,
             "description": "Insert for axis. Just inserts one svg:g\nelement.",
             "itemtype": "method",
             "name": "insert",
@@ -1612,40 +1616,40 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 110,
+            "line": 112,
             "description": "Renders as a grid.",
             "class": "Axis"
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 117,
+            "line": 119,
             "class": "Axis"
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 120,
+            "line": 122,
             "description": "Axis translation in x or y direction.",
             "class": "Axis"
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 127,
+            "line": 129,
             "class": "Axis"
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 132,
+            "line": 134,
             "class": "Axis"
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 154,
+            "line": 157,
             "description": "Axis layer creation",
             "class": "Axis"
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 159,
+            "line": 162,
             "description": "Sets tick size for the axis",
             "itemtype": "method",
             "name": "tickSize",
@@ -1661,7 +1665,7 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 167,
+            "line": 170,
             "description": "Size for the ticks. Necessary\nto define a grid chart.",
             "itemtype": "property",
             "name": "tsize",
@@ -1671,7 +1675,7 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 178,
+            "line": 181,
             "description": "Sets the scale that will be used for the axis",
             "itemtype": "method",
             "name": "setScale",
@@ -1687,7 +1691,7 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 194,
+            "line": 197,
             "description": "Shows the axis as a grid",
             "itemtype": "method",
             "name": "showAsGrid",
@@ -1704,7 +1708,7 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 206,
+            "line": 209,
             "description": "Sets axis orientation",
             "itemtype": "method",
             "name": "orient",
@@ -1721,7 +1725,7 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 219,
+            "line": 222,
             "description": "Sets x translation for axis.",
             "itemtype": "method",
             "name": "xtranslate",
@@ -1737,7 +1741,7 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 230,
+            "line": 233,
             "description": "Sets y translation for axis.",
             "itemtype": "method",
             "name": "ytranslate",
@@ -1753,7 +1757,7 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 241,
+            "line": 244,
             "description": "Text label that will be set next to the axis",
             "itemtype": "method",
             "name": "setTextLabel",
@@ -1774,7 +1778,7 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 254,
+            "line": 257,
             "description": "Custom tick count setting for particular\naxis.\n\nThis options will only work in linear scales,\nsince the domain, by defaut, is continuous.",
             "itemtype": "method",
             "name": "tickCount",
@@ -1790,7 +1794,7 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 271,
+            "line": 274,
             "description": "Tick format",
             "itemtype": "method",
             "name": "tickFormat",
@@ -1821,12 +1825,12 @@
         },
         {
             "file": "src\\components\\bar\\bar.js",
-            "line": 29,
+            "line": 28,
             "class": "Bar"
         },
         {
             "file": "src\\components\\bar\\bar.js",
-            "line": 35,
+            "line": 34,
             "description": "Bar initialization",
             "is_constructor": 1,
             "params": [
@@ -1840,13 +1844,13 @@
         },
         {
             "file": "src\\components\\bar\\bar.js",
-            "line": 43,
+            "line": 42,
             "description": "Sets only bar color as default.",
             "class": "Bar"
         },
         {
             "file": "src\\components\\bar\\bar.js",
-            "line": 51,
+            "line": 50,
             "description": "Data bind for a bar serie.\nCan have a color set for the whole serie, or\neach bar can have an own color defined.",
             "itemtype": "method",
             "name": "dataBind",
@@ -1862,7 +1866,7 @@
         },
         {
             "file": "src\\components\\bar\\bar.js",
-            "line": 69,
+            "line": 68,
             "description": "Sets color for the whole data serie.",
             "class": "Bar"
         },
@@ -1882,26 +1886,26 @@
         },
         {
             "file": "src\\components\\bar\\bar.js",
-            "line": 98,
+            "line": 99,
             "description": "chart.factor : value used to define bar's width. It can\nbe useful to reduce the width, in case many data series\nare draw using bars.",
             "class": "Bar"
         },
         {
             "file": "src\\components\\bar\\bar.js",
-            "line": 130,
+            "line": 131,
             "description": "Layer creation",
             "class": "Bar"
         },
         {
             "file": "src\\components\\bar\\bar.js",
-            "line": 135,
+            "line": 136,
             "description": "Adds z scale if necessary",
             "itemtype": "method",
             "name": "setZScale",
             "params": [
                 {
                     "name": "zScale",
-                    "description": "d3.scale for mapping along x axis. In fact, \nis the second scale for this axis.",
+                    "description": "d3.scale for mapping along x axis. In fact,\nis the second scale for this axis.",
                     "type": "Object"
                 }
             ],
@@ -1925,12 +1929,12 @@
         },
         {
             "file": "src\\components\\bar\\horizontalbar.js",
-            "line": 31,
+            "line": 30,
             "class": "HorizontalBar"
         },
         {
             "file": "src\\components\\bar\\horizontalbar.js",
-            "line": 37,
+            "line": 36,
             "description": "Horizontal bars initialization",
             "is_constructor": 1,
             "params": [
@@ -1944,7 +1948,7 @@
         },
         {
             "file": "src\\components\\bar\\horizontalbar.js",
-            "line": 47,
+            "line": 46,
             "class": "HorizontalBar"
         },
         {
@@ -2010,12 +2014,12 @@
         },
         {
             "file": "src\\components\\base\\basechart.js",
-            "line": 28,
+            "line": 27,
             "class": "BaseChart"
         },
         {
             "file": "src\\components\\base\\basechart.js",
-            "line": 34,
+            "line": 33,
             "description": "Sets the width for the chart\nIn case chart contains components, width will\npropagate to them",
             "itemtype": "method",
             "name": "width",
@@ -2031,7 +2035,7 @@
         },
         {
             "file": "src\\components\\base\\basechart.js",
-            "line": 52,
+            "line": 51,
             "description": "Sets the height for the chart. Propagates to\ncomponents.",
             "itemtype": "method",
             "name": "height",
@@ -2046,7 +2050,7 @@
         },
         {
             "file": "src\\components\\base\\basechart.js",
-            "line": 68,
+            "line": 67,
             "description": "Sets the scale type for the x data mapping chart.\nPropagates to components\n\nNot all charts use scales. Some can use direct\nmapping.",
             "itemtype": "method",
             "name": "setXScale",
@@ -2062,7 +2066,7 @@
         },
         {
             "file": "src\\components\\base\\basechart.js",
-            "line": 88,
+            "line": 87,
             "description": "Sets the scale type for the y data mapping chart.\nPropagates to components.\n\nNot all charts use scales. Some can use direct\nmapping.",
             "itemtype": "method",
             "name": "setYScale",
@@ -2078,7 +2082,7 @@
         },
         {
             "file": "src\\components\\base\\basechart.js",
-            "line": 108,
+            "line": 107,
             "description": "Propagates the Event Manager to component parts.",
             "itemtype": "method",
             "name": "setEventManager",
@@ -2094,27 +2098,27 @@
         },
         {
             "file": "src\\components\\circle\\circle.js",
-            "line": 14,
+            "line": 13,
             "class": "Circle"
         },
         {
             "file": "src\\components\\circle\\circle.js",
-            "line": 16,
+            "line": 15,
             "class": "Circle"
         },
         {
             "file": "src\\components\\circle\\circle.js",
-            "line": 23,
+            "line": 22,
             "class": "Circle"
         },
         {
             "file": "src\\components\\circle\\circle.js",
-            "line": 29,
+            "line": 27,
             "class": "Circle"
         },
         {
             "file": "src\\components\\circle\\circle.js",
-            "line": 35,
+            "line": 33,
             "description": "Circle initializator",
             "is_constructor": 1,
             "params": [
@@ -2128,13 +2132,13 @@
         },
         {
             "file": "src\\components\\circle\\circle.js",
-            "line": 49,
+            "line": 46,
             "description": "Defaults for circles.\n\nr : circle radius\nc : circle color",
             "class": "Circle"
         },
         {
             "file": "src\\components\\circle\\circle.js",
-            "line": 61,
+            "line": 58,
             "description": "Data bind for a circle serie.\nCan have color and circle radius set for the whole serie,\nor own values for each data point.",
             "itemtype": "method",
             "name": "dataBind",
@@ -2150,7 +2154,7 @@
         },
         {
             "file": "src\\components\\circle\\circle.js",
-            "line": 85,
+            "line": 83,
             "description": "Appends a svg:circle",
             "itemtype": "method",
             "name": "insert",
@@ -2159,12 +2163,12 @@
         },
         {
             "file": "src\\components\\circle\\circle.js",
-            "line": 101,
+            "line": 100,
             "class": "Circle"
         },
         {
             "file": "src\\components\\circle\\circle.js",
-            "line": 124,
+            "line": 131,
             "description": "Layer creation",
             "class": "Circle"
         },
@@ -2241,7 +2245,7 @@
         },
         {
             "file": "src\\components\\donut\\donut.js",
-            "line": 107,
+            "line": 108,
             "description": "Adds a svg:path element for the donut",
             "itemtype": "method",
             "name": "insert",
@@ -2250,12 +2254,12 @@
         },
         {
             "file": "src\\components\\donut\\donut.js",
-            "line": 126,
+            "line": 128,
             "class": "Donut"
         },
         {
             "file": "src\\components\\donut\\donut.js",
-            "line": 143,
+            "line": 145,
             "description": "Layer creation",
             "class": "Donut"
         },
@@ -2276,12 +2280,12 @@
         },
         {
             "file": "src\\components\\line\\line.js",
-            "line": 31,
+            "line": 30,
             "class": "Line"
         },
         {
             "file": "src\\components\\line\\line.js",
-            "line": 37,
+            "line": 36,
             "description": "Line initialization",
             "is_constructor": 1,
             "params": [
@@ -2295,13 +2299,13 @@
         },
         {
             "file": "src\\components\\line\\line.js",
-            "line": 45,
+            "line": 44,
             "description": "c : default color line",
             "class": "Line"
         },
         {
             "file": "src\\components\\line\\line.js",
-            "line": 55,
+            "line": 54,
             "description": "Data bind for a line serie.\nSince a line is drawed using d3.line\na datum must be defined. Can also have a color\nfor the whole serie.",
             "itemtype": "method",
             "name": "dataBind",
@@ -2316,7 +2320,7 @@
         },
         {
             "file": "src\\components\\line\\line.js",
-            "line": 83,
+            "line": 87,
             "description": "Appends a svg:path",
             "itemtype": "method",
             "name": "insert",
@@ -2325,7 +2329,7 @@
         },
         {
             "file": "src\\components\\line\\line.js",
-            "line": 111,
+            "line": 115,
             "description": "Layer creation",
             "class": "Line"
         },
@@ -2346,7 +2350,7 @@
         },
         {
             "file": "src\\components\\roundedrectangle\\roundedrectangle.js",
-            "line": 35,
+            "line": 34,
             "description": "Rounded rectangle initialization.",
             "is_constructor": 1,
             "params": [
@@ -2360,13 +2364,13 @@
         },
         {
             "file": "src\\components\\roundedrectangle\\roundedrectangle.js",
-            "line": 51,
+            "line": 50,
             "description": "Defaults for rectangle\n\nrh : rectangle height\nrw : rectangle width\nrc : rectangle color\nrx, ry : value for rounded corners",
             "class": "RoundedRectangle"
         },
         {
             "file": "src\\components\\roundedrectangle\\roundedrectangle.js",
-            "line": 68,
+            "line": 67,
             "description": "Data bind for Rounded Rectangle.\nData defines a rectangle height (rh), width (rw),\ncolor (rc), rx, ry. If not defined, defauls are\nused.",
             "itemtype": "method",
             "name": "dataBind",
@@ -2391,12 +2395,12 @@
         },
         {
             "file": "src\\components\\roundedrectangle\\roundedrectangle.js",
-            "line": 111,
+            "line": 112,
             "class": "RoundedRectangle"
         },
         {
             "file": "src\\components\\roundedrectangle\\roundedrectangle.js",
-            "line": 136,
+            "line": 137,
             "description": "Layer creation",
             "class": "RoundedRectangle"
         },
@@ -2417,19 +2421,19 @@
         },
         {
             "file": "src\\components\\scales\\basescale.js",
-            "line": 26,
+            "line": 25,
             "class": "BaseScale"
         },
         {
             "file": "src\\components\\scales\\basescale.js",
-            "line": 31,
+            "line": 30,
             "description": "Class constructor",
             "is_constructor": 1,
             "class": "BaseScale"
         },
         {
             "file": "src\\components\\scales\\basescale.js",
-            "line": 39,
+            "line": 37,
             "description": "Returns the contained scale.",
             "itemtype": "method",
             "name": "getScale",
@@ -2441,7 +2445,7 @@
         },
         {
             "file": "src\\components\\scales\\basescale.js",
-            "line": 49,
+            "line": 47,
             "description": "Generates range value for a scale.",
             "itemtype": "method",
             "name": "generateRange",
@@ -2606,7 +2610,7 @@
         },
         {
             "file": "src\\components\\scales\\linearscale.js",
-            "line": 139,
+            "line": 140,
             "description": "Maximum value setting for linear scale.\nUseful when setting discrete ticks for continuous scale",
             "itemtype": "method",
             "name": "setMaxValue",
@@ -2622,7 +2626,7 @@
         },
         {
             "file": "src\\components\\scales\\linearscale.js",
-            "line": 152,
+            "line": 153,
             "description": "Returns max value",
             "itemtype": "method",
             "name": "getMaxValue",
@@ -2649,12 +2653,12 @@
         },
         {
             "file": "src\\components\\scales\\ordinalscale.js",
-            "line": 27,
+            "line": 26,
             "class": "OrdinalScale"
         },
         {
             "file": "src\\components\\scales\\ordinalscale.js",
-            "line": 32,
+            "line": 31,
             "description": "Class constructor",
             "is_constructor": 1,
             "params": [
@@ -2668,13 +2672,13 @@
         },
         {
             "file": "src\\components\\scales\\ordinalscale.js",
-            "line": 43,
+            "line": 42,
             "description": "Inheritance from BaseScale",
             "class": "OrdinalScale"
         },
         {
             "file": "src\\components\\scales\\ordinalscale.js",
-            "line": 48,
+            "line": 47,
             "description": "Sets the domain data for the scale",
             "itemtype": "method",
             "name": "setDomain",
@@ -2690,7 +2694,7 @@
         },
         {
             "file": "src\\components\\scales\\ordinalscale.js",
-            "line": 60,
+            "line": 59,
             "description": "Sets the range for the scale",
             "itemtype": "method",
             "name": "setRange",
@@ -2706,7 +2710,7 @@
         },
         {
             "file": "src\\components\\scales\\ordinalscale.js",
-            "line": 72,
+            "line": 71,
             "description": "Maps a value to the current scaling\nSince ordinal scales computes a band width\nA value needs to be mapped and moved according\nto that band width",
             "itemtype": "method",
             "name": "map",
@@ -2730,7 +2734,7 @@
         },
         {
             "file": "src\\components\\scales\\ordinalscale.js",
-            "line": 87,
+            "line": 86,
             "description": "Returns the range band for the scale\nCan be reduced if (factor < 1)",
             "itemtype": "method",
             "name": "band",
@@ -2749,7 +2753,7 @@
         },
         {
             "file": "src\\components\\scales\\ordinalscale.js",
-            "line": 99,
+            "line": 98,
             "description": "Calculates the scale domain, based on a data collection and a\ncallback function\nRegarding the data series, ordinal scales should be uniform, whether\nthey have values for that specific ordinal element or not.",
             "itemtype": "method",
             "name": "calculateDomain",
@@ -2782,27 +2786,27 @@
         },
         {
             "file": "src\\components\\scales\\peakvalleylinearscale.js",
-            "line": 15,
+            "line": 16,
             "class": "PeakValleyLinearScale"
         },
         {
             "file": "src\\components\\scales\\peakvalleylinearscale.js",
-            "line": 17,
+            "line": 18,
             "class": "PeakValleyLinearScale"
         },
         {
             "file": "src\\components\\scales\\peakvalleylinearscale.js",
-            "line": 25,
+            "line": 26,
             "class": "PeakValleyLinearScale"
         },
         {
             "file": "src\\components\\scales\\peakvalleylinearscale.js",
-            "line": 30,
+            "line": 31,
             "class": "PeakValleyLinearScale"
         },
         {
             "file": "src\\components\\scales\\peakvalleylinearscale.js",
-            "line": 35,
+            "line": 36,
             "description": "Class constructor",
             "is_constructor": 1,
             "params": [
@@ -2816,13 +2820,13 @@
         },
         {
             "file": "src\\components\\scales\\peakvalleylinearscale.js",
-            "line": 46,
+            "line": 47,
             "description": "Inheritance from LinearScale",
             "class": "PeakValleyLinearScale"
         },
         {
             "file": "src\\components\\scales\\peakvalleylinearscale.js",
-            "line": 51,
+            "line": 52,
             "description": "Calculates the domain for the peak valley linear scale\n\nThe domain is calculated by adding all the data points one by one\nand keeping the highest and lowest value it reaches.\nIt sets the domain and the maximum value.",
             "itemtype": "method",
             "name": "calculateDomain",
@@ -2843,27 +2847,27 @@
         },
         {
             "file": "src\\components\\scales\\peakvalleylinearscale.js",
-            "line": 76,
+            "line": 77,
             "class": "PeakValleyLinearScale"
         },
         {
             "file": "src\\components\\scales\\peakvalleylinearscale.js",
-            "line": 97,
+            "line": 98,
             "class": "PeakValleyLinearScale"
         },
         {
             "file": "src\\components\\scales\\scalesfactory.js",
-            "line": 16,
+            "line": 17,
             "class": "ScaleFactory"
         },
         {
             "file": "src\\components\\scales\\scalesfactory.js",
-            "line": 18,
+            "line": 19,
             "class": "ScaleFactory"
         },
         {
             "file": "src\\components\\scales\\scalesfactory.js",
-            "line": 26,
+            "line": 27,
             "class": "ScaleFactory"
         },
         {
@@ -2919,12 +2923,12 @@
         },
         {
             "file": "src\\components\\text\\abovetext.js",
-            "line": 30,
+            "line": 29,
             "class": "AboveText"
         },
         {
             "file": "src\\components\\text\\abovetext.js",
-            "line": 36,
+            "line": 35,
             "is_constructor": 1,
             "params": [
                 {
@@ -2952,12 +2956,12 @@
         },
         {
             "file": "src\\components\\text\\righttext.js",
-            "line": 30,
+            "line": 29,
             "class": "RightText"
         },
         {
             "file": "src\\components\\text\\righttext.js",
-            "line": 36,
+            "line": 35,
             "is_constructor": 1,
             "params": [
                 {
@@ -2985,12 +2989,12 @@
         },
         {
             "file": "src\\components\\text\\text.js",
-            "line": 29,
+            "line": 28,
             "class": "Text"
         },
         {
             "file": "src\\components\\text\\text.js",
-            "line": 35,
+            "line": 34,
             "description": "Text label initializator",
             "is_constructor": 1,
             "params": [
@@ -3004,7 +3008,7 @@
         },
         {
             "file": "src\\components\\text\\text.js",
-            "line": 44,
+            "line": 43,
             "description": "Data bind for text labeling.\nCan depend on other elements, for instance,\nthe rounded rectangles to form a label.",
             "itemtype": "method",
             "name": "dataBind",
@@ -3028,7 +3032,7 @@
         },
         {
             "file": "src\\components\\text\\text.js",
-            "line": 100,
+            "line": 102,
             "description": "Layer creation",
             "class": "Text"
         },
@@ -3049,12 +3053,12 @@
         },
         {
             "file": "src\\components\\text\\winlosstext.js",
-            "line": 31,
+            "line": 30,
             "class": "AboveText"
         },
         {
             "file": "src\\components\\text\\winlosstext.js",
-            "line": 37,
+            "line": 36,
             "is_constructor": 1,
             "params": [
                 {
@@ -3067,7 +3071,7 @@
         },
         {
             "file": "src\\components\\text\\winlosstext.js",
-            "line": 45,
+            "line": 44,
             "description": "Sets offset for label.",
             "class": "AboveText"
         },
@@ -3088,12 +3092,12 @@
         },
         {
             "file": "src\\components\\triangle\\triangle.js",
-            "line": 30,
+            "line": 29,
             "class": "Triangle"
         },
         {
             "file": "src\\components\\triangle\\triangle.js",
-            "line": 36,
+            "line": 35,
             "description": "Triangle initialization",
             "is_constructor": 1,
             "params": [
@@ -3107,13 +3111,13 @@
         },
         {
             "file": "src\\components\\triangle\\triangle.js",
-            "line": 44,
+            "line": 43,
             "description": "c : triangle color",
             "class": "Triangle"
         },
         {
             "file": "src\\components\\triangle\\triangle.js",
-            "line": 52,
+            "line": 51,
             "description": "Data bind for a triangle serie.\nWill set a color for the whole serie.",
             "itemtype": "method",
             "name": "dataBind",
@@ -3138,18 +3142,18 @@
         },
         {
             "file": "src\\components\\triangle\\triangle.js",
-            "line": 91,
+            "line": 92,
             "class": "Triangle"
         },
         {
             "file": "src\\components\\triangle\\triangle.js",
-            "line": 110,
+            "line": 111,
             "description": "Layer creation",
             "class": "Triangle"
         },
         {
             "file": "src\\components\\triangle\\triangle.js",
-            "line": 115,
+            "line": 116,
             "description": "Transform must be redefined in order to\nseparate a triangle in two constituting parts",
             "itemtype": "method",
             "name": "transform",
@@ -3168,12 +3172,12 @@
         },
         {
             "file": "src\\components\\triangle\\triangle.js",
-            "line": 130,
+            "line": 132,
             "class": "Triangle"
         },
         {
             "file": "src\\components\\triangle\\triangle.js",
-            "line": 147,
+            "line": 170,
             "description": "Path is defined as a string connecting different\ndata, visualized as dots.",
             "itemtype": "method",
             "name": "getPath",
@@ -3207,12 +3211,12 @@
         },
         {
             "file": "src\\composition\\axis\\xyaxis.js",
-            "line": 28,
+            "line": 27,
             "class": "XYAxis"
         },
         {
             "file": "src\\composition\\axis\\xyaxis.js",
-            "line": 34,
+            "line": 33,
             "description": "XY axis system initializer",
             "is_constructor": 1,
             "params": [
@@ -3226,7 +3230,7 @@
         },
         {
             "file": "src\\composition\\axis\\xyaxis.js",
-            "line": 51,
+            "line": 61,
             "description": "Show whole chart as a grid.",
             "itemtype": "method",
             "name": "showAsGrid",
@@ -3235,7 +3239,7 @@
         },
         {
             "file": "src\\composition\\axis\\xyaxis.js",
-            "line": 62,
+            "line": 72,
             "description": "Moves x axis according to given height value, and sets\ntick size value.",
             "itemtype": "method",
             "name": "height",
@@ -3251,7 +3255,7 @@
         },
         {
             "file": "src\\composition\\axis\\xyaxis.js",
-            "line": 75,
+            "line": 86,
             "description": "Sets tick size, based on given width value",
             "itemtype": "method",
             "name": "width",
@@ -3267,7 +3271,7 @@
         },
         {
             "file": "src\\composition\\axis\\xyaxis.js",
-            "line": 87,
+            "line": 99,
             "description": "Sets x scale.",
             "itemtype": "method",
             "name": "setXScale",
@@ -3283,7 +3287,7 @@
         },
         {
             "file": "src\\composition\\axis\\xyaxis.js",
-            "line": 98,
+            "line": 110,
             "description": "Sets y scale.",
             "itemtype": "method",
             "name": "setYScale",
@@ -3314,12 +3318,12 @@
         },
         {
             "file": "src\\composition\\axis\\yxyaxis.js",
-            "line": 32,
+            "line": 31,
             "class": "YXYAxis"
         },
         {
             "file": "src\\composition\\axis\\yxyaxis.js",
-            "line": 37,
+            "line": 36,
             "description": "Defines as a mixin a right Y axis, a left Y axis, a X bottom axis",
             "is_constructor": 1,
             "params": [
@@ -3333,7 +3337,7 @@
         },
         {
             "file": "src\\composition\\axis\\yxyaxis.js",
-            "line": 53,
+            "line": 55,
             "description": "Show whole chart as a grid.",
             "itemtype": "method",
             "name": "showAsGrid",
@@ -3342,7 +3346,7 @@
         },
         {
             "file": "src\\composition\\axis\\yxyaxis.js",
-            "line": 63,
+            "line": 65,
             "description": "Sets x axis position and tick size",
             "itemtype": "method",
             "name": "height",
@@ -3358,7 +3362,7 @@
         },
         {
             "file": "src\\composition\\axis\\yxyaxis.js",
-            "line": 74,
+            "line": 76,
             "description": "Sets y axis disposition, based on a given\nwidth value, and tick size for only one y axis.",
             "itemtype": "method",
             "name": "width",
@@ -3374,7 +3378,7 @@
         },
         {
             "file": "src\\composition\\axis\\yxyaxis.js",
-            "line": 87,
+            "line": 89,
             "description": "Redefinition of x scale setter",
             "itemtype": "method",
             "name": "setXScale",
@@ -3390,7 +3394,7 @@
         },
         {
             "file": "src\\composition\\axis\\yxyaxis.js",
-            "line": 98,
+            "line": 100,
             "description": "Redefinition of y scale setter",
             "itemtype": "method",
             "name": "setYScale",
@@ -3406,27 +3410,27 @@
         },
         {
             "file": "src\\composition\\barchart\\barchart.js",
-            "line": 19,
+            "line": 18,
             "class": "BarChart"
         },
         {
             "file": "src\\composition\\barchart\\barchart.js",
-            "line": 21,
+            "line": 20,
             "class": "BarChart"
         },
         {
             "file": "src\\composition\\barchart\\barchart.js",
-            "line": 37,
+            "line": 36,
             "class": "BarChart"
         },
         {
             "file": "src\\composition\\barchart\\barchart.js",
-            "line": 43,
+            "line": 41,
             "class": "BarChart"
         },
         {
             "file": "src\\composition\\barchart\\barchart.js",
-            "line": 51,
+            "line": 49,
             "description": "BarChart initialization.",
             "is_constructor": 1,
             "params": [
@@ -3440,22 +3444,22 @@
         },
         {
             "file": "src\\composition\\barchart\\barchart.js",
-            "line": 73,
+            "line": 72,
             "class": "BarChart"
         },
         {
             "file": "src\\composition\\datamapper\\datamapper.js",
-            "line": 19,
+            "line": 20,
             "class": "DataMapper"
         },
         {
             "file": "src\\composition\\datamapper\\datamapper.js",
-            "line": 21,
+            "line": 22,
             "class": "DataMapper"
         },
         {
             "file": "src\\composition\\datamapper\\datamapper.js",
-            "line": 28,
+            "line": 29,
             "class": "DataMapper"
         },
         {
@@ -3549,12 +3553,12 @@
         },
         {
             "file": "src\\composition\\donutwithinnertext\\donutwithinnertext.js",
-            "line": 37,
+            "line": 36,
             "class": "DonutWithInnerText"
         },
         {
             "file": "src\\composition\\donutwithinnertext\\donutwithinnertext.js",
-            "line": 45,
+            "line": 44,
             "description": "Constructor",
             "is_constructor": 1,
             "params": [
@@ -3568,13 +3572,13 @@
         },
         {
             "file": "src\\composition\\donutwithinnertext\\donutwithinnertext.js",
-            "line": 58,
+            "line": 57,
             "description": "Defaults for Inner text",
             "class": "DonutWithInnerText"
         },
         {
             "file": "src\\composition\\donutwithinnertext\\donutwithinnertext.js",
-            "line": 66,
+            "line": 65,
             "description": "First element will be shown as label.\n\nData here will take two elements, since is necessary\nto render two paths for the donut chart.\n\nThe first one is the one that will be shown in label.\nThe second one is the rest of the donut.",
             "itemtype": "method",
             "name": "dataBind",
@@ -3595,7 +3599,7 @@
         },
         {
             "file": "src\\composition\\donutwithinnertext\\donutwithinnertext.js",
-            "line": 92,
+            "line": 93,
             "description": "Inserts one text for the value to display",
             "itemtype": "method",
             "name": "insert",
@@ -3604,23 +3608,23 @@
         },
         {
             "file": "src\\composition\\donutwithinnertext\\donutwithinnertext.js",
-            "line": 130,
+            "line": 133,
             "description": "Layer creation",
             "class": "DonutWithInnerText"
         },
         {
             "file": "src\\composition\\groupedbarchart\\groupedbarchart.js",
-            "line": 19,
+            "line": 20,
             "class": "GroupedBarChart"
         },
         {
             "file": "src\\composition\\groupedbarchart\\groupedbarchart.js",
-            "line": 21,
+            "line": 22,
             "class": "GroupedBarChart"
         },
         {
             "file": "src\\composition\\groupedbarchart\\groupedbarchart.js",
-            "line": 32,
+            "line": 33,
             "class": "GroupedBarChart"
         },
         {
@@ -3644,7 +3648,7 @@
         },
         {
             "file": "src\\composition\\groupedbarchart\\groupedbarchart.js",
-            "line": 56,
+            "line": 57,
             "description": "It is necessary to rewrite transform data, in order to\ngenerate a new scale.\n\nTwo scales are needed : one for the axis, and another\none for bar drawing.",
             "itemtype": "method",
             "name": "",
@@ -3659,17 +3663,17 @@
         },
         {
             "file": "src\\composition\\groupedbarchart\\groupedbarchart.js",
-            "line": 80,
-            "class": "GroupedBarChart"
-        },
-        {
-            "file": "src\\composition\\groupedbarchart\\groupedbarchart.js",
             "line": 83,
             "class": "GroupedBarChart"
         },
         {
             "file": "src\\composition\\groupedbarchart\\groupedbarchart.js",
-            "line": 88,
+            "line": 86,
+            "class": "GroupedBarChart"
+        },
+        {
+            "file": "src\\composition\\groupedbarchart\\groupedbarchart.js",
+            "line": 91,
             "description": "Adding new scale for bars grouping",
             "itemtype": "method",
             "name": "",
@@ -3685,7 +3689,7 @@
         },
         {
             "file": "src\\composition\\groupedbarchart\\groupedbarchart.js",
-            "line": 102,
+            "line": 105,
             "description": "Default z domain",
             "itemtype": "method",
             "name": "",
@@ -3701,27 +3705,27 @@
         },
         {
             "file": "src\\composition\\labeledtrianglechart\\labeledtrianglechart.js",
-            "line": 19,
+            "line": 18,
             "class": "LabeledTriangleChart"
         },
         {
             "file": "src\\composition\\labeledtrianglechart\\labeledtrianglechart.js",
-            "line": 21,
+            "line": 20,
             "class": "LabeledTriangleChart"
         },
         {
             "file": "src\\composition\\labeledtrianglechart\\labeledtrianglechart.js",
-            "line": 33,
+            "line": 32,
             "class": "LabeledTriangleChart"
         },
         {
             "file": "src\\composition\\labeledtrianglechart\\labeledtrianglechart.js",
-            "line": 39,
+            "line": 37,
             "class": "LabeledTriangleChart"
         },
         {
             "file": "src\\composition\\labeledtrianglechart\\labeledtrianglechart.js",
-            "line": 45,
+            "line": 43,
             "description": "Labeled triangle constructor.\n\nWill contain only one instance of each component chart, since no\nresize can be assumed.",
             "is_constructor": 1,
             "params": [
@@ -3750,12 +3754,12 @@
         },
         {
             "file": "src\\composition\\linechart\\linechart.js",
-            "line": 32,
+            "line": 31,
             "class": "LineChart"
         },
         {
             "file": "src\\composition\\linechart\\linechart.js",
-            "line": 38,
+            "line": 37,
             "description": "Multiple data group initializator.\n\nCreates N instances of a given mixin.",
             "is_constructor": 1,
             "params": [
@@ -3784,12 +3788,12 @@
         },
         {
             "file": "src\\composition\\linechart\\linechartcircles.js",
-            "line": 34,
+            "line": 33,
             "class": "LineChartCircles"
         },
         {
             "file": "src\\composition\\linechart\\linechartcircles.js",
-            "line": 41,
+            "line": 40,
             "description": "Line and circles chart initializator.",
             "is_constructor": 1,
             "params": [
@@ -3818,12 +3822,12 @@
         },
         {
             "file": "src\\composition\\scatterplot\\scatterplot.js",
-            "line": 35,
+            "line": 34,
             "class": "Scatterplot"
         },
         {
             "file": "src\\composition\\scatterplot\\scatterplot.js",
-            "line": 42,
+            "line": 41,
             "description": "Chart constructor",
             "is_constructor": 1,
             "params": [
@@ -3837,17 +3841,22 @@
         },
         {
             "file": "src\\composition\\multipledatagroup.js",
-            "line": 14,
+            "line": 1,
             "class": "MultipleDataGroup"
         },
         {
             "file": "src\\composition\\multipledatagroup.js",
-            "line": 16,
+            "line": 15,
             "class": "MultipleDataGroup"
         },
         {
             "file": "src\\composition\\multipledatagroup.js",
-            "line": 23,
+            "line": 17,
+            "class": "MultipleDataGroup"
+        },
+        {
+            "file": "src\\composition\\multipledatagroup.js",
+            "line": 24,
             "class": "MultipleDataGroup"
         },
         {
@@ -3953,12 +3962,12 @@
         },
         {
             "file": "src\\composition\\multipleinstancesmixin.js",
-            "line": 29,
+            "line": 28,
             "class": "MultipleInstancesMixin"
         },
         {
             "file": "src\\composition\\multipleinstancesmixin.js",
-            "line": 37,
+            "line": 36,
             "description": "Creates multiple mixin instances of a specific chart.\nIt is necessary to set the instances count\nand the chart name.",
             "is_constructor": 1,
             "params": [
@@ -3987,12 +3996,12 @@
         },
         {
             "file": "src\\composition\\simpledatagroup.js",
-            "line": 29,
+            "line": 28,
             "class": "SimpleDataGroup"
         },
         {
             "file": "src\\composition\\simpledatagroup.js",
-            "line": 36,
+            "line": 35,
             "description": "Returns the next element of the data collection",
             "itemtype": "method",
             "name": "transform",
@@ -4026,19 +4035,19 @@
         },
         {
             "file": "src\\utils\\accessor\\accessor.js",
-            "line": 22,
+            "line": 21,
             "class": "Accessor"
         },
         {
             "file": "src\\utils\\accessor\\accessor.js",
-            "line": 27,
+            "line": 26,
             "description": "Class constructor",
             "is_constructor": 1,
             "class": "Accessor"
         },
         {
             "file": "src\\utils\\accessor\\accessor.js",
-            "line": 36,
+            "line": 35,
             "description": "Returns first element of the collection",
             "itemtype": "method",
             "name": "first",
@@ -4050,7 +4059,7 @@
         },
         {
             "file": "src\\utils\\accessor\\accessor.js",
-            "line": 46,
+            "line": 45,
             "description": "Returns the next element of the collection\nIf no more elements are available,\ncollection index will reset itself",
             "itemtype": "method",
             "name": "next",
@@ -4062,7 +4071,7 @@
         },
         {
             "file": "src\\utils\\accessor\\accessor.js",
-            "line": 62,
+            "line": 61,
             "description": "Determines if the collection has more elements",
             "itemtype": "method",
             "name": "hasNext",
@@ -4074,7 +4083,7 @@
         },
         {
             "file": "src\\utils\\accessor\\accessor.js",
-            "line": 73,
+            "line": 72,
             "description": "Resets the colletion to restart iteration automatically",
             "itemtype": "method",
             "name": "restart",
@@ -4083,7 +4092,7 @@
         },
         {
             "file": "src\\utils\\accessor\\accessor.js",
-            "line": 84,
+            "line": 83,
             "description": "Returns the data contained in the accessor",
             "itemtype": "method",
             "name": "getData",
@@ -4095,7 +4104,7 @@
         },
         {
             "file": "src\\utils\\accessor\\accessor.js",
-            "line": 94,
+            "line": 93,
             "description": "Sets a specific data set to this accessor",
             "itemtype": "method",
             "name": "setDate",
@@ -4138,7 +4147,7 @@
         },
         {
             "file": "src\\utils\\datavalidator\\datavalidator.js",
-            "line": 38,
+            "line": 37,
             "description": "Checks if a given value is defined and > 0",
             "itemtype": "method",
             "name": "isPositiveNumber",
@@ -4162,7 +4171,7 @@
         },
         {
             "file": "src\\utils\\datavalidator\\datavalidator.js",
-            "line": 53,
+            "line": 52,
             "description": "Checks if value is number, or is defined",
             "itemtype": "method",
             "name": "isNumber",
@@ -4186,7 +4195,7 @@
         },
         {
             "file": "src\\utils\\datavalidator\\datavalidator.js",
-            "line": 68,
+            "line": 67,
             "description": "Checks if a value is defined",
             "itemtype": "method",
             "name": "isUndefined",
@@ -4210,28 +4219,28 @@
         },
         {
             "file": "src\\utils\\events\\bootstrapevent.js",
-            "line": 21,
+            "line": 22,
             "class": "BootstrapEvent"
         },
         {
             "file": "src\\utils\\events\\bootstrapevent.js",
-            "line": 23,
+            "line": 24,
             "class": "BootstrapEvent"
         },
         {
             "file": "src\\utils\\events\\bootstrapevent.js",
-            "line": 29,
+            "line": 30,
             "description": "Export global even in AMD case in case this script\nis loaded with others",
             "class": "BootstrapEvent"
         },
         {
             "file": "src\\utils\\events\\bootstrapevent.js",
-            "line": 36,
+            "line": 37,
             "class": "BootstrapEvent"
         },
         {
             "file": "src\\utils\\events\\bootstrapevent.js",
-            "line": 41,
+            "line": 42,
             "description": "Class constructor",
             "is_constructor": 1,
             "params": [
@@ -4245,7 +4254,7 @@
         },
         {
             "file": "src\\utils\\events\\bootstrapevent.js",
-            "line": 56,
+            "line": 57,
             "description": "Binds the bootstrap feature to a specified target selection",
             "itemtype": "method",
             "name": "bind",
@@ -4261,46 +4270,46 @@
         },
         {
             "file": "src\\utils\\events\\bootstrapevent.js",
-            "line": 67,
+            "line": 68,
             "description": "Traversing d3 structure to allow jquery bootstrap bindings",
             "class": "BootstrapEvent"
         },
         {
             "file": "src\\utils\\events\\bootstrapevent.js",
-            "line": 76,
+            "line": 77,
             "class": "BootstrapEvent"
         },
         {
             "file": "src\\utils\\events\\eventfactory.js",
-            "line": 12,
+            "line": 13,
             "class": "EventManager"
         },
         {
             "file": "src\\utils\\events\\eventfactory.js",
-            "line": 14,
+            "line": 15,
             "class": "EventManager"
         },
         {
             "file": "src\\utils\\events\\eventfactory.js",
-            "line": 19,
+            "line": 20,
             "description": "Export global even in AMD case in case this script\nis loaded with others",
             "class": "EventManager"
         },
         {
             "file": "src\\utils\\events\\eventfactory.js",
-            "line": 26,
+            "line": 27,
             "class": "EventManager"
         },
         {
             "file": "src\\utils\\events\\eventfactory.js",
-            "line": 31,
+            "line": 32,
             "description": "Class constructor",
             "is_constructor": 1,
             "class": "EventManager"
         },
         {
             "file": "src\\utils\\events\\eventfactory.js",
-            "line": 40,
+            "line": 41,
             "description": "Creates a specific Charty event object.",
             "itemtype": "method",
             "name": "",
@@ -4319,35 +4328,35 @@
         },
         {
             "file": "src\\utils\\events\\eventmanager.js",
-            "line": 17,
+            "line": 18,
             "class": "EventManager"
         },
         {
             "file": "src\\utils\\events\\eventmanager.js",
-            "line": 19,
+            "line": 20,
             "class": "EventManager"
         },
         {
             "file": "src\\utils\\events\\eventmanager.js",
-            "line": 25,
+            "line": 26,
             "description": "Export global even in AMD case in case this script\nis loaded with others",
             "class": "EventManager"
         },
         {
             "file": "src\\utils\\events\\eventmanager.js",
-            "line": 32,
+            "line": 33,
             "class": "EventManager"
         },
         {
             "file": "src\\utils\\events\\eventmanager.js",
-            "line": 37,
+            "line": 38,
             "description": "Class constructor",
             "is_constructor": 1,
             "class": "EventManager"
         },
         {
             "file": "src\\utils\\events\\eventmanager.js",
-            "line": 47,
+            "line": 48,
             "description": "Adds specific defined event to queue",
             "itemtype": "method",
             "name": "addEvent",
@@ -4363,7 +4372,7 @@
         },
         {
             "file": "src\\utils\\events\\eventmanager.js",
-            "line": 61,
+            "line": 62,
             "description": "Binds all available events to specified targets.\n\nEach event wrapper must have a way to bind itself to the specified\nelements.",
             "itemtype": "method",
             "name": "bindAll",
@@ -4389,18 +4398,18 @@
         },
         {
             "file": "src\\utils\\events\\functionevent.js",
-            "line": 19,
+            "line": 16,
             "description": "Export global even in AMD case in case this script\nis loaded with others",
             "class": "FunctionEvent"
         },
         {
             "file": "src\\utils\\events\\functionevent.js",
-            "line": 26,
+            "line": 23,
             "class": "FunctionEvent"
         },
         {
             "file": "src\\utils\\events\\functionevent.js",
-            "line": 31,
+            "line": 28,
             "description": "Class constructor\n\nIn the execute function, d represents a specific data element",
             "is_constructor": 1,
             "params": [
@@ -4414,7 +4423,7 @@
         },
         {
             "file": "src\\utils\\events\\functionevent.js",
-            "line": 47,
+            "line": 44,
             "description": "Binds a function to a specific event",
             "itemtype": "method",
             "name": "bind",
@@ -4440,23 +4449,23 @@
         },
         {
             "message": "replacing incorrect tag: extend with extends",
-            "line": " src\\composition\\multipledatagroup.js:1"
+            "line": " src\\composition\\multipledatagroup.js:2"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\utils\\events\\eventfactory.js:40"
+            "line": " src\\utils\\events\\eventfactory.js:41"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartinterface.js:22"
+            "line": " src\\api\\chartinterface.js:23"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartinterface.js:24"
+            "line": " src\\api\\chartinterface.js:25"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartinterface.js:32"
+            "line": " src\\api\\chartinterface.js:33"
         },
         {
             "message": "Missing item type",
@@ -4468,11 +4477,7 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartinterface.js:78"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src\\api\\chartinterface.js:86"
+            "line": " src\\api\\chartinterface.js:80"
         },
         {
             "message": "Missing item type",
@@ -4480,43 +4485,47 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartinterface.js:104"
+            "line": " src\\api\\chartinterface.js:94"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartinterface.js:108"
+            "line": " src\\api\\chartinterface.js:110"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartinterface.js:112"
+            "line": " src\\api\\chartinterface.js:114"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartinterface.js:129"
+            "line": " src\\api\\chartinterface.js:118"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartinterface.js:134"
+            "line": " src\\api\\chartinterface.js:136"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartinterface.js:158"
+            "line": " src\\api\\chartinterface.js:141"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartinterface.js:178"
+            "line": " src\\api\\chartinterface.js:165"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\charty.js:23"
+            "line": " src\\api\\chartinterface.js:185"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\charty.js:25"
+            "line": " src\\api\\charty.js:24"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\charty.js:44"
+            "line": " src\\api\\charty.js:26"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\api\\charty.js:45"
         },
         {
             "message": "Missing item type",
@@ -4600,19 +4609,19 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartynames.js:24"
+            "line": " src\\api\\chartynames.js:23"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartynames.js:29"
+            "line": " src\\api\\chartynames.js:28"
         },
         {
             "message": "Missing item type\nAxis types are defined as constants\n\nRelated to scaling.",
-            "line": " src\\api\\chartynames.js:59"
+            "line": " src\\api\\chartynames.js:58"
         },
         {
             "message": "Missing item type\nAxis defined as constants",
-            "line": " src\\api\\chartynames.js:70"
+            "line": " src\\api\\chartynames.js:69"
         },
         {
             "message": "Missing item type",
@@ -4635,10 +4644,6 @@
             "line": " src\\components\\axis\\axis.js:39"
         },
         {
-            "message": "Missing item type\nDefaults for axis\n\nc : axis style class",
-            "line": " src\\components\\axis\\axis.js:64"
-        },
-        {
             "message": "Missing item type\nLayer options",
             "line": " src\\components\\axis\\axis.js:75"
         },
@@ -4648,27 +4653,27 @@
         },
         {
             "message": "Missing item type\nRenders as a grid.",
-            "line": " src\\components\\axis\\axis.js:110"
+            "line": " src\\components\\axis\\axis.js:112"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\axis\\axis.js:117"
+            "line": " src\\components\\axis\\axis.js:119"
         },
         {
             "message": "Missing item type\nAxis translation in x or y direction.",
-            "line": " src\\components\\axis\\axis.js:120"
+            "line": " src\\components\\axis\\axis.js:122"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\axis\\axis.js:127"
+            "line": " src\\components\\axis\\axis.js:129"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\axis\\axis.js:132"
+            "line": " src\\components\\axis\\axis.js:134"
         },
         {
             "message": "Missing item type\nAxis layer creation",
-            "line": " src\\components\\axis\\axis.js:154"
+            "line": " src\\components\\axis\\axis.js:157"
         },
         {
             "message": "Missing item type",
@@ -4684,19 +4689,19 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\bar\\bar.js:29"
+            "line": " src\\components\\bar\\bar.js:28"
         },
         {
             "message": "Missing item type\nBar initialization",
-            "line": " src\\components\\bar\\bar.js:35"
+            "line": " src\\components\\bar\\bar.js:34"
         },
         {
             "message": "Missing item type\nSets only bar color as default.",
-            "line": " src\\components\\bar\\bar.js:43"
+            "line": " src\\components\\bar\\bar.js:42"
         },
         {
             "message": "Missing item type\nSets color for the whole data serie.",
-            "line": " src\\components\\bar\\bar.js:69"
+            "line": " src\\components\\bar\\bar.js:68"
         },
         {
             "message": "Missing item type",
@@ -4704,11 +4709,11 @@
         },
         {
             "message": "Missing item type\nchart.factor : value used to define bar's width. It can\nbe useful to reduce the width, in case many data series\nare draw using bars.",
-            "line": " src\\components\\bar\\bar.js:98"
+            "line": " src\\components\\bar\\bar.js:99"
         },
         {
             "message": "Missing item type\nLayer creation",
-            "line": " src\\components\\bar\\bar.js:130"
+            "line": " src\\components\\bar\\bar.js:131"
         },
         {
             "message": "Missing item type",
@@ -4724,15 +4729,15 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\bar\\horizontalbar.js:31"
+            "line": " src\\components\\bar\\horizontalbar.js:30"
         },
         {
             "message": "Missing item type\nHorizontal bars initialization",
-            "line": " src\\components\\bar\\horizontalbar.js:37"
+            "line": " src\\components\\bar\\horizontalbar.js:36"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\bar\\horizontalbar.js:47"
+            "line": " src\\components\\bar\\horizontalbar.js:46"
         },
         {
             "message": "Missing item type",
@@ -4776,39 +4781,39 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\base\\basechart.js:28"
+            "line": " src\\components\\base\\basechart.js:27"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\circle\\circle.js:14"
+            "line": " src\\components\\circle\\circle.js:13"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\circle\\circle.js:16"
+            "line": " src\\components\\circle\\circle.js:15"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\circle\\circle.js:23"
+            "line": " src\\components\\circle\\circle.js:22"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\circle\\circle.js:29"
+            "line": " src\\components\\circle\\circle.js:27"
         },
         {
             "message": "Missing item type\nCircle initializator",
-            "line": " src\\components\\circle\\circle.js:35"
+            "line": " src\\components\\circle\\circle.js:33"
         },
         {
             "message": "Missing item type\nDefaults for circles.\n\nr : circle radius\nc : circle color",
-            "line": " src\\components\\circle\\circle.js:49"
+            "line": " src\\components\\circle\\circle.js:46"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\circle\\circle.js:101"
+            "line": " src\\components\\circle\\circle.js:100"
         },
         {
             "message": "Missing item type\nLayer creation",
-            "line": " src\\components\\circle\\circle.js:124"
+            "line": " src\\components\\circle\\circle.js:131"
         },
         {
             "message": "Missing item type",
@@ -4848,11 +4853,11 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\donut\\donut.js:126"
+            "line": " src\\components\\donut\\donut.js:128"
         },
         {
             "message": "Missing item type\nLayer creation",
-            "line": " src\\components\\donut\\donut.js:143"
+            "line": " src\\components\\donut\\donut.js:145"
         },
         {
             "message": "Missing item type",
@@ -4868,19 +4873,19 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\line\\line.js:31"
+            "line": " src\\components\\line\\line.js:30"
         },
         {
             "message": "Missing item type\nLine initialization",
-            "line": " src\\components\\line\\line.js:37"
+            "line": " src\\components\\line\\line.js:36"
         },
         {
             "message": "Missing item type\nc : default color line",
-            "line": " src\\components\\line\\line.js:45"
+            "line": " src\\components\\line\\line.js:44"
         },
         {
             "message": "Missing item type\nLayer creation",
-            "line": " src\\components\\line\\line.js:111"
+            "line": " src\\components\\line\\line.js:115"
         },
         {
             "message": "Missing item type",
@@ -4896,19 +4901,19 @@
         },
         {
             "message": "Missing item type\nRounded rectangle initialization.",
-            "line": " src\\components\\roundedrectangle\\roundedrectangle.js:35"
+            "line": " src\\components\\roundedrectangle\\roundedrectangle.js:34"
         },
         {
             "message": "Missing item type\nDefaults for rectangle\n\nrh : rectangle height\nrw : rectangle width\nrc : rectangle color\nrx, ry : value for rounded corners",
-            "line": " src\\components\\roundedrectangle\\roundedrectangle.js:51"
+            "line": " src\\components\\roundedrectangle\\roundedrectangle.js:50"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\roundedrectangle\\roundedrectangle.js:111"
+            "line": " src\\components\\roundedrectangle\\roundedrectangle.js:112"
         },
         {
             "message": "Missing item type\nLayer creation",
-            "line": " src\\components\\roundedrectangle\\roundedrectangle.js:136"
+            "line": " src\\components\\roundedrectangle\\roundedrectangle.js:137"
         },
         {
             "message": "Missing item type",
@@ -4924,11 +4929,11 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\scales\\basescale.js:26"
+            "line": " src\\components\\scales\\basescale.js:25"
         },
         {
             "message": "Missing item type\nClass constructor",
-            "line": " src\\components\\scales\\basescale.js:31"
+            "line": " src\\components\\scales\\basescale.js:30"
         },
         {
             "message": "Missing item type",
@@ -4976,59 +4981,59 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\scales\\ordinalscale.js:27"
+            "line": " src\\components\\scales\\ordinalscale.js:26"
         },
         {
             "message": "Missing item type\nClass constructor",
-            "line": " src\\components\\scales\\ordinalscale.js:32"
+            "line": " src\\components\\scales\\ordinalscale.js:31"
         },
         {
             "message": "Missing item type\nInheritance from BaseScale",
-            "line": " src\\components\\scales\\ordinalscale.js:43"
+            "line": " src\\components\\scales\\ordinalscale.js:42"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\scales\\peakvalleylinearscale.js:15"
+            "line": " src\\components\\scales\\peakvalleylinearscale.js:16"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\scales\\peakvalleylinearscale.js:17"
+            "line": " src\\components\\scales\\peakvalleylinearscale.js:18"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\scales\\peakvalleylinearscale.js:25"
+            "line": " src\\components\\scales\\peakvalleylinearscale.js:26"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\scales\\peakvalleylinearscale.js:30"
+            "line": " src\\components\\scales\\peakvalleylinearscale.js:31"
         },
         {
             "message": "Missing item type\nClass constructor",
-            "line": " src\\components\\scales\\peakvalleylinearscale.js:35"
+            "line": " src\\components\\scales\\peakvalleylinearscale.js:36"
         },
         {
             "message": "Missing item type\nInheritance from LinearScale",
-            "line": " src\\components\\scales\\peakvalleylinearscale.js:46"
+            "line": " src\\components\\scales\\peakvalleylinearscale.js:47"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\scales\\peakvalleylinearscale.js:76"
+            "line": " src\\components\\scales\\peakvalleylinearscale.js:77"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\scales\\peakvalleylinearscale.js:97"
+            "line": " src\\components\\scales\\peakvalleylinearscale.js:98"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\scales\\scalesfactory.js:16"
+            "line": " src\\components\\scales\\scalesfactory.js:17"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\scales\\scalesfactory.js:18"
+            "line": " src\\components\\scales\\scalesfactory.js:19"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\scales\\scalesfactory.js:26"
+            "line": " src\\components\\scales\\scalesfactory.js:27"
         },
         {
             "message": "Missing item type",
@@ -5052,11 +5057,11 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\text\\abovetext.js:30"
+            "line": " src\\components\\text\\abovetext.js:29"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\text\\abovetext.js:36"
+            "line": " src\\components\\text\\abovetext.js:35"
         },
         {
             "message": "Missing item type",
@@ -5072,11 +5077,11 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\text\\righttext.js:30"
+            "line": " src\\components\\text\\righttext.js:29"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\text\\righttext.js:36"
+            "line": " src\\components\\text\\righttext.js:35"
         },
         {
             "message": "Missing item type",
@@ -5092,15 +5097,15 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\text\\text.js:29"
+            "line": " src\\components\\text\\text.js:28"
         },
         {
             "message": "Missing item type\nText label initializator",
-            "line": " src\\components\\text\\text.js:35"
+            "line": " src\\components\\text\\text.js:34"
         },
         {
             "message": "Missing item type\nLayer creation",
-            "line": " src\\components\\text\\text.js:100"
+            "line": " src\\components\\text\\text.js:102"
         },
         {
             "message": "Missing item type",
@@ -5116,15 +5121,15 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\text\\winlosstext.js:31"
+            "line": " src\\components\\text\\winlosstext.js:30"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\text\\winlosstext.js:37"
+            "line": " src\\components\\text\\winlosstext.js:36"
         },
         {
             "message": "Missing item type\nSets offset for label.",
-            "line": " src\\components\\text\\winlosstext.js:45"
+            "line": " src\\components\\text\\winlosstext.js:44"
         },
         {
             "message": "Missing item type",
@@ -5140,27 +5145,27 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\triangle\\triangle.js:30"
+            "line": " src\\components\\triangle\\triangle.js:29"
         },
         {
             "message": "Missing item type\nTriangle initialization",
-            "line": " src\\components\\triangle\\triangle.js:36"
+            "line": " src\\components\\triangle\\triangle.js:35"
         },
         {
             "message": "Missing item type\nc : triangle color",
-            "line": " src\\components\\triangle\\triangle.js:44"
+            "line": " src\\components\\triangle\\triangle.js:43"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\triangle\\triangle.js:91"
+            "line": " src\\components\\triangle\\triangle.js:92"
         },
         {
             "message": "Missing item type\nLayer creation",
-            "line": " src\\components\\triangle\\triangle.js:110"
+            "line": " src\\components\\triangle\\triangle.js:111"
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\triangle\\triangle.js:130"
+            "line": " src\\components\\triangle\\triangle.js:132"
         },
         {
             "message": "Missing item type",
@@ -5176,11 +5181,11 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\axis\\xyaxis.js:28"
+            "line": " src\\composition\\axis\\xyaxis.js:27"
         },
         {
             "message": "Missing item type\nXY axis system initializer",
-            "line": " src\\composition\\axis\\xyaxis.js:34"
+            "line": " src\\composition\\axis\\xyaxis.js:33"
         },
         {
             "message": "Missing item type",
@@ -5196,47 +5201,47 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\axis\\yxyaxis.js:32"
+            "line": " src\\composition\\axis\\yxyaxis.js:31"
         },
         {
             "message": "Missing item type\nDefines as a mixin a right Y axis, a left Y axis, a X bottom axis",
-            "line": " src\\composition\\axis\\yxyaxis.js:37"
+            "line": " src\\composition\\axis\\yxyaxis.js:36"
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\barchart\\barchart.js:19"
+            "line": " src\\composition\\barchart\\barchart.js:18"
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\barchart\\barchart.js:21"
+            "line": " src\\composition\\barchart\\barchart.js:20"
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\barchart\\barchart.js:37"
+            "line": " src\\composition\\barchart\\barchart.js:36"
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\barchart\\barchart.js:43"
+            "line": " src\\composition\\barchart\\barchart.js:41"
         },
         {
             "message": "Missing item type\nBarChart initialization.",
-            "line": " src\\composition\\barchart\\barchart.js:51"
+            "line": " src\\composition\\barchart\\barchart.js:49"
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\barchart\\barchart.js:73"
+            "line": " src\\composition\\barchart\\barchart.js:72"
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\datamapper\\datamapper.js:19"
+            "line": " src\\composition\\datamapper\\datamapper.js:20"
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\datamapper\\datamapper.js:21"
+            "line": " src\\composition\\datamapper\\datamapper.js:22"
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\datamapper\\datamapper.js:28"
+            "line": " src\\composition\\datamapper\\datamapper.js:29"
         },
         {
             "message": "Missing item type",
@@ -5264,15 +5269,15 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\donutwithinnertext\\donutwithinnertext.js:37"
+            "line": " src\\composition\\donutwithinnertext\\donutwithinnertext.js:36"
         },
         {
             "message": "Missing item type\nConstructor",
-            "line": " src\\composition\\donutwithinnertext\\donutwithinnertext.js:45"
+            "line": " src\\composition\\donutwithinnertext\\donutwithinnertext.js:44"
         },
         {
             "message": "Missing item type\nDefaults for Inner text",
-            "line": " src\\composition\\donutwithinnertext\\donutwithinnertext.js:58"
+            "line": " src\\composition\\donutwithinnertext\\donutwithinnertext.js:57"
         },
         {
             "message": "Missing item type",
@@ -5280,19 +5285,19 @@
         },
         {
             "message": "Missing item type\nLayer creation",
-            "line": " src\\composition\\donutwithinnertext\\donutwithinnertext.js:130"
+            "line": " src\\composition\\donutwithinnertext\\donutwithinnertext.js:133"
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\groupedbarchart\\groupedbarchart.js:19"
+            "line": " src\\composition\\groupedbarchart\\groupedbarchart.js:20"
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\groupedbarchart\\groupedbarchart.js:21"
+            "line": " src\\composition\\groupedbarchart\\groupedbarchart.js:22"
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\groupedbarchart\\groupedbarchart.js:32"
+            "line": " src\\composition\\groupedbarchart\\groupedbarchart.js:33"
         },
         {
             "message": "Missing item type",
@@ -5304,31 +5309,31 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\groupedbarchart\\groupedbarchart.js:80"
-        },
-        {
-            "message": "Missing item type",
             "line": " src\\composition\\groupedbarchart\\groupedbarchart.js:83"
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\labeledtrianglechart\\labeledtrianglechart.js:19"
+            "line": " src\\composition\\groupedbarchart\\groupedbarchart.js:86"
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\labeledtrianglechart\\labeledtrianglechart.js:21"
+            "line": " src\\composition\\labeledtrianglechart\\labeledtrianglechart.js:18"
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\labeledtrianglechart\\labeledtrianglechart.js:33"
+            "line": " src\\composition\\labeledtrianglechart\\labeledtrianglechart.js:20"
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\labeledtrianglechart\\labeledtrianglechart.js:39"
+            "line": " src\\composition\\labeledtrianglechart\\labeledtrianglechart.js:32"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\composition\\labeledtrianglechart\\labeledtrianglechart.js:37"
         },
         {
             "message": "Missing item type\nLabeled triangle constructor.\n\nWill contain only one instance of each component chart, since no\nresize can be assumed.",
-            "line": " src\\composition\\labeledtrianglechart\\labeledtrianglechart.js:45"
+            "line": " src\\composition\\labeledtrianglechart\\labeledtrianglechart.js:43"
         },
         {
             "message": "Missing item type",
@@ -5344,11 +5349,11 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\linechart\\linechart.js:32"
+            "line": " src\\composition\\linechart\\linechart.js:31"
         },
         {
             "message": "Missing item type\nMultiple data group initializator.\n\nCreates N instances of a given mixin.",
-            "line": " src\\composition\\linechart\\linechart.js:38"
+            "line": " src\\composition\\linechart\\linechart.js:37"
         },
         {
             "message": "Missing item type",
@@ -5364,11 +5369,11 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\linechart\\linechartcircles.js:34"
+            "line": " src\\composition\\linechart\\linechartcircles.js:33"
         },
         {
             "message": "Missing item type\nLine and circles chart initializator.",
-            "line": " src\\composition\\linechart\\linechartcircles.js:41"
+            "line": " src\\composition\\linechart\\linechartcircles.js:40"
         },
         {
             "message": "Missing item type",
@@ -5384,23 +5389,27 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\scatterplot\\scatterplot.js:35"
+            "line": " src\\composition\\scatterplot\\scatterplot.js:34"
         },
         {
             "message": "Missing item type\nChart constructor",
-            "line": " src\\composition\\scatterplot\\scatterplot.js:42"
+            "line": " src\\composition\\scatterplot\\scatterplot.js:41"
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\multipledatagroup.js:14"
+            "line": " src\\composition\\multipledatagroup.js:1"
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\multipledatagroup.js:16"
+            "line": " src\\composition\\multipledatagroup.js:15"
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\multipledatagroup.js:23"
+            "line": " src\\composition\\multipledatagroup.js:17"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\composition\\multipledatagroup.js:24"
         },
         {
             "message": "Missing item type",
@@ -5428,11 +5437,11 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\multipleinstancesmixin.js:29"
+            "line": " src\\composition\\multipleinstancesmixin.js:28"
         },
         {
             "message": "Missing item type\nCreates multiple mixin instances of a specific chart.\nIt is necessary to set the instances count\nand the chart name.",
-            "line": " src\\composition\\multipleinstancesmixin.js:37"
+            "line": " src\\composition\\multipleinstancesmixin.js:36"
         },
         {
             "message": "Missing item type",
@@ -5448,7 +5457,7 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\composition\\simpledatagroup.js:29"
+            "line": " src\\composition\\simpledatagroup.js:28"
         },
         {
             "message": "Missing item type",
@@ -5464,11 +5473,11 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\utils\\accessor\\accessor.js:22"
+            "line": " src\\utils\\accessor\\accessor.js:21"
         },
         {
             "message": "Missing item type\nClass constructor",
-            "line": " src\\utils\\accessor\\accessor.js:27"
+            "line": " src\\utils\\accessor\\accessor.js:26"
         },
         {
             "message": "Missing item type",
@@ -5492,71 +5501,71 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\utils\\events\\bootstrapevent.js:21"
+            "line": " src\\utils\\events\\bootstrapevent.js:22"
         },
         {
             "message": "Missing item type",
-            "line": " src\\utils\\events\\bootstrapevent.js:23"
+            "line": " src\\utils\\events\\bootstrapevent.js:24"
         },
         {
             "message": "Missing item type\nExport global even in AMD case in case this script\nis loaded with others",
-            "line": " src\\utils\\events\\bootstrapevent.js:29"
+            "line": " src\\utils\\events\\bootstrapevent.js:30"
         },
         {
             "message": "Missing item type",
-            "line": " src\\utils\\events\\bootstrapevent.js:36"
+            "line": " src\\utils\\events\\bootstrapevent.js:37"
         },
         {
             "message": "Missing item type\nClass constructor",
-            "line": " src\\utils\\events\\bootstrapevent.js:41"
+            "line": " src\\utils\\events\\bootstrapevent.js:42"
         },
         {
             "message": "Missing item type\nTraversing d3 structure to allow jquery bootstrap bindings",
-            "line": " src\\utils\\events\\bootstrapevent.js:67"
+            "line": " src\\utils\\events\\bootstrapevent.js:68"
         },
         {
             "message": "Missing item type",
-            "line": " src\\utils\\events\\bootstrapevent.js:76"
+            "line": " src\\utils\\events\\bootstrapevent.js:77"
         },
         {
             "message": "Missing item type",
-            "line": " src\\utils\\events\\eventfactory.js:12"
+            "line": " src\\utils\\events\\eventfactory.js:13"
         },
         {
             "message": "Missing item type",
-            "line": " src\\utils\\events\\eventfactory.js:14"
+            "line": " src\\utils\\events\\eventfactory.js:15"
         },
         {
             "message": "Missing item type\nExport global even in AMD case in case this script\nis loaded with others",
-            "line": " src\\utils\\events\\eventfactory.js:19"
+            "line": " src\\utils\\events\\eventfactory.js:20"
         },
         {
             "message": "Missing item type",
-            "line": " src\\utils\\events\\eventfactory.js:26"
+            "line": " src\\utils\\events\\eventfactory.js:27"
         },
         {
             "message": "Missing item type\nClass constructor",
-            "line": " src\\utils\\events\\eventfactory.js:31"
+            "line": " src\\utils\\events\\eventfactory.js:32"
         },
         {
             "message": "Missing item type",
-            "line": " src\\utils\\events\\eventmanager.js:17"
+            "line": " src\\utils\\events\\eventmanager.js:18"
         },
         {
             "message": "Missing item type",
-            "line": " src\\utils\\events\\eventmanager.js:19"
+            "line": " src\\utils\\events\\eventmanager.js:20"
         },
         {
             "message": "Missing item type\nExport global even in AMD case in case this script\nis loaded with others",
-            "line": " src\\utils\\events\\eventmanager.js:25"
+            "line": " src\\utils\\events\\eventmanager.js:26"
         },
         {
             "message": "Missing item type",
-            "line": " src\\utils\\events\\eventmanager.js:32"
+            "line": " src\\utils\\events\\eventmanager.js:33"
         },
         {
             "message": "Missing item type\nClass constructor",
-            "line": " src\\utils\\events\\eventmanager.js:37"
+            "line": " src\\utils\\events\\eventmanager.js:38"
         },
         {
             "message": "Missing item type",
@@ -5568,15 +5577,15 @@
         },
         {
             "message": "Missing item type\nExport global even in AMD case in case this script\nis loaded with others",
-            "line": " src\\utils\\events\\functionevent.js:19"
+            "line": " src\\utils\\events\\functionevent.js:16"
         },
         {
             "message": "Missing item type",
-            "line": " src\\utils\\events\\functionevent.js:26"
+            "line": " src\\utils\\events\\functionevent.js:23"
         },
         {
             "message": "Missing item type\nClass constructor\n\nIn the execute function, d represents a specific data element",
-            "line": " src\\utils\\events\\functionevent.js:31"
+            "line": " src\\utils\\events\\functionevent.js:28"
         }
     ]
 }
