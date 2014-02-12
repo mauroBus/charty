@@ -36,6 +36,5 @@
     "strict": false,
     "white": false,
     "unused": true,
-    "onevar": false,
-    "indent": 4
+    "onevar": false
 }
