@@ -25,46 +25,46 @@
     }
 }(this, function(Charty) {
 
-  /** Chart / Components / Compositions names */
-  Charty.CHART_NAMES = {
-    AXIS: 'Axis',
-    BAR: 'Bar',
-    HORIZONTAL_BAR: 'HorizontalBar',
-    WIN_LOSS_BAR: 'WinLossBar',
-    BASE_CHART: 'BaseChart',
-    CIRCLE: 'Circle',
-    DONUT: 'Donut',
-    LINE: 'Line',
-    ROUNDED_RECTANGLE: 'RoundedRectangle',
-    TEXT: 'Text',
-    ABOVE_TEXT : 'AboveText',
-    RIGHT_TEXT : 'RightText',
-    WIN_LOSS_TEXT : 'WinLossText',
-    TRIANGLE: 'Triangle',
-    XY_AXIS: 'XYAxis',
-    YXY_AXIS: 'YXYAxis',
-    BAR_CHART: 'BarChart',
-    LABELED_TRIANGLE_CHART: 'LabeledTriangleChart',
-    SCATTERPLOT: 'Scatterplot',
-    MULTIPLE_DATA_GROUP: 'MultipleDataGroup',
-    MULTIPLE_INSTANCES_MIXIN: 'MultipleInstancesMixin',
-    SIMPLE_DATA_GROUP: 'SimpleDataGroup',
-    DONUT_INNER_TEXT : 'DonutWithInnerText',
-    GROUPED_BAR_CHART : 'GroupedBarChart',
-    LINE_CHART : 'LineChart',
-    LINE_CHART_CIRCLES : 'LineChartCircles'
-  };
+    /** Chart / Components / Compositions names */
+    Charty.CHART_NAMES = {
+        AXIS: 'Axis',
+        BAR: 'Bar',
+        HORIZONTAL_BAR: 'HorizontalBar',
+        WIN_LOSS_BAR: 'WinLossBar',
+        BASE_CHART: 'BaseChart',
+        CIRCLE: 'Circle',
+        DONUT: 'Donut',
+        LINE: 'Line',
+        ROUNDED_RECTANGLE: 'RoundedRectangle',
+        TEXT: 'Text',
+        ABOVE_TEXT: 'AboveText',
+        RIGHT_TEXT: 'RightText',
+        WIN_LOSS_TEXT: 'WinLossText',
+        TRIANGLE: 'Triangle',
+        XY_AXIS: 'XYAxis',
+        YXY_AXIS: 'YXYAxis',
+        BAR_CHART: 'BarChart',
+        LABELED_TRIANGLE_CHART: 'LabeledTriangleChart',
+        SCATTERPLOT: 'Scatterplot',
+        MULTIPLE_DATA_GROUP: 'MultipleDataGroup',
+        MULTIPLE_INSTANCES_MIXIN: 'MultipleInstancesMixin',
+        SIMPLE_DATA_GROUP: 'SimpleDataGroup',
+        DONUT_INNER_TEXT: 'DonutWithInnerText',
+        GROUPED_BAR_CHART: 'GroupedBarChart',
+        LINE_CHART: 'LineChart',
+        LINE_CHART_CIRCLES: 'LineChartCircles'
+    };
 
-  /**
-  * Axis types are defined as constants
-  *
-  * Related to scaling.
-  */
-  Charty.AXIS_TYPE = {
-    ORDINAL: 'ordinal',
-    LINEAR: 'linear',
-    PEAK_VALLEY_LINEAR: 'peakValleyLinear'
-  };
+    /**
+     * Axis types are defined as constants
+     *
+     * Related to scaling.
+     */
+    Charty.AXIS_TYPE = {
+        ORDINAL: 'ordinal',
+        LINEAR: 'linear',
+        PEAK_VALLEY_LINEAR: 'peakValleyLinear'
+    };
 
     /**
      * Axis defined as constants
