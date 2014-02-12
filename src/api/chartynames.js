@@ -1,30 +1,29 @@
 /**
-* Define constants that will be used as names for different parts
-* 
-* @class ChartNames
-* @requires chartyinit
-*
-* @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
-*/
+ * Define constants that will be used as names for different parts
+ *
+ * @class ChartNames
+ * @requires chartyinit
+ *
+ * @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+ */
 
 (function(root, factory) {
-  /** Setting up AMD support*/
-  if (typeof define === 'function' && define.amd) {
-    /** AMD */
-    define('charty/chartynames',[
-      'charty/chartyinit'
-      ],
-      function (Charty) {
-        /** Export global even in AMD case in case this script
-        * is loaded with others */
-        return factory(Charty);
-    });
-  }
-  else {
-    /** Browser globals */
-    root.Charty = factory(Charty);
-  }
-}(this, function (Charty) {
+    /** Setting up AMD support*/
+    if (typeof define === 'function' && define.amd) {
+        /** AMD */
+        define('charty/chartynames', [
+                'charty/chartyinit'
+            ],
+            function(Charty) {
+                /** Export global even in AMD case in case this script
+                 * is loaded with others */
+                return factory(Charty);
+            });
+    } else {
+        /** Browser globals */
+        root.Charty = factory(Charty);
+    }
+}(this, function(Charty) {
 
   /** Chart / Components / Compositions names */
   Charty.CHART_NAMES = {
@@ -67,13 +66,13 @@
     PEAK_VALLEY_LINEAR: 'peakValleyLinear'
   };
 
-  /**
-  * Axis defined as constants
-  */
-  Charty.AXIS = {
-    X : 'x',
-    Y : 'y'
-  };
+    /**
+     * Axis defined as constants
+     */
+    Charty.AXIS = {
+        X: 'x',
+        Y: 'y'
+    };
 
-  return Charty;
+    return Charty;
 }));

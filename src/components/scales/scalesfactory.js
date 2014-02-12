@@ -1,7 +1,8 @@
+/* global OrdinalScale: true, LinearScale: true */
 /**
 *	Scale factory. Separation is provived in an attempt
 *	to provide an easy way to switching scales in a defined chart
-*	
+*
 *	@class ScaleFactory
 * @requires d3.chart,
 *						charty,
@@ -33,23 +34,23 @@
     root.ScaleFactory = factory(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale);
   }
 }(this, function(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale) {
-	/** 
+	/**
 	* Class constructor
 	*
 	* @constructor
 	*/
 	var ScaleFactory = function(){};
 
-	/**
-	*	Returns a specified scale object, acording to a scale type
-	*
-	*	@method scale
-	*	@param {String} scaleType Available scale type
-	*	@param {String} axisType Related axis type ('x'-'y')
-	*	@return {Object} LinearScale / OrdinalScale
-	*/
-	ScaleFactory.prototype.scale = function(scaleType, axisType){
-		var scale;
+    /**
+     *	Returns a specified scale object, acording to a scale type
+     *
+     *	@method scale
+     *	@param {String} scaleType Available scale type
+     *	@param {String} axisType Related axis type ('x'-'y')
+     *	@return {Object} LinearScale / OrdinalScale
+     */
+    ScaleFactory.prototype.scale = function(scaleType, axisType) {
+        var scale;
 
 		switch(scaleType){
 			case Charty.AXIS_TYPE.ORDINAL :
@@ -63,8 +64,8 @@
 				break;
 		}
 
-		return scale;
-	};
+        return scale;
+    };
 
 	return ScaleFactory;
 }));

@@ -1,24 +1,27 @@
 /**
-* Build generator via Grunt
-*/
+ * Build generator via Grunt
+ */
 var mountFolder = function(connect, dir) {
-  return connect.static(require('path').resolve(dir));
+    return connect.static(require('path')
+        .resolve(dir));
 };
 
 module.exports = function(grunt) {
-  'use strict';
+    'use strict';
 
-  /** Load all grunt tasks */
-  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+    /** Load all grunt tasks */
+    require('matchdep')
+        .filterDev('grunt-*')
+        .forEach(grunt.loadNpmTasks);
 
-  /** Configurable paths */
-  var yeomanConfig = {
-    app: 'src',
-    dist: 'dist'
-  };
+    /** Configurable paths */
+    var yeomanConfig = {
+        app: 'src',
+        dist: 'dist'
+    };
 
-  grunt.initConfig({
-    yeoman: yeomanConfig,
+    grunt.initConfig({
+        yeoman: yeomanConfig,
 
     /** Concat */
     concat: {
@@ -67,57 +70,84 @@ module.exports = function(grunt) {
       }
     },
 
-    /** Minimify code */
-    uglify: {
-      dist: {
-        files: {
-          '<%= yeoman.dist %>/charty.min.js': '<%= yeoman.dist %>/charty.js'
+        /** Minimify code */
+        uglify: {
+            dist: {
+                files: {
+                    '<%= yeoman.dist %>/charty.min.js': '<%= yeoman.dist %>/charty.js'
+                }
+            }
+        },
+
+        /** Platojs */
+        plato: {
+            your_task: {
+                files: {
+                    'report': ['<%= yeoman.app %>/**/*.js'],
+                }
+            },
+        },
+
+        /** Yuidoc */
+        yuidoc: {
+            compile: {
+                name: 'ChartyJS',
+                description: 'ChartyJS Api doc',
+                version: '0.5.8',
+                options: {
+                    paths: 'src/',
+                    outdir: 'doc/'
+                }
+            }
+        },
+
+        /** JSHint */
+        jshint: {
+            options: {
+                jshintrc: '.jshintrc'
+            },
+            all: [
+                '<%= yeoman.app %>/**/*.js'
+            ]
+        },
+
+        /** JSBeautifier */
+        jsbeautifier: {
+            modify: {
+                src: ['Gruntfile.js', '<%= yeoman.app %>/**/*.js'],
+                options: {
+                    config: '.jsbeautifyrc'
+                }
+            },
+            verify: {
+                src: ['Gruntfile.js', '<%= yeoman.app %>/**/*.js'],
+                options: {
+                    mode: 'VERIFY_ONLY',
+                    config: '.jsbeautifyrc'
+                }
+            }
         }
-      }
-    },
 
-    /** Platojs */
-    plato: {
-      your_task: {
-        files: {
-          'report': ['<%= yeoman.app %>/**/*.js'],
-        }
-      },
-    },
+    });
 
-    /** Yuidoc */
-    yuidoc: {
-      compile: {
-        name: 'ChartyJS',
-        description: 'ChartyJS Api doc',
-        version: '0.5.8',
-        options: {
-          paths: 'src/',
-          outdir: 'doc/'
-        }
-      }
-    }
+    /** Build js */
+    grunt.registerTask('build-js', [
+        'concat',
+        'uglify'
+    ]);
 
-  });
+    /** Build js with plato */
+    grunt.registerTask('build-js-plato', [
+        'plato',
+        'concat',
+        'uglify'
+    ]);
 
-  /** Build js */
-  grunt.registerTask('build-js', [
-    'concat',
-    'uglify'
-  ]);
-
-  /** Build js with plato */
-  grunt.registerTask('build-js-plato', [
-    'plato',
-    'concat',
-    'uglify'
-  ]);
-
-  /** Build js with plato and yuidoc */
-  grunt.registerTask('build-js-all', [
-    'plato',
-    'concat',
-    'uglify',
-    'yuidoc'
-  ]);
+    /** Build js with plato and yuidoc */
+    grunt.registerTask('build-js-all', [
+        'plato',
+        'concat',
+        'uglify',
+        'yuidoc'
+    ]);
 };
