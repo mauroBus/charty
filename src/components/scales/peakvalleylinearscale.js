@@ -1,3 +1,4 @@
+/*global LinearScale: true*/
 /**
  * Peak Valley scale for linear axis
  *

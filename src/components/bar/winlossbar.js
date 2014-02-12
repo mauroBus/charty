@@ -49,7 +49,7 @@
              * @constructor
              * @param {Object} args Arguments for axis component
              */
-            initialize: function(args) {
+            initialize: function() {
 
                 /**
                  * Sets offset for bars.

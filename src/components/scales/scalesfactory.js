@@ -1,4 +1,4 @@
-/* global OrdinalScale: true, LinearScale: true */
+/* global OrdinalScale: true, LinearScale: true, PeakValleyLinearScale:true */
 /**
  *	Scale factory. Separation is provived in an attempt
  *	to provide an easy way to switching scales in a defined chart
