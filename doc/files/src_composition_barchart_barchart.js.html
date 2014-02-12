@@ -165,87 +165,91 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-* Create a bar chart that will render
-* N data series
-* 
-* @class BarChart
-* @extends MultipleDataGroup
-* @requires d3.chart,
-*           charty,
-*           underscore,
-*           bar,
-*           multipledatagroup,
-*           yxyaxis,
-*           multipleinstancesmixin
-* 
-* @author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
-*/
-
+ * Create a bar chart that will render
+ * N data series
+ *
+ * @class BarChart
+ * @extends MultipleDataGroup
+ * @requires d3.chart,
+ *           charty,
+ *           underscore,
+ *           bar,
+ *           multipledatagroup,
+ *           yxyaxis,
+ *           multipleinstancesmixin
+ *
+ * @author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
+ */
 (function(root, factory) {
-  /** Setting up AMD support*/
-  if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
-    /** AMD */
-    define(&#x27;charty/barchart&#x27;,[
-      &#x27;d3.chart&#x27;,
-      &#x27;charty/chartynames&#x27;,
-      &#x27;underscore&#x27;,
-      &#x27;charty/bar&#x27;,
-      &#x27;charty/horizontalbar&#x27;,
-      &#x27;charty/multipledatagroup&#x27;,
-      &#x27;charty/xyaxis&#x27;,
-      &#x27;charty/yxyaxis&#x27;,
-      &#x27;charty/multipleinstancesmixin&#x27;,
-      &#x27;charty/text&#x27;,
-      &#x27;charty/abovetext&#x27;,
-      &#x27;charty/righttext&#x27;
-      ],
-      function (d3, Charty, _) {
-        /** Export global even in AMD case in case this script
-        * is loaded with others */
-        return factory(d3, Charty, _);
-    });
-  }
-  else {
-    /** Browser globals */
-    factory(d3, Charty, _);
-  }
-}(this, function (d3, Charty, _) {
+    /** Setting up AMD support*/
+    if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
+        /** AMD */
+        define(&#x27;charty/barchart&#x27;, [
+                &#x27;d3.chart&#x27;,
+                &#x27;charty/chartynames&#x27;,
+                &#x27;underscore&#x27;,
+                &#x27;charty/bar&#x27;,
+                &#x27;charty/horizontalbar&#x27;,
+                &#x27;charty/multipledatagroup&#x27;,
+                &#x27;charty/xyaxis&#x27;,
+                &#x27;charty/yxyaxis&#x27;,
+                &#x27;charty/multipleinstancesmixin&#x27;,
+                &#x27;charty/text&#x27;,
+                &#x27;charty/abovetext&#x27;,
+                &#x27;charty/righttext&#x27;
+            ],
+            function(d3, Charty, _) {
+                /** Export global even in AMD case in case this script
+                 * is loaded with others */
+                return factory(d3, Charty, _);
+            });
+    } else {
+        /** Browser globals */
+        factory(d3, Charty, _);
+    }
+}(this, function(d3, Charty, _) {
 
-	d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
-    .extend(Charty.CHART_NAMES.BAR_CHART,{
-      
-		/**
-		* BarChart initialization.
-    * 
-		* @constructor
-		* @param {Object} args example = {
-    *                       instances : 2,
-    *                       labelType : Charty.CHART_NAMES.ABOVE_TEXT
-    *                    }
-		*/
-		initialize : function(args){
+    d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
+        .extend(Charty.CHART_NAMES.BAR_CHART, {
 
-      args.instances = (args.instances || 1);
-      args.chartName = args.barType;
+            /**
+             * BarChart initialization.
+             *
+             * @constructor
+             * @param {Object} args example = {
+             *                       instances : 2,
+             *                       labelType : Charty.CHART_NAMES.ABOVE_TEXT
+             *                    }
+             */
+            initialize: function(args) {
 
-			var axis = this.mixin(args.axisSystem,
-                           this.base.append(&#x27;g&#x27;),
-                           args).showAsGrid(args.showAsGrid),
+                args.instances = (args.instances || 1);
+                args.chartName = args.barType;
 
-					barChart = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
-                                this.base.append(&#x27;g&#x27;),
-                                args);
+                this.mixin(args.axisSystem, this.base.append(&#x27;g&#x27;), args)
+                    .showAsGrid(args.showAsGrid);
 
-      /** Optional */
-      if (args.labelType){
+                this.mixin(
+                    Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
+                    this.base.append(&#x27;g&#x27;),
+                    args
+                );
 
-        textLabels = this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
-                                this.base.append(&#x27;g&#x27;),
-                                _.extend(args, { chartName : args.labelType }));
-      }
-		}
-	});
+                /** Optional */
+                if (args.labelType) {
+                    this.mixin(
+                        Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN,
+                        this.base.append(&#x27;g&#x27;),
+                        // @TODO review extend vs defaults
+                        _.extend(args, {
+                            chartName: args.labelType
+                        })
+                    );
+                }
+            }
+        });
 }));
+
     </pre>
 </div>
 

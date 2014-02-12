@@ -164,80 +164,82 @@
 
 <div class="file">
     <pre class="code prettyprint linenums">
+/*global FunctionEvent: true, BootstrapEvent: true*/
 /**
-*	Event factory. Creates instances of predefined events objects. 
-*	
-*	@class EventManager
-*	@constructor
-*	@requires functionevent,
-*						bootstrapevent
-*
-*	@author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
-*/
+ *	Event factory. Creates instances of predefined events objects.
+ *
+ *	@class EventManager
+ *	@constructor
+ *	@requires functionevent,
+ *						bootstrapevent
+ *
+ *	@author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
+ */
 (function(root, factory) {
-	/** Setting up AMD support*/
-	if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
-		/** AMD */
-		define(&#x27;charty/eventfactory&#x27;, [
-			&#x27;charty/functionevent&#x27;,
-			&#x27;charty/bootstrapevent&#x27;,
-		], function (FunctionEvent, BootstrapEvent) {
-			/**
-			 * Export global even in AMD case in case this script
-			 * is loaded with others
-			 */
-			return factory(FunctionEvent, BootstrapEvent);
-		});
-	} else {
-		/** Browser globals */
-		root.EventFactory = factory(FunctionEvent, BootstrapEvent);
-	}
-}(this, function (FunctionEvent, BootstrapEvent) {
+    /** Setting up AMD support*/
+    if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
+        /** AMD */
+        define(&#x27;charty/eventfactory&#x27;, [
+            &#x27;charty/functionevent&#x27;,
+            &#x27;charty/bootstrapevent&#x27;,
+        ], function(FunctionEvent, BootstrapEvent) {
+            /**
+             * Export global even in AMD case in case this script
+             * is loaded with others
+             */
+            return factory(FunctionEvent, BootstrapEvent);
+        });
+    } else {
+        /** Browser globals */
+        root.EventFactory = factory(FunctionEvent, BootstrapEvent);
+    }
+}(this, function(FunctionEvent, BootstrapEvent) {
 
-	/** 
-	*	Class constructor
-	*	
-	* @constructor
-	*/
-	function EventFactory (){
+    /**
+     *	Class constructor
+     *
+     * @constructor
+     */
+    function EventFactory() {
 
-	}
+    }
 
-	/**
-	*	Creates a specific Charty event object.
-	*
-	*	@method
-	*	@param {Object} e Defined event options
-	*	@returns {Event} Charty event
-	*/
-	EventFactory.prototype.createEvent = function (e){
+    /**
+     *	Creates a specific Charty event object.
+     *
+     *	@method
+     *	@param {Object} e Defined event options
+     *	@returns {Event} Charty event
+     */
+    EventFactory.prototype.createEvent = function(e) {
 
-		var EventObject = null;
+        var EventObject = null;
 
-		switch (e.type){
-			case &#x27;function&#x27;:
-				EventObject = new FunctionEvent ({
-					on : e.evt,
-					execute : e.bind
-				});
-				break;
-			case &#x27;bootstrap&#x27;:
-				EventObject = new BootstrapEvent({
-					trigger : e.evt,
-					type : e.element,
-					content : e.bind,
-					placement : e.placement
-				});
-				break;
-			default :
-				break;
-		}
+        switch (e.type) {
+            case &#x27;function&#x27;:
+                EventObject = new FunctionEvent({
+                    on: e.evt,
+                    execute: e.bind
+                });
+                break;
+            case &#x27;bootstrap&#x27;:
+                EventObject = new BootstrapEvent({
+                    trigger: e.evt,
+                    type: e.element,
+                    content: e.bind,
+                    placement: e.placement
+                });
+                break;
+            default:
+                break;
+        }
 
-		return EventObject;
-	};
+        return EventObject;
+    };
 
-	return EventFactory;
+    return EventFactory;
 }));
+
     </pre>
 </div>
 

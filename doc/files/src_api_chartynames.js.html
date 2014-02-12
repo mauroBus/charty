@@ -165,84 +165,84 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-* Define constants that will be used as names for different parts
-* 
-* @class ChartNames
-* @requires chartyinit
-*
-* @author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
-*/
+ * Define constants that will be used as names for different parts
+ *
+ * @class ChartNames
+ * @requires chartyinit
+ *
+ * @author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
+ */
 
 (function(root, factory) {
-  /** Setting up AMD support*/
-  if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
-    /** AMD */
-    define(&#x27;charty/chartynames&#x27;,[
-      &#x27;charty/chartyinit&#x27;
-      ],
-      function (Charty) {
-        /** Export global even in AMD case in case this script
-        * is loaded with others */
-        return factory(Charty);
-    });
-  }
-  else {
-    /** Browser globals */
-    root.Charty = factory(Charty);
-  }
-}(this, function (Charty) {
+    /** Setting up AMD support*/
+    if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
+        /** AMD */
+        define(&#x27;charty/chartynames&#x27;, [
+                &#x27;charty/chartyinit&#x27;
+            ],
+            function(Charty) {
+                /** Export global even in AMD case in case this script
+                 * is loaded with others */
+                return factory(Charty);
+            });
+    } else {
+        /** Browser globals */
+        root.Charty = factory(Charty);
+    }
+}(this, function(Charty) {
 
-  /** Chart / Components / Compositions names */
-  Charty.CHART_NAMES = {
-    AXIS: &#x27;Axis&#x27;,
-    BAR: &#x27;Bar&#x27;,
-    HORIZONTAL_BAR: &#x27;HorizontalBar&#x27;,
-    WIN_LOSS_BAR: &#x27;WinLossBar&#x27;,
-    BASE_CHART: &#x27;BaseChart&#x27;,
-    CIRCLE: &#x27;Circle&#x27;,
-    DONUT: &#x27;Donut&#x27;,
-    LINE: &#x27;Line&#x27;,
-    ROUNDED_RECTANGLE: &#x27;RoundedRectangle&#x27;,
-    TEXT: &#x27;Text&#x27;,
-    ABOVE_TEXT : &#x27;AboveText&#x27;,
-    RIGHT_TEXT : &#x27;RightText&#x27;,
-    WIN_LOSS_TEXT : &#x27;WinLossText&#x27;,
-    TRIANGLE: &#x27;Triangle&#x27;,
-    XY_AXIS: &#x27;XYAxis&#x27;,
-    YXY_AXIS: &#x27;YXYAxis&#x27;,
-    BAR_CHART: &#x27;BarChart&#x27;,
-    LABELED_TRIANGLE_CHART: &#x27;LabeledTriangleChart&#x27;,
-    SCATTERPLOT: &#x27;Scatterplot&#x27;,
-    MULTIPLE_DATA_GROUP: &#x27;MultipleDataGroup&#x27;,
-    MULTIPLE_INSTANCES_MIXIN: &#x27;MultipleInstancesMixin&#x27;,
-    SIMPLE_DATA_GROUP: &#x27;SimpleDataGroup&#x27;,
-    DONUT_INNER_TEXT : &#x27;DonutWithInnerText&#x27;,
-    GROUPED_BAR_CHART : &#x27;GroupedBarChart&#x27;,
-    LINE_CHART : &#x27;LineChart&#x27;,
-    LINE_CHART_CIRCLES : &#x27;LineChartCircles&#x27;
-  };
+    /** Chart / Components / Compositions names */
+    Charty.CHART_NAMES = {
+        AXIS: &#x27;Axis&#x27;,
+        BAR: &#x27;Bar&#x27;,
+        HORIZONTAL_BAR: &#x27;HorizontalBar&#x27;,
+        WIN_LOSS_BAR: &#x27;WinLossBar&#x27;,
+        BASE_CHART: &#x27;BaseChart&#x27;,
+        CIRCLE: &#x27;Circle&#x27;,
+        DONUT: &#x27;Donut&#x27;,
+        LINE: &#x27;Line&#x27;,
+        ROUNDED_RECTANGLE: &#x27;RoundedRectangle&#x27;,
+        TEXT: &#x27;Text&#x27;,
+        ABOVE_TEXT: &#x27;AboveText&#x27;,
+        RIGHT_TEXT: &#x27;RightText&#x27;,
+        WIN_LOSS_TEXT: &#x27;WinLossText&#x27;,
+        TRIANGLE: &#x27;Triangle&#x27;,
+        XY_AXIS: &#x27;XYAxis&#x27;,
+        YXY_AXIS: &#x27;YXYAxis&#x27;,
+        BAR_CHART: &#x27;BarChart&#x27;,
+        LABELED_TRIANGLE_CHART: &#x27;LabeledTriangleChart&#x27;,
+        SCATTERPLOT: &#x27;Scatterplot&#x27;,
+        MULTIPLE_DATA_GROUP: &#x27;MultipleDataGroup&#x27;,
+        MULTIPLE_INSTANCES_MIXIN: &#x27;MultipleInstancesMixin&#x27;,
+        SIMPLE_DATA_GROUP: &#x27;SimpleDataGroup&#x27;,
+        DONUT_INNER_TEXT: &#x27;DonutWithInnerText&#x27;,
+        GROUPED_BAR_CHART: &#x27;GroupedBarChart&#x27;,
+        LINE_CHART: &#x27;LineChart&#x27;,
+        LINE_CHART_CIRCLES: &#x27;LineChartCircles&#x27;
+    };
 
-  /**
-  * Axis types are defined as constants
-  *
-  * Related to scaling.
-  */
-  Charty.AXIS_TYPE = {
-    ORDINAL: &#x27;ordinal&#x27;,
-    LINEAR: &#x27;linear&#x27;,
-    PEAK_VALLEY_LINEAR: &#x27;peakValleyLinear&#x27;
-  };
+    /**
+     * Axis types are defined as constants
+     *
+     * Related to scaling.
+     */
+    Charty.AXIS_TYPE = {
+        ORDINAL: &#x27;ordinal&#x27;,
+        LINEAR: &#x27;linear&#x27;,
+        PEAK_VALLEY_LINEAR: &#x27;peakValleyLinear&#x27;
+    };
 
-  /**
-  * Axis defined as constants
-  */
-  Charty.AXIS = {
-    X : &#x27;x&#x27;,
-    Y : &#x27;y&#x27;
-  };
+    /**
+     * Axis defined as constants
+     */
+    Charty.AXIS = {
+        X: &#x27;x&#x27;,
+        Y: &#x27;y&#x27;
+    };
 
-  return Charty;
+    return Charty;
 }));
+
     </pre>
 </div>
 

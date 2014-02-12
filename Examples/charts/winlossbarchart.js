@@ -66,6 +66,7 @@ document.data = data666.data;
         labelType : Charty.CHART_NAMES.WIN_LOSS_TEXT,
         root : '#chart11',
         xAxis : Charty.AXIS_TYPE.ORDINAL,
+        xAxisClass: 'x-axis',
         yAxis : Charty.AXIS_TYPE.PEAK_VALLEY_LINEAR,
         axisSystem : Charty.CHART_NAMES.YXY_AXIS,
         showAsGrid : true,
@@ -79,11 +80,17 @@ document.data = data666.data;
     var marginOptions11 = {
         marginleft : 30,
         margintop : 40,
+        marginbottom: 50,
         marginlfactor : 0.85,
         margintfactor : 0.80
     };
 
+
     chart11.setDimensions(marginOptions11);
     
     chart11.draw(datagroup666);
+
+    d3.select('#chart11')
+      .selectAll('.x-axis text')
+      .attr('transform', 'translate(-10, 20),rotate(-45)');
 }));

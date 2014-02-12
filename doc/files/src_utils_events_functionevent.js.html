@@ -165,67 +165,65 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-*	When an event occurs, a defined function will be exectuted.
-*	This is for events that don&#x27;t depende on an specific API.
-*	
-*	@class FunctionEvent
-*	@constructor
-*	@requires d3
-*	
-*	@author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
-*/
+ *	When an event occurs, a defined function will be exectuted.
+ *	This is for events that don&#x27;t depende on an specific API.
+ *
+ *	@class FunctionEvent
+ *	@constructor
+ *	@requires d3
+ *
+ *	@author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
+ */
 (function(root, factory) {
-	/** Setting up AMD support*/
-	if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
-		/** AMD */
-		define(&#x27;charty/functionevent&#x27;, [
-			&#x27;d3&#x27;
-			],
-			function (d3) {
-			/**
-			 * Export global even in AMD case in case this script
-			 * is loaded with others
-			 */
-			return factory(d3);
-		});
-	} else {
-		/** Browser globals */
-		root.FunctionEvent = factory(d3);
-	}
-}(this, function (d3) {
+    /** Setting up AMD support*/
+    if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
+        /** AMD */
+        define(&#x27;charty/functionevent&#x27;, [], function() {
+            /**
+             * Export global even in AMD case in case this script
+             * is loaded with others
+             */
+            return factory();
+        });
+    } else {
+        /** Browser globals */
+        root.FunctionEvent = factory();
+    }
+}(this, function() {
 
-	/**
-	 * Class constructor
-	 *
-	 * In the execute function, d represents a specific data element
-	 *
-	 * @constructor
-	 * @param {Object} options = {
-	 *                       on : &#x27;click&#x27;,
-	 *                       execute : function (d) {}
-	 *                       }
-	 */
-	function FunctionEvent(options) {
+    /**
+     * Class constructor
+     *
+     * In the execute function, d represents a specific data element
+     *
+     * @constructor
+     * @param {Object} options = {
+     *                       on : &#x27;click&#x27;,
+     *                       execute : function (d) {}
+     *                       }
+     */
+    function FunctionEvent(options) {
 
-		this.opts = options;
-	}
+        this.opts = options;
+    }
 
-	/**
-	 * Binds a function to a specific event
-	 *
-	 * @method bind
-	 * @param {d3.selection} target Target to bind event
-	 * @chainable
-	 */
-	FunctionEvent.prototype.bind = function(target) {
+    /**
+     * Binds a function to a specific event
+     *
+     * @method bind
+     * @param {d3.selection} target Target to bind event
+     * @chainable
+     */
+    FunctionEvent.prototype.bind = function(target) {
 
-		target.on(this.opts.on, this.opts.execute);
-		return this;
-	};
+        target.on(this.opts.on, this.opts.execute);
+        return this;
+    };
 
-	return FunctionEvent;
+    return FunctionEvent;
 
 }));
+
     </pre>
 </div>
 

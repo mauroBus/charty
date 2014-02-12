@@ -165,78 +165,69 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-* Labeled triangle chart drawer.
-* 
-* @class LabeledTriangleChart
-* @extends MultipleDataGroup
-* @requires d3.chart,
-*           charty,
-*           triangle,
-*           roundedrectangle,
-*           textlabel,
-*           multipleinstancesmixin,
-*           yxyaxis,
-*           multipledatagroup
-*
-* @author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
-*/
-
+ * Labeled triangle chart drawer.
+ *
+ * @class LabeledTriangleChart
+ * @extends MultipleDataGroup
+ * @requires d3.chart,
+ *           charty,
+ *           triangle,
+ *           roundedrectangle,
+ *           textlabel,
+ *           multipleinstancesmixin,
+ *           yxyaxis,
+ *           multipledatagroup
+ *
+ * @author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
+ */
 (function(root, factory) {
-  /** Setting up AMD support*/
-  if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
-    /** AMD */
-    define(&#x27;charty/labeledtrianglechart&#x27;,[
-      &#x27;d3.chart&#x27;,
-      &#x27;charty/chartynames&#x27;,
-      &#x27;charty/triangle&#x27;,
-      &#x27;charty/roundedrectangle&#x27;,
-      &#x27;charty/text&#x27;,
-      &#x27;charty/multipleinstancesmixin&#x27;,
-      &#x27;charty/yxyaxis&#x27;,
-      &#x27;charty/multipledatagroup&#x27;
-      ],
-      function (d3, Charty) {
-        /** Export global even in AMD case in case this script
-        * is loaded with others */
-        return factory(d3, Charty);
-    });
-  }
-  else {
-    /** Browser globals */
-    factory(d3, Charty);
-  }
-}(this, function (d3, Charty) {
-  d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
-    .extend(Charty.CHART_NAMES.LABELED_TRIANGLE_CHART, {
-    /**
-    * Labeled triangle constructor.
-    *
-    * Will contain only one instance of each component chart, since no
-    * resize can be assumed.
-    *
-    * @constructor
-    * @param {Object} args Arguments for triangle chart.
-    */
-    initialize: function(args) {
-
-      var axis = this.mixin(args.axisSystem,
-                            this.base.append(&#x27;g&#x27;),
-                            args).showAsGrid(args.showAsGrid),
-
-          triangles = this.mixin(Charty.CHART_NAMES.TRIANGLE,
-                                this.base.append(&#x27;g&#x27;),
-                                args),
-
-          recs = this.mixin(Charty.CHART_NAMES.ROUNDED_RECTANGLE,
-                            this.base.append(&#x27;g&#x27;),
-                            args),
-
-          texts = this.mixin(Charty.CHART_NAMES.TEXT,
-                            this.base.append(&#x27;g&#x27;),
-                            args);
+    /** Setting up AMD support*/
+    if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
+        /** AMD */
+        define(&#x27;charty/labeledtrianglechart&#x27;, [
+                &#x27;d3.chart&#x27;,
+                &#x27;charty/chartynames&#x27;,
+                &#x27;charty/triangle&#x27;,
+                &#x27;charty/roundedrectangle&#x27;,
+                &#x27;charty/text&#x27;,
+                &#x27;charty/multipleinstancesmixin&#x27;,
+                &#x27;charty/yxyaxis&#x27;,
+                &#x27;charty/multipledatagroup&#x27;
+            ],
+            function(d3, Charty) {
+                /** Export global even in AMD case in case this script
+                 * is loaded with others */
+                return factory(d3, Charty);
+            });
+    } else {
+        /** Browser globals */
+        factory(d3, Charty);
     }
-  });
+}(this, function(d3, Charty) {
+    d3.chart(Charty.CHART_NAMES.MULTIPLE_DATA_GROUP)
+        .extend(Charty.CHART_NAMES.LABELED_TRIANGLE_CHART, {
+            /**
+             * Labeled triangle constructor.
+             *
+             * Will contain only one instance of each component chart, since no
+             * resize can be assumed.
+             *
+             * @constructor
+             * @param {Object} args Arguments for triangle chart.
+             */
+            initialize: function(args) {
+                this.mixin(args.axisSystem, this.base.append(&#x27;g&#x27;), args)
+                    .showAsGrid(args.showAsGrid);
+
+                this.mixin(Charty.CHART_NAMES.TRIANGLE, this.base.append(&#x27;g&#x27;), args);
+
+                this.mixin(Charty.CHART_NAMES.ROUNDED_RECTANGLE, this.base.append(&#x27;g&#x27;), args);
+
+                this.mixin(Charty.CHART_NAMES.TEXT, this.base.append(&#x27;g&#x27;), args);
+            }
+        });
 }));
+
     </pre>
 </div>
 

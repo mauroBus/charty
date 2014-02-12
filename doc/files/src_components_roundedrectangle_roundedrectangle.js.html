@@ -165,147 +165,149 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-* Rounded rectangle drawer.
-* 
-* @class RoundedRectangle
-* @extends SimpleDataGroup
-* @requires d3.chart,
-*           charty,
-*           simpledatagroup
-* 
-* @author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
-*/
+ * Rounded rectangle drawer.
+ *
+ * @class RoundedRectangle
+ * @extends SimpleDataGroup
+ * @requires d3.chart,
+ *           charty,
+ *           simpledatagroup
+ *
+ * @author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
+ */
 
 (function(root, factory) {
-  /** Setting up AMD support*/
-  if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
-    /** AMD */
-    define(&#x27;charty/roundedrectangle&#x27;,[
-      &#x27;d3.chart&#x27;,
-      &#x27;charty/chartynames&#x27;,
-      &#x27;charty/simpledatagroup&#x27;
-      ],
-      function (d3, Charty) {
-        /** Export global even in AMD case in case this script
-        * is loaded with others */
-        return factory(d3, Charty);
-    });
-  }
-  else {
-    // Browser globals
-    factory(d3, Charty);
-  }
-}(this, function (d3, Charty) {
-  d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
-    .extend(Charty.CHART_NAMES.ROUNDED_RECTANGLE,{
-    /**
-    * Rounded rectangle initialization.
-    *
-    * @constructor
-    * @param {Object} args Arguments for rounded rectangles component.
-    */
-    initialize : function(args){
-
-      var dataValidator = args.dataValidator,
-          errors = {
-            invalidRH : &#x27;Invalid value for rectangle height. Must be positive number.&#x27;,
-            invalidRW : &#x27;Invalid value for rectangle width. Must be positive number.&#x27;,
-            invalidRX : &#x27;Invalid value for rectangle rx. Must be positive number.&#x27;,
-            invalidRY : &#x27;Invalid value for rectangle ry. Must be positive number.&#x27;
-          };
-
-      /**
-      * Defaults for rectangle
-      *
-      * rh : rectangle height
-      * rw : rectangle width
-      * rc : rectangle color
-      * rx, ry : value for rounded corners
-      */
-      var defaults = {
-        rh : 20,
-        rw : 20,
-        rc : &#x27;rounded-rectangle-default&#x27;,
-        rx : 5,
-        ry : 5
-      };
-
-      var options = {
-        /**
-        * Data bind for Rounded Rectangle.
-        * Data defines a rectangle height (rh), width (rw),
-        * color (rc), rx, ry. If not defined, defauls are
-        * used.
-        *
-        * @method dataBind
-        * @param {Object} d example = {
-        *                              rh : 20,
-        *                              rw : 20,
-        *                              rc : &#x27;red&#x27;
-        *                              data : [...]
-        *                            }
-        * @chainable
-        */
-        dataBind : function(d){
-
-          var chart = this.chart();
-
-          chart.rh = (dataValidator.isPositiveNumber(d.rh, errors.invalidRH) || defaults.rh);
-          chart.rw = (dataValidator.isPositiveNumber(d.rw, errors.invalidRH) || defaults.rw);
-          chart.rx = (dataValidator.isPositiveNumber(d.rx, errors.invalidRX) || defaults.rx);
-          chart.ry = (dataValidator.isPositiveNumber(d.ry, errors.invalidRY) || defaults.ry);
-          chart.rc = (d.rc || defaults.rc);
-
-          return this.selectAll(&#x27;rect&#x27;).data(d.data);
-        },
-        /**
-        * Appends a svg:rect element.
-        *
-        * @method insert
-        * @chainable
-        */
-        insert : function(){
-          return this.append(&#x27;rect&#x27;);
-        },
-        events : {
-          &#x27;enter&#x27; : function(){
-            this.chart().eventManager.bindAll(this);
-
-            return this;
-          },
-          &#x27;merge&#x27; : function (){
-            /** Click event only on enter */
-            var chart = this.chart();
-
-            this.attr(&#x27;height&#x27;, chart.rh)
-                .attr(&#x27;width&#x27;, chart.rw)
-                .attr(&#x27;x&#x27;, function(d){
-                  return chart.xscale.map(d.x,1)+(chart.xscale.band(1)/2)-(chart.rw/2);
-                })
-                .attr(&#x27;y&#x27;,function(d){
-                  return chart.yscale.map(d.y)-(chart.rh/2);
-                })
-                .attr(&#x27;rx&#x27;, chart.rx)
-                .attr(&#x27;ry&#x27;, chart.ry)
-                .attr(&#x27;class&#x27;, function(d){
-                  return (d.rc || chart.rc);
-                });
-
-            return this;
-          },
-          &#x27;exit&#x27; : function(){
-            return this.remove();
-          }
-        }
-      };
-
-      /**
-      * Layer creation
-      */
-      this.layer(&#x27;roundedrects&#x27;, this.base, options);
+    /** Setting up AMD support*/
+    if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
+        /** AMD */
+        define(&#x27;charty/roundedrectangle&#x27;, [
+                &#x27;d3.chart&#x27;,
+                &#x27;charty/chartynames&#x27;,
+                &#x27;charty/simpledatagroup&#x27;
+            ],
+            function(d3, Charty) {
+                /** Export global even in AMD case in case this script
+                 * is loaded with others */
+                return factory(d3, Charty);
+            });
+    } else {
+        // Browser globals
+        factory(d3, Charty);
     }
-  });
+}(this, function(d3, Charty) {
+    d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
+        .extend(Charty.CHART_NAMES.ROUNDED_RECTANGLE, {
+            /**
+             * Rounded rectangle initialization.
+             *
+             * @constructor
+             * @param {Object} args Arguments for rounded rectangles component.
+             */
+            initialize: function(args) {
+
+                var dataValidator = args.dataValidator,
+                    errors = {
+                        invalidRH: &#x27;Invalid value for rectangle height. Must be positive number.&#x27;,
+                        invalidRW: &#x27;Invalid value for rectangle width. Must be positive number.&#x27;,
+                        invalidRX: &#x27;Invalid value for rectangle rx. Must be positive number.&#x27;,
+                        invalidRY: &#x27;Invalid value for rectangle ry. Must be positive number.&#x27;
+                    };
+
+                /**
+                 * Defaults for rectangle
+                 *
+                 * rh : rectangle height
+                 * rw : rectangle width
+                 * rc : rectangle color
+                 * rx, ry : value for rounded corners
+                 */
+                var defaults = {
+                    rh: 20,
+                    rw: 20,
+                    rc: &#x27;rounded-rectangle-default&#x27;,
+                    rx: 5,
+                    ry: 5
+                };
+
+                var options = {
+                    /**
+                     * Data bind for Rounded Rectangle.
+                     * Data defines a rectangle height (rh), width (rw),
+                     * color (rc), rx, ry. If not defined, defauls are
+                     * used.
+                     *
+                     * @method dataBind
+                     * @param {Object} d example = {
+                     *                              rh : 20,
+                     *                              rw : 20,
+                     *                              rc : &#x27;red&#x27;
+                     *                              data : [...]
+                     *                            }
+                     * @chainable
+                     */
+                    dataBind: function(d) {
+
+                        var chart = this.chart();
+
+                        chart.rh = (dataValidator.isPositiveNumber(d.rh, errors.invalidRH) || defaults.rh);
+                        chart.rw = (dataValidator.isPositiveNumber(d.rw, errors.invalidRH) || defaults.rw);
+                        chart.rx = (dataValidator.isPositiveNumber(d.rx, errors.invalidRX) || defaults.rx);
+                        chart.ry = (dataValidator.isPositiveNumber(d.ry, errors.invalidRY) || defaults.ry);
+                        chart.rc = (d.rc || defaults.rc);
+
+                        return this.selectAll(&#x27;rect&#x27;)
+                            .data(d.data);
+                    },
+                    /**
+                     * Appends a svg:rect element.
+                     *
+                     * @method insert
+                     * @chainable
+                     */
+                    insert: function() {
+                        return this.append(&#x27;rect&#x27;);
+                    },
+                    events: {
+                        &#x27;enter&#x27;: function() {
+                            this.chart()
+                                .eventManager.bindAll(this);
+
+                            return this;
+                        },
+                        &#x27;merge&#x27;: function() {
+                            /** Click event only on enter */
+                            var chart = this.chart();
+
+                            this.attr(&#x27;height&#x27;, chart.rh)
+                                .attr(&#x27;width&#x27;, chart.rw)
+                                .attr(&#x27;x&#x27;, function(d) {
+                                    return chart.xscale.map(d.x, 1) + (chart.xscale.band(1) / 2) - (chart.rw / 2);
+                                })
+                                .attr(&#x27;y&#x27;, function(d) {
+                                    return chart.yscale.map(d.y) - (chart.rh / 2);
+                                })
+                                .attr(&#x27;rx&#x27;, chart.rx)
+                                .attr(&#x27;ry&#x27;, chart.ry)
+                                .attr(&#x27;class&#x27;, function(d) {
+                                    return (d.rc || chart.rc);
+                                });
+
+                            return this;
+                        },
+                        &#x27;exit&#x27;: function() {
+                            return this.remove();
+                        }
+                    }
+                };
+
+                /**
+                 * Layer creation
+                 */
+                this.layer(&#x27;roundedrects&#x27;, this.base, options);
+            }
+        });
 }));
+
     </pre>
 </div>
 

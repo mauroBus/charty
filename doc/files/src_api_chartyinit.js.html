@@ -165,37 +165,37 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-* Api init for chart creation management.
-* 
-* 
-* @class ChartsApi
-* @constructor
-*
-* @author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
-*/
+ * Api init for chart creation management.
+ *
+ *
+ * @class ChartsApi
+ * @constructor
+ *
+ * @author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
+ */
 
 (function(root, factory) {
 
-  /** Setting up AMD support*/
-  if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
-    /** AMD */
-    define(&#x27;charty/chartyinit&#x27;,
-      function () {
-        /** Export global even in AMD case in case this script
-        * is loaded with others */
-        return factory();
-      });
-  } else {
-    /** Browser globals */
-    root.Charty = factory();
-  }
-}(this, function () {
+    /** Setting up AMD support*/
+    if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
+        /** AMD */
+        define(&#x27;charty/chartyinit&#x27;,
+            function() {
+                /** Export global even in AMD case in case this script
+                 * is loaded with others */
+                return factory();
+            });
+    } else {
+        /** Browser globals */
+        root.Charty = factory();
+    }
+}(this, function() {
 
-  var Charty = {
-  };
+    var Charty = {};
 
-  return Charty;
+    return Charty;
 }));
+
     </pre>
 </div>
 

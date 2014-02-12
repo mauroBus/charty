@@ -62,13 +62,13 @@
                 this.yt = 0;
 
                 /**
-                 * Defaults for axis
+                 * Axis default CSS class
                  *
-                 * c : axis style class
+                 * @property cssClass
+                 * @type String
+                 * @default 'axis'
                  */
-                var defaults = {
-                    c: 'axis'
-                };
+                this.cssClass = 'axis';
 
                 this.axis = d3.svg.axis();
 
@@ -117,7 +117,7 @@
                             }
 
                             /** Axis drawing */
-                            this.classed(defaults.c, true);
+                            this.classed(chart.cssClass, true);
 
                             /**
                              * Axis translation in x or y direction.
@@ -281,6 +281,12 @@
             tickFormat: function(format) {
                 if (format) {
                     this.axis.tickFormat(d3.format(format));
+                }
+                return this;
+            },
+            setClass: function(newClass) {
+                if (newClass) {
+                    this.cssClass = newClass;
                 }
                 return this;
             }

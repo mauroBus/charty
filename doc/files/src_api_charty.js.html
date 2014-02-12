@@ -164,174 +164,175 @@
 
 <div class="file">
     <pre class="code prettyprint linenums">
+/*global Charty: true, ScaleFactory: true, ChartInterface: true, DataValidator: true, EventFactory: true*/
 /**
-* Chart instantiation API
-* 
-* @class Charty
-* @requires chartynames
-*           scalesfactory
-*           chartinterface
-*           datavalidator
-*           eventfactory
-*           barchart
-*           labeledtrianglechart
-*           linechart
-*           scatterplot
-*           donut
-*           donnutwithinnertext
-*           linechartcircles
-*           groupedbarchart
-*
-* @author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
-*/
-
+ * Chart instantiation API
+ *
+ * @class Charty
+ * @requires chartynames
+ *           scalesfactory
+ *           chartinterface
+ *           datavalidator
+ *           eventfactory
+ *           barchart
+ *           labeledtrianglechart
+ *           linechart
+ *           scatterplot
+ *           donut
+ *           donnutwithinnertext
+ *           linechartcircles
+ *           groupedbarchart
+ *
+ * @author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
+ */
 (function(root, factory) {
-  /** Setting up AMD support*/
-  if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
-    /** AMD */
-    define(&#x27;charty/charty&#x27;,[
-      &#x27;charty/chartynames&#x27;,
-      &#x27;charty/scalesfactory&#x27;,
-      &#x27;charty/chartinterface&#x27;,
-      &#x27;charty/datavalidator&#x27;,
-      &#x27;charty/eventfactory&#x27;,
-      &#x27;charty/barchart&#x27;,
-      &#x27;charty/labeledtrianglechart&#x27;,
-      &#x27;charty/linechart&#x27;,
-      &#x27;charty/scatterplot&#x27;,
-      &#x27;charty/donut&#x27;,
-      &#x27;charty/donutwithinnertext&#x27;,
-      &#x27;charty/linechartcircles&#x27;,
-      &#x27;charty/groupedbarchart&#x27;,
-      &#x27;charty/winlossbar&#x27;,
-      &#x27;charty/winlosstext&#x27;
-      ],
-      function (Charty, ScaleFactory, ChartInterface, DataValidator, EventFactory) {
-        /** Export global even in AMD case in case this script
-        * is loaded with others */
-        return factory(Charty, ScaleFactory, ChartInterface, DataValidator, EventFactory);
-    });
-  }
-  else {
-    /** Browser globals */
-    root.Charty = factory(Charty, ScaleFactory, ChartInterface, DataValidator, EventFactory);
-  }
-}(this, function (Charty, ScaleFactory, ChartInterface, DataValidator, EventFactory) {
 
-  var scaleFactory = new ScaleFactory(),
-      dataValidator = new DataValidator(),
-      eventFactory = new EventFactory();
-
-
-  /**
-  * Appends a chart to a root d3.selection element. Chart is determined
-  * by a defined chart name.
-  * Margin is used to translate the chart a small distance. A chart can have many
-  * instances.
-  * Whether the chart takes the container dimensions, is it possible to also set
-  * the dimensions as initial options
-  * Defined events will be spread to every chart&#x27;s component.
-  *
-  * @method chart
-  * @param {Object} options options = {
-  *                    chartName : &#x27;BarChart&#x27;,
-  *                    instances : 2,
-  *                    root : &#x27;body&#x27;,
-  *                    xAxis : &#x27;ordinal&#x27;,
-  *                    yAxis : &#x27;linear&#x27;,
-  *                    xScaleDomain : [&#x27;Hi&#x27;, &#x27;I am&#x27;, &#x27;a fixed&#x27;, &#x27;domain&#x27;]
-  *                  }
-  * @return {Object} d3.chart for data drawing
-  */
-  Charty.chart = function(options) {
-
-    if (!options.root || !options.chartName) {
-      throw new Error(&#x27;Root element or chart name not defined&#x27;);
+    /** Setting up AMD support*/
+    if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
+        /** AMD */
+        define(&#x27;charty/charty&#x27;, [
+                &#x27;charty/chartynames&#x27;,
+                &#x27;charty/scalesfactory&#x27;,
+                &#x27;charty/chartinterface&#x27;,
+                &#x27;charty/datavalidator&#x27;,
+                &#x27;charty/eventfactory&#x27;,
+                &#x27;charty/barchart&#x27;,
+                &#x27;charty/labeledtrianglechart&#x27;,
+                &#x27;charty/linechart&#x27;,
+                &#x27;charty/scatterplot&#x27;,
+                &#x27;charty/donut&#x27;,
+                &#x27;charty/donutwithinnertext&#x27;,
+                &#x27;charty/linechartcircles&#x27;,
+                &#x27;charty/groupedbarchart&#x27;,
+                &#x27;charty/winlossbar&#x27;,
+                &#x27;charty/winlosstext&#x27;
+            ],
+            function(Charty, ScaleFactory, ChartInterface, DataValidator, EventFactory) {
+                /** Export global even in AMD case in case this script
+                 * is loaded with others */
+                return factory(Charty, ScaleFactory, ChartInterface, DataValidator, EventFactory);
+            });
+    } else {
+        /** Browser globals */
+        root.Charty = factory(Charty, ScaleFactory, ChartInterface, DataValidator, EventFactory);
     }
 
-    var selection = d3.select(options.root);
+}(this, function(Charty, ScaleFactory, ChartInterface, DataValidator, EventFactory) {
+
+    var scaleFactory = new ScaleFactory(),
+        dataValidator = new DataValidator(),
+        eventFactory = new EventFactory();
 
     /**
-    * Svg element creation
-    */
-    var svg = selection.append(&#x27;svg&#x27;);
+     * Appends a chart to a root d3.selection element. Chart is determined
+     * by a defined chart name.
+     * Margin is used to translate the chart a small distance. A chart can have many
+     * instances.
+     * Whether the chart takes the container dimensions, is it possible to also set
+     * the dimensions as initial options
+     * Defined events will be spread to every chart&#x27;s component.
+     *
+     * @method chart
+     * @param {Object} options options = {
+     *                    chartName : &#x27;BarChart&#x27;,
+     *                    instances : 2,
+     *                    root : &#x27;body&#x27;,
+     *                    xAxis : &#x27;ordinal&#x27;,
+     *                    yAxis : &#x27;linear&#x27;,
+     *                    xScaleDomain : [&#x27;Hi&#x27;, &#x27;I am&#x27;, &#x27;a fixed&#x27;, &#x27;domain&#x27;]
+     *                  }
+     * @return {Object} d3.chart for data drawing
+     */
+    Charty.chart = function(options) {
 
-    if (options.gradients){
-    /** Creation of linear gradients, if defined */
-      var defs = svg.append(&#x27;defs&#x27;);
-      /** Possible to define many gradients for one svg element */
-      _.each(options.gradients, function (gradient){
-        var grad = defs.append(&#x27;linearGradient&#x27;);
-            grad.attr(&#x27;id&#x27;, gradient.id);
-
-        if (gradient.orientation === &#x27;vertical&#x27;){
-          /** Vertial orientation */
-          grad.attr(&#x27;x1&#x27;, 0)
-              .attr(&#x27;x2&#x27;, 0)
-              .attr(&#x27;y1&#x27;, 0)
-              .attr(&#x27;y2&#x27;, 1);
+        if (!options.root || !options.chartName) {
+            throw new Error(&#x27;Root element or chart name not defined&#x27;);
         }
 
-        _.each(gradient.classes, function (gradientClass){
-            grad.append(&#x27;stop&#x27;)
-                .attr( &#x27;class&#x27;, gradientClass.className)
-                .attr(&#x27;offset&#x27;, gradientClass.offset);
-        });
-      });
-    }
+        var selection = d3.select(options.root);
 
-    /** Append g to svg */
-    var gSvg = svg.append(&#x27;g&#x27;);
+        /**
+         * Svg element creation
+         */
+        var svg = selection.append(&#x27;svg&#x27;);
 
-    options.dataValidator = dataValidator;
+        if (options.gradients) {
+            /** Creation of linear gradients, if defined */
+            var defs = svg.append(&#x27;defs&#x27;);
+            /** Possible to define many gradients for one svg element */
+            _.each(options.gradients, function(gradient) {
+                var grad = defs.append(&#x27;linearGradient&#x27;);
+                grad.attr(&#x27;id&#x27;, gradient.id);
 
-    /**
-    * Appends the chart to the specified html element.
-    */
-    var chart = gSvg.chart(options.chartName,options);
+                if (gradient.orientation === &#x27;vertical&#x27;) {
+                    /** Vertial orientation */
+                    grad.attr(&#x27;x1&#x27;, 0)
+                        .attr(&#x27;x2&#x27;, 0)
+                        .attr(&#x27;y1&#x27;, 0)
+                        .attr(&#x27;y2&#x27;, 1);
+                }
 
-    /**
-    * Scale definition.
-    * Some charts can use direct mapping instead of scaling.
-    */
-    if (options.xAxis){
-      chart.setXScale(scaleFactory.scale(options.xAxis,&#x27;x&#x27;));
-    }
-    
-    if (options.yAxis){
-      chart.setYScale(scaleFactory.scale(options.yAxis,&#x27;y&#x27;));
-    }
+                _.each(gradient.classes, function(gradientClass) {
+                    grad.append(&#x27;stop&#x27;)
+                        .attr(&#x27;class&#x27;, gradientClass.className)
+                        .attr(&#x27;offset&#x27;, gradientClass.offset);
+                });
+            });
+        }
 
-    /** Grouped bar chart uses another scale */
-    if (options.zAxis){
-      chart.setZScale(scaleFactory.scale(options.zAxis,&#x27;x&#x27;));
-    }
+        /** Append g to svg */
+        var gSvg = svg.append(&#x27;g&#x27;);
 
-    /** Sets default x domain */
-    if (options.defaultXDomain){
-      chart.setDefaultXDomain(options.defaultXDomain);
-    }
+        options.dataValidator = dataValidator;
 
-    /** Sets default y domain */
-    if (options.defaultYDomain){
-      chart.setDefaultYDomain(options.defaultYDomain);
-    }
+        /**
+         * Appends the chart to the specified html element.
+         */
+        var chart = gSvg.chart(options.chartName, options);
 
-    /** Sets default z domain */
-    if (options.defaultZDomain){
-      chart.setDefaultZDomain(options.defaultZDomain);
-    }
+        /**
+         * Scale definition.
+         * Some charts can use direct mapping instead of scaling.
+         */
+        if (options.xAxis) {
+            chart.setXScale(scaleFactory.scale(options.xAxis, &#x27;x&#x27;));
+        }
 
-    /**
-    * Returns the interface for the chart drawing
-    * 
-    * Interface will manage the events creation.
-    */
-    return new ChartInterface(chart, selection, svg, gSvg, eventFactory);
-  };
+        if (options.yAxis) {
+            chart.setYScale(scaleFactory.scale(options.yAxis, &#x27;y&#x27;));
+        }
 
-  return Charty;
+        /** Grouped bar chart uses another scale */
+        if (options.zAxis) {
+            chart.setZScale(scaleFactory.scale(options.zAxis, &#x27;x&#x27;));
+        }
+
+        /** Sets default x domain */
+        if (options.defaultXDomain) {
+            chart.setDefaultXDomain(options.defaultXDomain);
+        }
+
+        /** Sets default y domain */
+        if (options.defaultYDomain) {
+            chart.setDefaultYDomain(options.defaultYDomain);
+        }
+
+        /** Sets default z domain */
+        if (options.defaultZDomain) {
+            chart.setDefaultZDomain(options.defaultZDomain);
+        }
+
+        /**
+         * Returns the interface for the chart drawing
+         *
+         * Interface will manage the events creation.
+         */
+        return new ChartInterface(chart, selection, svg, gSvg, eventFactory);
+    };
+
+    return Charty;
 }));
+
     </pre>
 </div>
 

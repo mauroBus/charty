@@ -44,7 +44,8 @@
                 .orient('bottom')
                 .setTextLabel(args.xAxisLabel)
                 .tickCount(args.xTickCount)
-                .tickFormat(args.xAxisTickFormat);
+                .tickFormat(args.xAxisTickFormat)
+                .setClass(args.xAxisClass);
 
             this.yaxis = this.mixin(Charty.CHART_NAMES.AXIS,
                 this.base.append('g'),
@@ -52,7 +53,8 @@
                 .orient('left')
                 .setTextLabel(args.yAxisLabel, '-90')
                 .tickCount(args.yTickCount)
-                .tickFormat(args.yAxisTickFormat);
+                .tickFormat(args.yAxisTickFormat)
+                .setClass(args.yAxisClass);
 
         },
         /**
