@@ -56,7 +56,6 @@
                 .tickFormat(args.yAxisTickFormat)
                 .setClass(args.yAxisClass);
 
-
         },
         /**
          * Show whole chart as a grid.

@@ -1,3 +1,4 @@
+/*jshint -W074*/
 /*global Accessor: true, EventManager: true, EventFactory: true*/
 /**
  * Sets an interface for adding a link between the chart

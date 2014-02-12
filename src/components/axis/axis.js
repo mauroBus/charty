@@ -68,7 +68,7 @@
                  * @type String
                  * @default 'axis'
                  */
-                this.cssClass= 'axis';
+                this.cssClass = 'axis';
 
                 this.axis = d3.svg.axis();
 
@@ -285,7 +285,7 @@
                 return this;
             },
             setClass: function(newClass) {
-                if(newClass) {
+                if (newClass) {
                     this.cssClass = newClass;
                 }
                 return this;
