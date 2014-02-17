@@ -465,12 +465,26 @@
                 }
                 return this;
             },
+            /**
+             * Sets CSS Class
+             *
+             * @method setClass
+             * @param {String} newClass A CSS class to use on the axis
+             * @chainable
+             */
             setClass: function(newClass) {
                 if (newClass) {
                     this.cssClass = newClass;
                 }
                 return this;
             },
+            /**
+             * Sets rotation of tick labels
+             *
+             * @method setRotation
+             * @param {Number} degrees The number in degrees for the label to be rotated.
+             * @chainable
+             */
             setRotation: function(degrees) {
                 if (degrees) {
                     this.rotation = degrees;

@@ -1809,6 +1809,38 @@
             "class": "Axis"
         },
         {
+            "file": "src\\components\\axis\\axis.js",
+            "line": 302,
+            "description": "Sets CSS Class",
+            "itemtype": "method",
+            "name": "setClass",
+            "params": [
+                {
+                    "name": "newClass",
+                    "description": "A CSS class to use on the axis",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Axis"
+        },
+        {
+            "file": "src\\components\\axis\\axis.js",
+            "line": 315,
+            "description": "Sets rotation of tick labels",
+            "itemtype": "method",
+            "name": "setRotation",
+            "params": [
+                {
+                    "name": "degrees",
+                    "description": "The number in degrees for the label to be rotated.",
+                    "type": "Number"
+                }
+            ],
+            "chainable": 1,
+            "class": "Axis"
+        },
+        {
             "file": "src\\components\\bar\\bar.js",
             "line": 14,
             "class": "Bar"
