@@ -1081,7 +1081,7 @@
                  * @type String
                  * @default 'axis'
                  */
-                this.cssClass= 'axis';
+                this.cssClass = 'axis';
 
                 this.axis = d3.svg.axis();
 
@@ -1099,7 +1099,7 @@
                      */
                     dataBind: function(d) {
                         /** Case there is no data to display must be checked */
-                        if (d.hasNext()) {
+                        if (d.data.length) {
                             return this.selectAll('g')
                                 .data([true]);
                         } else {
@@ -1156,7 +1156,6 @@
                             return this;
                         },
                         'merge': function() {
-
                             return this.call(this.chart()
                                 .axis);
                         },
@@ -1199,7 +1198,6 @@
              * @chainable
              */
             setScale: function(scale) {
-
                 if (!scale) {
                     throw new Error('Undefined scale for axis.');
                 }
@@ -1298,7 +1296,7 @@
                 return this;
             },
             setClass: function(newClass) {
-                if(newClass) {
+                if (newClass) {
                     this.cssClass = newClass;
                 }
                 return this;
@@ -2914,7 +2912,6 @@
                 .tickFormat(args.yAxisTickFormat)
                 .setClass(args.yAxisClass);
 
-
         },
         /**
          * Show whole chart as a grid.
@@ -4107,6 +4104,7 @@ Takes N input data series
 
 }));
 
+/*jshint -W074*/
 /*global Accessor: true, EventManager: true, EventFactory: true*/
 /**
  * Sets an interface for adding a link between the chart

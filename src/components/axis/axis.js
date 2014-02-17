@@ -86,7 +86,7 @@
                      */
                     dataBind: function(d) {
                         /** Case there is no data to display must be checked */
-                        if (d.hasNext()) {
+                        if (d.data.length) {
                             return this.selectAll('g')
                                 .data([true]);
                         } else {
@@ -143,7 +143,6 @@
                             return this;
                         },
                         'merge': function() {
-
                             return this.call(this.chart()
                                 .axis);
                         },
@@ -186,7 +185,6 @@
              * @chainable
              */
             setScale: function(scale) {
-
                 if (!scale) {
                     throw new Error('Undefined scale for axis.');
                 }

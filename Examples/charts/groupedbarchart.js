@@ -60,7 +60,6 @@
     axisSystem : Charty.CHART_NAMES.YXY_AXIS,
     xAxis : Charty.AXIS_TYPE.ORDINAL,
     zAxis : Charty.AXIS_TYPE.ORDINAL,
-    defaultZDomain : ['2012','2013'],
     yAxis : Charty.AXIS_TYPE.LINEAR,
     root : '#chart8',
     showAsGrid : true
