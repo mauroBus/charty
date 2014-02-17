@@ -234,7 +234,7 @@
                  * @type String
                  * @default &#x27;axis&#x27;
                  */
-                this.cssClass= &#x27;axis&#x27;;
+                this.cssClass = &#x27;axis&#x27;;
 
                 this.axis = d3.svg.axis();
 
@@ -252,7 +252,7 @@
                      */
                     dataBind: function(d) {
                         /** Case there is no data to display must be checked */
-                        if (d.hasNext()) {
+                        if (d.data.length) {
                             return this.selectAll(&#x27;g&#x27;)
                                 .data([true]);
                         } else {
@@ -309,7 +309,6 @@
                             return this;
                         },
                         &#x27;merge&#x27;: function() {
-
                             return this.call(this.chart()
                                 .axis);
                         },
@@ -352,7 +351,6 @@
              * @chainable
              */
             setScale: function(scale) {
-
                 if (!scale) {
                     throw new Error(&#x27;Undefined scale for axis.&#x27;);
                 }
@@ -451,7 +449,7 @@
                 return this;
             },
             setClass: function(newClass) {
-                if(newClass) {
+                if (newClass) {
                     this.cssClass = newClass;
                 }
                 return this;
