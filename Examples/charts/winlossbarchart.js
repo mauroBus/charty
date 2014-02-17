@@ -68,6 +68,7 @@ document.data = data666.data;
         xAxis : Charty.AXIS_TYPE.ORDINAL,
         xAxisClass: 'x-axis',
         yAxis : Charty.AXIS_TYPE.PEAK_VALLEY_LINEAR,
+        xAxisTickRotation: 45,
         axisSystem : Charty.CHART_NAMES.YXY_AXIS,
         showAsGrid : true,
         setTextLabels : true
@@ -90,7 +91,4 @@ document.data = data666.data;
     
     chart11.draw(datagroup666);
 
-    d3.select('#chart11')
-      .selectAll('.x-axis text')
-      .attr('transform', 'translate(-10, 20),rotate(-45)');
 }));

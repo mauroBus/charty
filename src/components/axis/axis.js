@@ -143,8 +143,25 @@
                             return this;
                         },
                         'merge': function() {
-                            return this.call(this.chart()
-                                .axis);
+                            var chart = this.chart(),
+                                axis = this.call(chart.axis),
+                                xPos = 5,
+                                yPos = -2,
+                                textAnchor = 'start';
+
+                            if (chart.rotation < 0) {
+                                textAnchor = 'end';
+                                xPos = -5;
+                                yPos = 2;
+                            }
+                            if (chart.rotation) {
+                                this.selectAll('text')
+                                    .attr('y', yPos)
+                                    .attr('x', xPos)
+                                    .style('text-anchor', textAnchor)
+                                    .attr('transform', 'rotate(' + chart.rotation + ')');
+                            }
+                            return axis;
                         },
                         'remove': function() {
 
@@ -285,6 +302,12 @@
             setClass: function(newClass) {
                 if (newClass) {
                     this.cssClass = newClass;
+                }
+                return this;
+            },
+            setRotation: function(degrees) {
+                if (degrees) {
+                    this.rotation = degrees;
                 }
                 return this;
             }
