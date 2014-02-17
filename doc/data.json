@@ -1643,13 +1643,13 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 156,
+            "line": 173,
             "description": "Axis layer creation",
             "class": "Axis"
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 161,
+            "line": 178,
             "description": "Sets tick size for the axis",
             "itemtype": "method",
             "name": "tickSize",
@@ -1665,7 +1665,7 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 169,
+            "line": 186,
             "description": "Size for the ticks. Necessary\nto define a grid chart.",
             "itemtype": "property",
             "name": "tsize",
@@ -1675,7 +1675,7 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 180,
+            "line": 197,
             "description": "Sets the scale that will be used for the axis",
             "itemtype": "method",
             "name": "setScale",
@@ -1691,7 +1691,7 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 195,
+            "line": 212,
             "description": "Shows the axis as a grid",
             "itemtype": "method",
             "name": "showAsGrid",
@@ -1708,7 +1708,7 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 207,
+            "line": 224,
             "description": "Sets axis orientation",
             "itemtype": "method",
             "name": "orient",
@@ -1725,7 +1725,7 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 220,
+            "line": 237,
             "description": "Sets x translation for axis.",
             "itemtype": "method",
             "name": "xtranslate",
@@ -1741,7 +1741,7 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 231,
+            "line": 248,
             "description": "Sets y translation for axis.",
             "itemtype": "method",
             "name": "ytranslate",
@@ -1757,7 +1757,7 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 242,
+            "line": 259,
             "description": "Text label that will be set next to the axis",
             "itemtype": "method",
             "name": "setTextLabel",
@@ -1778,7 +1778,7 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 255,
+            "line": 272,
             "description": "Custom tick count setting for particular\naxis.\n\nThis options will only work in linear scales,\nsince the domain, by defaut, is continuous.",
             "itemtype": "method",
             "name": "tickCount",
@@ -1794,7 +1794,7 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 272,
+            "line": 289,
             "description": "Tick format",
             "itemtype": "method",
             "name": "tickFormat",
@@ -3230,7 +3230,7 @@
         },
         {
             "file": "src\\composition\\axis\\xyaxis.js",
-            "line": 60,
+            "line": 61,
             "description": "Show whole chart as a grid.",
             "itemtype": "method",
             "name": "showAsGrid",
@@ -3239,7 +3239,7 @@
         },
         {
             "file": "src\\composition\\axis\\xyaxis.js",
-            "line": 71,
+            "line": 72,
             "description": "Moves x axis according to given height value, and sets\ntick size value.",
             "itemtype": "method",
             "name": "height",
@@ -3255,7 +3255,7 @@
         },
         {
             "file": "src\\composition\\axis\\xyaxis.js",
-            "line": 85,
+            "line": 86,
             "description": "Sets tick size, based on given width value",
             "itemtype": "method",
             "name": "width",
@@ -3271,7 +3271,7 @@
         },
         {
             "file": "src\\composition\\axis\\xyaxis.js",
-            "line": 98,
+            "line": 99,
             "description": "Sets x scale.",
             "itemtype": "method",
             "name": "setXScale",
@@ -3287,7 +3287,7 @@
         },
         {
             "file": "src\\composition\\axis\\xyaxis.js",
-            "line": 109,
+            "line": 110,
             "description": "Sets y scale.",
             "itemtype": "method",
             "name": "setYScale",
@@ -4673,7 +4673,7 @@
         },
         {
             "message": "Missing item type\nAxis layer creation",
-            "line": " src\\components\\axis\\axis.js:156"
+            "line": " src\\components\\axis\\axis.js:173"
         },
         {
             "message": "Missing item type",

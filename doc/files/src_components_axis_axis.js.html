@@ -309,8 +309,25 @@
                             return this;
                         },
                         &#x27;merge&#x27;: function() {
-                            return this.call(this.chart()
-                                .axis);
+                            var chart = this.chart(),
+                                axis = this.call(chart.axis),
+                                xPos = 5,
+                                yPos = -2,
+                                textAnchor = &#x27;start&#x27;;
+
+                            if (chart.rotation &lt; 0) {
+                                textAnchor = &#x27;end&#x27;;
+                                xPos = -5;
+                                yPos = 2;
+                            }
+                            if (chart.rotation) {
+                                this.selectAll(&#x27;text&#x27;)
+                                    .attr(&#x27;y&#x27;, yPos)
+                                    .attr(&#x27;x&#x27;, xPos)
+                                    .style(&#x27;text-anchor&#x27;, textAnchor)
+                                    .attr(&#x27;transform&#x27;, &#x27;rotate(&#x27; + chart.rotation + &#x27;)&#x27;);
+                            }
+                            return axis;
                         },
                         &#x27;remove&#x27;: function() {
 
@@ -451,6 +468,12 @@
             setClass: function(newClass) {
                 if (newClass) {
                     this.cssClass = newClass;
+                }
+                return this;
+            },
+            setRotation: function(degrees) {
+                if (degrees) {
+                    this.rotation = degrees;
                 }
                 return this;
             }
