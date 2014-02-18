@@ -1833,7 +1833,7 @@
             "params": [
                 {
                     "name": "degrees",
-                    "description": "The number in degrees for the label to be rotated.",
+                    "description": "The number in degrees for the label to be rotated.\n  The expected number should be between -90 and 90.",
                     "type": "Number"
                 }
             ],
@@ -4148,6 +4148,18 @@
                 }
             ],
             "chainable": 1,
+            "class": "Accessor"
+        },
+        {
+            "file": "src\\utils\\accessor\\accessor.js",
+            "line": 105,
+            "description": "Gets the length of the data set.",
+            "itemtype": "method",
+            "name": "getLength",
+            "return": {
+                "description": "the length of the data",
+                "type": "Number"
+            },
             "class": "Accessor"
         },
         {

@@ -47,10 +47,10 @@
     };
 
     /** Data series */
-    var datagroup51 = [];
+    window.datagroup51 = [];
 
-    datagroup51.push(data51);
-    datagroup51.push(data52);
+        window.datagroup51.push(data51);
+        window.datagroup51.push(data52);
 
     /** 
     * Bar chart options
@@ -79,7 +79,7 @@
     };
 
     /** Bar chart creation */
-    var chart9 = Charty.chart(options9);
+    window.chart9 = Charty.chart(options9);
 
     /** Margin specifications */
     var marginOptions9 = {

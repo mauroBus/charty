@@ -86,7 +86,7 @@
                      */
                     dataBind: function(d) {
                         /** Case there is no data to display must be checked */
-                        if (d.data.length) {
+                        if (d.getLength()) {
                             return this.selectAll('g')
                                 .data([true]);
                         } else {
@@ -145,14 +145,14 @@
                         'merge': function() {
                             var chart = this.chart(),
                                 axis = this.call(chart.axis),
-                                xPos = 5,
-                                yPos = -2,
+                                xPos = 5, // Small margin for the text so it doesn't get in the way of the chart.
+                                yPos = -2, // Fixed number of pixes so the text is somewhat centered when rotated.
                                 textAnchor = 'start';
 
                             if (chart.rotation < 0) {
                                 textAnchor = 'end';
-                                xPos = -5;
-                                yPos = 2;
+                                xPos = -xPos;
+                                yPos = -yPos;
                             }
                             if (chart.rotation) {
                                 this.selectAll('text')
@@ -317,6 +317,7 @@
              *
              * @method setRotation
              * @param {Number} degrees The number in degrees for the label to be rotated.
+             *   The expected number should be between -90 and 90.
              * @chainable
              */
             setRotation: function(degrees) {
