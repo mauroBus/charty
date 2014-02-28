@@ -71,7 +71,7 @@
   var marginOptions3 = {
     marginleft : 50,
     margintop : 20,
-    marginlfactor : 0.85,
+    marginlfactor : 0.80,
     margintfactor : 0.85,
   };
 
