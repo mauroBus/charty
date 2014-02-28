@@ -102,5 +102,15 @@
         return this;
     };
 
+    /**
+     * Gets the length of the data set.
+     *
+     * @method getLength
+     * @return {Number} the length of the data
+     */
+    Accessor.prototype.getLength = function() {
+        return this.data.length;
+    };
+
     return Accessor;
 }));

@@ -391,7 +391,7 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "src\\api\\chartinterface.js",
-            "line": 2,
+            "line": 3,
             "description": "Sets an interface for adding a link between the chart\nand the data accessor.\n\nUses an event manager for defining different charty events. Since events\nneed to be present when chart is rendered, for attachment to every SVG node,\nthey should be defined by draw method. This makes an easy way of propagating\nevents to each base rendering class.\n\nNote : events are NOT defined in chart init, it can happen that, at this point,\nevents handler are not yet defined or they don't have all necessary data.",
             "requires": [
                 "accessor",
@@ -1136,27 +1136,27 @@
     "classitems": [
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 23,
+            "line": 24,
             "class": "ChartInterface"
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 25,
+            "line": 26,
             "class": "ChartInterface"
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 33,
+            "line": 34,
             "class": "ChartInterface"
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 38,
+            "line": 39,
             "class": "ChartInterface"
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 43,
+            "line": 44,
             "description": "Class constructor",
             "is_constructor": 1,
             "params": [
@@ -1190,7 +1190,7 @@
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 64,
+            "line": 65,
             "description": "Chart dimensioning via interface. Elements internal dimensioning.",
             "itemtype": "method",
             "name": "setDimensions",
@@ -1215,37 +1215,37 @@
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 80,
+            "line": 81,
             "class": "ChartInterface"
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 90,
+            "line": 91,
             "class": "ChartInterface"
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 94,
+            "line": 95,
             "class": "ChartInterface"
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 110,
+            "line": 111,
             "class": "ChartInterface"
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 114,
+            "line": 115,
             "class": "ChartInterface"
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 118,
+            "line": 119,
             "class": "ChartInterface"
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 123,
+            "line": 124,
             "description": "Interface to the chart drawing stage",
             "itemtype": "method",
             "name": "draw",
@@ -1266,17 +1266,17 @@
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 136,
+            "line": 137,
             "class": "ChartInterface"
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 141,
+            "line": 142,
             "class": "ChartInterface"
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 150,
+            "line": 151,
             "description": "Chart redimension, without redrawing elements",
             "itemtype": "method",
             "name": "redimension",
@@ -1297,12 +1297,12 @@
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 165,
+            "line": 166,
             "class": "ChartInterface"
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 175,
+            "line": 176,
             "description": "Sets a background image via css. Class is required",
             "itemtype": "method",
             "name": "setBackgroundImage",
@@ -1318,12 +1318,12 @@
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 185,
+            "line": 186,
             "class": "ChartInterface"
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 191,
+            "line": 192,
             "description": "Removes class containing background image, if present",
             "itemtype": "method",
             "name": "removeBackgroundImage",
@@ -1332,7 +1332,7 @@
         },
         {
             "file": "src\\api\\chartinterface.js",
-            "line": 203,
+            "line": 204,
             "description": "Sets title as a header",
             "itemtype": "method",
             "name": "setTitle",
@@ -1643,13 +1643,13 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 157,
+            "line": 173,
             "description": "Axis layer creation",
             "class": "Axis"
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 162,
+            "line": 178,
             "description": "Sets tick size for the axis",
             "itemtype": "method",
             "name": "tickSize",
@@ -1665,7 +1665,7 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 170,
+            "line": 186,
             "description": "Size for the ticks. Necessary\nto define a grid chart.",
             "itemtype": "property",
             "name": "tsize",
@@ -1675,7 +1675,7 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 181,
+            "line": 197,
             "description": "Sets the scale that will be used for the axis",
             "itemtype": "method",
             "name": "setScale",
@@ -1691,7 +1691,7 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 197,
+            "line": 212,
             "description": "Shows the axis as a grid",
             "itemtype": "method",
             "name": "showAsGrid",
@@ -1708,7 +1708,7 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 209,
+            "line": 224,
             "description": "Sets axis orientation",
             "itemtype": "method",
             "name": "orient",
@@ -1725,7 +1725,7 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 222,
+            "line": 237,
             "description": "Sets x translation for axis.",
             "itemtype": "method",
             "name": "xtranslate",
@@ -1741,7 +1741,7 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 233,
+            "line": 248,
             "description": "Sets y translation for axis.",
             "itemtype": "method",
             "name": "ytranslate",
@@ -1757,7 +1757,7 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 244,
+            "line": 259,
             "description": "Text label that will be set next to the axis",
             "itemtype": "method",
             "name": "setTextLabel",
@@ -1778,7 +1778,7 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 257,
+            "line": 272,
             "description": "Custom tick count setting for particular\naxis.\n\nThis options will only work in linear scales,\nsince the domain, by defaut, is continuous.",
             "itemtype": "method",
             "name": "tickCount",
@@ -1794,7 +1794,7 @@
         },
         {
             "file": "src\\components\\axis\\axis.js",
-            "line": 274,
+            "line": 289,
             "description": "Tick format",
             "itemtype": "method",
             "name": "tickFormat",
@@ -1803,6 +1803,38 @@
                     "name": "format",
                     "description": "Tick format option",
                     "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Axis"
+        },
+        {
+            "file": "src\\components\\axis\\axis.js",
+            "line": 302,
+            "description": "Sets CSS Class",
+            "itemtype": "method",
+            "name": "setClass",
+            "params": [
+                {
+                    "name": "newClass",
+                    "description": "A CSS class to use on the axis",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Axis"
+        },
+        {
+            "file": "src\\components\\axis\\axis.js",
+            "line": 315,
+            "description": "Sets rotation of tick labels",
+            "itemtype": "method",
+            "name": "setRotation",
+            "params": [
+                {
+                    "name": "degrees",
+                    "description": "The number in degrees for the label to be rotated.\n  The expected number should be between -90 and 90.",
+                    "type": "Number"
                 }
             ],
             "chainable": 1,
@@ -4119,6 +4151,18 @@
             "class": "Accessor"
         },
         {
+            "file": "src\\utils\\accessor\\accessor.js",
+            "line": 105,
+            "description": "Gets the length of the data set.",
+            "itemtype": "method",
+            "name": "getLength",
+            "return": {
+                "description": "the length of the data",
+                "type": "Number"
+            },
+            "class": "Accessor"
+        },
+        {
             "file": "src\\utils\\datavalidator\\datavalidator.js",
             "line": 12,
             "class": "DataValidator"
@@ -4457,63 +4501,63 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartinterface.js:23"
+            "line": " src\\api\\chartinterface.js:24"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartinterface.js:25"
+            "line": " src\\api\\chartinterface.js:26"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartinterface.js:33"
+            "line": " src\\api\\chartinterface.js:34"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartinterface.js:38"
+            "line": " src\\api\\chartinterface.js:39"
         },
         {
             "message": "Missing item type\nClass constructor",
-            "line": " src\\api\\chartinterface.js:43"
+            "line": " src\\api\\chartinterface.js:44"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartinterface.js:80"
+            "line": " src\\api\\chartinterface.js:81"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartinterface.js:90"
+            "line": " src\\api\\chartinterface.js:91"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartinterface.js:94"
+            "line": " src\\api\\chartinterface.js:95"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartinterface.js:110"
+            "line": " src\\api\\chartinterface.js:111"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartinterface.js:114"
+            "line": " src\\api\\chartinterface.js:115"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartinterface.js:118"
+            "line": " src\\api\\chartinterface.js:119"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartinterface.js:136"
+            "line": " src\\api\\chartinterface.js:137"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartinterface.js:141"
+            "line": " src\\api\\chartinterface.js:142"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartinterface.js:165"
+            "line": " src\\api\\chartinterface.js:166"
         },
         {
             "message": "Missing item type",
-            "line": " src\\api\\chartinterface.js:185"
+            "line": " src\\api\\chartinterface.js:186"
         },
         {
             "message": "Missing item type",
@@ -4673,7 +4717,7 @@
         },
         {
             "message": "Missing item type\nAxis layer creation",
-            "line": " src\\components\\axis\\axis.js:157"
+            "line": " src\\components\\axis\\axis.js:173"
         },
         {
             "message": "Missing item type",

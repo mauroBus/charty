@@ -86,7 +86,7 @@
                      */
                     dataBind: function(d) {
                         /** Case there is no data to display must be checked */
-                        if (d.hasNext()) {
+                        if (d.getLength()) {
                             return this.selectAll('g')
                                 .data([true]);
                         } else {
@@ -143,9 +143,25 @@
                             return this;
                         },
                         'merge': function() {
+                            var chart = this.chart(),
+                                axis = this.call(chart.axis),
+                                xPos = 5, // Small margin for the text so it doesn't get in the way of the chart.
+                                yPos = -2, // Fixed number of pixes so the text is somewhat centered when rotated.
+                                textAnchor = 'start';
 
-                            return this.call(this.chart()
-                                .axis);
+                            if (chart.rotation < 0) {
+                                textAnchor = 'end';
+                                xPos = -xPos;
+                                yPos = -yPos;
+                            }
+                            if (chart.rotation) {
+                                this.selectAll('text')
+                                    .attr('y', yPos)
+                                    .attr('x', xPos)
+                                    .style('text-anchor', textAnchor)
+                                    .attr('transform', 'rotate(' + chart.rotation + ')');
+                            }
+                            return axis;
                         },
                         'remove': function() {
 
@@ -186,7 +202,6 @@
              * @chainable
              */
             setScale: function(scale) {
-
                 if (!scale) {
                     throw new Error('Undefined scale for axis.');
                 }
@@ -284,9 +299,30 @@
                 }
                 return this;
             },
+            /**
+             * Sets CSS Class
+             *
+             * @method setClass
+             * @param {String} newClass A CSS class to use on the axis
+             * @chainable
+             */
             setClass: function(newClass) {
                 if (newClass) {
                     this.cssClass = newClass;
+                }
+                return this;
+            },
+            /**
+             * Sets rotation of tick labels
+             *
+             * @method setRotation
+             * @param {Number} degrees The number in degrees for the label to be rotated.
+             *   The expected number should be between -90 and 90.
+             * @chainable
+             */
+            setRotation: function(degrees) {
+                if (degrees) {
+                    this.rotation = degrees;
                 }
                 return this;
             }

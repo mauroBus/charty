@@ -37,7 +37,6 @@
          * @param {Object} args Arguments for xy axis system.
          */
         initialize: function(args) {
-
             this.xaxis = this.mixin(Charty.CHART_NAMES.AXIS,
                 this.base.append('g'),
                 args)
@@ -45,7 +44,8 @@
                 .setTextLabel(args.xAxisLabel)
                 .tickCount(args.xTickCount)
                 .tickFormat(args.xAxisTickFormat)
-                .setClass(args.xAxisClass);
+                .setClass(args.xAxisClass)
+                .setRotation(args.xAxisTickRotation);
 
             this.yaxis = this.mixin(Charty.CHART_NAMES.AXIS,
                 this.base.append('g'),
@@ -54,7 +54,8 @@
                 .setTextLabel(args.yAxisLabel, '-90')
                 .tickCount(args.yTickCount)
                 .tickFormat(args.yAxisTickFormat)
-                .setClass(args.yAxisClass);
+                .setClass(args.yAxisClass)
+                .setRotation(args.yAxisTickRotation);
 
         },
         /**

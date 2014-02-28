@@ -1081,7 +1081,7 @@
                  * @type String
                  * @default 'axis'
                  */
-                this.cssClass= 'axis';
+                this.cssClass = 'axis';
 
                 this.axis = d3.svg.axis();
 
@@ -1099,7 +1099,7 @@
                      */
                     dataBind: function(d) {
                         /** Case there is no data to display must be checked */
-                        if (d.hasNext()) {
+                        if (d.getLength()) {
                             return this.selectAll('g')
                                 .data([true]);
                         } else {
@@ -1156,9 +1156,25 @@
                             return this;
                         },
                         'merge': function() {
+                            var chart = this.chart(),
+                                axis = this.call(chart.axis),
+                                xPos = 5, // Small margin for the text so it doesn't get in the way of the chart.
+                                yPos = -2, // Fixed number of pixes so the text is somewhat centered when rotated.
+                                textAnchor = 'start';
 
-                            return this.call(this.chart()
-                                .axis);
+                            if (chart.rotation < 0) {
+                                textAnchor = 'end';
+                                xPos = -xPos;
+                                yPos = -yPos;
+                            }
+                            if (chart.rotation) {
+                                this.selectAll('text')
+                                    .attr('y', yPos)
+                                    .attr('x', xPos)
+                                    .style('text-anchor', textAnchor)
+                                    .attr('transform', 'rotate(' + chart.rotation + ')');
+                            }
+                            return axis;
                         },
                         'remove': function() {
 
@@ -1199,7 +1215,6 @@
              * @chainable
              */
             setScale: function(scale) {
-
                 if (!scale) {
                     throw new Error('Undefined scale for axis.');
                 }
@@ -1297,9 +1312,30 @@
                 }
                 return this;
             },
+            /**
+             * Sets CSS Class
+             *
+             * @method setClass
+             * @param {String} newClass A CSS class to use on the axis
+             * @chainable
+             */
             setClass: function(newClass) {
-                if(newClass) {
+                if (newClass) {
                     this.cssClass = newClass;
+                }
+                return this;
+            },
+            /**
+             * Sets rotation of tick labels
+             *
+             * @method setRotation
+             * @param {Number} degrees The number in degrees for the label to be rotated.
+               *   The expected number should be between -90 and 90.
+             * @chainable
+             */
+            setRotation: function(degrees) {
+                if (degrees) {
+                    this.rotation = degrees;
                 }
                 return this;
             }
@@ -2895,7 +2931,6 @@
          * @param {Object} args Arguments for xy axis system.
          */
         initialize: function(args) {
-
             this.xaxis = this.mixin(Charty.CHART_NAMES.AXIS,
                 this.base.append('g'),
                 args)
@@ -2903,7 +2938,8 @@
                 .setTextLabel(args.xAxisLabel)
                 .tickCount(args.xTickCount)
                 .tickFormat(args.xAxisTickFormat)
-                .setClass(args.xAxisClass);
+                .setClass(args.xAxisClass)
+                .setRotation(args.xAxisTickRotation);
 
             this.yaxis = this.mixin(Charty.CHART_NAMES.AXIS,
                 this.base.append('g'),
@@ -2912,8 +2948,8 @@
                 .setTextLabel(args.yAxisLabel, '-90')
                 .tickCount(args.yTickCount)
                 .tickFormat(args.yAxisTickFormat)
-                .setClass(args.yAxisClass);
-
+                .setClass(args.yAxisClass)
+                .setRotation(args.yAxisTickRotation);
 
         },
         /**
@@ -3790,6 +3826,16 @@ Takes N input data series
         return this;
     };
 
+    /**
+     * Gets the length of the data set.
+     *
+     * @method getLength
+     * @return {Number} the length of the data
+     */
+    Accessor.prototype.getLength = function() {
+        return this.data.length;
+    };
+
     return Accessor;
 }));
 
@@ -4107,6 +4153,7 @@ Takes N input data series
 
 }));
 
+/*jshint -W074*/
 /*global Accessor: true, EventManager: true, EventFactory: true*/
 /**
  * Sets an interface for adding a link between the chart
