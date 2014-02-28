@@ -1,4 +1,4 @@
-/** 
+/**
 * Simple horizontal bar chart example
 */
 
@@ -23,8 +23,8 @@
 
     "use strict";
 
-    /** 
-    * Chart data 
+    /**
+    * Chart data
     *
     * c : element color
     */
@@ -50,12 +50,12 @@
     datagroup51.push(data51);
     datagroup51.push(data52);
 
-    /** 
+    /**
     * Bar chart options
-    * 
+    *
     * xTickCount : how many ticks will be displayed along x axis
     * showAsGrid : a line for every tick, vertical / horizontal
-    * axisSystem : can be XY / XYX 
+    * axisSystem : can be XY / XYX
     * root : container div
     * barType : horizontal / vertical
     * instances : how many data groups are for drawing
@@ -87,10 +87,10 @@
     };
 
     chart1.setDimensions(marginOptions1);
-    
-    /** 
-    * Needs x and y position
-    */
-    chart1.setTitle('I hate that Donut Chart guy.', 200, 0);
+
+    /**
+     * Needs x and y position
+     */
+    chart1.setTitle('Horizontal bar chart.', 200, 0);
     chart1.draw(datagroup51);
 }));

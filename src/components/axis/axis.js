@@ -21,18 +21,19 @@
         /** AMD */
         define('charty/axis', [
                 'd3.chart',
+                'underscore',
                 'charty/chartynames'
             ],
-            function(d3, Charty) {
+            function(d3, _, Charty) {
                 /** Export global even in AMD case in case this script
                  * is loaded with others */
-                return factory(d3, Charty);
+                return factory(d3, _, Charty);
             });
     } else {
         /** Browser globals */
-        factory(d3, Charty);
+        factory(d3, _, Charty);
     }
-}(this, function(d3, Charty) {
+}(this, function(d3, _, Charty) {
 
     d3.chart(Charty.CHART_NAMES.BASE_CHART)
         .extend(Charty.CHART_NAMES.AXIS, {
@@ -290,12 +291,14 @@
              * Tick format
              *
              * @method tickFormat
-             * @param {String} format Tick format option
+             * @param {String|Function} format Tick formatter.
              * @chainable
              */
             tickFormat: function(format) {
-                if (format) {
+                if (_.isString(format)) {
                     this.axis.tickFormat(d3.format(format));
+                } else if (_.isFunction(format)) {
+                    this.axis.tickFormat(format);
                 }
                 return this;
             },

@@ -37,12 +37,10 @@
              * @param {Object} args Arguments for above text component.
              */
             initialize: function() {
-
                 var textLayer = this.layer('texts');
 
                 textLayer.off('merge');
                 textLayer.on('merge', function() {
-
                     var chart = this.chart(),
                         zeroY = chart.yscale.map(0);
 
@@ -57,9 +55,7 @@
                         .attr('y', function(d) {
                             return Math.min(zeroY, chart.yscale.map(d.y, chart.factor)) - 7;
                         })
-                        .text(function(d) {
-                            return d.y;
-                        });
+                        .text(chart.text);
                 });
             }
         });

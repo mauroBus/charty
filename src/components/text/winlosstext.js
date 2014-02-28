@@ -74,9 +74,7 @@
                             offset = offset + yScaleMap - zeroY;
                             return yPos;
                         })
-                        .text(function(d) {
-                            return d.y;
-                        });
+                        .text(chart.text);
                 });
             }
         });

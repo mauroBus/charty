@@ -1,8 +1,7 @@
-/** 
-* Win Loss Bar chart example.
-* 
-*/
-
+/**
+ * Win Loss Bar chart example.
+ *
+ */
 (function(root, factory) {
   /** Setting up AMD support*/
   if (typeof define === 'function' && define.amd) {
@@ -21,14 +20,9 @@
     factory(Charty);
   }
 }(this, function (Charty) {
-
     "use strict";
 
-    /** 
-    * Chart data 
-    *
-    */
-    var data666 = {
+    var serie = {
         data: [
           { x: 'A',     y: 100},
           { x: 'B',     y: -10},
@@ -44,18 +38,15 @@
         ]
     };
 
-document.data = data666.data;
-
     /** Data series */
-    var datagroup666 = [];
-    datagroup666.push(data666);
+    var datagroup = [serie];
 
-    /** 
+    /**
     * Bar chart options
-    * 
+    *
     * showAsGrid : a line for every tick, vertical / horizontal
     * labelType: changes value position depending on the label value.
-    * axisSystem : can be XY / XYX 
+    * axisSystem : can be XY / XYX
     * root : container div
     * barType : Win Loss bar
     * setTextLabels : shows labels above bars
@@ -74,6 +65,16 @@ document.data = data666.data;
         setTextLabels : true
     };
 
+    //
+    // Special customization example for labels
+    //
+    // Be careful, this change impact across all the charts using
+    // this graphic.
+    //
+    d3.chart(Charty.CHART_NAMES.WIN_LOSS_TEXT).prototype.text = function(d) {
+      return d.y < 0 ? '(' + d.y * -1 + ')' : d.y;
+    };
+
     /** Bar chart creation */
     var chart11 = Charty.chart(options11);
 
@@ -86,9 +87,7 @@ document.data = data666.data;
         margintfactor : 0.80
     };
 
-
     chart11.setDimensions(marginOptions11);
-    
-    chart11.draw(datagroup666);
 
+    chart11.draw(datagroup);
 }));
