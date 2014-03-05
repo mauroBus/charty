@@ -1,14 +1,18 @@
 {
   "name": "charty",
   "description": "Framework for chart developing.",
-  "version": "0.5.8",
+  "version": "0.5.10",
   "keywords": [
     "charts",
     "d3",
     "r2d3",
     "d3.chart"
   ],
-  "author": "Marcio Caraballo",
+  "author": "Marcio Caraballo <marcio.caraballososa@gmail.com>",
+  "contributors": [
+    "Facundo Cabrera <cabrerafacundo@gmail.com>",
+    "Cesar Del Soldato <cesards@gmail.com>"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/dendril/charty.git"
