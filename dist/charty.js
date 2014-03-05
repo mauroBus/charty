@@ -1034,18 +1034,19 @@
         /** AMD */
         define('charty/axis', [
                 'd3.chart',
+                'underscore',
                 'charty/chartynames'
             ],
-            function(d3, Charty) {
+            function(d3, _, Charty) {
                 /** Export global even in AMD case in case this script
                  * is loaded with others */
-                return factory(d3, Charty);
+                return factory(d3, _, Charty);
             });
     } else {
         /** Browser globals */
-        factory(d3, Charty);
+        factory(d3, _, Charty);
     }
-}(this, function(d3, Charty) {
+}(this, function(d3, _, Charty) {
 
     d3.chart(Charty.CHART_NAMES.BASE_CHART)
         .extend(Charty.CHART_NAMES.AXIS, {
@@ -1303,12 +1304,14 @@
              * Tick format
              *
              * @method tickFormat
-             * @param {String} format Tick format option
+             * @param {String|Function} format Tick formatter.
              * @chainable
              */
             tickFormat: function(format) {
-                if (format) {
+                if (_.isString(format)) {
                     this.axis.tickFormat(d3.format(format));
+                } else if (_.isFunction(format)) {
+                    this.axis.tickFormat(format);
                 }
                 return this;
             },
@@ -1330,7 +1333,7 @@
              *
              * @method setRotation
              * @param {Number} degrees The number in degrees for the label to be rotated.
-               *   The expected number should be between -90 and 90.
+             *   The expected number should be between -90 and 90.
              * @chainable
              */
             setRotation: function(degrees) {
@@ -2249,82 +2252,89 @@
         factory(d3, Charty);
     }
 }(this, function(d3, Charty) {
-    d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
-        .extend(Charty.CHART_NAMES.TEXT, {
-            /**
-             * Text label initializator
-             *
-             * @constructor
-             * @param {Object} args Arguments for text component.
-             */
-            initialize: function() {
 
-                var options = {
-                    /**
-                     * Data bind for text labeling.
-                     * Can depend on other elements, for instance,
-                     * the rounded rectangles to form a label.
-                     *
-                     * @method dataBind
-                     * @param {Object} d example = {
-                     *                              data : [...]
-                     *                            }
-                     */
-                    dataBind: function(d) {
+    var Label = {
+        /**
+         * Text label initializator
+         *
+         * @constructor
+         * @param {Object} args Arguments for text component.
+         */
+        initialize: function() {
 
-                        return this.selectAll('text')
-                            .data(d.data);
-                    },
-                    /**
-                     * Insert a svg:text element for each data input.
-                     *
-                     * @method insert
-                     * @chainable
-                     */
-                    insert: function() {
-                        return this.append('text');
-                    },
-                    events: {
-                        'enter': function() {
-
-                            var chart = this.chart();
-
-                            this.attr('text-anchor', 'middle')
-                                .attr('dy', '0.35em');
-
-                            chart.eventManager.bindAll(this);
-
-                            return this;
-                        },
-                        'merge': function() {
-
-                            var chart = this.chart();
-
-                            this.attr('x', function(d) {
-                                return chart.xscale.map(d.x, 1) + (chart.xscale.band(1) / 2);
-                            })
-                                .attr('y', function(d) {
-                                    return chart.yscale.map(d.y);
-                                })
-                                .text(function(d) {
-                                    return d.y;
-                                });
-
-                            return this;
-                        },
-                        'exit': function() {
-
-                            return this.remove();
-                        }
-                    }
-                };
-
+            var options = {
                 /**
-                 * Layer creation
+                 * Data bind for text labeling.
+                 * Can depend on other elements, for instance,
+                 * the rounded rectangles to form a label.
+                 *
+                 * @method dataBind
+                 * @param {Object} d example = {
+                 *                              data : [...]
+                 *                            }
                  */
-                this.layer('texts', this.base.append('g'), options);
-            }
-        });
+                dataBind: function(d) {
+                    return this.selectAll('text')
+                        .data(d.data);
+                },
+                /**
+                 * Insert a svg:text element for each data input.
+                 *
+                 * @method insert
+                 * @chainable
+                 */
+                insert: function() {
+                    return this.append('text');
+                },
+                events: {
+                    enter: function() {
+
+                        var chart = this.chart();
+
+                        this.attr('text-anchor', 'middle')
+                            .attr('dy', '0.35em');
+
+                        chart.eventManager.bindAll(this);
+
+                        return this;
+                    },
+                    merge: function() {
+                        var chart = this.chart();
+
+                        this.attr('x', function(d) {
+                            return chart.xscale.map(d.x, 1) + (chart.xscale.band(1) / 2);
+                        })
+                            .attr('y', function(d) {
+                                return chart.yscale.map(d.y);
+                            })
+                            .text(chart.text);
+
+                        return this;
+                    },
+                    exit: function() {
+                        return this.remove();
+                    }
+                }
+            };
+
+            /**
+             * Layer creation
+             */
+            this.layer('texts', this.base.append('g'), options);
+        },
+
+        /**
+        Text data accessor.
+
+        @see https://github.com/mbostock/d3/wiki/Selections#wiki-text
+        **/
+        text: function(d) {
+            return d.y;
+        }
+    };
+
+    d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
+        .extend(Charty.CHART_NAMES.TEXT, Label);
 }));
 
 /**
@@ -2366,12 +2376,10 @@
              * @param {Object} args Arguments for above text component.
              */
             initialize: function() {
-
                 var textLayer = this.layer('texts');
 
                 textLayer.off('merge');
                 textLayer.on('merge', function() {
-
                     var chart = this.chart(),
                         zeroY = chart.yscale.map(0);
 
@@ -2386,9 +2394,7 @@
                         .attr('y', function(d) {
                             return Math.min(zeroY, chart.yscale.map(d.y, chart.factor)) - 7;
                         })
-                        .text(function(d) {
-                            return d.y;
-                        });
+                        .text(chart.text);
                 });
             }
         });
@@ -2433,7 +2439,6 @@
              * @param {Object} args Arguments for right text component.
              */
             initialize: function() {
-
                 var textLayer = this.layer('texts');
 
                 textLayer.off('merge');
@@ -2447,9 +2452,7 @@
                         .attr('y', function(d) {
                             return chart.yscale.map(d.y, chart.factor) + chart.yscale.band(chart.factor || 1) / 2;
                         })
-                        .text(function(d) {
-                            return d.x;
-                        });
+                        .text(chart.text);
 
                     return this;
                 });
@@ -2533,9 +2536,7 @@
                             offset = offset + yScaleMap - zeroY;
                             return yPos;
                         })
-                        .text(function(d) {
-                            return d.y;
-                        });
+                        .text(chart.text);
                 });
             }
         });

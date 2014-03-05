@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\components\text\text.js - ChartyJS</title>
+    <title>src/components/text/text.js - ChartyJS</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -160,7 +160,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src\components\text\text.js</h1>
+                        <h1 class="file-heading">File: src/components/text/text.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -195,82 +195,89 @@
         factory(d3, Charty);
     }
 }(this, function(d3, Charty) {
-    d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
-        .extend(Charty.CHART_NAMES.TEXT, {
-            /**
-             * Text label initializator
-             *
-             * @constructor
-             * @param {Object} args Arguments for text component.
-             */
-            initialize: function() {
 
-                var options = {
-                    /**
-                     * Data bind for text labeling.
-                     * Can depend on other elements, for instance,
-                     * the rounded rectangles to form a label.
-                     *
-                     * @method dataBind
-                     * @param {Object} d example = {
-                     *                              data : [...]
-                     *                            }
-                     */
-                    dataBind: function(d) {
+    var Label = {
+        /**
+         * Text label initializator
+         *
+         * @constructor
+         * @param {Object} args Arguments for text component.
+         */
+        initialize: function() {
 
-                        return this.selectAll(&#x27;text&#x27;)
-                            .data(d.data);
-                    },
-                    /**
-                     * Insert a svg:text element for each data input.
-                     *
-                     * @method insert
-                     * @chainable
-                     */
-                    insert: function() {
-                        return this.append(&#x27;text&#x27;);
-                    },
-                    events: {
-                        &#x27;enter&#x27;: function() {
-
-                            var chart = this.chart();
-
-                            this.attr(&#x27;text-anchor&#x27;, &#x27;middle&#x27;)
-                                .attr(&#x27;dy&#x27;, &#x27;0.35em&#x27;);
-
-                            chart.eventManager.bindAll(this);
-
-                            return this;
-                        },
-                        &#x27;merge&#x27;: function() {
-
-                            var chart = this.chart();
-
-                            this.attr(&#x27;x&#x27;, function(d) {
-                                return chart.xscale.map(d.x, 1) + (chart.xscale.band(1) / 2);
-                            })
-                                .attr(&#x27;y&#x27;, function(d) {
-                                    return chart.yscale.map(d.y);
-                                })
-                                .text(function(d) {
-                                    return d.y;
-                                });
-
-                            return this;
-                        },
-                        &#x27;exit&#x27;: function() {
-
-                            return this.remove();
-                        }
-                    }
-                };
-
+            var options = {
                 /**
-                 * Layer creation
+                 * Data bind for text labeling.
+                 * Can depend on other elements, for instance,
+                 * the rounded rectangles to form a label.
+                 *
+                 * @method dataBind
+                 * @param {Object} d example = {
+                 *                              data : [...]
+                 *                            }
                  */
-                this.layer(&#x27;texts&#x27;, this.base.append(&#x27;g&#x27;), options);
-            }
-        });
+                dataBind: function(d) {
+                    return this.selectAll(&#x27;text&#x27;)
+                        .data(d.data);
+                },
+                /**
+                 * Insert a svg:text element for each data input.
+                 *
+                 * @method insert
+                 * @chainable
+                 */
+                insert: function() {
+                    return this.append(&#x27;text&#x27;);
+                },
+                events: {
+                    enter: function() {
+
+                        var chart = this.chart();
+
+                        this.attr(&#x27;text-anchor&#x27;, &#x27;middle&#x27;)
+                            .attr(&#x27;dy&#x27;, &#x27;0.35em&#x27;);
+
+                        chart.eventManager.bindAll(this);
+
+                        return this;
+                    },
+                    merge: function() {
+                        var chart = this.chart();
+
+                        this.attr(&#x27;x&#x27;, function(d) {
+                            return chart.xscale.map(d.x, 1) + (chart.xscale.band(1) / 2);
+                        })
+                            .attr(&#x27;y&#x27;, function(d) {
+                                return chart.yscale.map(d.y);
+                            })
+                            .text(chart.text);
+
+                        return this;
+                    },
+                    exit: function() {
+                        return this.remove();
+                    }
+                }
+            };
+
+            /**
+             * Layer creation
+             */
+            this.layer(&#x27;texts&#x27;, this.base.append(&#x27;g&#x27;), options);
+        },
+
+        /**
+        Text data accessor.
+
+        @see https://github.com/mbostock/d3/wiki/Selections#wiki-text
+        **/
+        text: function(d) {
+            return d.y;
+        }
+    };
+
+    d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
+        .extend(Charty.CHART_NAMES.TEXT, Label);
 }));
 
     </pre>

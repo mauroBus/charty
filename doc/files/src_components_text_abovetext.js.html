@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\components\text\abovetext.js - ChartyJS</title>
+    <title>src/components/text/abovetext.js - ChartyJS</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -160,7 +160,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src\components\text\abovetext.js</h1>
+                        <h1 class="file-heading">File: src/components/text/abovetext.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -203,12 +203,10 @@
              * @param {Object} args Arguments for above text component.
              */
             initialize: function() {
-
                 var textLayer = this.layer(&#x27;texts&#x27;);
 
                 textLayer.off(&#x27;merge&#x27;);
                 textLayer.on(&#x27;merge&#x27;, function() {
-
                     var chart = this.chart(),
                         zeroY = chart.yscale.map(0);
 
@@ -223,9 +221,7 @@
                         .attr(&#x27;y&#x27;, function(d) {
                             return Math.min(zeroY, chart.yscale.map(d.y, chart.factor)) - 7;
                         })
-                        .text(function(d) {
-                            return d.y;
-                        });
+                        .text(chart.text);
                 });
             }
         });
