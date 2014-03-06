@@ -44,16 +44,26 @@
      *	Returns a specified scale object, acording to a scale type
      *
      *	@method scale
-     *	@param {String} scaleType Available scale type
+     *	@param {String | Object} scaleOptions Available scale type
+     *  { name: 'ordinal'}
      *	@param {String} axisType Related axis type ('x'-'y')
      *	@return {Object} LinearScale / OrdinalScale
      */
-    ScaleFactory.prototype.scale = function(scaleType, axisType) {
-        var scale;
+    ScaleFactory.prototype.scale = function(scaleOptions, axisType) {
+        var scale,
+            scaleType,
+            options;
 
+        if (_.isString(scaleOptions)) {
+            scaleType = scaleOptions;
+            options = {};
+        } else {
+            scaleType = scaleOptions.name;
+            options = scaleOptions;
+        }
         switch (scaleType) {
             case Charty.AXIS_TYPE.ORDINAL:
-                scale = new OrdinalScale(axisType);
+                scale = new OrdinalScale(axisType, options);
                 break;
             case Charty.AXIS_TYPE.LINEAR:
                 scale = new LinearScale(axisType);

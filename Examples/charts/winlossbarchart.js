@@ -56,7 +56,10 @@
         barType : Charty.CHART_NAMES.WIN_LOSS_BAR,
         labelType : Charty.CHART_NAMES.WIN_LOSS_TEXT,
         root : '#chart11',
-        xAxis : Charty.AXIS_TYPE.ORDINAL,
+        xAxis : {
+          name: Charty.AXIS_TYPE.ORDINAL,
+          spacing: .5
+        },
         xAxisClass: 'x-axis',
         yAxis : Charty.AXIS_TYPE.PEAK_VALLEY_LINEAR,
         xAxisTickRotation: 45,
@@ -74,7 +77,6 @@
     d3.chart(Charty.CHART_NAMES.WIN_LOSS_TEXT).prototype.text = function(d) {
       return d.y < 0 ? '(' + d.y * -1 + ')' : d.y;
     };
-
     /** Bar chart creation */
     var chart11 = Charty.chart(options11);
 

@@ -465,10 +465,13 @@
      *
      *	@constructor
      * @param {String} axisType Axis type, defined in Charty names
+     * @param {Object} options The options for the scale.
+     *  {spacing: .5}
      */
-    var OrdinalScale = function(axisType) {
+    var OrdinalScale = function(axisType, options) {
         this.scale = d3.scale.ordinal();
         this.axisType = axisType;
+        this.spacing = options.spacing || 0.1;
     };
 
     /**
@@ -492,11 +495,11 @@
      *	Sets the range for the scale
      *
      *	@method setRange
-     *	@param {Number} range numeric value for the range
+     *  @param {Number} range numeric value for the range 
      *	@chainable
      */
     OrdinalScale.prototype.setRange = function(range) {
-        this.scale = this.scale.rangeRoundBands(this.generateRange(range), 0.1);
+        this.scale = this.scale.rangeRoundBands(this.generateRange(range), this.spacing);
         return this;
     };
 
@@ -715,16 +718,26 @@
      *	Returns a specified scale object, acording to a scale type
      *
      *	@method scale
-     *	@param {String} scaleType Available scale type
+     *	@param {String | Object} scaleOptions Available scale type
+     *  { name: 'ordinal'}
      *	@param {String} axisType Related axis type ('x'-'y')
      *	@return {Object} LinearScale / OrdinalScale
      */
-    ScaleFactory.prototype.scale = function(scaleType, axisType) {
-        var scale;
+    ScaleFactory.prototype.scale = function(scaleOptions, axisType) {
+        var scale,
+            scaleType,
+            options;
 
+        if (_.isString(scaleOptions)) {
+            scaleType = scaleOptions;
+            options = {};
+        } else {
+            scaleType = scaleOptions.name;
+            options = scaleOptions;
+        }
         switch (scaleType) {
             case Charty.AXIS_TYPE.ORDINAL:
-                scale = new OrdinalScale(axisType);
+                scale = new OrdinalScale(axisType, options);
                 break;
             case Charty.AXIS_TYPE.LINEAR:
                 scale = new LinearScale(axisType);

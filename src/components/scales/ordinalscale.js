@@ -33,10 +33,13 @@
      *
      *	@constructor
      * @param {String} axisType Axis type, defined in Charty names
+     * @param {Object} options The options for the scale.
+     *  {spacing: .5}
      */
-    var OrdinalScale = function(axisType) {
+    var OrdinalScale = function(axisType, options) {
         this.scale = d3.scale.ordinal();
         this.axisType = axisType;
+        this.spacing = options.spacing || 0.1;
     };
 
     /**
@@ -60,11 +63,11 @@
      *	Sets the range for the scale
      *
      *	@method setRange
-     *	@param {Number} range numeric value for the range
+     *  @param {Number} range numeric value for the range
      *	@chainable
      */
     OrdinalScale.prototype.setRange = function(range) {
-        this.scale = this.scale.rangeRoundBands(this.generateRange(range), 0.1);
+        this.scale = this.scale.rangeRoundBands(this.generateRange(range), this.spacing);
         return this;
     };
 
