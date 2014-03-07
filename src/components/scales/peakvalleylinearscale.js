@@ -4,14 +4,10 @@
  *
  * @class PeakValleyLinearScale
  * @extends BaseScale
- * @requires d3.chart,
- *           linearscale,
- *           charty,
- *           uderscore
+ * @requires d3.chart, linearscale, charty, underscore
  *
  * @author "Cesar Del Soldato <cesards@gmail.com>"
  */
-
 (function(root, factory) {
     /** Setting up AMD support*/
     if (typeof define === 'function' && define.amd) {
@@ -32,14 +28,12 @@
         root.PeakValleyLinearScale = factory(d3, LinearScale, Charty, _);
     }
 }(this, function(d3, LinearScale, Charty, _) {
-
     /**
-     * Class constructor
-     *
      * @constructor
-     * @param {String} axisType Axis type, defined in Charty names
-     * @param {Object} options The options for the scale.
-     *  {niceDomain: true}
+     *
+     * @param {Charty.AXIS.X|Charty.AXIS.Y} axisType - X or Y axis setting.
+     * @param {Object} [options] - Settings
+     *     @param {Boolean} [options.niceDomain=false] - Beautify the domain to include all the possible values.
      */
     var PeakValleyLinearScale = function(axisType, options) {
         this.scale = d3.scale.linear();
@@ -60,36 +54,37 @@
      * It sets the domain and the maximum value.
      *
      * @method calculateDomain
-     * @param {Object} data Accessor for the data collection
-     * @param {Object} f callback function
      * @chainable
+     * @param {Object} data Data collection.
+     * @param {Object} iterator Provide a way to access the data
      */
-    PeakValleyLinearScale.prototype.calculateDomain = function(data, f) {
+    PeakValleyLinearScale.prototype.calculateDomain = function(data, iterator) {
         var max = 0,
             valley = 0,
             peak = 0,
-            sum = 0,
-            d = data.getData(),
-            delta = 0,
-            self = this;
+            series = data.getData();
 
-        if (d && !_.isEmpty(d)) {
+        if (series && !_.isEmpty(series)) {
 
-            _.each(d, function(element) {
-                var chartData = element.data;
+            _.each(series, function(element) {
+                var data = element.data,
+                    sum = 0,
+                    delta = 0;
 
-                /** Chart can receive no data, should draw nothing or remove already drawn elements */
-                if (chartData && !_.isEmpty(chartData)) {
-                    var maxg = d3.max(chartData, f);
+                // Chart can receive no data, should draw nothing or remove
+                // already drawn elements
+                if (data && !_.isEmpty(data)) {
+                    var maxg = d3.max(data, iterator);
+
                     max = Math.max(maxg, max);
 
-                    _.each(chartData, function(dataPoint) {
-
-                        if (dataPoint.reset) {
+                    // Max and Min after sum all the value from the serie.
+                    _.each(data, function(point) {
+                        if (point.reset) {
                             sum = 0;
                         }
 
-                        sum = f ? sum + f(dataPoint) : sum + dataPoint;
+                        sum = iterator ? sum + iterator(point) : sum + point;
 
                         if (sum > peak) {
                             peak = sum;
@@ -99,16 +94,19 @@
                     });
                 }
 
-                if (self.niceDomain) {
-                    delta = self.getDelta(peak, valley);
+                if (this.niceDomain) {
+                    delta = this.getDelta(peak, valley);
                 }
 
-                /** Case when there is no data, sometimes can receive a NaN */
+                // Case when there is no data, sometimes can receive a NaN
                 if (!_.isNaN(peak) && !_.isNaN(valley) && !_.isNaN(max)) {
-                    return self.setMaxValue(max)
-                        .setDomain([Math.min(0, valley - delta), Math.max(0, peak + delta)]);
+                    return this.setMaxValue(max).setDomain([
+                        Math.min(0, valley - delta),
+                        Math.max(0, peak + delta)
+                    ]);
                 }
-            });
+            }, this);
+
         }
     };
 
