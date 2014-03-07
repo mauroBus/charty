@@ -31,17 +31,16 @@
 }(this, function(d3, BaseScale, _) {
 
     /**
-     * Class constructor
-     *
      * @constructor
-     * @param {String} axisType Axis type, defined in Charty names
-     * @param {Object} options The options for the scale.
-     *  {niceDomain: true}
+     *
+     * @param {Charty.AXIS.X|Charty.AXIS.Y} axisType - X or Y axis setting.
+     * @param {Object} [options] - Settings
+     *     @param {Boolean} [options.niceDomain=false] - Beautify the domain to include all the possible values.
      */
     var LinearScale = function(axisType, options) {
         this.scale = d3.scale.linear();
         this.axisType = axisType;
-        this.niceDomain = options ? options.niceDomain : false;
+        this.niceDomain = options && options.niceDomain || false;
     };
 
     /**
@@ -57,9 +56,7 @@
      * @chainable
      */
     LinearScale.prototype.setDomain = function(arrayValues) {
-        this.scale = this.scale.domain(arrayValues);
-        this.scale.nice();
-        return this;
+        return this.scale.domain(arrayValues).nice(), this;
     };
 
     /**
@@ -70,8 +67,7 @@
      * @chainable
      */
     LinearScale.prototype.setRange = function(range) {
-        this.scale = this.scale.range(this.generateRange(range));
-        return this;
+        return this.scale.range(this.generateRange(range)), this;
     };
 
     /**
@@ -109,15 +105,14 @@
      *
      * @method calculateDomain
      * @param {Object} data Accessor for the data collection
-     * @param {Object} f callback function
+     * @param {Object} iterator callback function
      * @chainable
      */
-    LinearScale.prototype.calculateDomain = function(data, f) {
+    LinearScale.prototype.calculateDomain = function(data, iterator) {
         var max = -Infinity,
             min = Infinity,
             d = data.getData(),
-            delta = 0,
-            self = this;
+            delta = 0;
 
         if (d && !_.isEmpty(d)) {
 
@@ -126,23 +121,24 @@
 
                 /** Chart can receive no data, should draw nothing or remove already drawn elements */
                 if (chartData && !_.isEmpty(chartData)) {
-                    var maxg = d3.max(chartData, f),
-                        ming = d3.min(chartData, f);
+                    var maxg = d3.max(chartData, iterator),
+                        ming = d3.min(chartData, iterator);
 
                     max = Math.max(maxg, max);
                     min = Math.min(ming, min);
                 }
+            }, this);
 
-                if (self.niceDomain) {
-                    delta = self.getDelta(max, min);
-                }
+            if (this.niceDomain) {
+                delta = this.getDelta(max, min);
+            }
 
-                /** Case when there is no data, sometimes can receive a NaN */
-                if (!_.isNaN(max) && !_.isNaN(min)) {
-                    return self.setMaxValue(max)
-                        .setDomain([Math.min(0, min - delta), Math.max(0, max + delta)]);
-                }
-            });
+            /** Case when there is no data, sometimes can receive a NaN */
+            if (!_.isNaN(max) && !_.isNaN(min)) {
+                return this.setMaxValue(max)
+                    .setDomain([Math.min(0, min - delta), Math.max(0, max + delta)]);
+            }
+
         }
     };
 

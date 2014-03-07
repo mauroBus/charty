@@ -36,7 +36,7 @@
     var OrdinalScale = function(axisType, options) {
         this.scale = d3.scale.ordinal();
         this.axisType = axisType;
-        this.spacing = options.spacing || 0.1;
+        this.spacing = options && options.spacing || 0.1;
     };
 
     /**
