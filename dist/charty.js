@@ -194,14 +194,12 @@
 }));
 
 /**
- *	Defines common scale functionality. Used as base element
- *	for inheritance.
+ * Defines common scale functionality. Used as base element for inheritance.
  *
- *	@class BaseScale
- *	@requires d3.chart,
- *						charty
+ * @class BaseScale
+ * @requires d3.chart, charty
  *
- *	@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+ * @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
  */
 (function(root, factory) {
     /** Setting up AMD support*/
@@ -213,7 +211,7 @@
             ],
             function(d3, Charty) {
                 /** Export global even in AMD case in case this script
-                 *	is loaded with others */
+                 *  is loaded with others */
                 return factory(d3, Charty);
             });
     } else {
@@ -222,7 +220,7 @@
     }
 }(this, function(d3, Charty) {
 
-    /** 
+    /**
      * Class constructor
      *
      * @constructor
@@ -230,21 +228,21 @@
     var BaseScale = function() {};
 
     /**
-     *	Returns the contained scale.
+     *  Returns the contained scale.
      *
-     *	@method getScale
-     *	@return {Object} d3.scale Linear / Ordinal scale
+     *  @method getScale
+     *  @return {Object} d3.scale Linear / Ordinal scale
      */
     BaseScale.prototype.getScale = function() {
         return this.scale;
     };
 
     /**
-     *	Generates range value for a scale.
+     *  Generates range value for a scale.
      *
-     *	@method generateRange
-     *	@param {Number} range value for the range
-     *	@return {Number} generated range value
+     *  @method generateRange
+     *  @param {Number} range value for the range
+     *  @return {Number} generated range value
      */
     BaseScale.prototype.generateRange = function(range) {
         var r;
@@ -455,14 +453,13 @@
 
 /* global BaseScale: true */
 /**
- *	Ordinal Scale
+ * Ordinal Scale
  *
- *	@class OrdinalScale
- *	@extends BaseScale
- *	@requires d3.chart,
- *						basescale
+ * @class OrdinalScale
+ * @extends BaseScale
+ * @requires d3.chart, basescale
  *
- *	@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+ * @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
  */
 (function(root, factory) {
     /** Setting up AMD support*/
@@ -474,7 +471,7 @@
             ],
             function(d3, BaseScale) {
                 /** Export global even in AMD case in case this script
-                 *	is loaded with others */
+                 *  is loaded with others */
                 return factory(d3, BaseScale);
             });
     } else {
@@ -482,14 +479,12 @@
         root.OrdinalScale = factory(d3, BaseScale);
     }
 }(this, function(d3, BaseScale) {
-
     /**
-     * Class constructor
+     * @constructor
      *
-     *	@constructor
-     * @param {String} axisType Axis type, defined in Charty names
-     * @param {Object} options The options for the scale.
-     *  {spacing: .5}
+     * @param {Charty.AXIS.X|Charty.AXIS.Y} axisType - X or Y axis setting.
+     * @param {Object} [options] - Settings
+     *     @param {Number} [options.spacing=.1] - Spacing between bars.
      */
     var OrdinalScale = function(axisType, options) {
         this.scale = d3.scale.ordinal();
@@ -498,89 +493,82 @@
     };
 
     /**
-     *	Inheritance from BaseScale
+     *  Inheritance from BaseScale
      */
     OrdinalScale.prototype = new BaseScale();
 
     /**
-     *	Sets the domain data for the scale
+     *  Sets the domain data for the scale
      *
-     *	@method setDomain
-     *	@param {Array} domain values for ordinal domain
-     *	@chainable
+     *  @method setDomain
+     *  @param {Array} domain values for ordinal domain
+     *  @chainable
      */
     OrdinalScale.prototype.setDomain = function(domain) {
-        this.scale = this.scale.domain(domain);
-        return this;
+        return this.scale = this.scale.domain(domain), this;
     };
 
     /**
-     *	Sets the range for the scale
+     *  Sets the range for the scale
      *
-     *	@method setRange
+     *  @method setRange
      *  @param {Number} range numeric value for the range
-     *	@chainable
+     *  @chainable
      */
     OrdinalScale.prototype.setRange = function(range) {
-        this.scale = this.scale.rangeRoundBands(this.generateRange(range), this.spacing);
-        return this;
+        return this.scale = this.scale.rangeRoundBands(this.generateRange(range), this.spacing), this;
     };
 
     /**
-     *	Maps a value to the current scaling
-     *	Since ordinal scales computes a band width
-     *	A value needs to be mapped and moved according
-     *	to that band width
+     *  Maps a value to the current scaling
+     *  Since ordinal scales computes a band width
+     *  A value needs to be mapped and moved according
+     *  to that band width
      *
-     *	@method map
-     *	@param {String} value String value that belongs to the domain
-     *	@param {Number} factor reduce factor for overlapping charts
-     *	@return {Number} mapped String value
+     *  @method map
+     *  @param {String} value String value that belongs to the domain
+     *  @param {Number} factor reduce factor for overlapping charts
+     *  @return {Number} mapped String value
      */
     OrdinalScale.prototype.map = function(value, factor) {
         return (this.scale(value) + ((this.scale.rangeBand() - (this.scale.rangeBand() * factor)) / 2));
     };
 
     /**
-     *	Returns the range band for the scale
-     *	Can be reduced if (factor < 1)
+     *  Returns the range band for the scale
+     *  Can be reduced if (factor < 1)
      *
-     *	@method band
-     *	@param {Number} factor reduce factor
-     *	@return {Number} scale width
+     *  @method band
+     *  @param {Number} factor reduce factor
+     *  @return {Number} scale width
      */
     OrdinalScale.prototype.band = function(factor) {
         return (this.scale.rangeBand() * factor);
     };
 
     /**
-     *	Calculates the scale domain, based on a data collection and a
-     *	callback function
-     *	Regarding the data series, ordinal scales should be uniform, whether
-     *	they have values for that specific ordinal element or not.
+     *  Calculates the scale domain, based on a data collection and a
+     *  callback function
+     *  Regarding the data series, ordinal scales should be uniform, whether
+     *  they have values for that specific ordinal element or not.
      *
-     *	@method calculateDomain
-     *	@param {Object} data Accessor for the data collection
-     *	@param {Object} f callback function
-     *	@chainable
+     *  @method calculateDomain
+     *  @param {Object} data Accessor for the data collection
+     *  @param {Object} f callback function
+     *  @chainable
      */
     OrdinalScale.prototype.calculateDomain = function(data, f) {
-        var dataSample = data.first()
-            .data,
-            dom = dataSample.map(f);
-
-        return this.setDomain(dom);
+        return this.setDomain(data.first().data.map(f));
     };
 
     /**
-     *	Checks if domain wasn't previously calculated
+     *  Checks if domain wasn't previously calculated
      *
-     *	@method defaultDomain
-     *	@return {Boolean} True if domain isn't set
+     *  @method defaultDomain
+     *  @return {Boolean} True if domain isn't set
      */
     OrdinalScale.prototype.defaultDomain = function() {
-        return (this.scale.domain()
-            .length === 0);
+        return this.scale.domain().length === 0;
     };
 
     return OrdinalScale;
@@ -592,14 +580,10 @@
  *
  * @class PeakValleyLinearScale
  * @extends BaseScale
- * @requires d3.chart,
- *           linearscale,
- *           charty,
- *           uderscore
+ * @requires d3.chart, linearscale, charty, underscore
  *
  * @author "Cesar Del Soldato <cesards@gmail.com>"
  */
-
 (function(root, factory) {
     /** Setting up AMD support*/
     if (typeof define === 'function' && define.amd) {
@@ -620,14 +604,12 @@
         root.PeakValleyLinearScale = factory(d3, LinearScale, Charty, _);
     }
 }(this, function(d3, LinearScale, Charty, _) {
-
     /**
-     * Class constructor
-     *
      * @constructor
-     * @param {String} axisType Axis type, defined in Charty names
-     * @param {Object} options The options for the scale.
-     *  {niceDomain: true}
+     *
+     * @param {Charty.AXIS.X|Charty.AXIS.Y} axisType - X or Y axis setting.
+     * @param {Object} [options] - Settings
+     *     @param {Boolean} [options.niceDomain=false] - Beautify the domain to include all the possible values.
      */
     var PeakValleyLinearScale = function(axisType, options) {
         this.scale = d3.scale.linear();
@@ -648,36 +630,37 @@
      * It sets the domain and the maximum value.
      *
      * @method calculateDomain
-     * @param {Object} data Accessor for the data collection
-     * @param {Object} f callback function
      * @chainable
+     * @param {Object} data Data collection.
+     * @param {Object} iterator Provide a way to access the data
      */
-    PeakValleyLinearScale.prototype.calculateDomain = function(data, f) {
+    PeakValleyLinearScale.prototype.calculateDomain = function(data, iterator) {
         var max = 0,
             valley = 0,
             peak = 0,
-            sum = 0,
-            d = data.getData(),
-            delta = 0,
-            self = this;
+            series = data.getData(),
+            delta = 0;
 
-        if (d && !_.isEmpty(d)) {
+        if (series && !_.isEmpty(series)) {
 
-            _.each(d, function(element) {
-                var chartData = element.data;
+            _.each(series, function(element) {
+                var data = element.data,
+                    sum = 0;
 
-                /** Chart can receive no data, should draw nothing or remove already drawn elements */
-                if (chartData && !_.isEmpty(chartData)) {
-                    var maxg = d3.max(chartData, f);
+                // Chart can receive no data, should draw nothing or remove
+                // already drawn elements
+                if (data && !_.isEmpty(data)) {
+                    var maxg = d3.max(data, iterator);
+
                     max = Math.max(maxg, max);
 
-                    _.each(chartData, function(dataPoint) {
-
-                        if (dataPoint.reset) {
+                    // Max and Min after sum all the value from the serie.
+                    _.each(data, function(point) {
+                        if (point.reset) {
                             sum = 0;
                         }
 
-                        sum = f ? sum + f(dataPoint) : sum + dataPoint;
+                        sum = iterator ? sum + iterator(point) : sum + point;
 
                         if (sum > peak) {
                             peak = sum;
@@ -686,38 +669,36 @@
                         }
                     });
                 }
+            }, this);
 
-                if (self.niceDomain) {
-                    delta = self.getDelta(peak, valley);
-                }
+            if (this.niceDomain) {
+                delta = this.getDelta(peak, valley);
+            }
 
-                /** Case when there is no data, sometimes can receive a NaN */
-                if (!_.isNaN(peak) && !_.isNaN(valley) && !_.isNaN(max)) {
-                    return self.setMaxValue(max)
-                        .setDomain([Math.min(0, valley - delta), Math.max(0, peak + delta)]);
-                }
-            });
+            // Case when there is no data, sometimes can receive a NaN
+            if (!_.isNaN(peak) && !_.isNaN(valley) && !_.isNaN(max)) {
+                return this.setMaxValue(max).setDomain([
+                    Math.min(0, valley - delta),
+                    Math.max(0, peak + delta)
+                ]);
+            }
+
         }
     };
 
     return PeakValleyLinearScale;
 }));
 
-/* global OrdinalScale: true, LinearScale: true, PeakValleyLinearScale:true */
+/* global OrdinalScale: true, LinearScale: true, PeakValleyLinearScale: true */
 /**
- *	Scale factory. Separation is provived in an attempt
- *	to provide an easy way to switching scales in a defined chart
+ * Scale factory. Separation is provived in an attempt to provide an easy way
+ * to switching scales in a defined chart.
  *
- *	@class ScaleFactory
- * @requires d3.chart,
- *						charty,
- *						ordinalscale,
- *						linearscale,
- *						peakvalleylinearscale
+ * @class ScaleFactory
+ * @requires d3.chart, charty, ordinalscale, linearscale, peakvalleylinearscale
  *
- *	@author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+ * @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
  */
-
 (function(root, factory) {
     /** Setting up AMD support*/
     if (typeof define === 'function' && define.amd) {
@@ -730,7 +711,7 @@
             ],
             function(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale) {
                 /** Export global even in AMD case in case this script
-                 *	is loaded with others */
+                 *  is loaded with others */
                 return factory(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale);
             });
     } else {
@@ -738,47 +719,46 @@
         root.ScaleFactory = factory(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale);
     }
 }(this, function(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale) {
-    /**
-     * Class constructor
-     *
-     * @constructor
-     */
-    var ScaleFactory = function() {};
+
+    /** @constructor */
+    function ScaleFactory() {}
 
     /**
-     *	Returns a specified scale object, acording to a scale type
+     * Returns a specified scale object acording to a scale type.
      *
-     *	@method scale
-     *	@param {String | Object} scaleOptions Available scale type
-     *  { name: 'ordinal'}
-     *	@param {String} axisType Related axis type ('x'-'y')
-     *	@return {Object} LinearScale / OrdinalScale
+     * @method scale
+     *
+     * @param {String|Object} options      - List of possible options provided to the scale contructor.
+     *   @param {String}  options.name       - Scale type ID.
+     *   @param {Number}  options.spacing    - Define how much space we leave between bars (OrdinalScale)
+     *   @param {Boolean} options.niceDomain - Ask for a domain proccessing to include all values in the axis (LinearScale)
+     *
+     * @param {Charty.AXIS.X|Charty.AXIS.Y} axisType - X or Y axis setting.
+     *
+     * @return {Object} Scale instance.
      */
-    ScaleFactory.prototype.scale = function(scaleOptions, axisType) {
-        var scale,
-            scaleType,
-            options;
+    ScaleFactory.prototype.scale = function(options, axisType) {
+        var type;
 
-        if (_.isString(scaleOptions)) {
-            scaleType = scaleOptions;
+        // Retro compatible for type as Strings, since version 0.5.11 we could
+        // send options to the scales to be able to configure the object.
+        if (_.isString(options)) {
+            type = options;
             options = {};
         } else {
-            scaleType = scaleOptions.name;
-            options = scaleOptions;
-        }
-        switch (scaleType) {
-            case Charty.AXIS_TYPE.ORDINAL:
-                scale = new OrdinalScale(axisType, options);
-                break;
-            case Charty.AXIS_TYPE.LINEAR:
-                scale = new LinearScale(axisType, options);
-                break;
-            case Charty.AXIS_TYPE.PEAK_VALLEY_LINEAR:
-                scale = new PeakValleyLinearScale(axisType, options);
-                break;
+            type = options.name;
         }
 
-        return scale;
+        switch (type) {
+            case Charty.AXIS_TYPE.ORDINAL:
+                return new OrdinalScale(axisType, options);
+            case Charty.AXIS_TYPE.LINEAR:
+                return new LinearScale(axisType, options);
+            case Charty.AXIS_TYPE.PEAK_VALLEY_LINEAR:
+                return new PeakValleyLinearScale(axisType, options);
+            default:
+                throw new Error('Provide a value Charty.AXIS_TYPE value');
+        }
     };
 
     return ScaleFactory;

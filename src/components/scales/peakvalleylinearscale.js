@@ -62,14 +62,14 @@
         var max = 0,
             valley = 0,
             peak = 0,
-            series = data.getData();
+            series = data.getData(),
+            delta = 0;
 
         if (series && !_.isEmpty(series)) {
 
             _.each(series, function(element) {
                 var data = element.data,
-                    sum = 0,
-                    delta = 0;
+                    sum = 0;
 
                 // Chart can receive no data, should draw nothing or remove
                 // already drawn elements
@@ -93,19 +93,19 @@
                         }
                     });
                 }
-
-                if (this.niceDomain) {
-                    delta = this.getDelta(peak, valley);
-                }
-
-                // Case when there is no data, sometimes can receive a NaN
-                if (!_.isNaN(peak) && !_.isNaN(valley) && !_.isNaN(max)) {
-                    return this.setMaxValue(max).setDomain([
-                        Math.min(0, valley - delta),
-                        Math.max(0, peak + delta)
-                    ]);
-                }
             }, this);
+
+            if (this.niceDomain) {
+                delta = this.getDelta(peak, valley);
+            }
+
+            // Case when there is no data, sometimes can receive a NaN
+            if (!_.isNaN(peak) && !_.isNaN(valley) && !_.isNaN(max)) {
+                return this.setMaxValue(max).setDomain([
+                    Math.min(0, valley - delta),
+                    Math.max(0, peak + delta)
+                ]);
+            }
 
         }
     };
