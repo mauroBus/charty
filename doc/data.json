@@ -2517,31 +2517,40 @@
         {
             "file": "src/components/scales/linearscale.js",
             "line": 33,
-            "description": "Class constructor",
             "is_constructor": 1,
             "params": [
                 {
                     "name": "axisType",
-                    "description": "Axis type, defined in Charty names",
-                    "type": "String"
+                    "description": "- X or Y axis setting.",
+                    "type": "Charty.AXIS.X|Charty.AXIS.Y"
                 },
                 {
                     "name": "options",
-                    "description": "The options for the scale.\n {niceDomain: true}",
-                    "type": "Object"
+                    "description": "- Settings",
+                    "type": "Object",
+                    "optional": true,
+                    "props": [
+                        {
+                            "name": "niceDomain",
+                            "description": "- Beautify the domain to include all the possible values.",
+                            "type": "Boolean",
+                            "optional": true,
+                            "optdefault": "false"
+                        }
+                    ]
                 }
             ],
             "class": "LinearScale"
         },
         {
             "file": "src/components/scales/linearscale.js",
-            "line": 47,
+            "line": 46,
             "description": "Inheritance from BaseScale",
             "class": "LinearScale"
         },
         {
             "file": "src/components/scales/linearscale.js",
-            "line": 52,
+            "line": 51,
             "description": "Sets domain for linear scale",
             "itemtype": "method",
             "name": "setDomain",
@@ -2557,7 +2566,7 @@
         },
         {
             "file": "src/components/scales/linearscale.js",
-            "line": 65,
+            "line": 62,
             "description": "Sets the range for the linear scale",
             "itemtype": "method",
             "name": "setRange",
@@ -2573,7 +2582,7 @@
         },
         {
             "file": "src/components/scales/linearscale.js",
-            "line": 77,
+            "line": 73,
             "description": "Returns scaled value",
             "itemtype": "method",
             "name": "map",
@@ -2592,7 +2601,7 @@
         },
         {
             "file": "src/components/scales/linearscale.js",
-            "line": 88,
+            "line": 84,
             "description": "Returns band for a specified value",
             "itemtype": "method",
             "name": "band",
@@ -2616,7 +2625,7 @@
         },
         {
             "file": "src/components/scales/linearscale.js",
-            "line": 101,
+            "line": 97,
             "description": "Calculates the domain for the linear scale\n\nData probably won't be uniform, so for each data element,\na maximum value is obtained. The maximum element will be kept.\nSame situation is for the minimum element\n\nKeeps a reference for the minimum value",
             "itemtype": "method",
             "name": "calculateDomain",
@@ -2627,7 +2636,7 @@
                     "type": "Object"
                 },
                 {
-                    "name": "f",
+                    "name": "iterator",
                     "description": "callback function",
                     "type": "Object"
                 }
@@ -2637,17 +2646,17 @@
         },
         {
             "file": "src/components/scales/linearscale.js",
-            "line": 127,
+            "line": 122,
             "class": "LinearScale"
         },
         {
             "file": "src/components/scales/linearscale.js",
-            "line": 140,
+            "line": 136,
             "class": "LinearScale"
         },
         {
             "file": "src/components/scales/linearscale.js",
-            "line": 149,
+            "line": 145,
             "description": "Returns the delta value to add to the domain in order to make sure all the\ndata is wrapped by axis ticks.",
             "itemtype": "method",
             "name": "getDelta",
@@ -2671,7 +2680,7 @@
         },
         {
             "file": "src/components/scales/linearscale.js",
-            "line": 163,
+            "line": 159,
             "description": "Maximum value setting for linear scale.\nUseful when setting discrete ticks for continuous scale",
             "itemtype": "method",
             "name": "setMaxValue",
@@ -2687,7 +2696,7 @@
         },
         {
             "file": "src/components/scales/linearscale.js",
-            "line": 176,
+            "line": 172,
             "description": "Returns max value",
             "itemtype": "method",
             "name": "getMaxValue",
@@ -2909,13 +2918,13 @@
         },
         {
             "file": "src/components/scales/peakvalleylinearscale.js",
-            "line": 44,
+            "line": 42,
             "description": "Inheritance from LinearScale",
             "class": "PeakValleyLinearScale"
         },
         {
             "file": "src/components/scales/peakvalleylinearscale.js",
-            "line": 49,
+            "line": 47,
             "description": "Calculates the domain for the peak valley linear scale\n\nThe domain is calculated by adding all the data points one by one\nand keeping the highest and lowest value it reaches.\nIt sets the domain and the maximum value.",
             "itemtype": "method",
             "name": "calculateDomain",
@@ -5067,20 +5076,20 @@
             "line": " src/components/scales/linearscale.js:28"
         },
         {
-            "message": "Missing item type\nClass constructor",
+            "message": "Missing item type",
             "line": " src/components/scales/linearscale.js:33"
         },
         {
             "message": "Missing item type\nInheritance from BaseScale",
-            "line": " src/components/scales/linearscale.js:47"
+            "line": " src/components/scales/linearscale.js:46"
         },
         {
             "message": "Missing item type",
-            "line": " src/components/scales/linearscale.js:127"
+            "line": " src/components/scales/linearscale.js:122"
         },
         {
             "message": "Missing item type",
-            "line": " src/components/scales/linearscale.js:140"
+            "line": " src/components/scales/linearscale.js:136"
         },
         {
             "message": "Missing item type",
@@ -5128,7 +5137,7 @@
         },
         {
             "message": "Missing item type\nInheritance from LinearScale",
-            "line": " src/components/scales/peakvalleylinearscale.js:44"
+            "line": " src/components/scales/peakvalleylinearscale.js:42"
         },
         {
             "message": "Missing item type",

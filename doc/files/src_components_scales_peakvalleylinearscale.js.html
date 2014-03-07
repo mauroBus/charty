@@ -202,9 +202,7 @@
      *     @param {Boolean} [options.niceDomain=false] - Beautify the domain to include all the possible values.
      */
     var PeakValleyLinearScale = function(axisType, options) {
-        this.scale = d3.scale.linear();
-        this.axisType = axisType;
-        this.niceDomain = options ? options.niceDomain : false;
+        LinearScale.apply(this, arguments);
     };
 
     /**
