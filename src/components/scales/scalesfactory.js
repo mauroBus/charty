@@ -66,10 +66,10 @@
                 scale = new OrdinalScale(axisType, options);
                 break;
             case Charty.AXIS_TYPE.LINEAR:
-                scale = new LinearScale(axisType);
+                scale = new LinearScale(axisType, options);
                 break;
             case Charty.AXIS_TYPE.PEAK_VALLEY_LINEAR:
-                scale = new PeakValleyLinearScale(axisType);
+                scale = new PeakValleyLinearScale(axisType, options);
                 break;
         }
 

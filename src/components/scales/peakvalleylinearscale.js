@@ -38,10 +38,13 @@
      *
      * @constructor
      * @param {String} axisType Axis type, defined in Charty names
+     * @param {Object} options The options for the scale.
+     *  {niceDomain: true}
      */
-    var PeakValleyLinearScale = function(axisType) {
+    var PeakValleyLinearScale = function(axisType, options) {
         this.scale = d3.scale.linear();
         this.axisType = axisType;
+        this.niceDomain = options ? options.niceDomain : false;
     };
 
     /**
@@ -67,6 +70,7 @@
             peak = 0,
             sum = 0,
             d = data.getData(),
+            delta = 0,
             self = this;
 
         if (d && !_.isEmpty(d)) {
@@ -95,10 +99,14 @@
                     });
                 }
 
+                if (self.niceDomain) {
+                    delta = self.getDelta(peak, valley);
+                }
+
                 /** Case when there is no data, sometimes can receive a NaN */
                 if (!_.isNaN(peak) && !_.isNaN(valley) && !_.isNaN(max)) {
                     return self.setMaxValue(max)
-                        .setDomain([valley, peak]);
+                        .setDomain([Math.min(0, valley - delta), Math.max(0, peak + delta)]);
                 }
             });
         }

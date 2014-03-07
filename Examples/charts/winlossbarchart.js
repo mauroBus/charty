@@ -61,7 +61,10 @@
           spacing: .5
         },
         xAxisClass: 'x-axis',
-        yAxis : Charty.AXIS_TYPE.PEAK_VALLEY_LINEAR,
+        yAxis : {
+          name: Charty.AXIS_TYPE.PEAK_VALLEY_LINEAR,
+          niceDomain: true
+        },
         xAxisTickRotation: 45,
         axisSystem : Charty.CHART_NAMES.YXY_AXIS,
         showAsGrid : true,

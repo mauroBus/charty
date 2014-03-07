@@ -302,10 +302,13 @@
      *
      * @constructor
      * @param {String} axisType Axis type, defined in Charty names
+     * @param {Object} options The options for the scale.
+     *  {niceDomain: true}
      */
-    var LinearScale = function(axisType) {
+    var LinearScale = function(axisType, options) {
         this.scale = d3.scale.linear();
         this.axisType = axisType;
+        this.niceDomain = options ? options.niceDomain : false;
     };
 
     /**
@@ -322,6 +325,7 @@
      */
     LinearScale.prototype.setDomain = function(arrayValues) {
         this.scale = this.scale.domain(arrayValues);
+        this.scale.nice();
         return this;
     };
 
@@ -379,6 +383,7 @@
         var max = -Infinity,
             min = Infinity,
             d = data.getData(),
+            delta = 0,
             self = this;
 
         if (d && !_.isEmpty(d)) {
@@ -395,13 +400,31 @@
                     min = Math.min(ming, min);
                 }
 
+                if (self.niceDomain) {
+                    delta = self.getDelta(max, min);
+                }
+
                 /** Case when there is no data, sometimes can receive a NaN */
                 if (!_.isNaN(max) && !_.isNaN(min)) {
                     return self.setMaxValue(max)
-                        .setDomain([Math.min(0, min), Math.max(0, max)]);
+                        .setDomain([Math.min(0, min - delta), Math.max(0, max + delta)]);
                 }
             });
         }
+    };
+
+    /**
+     * Returns the delta value to add to the domain in order to make sure all the
+     * data is wrapped by axis ticks.
+     *
+     * @method getDelta
+     * @param {Number} max The maximum value
+     * @param {Number} min The minimum value
+     * @return {Number} The delta value calculated on a 10 step division.
+     */
+    LinearScale.prototype.getDelta = function(max, min) {
+        var step = (max - min) / 10 + 1;
+        return Math.abs(max - min) % step;
     };
 
     /**
@@ -495,7 +518,7 @@
      *	Sets the range for the scale
      *
      *	@method setRange
-     *  @param {Number} range numeric value for the range 
+     *  @param {Number} range numeric value for the range
      *	@chainable
      */
     OrdinalScale.prototype.setRange = function(range) {
@@ -603,10 +626,13 @@
      *
      * @constructor
      * @param {String} axisType Axis type, defined in Charty names
+     * @param {Object} options The options for the scale.
+     *  {niceDomain: true}
      */
-    var PeakValleyLinearScale = function(axisType) {
+    var PeakValleyLinearScale = function(axisType, options) {
         this.scale = d3.scale.linear();
         this.axisType = axisType;
+        this.niceDomain = options ? options.niceDomain : false;
     };
 
     /**
@@ -632,6 +658,7 @@
             peak = 0,
             sum = 0,
             d = data.getData(),
+            delta = 0,
             self = this;
 
         if (d && !_.isEmpty(d)) {
@@ -660,10 +687,14 @@
                     });
                 }
 
+                if (self.niceDomain) {
+                    delta = self.getDelta(peak, valley);
+                }
+
                 /** Case when there is no data, sometimes can receive a NaN */
                 if (!_.isNaN(peak) && !_.isNaN(valley) && !_.isNaN(max)) {
                     return self.setMaxValue(max)
-                        .setDomain([valley, peak]);
+                        .setDomain([Math.min(0, valley - delta), Math.max(0, peak + delta)]);
                 }
             });
         }
@@ -740,10 +771,10 @@
                 scale = new OrdinalScale(axisType, options);
                 break;
             case Charty.AXIS_TYPE.LINEAR:
-                scale = new LinearScale(axisType);
+                scale = new LinearScale(axisType, options);
                 break;
             case Charty.AXIS_TYPE.PEAK_VALLEY_LINEAR:
-                scale = new PeakValleyLinearScale(axisType);
+                scale = new PeakValleyLinearScale(axisType, options);
                 break;
         }
 
