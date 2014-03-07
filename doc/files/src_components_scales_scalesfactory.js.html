@@ -164,21 +164,16 @@
 
 <div class="file">
     <pre class="code prettyprint linenums">
-/* global OrdinalScale: true, LinearScale: true, PeakValleyLinearScale:true */
+/* global OrdinalScale: true, LinearScale: true, PeakValleyLinearScale: true */
 /**
- *	Scale factory. Separation is provived in an attempt
- *	to provide an easy way to switching scales in a defined chart
+ * Scale factory. Separation is provived in an attempt to provide an easy way
+ * to switching scales in a defined chart.
  *
- *	@class ScaleFactory
- * @requires d3.chart,
- *						charty,
- *						ordinalscale,
- *						linearscale,
- *						peakvalleylinearscale
+ * @class ScaleFactory
+ * @requires d3.chart, charty, ordinalscale, linearscale, peakvalleylinearscale
  *
- *	@author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
+ * @author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
  */
-
 (function(root, factory) {
     /** Setting up AMD support*/
     if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
@@ -191,7 +186,7 @@
             ],
             function(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale) {
                 /** Export global even in AMD case in case this script
-                 *	is loaded with others */
+                 *  is loaded with others */
                 return factory(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale);
             });
     } else {
@@ -199,37 +194,46 @@
         root.ScaleFactory = factory(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale);
     }
 }(this, function(Charty, OrdinalScale, LinearScale, PeakValleyLinearScale) {
-    /**
-     * Class constructor
-     *
-     * @constructor
-     */
-    var ScaleFactory = function() {};
+
+    /** @constructor */
+    function ScaleFactory() {}
 
     /**
-     *	Returns a specified scale object, acording to a scale type
+     * Returns a specified scale object acording to a scale type.
      *
-     *	@method scale
-     *	@param {String} scaleType Available scale type
-     *	@param {String} axisType Related axis type (&#x27;x&#x27;-&#x27;y&#x27;)
-     *	@return {Object} LinearScale / OrdinalScale
+     * @method scale
+     *
+     * @param {String|Object} options      - List of possible options provided to the scale contructor.
+     *   @param {String}  options.name       - Scale type ID.
+     *   @param {Number}  options.spacing    - Define how much space we leave between bars (OrdinalScale)
+     *   @param {Boolean} options.niceDomain - Ask for a domain proccessing to include all values in the axis (LinearScale)
+     *
+     * @param {Charty.AXIS.X|Charty.AXIS.Y} axisType - X or Y axis setting.
+     *
+     * @return {Object} Scale instance.
      */
-    ScaleFactory.prototype.scale = function(scaleType, axisType) {
-        var scale;
+    ScaleFactory.prototype.scale = function(options, axisType) {
+        var type;
 
-        switch (scaleType) {
-            case Charty.AXIS_TYPE.ORDINAL:
-                scale = new OrdinalScale(axisType);
-                break;
-            case Charty.AXIS_TYPE.LINEAR:
-                scale = new LinearScale(axisType);
-                break;
-            case Charty.AXIS_TYPE.PEAK_VALLEY_LINEAR:
-                scale = new PeakValleyLinearScale(axisType);
-                break;
+        // Retro compatible for type as Strings, since version 0.5.11 we could
+        // send options to the scales to be able to configure the object.
+        if (_.isString(options)) {
+            type = options;
+            options = {};
+        } else {
+            type = options.name;
         }
 
-        return scale;
+        switch (type) {
+            case Charty.AXIS_TYPE.ORDINAL:
+                return new OrdinalScale(axisType, options);
+            case Charty.AXIS_TYPE.LINEAR:
+                return new LinearScale(axisType, options);
+            case Charty.AXIS_TYPE.PEAK_VALLEY_LINEAR:
+                return new PeakValleyLinearScale(axisType, options);
+            default:
+                throw new Error(&#x27;Provide a value Charty.AXIS_TYPE value&#x27;);
+        }
     };
 
     return ScaleFactory;

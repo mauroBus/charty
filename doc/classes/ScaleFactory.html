@@ -180,8 +180,8 @@
 
 
 <div class="box intro">
-    <p>Scale factory. Separation is provived in an attempt
-to provide an easy way to switching scales in a defined chart</p>
+    <p>Scale factory. Separation is provived in an attempt to provide an easy way
+to switching scales in a defined chart.</p>
 
 </div>
 
@@ -241,7 +241,7 @@ to provide an easy way to switching scales in a defined chart</p>
             
                 <li class="arg">
                     
-                        <code>scaleType</code>
+                        <code>options</code>
                     
                 </li>
             
@@ -284,7 +284,7 @@ to provide an easy way to switching scales in a defined chart</p>
             
         
         
-        <a href="../files/src_components_scales_scalesfactory.js.html#l43"><code>src&#x2F;components&#x2F;scales&#x2F;scalesfactory.js:43</code></a>
+        <a href="../files/src_components_scales_scalesfactory.js.html#l35"><code>src&#x2F;components&#x2F;scales&#x2F;scalesfactory.js:35</code></a>
         
         </p>
 
@@ -295,7 +295,7 @@ to provide an easy way to switching scales in a defined chart</p>
     </div>
 
     <div class="description">
-        <p>Returns a specified scale object, acording to a scale type</p>
+        <p>Returns a specified scale object acording to a scale type.</p>
 
     </div>
 
@@ -307,30 +307,86 @@ to provide an easy way to switching scales in a defined chart</p>
             
                 <li class="param">
                     
-                        <code class="param-name">scaleType</code>
-                        <span class="type">String</span>
+                        <code class="param-name">options</code>
+                        <span class="type">String | Object</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>Available scale type</p>
+                        <ul>
+<li>List of possible options provided to the scale contructor.</li>
+</ul>
 
                     </div>
 
+                    
+                        <ul class="params-list">
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">name</code>
+                                    <span class="type">String</span>
+                                
+
+                                <div class="param-description">
+                                    <ul>
+<li>Scale type ID.</li>
+</ul>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">spacing</code>
+                                    <span class="type">Number</span>
+                                
+
+                                <div class="param-description">
+                                    <ul>
+<li>Define how much space we leave between bars (OrdinalScale)</li>
+</ul>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">niceDomain</code>
+                                    <span class="type">Boolean</span>
+                                
+
+                                <div class="param-description">
+                                    <ul>
+<li>Ask for a domain proccessing to include all values in the axis (LinearScale)</li>
+</ul>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                        </ul>
                     
                 </li>
             
                 <li class="param">
                     
                         <code class="param-name">axisType</code>
-                        <span class="type">String</span>
+                        <span class="type">Charty.AXIS.X | Charty.AXIS.Y</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>Related axis type (&#39;x&#39;-&#39;y&#39;)</p>
+                        <ul>
+<li>X or Y axis setting.</li>
+</ul>
 
                     </div>
 
@@ -350,7 +406,7 @@ to provide an easy way to switching scales in a defined chart</p>
                     
                         <span class="type">Object</span>:
                     
-                    <p>LinearScale / OrdinalScale</p>
+                    <p>Scale instance.</p>
 
                 
             </div>

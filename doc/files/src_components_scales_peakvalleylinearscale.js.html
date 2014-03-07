@@ -170,14 +170,10 @@
  *
  * @class PeakValleyLinearScale
  * @extends BaseScale
- * @requires d3.chart,
- *           linearscale,
- *           charty,
- *           uderscore
+ * @requires d3.chart, linearscale, charty, underscore
  *
  * @author &quot;Cesar Del Soldato &lt;cesards@gmail.com&gt;&quot;
  */
-
 (function(root, factory) {
     /** Setting up AMD support*/
     if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
@@ -198,16 +194,17 @@
         root.PeakValleyLinearScale = factory(d3, LinearScale, Charty, _);
     }
 }(this, function(d3, LinearScale, Charty, _) {
-
     /**
-     * Class constructor
-     *
      * @constructor
-     * @param {String} axisType Axis type, defined in Charty names
+     *
+     * @param {Charty.AXIS.X|Charty.AXIS.Y} axisType - X or Y axis setting.
+     * @param {Object} [options] - Settings
+     *     @param {Boolean} [options.niceDomain=false] - Beautify the domain to include all the possible values.
      */
-    var PeakValleyLinearScale = function(axisType) {
+    var PeakValleyLinearScale = function(axisType, options) {
         this.scale = d3.scale.linear();
         this.axisType = axisType;
+        this.niceDomain = options ? options.niceDomain : false;
     };
 
     /**
@@ -223,35 +220,37 @@
      * It sets the domain and the maximum value.
      *
      * @method calculateDomain
-     * @param {Object} data Accessor for the data collection
-     * @param {Object} f callback function
      * @chainable
+     * @param {Object} data Data collection.
+     * @param {Object} iterator Provide a way to access the data
      */
-    PeakValleyLinearScale.prototype.calculateDomain = function(data, f) {
+    PeakValleyLinearScale.prototype.calculateDomain = function(data, iterator) {
         var max = 0,
             valley = 0,
             peak = 0,
-            sum = 0,
-            d = data.getData(),
-            self = this;
+            series = data.getData(),
+            delta = 0;
 
-        if (d &amp;&amp; !_.isEmpty(d)) {
+        if (series &amp;&amp; !_.isEmpty(series)) {
 
-            _.each(d, function(element) {
-                var chartData = element.data;
+            _.each(series, function(element) {
+                var data = element.data,
+                    sum = 0;
 
-                /** Chart can receive no data, should draw nothing or remove already drawn elements */
-                if (chartData &amp;&amp; !_.isEmpty(chartData)) {
-                    var maxg = d3.max(chartData, f);
+                // Chart can receive no data, should draw nothing or remove
+                // already drawn elements
+                if (data &amp;&amp; !_.isEmpty(data)) {
+                    var maxg = d3.max(data, iterator);
+
                     max = Math.max(maxg, max);
 
-                    _.each(chartData, function(dataPoint) {
-
-                        if (dataPoint.reset) {
+                    // Max and Min after sum all the value from the serie.
+                    _.each(data, function(point) {
+                        if (point.reset) {
                             sum = 0;
                         }
 
-                        sum = f ? sum + f(dataPoint) : sum + dataPoint;
+                        sum = iterator ? sum + iterator(point) : sum + point;
 
                         if (sum &gt; peak) {
                             peak = sum;
@@ -260,13 +259,20 @@
                         }
                     });
                 }
+            }, this);
 
-                /** Case when there is no data, sometimes can receive a NaN */
-                if (!_.isNaN(peak) &amp;&amp; !_.isNaN(valley) &amp;&amp; !_.isNaN(max)) {
-                    return self.setMaxValue(max)
-                        .setDomain([valley, peak]);
-                }
-            });
+            if (this.niceDomain) {
+                delta = this.getDelta(peak, valley);
+            }
+
+            // Case when there is no data, sometimes can receive a NaN
+            if (!_.isNaN(peak) &amp;&amp; !_.isNaN(valley) &amp;&amp; !_.isNaN(max)) {
+                return this.setMaxValue(max).setDomain([
+                    Math.min(0, valley - delta),
+                    Math.max(0, peak + delta)
+                ]);
+            }
+
         }
     };
 

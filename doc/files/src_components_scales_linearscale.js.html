@@ -201,10 +201,13 @@
      *
      * @constructor
      * @param {String} axisType Axis type, defined in Charty names
+     * @param {Object} options The options for the scale.
+     *  {niceDomain: true}
      */
-    var LinearScale = function(axisType) {
+    var LinearScale = function(axisType, options) {
         this.scale = d3.scale.linear();
         this.axisType = axisType;
+        this.niceDomain = options ? options.niceDomain : false;
     };
 
     /**
@@ -221,6 +224,7 @@
      */
     LinearScale.prototype.setDomain = function(arrayValues) {
         this.scale = this.scale.domain(arrayValues);
+        this.scale.nice();
         return this;
     };
 
@@ -278,6 +282,7 @@
         var max = -Infinity,
             min = Infinity,
             d = data.getData(),
+            delta = 0,
             self = this;
 
         if (d &amp;&amp; !_.isEmpty(d)) {
@@ -294,13 +299,31 @@
                     min = Math.min(ming, min);
                 }
 
+                if (self.niceDomain) {
+                    delta = self.getDelta(max, min);
+                }
+
                 /** Case when there is no data, sometimes can receive a NaN */
                 if (!_.isNaN(max) &amp;&amp; !_.isNaN(min)) {
                     return self.setMaxValue(max)
-                        .setDomain([Math.min(0, min), Math.max(0, max)]);
+                        .setDomain([Math.min(0, min - delta), Math.max(0, max + delta)]);
                 }
             });
         }
+    };
+
+    /**
+     * Returns the delta value to add to the domain in order to make sure all the
+     * data is wrapped by axis ticks.
+     *
+     * @method getDelta
+     * @param {Number} max The maximum value
+     * @param {Number} min The minimum value
+     * @return {Number} The delta value calculated on a 10 step division.
+     */
+    LinearScale.prototype.getDelta = function(max, min) {
+        var step = (max - min) / 10 + 1;
+        return Math.abs(max - min) % step;
     };
 
     /**
