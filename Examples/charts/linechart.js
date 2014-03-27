@@ -59,7 +59,10 @@
     instances : 2,
     root : '#chart3',
     xAxis : Charty.AXIS_TYPE.ORDINAL,
-    yAxis : Charty.AXIS_TYPE.LINEAR,
+    yAxis : {
+      name: Charty.AXIS_TYPE.LINEAR,
+      niceDomain: true
+    },
     axisSystem : Charty.CHART_NAMES.YXY_AXIS,
     showAsGrid : true,
     yAxisTickFormat: '$d'
