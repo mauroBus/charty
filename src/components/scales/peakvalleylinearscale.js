@@ -35,7 +35,7 @@
      * @param {Object} [options] - Settings
      *     @param {Boolean} [options.niceDomain=false] - Beautify the domain to include all the possible values.
      */
-    var PeakValleyLinearScale = function(axisType, options) {
+    var PeakValleyLinearScale = function() {
         LinearScale.apply(this, arguments);
     };
 
