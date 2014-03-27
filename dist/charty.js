@@ -396,12 +396,14 @@
 
             if (this.niceDomain) {
                 delta = this.getDelta(max, min);
+                // If no negative values exist, don't use the delta on the min value.
+                min = min >= 0 ? min : min - delta;
             }
 
             /** Case when there is no data, sometimes can receive a NaN */
             if (!_.isNaN(max) && !_.isNaN(min)) {
                 return this.setMaxValue(max)
-                    .setDomain([Math.min(0, min - delta), Math.max(0, max + delta)]);
+                    .setDomain([Math.min(0, min), Math.max(0, max + delta)]);
             }
 
         }
@@ -667,13 +669,16 @@
 
             if (this.niceDomain) {
                 delta = this.getDelta(peak, valley);
+                peak = peak + delta;
+                // If no negatives are shown, don't use the delta on the valley.
+                valley = valley >= 0 ? valley : valley - delta;
             }
 
             // Case when there is no data, sometimes can receive a NaN
             if (!_.isNaN(peak) && !_.isNaN(valley) && !_.isNaN(max)) {
                 return this.setMaxValue(max).setDomain([
-                    Math.min(0, valley - delta),
-                    Math.max(0, peak + delta)
+                    Math.min(0, valley),
+                    Math.max(0, peak)
                 ]);
             }
 
