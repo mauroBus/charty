@@ -133,6 +133,9 @@
                 delta = this.getDelta(max, min);
                 // If no negative values exist, don't use the delta on the min value.
                 min = min >= 0 ? min : min - delta;
+
+                // If no positive values exist, set the delta to 0.
+                delta = max <= 0 ? 0 : delta;
             }
 
             /** Case when there is no data, sometimes can receive a NaN */
