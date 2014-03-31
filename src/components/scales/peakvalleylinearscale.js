@@ -95,7 +95,10 @@
 
             if (this.niceDomain) {
                 delta = this.getDelta(peak, valley);
-                peak = peak + delta;
+
+                // If no positives are shown, don't use the delta on the peak.
+                peak = peak <= 0 ? peak : peak + delta;
+
                 // If no negatives are shown, don't use the delta on the valley.
                 valley = valley >= 0 ? valley : valley - delta;
             }
