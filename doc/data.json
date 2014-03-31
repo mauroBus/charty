@@ -2651,12 +2651,12 @@
         },
         {
             "file": "src/components/scales/linearscale.js",
-            "line": 136,
+            "line": 141,
             "class": "LinearScale"
         },
         {
             "file": "src/components/scales/linearscale.js",
-            "line": 145,
+            "line": 150,
             "description": "Returns the delta value to add to the domain in order to make sure all the\ndata is wrapped by axis ticks.",
             "itemtype": "method",
             "name": "getDelta",
@@ -2680,7 +2680,7 @@
         },
         {
             "file": "src/components/scales/linearscale.js",
-            "line": 159,
+            "line": 164,
             "description": "Maximum value setting for linear scale.\nUseful when setting discrete ticks for continuous scale",
             "itemtype": "method",
             "name": "setMaxValue",
@@ -2696,7 +2696,7 @@
         },
         {
             "file": "src/components/scales/linearscale.js",
-            "line": 172,
+            "line": 177,
             "description": "Returns max value",
             "itemtype": "method",
             "name": "getMaxValue",
@@ -5089,7 +5089,7 @@
         },
         {
             "message": "Missing item type",
-            "line": " src/components/scales/linearscale.js:136"
+            "line": " src/components/scales/linearscale.js:141"
         },
         {
             "message": "Missing item type",
