@@ -4281,7 +4281,7 @@ Takes N input data series
         this.svg.attr('width', svgWidth)
             .attr('height', svgHeight)
             .attr('viewBox', ('0 0 ' + svgWidth + " " + svgHeight))
-            .attr('preserveAspectRatio', 'XminYmin');
+            .attr('preserveAspectRatio', 'xMinYMin');
 
         if (margin) {
             marginValues = {
