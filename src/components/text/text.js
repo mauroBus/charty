@@ -32,13 +32,10 @@
 
     var Label = {
         /**
-         * Text label initializator
-         *
          * @constructor
-         * @param {Object} args Arguments for text component.
+         * Text label initializator
          */
         initialize: function() {
-
             var options = {
                 /**
                  * Data bind for text labeling.
@@ -63,6 +60,7 @@
                 insert: function() {
                     return this.append('text');
                 },
+
                 events: {
                     enter: function() {
 
@@ -75,19 +73,17 @@
 
                         return this;
                     },
+
                     merge: function() {
                         var chart = this.chart();
 
-                        this.attr('x', function(d) {
-                            return chart.xscale.map(d.x, 1) + (chart.xscale.band(1) / 2);
-                        })
-                            .attr('y', function(d) {
-                                return chart.yscale.map(d.y);
-                            })
+                        this.attr('x', _.partial(chart.x, chart))
+                            .attr('y', _.partial(chart.y, chart))
                             .text(chart.text);
 
                         return this;
                     },
+
                     exit: function() {
                         return this.remove();
                     }
@@ -98,6 +94,20 @@
              * Layer creation
              */
             this.layer('texts', this.base.append('g'), options);
+        },
+
+        /**
+        Calculate `x` to be centered horizontally.
+        **/
+        x: function(chart, d) {
+            return chart.xscale.map(d.x, 1) + (chart.xscale.band(1) / 2);
+        },
+
+        /**
+        Calculate `y` to be centered vertically.
+        **/
+        y: function(chart, d) {
+            return chart.yscale.map(d.y) - 15;
         },
 
         /**

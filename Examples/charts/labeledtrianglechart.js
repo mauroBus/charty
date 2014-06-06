@@ -1,8 +1,8 @@
-/** 
+/**
 * Triangle chart instantiation example. It is defined to take
 * only one data serie.
 *
-* Note : linear gradients won't work in ie8 via r2d3 
+* Note : linear gradients won't work in ie8 via r2d3
 * (everything will crash).
 */
 
@@ -27,7 +27,7 @@
 
   "use strict";
 
-  /** 
+  /**
   * rh : rectangle height
   * rw : rectangle width
   * rc : rectangle color
@@ -40,9 +40,9 @@
     rw: 30,
     rc:'gray',
     data: [
-      { x: 'A', y: 2, c : 'red', c1: 'red', c2:'blue'},
-      { x: 'B', y: 2, c : 'red', c1:'yellow', c2:'green'},
-      { x: 'C', y: 2, c : 'red', c1:'green', c2:'yellow'}
+      { x: 'A', y: 1, c : 'red', c1: 'red', c2:'blue'},
+      { x: 'B', y: 150, c : 'red', c1:'yellow', c2:'green'},
+      { x: 'C', y: 350, c : 'red', c1:'green', c2:'yellow'}
     ]
   };
 
@@ -51,14 +51,14 @@
 
   datagroup2.push(data1);
 
-  /** 
-  * Labeled triangle chart options 
+  /**
+  * Labeled triangle chart options
   *
   * root : container div
   * defaultXDomain : default values for x axis
   * yTicksCount : how many ticks are generated for y axis,
   * yAxisFormat : y axis ticks formatter (d3.format specific) -> "d" : only integers
-  * gradients : linear gradients. 
+  * gradients : linear gradients.
   */
   var options2 = {
     chartName : Charty.CHART_NAMES.LABELED_TRIANGLE_CHART,
