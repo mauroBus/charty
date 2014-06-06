@@ -124,7 +124,7 @@
             transform: function(data) {
                 var result = [],
                     dataArray = data.next()
-                        .data,
+                    .data,
                     self = this,
                     xBand = this.xscale.band(1),
                     zeroY = this.yscale.map(0);
