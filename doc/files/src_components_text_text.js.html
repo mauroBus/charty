@@ -198,13 +198,10 @@
 
     var Label = {
         /**
-         * Text label initializator
-         *
          * @constructor
-         * @param {Object} args Arguments for text component.
+         * Text label initializator
          */
         initialize: function() {
-
             var options = {
                 /**
                  * Data bind for text labeling.
@@ -229,6 +226,7 @@
                 insert: function() {
                     return this.append(&#x27;text&#x27;);
                 },
+
                 events: {
                     enter: function() {
 
@@ -241,19 +239,17 @@
 
                         return this;
                     },
+
                     merge: function() {
                         var chart = this.chart();
 
-                        this.attr(&#x27;x&#x27;, function(d) {
-                            return chart.xscale.map(d.x, 1) + (chart.xscale.band(1) / 2);
-                        })
-                            .attr(&#x27;y&#x27;, function(d) {
-                                return chart.yscale.map(d.y);
-                            })
+                        this.attr(&#x27;x&#x27;, _.partial(chart.x, chart))
+                            .attr(&#x27;y&#x27;, _.partial(chart.y, chart))
                             .text(chart.text);
 
                         return this;
                     },
+
                     exit: function() {
                         return this.remove();
                     }
@@ -264,6 +260,20 @@
              * Layer creation
              */
             this.layer(&#x27;texts&#x27;, this.base.append(&#x27;g&#x27;), options);
+        },
+
+        /**
+        Calculate &#x60;x&#x60; to be centered horizontally.
+        **/
+        x: function(chart, d) {
+            return chart.xscale.map(d.x, 1) + (chart.xscale.band(1) / 2);
+        },
+
+        /**
+        Calculate &#x60;y&#x60; to be centered vertically.
+        **/
+        y: function(chart, d) {
+            return chart.yscale.map(d.y) - 15;
         },
 
         /**

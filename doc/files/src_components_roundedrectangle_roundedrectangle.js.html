@@ -182,19 +182,20 @@
         /** AMD */
         define(&#x27;charty/roundedrectangle&#x27;, [
                 &#x27;d3.chart&#x27;,
+                &#x27;underscore&#x27;,
                 &#x27;charty/chartynames&#x27;,
                 &#x27;charty/simpledatagroup&#x27;
             ],
             function(d3, Charty) {
                 /** Export global even in AMD case in case this script
                  * is loaded with others */
-                return factory(d3, Charty);
+                return factory(d3, _, Charty);
             });
     } else {
         // Browser globals
-        factory(d3, Charty);
+        factory(d3, _, Charty);
     }
-}(this, function(d3, Charty) {
+}(this, function(d3, _, Charty) {
     d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
         .extend(Charty.CHART_NAMES.ROUNDED_RECTANGLE, {
             /**
@@ -246,7 +247,6 @@
                      * @chainable
                      */
                     dataBind: function(d) {
-
                         var chart = this.chart();
 
                         chart.rh = (dataValidator.isPositiveNumber(d.rh, errors.invalidRH) || defaults.rh);
@@ -255,8 +255,7 @@
                         chart.ry = (dataValidator.isPositiveNumber(d.ry, errors.invalidRY) || defaults.ry);
                         chart.rc = (d.rc || defaults.rc);
 
-                        return this.selectAll(&#x27;rect&#x27;)
-                            .data(d.data);
+                        return this.selectAll(&#x27;rect&#x27;).data(d.data);
                     },
                     /**
                      * Appends a svg:rect element.
@@ -267,34 +266,30 @@
                     insert: function() {
                         return this.append(&#x27;rect&#x27;);
                     },
+
                     events: {
-                        &#x27;enter&#x27;: function() {
+                        enter: function() {
                             this.chart()
                                 .eventManager.bindAll(this);
 
                             return this;
                         },
-                        &#x27;merge&#x27;: function() {
-                            /** Click event only on enter */
+
+                        merge: function() {
                             var chart = this.chart();
 
                             this.attr(&#x27;height&#x27;, chart.rh)
                                 .attr(&#x27;width&#x27;, chart.rw)
-                                .attr(&#x27;x&#x27;, function(d) {
-                                    return chart.xscale.map(d.x, 1) + (chart.xscale.band(1) / 2) - (chart.rw / 2);
-                                })
-                                .attr(&#x27;y&#x27;, function(d) {
-                                    return chart.yscale.map(d.y) - (chart.rh / 2);
-                                })
                                 .attr(&#x27;rx&#x27;, chart.rx)
                                 .attr(&#x27;ry&#x27;, chart.ry)
-                                .attr(&#x27;class&#x27;, function(d) {
-                                    return (d.rc || chart.rc);
-                                });
+                                .attr(&#x27;x&#x27;, _.partial(chart.x, chart))
+                                .attr(&#x27;y&#x27;, _.partial(chart.y, chart))
+                                .attr(&#x27;class&#x27;, _.partial(chart[&#x27;class&#x27;], chart));
 
                             return this;
                         },
-                        &#x27;exit&#x27;: function() {
+
+                        exit: function() {
                             return this.remove();
                         }
                     }
@@ -304,6 +299,27 @@
                  * Layer creation
                  */
                 this.layer(&#x27;roundedrects&#x27;, this.base, options);
+            },
+
+            /**
+            Calculate &#x60;x&#x60; to be centered horizontally.
+            **/
+            x: function(chart, d) {
+                return chart.xscale.map(d.x, 1) + (chart.xscale.band(1) / 2) - (chart.rw / 2);
+            },
+
+            /**
+            Calculate &#x60;y&#x60; to be centered vertically.
+            **/
+            y: function(chart, d) {
+                return chart.yscale.map(d.y) - chart.rh;
+            },
+
+            /**
+            Class attribute generation.
+            **/
+            &#x27;class&#x27;: function(chart, d) {
+                return d.rc || chart.rc;
             }
         });
 }));

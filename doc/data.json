@@ -2377,12 +2377,12 @@
         },
         {
             "file": "src/components/roundedrectangle/roundedrectangle.js",
-            "line": 23,
+            "line": 24,
             "class": "RoundedRectangle"
         },
         {
             "file": "src/components/roundedrectangle/roundedrectangle.js",
-            "line": 34,
+            "line": 35,
             "description": "Rounded rectangle initialization.",
             "is_constructor": 1,
             "params": [
@@ -2396,13 +2396,13 @@
         },
         {
             "file": "src/components/roundedrectangle/roundedrectangle.js",
-            "line": 50,
+            "line": 51,
             "description": "Defaults for rectangle\n\nrh : rectangle height\nrw : rectangle width\nrc : rectangle color\nrx, ry : value for rounded corners",
             "class": "RoundedRectangle"
         },
         {
             "file": "src/components/roundedrectangle/roundedrectangle.js",
-            "line": 67,
+            "line": 68,
             "description": "Data bind for Rounded Rectangle.\nData defines a rectangle height (rh), width (rw),\ncolor (rc), rx, ry. If not defined, defauls are\nused.",
             "itemtype": "method",
             "name": "dataBind",
@@ -2418,7 +2418,7 @@
         },
         {
             "file": "src/components/roundedrectangle/roundedrectangle.js",
-            "line": 95,
+            "line": 94,
             "description": "Appends a svg:rect element.",
             "itemtype": "method",
             "name": "insert",
@@ -2427,13 +2427,26 @@
         },
         {
             "file": "src/components/roundedrectangle/roundedrectangle.js",
-            "line": 112,
+            "line": 132,
+            "description": "Layer creation",
             "class": "RoundedRectangle"
         },
         {
             "file": "src/components/roundedrectangle/roundedrectangle.js",
-            "line": 137,
-            "description": "Layer creation",
+            "line": 138,
+            "description": "Calculate `x` to be centered horizontally.",
+            "class": "RoundedRectangle"
+        },
+        {
+            "file": "src/components/roundedrectangle/roundedrectangle.js",
+            "line": 145,
+            "description": "Calculate `y` to be centered vertically.",
+            "class": "RoundedRectangle"
+        },
+        {
+            "file": "src/components/roundedrectangle/roundedrectangle.js",
+            "line": 152,
+            "description": "Class attribute generation.",
             "class": "RoundedRectangle"
         },
         {
@@ -3098,20 +3111,12 @@
         {
             "file": "src/components/text/text.js",
             "line": 34,
-            "description": "Text label initializator",
             "is_constructor": 1,
-            "params": [
-                {
-                    "name": "args",
-                    "description": "Arguments for text component.",
-                    "type": "Object"
-                }
-            ],
             "class": "Text"
         },
         {
             "file": "src/components/text/text.js",
-            "line": 43,
+            "line": 40,
             "description": "Data bind for text labeling.\nCan depend on other elements, for instance,\nthe rounded rectangles to form a label.",
             "itemtype": "method",
             "name": "dataBind",
@@ -3126,7 +3131,7 @@
         },
         {
             "file": "src/components/text/text.js",
-            "line": 57,
+            "line": 54,
             "description": "Insert a svg:text element for each data input.",
             "itemtype": "method",
             "name": "insert",
@@ -3135,13 +3140,25 @@
         },
         {
             "file": "src/components/text/text.js",
-            "line": 97,
+            "line": 93,
             "description": "Layer creation",
             "class": "Text"
         },
         {
             "file": "src/components/text/text.js",
-            "line": 103,
+            "line": 99,
+            "description": "Calculate `x` to be centered horizontally.",
+            "class": "Text"
+        },
+        {
+            "file": "src/components/text/text.js",
+            "line": 106,
+            "description": "Calculate `y` to be centered vertically.",
+            "class": "Text"
+        },
+        {
+            "file": "src/components/text/text.js",
+            "line": 113,
             "description": "Text data accessor.",
             "see": [
                 "https://github.com/mbostock/d3/wiki/Selections#wiki-text"
@@ -5021,23 +5038,31 @@
         },
         {
             "message": "Missing item type",
-            "line": " src/components/roundedrectangle/roundedrectangle.js:23"
+            "line": " src/components/roundedrectangle/roundedrectangle.js:24"
         },
         {
             "message": "Missing item type\nRounded rectangle initialization.",
-            "line": " src/components/roundedrectangle/roundedrectangle.js:34"
+            "line": " src/components/roundedrectangle/roundedrectangle.js:35"
         },
         {
             "message": "Missing item type\nDefaults for rectangle\n\nrh : rectangle height\nrw : rectangle width\nrc : rectangle color\nrx, ry : value for rounded corners",
-            "line": " src/components/roundedrectangle/roundedrectangle.js:50"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/components/roundedrectangle/roundedrectangle.js:112"
+            "line": " src/components/roundedrectangle/roundedrectangle.js:51"
         },
         {
             "message": "Missing item type\nLayer creation",
-            "line": " src/components/roundedrectangle/roundedrectangle.js:137"
+            "line": " src/components/roundedrectangle/roundedrectangle.js:132"
+        },
+        {
+            "message": "Missing item type\nCalculate `x` to be centered horizontally.",
+            "line": " src/components/roundedrectangle/roundedrectangle.js:138"
+        },
+        {
+            "message": "Missing item type\nCalculate `y` to be centered vertically.",
+            "line": " src/components/roundedrectangle/roundedrectangle.js:145"
+        },
+        {
+            "message": "Missing item type\nClass attribute generation.",
+            "line": " src/components/roundedrectangle/roundedrectangle.js:152"
         },
         {
             "message": "Missing item type",
@@ -5216,16 +5241,24 @@
             "line": " src/components/text/text.js:28"
         },
         {
-            "message": "Missing item type\nText label initializator",
+            "message": "Missing item type",
             "line": " src/components/text/text.js:34"
         },
         {
             "message": "Missing item type\nLayer creation",
-            "line": " src/components/text/text.js:97"
+            "line": " src/components/text/text.js:93"
+        },
+        {
+            "message": "Missing item type\nCalculate `x` to be centered horizontally.",
+            "line": " src/components/text/text.js:99"
+        },
+        {
+            "message": "Missing item type\nCalculate `y` to be centered vertically.",
+            "line": " src/components/text/text.js:106"
         },
         {
             "message": "Missing item type\nText data accessor.",
-            "line": " src/components/text/text.js:103"
+            "line": " src/components/text/text.js:113"
         },
         {
             "message": "Missing item type",
