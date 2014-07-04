@@ -2593,12 +2593,12 @@
 }));
 
 /**
- * Text labeling in the middle the data element with Win Loss offser calculation.
- * Redefindes "merge"
+ * Extends "WinLossText" to allow custom text labeling.
+ * Redefindes "text"
  * Useful for vertical bar chart.
  *
- * @class AboveText
- * @extends Text
+ * @class WinLossCustomText
+ * @extends WinLossText
  * @requires d3.chart,
  *           charty,
  *           text
@@ -2610,7 +2610,7 @@
     /** Setting up AMD support*/
     if (typeof define === 'function' && define.amd) {
         /** AMD */
-        define('charty/winlossabstext', [
+        define('charty/winlosscustomtext', [
                 'd3.chart',
                 'charty/chartynames',
                 'charty/text'
@@ -4516,7 +4516,7 @@ Takes N input data series
                 'charty/groupedbarchart',
                 'charty/winlossbar',
                 'charty/winlosstext',
-                'charty/winlossabstext'
+                'charty/winlosscustomtext'
             ],
             function(Charty, ScaleFactory, ChartInterface, DataValidator, EventFactory) {
                 /** Export global even in AMD case in case this script
