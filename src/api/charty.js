@@ -40,7 +40,7 @@
                 'charty/groupedbarchart',
                 'charty/winlossbar',
                 'charty/winlosstext',
-                'charty/winlossabstext'
+                'charty/winlosscustomtext'
             ],
             function(Charty, ScaleFactory, ChartInterface, DataValidator, EventFactory) {
                 /** Export global even in AMD case in case this script

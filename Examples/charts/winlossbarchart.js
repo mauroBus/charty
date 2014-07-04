@@ -54,7 +54,10 @@
     var options11 = {
         chartName : Charty.CHART_NAMES.BAR_CHART,
         barType : Charty.CHART_NAMES.WIN_LOSS_BAR,
-        labelType : Charty.CHART_NAMES.WIN_LOSS_TEXT,
+        labelType : Charty.CHART_NAMES.WIN_LOSS_CUSTOM_TEXT,
+        customLabelText: function(d) {
+          return (d.y < 0) ? '(' + (d.y * -1) + ')' : d.y;
+        },
         root : '#chart11',
         xAxis : {
           name: Charty.AXIS_TYPE.ORDINAL,
