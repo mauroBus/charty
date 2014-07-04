@@ -156,6 +156,7 @@
         ABOVE_TEXT: 'AboveText',
         RIGHT_TEXT: 'RightText',
         WIN_LOSS_TEXT: 'WinLossText',
+        WIN_LOSS_CUSTOM_TEXT: 'WinLossCustomText',
         TRIANGLE: 'Triangle',
         XY_AXIS: 'XYAxis',
         YXY_AXIS: 'YXYAxis',
@@ -2128,7 +2129,7 @@
                 'charty/chartynames',
                 'charty/simpledatagroup'
             ],
-            function(d3, Charty) {
+            function(d3, _, Charty) {
                 /** Export global even in AMD case in case this script
                  * is loaded with others */
                 return factory(d3, _, Charty);
@@ -2555,45 +2556,84 @@
              * @param {Object} args Arguments for above text component.
              */
             initialize: function() {
+                this.offset = 0;
+            },
 
-                var textLayer = this.layer('texts');
+            /**
+            Calculate `x` to be centered horizontally.
+            **/
+            x: function(chart, d) {
+                var pos = 0;
+                if (chart.zScale) {
+                    pos += chart.zScale.map(d.z, 1);
+                }
 
-                /**
-                 * Sets offset for label.
-                 */
-                var offset = 0;
+                return (pos += chart.xscale.map(d.x, (chart.factor || 1)) + (chart.xscale.band(chart.factor || 1) / 2));
+            },
 
-                textLayer.off('merge');
-                textLayer.on('merge', function() {
+            /**
+            Calculate `y` to be centered vertically.
+            **/
+            y: function(chart, d) {
+                var yScaleMap = chart.yscale.map(d.y, chart.factor),
+                    yPos,
+                    zeroY = chart.yscale.map(0),
+                    heightZeroY = chart.h - zeroY;
 
-                    var chart = this.chart(),
-                        zeroY = chart.yscale.map(0),
-                        heightZeroY = chart.h - zeroY;
+                // Reset the offset if the element asks for it.
+                if (d.reset) {
+                    chart.offset = 0;
+                }
 
-                    this.attr('x', function(d) {
-                        var pos = 0;
-                        if (chart.zScale) {
-                            pos += chart.zScale.map(d.z, 1);
-                        }
-
-                        return (pos += chart.xscale.map(d.x, (chart.factor || 1)) + (chart.xscale.band(chart.factor || 1) / 2));
-                    })
-                        .attr('y', function(d) {
-                            var yScaleMap = chart.yscale.map(d.y, chart.factor),
-                                yPos;
-
-                            // Reset the offset if the element asks for it.
-                            if (d.reset) {
-                                offset = 0;
-                            }
-
-                            yPos = yScaleMap + offset + (chart.yscale.band(chart.h, d.y) - heightZeroY) / 2;
-                            offset = offset + yScaleMap - zeroY;
-                            return yPos;
-                        })
-                        .text(chart.text);
-                });
+                yPos = yScaleMap + chart.offset + (chart.yscale.band(chart.h, d.y) - heightZeroY) / 2;
+                chart.offset = chart.offset + yScaleMap - zeroY;
+                return yPos;
             }
+        });
+}));
+
+/**
+ * Text labeling in the middle the data element with Win Loss offser calculation.
+ * Redefindes "merge"
+ * Useful for vertical bar chart.
+ *
+ * @class AboveText
+ * @extends Text
+ * @requires d3.chart,
+ *           charty,
+ *           text
+ *
+ * @author "Mauro Buselli <maurobuselli@gmail.com>"
+ */
+
+(function(root, factory) {
+    /** Setting up AMD support*/
+    if (typeof define === 'function' && define.amd) {
+        /** AMD */
+        define('charty/winlossabstext', [
+                'd3.chart',
+                'charty/chartynames',
+                'charty/text'
+            ],
+            function(d3, Charty) {
+                /** Export global even in AMD case in case this script
+                 * is loaded with others */
+                return factory(d3, Charty);
+            });
+    } else {
+        /** Browser globals */
+        factory(d3, Charty);
+    }
+}(this, function(d3, Charty) {
+    d3.chart(Charty.CHART_NAMES.WIN_LOSS_TEXT)
+        .extend(Charty.CHART_NAMES.WIN_LOSS_CUSTOM_TEXT, {
+
+            initialize: function(args) {
+                if (args.customLabelText && _.isFunction(args.customLabelText)) {
+                    this.text = args.customLabelText;
+                }
+            }
+
         });
 }));
 
@@ -4475,7 +4515,8 @@ Takes N input data series
                 'charty/linechartcircles',
                 'charty/groupedbarchart',
                 'charty/winlossbar',
-                'charty/winlosstext'
+                'charty/winlosstext',
+                'charty/winlossabstext'
             ],
             function(Charty, ScaleFactory, ChartInterface, DataValidator, EventFactory) {
                 /** Export global even in AMD case in case this script
