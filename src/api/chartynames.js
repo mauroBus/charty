@@ -40,6 +40,7 @@
         ABOVE_TEXT: 'AboveText',
         RIGHT_TEXT: 'RightText',
         WIN_LOSS_TEXT: 'WinLossText',
+        WIN_LOSS_CUSTOM_TEXT: 'WinLossCustomText',
         TRIANGLE: 'Triangle',
         XY_AXIS: 'XYAxis',
         YXY_AXIS: 'YXYAxis',

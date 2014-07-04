@@ -46,6 +46,7 @@ module.exports = function(grunt) {
                     '<%= yeoman.app %>/components/text/abovetext.js',
                     '<%= yeoman.app %>/components/text/righttext.js',
                     '<%= yeoman.app %>/components/text/winlosstext.js',
+                    '<%= yeoman.app %>/components/text/winlosscustomtext.js',
                     '<%= yeoman.app %>/components/triangle/triangle.js',
                     '<%= yeoman.app %>/composition/multipledatagroup.js',
                     '<%= yeoman.app %>/composition/multipleinstancesmixin.js',

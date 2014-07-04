@@ -38,44 +38,38 @@
              * @param {Object} args Arguments for above text component.
              */
             initialize: function() {
+                this.offset = 0;
+            },
 
-                var textLayer = this.layer('texts');
+            /**
+            Calculate `x` to be centered horizontally.
+            **/
+            x: function(chart, d) {
+                var pos = 0;
+                if (chart.zScale) {
+                    pos += chart.zScale.map(d.z, 1);
+                }
 
-                /**
-                 * Sets offset for label.
-                 */
-                var offset = 0;
+                return (pos += chart.xscale.map(d.x, (chart.factor || 1)) + (chart.xscale.band(chart.factor || 1) / 2));
+            },
 
-                textLayer.off('merge');
-                textLayer.on('merge', function() {
+            /**
+            Calculate `y` to be centered vertically.
+            **/
+            y: function(chart, d) {
+                var yScaleMap = chart.yscale.map(d.y, chart.factor),
+                    yPos,
+                    zeroY = chart.yscale.map(0),
+                    heightZeroY = chart.h - zeroY;
 
-                    var chart = this.chart(),
-                        zeroY = chart.yscale.map(0),
-                        heightZeroY = chart.h - zeroY;
+                // Reset the offset if the element asks for it.
+                if (d.reset) {
+                    chart.offset = 0;
+                }
 
-                    this.attr('x', function(d) {
-                        var pos = 0;
-                        if (chart.zScale) {
-                            pos += chart.zScale.map(d.z, 1);
-                        }
-
-                        return (pos += chart.xscale.map(d.x, (chart.factor || 1)) + (chart.xscale.band(chart.factor || 1) / 2));
-                    })
-                        .attr('y', function(d) {
-                            var yScaleMap = chart.yscale.map(d.y, chart.factor),
-                                yPos;
-
-                            // Reset the offset if the element asks for it.
-                            if (d.reset) {
-                                offset = 0;
-                            }
-
-                            yPos = yScaleMap + offset + (chart.yscale.band(chart.h, d.y) - heightZeroY) / 2;
-                            offset = offset + yScaleMap - zeroY;
-                            return yPos;
-                        })
-                        .text(chart.text);
-                });
+                yPos = yScaleMap + chart.offset + (chart.yscale.band(chart.h, d.y) - heightZeroY) / 2;
+                chart.offset = chart.offset + yScaleMap - zeroY;
+                return yPos;
             }
         });
 }));
