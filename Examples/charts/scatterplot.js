@@ -28,17 +28,71 @@
   */
   var data3 = {
     data: [
-      { x:  25, y: 100, c : 'red'},
-      { x:  50, y:  40, c : 'red'},
-      { x:  75, y:  60, c : 'red'}
+      {
+        x: 25,
+        y: 100,
+        c: 'orange',
+        r: 8,
+        label: {
+          text: '1',
+          color: 'dodgerblue'
+        }
+      },
+      {
+        x: 50,
+        y:  40,
+        c: 'orange',
+        r: 8,
+        label: {
+          text: '2',
+          color: 'dodgerblue'
+        }
+      },
+      {
+        x: 75,
+        y:  60,
+        c: 'orange',
+        r: 8,
+        label: {
+          text: '3',
+          color: 'dodgerblue'
+        }
+      }
     ]
   };
 
   var data5 = {
     data: [
-      { x: 25,  y: 150, c : 'blue'},
-      { x: 50,  y:  50, c : 'blue'},
-      { x: 75,  y:  30, c : 'blue'}
+      {
+        x: 25,
+        y: 150,
+        c: 'blue',
+        r: 10,
+        label: {
+          text: '40',
+          color: 'goldenrod'
+        }
+      },
+      {
+        x: 50,
+        y:  50,
+        c: 'blue',
+        r: 10,
+        label: {
+          text: '50',
+          color: 'goldenrod'
+        }
+      },
+      {
+        x: 75,
+        y:  30,
+        c: 'blue',
+        r: 10,
+        label: {
+          text: '60',
+          color: 'goldenrod'
+        }
+      }
     ]
   };
 
@@ -60,8 +114,14 @@
     instances : 2,
     root : '#chart4',
     defaultXDomain : [0, 100],
-    xAxis : Charty.AXIS_TYPE.LINEAR,
-    yAxis : Charty.AXIS_TYPE.LINEAR,
+    xAxis : {
+      name: Charty.AXIS_TYPE.LINEAR,
+      spacing: 50
+    },
+    yAxis : {
+      name: Charty.AXIS_TYPE.LINEAR,
+      spacing: 25
+    },
     axisSystem : Charty.CHART_NAMES.XY_AXIS,
     showAsGrid : true,
     xAxisLabel : 'X Axis',
