@@ -28,17 +28,17 @@
   */
   var data3 = {
     data: [
-      { x:  25, y: 100, c : 'red'},
-      { x:  50, y:  40, c : 'red'},
-      { x:  75, y:  60, c : 'red'}
+      { x:  25, y: 100, c : 'red', label: {text: '1'}},
+      { x:  50, y:  40, c : 'red', label: {text: '2'}},
+      { x:  75, y:  60, c : 'red', label: {text: '3'}}
     ]
   };
 
   var data5 = {
     data: [
-      { x: 25,  y: 150, c : 'blue'},
-      { x: 50,  y:  50, c : 'blue'},
-      { x: 75,  y:  30, c : 'blue'}
+      { x: 25,  y: 150, c : 'blue', label: {text: '4'}},
+      { x: 50,  y:  50, c : 'blue', label: {text: '5'}},
+      { x: 75,  y:  30, c : 'blue', label: {text: '6'}}
     ]
   };
 

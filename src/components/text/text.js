@@ -47,31 +47,19 @@
                  *                              data : [...]
                  *                            }
                  */
-                dataBind: function(d) {
-                    return this.chart().dataBind.call(this, d);
-                },
+                dataBind: this.dataBind,
                 /**
                  * Insert a svg:text element for each data input.
                  *
                  * @method insert
                  * @chainable
                  */
-                insert: function() {
-                    return this.chart().insert.call(this);
-                },
+                insert: this.insert,
 
                 events: {
-                    enter: function() {
-                        return this.chart().enter.call(this);
-                    },
-
-                    merge: function() {
-                        return this.chart().merge.call(this);
-                    },
-
-                    exit: function() {
-                        return this.chart().exit.call(this);
-                    }
+                    enter: this.enter,
+                    merge: this.merge,
+                    exit: this.exit
                 }
             };
 
@@ -96,6 +84,22 @@
         },
 
         /**
+        Placeholder to set a "x" offset.
+        No Op.
+        **/
+        dx: function(chart, d) {
+            return '';
+        },
+
+        /**
+        Placeholder to set a "y" offset.
+        No Op.
+        **/
+        dy: function(chart, d) {
+            return '';
+        },
+
+        /**
         Text data accessor.
 
         @see https://github.com/mbostock/d3/wiki/Selections#wiki-text
@@ -105,7 +109,7 @@
         },
 
 
-        /**** Custom Events Data accessor. ****/
+        /**** Custom Events Data Accessors ****/
 
         dataBind: function(d) {
             return this.selectAll('text')
@@ -132,6 +136,8 @@
 
             this.attr('x', _.partial(chart.x, chart))
                 .attr('y', _.partial(chart.y, chart))
+                .attr('dx', _.partial(chart.dx, chart))
+                .attr('dy', _.partial(chart.dy, chart))
                 .text(chart.text);
 
             return this;

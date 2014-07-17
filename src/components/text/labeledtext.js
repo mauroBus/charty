@@ -1,14 +1,14 @@
 /**
- * Text labeling above the data element. Redefindes "merge"
- * Useful for vertical bar chart
+ * Text labeling with a custom text. The label is placed in the middle of
+ * the data point (x and y).
  *
- * @class AboveText
+ * @class LabeledText
  * @extends Text
  * @requires d3.chart,
  *           charty,
  *           text
  *
- * @author "Marcio Caraballo <marcio.caraballososa@gmail.com>"
+ * @author "Mauro Buselli <maurobuselli@gmail.com>"
  */
 
 (function(root, factory) {
@@ -43,19 +43,16 @@
                 return d.label ? chart.yscale.map(d.y) : 0;
             },
 
-            text: function(d) {
-                return d.label ? (d.label.text || '') : '';
+            dx: function(chart, d) {
+                return (d.label && d.label.text) ? (-(d.label.text.toString().length / 4) + 'em') : 0;
             },
 
-            dataBind: function(data) {
-                var labels = [];
+            dy: function(chart, d) {
+                return '0.25em';
+            },
 
-                _.each(data.data, function(d) {
-                    labels = labels.concat(d.data);
-                });
-
-                return this.selectAll('text')
-                  .data(labels);
+            text: function(d) {
+                return d.label ? (d.label.text || '') : '';
             },
 
             enter: function() {
@@ -63,28 +60,6 @@
                 this.chart()
                     .eventManager.bindAll(this);
             },
-
-            // merge: function(d) {
-            //     var chart = this.chart();
-
-            //     chart.attr('dx', function(d) { // offset x
-            //         return (d.label && d.label.text) ? ((d.label.text.toString().length) * -4) : 0;
-            //     })
-            //     .attr('dy', function(d) { // offset y
-            //         return d.label ? (d.label.fontSize || self.labelFontSize) / 2 - 1 : 0;
-            //     });
-            //         // .text(function(d) { // label text
-            //         //     return d.label ? (d.label.text || '') : '';
-            //         // })
-            //         // .attr('font-size', function(d) { // label font size
-            //         //     return d.label ? (d.label.fontSize || self.labelFontSize) : '';
-            //         // })
-            //         // .attr('style', function(d) { // label fill color
-            //         //     return d.label ? ('fill:' + (d.label.color || 'white')) : '';
-            //         // });
-
-            //     return this;
-            // },
 
             exit: function() {
                 return this.remove();

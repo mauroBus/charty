@@ -2316,31 +2316,19 @@
                  *                              data : [...]
                  *                            }
                  */
-                dataBind: function(d) {
-                    return this.chart().dataBind.call(this, d);
-                },
+                dataBind: this.dataBind,
                 /**
                  * Insert a svg:text element for each data input.
                  *
                  * @method insert
                  * @chainable
                  */
-                insert: function() {
-                    return this.chart().insert.call(this);
-                },
+                insert: this.insert,
 
                 events: {
-                    enter: function() {
-                        return this.chart().enter.call(this);
-                    },
-
-                    merge: function() {
-                        return this.chart().merge.call(this);
-                    },
-
-                    exit: function() {
-                        return this.chart().exit.call(this);
-                    }
+                    enter: this.enter,
+                    merge: this.merge,
+                    exit: this.exit
                 }
             };
 
@@ -2365,6 +2353,22 @@
         },
 
         /**
+        Placeholder to set a "x" offset.
+        No Op.
+        **/
+        dx: function(chart, d) {
+            return '';
+        },
+
+        /**
+        Placeholder to set a "y" offset.
+        No Op.
+        **/
+        dy: function(chart, d) {
+            return '';
+        },
+
+        /**
         Text data accessor.
 
         @see https://github.com/mbostock/d3/wiki/Selections#wiki-text
@@ -2374,7 +2378,7 @@
         },
 
 
-        /**** Custom Events Data accessor. ****/
+        /**** Custom Events Data Accessors ****/
 
         dataBind: function(d) {
             return this.selectAll('text')
@@ -2401,6 +2405,8 @@
 
             this.attr('x', _.partial(chart.x, chart))
                 .attr('y', _.partial(chart.y, chart))
+                .attr('dx', _.partial(chart.dx, chart))
+                .attr('dy', _.partial(chart.dy, chart))
                 .text(chart.text);
 
             return this;
@@ -2617,6 +2623,76 @@
                         .text(chart.text);
                 });
             }
+        });
+}));
+
+/**
+ * Text labeling with a custom text. The label is placed in the middle of
+ * the data point (x and y).
+ *
+ * @class LabeledText
+ * @extends Text
+ * @requires d3.chart,
+ *           charty,
+ *           text
+ *
+ * @author "Mauro Buselli <maurobuselli@gmail.com>"
+ */
+
+(function(root, factory) {
+    /** Setting up AMD support*/
+    if (typeof define === 'function' && define.amd) {
+        /** AMD */
+        define('charty/abovetext', [
+                'd3.chart',
+                'charty/chartynames',
+                'charty/text'
+            ],
+            function(d3, Charty) {
+                /** Export global even in AMD case in case this script
+                 * is loaded with others */
+                return factory(d3, Charty);
+            });
+    } else {
+        /** Browser globals */
+        factory(d3, Charty);
+    }
+}(this, function(d3, Charty) {
+    d3.chart(Charty.CHART_NAMES.TEXT)
+        .extend(Charty.CHART_NAMES.LABELED_TEXT, {
+            // Select the labels we wish to bind to and
+            // bind the data to them.
+
+            x: function(chart, d) {
+                return d.label ? chart.xscale.map(d.x, 1) : 0;
+            },
+
+            y: function(chart, d) {
+                return d.label ? chart.yscale.map(d.y) : 0;
+            },
+
+            dx: function(chart, d) {
+                return (d.label && d.label.text) ? (-(d.label.text.toString().length / 4) + 'em') : 0;
+            },
+
+            dy: function(chart, d) {
+                return '0.25em';
+            },
+
+            text: function(d) {
+                return d.label ? (d.label.text || '') : '';
+            },
+
+            enter: function() {
+                // binding the events to the labels.
+                this.chart()
+                    .eventManager.bindAll(this);
+            },
+
+            exit: function() {
+                return this.remove();
+            }
+
         });
 }));
 
@@ -3790,15 +3866,19 @@ Takes N input data series
              * @param {Object} args Arguments for scatterplot chart.
              */
             initialize: function(args) {
-
                 args.chartName = Charty.CHART_NAMES.CIRCLE;
+
                 args.instances = (args.instances || 1);
 
                 this.mixin(args.axisSystem, this.base.append('g'), args)
                     .showAsGrid(args.showAsGrid);
 
-                this.mixin(Charty.CHART_NAMES.LABELED_TEXT, this.base.append('g'));
+                this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base, args);
 
+                // Applying the multiple data sets also to the "LABELED_TEXT" chart.
+                // TODO: Need a refactor of "MULTIPLE_INSTANCES_MIXIN" to allow adding the
+                //  data sets to more than one chart.
+                args.chartName = Charty.CHART_NAMES.LABELED_TEXT;
                 this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base, args);
             }
         });
