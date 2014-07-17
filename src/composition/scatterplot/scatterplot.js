@@ -23,7 +23,8 @@
                 'charty/circle',
                 'charty/multipledatagroup',
                 'charty/yxyaxis',
-                'charty/multipleinstancesmixin'
+                'charty/multipleinstancesmixin',
+                'charty/labeledtext'
             ],
             function(d3, Charty) {
                 /** Export global even in AMD case in case this script
@@ -51,6 +52,8 @@
 
                 this.mixin(args.axisSystem, this.base.append('g'), args)
                     .showAsGrid(args.showAsGrid);
+
+                this.mixin(Charty.CHART_NAMES.LABELED_TEXT, this.base.append('g'));
 
                 this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base, args);
             }

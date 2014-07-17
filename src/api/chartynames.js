@@ -52,7 +52,8 @@
         DONUT_INNER_TEXT: 'DonutWithInnerText',
         GROUPED_BAR_CHART: 'GroupedBarChart',
         LINE_CHART: 'LineChart',
-        LINE_CHART_CIRCLES: 'LineChartCircles'
+        LINE_CHART_CIRCLES: 'LineChartCircles',
+        LABELED_TEXT: 'LabeledText'
     };
 
     /**

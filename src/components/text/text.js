@@ -48,8 +48,7 @@
                  *                            }
                  */
                 dataBind: function(d) {
-                    return this.selectAll('text')
-                        .data(d.data);
+                    return this.chart().dataBind.call(this, d);
                 },
                 /**
                  * Insert a svg:text element for each data input.
@@ -58,34 +57,20 @@
                  * @chainable
                  */
                 insert: function() {
-                    return this.append('text');
+                    return this.chart().insert.call(this);
                 },
 
                 events: {
                     enter: function() {
-
-                        var chart = this.chart();
-
-                        this.attr('text-anchor', 'middle')
-                            .attr('dy', '0.35em');
-
-                        chart.eventManager.bindAll(this);
-
-                        return this;
+                        return this.chart().enter.call(this);
                     },
 
                     merge: function() {
-                        var chart = this.chart();
-
-                        this.attr('x', _.partial(chart.x, chart))
-                            .attr('y', _.partial(chart.y, chart))
-                            .text(chart.text);
-
-                        return this;
+                        return this.chart().merge.call(this);
                     },
 
                     exit: function() {
-                        return this.remove();
+                        return this.chart().exit.call(this);
                     }
                 }
             };
@@ -117,6 +102,43 @@
         **/
         text: function(d) {
             return d.y;
+        },
+
+
+        /**** Custom Events Data accessor. ****/
+
+        dataBind: function(d) {
+            return this.selectAll('text')
+                .data(d.data);
+        },
+
+        insert: function() {
+            return this.append('text');
+        },
+
+        enter: function() {
+            var chart = this.chart();
+
+            this.attr('text-anchor', 'middle')
+                .attr('dy', '0.35em');
+
+            chart.eventManager.bindAll(this);
+
+            return this;
+        },
+
+        merge: function() {
+            var chart = this.chart();
+
+            this.attr('x', _.partial(chart.x, chart))
+                .attr('y', _.partial(chart.y, chart))
+                .text(chart.text);
+
+            return this;
+        },
+
+        exit: function() {
+            return this.remove();
         }
     };
 
