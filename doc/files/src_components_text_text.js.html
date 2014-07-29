@@ -83,6 +83,8 @@
             
                 <li><a href="../classes/HorizontalBar.html">HorizontalBar</a></li>
             
+                <li><a href="../classes/LabeledText.html">LabeledText</a></li>
+            
                 <li><a href="../classes/LabeledTriangleChart.html">LabeledTriangleChart</a></li>
             
                 <li><a href="../classes/Line.html">Line</a></li>
@@ -213,53 +215,26 @@
                  *                              data : [...]
                  *                            }
                  */
-                dataBind: function(d) {
-                    return this.selectAll(&#x27;text&#x27;)
-                        .data(d.data);
-                },
+                dataBind: this.dataBind,
                 /**
                  * Insert a svg:text element for each data input.
                  *
                  * @method insert
                  * @chainable
                  */
-                insert: function() {
-                    return this.append(&#x27;text&#x27;);
-                },
+                insert: this.insert,
 
                 events: {
-                    enter: function() {
-
-                        var chart = this.chart();
-
-                        this.attr(&#x27;text-anchor&#x27;, &#x27;middle&#x27;)
-                            .attr(&#x27;dy&#x27;, &#x27;0.35em&#x27;);
-
-                        chart.eventManager.bindAll(this);
-
-                        return this;
-                    },
-
-                    merge: function() {
-                        var chart = this.chart();
-
-                        this.attr(&#x27;x&#x27;, _.partial(chart.x, chart))
-                            .attr(&#x27;y&#x27;, _.partial(chart.y, chart))
-                            .text(chart.text);
-
-                        return this;
-                    },
-
-                    exit: function() {
-                        return this.remove();
-                    }
+                    enter: this.enter,
+                    merge: this.merge,
+                    exit: this.exit
                 }
             };
 
-            /**
-             * Layer creation
-             */
-            this.layer(&#x27;texts&#x27;, this.base.append(&#x27;g&#x27;), options);
+          /**
+          Layer creation
+          **/
+          this.layer(&#x27;texts&#x27;, this.base.append(&#x27;g&#x27;), options);
         },
 
         /**
@@ -277,12 +252,67 @@
         },
 
         /**
+        Placeholder to set a &quot;x&quot; offset.
+        No Op.
+        **/
+        dx: function(chart, d) {
+            return &#x27;&#x27;;
+        },
+
+        /**
+        Placeholder to set a &quot;y&quot; offset.
+        No Op.
+        **/
+        dy: function(chart, d) {
+            return &#x27;&#x27;;
+        },
+
+        /**
         Text data accessor.
 
         @see https://github.com/mbostock/d3/wiki/Selections#wiki-text
         **/
         text: function(d) {
             return d.y;
+        },
+
+
+        /**** Custom Events Data Accessors ****/
+
+        dataBind: function(d) {
+            return this.selectAll(&#x27;text&#x27;)
+                .data(d.data);
+        },
+
+        insert: function() {
+            return this.append(&#x27;text&#x27;);
+        },
+
+        enter: function() {
+            var chart = this.chart();
+
+            this.attr(&#x27;text-anchor&#x27;, &#x27;middle&#x27;)
+                .attr(&#x27;dy&#x27;, &#x27;0.35em&#x27;);
+
+            chart.eventManager.bindAll(this);
+
+            return this;
+        },
+
+        merge: function() {
+            var chart = this.chart();
+
+            this.attr(&#x27;x&#x27;, _.partial(chart.x, chart))
+                .attr(&#x27;y&#x27;, _.partial(chart.y, chart))
+                .attr(&#x27;dx&#x27;, _.partial(chart.dx, chart))
+                .attr(&#x27;dy&#x27;, _.partial(chart.dy, chart))
+                .text(chart.text);
+
+            return this;
+        },
+
+        exit: function() {
+            return this.remove();
         }
     };
 

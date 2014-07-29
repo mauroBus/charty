@@ -174,6 +174,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/components/text/labeledtext.js": {
+            "name": "src/components/text/labeledtext.js",
+            "modules": {},
+            "classes": {
+                "LabeledText": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src/components/text/righttext.js": {
             "name": "src/components/text/righttext.js",
             "modules": {},
@@ -728,6 +737,25 @@
                 "text"
             ],
             "author": "\"Marcio Caraballo <marcio.caraballososa@gmail.com>\""
+        },
+        "LabeledText": {
+            "name": "LabeledText",
+            "shortname": "LabeledText",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/components/text/labeledtext.js",
+            "line": 1,
+            "description": "Text labeling with a custom text. The label is placed in the middle of\nthe data point (x and y).",
+            "extends": "Text",
+            "requires": [
+                "d3.chart",
+                "charty",
+                "text"
+            ],
+            "author": "\"Mauro Buselli <maurobuselli@gmail.com>\""
         },
         "RightText": {
             "name": "RightText",
@@ -1368,17 +1396,17 @@
         },
         {
             "file": "src/api/charty.js",
-            "line": 45,
+            "line": 46,
             "class": "Charty"
         },
         {
             "file": "src/api/charty.js",
-            "line": 50,
+            "line": 51,
             "class": "Charty"
         },
         {
             "file": "src/api/charty.js",
-            "line": 60,
+            "line": 61,
             "description": "Appends a chart to a root d3.selection element. Chart is determined\nby a defined chart name.\nMargin is used to translate the chart a small distance. A chart can have many\ninstances.\nWhether the chart takes the container dimensions, is it possible to also set\nthe dimensions as initial options\nDefined events will be spread to every chart's component.",
             "itemtype": "method",
             "name": "chart",
@@ -1397,65 +1425,65 @@
         },
         {
             "file": "src/api/charty.js",
-            "line": 88,
+            "line": 89,
             "description": "Svg element creation",
             "class": "Charty"
         },
         {
             "file": "src/api/charty.js",
-            "line": 94,
+            "line": 95,
             "class": "Charty"
         },
         {
             "file": "src/api/charty.js",
-            "line": 96,
+            "line": 97,
             "class": "Charty"
         },
         {
             "file": "src/api/charty.js",
-            "line": 102,
+            "line": 103,
             "class": "Charty"
         },
         {
             "file": "src/api/charty.js",
-            "line": 117,
+            "line": 118,
             "class": "Charty"
         },
         {
             "file": "src/api/charty.js",
-            "line": 122,
+            "line": 123,
             "description": "Appends the chart to the specified html element.",
             "class": "Charty"
         },
         {
             "file": "src/api/charty.js",
-            "line": 127,
+            "line": 128,
             "description": "Scale definition.\nSome charts can use direct mapping instead of scaling.",
             "class": "Charty"
         },
         {
             "file": "src/api/charty.js",
-            "line": 139,
+            "line": 140,
             "class": "Charty"
         },
         {
             "file": "src/api/charty.js",
-            "line": 144,
+            "line": 145,
             "class": "Charty"
         },
         {
             "file": "src/api/charty.js",
-            "line": 149,
+            "line": 150,
             "class": "Charty"
         },
         {
             "file": "src/api/charty.js",
-            "line": 154,
+            "line": 155,
             "class": "Charty"
         },
         {
             "file": "src/api/charty.js",
-            "line": 159,
+            "line": 160,
             "description": "Returns the interface for the chart drawing\n\nInterface will manage the events creation.",
             "class": "Charty"
         },
@@ -1506,13 +1534,13 @@
         },
         {
             "file": "src/api/chartynames.js",
-            "line": 58,
+            "line": 59,
             "description": "Axis types are defined as constants\n\nRelated to scaling.",
             "class": "ChartNames"
         },
         {
             "file": "src/api/chartynames.js",
-            "line": 69,
+            "line": 70,
             "description": "Axis defined as constants",
             "class": "ChartNames"
         },
@@ -3056,6 +3084,26 @@
             "class": "AboveText"
         },
         {
+            "file": "src/components/text/labeledtext.js",
+            "line": 14,
+            "class": "LabeledText"
+        },
+        {
+            "file": "src/components/text/labeledtext.js",
+            "line": 16,
+            "class": "LabeledText"
+        },
+        {
+            "file": "src/components/text/labeledtext.js",
+            "line": 23,
+            "class": "LabeledText"
+        },
+        {
+            "file": "src/components/text/labeledtext.js",
+            "line": 28,
+            "class": "LabeledText"
+        },
+        {
             "file": "src/components/text/righttext.js",
             "line": 15,
             "class": "RightText"
@@ -3131,7 +3179,7 @@
         },
         {
             "file": "src/components/text/text.js",
-            "line": 54,
+            "line": 51,
             "description": "Insert a svg:text element for each data input.",
             "itemtype": "method",
             "name": "insert",
@@ -3140,29 +3188,46 @@
         },
         {
             "file": "src/components/text/text.js",
-            "line": 93,
+            "line": 66,
             "description": "Layer creation",
             "class": "Text"
         },
         {
             "file": "src/components/text/text.js",
-            "line": 99,
+            "line": 72,
             "description": "Calculate `x` to be centered horizontally.",
             "class": "Text"
         },
         {
             "file": "src/components/text/text.js",
-            "line": 106,
+            "line": 79,
             "description": "Calculate `y` to be centered vertically.",
             "class": "Text"
         },
         {
             "file": "src/components/text/text.js",
-            "line": 113,
+            "line": 86,
+            "description": "Placeholder to set a \"x\" offset.\nNo Op.",
+            "class": "Text"
+        },
+        {
+            "file": "src/components/text/text.js",
+            "line": 94,
+            "description": "Placeholder to set a \"y\" offset.\nNo Op.",
+            "class": "Text"
+        },
+        {
+            "file": "src/components/text/text.js",
+            "line": 102,
             "description": "Text data accessor.",
             "see": [
                 "https://github.com/mbostock/d3/wiki/Selections#wiki-text"
             ],
+            "class": "Text"
+        },
+        {
+            "file": "src/components/text/text.js",
+            "line": 112,
             "class": "Text"
         },
         {
@@ -3946,17 +4011,17 @@
         },
         {
             "file": "src/composition/scatterplot/scatterplot.js",
-            "line": 29,
+            "line": 30,
             "class": "Scatterplot"
         },
         {
             "file": "src/composition/scatterplot/scatterplot.js",
-            "line": 34,
+            "line": 35,
             "class": "Scatterplot"
         },
         {
             "file": "src/composition/scatterplot/scatterplot.js",
-            "line": 41,
+            "line": 42,
             "description": "Chart constructor",
             "is_constructor": 1,
             "params": [
@@ -4666,59 +4731,59 @@
         },
         {
             "message": "Missing item type",
-            "line": " src/api/charty.js:45"
+            "line": " src/api/charty.js:46"
         },
         {
             "message": "Missing item type",
-            "line": " src/api/charty.js:50"
+            "line": " src/api/charty.js:51"
         },
         {
             "message": "Missing item type\nSvg element creation",
-            "line": " src/api/charty.js:88"
+            "line": " src/api/charty.js:89"
         },
         {
             "message": "Missing item type",
-            "line": " src/api/charty.js:94"
+            "line": " src/api/charty.js:95"
         },
         {
             "message": "Missing item type",
-            "line": " src/api/charty.js:96"
+            "line": " src/api/charty.js:97"
         },
         {
             "message": "Missing item type",
-            "line": " src/api/charty.js:102"
+            "line": " src/api/charty.js:103"
         },
         {
             "message": "Missing item type",
-            "line": " src/api/charty.js:117"
+            "line": " src/api/charty.js:118"
         },
         {
             "message": "Missing item type\nAppends the chart to the specified html element.",
-            "line": " src/api/charty.js:122"
+            "line": " src/api/charty.js:123"
         },
         {
             "message": "Missing item type\nScale definition.\nSome charts can use direct mapping instead of scaling.",
-            "line": " src/api/charty.js:127"
+            "line": " src/api/charty.js:128"
         },
         {
             "message": "Missing item type",
-            "line": " src/api/charty.js:139"
+            "line": " src/api/charty.js:140"
         },
         {
             "message": "Missing item type",
-            "line": " src/api/charty.js:144"
+            "line": " src/api/charty.js:145"
         },
         {
             "message": "Missing item type",
-            "line": " src/api/charty.js:149"
+            "line": " src/api/charty.js:150"
         },
         {
             "message": "Missing item type",
-            "line": " src/api/charty.js:154"
+            "line": " src/api/charty.js:155"
         },
         {
             "message": "Missing item type\nReturns the interface for the chart drawing\n\nInterface will manage the events creation.",
-            "line": " src/api/charty.js:159"
+            "line": " src/api/charty.js:160"
         },
         {
             "message": "Missing item type",
@@ -4758,11 +4823,11 @@
         },
         {
             "message": "Missing item type\nAxis types are defined as constants\n\nRelated to scaling.",
-            "line": " src/api/chartynames.js:58"
+            "line": " src/api/chartynames.js:59"
         },
         {
             "message": "Missing item type\nAxis defined as constants",
-            "line": " src/api/chartynames.js:69"
+            "line": " src/api/chartynames.js:70"
         },
         {
             "message": "Missing item type",
@@ -5206,6 +5271,22 @@
         },
         {
             "message": "Missing item type",
+            "line": " src/components/text/labeledtext.js:14"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/components/text/labeledtext.js:16"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/components/text/labeledtext.js:23"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/components/text/labeledtext.js:28"
+        },
+        {
+            "message": "Missing item type",
             "line": " src/components/text/righttext.js:15"
         },
         {
@@ -5246,19 +5327,31 @@
         },
         {
             "message": "Missing item type\nLayer creation",
-            "line": " src/components/text/text.js:93"
+            "line": " src/components/text/text.js:66"
         },
         {
             "message": "Missing item type\nCalculate `x` to be centered horizontally.",
-            "line": " src/components/text/text.js:99"
+            "line": " src/components/text/text.js:72"
         },
         {
             "message": "Missing item type\nCalculate `y` to be centered vertically.",
-            "line": " src/components/text/text.js:106"
+            "line": " src/components/text/text.js:79"
+        },
+        {
+            "message": "Missing item type\nPlaceholder to set a \"x\" offset.\nNo Op.",
+            "line": " src/components/text/text.js:86"
+        },
+        {
+            "message": "Missing item type\nPlaceholder to set a \"y\" offset.\nNo Op.",
+            "line": " src/components/text/text.js:94"
         },
         {
             "message": "Missing item type\nText data accessor.",
-            "line": " src/components/text/text.js:113"
+            "line": " src/components/text/text.js:102"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/components/text/text.js:112"
         },
         {
             "message": "Missing item type",
@@ -5538,15 +5631,15 @@
         },
         {
             "message": "Missing item type",
-            "line": " src/composition/scatterplot/scatterplot.js:29"
+            "line": " src/composition/scatterplot/scatterplot.js:30"
         },
         {
             "message": "Missing item type",
-            "line": " src/composition/scatterplot/scatterplot.js:34"
+            "line": " src/composition/scatterplot/scatterplot.js:35"
         },
         {
             "message": "Missing item type\nChart constructor",
-            "line": " src/composition/scatterplot/scatterplot.js:41"
+            "line": " src/composition/scatterplot/scatterplot.js:42"
         },
         {
             "message": "Missing item type",

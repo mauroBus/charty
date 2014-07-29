@@ -2129,7 +2129,7 @@
                 'charty/chartynames',
                 'charty/simpledatagroup'
             ],
-            function(d3, Charty) {
+            function(d3, _, Charty) {
                 /** Export global even in AMD case in case this script
                  * is loaded with others */
                 return factory(d3, _, Charty);
@@ -2332,10 +2332,10 @@
                 }
             };
 
-            /**
-             * Layer creation
-             */
-            this.layer('texts', this.base.append('g'), options);
+          /**
+          Layer creation
+          **/
+          this.layer('texts', this.base.append('g'), options);
         },
 
         /**
@@ -2638,12 +2638,11 @@
  *
  * @author "Mauro Buselli <maurobuselli@gmail.com>"
  */
-
 (function(root, factory) {
     /** Setting up AMD support*/
     if (typeof define === 'function' && define.amd) {
         /** AMD */
-        define('charty/abovetext', [
+        define('charty/labeledtext', [
                 'd3.chart',
                 'charty/chartynames',
                 'charty/text'
@@ -2658,11 +2657,9 @@
         factory(d3, Charty);
     }
 }(this, function(d3, Charty) {
+
     d3.chart(Charty.CHART_NAMES.TEXT)
         .extend(Charty.CHART_NAMES.LABELED_TEXT, {
-            // Select the labels we wish to bind to and
-            // bind the data to them.
-
             x: function(chart, d) {
                 return d.label ? chart.xscale.map(d.x, 1) : 0;
             },
@@ -2684,15 +2681,12 @@
             },
 
             enter: function() {
-                // binding the events to the labels.
-                this.chart()
-                    .eventManager.bindAll(this);
+                this.chart().eventManager.bindAll(this);
             },
 
             exit: function() {
                 return this.remove();
             }
-
         });
 }));
 
@@ -3867,7 +3861,6 @@ Takes N input data series
              */
             initialize: function(args) {
                 args.chartName = Charty.CHART_NAMES.CIRCLE;
-
                 args.instances = (args.instances || 1);
 
                 this.mixin(args.axisSystem, this.base.append('g'), args)
