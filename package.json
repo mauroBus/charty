@@ -1,7 +1,7 @@
 {
   "name": "charty",
   "description": "Framework for chart developing.",
-  "version": "0.5.15",
+  "version": "0.5.16",
   "keywords": [
     "charts",
     "d3",
