@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/utils/events/bootstrapevent.js - ChartyJS</title>
+    <title>src/components/text/labeledtext.js - ChartyJS</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -162,103 +162,72 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src/utils/events/bootstrapevent.js</h1>
+                        <h1 class="file-heading">File: src/components/text/labeledtext.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-/*global $: true*/
 /**
- *	Hooks to specified element a bootstrap feature (for instance, a popover).
- *	Since data will be handled a specific way, a custom bootstrap event is given in
- *	order to facilitate instantiation.
+ * Text labeling with a custom text. The label is placed in the middle of
+ * the data point (x and y).
  *
- *	Note : since SVG element won&#x27;t render contained divs, every element will
- *	be added to the &#x27;body&#x27; element. This workaround is easier than dealing with
- *	SVG foreing objects.
+ * @class LabeledText
+ * @extends Text
+ * @requires d3.chart,
+ *           charty,
+ *           text
  *
- *	Supported bootstrap features : popovers, tooltips.
- *
- *	@class BootstrapEvent
- *	@constructor
- *	@requires bootstrap,
- *						underscore,
- *						d3
- *
- *	@author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
+ * @author &quot;Mauro Buselli &lt;maurobuselli@gmail.com&gt;&quot;
  */
 (function(root, factory) {
-    /** Setting up AMD support */
+    /** Setting up AMD support*/
     if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
         /** AMD */
-        define(&#x27;charty/bootstrapevent&#x27;, [
-            &#x27;bootstrap&#x27;,
-            &#x27;underscore&#x27;,
-            &#x27;d3&#x27;
-        ], function($, _, d3) {
-            /**
-             * Export global even in AMD case in case this script
-             * is loaded with others
-             */
-            return factory($, _, d3);
-        });
+        define(&#x27;charty/labeledtext&#x27;, [
+                &#x27;d3.chart&#x27;,
+                &#x27;charty/chartynames&#x27;,
+                &#x27;charty/text&#x27;
+            ],
+            function(d3, Charty) {
+                /** Export global even in AMD case in case this script
+                 * is loaded with others */
+                return factory(d3, Charty);
+            });
     } else {
         /** Browser globals */
-        root.BootstrapEvent = factory($, _, d3);
+        factory(d3, Charty);
     }
-}(this, function($, _) {
+}(this, function(d3, Charty) {
 
-    /**
-     *	Class constructor
-     *
-     *	@constructor
-     *	@param Object options example = {
-     *																	type : &#x27;popover&#x27;,
-     *																	placement: &#x27;left&#x27;,
-     *																	trigger: &#x27;click&#x27;,
-     *																	content : function () {}
-     *																}
-     */
-    function BootstrapEvent(options) {
-        this.opts = options;
-    }
+    d3.chart(Charty.CHART_NAMES.TEXT)
+        .extend(Charty.CHART_NAMES.LABELED_TEXT, {
+            x: function(chart, d) {
+                return d.label ? chart.xscale.map(d.x, 1) : 0;
+            },
 
-    /**
-     * Binds the bootstrap feature to a specified target selection
-     *
-     * @method bind
-     * @param  {d3.selection} target Target selection
-     * @chainable
-     */
-    BootstrapEvent.prototype.bind = function(target) {
+            y: function(chart, d) {
+                return d.label ? chart.yscale.map(d.y) : 0;
+            },
 
-        var self = this;
+            dx: function(chart, d) {
+                return (d.label &amp;&amp; d.label.text) ? (-(d.label.text.toString().length / 4) + &#x27;em&#x27;) : 0;
+            },
 
-        /**
-         * Traversing d3 structure to allow jquery bootstrap bindings
-         */
-        _.each(target[0], function(element) {
+            dy: function(chart, d) {
+                return &#x27;0.25em&#x27;;
+            },
 
-            var d3Element = d3.select(element);
+            text: function(d) {
+                return d.label ? (d.label.text || &#x27;&#x27;) : &#x27;&#x27;;
+            },
 
-            d3Element.attr(&#x27;data-toggle&#x27;, self.opts.type);
+            enter: function() {
+                this.chart().eventManager.bindAll(this);
+            },
 
-            /** Bootstrap popover / tooltip instantiation */
-            $(element)[self.opts.type]({
-                placement: self.opts.placement,
-                trigger: self.opts.trigger,
-                html: true,
-                container: &#x27;body&#x27;,
-                context: d3Element,
-                content: function() {
-                    return self.opts.content(element);
-                }
-            });
+            exit: function() {
+                return this.remove();
+            }
         });
-
-        return this;
-    };
-
-    return BootstrapEvent;
 }));
 
     </pre>

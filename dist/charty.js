@@ -168,7 +168,8 @@
         DONUT_INNER_TEXT: 'DonutWithInnerText',
         GROUPED_BAR_CHART: 'GroupedBarChart',
         LINE_CHART: 'LineChart',
-        LINE_CHART_CIRCLES: 'LineChartCircles'
+        LINE_CHART_CIRCLES: 'LineChartCircles',
+        LABELED_TEXT: 'LabeledText'
     };
 
     /**
@@ -2128,7 +2129,7 @@
                 'charty/chartynames',
                 'charty/simpledatagroup'
             ],
-            function(d3, Charty) {
+            function(d3, _, Charty) {
                 /** Export global even in AMD case in case this script
                  * is loaded with others */
                 return factory(d3, _, Charty);
@@ -2315,53 +2316,26 @@
                  *                              data : [...]
                  *                            }
                  */
-                dataBind: function(d) {
-                    return this.selectAll('text')
-                        .data(d.data);
-                },
+                dataBind: this.dataBind,
                 /**
                  * Insert a svg:text element for each data input.
                  *
                  * @method insert
                  * @chainable
                  */
-                insert: function() {
-                    return this.append('text');
-                },
+                insert: this.insert,
 
                 events: {
-                    enter: function() {
-
-                        var chart = this.chart();
-
-                        this.attr('text-anchor', 'middle')
-                            .attr('dy', '0.35em');
-
-                        chart.eventManager.bindAll(this);
-
-                        return this;
-                    },
-
-                    merge: function() {
-                        var chart = this.chart();
-
-                        this.attr('x', _.partial(chart.x, chart))
-                            .attr('y', _.partial(chart.y, chart))
-                            .text(chart.text);
-
-                        return this;
-                    },
-
-                    exit: function() {
-                        return this.remove();
-                    }
+                    enter: this.enter,
+                    merge: this.merge,
+                    exit: this.exit
                 }
             };
 
-            /**
-             * Layer creation
-             */
-            this.layer('texts', this.base.append('g'), options);
+          /**
+          Layer creation
+          **/
+          this.layer('texts', this.base.append('g'), options);
         },
 
         /**
@@ -2379,12 +2353,67 @@
         },
 
         /**
+        Placeholder to set a "x" offset.
+        No Op.
+        **/
+        dx: function(chart, d) {
+            return '';
+        },
+
+        /**
+        Placeholder to set a "y" offset.
+        No Op.
+        **/
+        dy: function(chart, d) {
+            return '';
+        },
+
+        /**
         Text data accessor.
 
         @see https://github.com/mbostock/d3/wiki/Selections#wiki-text
         **/
         text: function(d) {
             return d.y;
+        },
+
+
+        /**** Custom Events Data Accessors ****/
+
+        dataBind: function(d) {
+            return this.selectAll('text')
+                .data(d.data);
+        },
+
+        insert: function() {
+            return this.append('text');
+        },
+
+        enter: function() {
+            var chart = this.chart();
+
+            this.attr('text-anchor', 'middle')
+                .attr('dy', '0.35em');
+
+            chart.eventManager.bindAll(this);
+
+            return this;
+        },
+
+        merge: function() {
+            var chart = this.chart();
+
+            this.attr('x', _.partial(chart.x, chart))
+                .attr('y', _.partial(chart.y, chart))
+                .attr('dx', _.partial(chart.dx, chart))
+                .attr('dy', _.partial(chart.dy, chart))
+                .text(chart.text);
+
+            return this;
+        },
+
+        exit: function() {
+            return this.remove();
         }
     };
 
@@ -2593,6 +2622,70 @@
                         })
                         .text(chart.text);
                 });
+            }
+        });
+}));
+
+/**
+ * Text labeling with a custom text. The label is placed in the middle of
+ * the data point (x and y).
+ *
+ * @class LabeledText
+ * @extends Text
+ * @requires d3.chart,
+ *           charty,
+ *           text
+ *
+ * @author "Mauro Buselli <maurobuselli@gmail.com>"
+ */
+(function(root, factory) {
+    /** Setting up AMD support*/
+    if (typeof define === 'function' && define.amd) {
+        /** AMD */
+        define('charty/labeledtext', [
+                'd3.chart',
+                'charty/chartynames',
+                'charty/text'
+            ],
+            function(d3, Charty) {
+                /** Export global even in AMD case in case this script
+                 * is loaded with others */
+                return factory(d3, Charty);
+            });
+    } else {
+        /** Browser globals */
+        factory(d3, Charty);
+    }
+}(this, function(d3, Charty) {
+
+    d3.chart(Charty.CHART_NAMES.TEXT)
+        .extend(Charty.CHART_NAMES.LABELED_TEXT, {
+            x: function(chart, d) {
+                return d.label ? chart.xscale.map(d.x, 1) : 0;
+            },
+
+            y: function(chart, d) {
+                return d.label ? chart.yscale.map(d.y) : 0;
+            },
+
+            dx: function(chart, d) {
+                return (d.label && d.label.text) ? (-(d.label.text.toString().length / 4) + 'em') : 0;
+            },
+
+            dy: function(chart, d) {
+                return '0.25em';
+            },
+
+            text: function(d) {
+                return d.label ? (d.label.text || '') : '';
+            },
+
+            enter: function() {
+                this.chart().eventManager.bindAll(this);
+            },
+
+            exit: function() {
+                return this.remove();
             }
         });
 }));
@@ -3744,7 +3837,8 @@ Takes N input data series
                 'charty/circle',
                 'charty/multipledatagroup',
                 'charty/yxyaxis',
-                'charty/multipleinstancesmixin'
+                'charty/multipleinstancesmixin',
+                'charty/labeledtext'
             ],
             function(d3, Charty) {
                 /** Export global even in AMD case in case this script
@@ -3766,13 +3860,18 @@ Takes N input data series
              * @param {Object} args Arguments for scatterplot chart.
              */
             initialize: function(args) {
-
                 args.chartName = Charty.CHART_NAMES.CIRCLE;
                 args.instances = (args.instances || 1);
 
                 this.mixin(args.axisSystem, this.base.append('g'), args)
                     .showAsGrid(args.showAsGrid);
 
+                this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base, args);
+
+                // Applying the multiple data sets also to the "LABELED_TEXT" chart.
+                // TODO: Need a refactor of "MULTIPLE_INSTANCES_MIXIN" to allow adding the
+                //  data sets to more than one chart.
+                args.chartName = Charty.CHART_NAMES.LABELED_TEXT;
                 this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base, args);
             }
         });
@@ -4475,7 +4574,8 @@ Takes N input data series
                 'charty/linechartcircles',
                 'charty/groupedbarchart',
                 'charty/winlossbar',
-                'charty/winlosstext'
+                'charty/winlosstext',
+                'charty/labeledtext'
             ],
             function(Charty, ScaleFactory, ChartInterface, DataValidator, EventFactory) {
                 /** Export global even in AMD case in case this script

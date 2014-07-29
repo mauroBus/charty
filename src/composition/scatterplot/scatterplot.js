@@ -23,7 +23,8 @@
                 'charty/circle',
                 'charty/multipledatagroup',
                 'charty/yxyaxis',
-                'charty/multipleinstancesmixin'
+                'charty/multipleinstancesmixin',
+                'charty/labeledtext'
             ],
             function(d3, Charty) {
                 /** Export global even in AMD case in case this script
@@ -45,13 +46,18 @@
              * @param {Object} args Arguments for scatterplot chart.
              */
             initialize: function(args) {
-
                 args.chartName = Charty.CHART_NAMES.CIRCLE;
                 args.instances = (args.instances || 1);
 
                 this.mixin(args.axisSystem, this.base.append('g'), args)
                     .showAsGrid(args.showAsGrid);
 
+                this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base, args);
+
+                // Applying the multiple data sets also to the "LABELED_TEXT" chart.
+                // TODO: Need a refactor of "MULTIPLE_INSTANCES_MIXIN" to allow adding the
+                //  data sets to more than one chart.
+                args.chartName = Charty.CHART_NAMES.LABELED_TEXT;
                 this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base, args);
             }
         });

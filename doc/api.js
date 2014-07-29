@@ -22,6 +22,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "FunctionEvent",
         "GroupedBarChart",
         "HorizontalBar",
+        "LabeledText",
         "LabeledTriangleChart",
         "Line",
         "LineChart",

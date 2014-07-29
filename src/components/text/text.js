@@ -47,53 +47,26 @@
                  *                              data : [...]
                  *                            }
                  */
-                dataBind: function(d) {
-                    return this.selectAll('text')
-                        .data(d.data);
-                },
+                dataBind: this.dataBind,
                 /**
                  * Insert a svg:text element for each data input.
                  *
                  * @method insert
                  * @chainable
                  */
-                insert: function() {
-                    return this.append('text');
-                },
+                insert: this.insert,
 
                 events: {
-                    enter: function() {
-
-                        var chart = this.chart();
-
-                        this.attr('text-anchor', 'middle')
-                            .attr('dy', '0.35em');
-
-                        chart.eventManager.bindAll(this);
-
-                        return this;
-                    },
-
-                    merge: function() {
-                        var chart = this.chart();
-
-                        this.attr('x', _.partial(chart.x, chart))
-                            .attr('y', _.partial(chart.y, chart))
-                            .text(chart.text);
-
-                        return this;
-                    },
-
-                    exit: function() {
-                        return this.remove();
-                    }
+                    enter: this.enter,
+                    merge: this.merge,
+                    exit: this.exit
                 }
             };
 
-            /**
-             * Layer creation
-             */
-            this.layer('texts', this.base.append('g'), options);
+          /**
+          Layer creation
+          **/
+          this.layer('texts', this.base.append('g'), options);
         },
 
         /**
@@ -111,12 +84,67 @@
         },
 
         /**
+        Placeholder to set a "x" offset.
+        No Op.
+        **/
+        dx: function(chart, d) {
+            return '';
+        },
+
+        /**
+        Placeholder to set a "y" offset.
+        No Op.
+        **/
+        dy: function(chart, d) {
+            return '';
+        },
+
+        /**
         Text data accessor.
 
         @see https://github.com/mbostock/d3/wiki/Selections#wiki-text
         **/
         text: function(d) {
             return d.y;
+        },
+
+
+        /**** Custom Events Data Accessors ****/
+
+        dataBind: function(d) {
+            return this.selectAll('text')
+                .data(d.data);
+        },
+
+        insert: function() {
+            return this.append('text');
+        },
+
+        enter: function() {
+            var chart = this.chart();
+
+            this.attr('text-anchor', 'middle')
+                .attr('dy', '0.35em');
+
+            chart.eventManager.bindAll(this);
+
+            return this;
+        },
+
+        merge: function() {
+            var chart = this.chart();
+
+            this.attr('x', _.partial(chart.x, chart))
+                .attr('y', _.partial(chart.y, chart))
+                .attr('dx', _.partial(chart.dx, chart))
+                .attr('dy', _.partial(chart.dy, chart))
+                .text(chart.text);
+
+            return this;
+        },
+
+        exit: function() {
+            return this.remove();
         }
     };
 

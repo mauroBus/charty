@@ -83,6 +83,8 @@
             
                 <li><a href="../classes/HorizontalBar.html">HorizontalBar</a></li>
             
+                <li><a href="../classes/LabeledText.html">LabeledText</a></li>
+            
                 <li><a href="../classes/LabeledTriangleChart.html">LabeledTriangleChart</a></li>
             
                 <li><a href="../classes/Line.html">Line</a></li>
@@ -189,7 +191,8 @@
                 &#x27;charty/circle&#x27;,
                 &#x27;charty/multipledatagroup&#x27;,
                 &#x27;charty/yxyaxis&#x27;,
-                &#x27;charty/multipleinstancesmixin&#x27;
+                &#x27;charty/multipleinstancesmixin&#x27;,
+                &#x27;charty/labeledtext&#x27;
             ],
             function(d3, Charty) {
                 /** Export global even in AMD case in case this script
@@ -211,13 +214,18 @@
              * @param {Object} args Arguments for scatterplot chart.
              */
             initialize: function(args) {
-
                 args.chartName = Charty.CHART_NAMES.CIRCLE;
                 args.instances = (args.instances || 1);
 
                 this.mixin(args.axisSystem, this.base.append(&#x27;g&#x27;), args)
                     .showAsGrid(args.showAsGrid);
 
+                this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base, args);
+
+                // Applying the multiple data sets also to the &quot;LABELED_TEXT&quot; chart.
+                // TODO: Need a refactor of &quot;MULTIPLE_INSTANCES_MIXIN&quot; to allow adding the
+                //  data sets to more than one chart.
+                args.chartName = Charty.CHART_NAMES.LABELED_TEXT;
                 this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base, args);
             }
         });
