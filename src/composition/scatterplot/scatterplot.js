@@ -47,7 +47,6 @@
              */
             initialize: function(args) {
                 args.chartName = Charty.CHART_NAMES.CIRCLE;
-
                 args.instances = (args.instances || 1);
 
                 this.mixin(args.axisSystem, this.base.append('g'), args)

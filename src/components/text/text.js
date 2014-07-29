@@ -63,10 +63,10 @@
                 }
             };
 
-            /**
-             * Layer creation
-             */
-            this.layer('texts', this.base.append('g'), options);
+          /**
+          Layer creation
+          **/
+          this.layer('texts', this.base.append('g'), options);
         },
 
         /**

@@ -20,7 +20,7 @@
                 'charty/chartynames',
                 'charty/simpledatagroup'
             ],
-            function(d3, Charty) {
+            function(d3, _, Charty) {
                 /** Export global even in AMD case in case this script
                  * is loaded with others */
                 return factory(d3, _, Charty);
