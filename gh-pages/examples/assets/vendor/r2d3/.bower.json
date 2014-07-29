@@ -1,0 +1,14 @@
+{
+  "name": "r2d3",
+  "homepage": "https://github.com/marciocaraballo/r2d3",
+  "version": "0.2.1",
+  "_release": "0.2.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.2.1",
+    "commit": "7e1be1ca2e392fe259b7fb1d553abaea0433a41a"
+  },
+  "_source": "https://github.com/marciocaraballo/r2d3.git",
+  "_target": "~0.2.1",
+  "_originalSource": "https://github.com/marciocaraballo/r2d3.git"
+}

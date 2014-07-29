@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>components/scales/linearscale.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
+      <p class="stat">74.40</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">171</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
+      <p class="stat">34.92</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">0.78</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">/* global BaseScale: true */
+/**
+ * Linear scale for linear axis
+ *
+ * @class LinearScale
+ * @extends BaseScale
+ * @requires d3.chart,
+ *           basescale,
+ *           uderscore
+ *
+ * @author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
+ */
+(function(root, factory) {
+    /** Setting up AMD support*/
+    if (typeof define === &#039;function&#039; &amp;&amp; define.amd) {
+        /** AMD */
+        define(&#039;charty/linearscale&#039;, [
+                &#039;d3.chart&#039;,
+                &#039;charty/basescale&#039;,
+                &#039;underscore&#039;
+            ],
+            function(d3, BaseScale, _) {
+                /** Export global even in AMD case in case this script
+                 * is loaded with others */
+                return factory(d3, BaseScale, _);
+            });
+    } else {
+        /** Browser globals */
+        root.LinearScale = factory(d3, BaseScale, _);
+    }
+}(this, function(d3, BaseScale, _) {
+
+    /**
+     * @constructor
+     *
+     * @param {Charty.AXIS.X|Charty.AXIS.Y} axisType - X or Y axis setting.
+     * @param {Object} [options] - Settings
+     *     @param {Boolean} [options.niceDomain=false] - Beautify the domain to include all the possible values.
+     */
+    var LinearScale = function(axisType, options) {
+        this.scale = d3.scale.linear();
+        this.axisType = axisType;
+        this.niceDomain = options &amp;&amp; options.niceDomain || false;
+    };
+
+    /**
+     * Inheritance from BaseScale
+     */
+    LinearScale.prototype = new BaseScale();
+
+    /**
+     * Sets domain for linear scale
+     *
+     * @method setDomain
+     * @param {Object} arrayValues Max and min value defined by array
+     * @chainable
+     */
+    LinearScale.prototype.setDomain = function(arrayValues) {
+        return this.scale.domain(arrayValues).nice(), this;
+    };
+
+    /**
+     * Sets the range for the linear scale
+     *
+     * @method setRange
+     * @param {Number} range numeric value for linear scale
+     * @chainable
+     */
+    LinearScale.prototype.setRange = function(range) {
+        return this.scale.range(this.generateRange(range)), this;
+    };
+
+    /**
+     * Returns scaled value
+     *
+     * @method map
+     * @param {Number} value number to map to scale
+     * @return {Number} mapped value
+     */
+    LinearScale.prototype.map = function(value) {
+        return this.scale(value);
+    };
+
+    /**
+     * Returns band for a specified value
+     *
+     * @method band
+     * @param {Number} max max value for a scale
+     * @param {Number} value to map
+     * @return {Number} similar to ordinal band but for
+     * linear scale
+     */
+    LinearScale.prototype.band = function(max, value) {
+        return (max - this.scale(value));
+    };
+
+    /**
+     * Calculates the domain for the linear scale
+     *
+     * Data probably won&#039;t be uniform, so for each data element,
+     * a maximum value is obtained. The maximum element will be kept.
+     * Same situation is for the minimum element
+     *
+     * Keeps a reference for the minimum value
+     *
+     * @method calculateDomain
+     * @param {Object} data Accessor for the data collection
+     * @param {Object} iterator callback function
+     * @chainable
+     */
+    LinearScale.prototype.calculateDomain = function(data, iterator) {
+        var max = -Infinity,
+            min = Infinity,
+            d = data.getData(),
+            delta = 0;
+
+        if (d &amp;&amp; !_.isEmpty(d)) {
+
+            _.each(d, function(element) {
+                var chartData = element.data;
+
+                /** Chart can receive no data, should draw nothing or remove already drawn elements */
+                if (chartData &amp;&amp; !_.isEmpty(chartData)) {
+                    var maxg = d3.max(chartData, iterator),
+                        ming = d3.min(chartData, iterator);
+
+                    max = Math.max(maxg, max);
+                    min = Math.min(ming, min);
+                }
+            }, this);
+
+            if (this.niceDomain) {
+                delta = this.getDelta(max, min);
+            }
+
+            /** Case when there is no data, sometimes can receive a NaN */
+            if (!_.isNaN(max) &amp;&amp; !_.isNaN(min)) {
+                return this.setMaxValue(max)
+                    .setDomain([Math.min(0, min - delta), Math.max(0, max + delta)]);
+            }
+
+        }
+    };
+
+    /**
+     * Returns the delta value to add to the domain in order to make sure all the
+     * data is wrapped by axis ticks.
+     *
+     * @method getDelta
+     * @param {Number} max The maximum value
+     * @param {Number} min The minimum value
+     * @return {Number} The delta value calculated on a 10 step division.
+     */
+    LinearScale.prototype.getDelta = function(max, min) {
+        var step = (max - min) / 10 + 1;
+        return Math.abs(max - min) % step;
+    };
+
+    /**
+     * Maximum value setting for linear scale.
+     * Useful when setting discrete ticks for continuous scale
+     *
+     * @method setMaxValue
+     * @param {Number} maxVal Scale&#039;s maximum value
+     * @chainable
+     */
+    LinearScale.prototype.setMaxValue = function(maxVal) {
+        this.maxValue = maxVal;
+        return this;
+    };
+
+    /**
+     * Returns max value
+     *
+     * @method getMaxValue
+     * @return {Number} scale&#039;s maximum value
+     */
+    LinearScale.prototype.getMaxValue = function() {
+        return this.maxValue;
+    };
+
+    return LinearScale;
+}));</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

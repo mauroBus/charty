@@ -1,0 +1,13 @@
+{
+  "name": "Polyfills-for-IE8",
+  "homepage": "https://github.com/jonathantneal/Polyfills-for-IE8",
+  "_release": "d44665e676",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "d44665e676ba374aa66a3b57fd4fcd0b9ca90352"
+  },
+  "_source": "https://github.com/jonathantneal/Polyfills-for-IE8.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/jonathantneal/Polyfills-for-IE8.git"
+}

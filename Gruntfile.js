@@ -1,9 +1,11 @@
-/**
- * Build generator via Grunt
- */
+var compression = require('compression')();
+
+//
+// Helper for connect. The idea behind it is to load a middle with a given
+// directory.
+//
 var mountFolder = function(connect, dir) {
-    return connect.static(require('path')
-        .resolve(dir));
+    return connect.static(require('path').resolve(dir));
 };
 
 module.exports = function(grunt) {
@@ -14,122 +16,176 @@ module.exports = function(grunt) {
         .filterDev('grunt-*')
         .forEach(grunt.loadNpmTasks);
 
-    /** Configurable paths */
-    var yeomanConfig = {
-        app: 'src',
-        dist: 'dist'
+    /** General settings **/
+    var config = {
+        SRC: 'src',
+        DIST: 'dist',
+        GH_PAGES: 'gh-pages',
+        TMP: '.tmp',
+        JS_TREE: [
+            '<%= config.SRC %>/utils/datavalidator/datavalidator.js',
+            '<%= config.SRC %>/api/chartyinit.js',
+            '<%= config.SRC %>/api/chartynames.js',
+            '<%= config.SRC %>/components/scales/*.js',
+            '<%= config.SRC %>/composition/datamapper/datamapper.js',
+            '<%= config.SRC %>/components/base/basechart.js',
+            '<%= config.SRC %>/composition/simpledatagroup.js',
+            '<%= config.SRC %>/components/axis/axis.js',
+            '<%= config.SRC %>/components/bar/bar.js',
+            '<%= config.SRC %>/components/bar/horizontalbar.js',
+            '<%= config.SRC %>/components/bar/winlossbar.js',
+            '<%= config.SRC %>/components/circle/circle.js',
+            '<%= config.SRC %>/components/donut/donut.js',
+            '<%= config.SRC %>/components/line/line.js',
+            '<%= config.SRC %>/components/roundedrectangle/roundedrectangle.js',
+            '<%= config.SRC %>/components/text/text.js',
+            '<%= config.SRC %>/components/text/abovetext.js',
+            '<%= config.SRC %>/components/text/righttext.js',
+            '<%= config.SRC %>/components/text/winlosstext.js',
+            '<%= config.SRC %>/components/text/labeledtext.js',
+            '<%= config.SRC %>/components/triangle/triangle.js',
+            '<%= config.SRC %>/composition/multipledatagroup.js',
+            '<%= config.SRC %>/composition/multipleinstancesmixin.js',
+            '<%= config.SRC %>/composition/axis/xyaxis.js',
+            '<%= config.SRC %>/composition/axis/yxyaxis.js',
+            '<%= config.SRC %>/composition/barchart/barchart.js',
+            '<%= config.SRC %>/composition/groupedbarchart/groupedbarchart.js',
+            '<%= config.SRC %>/composition/donutwithinnertext/donutwithinnertext.js',
+            '<%= config.SRC %>/composition/labeledtrianglechart/labeledtrianglechart.js',
+            '<%= config.SRC %>/composition/linechart/*.js',
+            '<%= config.SRC %>/composition/scatterplot/scatterplot.js',
+            '<%= config.SRC %>/utils/accessor/accessor.js',
+            '<%= config.SRC %>/utils/events/functionevent.js',
+            '<%= config.SRC %>/utils/events/bootstrapevent.js',
+            '<%= config.SRC %>/utils/events/eventfactory.js',
+            '<%= config.SRC %>/utils/events/eventmanager.js',
+            '<%= config.SRC %>/api/chartinterface.js',
+            '<%= config.SRC %>/api/chartyapi.js',
+            '<%= config.SRC %>/api/charty.js'
+        ]
     };
 
     grunt.initConfig({
-        yeoman: yeomanConfig,
+        config: config,
+        pkg: grunt.file.readJSON('package.json'),
 
-        /** Concat */
         concat: {
             dist: {
-                src: [
-                    '<%= yeoman.app %>/utils/datavalidator/datavalidator.js',
-                    '<%= yeoman.app %>/api/chartyinit.js',
-                    '<%= yeoman.app %>/api/chartynames.js',
-                    '<%= yeoman.app %>/components/scales/*.js',
-                    '<%= yeoman.app %>/composition/datamapper/datamapper.js',
-                    '<%= yeoman.app %>/components/base/basechart.js',
-                    '<%= yeoman.app %>/composition/simpledatagroup.js',
-                    '<%= yeoman.app %>/components/axis/axis.js',
-                    '<%= yeoman.app %>/components/bar/bar.js',
-                    '<%= yeoman.app %>/components/bar/horizontalbar.js',
-                    '<%= yeoman.app %>/components/bar/winlossbar.js',
-                    '<%= yeoman.app %>/components/circle/circle.js',
-                    '<%= yeoman.app %>/components/donut/donut.js',
-                    '<%= yeoman.app %>/components/line/line.js',
-                    '<%= yeoman.app %>/components/roundedrectangle/roundedrectangle.js',
-                    '<%= yeoman.app %>/components/text/text.js',
-                    '<%= yeoman.app %>/components/text/abovetext.js',
-                    '<%= yeoman.app %>/components/text/righttext.js',
-                    '<%= yeoman.app %>/components/text/winlosstext.js',
-                    '<%= yeoman.app %>/components/text/labeledtext.js',
-                    '<%= yeoman.app %>/components/triangle/triangle.js',
-                    '<%= yeoman.app %>/composition/multipledatagroup.js',
-                    '<%= yeoman.app %>/composition/multipleinstancesmixin.js',
-                    '<%= yeoman.app %>/composition/axis/xyaxis.js',
-                    '<%= yeoman.app %>/composition/axis/yxyaxis.js',
-                    '<%= yeoman.app %>/composition/barchart/barchart.js',
-                    '<%= yeoman.app %>/composition/groupedbarchart/groupedbarchart.js',
-                    '<%= yeoman.app %>/composition/donutwithinnertext/donutwithinnertext.js',
-                    '<%= yeoman.app %>/composition/labeledtrianglechart/labeledtrianglechart.js',
-                    '<%= yeoman.app %>/composition/linechart/*.js',
-                    '<%= yeoman.app %>/composition/scatterplot/scatterplot.js',
-                    '<%= yeoman.app %>/utils/accessor/accessor.js',
-                    '<%= yeoman.app %>/utils/events/functionevent.js',
-                    '<%= yeoman.app %>/utils/events/bootstrapevent.js',
-                    '<%= yeoman.app %>/utils/events/eventfactory.js',
-                    '<%= yeoman.app %>/utils/events/eventmanager.js',
-                    '<%= yeoman.app %>/api/chartinterface.js',
-                    '<%= yeoman.app %>/api/chartyapi.js',
-                    '<%= yeoman.app %>/api/charty.js',
-                ],
-                dest: '<%= yeoman.dist %>/charty.js'
+                src: config.JS_TREE,
+                dest: '<%= config.DIST %>/<%= pkg.name %>.js'
             }
         },
 
-        /** Minimify code */
         uglify: {
-            dist: {
+            dev: {
+                options: {
+                    sourceMap: true,
+                    sourceMapIncludeSources: true,
+                    mangle: false,
+                    compress: false,
+                    report: 'gzip'
+                },
                 files: {
-                    '<%= yeoman.dist %>/charty.min.js': '<%= yeoman.dist %>/charty.js'
+                    '<%= config.DIST %>/<%= pkg.name %>.min.js': config.JS_TREE
                 }
             }
         },
 
-        /** Platojs */
         plato: {
-            your_task: {
+            default: {
                 files: {
-                    'report': ['<%= yeoman.app %>/**/*.js'],
+                    '<%= config.GH_PAGES %>/plato': config.JS_TREE
                 }
             },
         },
 
-        /** Yuidoc */
         yuidoc: {
             compile: {
-                name: 'ChartyJS',
-                description: 'ChartyJS Api doc',
-                version: '0.5.8',
+                name: '<%= pkg.name %>',
+                description: '<%= pkg.description %>',
+                version: '<%= pkg.version %>',
                 options: {
                     paths: 'src/',
-                    outdir: 'doc/'
+                    outdir: 'gh-pages/doc/'
                 }
             }
         },
 
-        /** JSHint */
         jshint: {
             options: {
                 jshintrc: '.jshintrc'
             },
-            all: [
-                '<%= yeoman.app %>/**/*.js'
-            ]
+            default: config.JS_TREE
         },
 
-        /** JSBeautifier */
         jsbeautifier: {
             modify: {
-                src: ['Gruntfile.js', '<%= yeoman.app %>/**/*.js'],
+                src: config.JS_TREE,
                 options: {
                     config: '.jsbeautifyrc'
                 }
             },
             verify: {
-                src: ['Gruntfile.js', '<%= yeoman.app %>/**/*.js'],
+                src: config.JS_TREE,
                 options: {
                     mode: 'VERIFY_ONLY',
                     config: '.jsbeautifyrc'
                 }
             }
-        }
+        },
 
+        connect: {
+            default: {
+                options: {
+                    port: 9000,
+                    middleware: function(connect, options) {
+                        return [
+                            compression,
+                            mountFolder(connect, '.tmp'),
+                            mountFolder(connect, 'gh-pages')
+                        ];
+                    }
+                }
+            }
+        },
+
+        watch: {
+            options: {
+                livereload: true
+            },
+            html: {
+                files: [
+                    '<%= config.GH_PAGES %>/examples/*.html'
+                ]
+            },
+            js: {
+                files: config.JS_TREE,
+                tasks: ['reload-js']
+            }
+        },
+
+        copy: {
+            dev: {
+                files: [{
+                    expand: true,
+                    dot: false,
+                    src: '<%= config.DIST %>/**',
+                    dest: '<%= config.TMP %>/examples/assets/vendor/<%= pkg.name %>'
+                }]
+            }
+        }
     });
+
+    grunt.registerTask('server', [
+        'connect',
+        'watch'
+    ]);
+
+    grunt.registerTask('reload-js', [
+        // 'concat',
+        'uglify',
+        'copy:dev'
+    ]);
 
     /** Build js */
     grunt.registerTask('build-js', [

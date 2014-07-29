@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>components/roundedrectangle/roundedrectangle.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
+      <p class="stat">74.22</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">131</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
+      <p class="stat">25.54</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">0.83</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">/**
+ * Rounded rectangle drawer.
+ *
+ * @class RoundedRectangle
+ * @extends SimpleDataGroup
+ * @requires d3.chart,
+ *           charty,
+ *           simpledatagroup
+ *
+ * @author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
+ */
+
+(function(root, factory) {
+    /** Setting up AMD support*/
+    if (typeof define === &#039;function&#039; &amp;&amp; define.amd) {
+        /** AMD */
+        define(&#039;charty/roundedrectangle&#039;, [
+                &#039;d3.chart&#039;,
+                &#039;charty/chartynames&#039;,
+                &#039;charty/simpledatagroup&#039;
+            ],
+            function(d3, Charty) {
+                /** Export global even in AMD case in case this script
+                 * is loaded with others */
+                return factory(d3, Charty);
+            });
+    } else {
+        // Browser globals
+        factory(d3, Charty);
+    }
+}(this, function(d3, Charty) {
+    d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
+        .extend(Charty.CHART_NAMES.ROUNDED_RECTANGLE, {
+            /**
+             * Rounded rectangle initialization.
+             *
+             * @constructor
+             * @param {Object} args Arguments for rounded rectangles component.
+             */
+            initialize: function(args) {
+
+                var dataValidator = args.dataValidator,
+                    errors = {
+                        invalidRH: &#039;Invalid value for rectangle height. Must be positive number.&#039;,
+                        invalidRW: &#039;Invalid value for rectangle width. Must be positive number.&#039;,
+                        invalidRX: &#039;Invalid value for rectangle rx. Must be positive number.&#039;,
+                        invalidRY: &#039;Invalid value for rectangle ry. Must be positive number.&#039;
+                    };
+
+                /**
+                 * Defaults for rectangle
+                 *
+                 * rh : rectangle height
+                 * rw : rectangle width
+                 * rc : rectangle color
+                 * rx, ry : value for rounded corners
+                 */
+                var defaults = {
+                    rh: 20,
+                    rw: 20,
+                    rc: &#039;rounded-rectangle-default&#039;,
+                    rx: 5,
+                    ry: 5
+                };
+
+                var options = {
+                    /**
+                     * Data bind for Rounded Rectangle.
+                     * Data defines a rectangle height (rh), width (rw),
+                     * color (rc), rx, ry. If not defined, defauls are
+                     * used.
+                     *
+                     * @method dataBind
+                     * @param {Object} d example = {
+                     *                              rh : 20,
+                     *                              rw : 20,
+                     *                              rc : &#039;red&#039;
+                     *                              data : [...]
+                     *                            }
+                     * @chainable
+                     */
+                    dataBind: function(d) {
+
+                        var chart = this.chart();
+
+                        chart.rh = (dataValidator.isPositiveNumber(d.rh, errors.invalidRH) || defaults.rh);
+                        chart.rw = (dataValidator.isPositiveNumber(d.rw, errors.invalidRH) || defaults.rw);
+                        chart.rx = (dataValidator.isPositiveNumber(d.rx, errors.invalidRX) || defaults.rx);
+                        chart.ry = (dataValidator.isPositiveNumber(d.ry, errors.invalidRY) || defaults.ry);
+                        chart.rc = (d.rc || defaults.rc);
+
+                        return this.selectAll(&#039;rect&#039;)
+                            .data(d.data);
+                    },
+                    /**
+                     * Appends a svg:rect element.
+                     *
+                     * @method insert
+                     * @chainable
+                     */
+                    insert: function() {
+                        return this.append(&#039;rect&#039;);
+                    },
+                    events: {
+                        &#039;enter&#039;: function() {
+                            this.chart()
+                                .eventManager.bindAll(this);
+
+                            return this;
+                        },
+                        &#039;merge&#039;: function() {
+                            /** Click event only on enter */
+                            var chart = this.chart();
+
+                            this.attr(&#039;height&#039;, chart.rh)
+                                .attr(&#039;width&#039;, chart.rw)
+                                .attr(&#039;x&#039;, function(d) {
+                                    return chart.xscale.map(d.x, 1) + (chart.xscale.band(1) / 2) - (chart.rw / 2);
+                                })
+                                .attr(&#039;y&#039;, function(d) {
+                                    return chart.yscale.map(d.y) - (chart.rh / 2);
+                                })
+                                .attr(&#039;rx&#039;, chart.rx)
+                                .attr(&#039;ry&#039;, chart.ry)
+                                .attr(&#039;class&#039;, function(d) {
+                                    return (d.rc || chart.rc);
+                                });
+
+                            return this;
+                        },
+                        &#039;exit&#039;: function() {
+                            return this.remove();
+                        }
+                    }
+                };
+
+                /**
+                 * Layer creation
+                 */
+                this.layer(&#039;roundedrects&#039;, this.base, options);
+            }
+        });
+}));</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

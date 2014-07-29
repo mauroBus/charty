@@ -1,0 +1,6 @@
+{
+  "name": "charty-examples",
+  "dependencies": {
+    "charty" : "https://github.com/chartyjs/charty.git#latest"
+  }
+}
