@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.5.11</em>
+            <em>API Docs for: 0.6.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -82,6 +82,8 @@
                 <li><a href="../classes/GroupedBarChart.html">GroupedBarChart</a></li>
             
                 <li><a href="../classes/HorizontalBar.html">HorizontalBar</a></li>
+            
+                <li><a href="../classes/LabeledText.html">LabeledText</a></li>
             
                 <li><a href="../classes/LabeledTriangleChart.html">LabeledTriangleChart</a></li>
             
@@ -297,12 +299,17 @@
 
             if (this.niceDomain) {
                 delta = this.getDelta(max, min);
+                // If no negative values exist, don&#x27;t use the delta on the min value.
+                min = min &gt;= 0 ? min : min - delta;
+
+                // If no positive values exist, set the delta to 0.
+                delta = max &lt;= 0 ? 0 : delta;
             }
 
             /** Case when there is no data, sometimes can receive a NaN */
             if (!_.isNaN(max) &amp;&amp; !_.isNaN(min)) {
                 return this.setMaxValue(max)
-                    .setDomain([Math.min(0, min - delta), Math.max(0, max + delta)]);
+                    .setDomain([Math.min(0, min), Math.max(0, max + delta)]);
             }
 
         }

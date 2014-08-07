@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>Plato - components/roundedrectangle/roundedrectangle.js</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
@@ -15,7 +15,6 @@
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
   <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
   <link href="../../assets/css/plato.css" rel="stylesheet">
   <link href="../../assets/css/plato-file.css" rel="stylesheet">
@@ -26,7 +25,7 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
     <ul class="nav navbar-nav">
       <li>
         <a href="../../index.html">Report Home</a>
@@ -44,12 +43,12 @@
 <div class="container aggregate-stats">
   <div class="row">
     <div class="col-md-6">
-      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">74.22</p>
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">73.43</p>
     </div>
     <div class="col-md-6">
-      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">131</p>
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">147</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,12 +61,12 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">25.54</p>
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">27.47</p>
     </div>
     <div class="col-md-6">
-      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.83</p>
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">0.91</p>
     </div>
   </div>
 </div>
@@ -78,11 +77,11 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
     <div class="col-md-6">
-      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
   </div>
@@ -108,19 +107,20 @@
         /** AMD */
         define(&#039;charty/roundedrectangle&#039;, [
                 &#039;d3.chart&#039;,
+                &#039;underscore&#039;,
                 &#039;charty/chartynames&#039;,
                 &#039;charty/simpledatagroup&#039;
             ],
-            function(d3, Charty) {
+            function(d3, _, Charty) {
                 /** Export global even in AMD case in case this script
                  * is loaded with others */
-                return factory(d3, Charty);
+                return factory(d3, _, Charty);
             });
     } else {
         // Browser globals
-        factory(d3, Charty);
+        factory(d3, _, Charty);
     }
-}(this, function(d3, Charty) {
+}(this, function(d3, _, Charty) {
     d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
         .extend(Charty.CHART_NAMES.ROUNDED_RECTANGLE, {
             /**
@@ -172,7 +172,6 @@
                      * @chainable
                      */
                     dataBind: function(d) {
-
                         var chart = this.chart();
 
                         chart.rh = (dataValidator.isPositiveNumber(d.rh, errors.invalidRH) || defaults.rh);
@@ -181,8 +180,7 @@
                         chart.ry = (dataValidator.isPositiveNumber(d.ry, errors.invalidRY) || defaults.ry);
                         chart.rc = (d.rc || defaults.rc);
 
-                        return this.selectAll(&#039;rect&#039;)
-                            .data(d.data);
+                        return this.selectAll(&#039;rect&#039;).data(d.data);
                     },
                     /**
                      * Appends a svg:rect element.
@@ -193,34 +191,30 @@
                     insert: function() {
                         return this.append(&#039;rect&#039;);
                     },
+
                     events: {
-                        &#039;enter&#039;: function() {
+                        enter: function() {
                             this.chart()
                                 .eventManager.bindAll(this);
 
                             return this;
                         },
-                        &#039;merge&#039;: function() {
-                            /** Click event only on enter */
+
+                        merge: function() {
                             var chart = this.chart();
 
                             this.attr(&#039;height&#039;, chart.rh)
                                 .attr(&#039;width&#039;, chart.rw)
-                                .attr(&#039;x&#039;, function(d) {
-                                    return chart.xscale.map(d.x, 1) + (chart.xscale.band(1) / 2) - (chart.rw / 2);
-                                })
-                                .attr(&#039;y&#039;, function(d) {
-                                    return chart.yscale.map(d.y) - (chart.rh / 2);
-                                })
                                 .attr(&#039;rx&#039;, chart.rx)
                                 .attr(&#039;ry&#039;, chart.ry)
-                                .attr(&#039;class&#039;, function(d) {
-                                    return (d.rc || chart.rc);
-                                });
+                                .attr(&#039;x&#039;, _.partial(chart.x, chart))
+                                .attr(&#039;y&#039;, _.partial(chart.y, chart))
+                                .attr(&#039;class&#039;, _.partial(chart[&#039;class&#039;], chart));
 
                             return this;
                         },
-                        &#039;exit&#039;: function() {
+
+                        exit: function() {
                             return this.remove();
                         }
                     }
@@ -230,6 +224,27 @@
                  * Layer creation
                  */
                 this.layer(&#039;roundedrects&#039;, this.base, options);
+            },
+
+            /**
+            Calculate `x` to be centered horizontally.
+            **/
+            x: function(chart, d) {
+                return chart.xscale.map(d.x, 1) + (chart.xscale.band(1) / 2) - (chart.rw / 2);
+            },
+
+            /**
+            Calculate `y` to be centered vertically.
+            **/
+            y: function(chart, d) {
+                return chart.yscale.map(d.y) - chart.rh;
+            },
+
+            /**
+            Class attribute generation.
+            **/
+            &#039;class&#039;: function(chart, d) {
+                return d.rc || chart.rc;
             }
         });
 }));</textarea>

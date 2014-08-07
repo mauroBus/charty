@@ -4308,6 +4308,7 @@ Takes N input data series
 
 }));
 
+
 /*jshint -W074*/
 /*global Accessor: true, EventManager: true, EventFactory: true*/
 /**

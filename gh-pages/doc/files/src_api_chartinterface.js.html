@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.5.11</em>
+            <em>API Docs for: 0.6.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -82,6 +82,8 @@
                 <li><a href="../classes/GroupedBarChart.html">GroupedBarChart</a></li>
             
                 <li><a href="../classes/HorizontalBar.html">HorizontalBar</a></li>
+            
+                <li><a href="../classes/LabeledText.html">LabeledText</a></li>
             
                 <li><a href="../classes/LabeledTriangleChart.html">LabeledTriangleChart</a></li>
             
@@ -164,6 +166,7 @@
 
 <div class="file">
     <pre class="code prettyprint linenums">
+
 /*jshint -W074*/
 /*global Accessor: true, EventManager: true, EventFactory: true*/
 /**
@@ -262,7 +265,7 @@
         this.svg.attr(&#x27;width&#x27;, svgWidth)
             .attr(&#x27;height&#x27;, svgHeight)
             .attr(&#x27;viewBox&#x27;, (&#x27;0 0 &#x27; + svgWidth + &quot; &quot; + svgHeight))
-            .attr(&#x27;preserveAspectRatio&#x27;, &#x27;XminYmin&#x27;);
+            .attr(&#x27;preserveAspectRatio&#x27;, &#x27;xMinYMin&#x27;);
 
         if (margin) {
             marginValues = {
