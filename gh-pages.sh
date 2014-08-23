@@ -6,7 +6,7 @@
 #
 
 # master branch where the gh-pages folder is present
-BRANCH=next
+BRANCH=master
 # name of the gh-pages folder inside your master branch
 FOLDER=gh-pages
 # destination branch
