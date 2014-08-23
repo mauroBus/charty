@@ -77,26 +77,17 @@ module.exports = function(grunt) {
         },
 
         uglify: {
-            dev: {
+            all: {
                 options: {
                     sourceMap: true,
                     sourceMapIncludeSources: true,
                     mangle: false,
-                    compress: false,
-                    report: 'gzip'
+                    compress: false
                 },
                 files: {
                     '<%= config.DIST %>/<%= pkg.name %>.min.js': config.JS_TREE
                 }
             }
-        },
-
-        plato: {
-            default: {
-                files: {
-                    '<%= config.GH_PAGES %>/plato': config.JS_TREE
-                }
-            },
         },
 
         yuidoc: {
@@ -182,27 +173,16 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('reload-js', [
-        // 'concat',
         'uglify',
         'copy:dev'
     ]);
 
-    /** Build js */
-    grunt.registerTask('build-js', [
+    grunt.registerTask('build', [
         'concat',
         'uglify'
     ]);
 
-    /** Build js with plato */
-    grunt.registerTask('build-js-plato', [
-        'plato',
-        'concat',
-        'uglify'
-    ]);
-
-    /** Build js with plato and yuidoc */
-    grunt.registerTask('build-js-all', [
-        'plato',
+    grunt.registerTask('release', [
         'concat',
         'uglify',
         'yuidoc'
