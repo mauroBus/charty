@@ -1,6 +1,6 @@
 # Charty
 
-[![Code Climate](https://codeclimate.com/repos/52d7fc9ae30ba059d70177b8/badges/51ccb3e5b026c3f07fd9/gpa.png)](https://codeclimate.com/repos/52d7fc9ae30ba059d70177b8/feed)
+[![Code Climate](https://codeclimate.com/github/chartyjs/charty/badges/gpa.svg)](https://codeclimate.com/github/chartyjs/charty)
 
 This project is a work in progress using d3.chart as base to create a suite of basic components to build
 charts. (We are using this suite in production with really good results).
@@ -8,7 +8,9 @@ charts. (We are using this suite in production with really good results).
 ## Browser Supported
 
 - IE9+ (Windows 7 mainly).
+
   > We are using r2d3 for IE8 support, but it's not perfect.
+
 - Chrome (lastest 2 versions)
 - Firefox (lastest 2 versions)
 - Safari (lastest 2 versions)
@@ -20,6 +22,13 @@ charts. (We are using this suite in production with really good results).
 + `git clone git@github.com:chartyjs/charty.git`
 + `npm install bower -g`
 + `npm install && bower install`
+
+## How to start hacking
+
+1. `grunt server`
+2. [Open the examples page](http://localhost:9000/examples/)
+3. Any change you make will be live-reloaded if you have the required browser
+   extension.
 
 ## Architecture details
 
