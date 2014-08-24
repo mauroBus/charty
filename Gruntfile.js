@@ -18,6 +18,7 @@ module.exports = function(grunt) {
 
     /** General settings **/
     var config = {
+        BANNER: '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("isoDateTime") %> */',
         SRC: 'src',
         DIST: 'dist',
         GH_PAGES: 'gh-pages',
@@ -74,11 +75,20 @@ module.exports = function(grunt) {
             dev: {
                 options: {
                     sourceMap: true,
-                    sourceMapStyle: 'embed',
-                    banner: '/*! <%= pkg.name %> - <%= grunt.template.today("isoDateTime") %> */\n',
+                    sourceMapStyle: 'embed'
                 },
                 files: {
                     '<%= config.TMP_CHARTY %>/<%= pkg.name %>.min.js' : config.JS_TREE
+                }
+            },
+            dist: {
+                options: {
+                    sourceMap: true,
+                    sourceMapStyle: 'embed',
+                    banner: '<%= config.BANNER %>',
+                },
+                files: {
+                    '<%= config.DIST %>/<%= pkg.name %>.js' : config.JS_TREE
                 }
             }
         },
@@ -86,7 +96,7 @@ module.exports = function(grunt) {
         uglify: {
             dist: {
                 options: {
-                    banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("isoDateTime") %> */',
+                    banner: '<%= config.BANNER %>',
                     sourceMap: true,
                     sourceMapIncludeSources: true,
                     mangle: false
@@ -169,11 +179,12 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('reload', [
-        'concat'
+        'concat:dev'
     ]);
 
     grunt.registerTask('build', [
-        'uglify'
+        'concat:dist',
+        'uglify:dist'
     ]);
 
     grunt.registerTask('release', [
