@@ -22,6 +22,7 @@ module.exports = function(grunt) {
         DIST: 'dist',
         GH_PAGES: 'gh-pages',
         TMP: '.tmp',
+        TMP_CHARTY: '<%= config.TMP %>/examples/assets/vendor/<%= pkg.name %>/dist',
         JS_TREE: [
             '<%= config.SRC %>/utils/datavalidator/datavalidator.js',
             '<%= config.SRC %>/api/chartyinit.js',
@@ -70,19 +71,25 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
 
         concat: {
-            dist: {
-                src: config.JS_TREE,
-                dest: '<%= config.DIST %>/<%= pkg.name %>.js'
+            dev: {
+                options: {
+                    sourceMap: true,
+                    sourceMapStyle: 'embed',
+                    banner: '/*! <%= pkg.name %> - <%= grunt.template.today("isoDateTime") %> */\n',
+                },
+                files: {
+                    '<%= config.TMP_CHARTY %>/<%= pkg.name %>.min.js' : config.JS_TREE
+                }
             }
         },
 
         uglify: {
-            all: {
+            dist: {
                 options: {
+                    banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("isoDateTime") %> */',
                     sourceMap: true,
                     sourceMapIncludeSources: true,
-                    mangle: false,
-                    compress: false
+                    mangle: false
                 },
                 files: {
                     '<%= config.DIST %>/<%= pkg.name %>.min.js': config.JS_TREE
@@ -151,18 +158,7 @@ module.exports = function(grunt) {
             },
             js: {
                 files: config.JS_TREE,
-                tasks: ['reload-js']
-            }
-        },
-
-        copy: {
-            dev: {
-                files: [{
-                    expand: true,
-                    dot: false,
-                    src: '<%= config.DIST %>/**',
-                    dest: '<%= config.TMP %>/examples/assets/vendor/<%= pkg.name %>'
-                }]
+                tasks: ['reload']
             }
         }
     });
@@ -172,19 +168,16 @@ module.exports = function(grunt) {
         'watch'
     ]);
 
-    grunt.registerTask('reload-js', [
-        'uglify',
-        'copy:dev'
+    grunt.registerTask('reload', [
+        'concat'
     ]);
 
     grunt.registerTask('build', [
-        'concat',
         'uglify'
     ]);
 
     grunt.registerTask('release', [
-        'concat',
-        'uglify',
+        'build',
         'yuidoc'
     ]);
 };
