@@ -30,6 +30,20 @@ charts. (We are using this suite in production with really good results).
 3. Any change you make will be live-reloaded if you have the required browser
    extension.
 
+## Release steps (automation comming soon)
+
+0. `grunt release`
+1. Update version in package.json
+2. Update version in bower.json
+3. Commit changes.
+4. Create a tag with a name equals to the version used before.
+5. `git push`
+6. `git push --tags`
+7. `cd gh-pages/examples && bower update`
+8. Commit changes.
+9. Run `./gh-pages.sh`
+10. `git push -f origin gh-pages`
+
 ## Architecture details
 
 ### Reusable components for visualizations using d3.chart
