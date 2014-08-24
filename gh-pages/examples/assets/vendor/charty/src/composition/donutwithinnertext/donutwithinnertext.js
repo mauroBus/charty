@@ -80,7 +80,7 @@
                         var chart = this.chart(),
                             data = d.data,
                             stringValue = (data[0].y)
-                                .toString() + '%';
+                            .toString() + '%';
 
                         chart.fontSize = (dataValidator.isPositiveNumber(d.fontSize, errors.invalidFontSize) || defaults.fontSize);
                         /** By default, text will be centered inside donut */

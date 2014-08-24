@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src/components/axis/axis.js - charty</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="charty"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.6.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/AboveText.html">AboveText</a></li>
+            
+                <li><a href="../classes/Accessor.html">Accessor</a></li>
+            
+                <li><a href="../classes/Axis.html">Axis</a></li>
+            
+                <li><a href="../classes/Bar.html">Bar</a></li>
+            
+                <li><a href="../classes/BarChart.html">BarChart</a></li>
+            
+                <li><a href="../classes/BaseChart.html">BaseChart</a></li>
+            
+                <li><a href="../classes/BaseScale.html">BaseScale</a></li>
+            
+                <li><a href="../classes/BootstrapEvent.html">BootstrapEvent</a></li>
+            
+                <li><a href="../classes/ChartInterface.html">ChartInterface</a></li>
+            
+                <li><a href="../classes/ChartNames.html">ChartNames</a></li>
+            
+                <li><a href="../classes/ChartsApi.html">ChartsApi</a></li>
+            
+                <li><a href="../classes/Charty.html">Charty</a></li>
+            
+                <li><a href="../classes/Circle.html">Circle</a></li>
+            
+                <li><a href="../classes/DataMapper.html">DataMapper</a></li>
+            
+                <li><a href="../classes/DataValidator.html">DataValidator</a></li>
+            
+                <li><a href="../classes/Donut.html">Donut</a></li>
+            
+                <li><a href="../classes/DonutWithInnerText.html">DonutWithInnerText</a></li>
+            
+                <li><a href="../classes/EventManager.html">EventManager</a></li>
+            
+                <li><a href="../classes/FunctionEvent.html">FunctionEvent</a></li>
+            
+                <li><a href="../classes/GroupedBarChart.html">GroupedBarChart</a></li>
+            
+                <li><a href="../classes/HorizontalBar.html">HorizontalBar</a></li>
+            
+                <li><a href="../classes/LabeledText.html">LabeledText</a></li>
+            
+                <li><a href="../classes/LabeledTriangleChart.html">LabeledTriangleChart</a></li>
+            
+                <li><a href="../classes/Line.html">Line</a></li>
+            
+                <li><a href="../classes/LinearScale.html">LinearScale</a></li>
+            
+                <li><a href="../classes/LineChart.html">LineChart</a></li>
+            
+                <li><a href="../classes/LineChartCircles.html">LineChartCircles</a></li>
+            
+                <li><a href="../classes/MultipleDataGroup.html">MultipleDataGroup</a></li>
+            
+                <li><a href="../classes/MultipleInstancesMixin.html">MultipleInstancesMixin</a></li>
+            
+                <li><a href="../classes/OrdinalScale.html">OrdinalScale</a></li>
+            
+                <li><a href="../classes/PeakValleyLinearScale.html">PeakValleyLinearScale</a></li>
+            
+                <li><a href="../classes/RightText.html">RightText</a></li>
+            
+                <li><a href="../classes/RoundedRectangle.html">RoundedRectangle</a></li>
+            
+                <li><a href="../classes/ScaleFactory.html">ScaleFactory</a></li>
+            
+                <li><a href="../classes/Scatterplot.html">Scatterplot</a></li>
+            
+                <li><a href="../classes/SimpleDataGroup.html">SimpleDataGroup</a></li>
+            
+                <li><a href="../classes/Text.html">Text</a></li>
+            
+                <li><a href="../classes/Triangle.html">Triangle</a></li>
+            
+                <li><a href="../classes/WinLossBar.html">WinLossBar</a></li>
+            
+                <li><a href="../classes/XYAxis.html">XYAxis</a></li>
+            
+                <li><a href="../classes/YXYAxis.html">YXYAxis</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: src/components/axis/axis.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * Basic Axis representation.
+ *
+ * Only one X/Y is sufficient for chart drawing, but can
+ * contain more. The idea is to draw an axis and locate it
+ * wherever is necessary.
+ *
+ * Wether Axis is a BaseChart, no need to extend it, since
+ * it will implement all the functions needed.
+ *
+ * @class Axis
+ * @requires d3.chart,
+ *           charty
+ *
+ * @author &quot;Marcio Caraballo &lt;marcio.caraballososa@gmail.com&gt;&quot;
+ */
+
+(function(root, factory) {
+    /** Setting up AMD support*/
+    if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
+        /** AMD */
+        define(&#x27;charty/axis&#x27;, [
+                &#x27;d3.chart&#x27;,
+                &#x27;underscore&#x27;,
+                &#x27;charty/chartynames&#x27;
+            ],
+            function(d3, _, Charty) {
+                /** Export global even in AMD case in case this script
+                 * is loaded with others */
+                return factory(d3, _, Charty);
+            });
+    } else {
+        /** Browser globals */
+        factory(d3, _, Charty);
+    }
+}(this, function(d3, _, Charty) {
+
+    d3.chart(Charty.CHART_NAMES.BASE_CHART)
+        .extend(Charty.CHART_NAMES.AXIS, {
+            /**
+             * Basic Axis initialization
+             *
+             * @constructor
+             * @param {Object} args Arguments for axis component
+             */
+            initialize: function() {
+
+                /**
+                 * Tranlation value in the x direction
+                 *
+                 * @property xt
+                 * @type Number
+                 * @default 0
+                 */
+                this.xt = 0;
+                /**
+                 * Tranlation value in the y direction
+                 *
+                 * @property yt
+                 * @type Number
+                 * @default 0
+                 */
+                this.yt = 0;
+
+                /**
+                 * Axis default CSS class
+                 *
+                 * @property cssClass
+                 * @type String
+                 * @default &#x27;axis&#x27;
+                 */
+                this.cssClass = &#x27;axis&#x27;;
+
+                this.axis = d3.svg.axis();
+
+                /**
+                 * Layer options
+                 */
+                var axisLayerOptions = {
+                    /**
+                     * Data bind for axis
+                     * Since axis requires just a scale, only one element
+                     * will be set for the data selection
+                     *
+                     * @method dataBind
+                     * @param {Object} d
+                     */
+                    dataBind: function(d) {
+                        /** Case there is no data to display must be checked */
+                        if (d.getLength()) {
+                            return this.selectAll(&#x27;g&#x27;)
+                                .data([true]);
+                        } else {
+                            return this.selectAll(&#x27;g&#x27;)
+                                .data([]);
+                        }
+                    },
+
+                    /**
+                     * Insert for axis. Just inserts one svg:g
+                     * element.
+                     *
+                     * @method insert
+                     */
+                    insert: function() {
+                        return this.append(&#x27;g&#x27;);
+                    },
+                    events: {
+                        &#x27;enter&#x27;: function() {
+
+                            var chart = this.chart();
+
+                            /**
+                             * Renders as a grid.
+                             */
+                            if (chart.grid) {
+                                chart.axis.tickSize(-chart.tsize, 0, 0);
+                            }
+
+                            /** Axis drawing */
+                            this.classed(chart.cssClass, true);
+
+                            /**
+                             * Axis translation in x or y direction.
+                             */
+                            if (chart.xt !== 0 || chart.yt !== 0) {
+                                this.attr(&#x27;transform&#x27;, &#x27;translate(&#x27; + chart.xt + &#x27;,&#x27; + chart.yt + &#x27;)&#x27;);
+                            }
+
+                            /** Adds a text label */
+                            if (chart.textLabel) {
+                                var text = this.append(&#x27;text&#x27;)
+                                    .text(chart.textLabel);
+
+                                /** Y Axis label rotation */
+                                if (chart.labelRotate) {
+                                    text.attr(&#x27;transform&#x27;, &#x27;translate(&#x27; + (-chart.w / 14) + &#x27;,&#x27; + (chart.h + (chart.textLabel.length * chart.h) / 32) / 2 + &#x27;)&#x27; +
+                                        &#x27; rotate(&#x27; + chart.labelRotate + &#x27;)&#x27;);
+                                } else {
+                                    text.attr(&#x27;transform&#x27;, &#x27;translate(&#x27; + (chart.w / 2 - chart.textLabel.length * 3.2) + &#x27;,&#x27; + chart.yt / 6 + &#x27;)&#x27;);
+                                }
+                            }
+
+                            return this;
+                        },
+                        &#x27;merge&#x27;: function() {
+                            var chart = this.chart(),
+                                axis = this.call(chart.axis),
+                                xPos = 5, // Small margin for the text so it doesn&#x27;t get in the way of the chart.
+                                yPos = -2, // Fixed number of pixes so the text is somewhat centered when rotated.
+                                textAnchor = &#x27;start&#x27;;
+
+                            if (chart.rotation &lt; 0) {
+                                textAnchor = &#x27;end&#x27;;
+                                xPos = -xPos;
+                                yPos = -yPos;
+                            }
+                            if (chart.rotation) {
+                                this.selectAll(&#x27;text&#x27;)
+                                    .attr(&#x27;y&#x27;, yPos)
+                                    .attr(&#x27;x&#x27;, xPos)
+                                    .style(&#x27;text-anchor&#x27;, textAnchor)
+                                    .attr(&#x27;transform&#x27;, &#x27;rotate(&#x27; + chart.rotation + &#x27;)&#x27;);
+                            }
+                            return axis;
+                        },
+                        &#x27;remove&#x27;: function() {
+
+                            return this.remove();
+                        }
+                    }
+                };
+
+                /**
+                 * Axis layer creation
+                 */
+                this.layer(&#x27;axis&#x27;, this.base.append(&#x27;g&#x27;), axisLayerOptions);
+            },
+            /**
+             * Sets tick size for the axis
+             *
+             * @method tickSize
+             * @param {Number} size ticksize
+             * @chainable
+             */
+            tickSize: function(size) {
+                /**
+                 * Size for the ticks. Necessary
+                 * to define a grid chart.
+                 *
+                 * @property tsize
+                 * @type Number
+                 * @default 0
+                 */
+                this.tsize = (size || 0);
+                return this;
+            },
+            /**
+             * Sets the scale that will be used for the axis
+             *
+             * @method setScale
+             * @param {Object} d3.scale
+             * @chainable
+             */
+            setScale: function(scale) {
+                if (!scale) {
+                    throw new Error(&#x27;Undefined scale for axis.&#x27;);
+                }
+
+                this.axis.scale(scale.getScale());
+                return this;
+            },
+            /**
+             * Shows the axis as a grid
+             *
+             * @method showAsGrid
+             * @param {Boolean} val true/false value
+             * @chainable
+             * @default false
+             */
+            showAsGrid: function(val) {
+                this.grid = val;
+                return this;
+            },
+            /**
+             * Sets axis orientation
+             *
+             * @method orient
+             * @param {String} orient
+             * @chainable
+             * @default bottom
+             */
+            orient: function(orient) {
+
+                this.axis.orient(orient || &#x27;bottom&#x27;);
+                return this;
+            },
+            /**
+             * Sets x translation for axis.
+             *
+             * @method xtranslate
+             * @param {Number} t tranlation value
+             * @chainable
+             */
+            xtranslate: function(t) {
+                this.xt = t;
+                return this;
+            },
+            /**
+             * Sets y translation for axis.
+             *
+             * @method ytranslate
+             * @param {Number} t tranlation value
+             * @chainable
+             */
+            ytranslate: function(t) {
+                this.yt = t;
+                return this;
+            },
+            /**
+             * Text label that will be set next to the axis
+             *
+             * @method setTextLabel
+             * @param {String} label Text label
+             * @param {Number} labelRotate Rotation for y axis label
+             * @chainable
+             */
+            setTextLabel: function(label, labelRotate) {
+                this.textLabel = label;
+                this.labelRotate = labelRotate;
+                return this;
+            },
+            /**
+             * Custom tick count setting for particular
+             * axis.
+             *
+             * This options will only work in linear scales,
+             * since the domain, by defaut, is continuous.
+             *
+             * @method tickCount
+             * @param {Number} tCount ticks count
+             * @chainable
+             */
+            tickCount: function(tCount) {
+                if (tCount) {
+                    this.axis.ticks(tCount);
+                }
+                return this;
+            },
+            /**
+             * Tick format
+             *
+             * @method tickFormat
+             * @param {String|Function} format Tick formatter.
+             * @chainable
+             */
+            tickFormat: function(format) {
+                if (_.isString(format)) {
+                    this.axis.tickFormat(d3.format(format));
+                } else if (_.isFunction(format)) {
+                    this.axis.tickFormat(format);
+                }
+                return this;
+            },
+            /**
+             * Sets CSS Class
+             *
+             * @method setClass
+             * @param {String} newClass A CSS class to use on the axis
+             * @chainable
+             */
+            setClass: function(newClass) {
+                if (newClass) {
+                    this.cssClass = newClass;
+                }
+                return this;
+            },
+            /**
+             * Sets rotation of tick labels
+             *
+             * @method setRotation
+             * @param {Number} degrees The number in degrees for the label to be rotated.
+             *   The expected number should be between -90 and 90.
+             * @chainable
+             */
+            setRotation: function(degrees) {
+                if (degrees) {
+                    this.rotation = degrees;
+                }
+                return this;
+            }
+        });
+}));
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

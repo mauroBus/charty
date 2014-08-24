@@ -1,0 +1,100 @@
+::-moz-selection {
+  background: #5E7682;
+  text-shadow: none;
+}
+
+::selection {
+  background: #5E7682;
+  text-shadow: none;
+}
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+/* ==========================================================================
+   Author's custom styles.
+
+   Color scheme: https://kuler.adobe.com/Abeo-color-theme-3691729/
+   ========================================================================== */
+html,
+body,
+main {
+  height: 100%;
+  min-height: 350px;
+}
+
+html {
+  font-family: 'Roboto', 'Verdana', 'Helvica';
+  font-size: 12px;
+  -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+
+  background-color: #423D35;
+  text-align: center;
+}
+
+main {
+  overflow: hidden;
+}
+
+.logo {
+  color: #00FFBA;
+  letter-spacing: -.5rem;
+  text-decoration: none;
+}
+
+.menu {
+  margin: 0 0 1rem 0;
+  padding: 0;
+}
+
+.menu__item {
+  color: #F4E6B9;
+  text-decoration: none;
+}
+
+.footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.footer p {
+  margin: 1rem;
+  color: #F4E6B9;
+}
+
+.footer .name {
+  color: #E0BB5D;
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   General modifiers
+   ========================================================================== */
+.text--big {
+  font-size: 6rem;
+}
+
+.text--medium {
+  font-size: 2rem;
+}
+
+.text--small {
+  font-size: 0.66rem;
+}
+
+/* ==========================================================================
+   Media queries
+   ========================================================================== */
+@media screen and (max-height: 350px) {
+  .footer {
+    position: static;
+    margin-top: 1rem;
+  }
+}

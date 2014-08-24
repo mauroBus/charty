@@ -1,6 +1,6 @@
 {
   "name": "charty",
-  "version": "0.5.11",
+  "version": "0.6.0",
   "main": "main.js",
   "ignore": [
     "**/.*",
@@ -21,11 +21,11 @@
     "bootstrap": "3.0.0"
   },
   "homepage": "https://github.com/chartyjs/charty",
-  "_release": "0.5.11",
+  "_release": "0.6.0",
   "_resolution": {
     "type": "version",
-    "tag": "0.5.11",
-    "commit": "b15bf40a4292f463b01a573b307d037e075bf206"
+    "tag": "0.6.0",
+    "commit": "3b555efa68d164e4727c83f4c24c8af351f0f0fc"
   },
   "_source": "https://github.com/chartyjs/charty.git",
   "_target": "*",

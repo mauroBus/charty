@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Circle - charty</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="charty"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.6.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/AboveText.html">AboveText</a></li>
+            
+                <li><a href="../classes/Accessor.html">Accessor</a></li>
+            
+                <li><a href="../classes/Axis.html">Axis</a></li>
+            
+                <li><a href="../classes/Bar.html">Bar</a></li>
+            
+                <li><a href="../classes/BarChart.html">BarChart</a></li>
+            
+                <li><a href="../classes/BaseChart.html">BaseChart</a></li>
+            
+                <li><a href="../classes/BaseScale.html">BaseScale</a></li>
+            
+                <li><a href="../classes/BootstrapEvent.html">BootstrapEvent</a></li>
+            
+                <li><a href="../classes/ChartInterface.html">ChartInterface</a></li>
+            
+                <li><a href="../classes/ChartNames.html">ChartNames</a></li>
+            
+                <li><a href="../classes/ChartsApi.html">ChartsApi</a></li>
+            
+                <li><a href="../classes/Charty.html">Charty</a></li>
+            
+                <li><a href="../classes/Circle.html">Circle</a></li>
+            
+                <li><a href="../classes/DataMapper.html">DataMapper</a></li>
+            
+                <li><a href="../classes/DataValidator.html">DataValidator</a></li>
+            
+                <li><a href="../classes/Donut.html">Donut</a></li>
+            
+                <li><a href="../classes/DonutWithInnerText.html">DonutWithInnerText</a></li>
+            
+                <li><a href="../classes/EventManager.html">EventManager</a></li>
+            
+                <li><a href="../classes/FunctionEvent.html">FunctionEvent</a></li>
+            
+                <li><a href="../classes/GroupedBarChart.html">GroupedBarChart</a></li>
+            
+                <li><a href="../classes/HorizontalBar.html">HorizontalBar</a></li>
+            
+                <li><a href="../classes/LabeledText.html">LabeledText</a></li>
+            
+                <li><a href="../classes/LabeledTriangleChart.html">LabeledTriangleChart</a></li>
+            
+                <li><a href="../classes/Line.html">Line</a></li>
+            
+                <li><a href="../classes/LinearScale.html">LinearScale</a></li>
+            
+                <li><a href="../classes/LineChart.html">LineChart</a></li>
+            
+                <li><a href="../classes/LineChartCircles.html">LineChartCircles</a></li>
+            
+                <li><a href="../classes/MultipleDataGroup.html">MultipleDataGroup</a></li>
+            
+                <li><a href="../classes/MultipleInstancesMixin.html">MultipleInstancesMixin</a></li>
+            
+                <li><a href="../classes/OrdinalScale.html">OrdinalScale</a></li>
+            
+                <li><a href="../classes/PeakValleyLinearScale.html">PeakValleyLinearScale</a></li>
+            
+                <li><a href="../classes/RightText.html">RightText</a></li>
+            
+                <li><a href="../classes/RoundedRectangle.html">RoundedRectangle</a></li>
+            
+                <li><a href="../classes/ScaleFactory.html">ScaleFactory</a></li>
+            
+                <li><a href="../classes/Scatterplot.html">Scatterplot</a></li>
+            
+                <li><a href="../classes/SimpleDataGroup.html">SimpleDataGroup</a></li>
+            
+                <li><a href="../classes/Text.html">Text</a></li>
+            
+                <li><a href="../classes/Triangle.html">Triangle</a></li>
+            
+                <li><a href="../classes/WinLossBar.html">WinLossBar</a></li>
+            
+                <li><a href="../classes/XYAxis.html">XYAxis</a></li>
+            
+                <li><a href="../classes/YXYAxis.html">YXYAxis</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1>Circle Class</h1>
+<div class="box meta">
+    
+
+    
+        <div class="extends">
+            Extends <a href="../classes/SimpleDataGroup.html" class="crosslink">SimpleDataGroup</a>
+        </div>
+    
+
+    
+        <div class="foundat">
+            Defined in: <a href="../files/src_components_circle_circle.js.html#l1"><code>src&#x2F;components&#x2F;circle&#x2F;circle.js:1</code></a>
+        </div>
+    
+
+    
+
+    
+</div>
+
+
+
+<div class="box intro">
+    <p>Circle drawer.</p>
+
+</div>
+
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods extends">
+                        
+                            <li class="index-item method">
+                                <a href="#method_dataBind">dataBind</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_height">height</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_insert">insert</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_setEventManager">setEventManager</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_setXScale">setXScale</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_setYScale">setYScale</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_transform">transform</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_width">width</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+
+            
+
+            
+        </div>
+
+        
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method_dataBind" class="method item">
+    <h3 class="name"><code>dataBind</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>d</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_circle_circle.js.html#l58"><code>src&#x2F;components&#x2F;circle&#x2F;circle.js:58</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Data bind for a circle serie.
+Can have color and circle radius set for the whole serie,
+or own values for each data point.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">d</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>example = {
+                             color : &#39;red&#39;,
+                             r : 5
+                             data : [
+                               {x : &#39;Jan&#39;, y: 300, c : &#39;blue&#39;, r : 20}
+                             ]
+                           }</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_height" class="method item inherited">
+    <h3 class="name"><code>height</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>newHeight</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/BaseChart.html#method_height">BaseChart</a>:
+            
+        
+        
+        <a href="../files/src_components_base_basechart.js.html#l51"><code>src&#x2F;components&#x2F;base&#x2F;basechart.js:51</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sets the height for the chart. Propagates to
+components.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">newHeight</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Height for the chart</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_insert" class="method item">
+    <h3 class="name"><code>insert</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_circle_circle.js.html#l83"><code>src&#x2F;components&#x2F;circle&#x2F;circle.js:83</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Appends a svg:circle</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_setEventManager" class="method item inherited">
+    <h3 class="name"><code>setEventManager</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>evtManager</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/BaseChart.html#method_setEventManager">BaseChart</a>:
+            
+        
+        
+        <a href="../files/src_components_base_basechart.js.html#l107"><code>src&#x2F;components&#x2F;base&#x2F;basechart.js:107</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Propagates the Event Manager to component parts.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">evtManager</code>
+                        <span class="type"><a href="../classes/EventManager.html" class="crosslink">EventManager</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Event Manager for chart.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_setXScale" class="method item inherited">
+    <h3 class="name"><code>setXScale</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>LinearScale,</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/BaseChart.html#method_setXScale">BaseChart</a>:
+            
+        
+        
+        <a href="../files/src_components_base_basechart.js.html#l67"><code>src&#x2F;components&#x2F;base&#x2F;basechart.js:67</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sets the scale type for the x data mapping chart.
+Propagates to components</p>
+<p>Not all charts use scales. Some can use direct
+mapping.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">LinearScale,</code>
+                        <span class="type">Oject</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>OrdinalScale</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_setYScale" class="method item inherited">
+    <h3 class="name"><code>setYScale</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>LinearScale,</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/BaseChart.html#method_setYScale">BaseChart</a>:
+            
+        
+        
+        <a href="../files/src_components_base_basechart.js.html#l87"><code>src&#x2F;components&#x2F;base&#x2F;basechart.js:87</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sets the scale type for the y data mapping chart.
+Propagates to components.</p>
+<p>Not all charts use scales. Some can use direct
+mapping.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">LinearScale,</code>
+                        <span class="type">Oject</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>OrdinalScale</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_transform" class="method item inherited">
+    <h3 class="name"><code>transform</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>data</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/SimpleDataGroup.html#method_transform">SimpleDataGroup</a>:
+            
+        
+        
+        <a href="../files/src_composition_simpledatagroup.js.html#l35"><code>src&#x2F;composition&#x2F;simpledatagroup.js:35</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns the next element of the data collection</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">data</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Data Accessor</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>next element in the collection</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_width" class="method item inherited">
+    <h3 class="name"><code>width</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>newWidth</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/BaseChart.html#method_width">BaseChart</a>:
+            
+        
+        
+        <a href="../files/src_components_base_basechart.js.html#l33"><code>src&#x2F;components&#x2F;base&#x2F;basechart.js:33</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sets the width for the chart
+In case chart contains components, width will
+propagate to them</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">newWidth</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Width for the chart</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+
+        
+
+        
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

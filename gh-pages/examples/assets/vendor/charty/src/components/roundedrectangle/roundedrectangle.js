@@ -16,19 +16,20 @@
         /** AMD */
         define('charty/roundedrectangle', [
                 'd3.chart',
+                'underscore',
                 'charty/chartynames',
                 'charty/simpledatagroup'
             ],
-            function(d3, Charty) {
+            function(d3, _, Charty) {
                 /** Export global even in AMD case in case this script
                  * is loaded with others */
-                return factory(d3, Charty);
+                return factory(d3, _, Charty);
             });
     } else {
         // Browser globals
-        factory(d3, Charty);
+        factory(d3, _, Charty);
     }
-}(this, function(d3, Charty) {
+}(this, function(d3, _, Charty) {
     d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
         .extend(Charty.CHART_NAMES.ROUNDED_RECTANGLE, {
             /**
@@ -80,7 +81,6 @@
                      * @chainable
                      */
                     dataBind: function(d) {
-
                         var chart = this.chart();
 
                         chart.rh = (dataValidator.isPositiveNumber(d.rh, errors.invalidRH) || defaults.rh);
@@ -89,8 +89,7 @@
                         chart.ry = (dataValidator.isPositiveNumber(d.ry, errors.invalidRY) || defaults.ry);
                         chart.rc = (d.rc || defaults.rc);
 
-                        return this.selectAll('rect')
-                            .data(d.data);
+                        return this.selectAll('rect').data(d.data);
                     },
                     /**
                      * Appends a svg:rect element.
@@ -101,34 +100,30 @@
                     insert: function() {
                         return this.append('rect');
                     },
+
                     events: {
-                        'enter': function() {
+                        enter: function() {
                             this.chart()
                                 .eventManager.bindAll(this);
 
                             return this;
                         },
-                        'merge': function() {
-                            /** Click event only on enter */
+
+                        merge: function() {
                             var chart = this.chart();
 
                             this.attr('height', chart.rh)
                                 .attr('width', chart.rw)
-                                .attr('x', function(d) {
-                                    return chart.xscale.map(d.x, 1) + (chart.xscale.band(1) / 2) - (chart.rw / 2);
-                                })
-                                .attr('y', function(d) {
-                                    return chart.yscale.map(d.y) - (chart.rh / 2);
-                                })
                                 .attr('rx', chart.rx)
                                 .attr('ry', chart.ry)
-                                .attr('class', function(d) {
-                                    return (d.rc || chart.rc);
-                                });
+                                .attr('x', _.partial(chart.x, chart))
+                                .attr('y', _.partial(chart.y, chart))
+                                .attr('class', _.partial(chart['class'], chart));
 
                             return this;
                         },
-                        'exit': function() {
+
+                        exit: function() {
                             return this.remove();
                         }
                     }
@@ -138,6 +133,27 @@
                  * Layer creation
                  */
                 this.layer('roundedrects', this.base, options);
+            },
+
+            /**
+            Calculate `x` to be centered horizontally.
+            **/
+            x: function(chart, d) {
+                return chart.xscale.map(d.x, 1) + (chart.xscale.band(1) / 2) - (chart.rw / 2);
+            },
+
+            /**
+            Calculate `y` to be centered vertically.
+            **/
+            y: function(chart, d) {
+                return chart.yscale.map(d.y) - chart.rh;
+            },
+
+            /**
+            Class attribute generation.
+            **/
+            'class': function(chart, d) {
+                return d.rc || chart.rc;
             }
         });
 }));

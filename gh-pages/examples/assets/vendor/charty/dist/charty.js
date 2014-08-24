@@ -1,4 +1,4 @@
-/**
+/*! charty - v0.6.0 - 2014-08-23T23:40:20 *//**
  * Data checker for different data input
  *
  * @class DataValidator
@@ -168,7 +168,8 @@
         DONUT_INNER_TEXT: 'DonutWithInnerText',
         GROUPED_BAR_CHART: 'GroupedBarChart',
         LINE_CHART: 'LineChart',
-        LINE_CHART_CIRCLES: 'LineChartCircles'
+        LINE_CHART_CIRCLES: 'LineChartCircles',
+        LABELED_TEXT: 'LabeledText'
     };
 
     /**
@@ -396,12 +397,17 @@
 
             if (this.niceDomain) {
                 delta = this.getDelta(max, min);
+                // If no negative values exist, don't use the delta on the min value.
+                min = min >= 0 ? min : min - delta;
+
+                // If no positive values exist, set the delta to 0.
+                delta = max <= 0 ? 0 : delta;
             }
 
             /** Case when there is no data, sometimes can receive a NaN */
             if (!_.isNaN(max) && !_.isNaN(min)) {
                 return this.setMaxValue(max)
-                    .setDomain([Math.min(0, min - delta), Math.max(0, max + delta)]);
+                    .setDomain([Math.min(0, min), Math.max(0, max + delta)]);
             }
 
         }
@@ -607,7 +613,7 @@
      * @param {Object} [options] - Settings
      *     @param {Boolean} [options.niceDomain=false] - Beautify the domain to include all the possible values.
      */
-    var PeakValleyLinearScale = function(axisType, options) {
+    var PeakValleyLinearScale = function() {
         LinearScale.apply(this, arguments);
     };
 
@@ -667,13 +673,19 @@
 
             if (this.niceDomain) {
                 delta = this.getDelta(peak, valley);
+
+                // If no positives are shown, don't use the delta on the peak.
+                peak = peak <= 0 ? peak : peak + delta;
+
+                // If no negatives are shown, don't use the delta on the valley.
+                valley = valley >= 0 ? valley : valley - delta;
             }
 
             // Case when there is no data, sometimes can receive a NaN
             if (!_.isNaN(peak) && !_.isNaN(valley) && !_.isNaN(max)) {
                 return this.setMaxValue(max).setDomain([
-                    Math.min(0, valley - delta),
-                    Math.max(0, peak + delta)
+                    Math.min(0, valley),
+                    Math.max(0, peak)
                 ]);
             }
 
@@ -2113,19 +2125,20 @@
         /** AMD */
         define('charty/roundedrectangle', [
                 'd3.chart',
+                'underscore',
                 'charty/chartynames',
                 'charty/simpledatagroup'
             ],
-            function(d3, Charty) {
+            function(d3, _, Charty) {
                 /** Export global even in AMD case in case this script
                  * is loaded with others */
-                return factory(d3, Charty);
+                return factory(d3, _, Charty);
             });
     } else {
         // Browser globals
-        factory(d3, Charty);
+        factory(d3, _, Charty);
     }
-}(this, function(d3, Charty) {
+}(this, function(d3, _, Charty) {
     d3.chart(Charty.CHART_NAMES.SIMPLE_DATA_GROUP)
         .extend(Charty.CHART_NAMES.ROUNDED_RECTANGLE, {
             /**
@@ -2177,7 +2190,6 @@
                      * @chainable
                      */
                     dataBind: function(d) {
-
                         var chart = this.chart();
 
                         chart.rh = (dataValidator.isPositiveNumber(d.rh, errors.invalidRH) || defaults.rh);
@@ -2186,8 +2198,7 @@
                         chart.ry = (dataValidator.isPositiveNumber(d.ry, errors.invalidRY) || defaults.ry);
                         chart.rc = (d.rc || defaults.rc);
 
-                        return this.selectAll('rect')
-                            .data(d.data);
+                        return this.selectAll('rect').data(d.data);
                     },
                     /**
                      * Appends a svg:rect element.
@@ -2198,34 +2209,30 @@
                     insert: function() {
                         return this.append('rect');
                     },
+
                     events: {
-                        'enter': function() {
+                        enter: function() {
                             this.chart()
                                 .eventManager.bindAll(this);
 
                             return this;
                         },
-                        'merge': function() {
-                            /** Click event only on enter */
+
+                        merge: function() {
                             var chart = this.chart();
 
                             this.attr('height', chart.rh)
                                 .attr('width', chart.rw)
-                                .attr('x', function(d) {
-                                    return chart.xscale.map(d.x, 1) + (chart.xscale.band(1) / 2) - (chart.rw / 2);
-                                })
-                                .attr('y', function(d) {
-                                    return chart.yscale.map(d.y) - (chart.rh / 2);
-                                })
                                 .attr('rx', chart.rx)
                                 .attr('ry', chart.ry)
-                                .attr('class', function(d) {
-                                    return (d.rc || chart.rc);
-                                });
+                                .attr('x', _.partial(chart.x, chart))
+                                .attr('y', _.partial(chart.y, chart))
+                                .attr('class', _.partial(chart['class'], chart));
 
                             return this;
                         },
-                        'exit': function() {
+
+                        exit: function() {
                             return this.remove();
                         }
                     }
@@ -2235,6 +2242,27 @@
                  * Layer creation
                  */
                 this.layer('roundedrects', this.base, options);
+            },
+
+            /**
+            Calculate `x` to be centered horizontally.
+            **/
+            x: function(chart, d) {
+                return chart.xscale.map(d.x, 1) + (chart.xscale.band(1) / 2) - (chart.rw / 2);
+            },
+
+            /**
+            Calculate `y` to be centered vertically.
+            **/
+            y: function(chart, d) {
+                return chart.yscale.map(d.y) - chart.rh;
+            },
+
+            /**
+            Class attribute generation.
+            **/
+            'class': function(chart, d) {
+                return d.rc || chart.rc;
             }
         });
 }));
@@ -2273,13 +2301,10 @@
 
     var Label = {
         /**
-         * Text label initializator
-         *
          * @constructor
-         * @param {Object} args Arguments for text component.
+         * Text label initializator
          */
         initialize: function() {
-
             var options = {
                 /**
                  * Data bind for text labeling.
@@ -2291,54 +2316,56 @@
                  *                              data : [...]
                  *                            }
                  */
-                dataBind: function(d) {
-                    return this.selectAll('text')
-                        .data(d.data);
-                },
+                dataBind: this.dataBind,
                 /**
                  * Insert a svg:text element for each data input.
                  *
                  * @method insert
                  * @chainable
                  */
-                insert: function() {
-                    return this.append('text');
-                },
+                insert: this.insert,
+
                 events: {
-                    enter: function() {
-
-                        var chart = this.chart();
-
-                        this.attr('text-anchor', 'middle')
-                            .attr('dy', '0.35em');
-
-                        chart.eventManager.bindAll(this);
-
-                        return this;
-                    },
-                    merge: function() {
-                        var chart = this.chart();
-
-                        this.attr('x', function(d) {
-                            return chart.xscale.map(d.x, 1) + (chart.xscale.band(1) / 2);
-                        })
-                            .attr('y', function(d) {
-                                return chart.yscale.map(d.y);
-                            })
-                            .text(chart.text);
-
-                        return this;
-                    },
-                    exit: function() {
-                        return this.remove();
-                    }
+                    enter: this.enter,
+                    merge: this.merge,
+                    exit: this.exit
                 }
             };
 
-            /**
-             * Layer creation
-             */
-            this.layer('texts', this.base.append('g'), options);
+          /**
+          Layer creation
+          **/
+          this.layer('texts', this.base.append('g'), options);
+        },
+
+        /**
+        Calculate `x` to be centered horizontally.
+        **/
+        x: function(chart, d) {
+            return chart.xscale.map(d.x, 1) + (chart.xscale.band(1) / 2);
+        },
+
+        /**
+        Calculate `y` to be centered vertically.
+        **/
+        y: function(chart, d) {
+            return chart.yscale.map(d.y) - 15;
+        },
+
+        /**
+        Placeholder to set a "x" offset.
+        No Op.
+        **/
+        dx: function(chart, d) {
+            return '';
+        },
+
+        /**
+        Placeholder to set a "y" offset.
+        No Op.
+        **/
+        dy: function(chart, d) {
+            return '';
         },
 
         /**
@@ -2348,6 +2375,45 @@
         **/
         text: function(d) {
             return d.y;
+        },
+
+
+        /**** Custom Events Data Accessors ****/
+
+        dataBind: function(d) {
+            return this.selectAll('text')
+                .data(d.data);
+        },
+
+        insert: function() {
+            return this.append('text');
+        },
+
+        enter: function() {
+            var chart = this.chart();
+
+            this.attr('text-anchor', 'middle')
+                .attr('dy', '0.35em');
+
+            chart.eventManager.bindAll(this);
+
+            return this;
+        },
+
+        merge: function() {
+            var chart = this.chart();
+
+            this.attr('x', _.partial(chart.x, chart))
+                .attr('y', _.partial(chart.y, chart))
+                .attr('dx', _.partial(chart.dx, chart))
+                .attr('dy', _.partial(chart.dy, chart))
+                .text(chart.text);
+
+            return this;
+        },
+
+        exit: function() {
+            return this.remove();
         }
     };
 
@@ -2561,6 +2627,70 @@
 }));
 
 /**
+ * Text labeling with a custom text. The label is placed in the middle of
+ * the data point (x and y).
+ *
+ * @class LabeledText
+ * @extends Text
+ * @requires d3.chart,
+ *           charty,
+ *           text
+ *
+ * @author "Mauro Buselli <maurobuselli@gmail.com>"
+ */
+(function(root, factory) {
+    /** Setting up AMD support*/
+    if (typeof define === 'function' && define.amd) {
+        /** AMD */
+        define('charty/labeledtext', [
+                'd3.chart',
+                'charty/chartynames',
+                'charty/text'
+            ],
+            function(d3, Charty) {
+                /** Export global even in AMD case in case this script
+                 * is loaded with others */
+                return factory(d3, Charty);
+            });
+    } else {
+        /** Browser globals */
+        factory(d3, Charty);
+    }
+}(this, function(d3, Charty) {
+
+    d3.chart(Charty.CHART_NAMES.TEXT)
+        .extend(Charty.CHART_NAMES.LABELED_TEXT, {
+            x: function(chart, d) {
+                return d.label ? chart.xscale.map(d.x, 1) : 0;
+            },
+
+            y: function(chart, d) {
+                return d.label ? chart.yscale.map(d.y) : 0;
+            },
+
+            dx: function(chart, d) {
+                return (d.label && d.label.text) ? (-(d.label.text.toString().length / 4) + 'em') : 0;
+            },
+
+            dy: function(chart, d) {
+                return '0.25em';
+            },
+
+            text: function(d) {
+                return d.label ? (d.label.text || '') : '';
+            },
+
+            enter: function() {
+                this.chart().eventManager.bindAll(this);
+            },
+
+            exit: function() {
+                return this.remove();
+            }
+        });
+}));
+
+/**
  * Triangle drawer.
  *
  * @class Triangle
@@ -2686,7 +2816,7 @@
             transform: function(data) {
                 var result = [],
                     dataArray = data.next()
-                        .data,
+                    .data,
                     self = this,
                     xBand = this.xscale.band(1),
                     zeroY = this.yscale.map(0);
@@ -3434,7 +3564,7 @@
                         var chart = this.chart(),
                             data = d.data,
                             stringValue = (data[0].y)
-                                .toString() + '%';
+                            .toString() + '%';
 
                         chart.fontSize = (dataValidator.isPositiveNumber(d.fontSize, errors.invalidFontSize) || defaults.fontSize);
                         /** By default, text will be centered inside donut */
@@ -3707,7 +3837,8 @@ Takes N input data series
                 'charty/circle',
                 'charty/multipledatagroup',
                 'charty/yxyaxis',
-                'charty/multipleinstancesmixin'
+                'charty/multipleinstancesmixin',
+                'charty/labeledtext'
             ],
             function(d3, Charty) {
                 /** Export global even in AMD case in case this script
@@ -3729,13 +3860,18 @@ Takes N input data series
              * @param {Object} args Arguments for scatterplot chart.
              */
             initialize: function(args) {
-
                 args.chartName = Charty.CHART_NAMES.CIRCLE;
                 args.instances = (args.instances || 1);
 
                 this.mixin(args.axisSystem, this.base.append('g'), args)
                     .showAsGrid(args.showAsGrid);
 
+                this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base, args);
+
+                // Applying the multiple data sets also to the "LABELED_TEXT" chart.
+                // TODO: Need a refactor of "MULTIPLE_INSTANCES_MIXIN" to allow adding the
+                //  data sets to more than one chart.
+                args.chartName = Charty.CHART_NAMES.LABELED_TEXT;
                 this.mixin(Charty.CHART_NAMES.MULTIPLE_INSTANCES_MIXIN, this.base, args);
             }
         });
@@ -4172,6 +4308,7 @@ Takes N input data series
 
 }));
 
+
 /*jshint -W074*/
 /*global Accessor: true, EventManager: true, EventFactory: true*/
 /**
@@ -4270,7 +4407,7 @@ Takes N input data series
         this.svg.attr('width', svgWidth)
             .attr('height', svgHeight)
             .attr('viewBox', ('0 0 ' + svgWidth + " " + svgHeight))
-            .attr('preserveAspectRatio', 'XminYmin');
+            .attr('preserveAspectRatio', 'xMinYMin');
 
         if (margin) {
             marginValues = {
@@ -4438,7 +4575,8 @@ Takes N input data series
                 'charty/linechartcircles',
                 'charty/groupedbarchart',
                 'charty/winlossbar',
-                'charty/winlosstext'
+                'charty/winlosstext',
+                'charty/labeledtext'
             ],
             function(Charty, ScaleFactory, ChartInterface, DataValidator, EventFactory) {
                 /** Export global even in AMD case in case this script
@@ -4565,3 +4703,5 @@ Takes N input data series
 
     return Charty;
 }));
+
+//# sourceMappingURL=charty.js.map
