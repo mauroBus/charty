@@ -1,4 +1,4 @@
-/**
+/*! charty - v0.6.0 - 2014-08-23T23:20:57 *//**
  * Data checker for different data input
  *
  * @class DataValidator
@@ -4703,3 +4703,5 @@ Takes N input data series
 
     return Charty;
 }));
+
+//# sourceMappingURL=charty.js.map
